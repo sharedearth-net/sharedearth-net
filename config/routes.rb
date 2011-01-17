@@ -1,4 +1,9 @@
 Sharedearthapp::Application.routes.draw do
+
+  match "/auth/:provider/callback" => "sessions#create"
+  match "/auth/:provider" => "sessions#create", :as => :signin # this is dummy route, since this will be handled by OmniAuth
+  match "/signout" => "sessions#destroy", :as => :signout
+
   root :to => "pages#index"
 
   # The priority is based upon order of creation:

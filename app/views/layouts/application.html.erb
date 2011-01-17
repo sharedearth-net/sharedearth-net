@@ -8,7 +8,27 @@
 </head>
 <body>
 
-<h2>Shared Earth</h2>
+<div style="float:right;text-align:right;">
+	<% if current_user %>
+		Welcome <%= current_user.name %>!
+	  	<%= link_to "Sign Out", signout_path %>
+		<%= image_tag "http://graph.facebook.com/#{current_user.nickname}/picture" %>
+	<% else %>
+		<%= link_to "Sign in with Facebook", signin_path('facebook') %>
+	<% end %>
+</div>
+<div>
+	<h2>SharedEarth.net</h2>
+</div>
+
+<% flash.each do |name, msg| %>
+	<%
+		# this will output all set flash messages and it will give each appropriate id
+		# possible values include: flash-notice and flash-alert
+		# (CSS rules also allow flash-info - which is not used at the moment)
+	%>
+	<%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
+<% end %>
 
 <%= yield %>
 
