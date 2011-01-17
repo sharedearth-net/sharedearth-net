@@ -1,0 +1,10 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+
+.DS_Store
+config/database.yml
+public/assets
+public/system
+public/javascripts/all.js
