@@ -7,8 +7,9 @@ describe SessionsController do
       get :destroy
     end
     
-    it "should redirect user to root url" do
+    it "should set flash notice and redirect user to root url" do
       do_get
+      flash[:notice].should eql(I18n.t('messages.signed_out'))
       response.should redirect_to(root_path)
     end
 
@@ -48,8 +49,9 @@ describe SessionsController do
       session[:user_id].should_not be_nil
     end
 
-    it "should redirect user to root url" do
+    it "should set flash notice redirect user to root url" do
       do_get
+      flash[:notice].should eql(I18n.t('messages.signed_in'))
       response.should redirect_to(root_path)
     end
   end

@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      user: User
+    attributes:
+      user:
+        provider: Provider
+        uid: UID
+        name: Name
+        nickname: Nickname
