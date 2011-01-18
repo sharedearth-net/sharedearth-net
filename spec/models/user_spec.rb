@@ -30,6 +30,8 @@ describe User do
     @user = User.new
   end
 
+  it { should have_one(:person) }
+
   it "should be valid" do
     @user.attributes = valid_user_attributes
     @user.should be_valid

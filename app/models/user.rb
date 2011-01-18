@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_one :person
+
   validates_presence_of :provider, :uid, :name, :nickname
   validates_uniqueness_of :uid, :scope => :provider
 
