@@ -32,4 +32,5 @@ group :development, :test do
   gem "rspec-rails", "~> 2.4"
 	gem "autotest"
 	gem "webrat"
+	gem "rcov"
 end

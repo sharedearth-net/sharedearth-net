@@ -8,3 +8,21 @@ config/database.yml
 public/assets
 public/system
 public/javascripts/all.js
+
+# taken from https://github.com/github/gitignore/blob/master/Rails.gitignore
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+# config/*.yml
+rerun.txt
