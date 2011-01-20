@@ -14,23 +14,18 @@ describe "pages/index.html.erb (aka homepage)" do
   end
   
   describe "for signed in member" do
-    def mock_signedin_user
-      @user = mock_model(User)
-      @user.stub!(:name).and_return("Slobodan Kovacevic")
-      @user.stub!(:nickname).and_return("basti")
-      view.stub!(:current_user).and_return(@user)
+    before do
+      mock_signedin_user
+      # view.stub!(:current_user).and_return(@user)
+      view.should_receive(:current_user).at_least(:once).and_return(@user) # makes sure that we are checking current_user at least once
     end
     
     it "should have a link for signout" do
-      mock_signedin_user
-      view.should_receive(:current_user).at_least(:once)
-
       render_index_with_layout
       rendered.should have_selector("a", :href => signout_path)
     end
     
     it "should have a link to see item list" do
-      mock_signedin_user
       render_index_with_layout
       rendered.should have_selector("a", :href => items_path)
     end

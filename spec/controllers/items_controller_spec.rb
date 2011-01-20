@@ -5,14 +5,6 @@ describe ItemsController do
     @mock_item ||= mock_model(Item, stubs).as_null_object
   end
 
-  def mock_signedin_user
-    # TODO: see if we can define stubs like above in one line
-    @user = mock_model(User)
-    @user.stub!(:name).and_return("Slobodan Kovacevic")
-    @user.stub!(:nickname).and_return("basti")
-    controller.stub!(:current_user).and_return(@user)
-  end
-  
   describe "for visitor" do
     it "should deny access to visitors" do
       controller.stub!(:current_user).and_return(false)
@@ -27,6 +19,7 @@ describe ItemsController do
   describe "for signed in member" do
     before do
       mock_signedin_user
+      controller.stub!(:current_user).and_return(@user)
       controller.should_receive(:authenticate_user!)
     end
 
