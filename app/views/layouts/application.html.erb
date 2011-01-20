@@ -11,6 +11,7 @@
 <div style="float:right;text-align:right;">
 	<% if current_user %>
 		Welcome <%= current_user.name %>!
+		<%= link_to "My Items", items_path %>
 	  	<%= link_to "Sign Out", signout_path %>
 		<%= image_tag "http://graph.facebook.com/#{current_user.nickname}/picture" %>
 	<% else %>
@@ -18,8 +19,10 @@
 	<% end %>
 </div>
 <div>
-	<h2>SharedEarth.net</h2>
+	<h2><%= link_to "sharedearth.net", root_path %></h2>
 </div>
+
+<hr style="clear:both;" />
 
 <% flash.each do |name, msg| %>
 	<%

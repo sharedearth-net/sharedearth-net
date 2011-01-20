@@ -57,15 +57,3 @@ describe SessionsController do
   end
   
 end
-
-describe SessionsController, "#route_for" do
-
-  it "should map { :controller => 'sessions', :action => 'create', :provider => 'facebook' } to /auth/facebook/callback" do
-    { :get => "/auth/facebook/callback" }.should route_to(:controller => "sessions", :action => "create", :provider => "facebook")
-  end
-
-  it "should map { :controller => 'sessions', :action => 'destroy' } to /signout" do
-    { :get => "/signout" }.should route_to(:controller => "sessions", :action => "destroy")
-  end
-
-end

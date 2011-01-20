@@ -6,3 +6,4 @@ en:
   messages:
     signed_in: "Signed in!"
     signed_out: "Signed out!"
+    must_be_signed_in: "To access that page you must first sign in."

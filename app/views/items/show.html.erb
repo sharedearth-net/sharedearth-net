@@ -1,0 +1,30 @@
+<h1>Item: <%= @item.name %></h1>
+
+<p>
+  <b>Type:</b>
+  <%= @item.item_type %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @item.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @item.owner_id %>
+</p>
+
+<p>
+  <b>Owner type:</b>
+  <%= @item.owner_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
