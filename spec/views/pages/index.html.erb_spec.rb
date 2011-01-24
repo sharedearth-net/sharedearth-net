@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe "pages/index.html.erb (aka homepage)" do
+  include UserMocks
+
+  let(:signedin_user) { mock_signedin_user }
 
   def render_index_with_layout
     render :template => "pages/index", :layout => "layouts/application"
@@ -15,9 +18,9 @@ describe "pages/index.html.erb (aka homepage)" do
   
   describe "for signed in member" do
     before do
-      mock_signedin_user
-      # view.stub!(:current_user).and_return(@user)
-      view.should_receive(:current_user).at_least(:once).and_return(@user) # makes sure that we are checking current_user at least once
+      # mock_signedin_user
+      # view.stub!(:current_user).and_return(signedin_user)
+      view.should_receive(:current_user).at_least(:once).and_return(signedin_user) # makes sure that we are checking current_user at least once
     end
     
     it "should have a link for signout" do

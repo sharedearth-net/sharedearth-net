@@ -63,9 +63,15 @@ describe User, ".create_with_omniauth" do
   include UserSpecHelper
   
   it "should create new user using omniauth hash" do
-    lambda {
+    expect {
       User.create_with_omniauth(valid_omniauth_hash)
-    }.should change(User, :count)
+    }.should change(User, :count).by(1)
+  end
+  
+  it "should create new person for this new user" do
+    expect {
+      User.create_with_omniauth(valid_omniauth_hash)
+    }.should change(Person, :count).by(1) 
   end
 
 end
