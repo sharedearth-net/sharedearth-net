@@ -5,6 +5,7 @@ tmp/**/*
 
 .DS_Store
 config/database.yml
+config/s3.yml
 public/assets
 public/system
 public/javascripts/all.js

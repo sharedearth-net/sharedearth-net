@@ -2,11 +2,10 @@
 
 <table>
   <tr>
+		<th>Photo</th>
     <th>Type</th>
     <th>Name</th>
     <th>Description</th>
-    <th>Owner</th>
-    <th>Owner type</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,11 +13,10 @@
 
 <% @items.each do |item| %>
   <tr>
+		<td><%= image_tag item.photo.url(:thumb) %></td>
     <td><%= item.item_type %></td>
     <td><%= item.name %></td>
     <td><%= item.description %></td>
-    <td><%= item.owner_id %></td>
-    <td><%= item.owner_type %></td>
     <td><%= link_to 'Show', item %></td>
     <td><%= link_to 'Edit', edit_item_path(item) %></td>
     <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>

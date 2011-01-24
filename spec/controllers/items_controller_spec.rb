@@ -29,7 +29,7 @@ describe ItemsController do
 
     describe "GET index" do
       it "assigns only owner's items as @items" do
-        signedin_user.stub(:person)
+        signedin_user.stub(:person).and_return(mock_model(Person))
         signedin_user.person.stub(:items) { [mock_item] }
         get :index
         assigns(:items).should eq([mock_item])

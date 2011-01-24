@@ -25,7 +25,7 @@ describe "items/index.html.erb" do
     assert_select "tr>td", :text => "MyItemType".to_s, :count => 2
     assert_select "tr>td", :text => "MyItemName".to_s, :count => 2
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => 1.to_s, :count => 2
-    assert_select "tr>td", :text => "Owner Type".to_s, :count => 2
+    # assert_select "tr>td", :text => 1.to_s, :count => 2
+    # assert_select "tr>td", :text => "Owner Type".to_s, :count => 2
   end
 end

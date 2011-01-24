@@ -28,4 +28,12 @@ describe Item do
     item.is_owner?(not_owner).should be_false
   end
 
+  it { should have_attached_file(:photo) }
+  it { should validate_attachment_presence(:photo) }
+  it { should validate_attachment_content_type(:photo).
+                allowing('image/png', 'image/gif', 'image/jpeg', 'image/jpg').
+                rejecting('text/plain', 'text/xml') }
+  # apparently when should validate_attachment_size is run under Ruby 1.8.7 it hangs
+  # (it should work correctly under Ruby 1.9.2+). For now we'll just comment it out.
+  # it { should validate_attachment_size(:photo).less_than(1.megabyte) }
 end

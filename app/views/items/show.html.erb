@@ -15,7 +15,7 @@
   <%= @item.description %>
 </p>
 
-<p>
+<!-- <p>
   <b>Owner:</b>
   <%= @item.owner_id %>
 </p>
@@ -23,8 +23,11 @@
 <p>
   <b>Owner type:</b>
   <%= @item.owner_type %>
-</p>
+</p> -->
 
+<p>
+	<%= image_tag @item.photo.url(:medium) %>
+</p>
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

@@ -16,7 +16,7 @@ describe "items/show.html.erb" do
     rendered.should match(/MyItemType/)
     rendered.should match(/MyItemName/)
     rendered.should match(/MyItemDescription/)
-    rendered.should match(/1/)
-    rendered.should match(/Owner Type/)
+    # rendered.should match(/1/)
+    # rendered.should match(/Owner Type/)
   end
 end
