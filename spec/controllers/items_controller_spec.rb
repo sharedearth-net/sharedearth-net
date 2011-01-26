@@ -10,21 +10,23 @@ describe ItemsController do
     @mock_item ||= mock_model(Item, stubs).as_null_object
   end
 
-  describe "for visitor" do
-    it "should deny access to visitors" do
-      controller.stub!(:current_user).and_return(false)
-
-      get :index
-
-      flash[:alert].should eql(I18n.t('messages.must_be_signed_in'))
-      response.should redirect_to(root_path)
-    end
-  end
+  # describe "for visitor" do
+  #   it "should deny access to visitors" do
+  #     controller.stub!(:current_user).and_return(false)
+  # 
+  #     get :index
+  # 
+  #     flash[:alert].should eql(I18n.t('messages.must_be_signed_in'))
+  #     response.should redirect_to(root_path)
+  #   end
+  # end
+  
+  it_should_require_signed_in_user_for_actions :index, :show, :new, :edit, :create, :update, :destroy
 
   describe "for signed in member" do
     before do
       controller.stub!(:current_user).and_return(signedin_user)
-      controller.should_receive(:authenticate_user!)
+      controller.stub!(:authenticate_user!).and_return(true)
     end
 
     describe "GET index" do

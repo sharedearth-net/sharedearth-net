@@ -20,6 +20,8 @@ describe "pages/index.html.erb (aka homepage)" do
     before do
       # mock_signedin_user
       # view.stub!(:current_user).and_return(signedin_user)
+      person = mock_person(:name => "Slobodan Kovacevic")
+      signedin_user.stub!(:person).and_return(person)
       view.should_receive(:current_user).at_least(:once).and_return(signedin_user) # makes sure that we are checking current_user at least once
     end
     

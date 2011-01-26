@@ -27,4 +27,5 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.include Paperclip::Shoulda::Matchers
+  config.include(ControllerMacros, :type => :controller)
 end

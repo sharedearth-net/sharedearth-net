@@ -2,7 +2,7 @@
 
 module UserMocks
   def mock_signedin_user(stubs = {})
-    defaults = {:name => "Slobodan Kovacevic", :nickname => "basti", :person => mock_person}
+    defaults = {:name => "Slobodan Kovacevic", :nickname => "basti", :person => mock_person, :avatar => "http://graph.facebook.com/basti/picture"}
     # @user = mock_model(User, defaults.merge(stubs))
     mock_model(User, defaults.merge(stubs))
   end
