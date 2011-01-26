@@ -6,9 +6,6 @@ class Item < ActiveRecord::Base
                     :storage => :s3,
                     :s3_credentials => S3_CREDENTIALS,
                     :path => "item-photos/:id-:basename-:style.:extension"
-                   # :url  => "/assets/photos/:ad_id/:basename-:style.:extension",
-                   # :default_url => "/images/noimg-:style.png"
-
 
   validates_presence_of :item_type, :name, :description, :owner_id, :owner_type
 

@@ -6,7 +6,6 @@ module UserSpecHelper
     {
       :provider => 'facebook',
       :uid => '111111111',
-      :name => 'Slobodan Kovacevic',
       :nickname => 'basti'
     }
   end
@@ -52,8 +51,7 @@ describe User do
     @user.should have(1).error_on(:uid)
   end
   
-  it "should require name and nickname" do
-    @user.should have(1).error_on(:name)
+  it "should require nickname" do
     @user.should have(1).error_on(:nickname)
   end
   
@@ -74,4 +72,13 @@ describe User, ".create_with_omniauth" do
     }.should change(Person, :count).by(1) 
   end
 
+end
+
+describe User, ".avatar" do
+  include UserSpecHelper
+
+  it "should return Facebook avatar URL" do
+    valid_user = User.new(valid_user_attributes)
+    valid_user.avatar.should eql("http://graph.facebook.com/#{valid_user_attributes[:nickname]}/picture")
+  end
 end
