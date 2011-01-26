@@ -1,6 +1,7 @@
 Sharedearthapp::Application.routes.draw do
 
   resources :items
+  resources :people, :only => [:show, :edit, :update]
 
   match "/auth/:provider/callback" => "sessions#create"
   match "/auth/:provider" => "sessions#create", :as => :signin # this is dummy route, since this will be handled by OmniAuth
