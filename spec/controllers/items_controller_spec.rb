@@ -4,29 +4,16 @@ describe ItemsController do
   include UserMocks
   
   let(:signedin_user) { mock_signedin_user }
-  # let(:signedin_person) { mock_person_for_user(signedin_user) }
 
   def mock_item(stubs={})
     @mock_item ||= mock_model(Item, stubs).as_null_object
   end
-
-  # describe "for visitor" do
-  #   it "should deny access to visitors" do
-  #     controller.stub!(:current_user).and_return(false)
-  # 
-  #     get :index
-  # 
-  #     flash[:alert].should eql(I18n.t('messages.must_be_signed_in'))
-  #     response.should redirect_to(root_path)
-  #   end
-  # end
   
   it_should_require_signed_in_user_for_actions :index, :show, :new, :edit, :create, :update, :destroy
 
   describe "for signed in member" do
     before do
-      controller.stub!(:current_user).and_return(signedin_user)
-      controller.stub!(:authenticate_user!).and_return(true)
+      sign_in_as_user(signedin_user)
     end
 
     describe "GET index" do
