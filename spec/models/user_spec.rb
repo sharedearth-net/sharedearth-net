@@ -79,6 +79,13 @@ describe User, ".avatar" do
 
   it "should return Facebook avatar URL" do
     valid_user = User.new(valid_user_attributes)
-    valid_user.avatar.should eql("http://graph.facebook.com/#{valid_user_attributes[:nickname]}/picture")
+    valid_user.avatar.should eql("http://graph.facebook.com/#{valid_user_attributes[:uid]}/picture/")
+  end
+
+  it "should return URL for different Facebook avatar sizes" do
+    valid_user = User.new(valid_user_attributes)
+    ["square", "small", "large"].each do |avatar_size|
+      valid_user.avatar(avatar_size).should eql("http://graph.facebook.com/#{valid_user_attributes[:uid]}/picture/?type=#{avatar_size}")
+    end
   end
 end

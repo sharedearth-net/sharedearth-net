@@ -13,7 +13,11 @@ class User < ActiveRecord::Base
     end
   end
   
-  def avatar
-    "http://graph.facebook.com/#{nickname}/picture"
+  # Available avatar sizes
+  # square (50x50, Facebook default)
+  # small  (50 pixels wide, variable height)
+  # large (about 200 pixels wide, variable height)
+  def avatar(avatar_size = nil)
+    "http://graph.facebook.com/#{uid}/picture/"+(avatar_size ? "?type=#{avatar_size}" : "")
   end
 end

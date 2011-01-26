@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ItemsController do
   
-  let(:signedin_user) { mock_signedin_user }
+  let(:signedin_user) { generate_mock_user_with_person }
 
   def mock_item(stubs={})
     @mock_item ||= mock_model(Item, stubs).as_null_object

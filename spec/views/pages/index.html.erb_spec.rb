@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "pages/index.html.erb (aka homepage)" do
 
-  let(:signedin_user) { mock_signedin_user }
+  let(:signedin_user) { generate_mock_user_with_person }
 
   def render_index_with_layout
     render :template => "pages/index", :layout => "layouts/application"
@@ -17,8 +17,6 @@ describe "pages/index.html.erb (aka homepage)" do
   
   describe "for signed in member" do
     before do
-      # mock_signedin_user
-      # view.stub!(:current_user).and_return(signedin_user)
       person = mock_person(:name => "Slobodan Kovacevic")
       signedin_user.stub!(:person).and_return(person)
       view.should_receive(:current_user).at_least(:once).and_return(signedin_user) # makes sure that we are checking current_user at least once
