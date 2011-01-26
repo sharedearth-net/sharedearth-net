@@ -28,4 +28,5 @@ RSpec.configure do |config|
 
   config.include Paperclip::Shoulda::Matchers
   config.include(ControllerMacros, :type => :controller)
+  config.include(UserMocks)
 end

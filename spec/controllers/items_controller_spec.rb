@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ItemsController do
-  include UserMocks
   
   let(:signedin_user) { mock_signedin_user }
 

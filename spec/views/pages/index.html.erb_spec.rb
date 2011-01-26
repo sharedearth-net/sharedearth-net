@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "pages/index.html.erb (aka homepage)" do
-  include UserMocks
 
   let(:signedin_user) { mock_signedin_user }
 
