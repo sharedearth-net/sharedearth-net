@@ -29,7 +29,7 @@ describe Item do
   end
 
   it { should have_attached_file(:photo) }
-  it { should validate_attachment_presence(:photo) }
+  # it { should validate_attachment_presence(:photo) }
   it { should validate_attachment_content_type(:photo).
                 allowing('image/png', 'image/gif', 'image/jpeg', 'image/jpg').
                 rejecting('text/plain', 'text/xml') }
