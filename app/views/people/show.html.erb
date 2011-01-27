@@ -1,3 +1,15 @@
 <h1><%= image_tag @person.user.avatar(:large) %> <%= @person.name %></h1>
 
 <%= link_to "Edit profile", edit_person_path(@person) if current_user.person == @person %>
+
+
+<h2>Items</h2>
+<% unless @items.size.zero? %>
+	<ul>
+		<% @items.each do |item| %>
+			<li><%= image_tag item.photo.url(:thumb) %><%= link_to item.name, item_path(item) %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p>This person has no items.</p>
+<% end %>

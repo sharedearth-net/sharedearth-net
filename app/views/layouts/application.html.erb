@@ -11,6 +11,7 @@
 <div style="float:right;text-align:right;">
 	<% if current_user %>
 		Welcome <%= current_user.person.name %>!
+		<%= link_to "Profile", person_path(current_user.person) %>
 		<%= link_to "My Items", items_path %>
 	  	<%= link_to "Sign Out", signout_path %>
 		<%= image_tag current_user.avatar %>

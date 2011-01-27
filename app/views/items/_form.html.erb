@@ -1,15 +1,5 @@
 <%= form_for(@item, :html => { :multipart => true }) do |f| %>
-  <% if @item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-      <ul>
-      <% @item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= render :partial => "shared/error_messages", :locals => { :model => @item } %>
 
   <div class="field">
     <%= f.label :item_type %><br />

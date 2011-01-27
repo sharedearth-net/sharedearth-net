@@ -31,6 +31,11 @@ describe "pages/index.html.erb (aka homepage)" do
       render_index_with_layout
       rendered.should have_selector("a", :href => items_path)
     end
+
+    it "should have a link to see profile page" do
+      render_index_with_layout
+      rendered.should have_selector("a", :href => person_path(signedin_user.person))
+    end
   end
 
 end

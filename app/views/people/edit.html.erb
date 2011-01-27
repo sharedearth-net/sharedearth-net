@@ -1,2 +1,13 @@
-<h1>People#edit</h1>
-<p>Find me in app/views/people/edit.html.erb</p>
+<h1>Edit profile</h1>
+
+<%= form_for(@person, :html => { :multipart => true }) do |f| %>
+	<%= render :partial => "shared/error_messages", :locals => { :model => @person } %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %> or <%= link_to 'cancel', @person %>
+  </div>
+<% end %>
