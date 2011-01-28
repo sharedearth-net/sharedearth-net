@@ -6,6 +6,8 @@ describe Item do
   let(:person) { mock_model(Person) }
 
   it { should belong_to(:owner) }
+
+  it { should have_many(:item_requests) }
   
   it { should validate_presence_of(:item_type) }
 

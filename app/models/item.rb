@@ -1,4 +1,5 @@
 class Item < ActiveRecord::Base
+  has_many :item_requests
   belongs_to :owner, :polymorphic => true
 
   has_attached_file :photo,

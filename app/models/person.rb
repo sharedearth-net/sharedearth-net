@@ -1,6 +1,8 @@
 class Person < ActiveRecord::Base
   belongs_to :user
   has_many :items, :as => :owner
+  has_many :item_requests, :as => :requester
+  has_many :item_gifts, :as => :gifter, :class_name => "ItemRequest"
   
   validates_presence_of :user_id, :name
   

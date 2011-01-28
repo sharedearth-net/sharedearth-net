@@ -10,7 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110126094731) do
+ActiveRecord::Schema.define(:version => 20110128091729) do
+
+  create_table "item_requests", :force => true do |t|
+    t.integer  "requester_id"
+    t.string   "requester_type"
+    t.integer  "gifter_id"
+    t.string   "gifter_type"
+    t.integer  "item_id"
+    t.text     "description"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "items", :force => true do |t|
     t.string   "item_type"

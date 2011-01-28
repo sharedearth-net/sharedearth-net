@@ -8,6 +8,10 @@ describe Person do
   it { should validate_presence_of(:user_id) }
 
   it { should have_many(:items) }
+
+  it { should have_many(:item_requests) }
+
+  it { should have_many(:item_gifts) }
   
   it { should validate_presence_of(:name) }
 
