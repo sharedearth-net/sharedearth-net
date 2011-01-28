@@ -7,7 +7,8 @@ module ControllerMacros
     def it_should_require_signed_in_user_for_actions(*actions)
       actions.each do |action|
         it "#{action} action should require signed in user" do
-          controller.stub!(:current_user).and_return(false)
+          as_signed_out_visitor
+          # controller.stub!(:current_user).and_return(false)
           # controller.should_receive(:authenticate_user!)
           get action, :id => 1
           response.should redirect_to(root_path)
@@ -20,6 +21,11 @@ module ControllerMacros
   def sign_in_as_user(user)
     controller.stub!(:current_user).and_return(user)
     controller.stub!(:authenticate_user!).and_return(true)
+  end
+
+  def as_signed_out_visitor
+    controller.stub!(:current_user).and_return(nil)
+    # controller.stub!(:authenticate_user!).and_return(false)
   end
 
   # def login_as_admin

@@ -1,2 +1,15 @@
-<h1>ItemRequests#new</h1>
-<p>Find me in app/views/item_requests/new.html.erb</p>
+<h1>New request</h1>
+
+<%= form_for(@item_request, :url => requests_path) do |f| %>
+	<%= render :partial => "shared/error_messages", :locals => { :model => @item_request } %>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', :back %>
