@@ -10,7 +10,7 @@ class Item < ActiveRecord::Base
                     :default_url => "/images/noimage-:style.png"
                     
 
-  validates_presence_of :item_type, :name, :description, :owner_id, :owner_type
+  validates_presence_of :item_type, :name, :owner_id, :owner_type
 
   # validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 1.megabyte
