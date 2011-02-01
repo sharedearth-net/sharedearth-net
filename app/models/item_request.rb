@@ -13,6 +13,7 @@ class ItemRequest < ActiveRecord::Base
   belongs_to :requester, :polymorphic => true
   belongs_to :gifter, :polymorphic => true
   
+  validates_presence_of :description
   validates_presence_of :requester_id, :requester_type
   validates_presence_of :gifter_id, :gifter_type
   validates_presence_of :item_id, :status

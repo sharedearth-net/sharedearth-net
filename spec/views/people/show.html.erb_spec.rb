@@ -45,4 +45,10 @@ describe "people/show.html.erb" do
     rendered.should have_selector("a", :href => item_path(mock_person.items.first))
     rendered.should have_selector("a", :href => item_path(mock_person.items.second))
   end
+
+  it "should render a link to request an item" do
+    render
+    rendered.should have_selector("a", :href => new_request_path(:item_id => mock_person.items.first))
+    rendered.should have_selector("a", :href => new_request_path(:item_id => mock_person.items.second))
+  end
 end

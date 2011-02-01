@@ -1,6 +1,8 @@
 <h1>New request</h1>
 
 <%= form_for(@item_request, :url => requests_path) do |f| %>
+	<%= f.hidden_field :item_id %>
+	
 	<%= render :partial => "shared/error_messages", :locals => { :model => @item_request } %>
 
   <div class="field">
