@@ -4,6 +4,7 @@ describe ItemRequestsController do
 
   let(:mock_item_request) { mock_model(ItemRequest).as_null_object }
   let(:mock_item) { mock_model(Item).as_null_object }
+  let(:mock_person) { mock_model(Person).as_null_object }
   let(:signedin_user) { generate_mock_user_with_person }
 
   it_should_require_signed_in_user_for_actions :show, :new, :create, :update
@@ -18,6 +19,8 @@ describe ItemRequestsController do
 
       before do
         Item.stub(:find).with("42").and_return(mock_item)
+        mock_item_request.stub(:requester=)
+        mock_item_request.stub(:gifter=)
       end
       
       it "assigns a new item request as @item_request" do
@@ -27,7 +30,7 @@ describe ItemRequestsController do
       end
       
       it "should set item association for new item request" do
-        ItemRequest.should_receive(:new).with(:item => mock_item)
+        ItemRequest.should_receive(:new).with(:item => mock_item).and_return(mock_item_request)
         get :new, :item_id => "42"
       end
 
@@ -42,43 +45,88 @@ describe ItemRequestsController do
         assigns(:item).should be(mock_item)
       end
 
+      it "should set requester for a newly created request" do
+        ItemRequest.stub(:new) { mock_item_request }
+        mock_item_request.should_receive(:requester=).with(signedin_user.person) # current_user is stubbed with signedin_user
+        get :new, :item_id => "42"
+      end
+      
+      it "should set gifter for a newly created request" do
+        mock_gifter = mock_model(Person)
+        mock_item.stub(:owner).and_return(mock_gifter)
+        mock_item_request.stub(:item).and_return(mock_item)
+        ItemRequest.stub(:new) { mock_item_request }
+      
+        mock_item_request.should_receive(:gifter=).with(mock_gifter)
+        get :new, :item_id => "42"
+      end
+
     end
 
     describe "POST create" do
+
       describe "with valid params" do
-        # it "assigns a newly created item request as @item_request" do
-        #   mock_item_request.stub(:save).and_return(true)
-        #   ItemRequest.stub(:new).with({'these' => 'params'}) { mock_item_request }
-        #   post :create, :item_request => {'these' => 'params'}
-        #   assigns(:item_request).should be(mock_item_request)
-        # end
-                
-        # it "should set owner for a newly created item" do
-        #   Item.stub(:new) { mock_item(:save => true, :owner= => signedin_user.person) }
-        #   mock_item.should_receive(:owner=).with(signedin_user.person) # current_user is stubbed with signedin_user
-        #   post :create, :item => {}
-        # end
+
+        before do
+          mock_item_request.stub(:save).and_return(true)
+        end
+
+        it "assigns a newly created item request as @item_request" do
+          ItemRequest.stub(:new).with({'these' => 'params'}) { mock_item_request }
+          post :create, :item_request => {'these' => 'params'}
+          assigns(:item_request).should be(mock_item_request)
+        end
         
-        # it "redirects to the created item" do
-        #   Item.stub(:new) { mock_item(:save => true) }
-        #   post :create, :item => {}
-        #   response.should redirect_to(item_url(mock_item))
-        # end
+        it "should set request status to 'requested'" do
+          ItemRequest.stub(:new) { mock_item_request }          
+          mock_item_request.should_receive(:status=).with(ItemRequest::STATUS_REQUESTED)
+          post :create, :item => {}          
+        end
+                
+        it "should set requester for a newly created request" do
+          ItemRequest.stub(:new) { mock_item_request }
+          mock_item_request.should_receive(:requester=).with(signedin_user.person) # current_user is stubbed with signedin_user
+          post :create, :item => {}
+        end
+        
+        it "should set gifter for a newly created request" do
+          mock_gifter = mock_model(Person)
+          mock_item.stub(:owner).and_return(mock_gifter)
+          mock_item_request.stub(:item).and_return(mock_item)
+          ItemRequest.stub(:new) { mock_item_request }
+
+          mock_item_request.should_receive(:gifter=).with(mock_gifter)
+          post :create, :item => {}
+        end
+        
+        it "redirects to the created item" do
+          ItemRequest.stub(:new) { mock_item_request }
+          post :create, :item => {}
+          response.should redirect_to(request_url(mock_item_request))
+        end
+
       end
 
-      # describe "with invalid params" do
-      #   it "assigns a newly created but unsaved item as @item" do
-      #     Item.stub(:new).with({'these' => 'params'}) { mock_item(:save => false) }
-      #     post :create, :item => {'these' => 'params'}
-      #     assigns(:item).should be(mock_item)
-      #   end
-      # 
-      #   it "re-renders the 'new' template" do
-      #     Item.stub(:new) { mock_item(:save => false) }
-      #     post :create, :item => {}
-      #     response.should render_template("new")
-      #   end
-      # end
+      describe "with invalid params" do
+
+        before do
+          mock_item_request.stub(:save).and_return(false)
+        end
+        
+        it "assigns a newly created but unsaved request as @item_request" do
+          ItemRequest.stub(:new).with({'these' => 'params'}) { mock_item_request }
+          post :create, :item_request => {'these' => 'params'}
+          assigns(:item_request).should be(mock_item_request)
+        end
+      
+        it "re-renders the 'new' template" do
+          ItemRequest.stub(:new) { mock_item_request }
+          post :create, :item_request => {}
+          response.should render_template("new")
+        end
+
+      end
+
     end
 
   end

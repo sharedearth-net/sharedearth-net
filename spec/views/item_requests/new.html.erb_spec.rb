@@ -1,13 +1,20 @@
 require 'spec_helper'
 
 describe "item_requests/new.html.erb" do
+
+  let(:stub_item_request) {
+    stub_model(ItemRequest,
+      :description => "MyDescription",
+      :item_id => 1,
+      :item => stub_model(Item, :name => "MyItemName"),
+      :gifter_id => 2,
+      :gifter_type => "Person",
+      :gifter => stub_model(Person, :name => "Slobodan Kovacevic")
+    ).as_new_record
+  }
+
   before do
-    assign(:item_request, stub_model(ItemRequest,
-      :description => "MyText",
-      :item_id => 1
-      # :owner_id => 1,
-      # :owner_type => "MyString"
-    ).as_new_record)
+    assign(:item_request, stub_item_request)
   end
 
   it "renders new item form" do
@@ -19,5 +26,11 @@ describe "item_requests/new.html.erb" do
       # assert_select "input#item_owner_id", :name => "item[owner_id]"
       # assert_select "input#item_owner_type", :name => "item[owner_type]"
     end
+  end
+
+  it "should display item name and gifter name" do
+    render
+    rendered.should contain(stub_item_request.item.name)
+    rendered.should contain(stub_item_request.gifter.name)
   end
 end
