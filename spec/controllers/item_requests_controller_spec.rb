@@ -63,6 +63,50 @@ describe ItemRequestsController do
 
     end
 
+    describe "GET show" do
+
+      it "assigns the requested requests as @item_request" do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+        get :show, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+      
+      it "should allow requester to view the request" do
+        mock_item_request.stub(:requester).and_return(signedin_user.person)
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        get :show, :id => "42"
+        response.should be_success
+      end
+
+      it "should allow gifter to view the request" do
+        mock_item_request.stub(:gifter).and_return(signedin_user.person)
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        get :show, :id => "42"
+        response.should be_success
+      end
+
+      it "should redirect other users trying to view the request" do
+        # mock_item_request is already null object, so gifter and requester will return nil
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        get :show, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_and_requester_can_access'))
+        response.should redirect_to(root_path)
+      end
+
+      # it "should deny access for non-owner members" do
+      #   mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
+      #   Item.stub(:find).with("37") { mock_item }
+      # 
+      #   get :show, :id => "37"
+      #   flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
+      #   response.should redirect_to(root_path)
+      # end
+
+    end
+
     describe "POST create" do
 
       describe "with valid params" do

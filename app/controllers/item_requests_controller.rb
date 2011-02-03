@@ -14,6 +14,17 @@ class ItemRequestsController < ApplicationController
   end
 
   def show
+    @item_request = ItemRequest.find(params[:id])
+    
+    # only gifter or requester can access
+    unless @item_request.gifter == current_user.person || @item_request.requester == current_user.person
+      redirect_to(root_path, :alert => I18n.t('messages.only_gifter_and_requester_can_access')) and return 
+    end
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @item }
+    end
   end
   
   def create

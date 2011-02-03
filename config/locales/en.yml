@@ -9,3 +9,4 @@ en:
     must_be_signed_in: "To access that page you must first sign in."
     only_owner_can_access: "Sorry. Only item owner can access that page."
     you_cannot_edit_others: "You cannot edit other people stuff."
+    only_gifter_and_requester_can_access: "Sorry. Only requester and gifter can access request page."

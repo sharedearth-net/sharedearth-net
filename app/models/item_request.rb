@@ -22,4 +22,12 @@ class ItemRequest < ActiveRecord::Base
   def status_name
     STATUSES[status]
   end
+  
+  def requester?(requester)
+    self.requester == requester
+  end
+
+  def gifter?(gifter)
+    self.gifter == gifter
+  end
 end

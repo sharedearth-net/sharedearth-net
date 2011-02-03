@@ -1,2 +1,22 @@
-<h1>ItemRequests#show</h1>
-<p>Find me in app/views/item_requests/show.html.erb</p>
+<%= image_tag @item_request.requester.user.avatar(:large), :style => "float:left;padding:10px;" %>
+<h1><%= @item_request.requester.name %></h1>
+
+<p>
+	Would like to borrow a <strong><%= @item_request.item.name %></strong> from <%= @item_request.gifter.name %>
+</p>
+
+<% if @item_request.description %>
+	<p><%= @item_request.description %></p>
+<% end %>
+
+<p>Status: <%= @item_request.status_name %></p>
+
+<% if @item_request.gifter?(current_user.person) %>
+	<% if @item_request.status == ItemRequest::STATUS_REQUESTED %>
+		<%= link_to "Accept", root_path, :id => "accept_button" %>
+		&nbsp;&nbsp;
+		<%= link_to "Reject", root_path, :id => "reject_button" %>
+	<% elsif @item_request.status == ItemRequest::STATUS_ACCEPTED %>
+		<%= link_to "Complete", root_path, :id => "complete_button" %>
+	<% end %>
+<% end %>
