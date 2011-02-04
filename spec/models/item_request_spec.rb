@@ -106,9 +106,31 @@ describe ItemRequest, ".accept!" do
     expect { @item_request.accept! }.to change { @item_request.changed? }.to(false)
   end
 
-  it "should raise exception if request object is not valid" do
-    @item_request = ItemRequest.new
+  it "should raise exception if request object is cannot be saved" do
+    @item_request = ItemRequest.new # invalid object attrs
     expect { @item_request.accept! }.to raise_error
+  end
+
+end
+
+describe ItemRequest, ".reject!" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    @item_request = ItemRequest.new(valid_item_request_attributes)
+  end
+  
+  it "should update status to rejected" do
+    expect { @item_request.reject! }.to change { @item_request.status }.from(ItemRequest::STATUS_REQUESTED).to(ItemRequest::STATUS_REJECTED)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.reject! }.to change { @item_request.changed? }.to(false)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    @item_request = ItemRequest.new # invalid object attrs
+    expect { @item_request.reject! }.to raise_error
   end
 
 end

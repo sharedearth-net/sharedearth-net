@@ -14,3 +14,4 @@ en:
     only_gifter_can_access: "Sorry. Only gifter can access request page."
     item_requests:
       request_accepted: "Request has been accepted."
+      request_rejected: "Request has been rejected."

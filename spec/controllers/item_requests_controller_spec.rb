@@ -231,6 +231,57 @@ describe ItemRequestsController do
 
     end
 
+    describe "PUT reject" do
+    
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :reject, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+      
+      it "should change request status to 'rejected'" do
+        mock_item_request.should_receive(:reject!).once
+        put :reject, :id => "42"
+      end
+
+      it "should redirect to request page" do
+        put :reject, :id => "42"
+        flash[:notice].should eql(I18n.t('messages.item_requests.request_rejected'))
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should allow only gifter to reject the request" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :reject, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should redirect requester trying to reject the request" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :reject, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should redirect other users trying to reject the request" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :reject, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+    end
+
   end
 
 end

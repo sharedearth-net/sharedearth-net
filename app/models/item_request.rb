@@ -2,11 +2,13 @@ class ItemRequest < ActiveRecord::Base
   STATUS_REQUESTED = 10.freeze
   STATUS_ACCEPTED  = 20.freeze
   STATUS_COMPLETED = 30.freeze
+  STATUS_REJECTED  = 40.freeze
 
   STATUSES = {
     STATUS_REQUESTED  => 'requested',
     STATUS_ACCEPTED   => 'accepted',
-    STATUS_COMPLETED  => 'completed'
+    STATUS_COMPLETED  => 'completed',
+    STATUS_REJECTED  => 'rejected'
   }
   
   belongs_to :item
@@ -33,6 +35,11 @@ class ItemRequest < ActiveRecord::Base
   
   def accept!
     self.status = STATUS_ACCEPTED
+    save!
+  end
+
+  def reject!
+    self.status = STATUS_REJECTED
     save!
   end
 end

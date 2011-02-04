@@ -1,8 +1,8 @@
 class ItemRequestsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_item_request, :only => [ :show, :accept ]
+  before_filter :get_item_request, :only => [ :show, :accept, :reject ]
   before_filter :only_requester_or_gifter, :only => [ :show ]
-  before_filter :only_gifter, :only => [ :accept ]
+  before_filter :only_gifter, :only => [ :accept, :reject ]
 
   def new
     @item = Item.find(params[:item_id])
@@ -45,8 +45,13 @@ class ItemRequestsController < ApplicationController
   end  
   
   def accept
-    @item_request.accept!    
+    @item_request.accept!
     redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_accepted'))
+  end
+  
+  def reject
+    @item_request.reject!
+    redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_rejected'))
   end
   
   private
