@@ -4,6 +4,7 @@ describe "pages/index.html.erb (aka homepage)" do
 
   let(:signedin_user) { generate_mock_user_with_person }
 
+  # TODO: we probably shouldn't test the layout through index page. See how to make that separate test.
   def render_index_with_layout
     render :template => "pages/index", :layout => "layouts/application"
   end
@@ -16,6 +17,7 @@ describe "pages/index.html.erb (aka homepage)" do
   end
   
   describe "for signed in member" do
+
     before do
       person = mock_person(:name => "Slobodan Kovacevic")
       signedin_user.stub!(:person).and_return(person)
@@ -36,6 +38,12 @@ describe "pages/index.html.erb (aka homepage)" do
       render_index_with_layout
       rendered.should have_selector("a", :href => person_path(signedin_user.person))
     end
+
+    it "should have a link to see dashboard" do
+      render_index_with_layout
+      rendered.should have_selector("a", :href => dashboard_path)
+    end
+
   end
 
 end

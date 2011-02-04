@@ -9,4 +9,9 @@ class Person < ActiveRecord::Base
   def belongs_to?(some_user)
     user == some_user
   end
+  
+  # TODO: maybe convert this to scope
+  def all_requests
+    item_requests + item_gifts
+  end
 end

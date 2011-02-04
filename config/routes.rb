@@ -15,6 +15,8 @@ Sharedearthapp::Application.routes.draw do
   match "/auth/:provider" => "sessions#create", :as => :signin # this is dummy route, since this will be handled by OmniAuth
   match "/signout" => "sessions#destroy", :as => :signout
 
+  match "/dashboard", :to => "pages#dashboard"
+
   root :to => "pages#index"
 
   # The priority is based upon order of creation:
