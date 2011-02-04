@@ -19,5 +19,17 @@ describe ItemRequestsController do
       { :put => "/requests/1" }.should route_to(:controller => "item_requests", :action => "update", :id => "1")
     end
 
+    it "recognizes and generates #accept" do
+      { :put => "/requests/1/accept" }.should route_to(:controller => "item_requests", :action => "accept", :id => "1")
+    end
+
+    it "recognizes and generates #reject" do
+      { :put => "/requests/1/reject" }.should route_to(:controller => "item_requests", :action => "reject", :id => "1")
+    end
+
+    it "recognizes and generates #complete" do
+      { :put => "/requests/1/complete" }.should route_to(:controller => "item_requests", :action => "complete", :id => "1")
+    end
+
   end
 end

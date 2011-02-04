@@ -30,4 +30,9 @@ class ItemRequest < ActiveRecord::Base
   def gifter?(gifter)
     self.gifter == gifter
   end
+  
+  def accept!
+    self.status = STATUS_ACCEPTED
+    save!
+  end
 end

@@ -13,10 +13,10 @@
 
 <% if @item_request.gifter?(current_user.person) %>
 	<% if @item_request.status == ItemRequest::STATUS_REQUESTED %>
-		<%= link_to "Accept", root_path, :id => "accept_button" %>
+		<%= link_to "Accept", accept_request_path(@item_request), :id => "accept_button", :method => :put %>
 		&nbsp;&nbsp;
-		<%= link_to "Reject", root_path, :id => "reject_button" %>
+		<%= link_to "Reject", reject_request_path(@item_request), :id => "reject_button", :method => :put %>
 	<% elsif @item_request.status == ItemRequest::STATUS_ACCEPTED %>
-		<%= link_to "Complete", root_path, :id => "complete_button" %>
+		<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put %>
 	<% end %>
 <% end %>

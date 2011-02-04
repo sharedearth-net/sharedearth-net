@@ -10,3 +10,7 @@ en:
     only_owner_can_access: "Sorry. Only item owner can access that page."
     you_cannot_edit_others: "You cannot edit other people stuff."
     only_gifter_and_requester_can_access: "Sorry. Only requester and gifter can access request page."
+    only_requester_can_access: "Sorry. Only requester can access request page."
+    only_gifter_can_access: "Sorry. Only gifter can access request page."
+    item_requests:
+      request_accepted: "Request has been accepted."

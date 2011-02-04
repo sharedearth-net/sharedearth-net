@@ -9,6 +9,21 @@ describe ItemRequestsController do
 
   it_should_require_signed_in_user_for_actions :show, :new, :create, :update
 
+  def as_the_requester
+    mock_item_request.stub(:requester?).and_return(true)
+    mock_item_request.stub(:gifter?).and_return(false)
+  end
+
+  def as_the_gifter
+    mock_item_request.stub(:requester?).and_return(false)
+    mock_item_request.stub(:gifter?).and_return(true)
+  end
+
+  def as_other_person
+    mock_item_request.stub(:requester?).and_return(false)
+    mock_item_request.stub(:gifter?).and_return(false)
+  end
+
   describe "as signed in user" do
 
     before do
@@ -72,7 +87,8 @@ describe ItemRequestsController do
       end
       
       it "should allow requester to view the request" do
-        mock_item_request.stub(:requester).and_return(signedin_user.person)
+        # mock_item_request.stub(:requester).and_return(signedin_user.person)
+        as_the_requester
         ItemRequest.stub(:find).with("42") { mock_item_request }
       
         get :show, :id => "42"
@@ -80,7 +96,7 @@ describe ItemRequestsController do
       end
 
       it "should allow gifter to view the request" do
-        mock_item_request.stub(:gifter).and_return(signedin_user.person)
+        as_the_gifter
         ItemRequest.stub(:find).with("42") { mock_item_request }
       
         get :show, :id => "42"
@@ -88,22 +104,13 @@ describe ItemRequestsController do
       end
 
       it "should redirect other users trying to view the request" do
-        # mock_item_request is already null object, so gifter and requester will return nil
+        as_other_person
         ItemRequest.stub(:find).with("42") { mock_item_request }
       
         get :show, :id => "42"
         flash[:alert].should eql(I18n.t('messages.only_gifter_and_requester_can_access'))
         response.should redirect_to(root_path)
       end
-
-      # it "should deny access for non-owner members" do
-      #   mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
-      #   Item.stub(:find).with("37") { mock_item }
-      # 
-      #   get :show, :id => "37"
-      #   flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
-      #   response.should redirect_to(root_path)
-      # end
 
     end
 
@@ -169,6 +176,57 @@ describe ItemRequestsController do
           response.should render_template("new")
         end
 
+      end
+
+    end
+
+    describe "PUT accept" do
+    
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :accept, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+      
+      it "should change request status to 'accepted'" do
+        mock_item_request.should_receive(:accept!).once
+        put :accept, :id => "42"
+      end
+
+      it "should redirect to request page" do
+        put :accept, :id => "42"
+        flash[:notice].should eql(I18n.t('messages.item_requests.request_accepted'))
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should allow only gifter to accept the request" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :accept, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should redirect requester trying to accept the request" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :accept, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should redirect other users trying to accept the request" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :accept, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_path(mock_item_request))
       end
 
     end

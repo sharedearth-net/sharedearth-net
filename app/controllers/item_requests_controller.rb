@@ -1,5 +1,8 @@
 class ItemRequestsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :get_item_request, :only => [ :show, :accept ]
+  before_filter :only_requester_or_gifter, :only => [ :show ]
+  before_filter :only_gifter, :only => [ :accept ]
 
   def new
     @item = Item.find(params[:item_id])
@@ -14,13 +17,6 @@ class ItemRequestsController < ApplicationController
   end
 
   def show
-    @item_request = ItemRequest.find(params[:id])
-    
-    # only gifter or requester can access
-    unless @item_request.gifter == current_user.person || @item_request.requester == current_user.person
-      redirect_to(root_path, :alert => I18n.t('messages.only_gifter_and_requester_can_access')) and return 
-    end
-    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @item }
@@ -45,6 +41,34 @@ class ItemRequestsController < ApplicationController
   end
 
   def update
-    render :text => "update"
+    render :text => "TODO update"
   end  
+  
+  def accept
+    @item_request.accept!    
+    redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_accepted'))
+  end
+  
+  private
+  def get_item_request
+    @item_request = ItemRequest.find(params[:id])
+  end
+  
+  def only_requester_or_gifter
+    unless @item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)
+      redirect_to(root_path, :alert => I18n.t('messages.only_gifter_and_requester_can_access'))
+    end    
+  end
+  
+  def only_gifter
+    unless @item_request.gifter? current_user.person
+      redirect_to(request_path(@item_request), :alert => I18n.t('messages.only_gifter_can_access'))
+    end
+  end
+  
+  def only_requester
+    unless @item_request.requester? current_user.person
+      redirect_to(root_path, :alert => I18n.t('messages.only_requester_can_access'))
+    end
+  end
 end
