@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_item, :only => [:show, :edit, :update, :destroy]
-  before_filter :only_owner!, :only => [:show, :edit, :update, :destroy]#:except => [:index, :new, :create]
+  before_filter :only_owner!, :only => [:edit, :update, :destroy]#:except => [:index, :new, :create]
 
   # GET /items
   # GET /items.xml

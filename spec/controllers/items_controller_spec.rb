@@ -31,21 +31,22 @@ describe ItemsController do
         assigns(:item).should be(mock_item)
       end
       
-      it "should allow only owner to view the item" do
-        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
+      it "should allow owner to view the item" do
+        mock_item.stub(:is_owner?).with(signedin_user.person).and_return(true)
         Item.stub(:find).with("37") { mock_item }
 
         get :show, :id => "37"
         assigns(:item).should be(mock_item)
+        response.should be_success
       end
 
-      it "should deny access for non-owner members" do
-        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
+      it "should allow non-owner members to view the item" do
+        mock_item.stub(:is_owner?).with(signedin_user.person).and_return(false)
         Item.stub(:find).with("37") { mock_item }
       
         get :show, :id => "37"
-        flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
-        response.should redirect_to(root_path)
+        assigns(:item).should be(mock_item)
+        response.should be_success
       end
     end
 
