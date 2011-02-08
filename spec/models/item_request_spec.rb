@@ -24,7 +24,7 @@ describe ItemRequest do
   
   it { should belong_to(:item) }
   
-  it { should validate_presence_of(:description) }
+  # it { should validate_presence_of(:description) }
 
   it { should validate_presence_of(:requester_id) }
 
