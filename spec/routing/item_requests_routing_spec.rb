@@ -31,5 +31,9 @@ describe ItemRequestsController do
       { :put => "/requests/1/complete" }.should route_to(:controller => "item_requests", :action => "complete", :id => "1")
     end
 
+    it "recognizes and generates #cancel" do
+      { :put => "/requests/1/cancel" }.should route_to(:controller => "item_requests", :action => "cancel", :id => "1")
+    end
+
   end
 end

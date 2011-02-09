@@ -134,3 +134,25 @@ describe ItemRequest, ".reject!" do
   end
 
 end
+
+describe ItemRequest, ".cancel!" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    @item_request = ItemRequest.new(valid_item_request_attributes)
+  end
+  
+  it "should update status to canceled" do
+    expect { @item_request.cancel! }.to change { @item_request.status }.from(ItemRequest::STATUS_REQUESTED).to(ItemRequest::STATUS_CANCELED)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.cancel! }.to change { @item_request.changed? }.to(false)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    @item_request = ItemRequest.new # invalid object attrs
+    expect { @item_request.cancel! }.to raise_error
+  end
+
+end

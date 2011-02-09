@@ -19,7 +19,8 @@
 	<%= image_tag @item.photo.url(:medium) %>
 </p>
 
-<% owner_only(@item) do %>
-	<%= link_to 'Edit', edit_item_path(@item) %> |
-	<%= link_to 'Back', items_path %>
+<%= owner_only(@item) do %>
+	<div>
+		<%= link_to 'Edit', edit_item_path(@item) %> |
+	</div>
 <% end %>

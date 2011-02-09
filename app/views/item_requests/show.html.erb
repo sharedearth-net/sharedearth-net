@@ -11,12 +11,18 @@
 
 <p>Status: <%= @item_request.status_name %></p>
 
-<% if @item_request.gifter?(current_user.person) %>
+<%= gifter_only(@item_request) do %>
 	<% if @item_request.status == ItemRequest::STATUS_REQUESTED %>
 		<%= link_to "Accept", accept_request_path(@item_request), :id => "accept_button", :method => :put %>
 		&nbsp;&nbsp;
 		<%= link_to "Reject", reject_request_path(@item_request), :id => "reject_button", :method => :put %>
 	<% elsif @item_request.status == ItemRequest::STATUS_ACCEPTED %>
 		<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put %>
+	<% end %>
+<% end %>
+
+<%= requester_only(@item_request) do %>
+	<% if @item_request.status == ItemRequest::STATUS_REQUESTED %>
+		<%= link_to "Cancel", cancel_request_path(@item_request), :id => "cancel_button", :method => :put %>
 	<% end %>
 <% end %>

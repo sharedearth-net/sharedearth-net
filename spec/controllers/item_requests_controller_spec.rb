@@ -7,7 +7,7 @@ describe ItemRequestsController do
   let(:mock_person) { mock_model(Person).as_null_object }
   let(:signedin_user) { generate_mock_user_with_person }
 
-  it_should_require_signed_in_user_for_actions :show, :new, :create, :update
+  it_should_require_signed_in_user_for_actions :show, :new, :create, :update, :accept, :reject, :cancel
 
   def as_the_requester
     mock_item_request.stub(:requester?).and_return(true)
@@ -278,6 +278,57 @@ describe ItemRequestsController do
         put :reject, :id => "42"
         flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
         response.should redirect_to(request_path(mock_item_request))
+      end
+
+    end
+
+    describe "PUT cancel" do
+    
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :cancel, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+      
+      it "should change request status to 'canceled'" do
+        mock_item_request.should_receive(:cancel!).once
+        put :cancel, :id => "42"
+      end
+
+      it "should redirect to request page" do
+        put :cancel, :id => "42"
+        flash[:notice].should eql(I18n.t('messages.item_requests.request_canceled'))
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      # it "should allow requester to cancel the request" do
+      #   as_the_requester
+      #   ItemRequest.stub(:find).with("42") { mock_item_request }
+      # 
+      #   put :accept, :id => "42"
+      #   flash[:alert].should be_blank # make sure this is not an error redirect
+      #   response.should redirect_to(request_path(mock_item_request))
+      # end
+
+      # it "should redirect requester trying to accept the request" do
+      #   as_the_requester
+      #   ItemRequest.stub(:find).with("42") { mock_item_request }
+      # 
+      #   put :cancel, :id => "42"
+      #   flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+      #   response.should redirect_to(request_path(mock_item_request))
+      # end
+
+      it "should redirect other users trying to accept the request" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :cancel, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_and_requester_can_access'))
+        response.should redirect_to(root_path)
       end
 
     end

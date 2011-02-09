@@ -8,6 +8,7 @@ Sharedearthapp::Application.routes.draw do
       put "accept"
       put "reject"
       put "complete"
+      put "cancel"
     end
   end
   

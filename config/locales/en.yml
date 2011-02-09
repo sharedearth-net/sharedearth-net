@@ -15,3 +15,4 @@ en:
     item_requests:
       request_accepted: "Request has been accepted."
       request_rejected: "Request has been rejected."
+      request_canceled: "Request has been canceled."
