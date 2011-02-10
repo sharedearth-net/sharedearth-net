@@ -40,6 +40,7 @@ class ItemRequestsController < ApplicationController
     end
   end
 
+  # TODO: create update method. Check if it's needed.
   def update
     render :text => "TODO update"
   end  

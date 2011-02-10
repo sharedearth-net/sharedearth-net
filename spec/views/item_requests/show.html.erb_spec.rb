@@ -144,6 +144,40 @@ describe "item_requests/show.html.erb" do
     
   end
 
+  describe "for request in 'collected' state" do
+        
+    before(:each) do
+      with_request_status(ItemRequest::STATUS_COLLECTED)
+    end
+
+    describe "to the gifter" do
+
+      before(:each) do
+        as_gifter
+      end
+
+      it "should render complete button" do
+        render
+        should_render_only([:complete_button])
+      end
+          
+    end
+
+    describe "to the requester" do
+
+      before(:each) do
+        as_requester
+      end
+
+      it "should render complete button" do
+        render
+        should_render_only([:complete_button])
+      end
+          
+    end
+    
+  end
+
   describe "for request in 'completed' state" do
     
     before(:each) do
@@ -190,6 +224,11 @@ describe "item_requests/show.html.erb" do
         as_gifter
       end
           
+      it "shouldn't render any buttons" do
+        render
+        should_render_only([]) # don't render any of the buttons
+      end
+          
     end
 
     describe "to the requester" do
@@ -200,6 +239,11 @@ describe "item_requests/show.html.erb" do
 
     end
     
+    it "shouldn't render any buttons" do
+      render
+      should_render_only([]) # don't render any of the buttons
+    end
+        
   end
 
   describe "for request in 'canceled' state" do
@@ -214,6 +258,11 @@ describe "item_requests/show.html.erb" do
         as_gifter
       end
           
+      it "shouldn't render any buttons" do
+        render
+        should_render_only([]) # don't render any of the buttons
+      end
+          
     end
 
     describe "to the requester" do
@@ -224,6 +273,11 @@ describe "item_requests/show.html.erb" do
 
     end
     
+    it "shouldn't render any buttons" do
+      render
+      should_render_only([]) # don't render any of the buttons
+    end
+        
   end
 
 end

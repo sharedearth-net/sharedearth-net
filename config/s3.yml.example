@@ -1,0 +1,13 @@
+development:
+  access_key_id: AKIP#EXAMPLE#C4OFFV
+  secret_access_key: e+kkjyY0piFZu#EXAMPLE#Q/j/YMMyZArqMlOaOD
+  bucket: sharedearth-development
+test:
+  access_key_id: AKIP#EXAMPLE#C4OFFV
+  secret_access_key: e+kkjyY0piFZu#EXAMPLE#Q/j/YMMyZArqMlOaOD
+  bucket: sharedearth-test
+production:
+  access_key_id: AKIP#EXAMPLE#C4OFFV
+  secret_access_key: e+kkjyY0piFZu#EXAMPLE#Q/j/YMMyZArqMlOaOD
+  bucket: sharedearth-production
+  
