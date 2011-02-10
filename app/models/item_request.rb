@@ -18,6 +18,8 @@ class ItemRequest < ActiveRecord::Base
   belongs_to :item
   belongs_to :requester, :polymorphic => true
   belongs_to :gifter, :polymorphic => true
+
+  scope :involves, lambda { |entity| where("(requester_id = ? AND requester_type = ?) OR (gifter_id = ? AND gifter_type = ?) ", entity.id, entity.class.to_s, entity.id, entity.class.to_s) }  
   
   # validates_presence_of :description
   validates_presence_of :requester_id, :requester_type

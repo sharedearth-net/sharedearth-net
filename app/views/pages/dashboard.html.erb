@@ -1,1 +1,16 @@
 <h1>Dashboard</h1>
+
+<h2>Requests</h2>
+<% unless @all_item_requests.size.zero? %>
+	<ul>
+		<% @all_item_requests.each do |req| %>
+			<li>
+				<%= req.requester.name %> requested from <%= req.gifter.name %>
+				&nbsp;&nbsp;
+				<%= link_to 'view request', request_path(req), :id => "request_#{req.id}" %>
+			</li>
+		<% end %>
+	</ul>
+<% else %>
+	<p>No requests.</p>
+<% end %>

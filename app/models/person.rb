@@ -10,8 +10,7 @@ class Person < ActiveRecord::Base
     user == some_user
   end
   
-  # TODO: maybe convert this to scope
-  def all_requests
-    item_requests + item_gifts
+  def all_item_requests
+    ItemRequest.involves(self)
   end
 end

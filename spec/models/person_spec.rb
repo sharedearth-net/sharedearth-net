@@ -32,13 +32,13 @@ end
 describe Person, ".all_requests" do
 
   it "should return all requests for this person (both as gifter and requester)" do
+    # OPTIMIZE: I don't like this test. Maybe there's better way to test this.
     person = Person.new
     first_request = mock_model(ItemRequest)
     second_request = mock_model(ItemRequest)
-    person.stub(:item_requests).and_return([first_request])
-    person.stub(:item_gifts).and_return([second_request])
+    ItemRequest.stub(:involves).and_return([first_request, second_request])
 
-    person.all_requests.should eql([first_request, second_request])
+    person.all_item_requests.should eql([first_request, second_request])
   end
 
 end
