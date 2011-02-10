@@ -1,7 +1,7 @@
 class ItemRequestsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_item_request, :only => [ :show, :accept, :reject, :cancel ]
-  before_filter :only_requester_or_gifter, :only => [ :show, :cancel ]
+  before_filter :get_item_request, :only => [ :show, :accept, :reject, :cancel, :collected, :complete ]
+  before_filter :only_requester_or_gifter, :only => [ :show, :cancel, :collected, :complete ]
   before_filter :only_gifter, :only => [ :accept, :reject ]
 
   def new
@@ -57,6 +57,16 @@ class ItemRequestsController < ApplicationController
   def cancel
     @item_request.cancel!
     redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_canceled'))
+  end
+  
+  def collected
+    @item_request.collected!
+    redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_collected'))
+  end
+  
+  def complete
+    @item_request.complete!
+    redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_completed'))
   end
   
   private

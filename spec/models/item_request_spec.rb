@@ -156,3 +156,47 @@ describe ItemRequest, ".cancel!" do
   end
 
 end
+
+describe ItemRequest, ".collected!" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    @item_request = ItemRequest.new(valid_item_request_attributes)
+  end
+  
+  it "should update status to collected" do
+    expect { @item_request.collected! }.to change { @item_request.status }.to(ItemRequest::STATUS_COLLECTED)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.collected! }.to change { @item_request.changed? }.to(false)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    @item_request = ItemRequest.new # invalid object attrs
+    expect { @item_request.collected! }.to raise_error
+  end
+
+end
+
+describe ItemRequest, ".complete!" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    @item_request = ItemRequest.new(valid_item_request_attributes)
+  end
+  
+  it "should update status to completed" do
+    expect { @item_request.complete! }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.complete! }.to change { @item_request.changed? }.to(false)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    @item_request = ItemRequest.new # invalid object attrs
+    expect { @item_request.complete! }.to raise_error
+  end
+
+end

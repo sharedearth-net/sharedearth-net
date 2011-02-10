@@ -1,6 +1,37 @@
 require 'spec_helper'
 
 describe "item_requests/show.html.erb" do
+
+  def should_render_only(required_buttons)
+    buttons = {
+      :accept_button => accept_request_path(@item_request),
+      :reject_button => reject_request_path(@item_request),
+      :complete_button => complete_request_path(@item_request),
+      :cancel_button => cancel_request_path(@item_request),
+      :collected_button => collected_request_path(@item_request)
+    }
+
+    buttons.each do |button_id, button_url|
+      if required_buttons.include?(button_id)
+        rendered.should have_selector("a##{button_id}", :href => button_url)
+      else
+        rendered.should_not have_selector("a##{button_id}", :href => button_url)
+      end
+    end
+  end
+
+  def as_gifter
+    signedin_user.stub(:person).and_return(@item_request.gifter)
+  end
+
+  def as_requester
+    signedin_user.stub(:person).and_return(@item_request.requester)
+  end
+
+  def with_request_status(status)
+    @item_request.stub(:status).and_return(status)
+  end
+
   let(:signedin_user) { generate_mock_user_with_person }
 
   before(:each) do
@@ -45,49 +76,154 @@ describe "item_requests/show.html.erb" do
     rendered.should contain(/#{@item_request.status_name}/)
   end
 
-  it "renders accept/reject buttons for gifter if request hasn't been responded to" do
-    signedin_user.stub(:person).and_return(@item_request.gifter)
-    @item_request.stub(:status).and_return(ItemRequest::STATUS_REQUESTED)
-    render
-    rendered.should have_selector("a#accept_button", :href => accept_request_path(@item_request))
-    rendered.should have_selector("a#reject_button", :href => reject_request_path(@item_request))
-    rendered.should_not have_selector("a#complete_button")
+  describe "for request in 'requested' state" do
+    
+    before(:each) do
+      with_request_status(ItemRequest::STATUS_REQUESTED)
+    end
+
+    describe "to the gifter" do
+      
+      before(:each) do
+        as_gifter
+      end
+      
+      it "should render accept/reject buttons" do        
+        render
+        should_render_only([:accept_button, :reject_button])
+      end
+
+    end
+
+    describe "to the requester" do
+
+      before(:each) do
+        as_requester
+      end
+      
+      it "should render cancel button" do
+        render
+        should_render_only([:cancel_button])
+      end
+
+    end
+    
   end
   
-  it "renders complete button for gifter if request is accepted" do
-    signedin_user.stub(:person).and_return(@item_request.gifter)
-    @item_request.stub(:status).and_return(ItemRequest::STATUS_ACCEPTED)
-    render
-    rendered.should_not have_selector("a#accept_button")
-    rendered.should_not have_selector("a#reject_button")
-    rendered.should have_selector("a#complete_button", :href => complete_request_path(@item_request))
-  end
-  
-  it "doesn't render of any of the buttons (accept, reject, complete) to requester if status is 'requested'" do
-    signedin_user.stub(:person).and_return(@item_request.requester)
-    @item_request.stub(:status).and_return(ItemRequest::STATUS_REQUESTED)
-    render
-    rendered.should_not have_selector("a#accept_button")
-    rendered.should_not have_selector("a#reject_button")
-    rendered.should_not have_selector("a#complete_button")
+  describe "for request in 'accepted' state" do
+        
+    before(:each) do
+      with_request_status(ItemRequest::STATUS_ACCEPTED)
+    end
+
+    describe "to the gifter" do
+
+      before(:each) do
+        as_gifter
+      end
+
+      it "should render cancel, collected and complete buttons" do
+        render
+        should_render_only([:cancel_button, :collected_button, :complete_button])
+      end
+          
+    end
+
+    describe "to the requester" do
+
+      before(:each) do
+        as_requester
+      end
+
+      it "should render cancel, collected and complete buttons" do
+        render
+        should_render_only([:cancel_button, :collected_button, :complete_button])
+      end
+          
+    end
+    
   end
 
-  it "doesn't render of any of the buttons (accept, reject, complete) to requester if status is 'accepted'" do
-    signedin_user.stub(:person).and_return(@item_request.requester)
-    @item_request.stub(:status).and_return(ItemRequest::STATUS_ACCEPTED)
-    render
-    rendered.should_not have_selector("a#accept_button")
-    rendered.should_not have_selector("a#reject_button")
-    rendered.should_not have_selector("a#complete_button")
+  describe "for request in 'completed' state" do
+    
+    before(:each) do
+      with_request_status(ItemRequest::STATUS_COMPLETED)
+    end
+
+    describe "to the gifter" do
+
+      before(:each) do
+        as_gifter
+      end
+      
+      it "shouldn't render any buttons" do
+        render
+        should_render_only([]) # don't render any of the buttons
+      end
+          
+    end
+
+    describe "to the requester" do
+
+      before(:each) do
+        as_requester
+      end
+
+      it "shouldn't render any buttons" do
+        render
+        should_render_only([]) # don't render any of the buttons
+      end
+          
+    end
+    
   end
 
-  it "doesn't render of any of the buttons (accept, reject, complete) to anyone if status is 'completed'" do
-    signedin_user.stub(:person).and_return(@item_request.gifter)
-    @item_request.stub(:status).and_return(ItemRequest::STATUS_COMPLETED)
-    render
-    rendered.should_not have_selector("a#accept_button")
-    rendered.should_not have_selector("a#reject_button")
-    rendered.should_not have_selector("a#complete_button")
+  describe "for request in 'rejected' state" do
+    
+    before(:each) do
+      with_request_status(ItemRequest::STATUS_REJECTED)
+    end
+
+    describe "to the gifter" do
+
+      before(:each) do
+        as_gifter
+      end
+          
+    end
+
+    describe "to the requester" do
+
+      before(:each) do
+        as_requester
+      end
+
+    end
+    
+  end
+
+  describe "for request in 'canceled' state" do
+    
+    before(:each) do
+      with_request_status(ItemRequest::STATUS_CANCELED)
+    end
+
+    describe "to the gifter" do
+
+      before(:each) do
+        as_gifter
+      end
+          
+    end
+
+    describe "to the requester" do
+
+      before(:each) do
+        as_requester
+      end
+
+    end
+    
   end
 
 end

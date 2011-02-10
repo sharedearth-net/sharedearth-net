@@ -11,7 +11,7 @@ module ApplicationHelper
     capture(&block) if current_user && item_request.requester?(current_user.person)
   end
 
-  def requester_or_gifter_only(item_request, &block)
+  def requester_and_gifter_only(item_request, &block)
     capture(&block) if current_user && (item_request.gifter?(current_user.person) || item_request.requester?(current_user.person))
   end
 end

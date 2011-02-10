@@ -9,6 +9,7 @@ Sharedearthapp::Application.routes.draw do
       put "reject"
       put "complete"
       put "cancel"
+      put "collected"
     end
   end
   

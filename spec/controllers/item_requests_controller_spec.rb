@@ -304,29 +304,131 @@ describe ItemRequestsController do
         response.should redirect_to(request_path(mock_item_request))
       end
 
-      # it "should allow requester to cancel the request" do
-      #   as_the_requester
-      #   ItemRequest.stub(:find).with("42") { mock_item_request }
-      # 
-      #   put :accept, :id => "42"
-      #   flash[:alert].should be_blank # make sure this is not an error redirect
-      #   response.should redirect_to(request_path(mock_item_request))
-      # end
+      it "should allow requester to cancel the request" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :cancel, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(request_path(mock_item_request))
+      end
 
-      # it "should redirect requester trying to accept the request" do
-      #   as_the_requester
-      #   ItemRequest.stub(:find).with("42") { mock_item_request }
-      # 
-      #   put :cancel, :id => "42"
-      #   flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
-      #   response.should redirect_to(request_path(mock_item_request))
-      # end
+      it "should allow gifter to cancel the request" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :cancel, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(request_path(mock_item_request))
+      end
 
-      it "should redirect other users trying to accept the request" do
+      it "should redirect other users trying to cancel the request" do
         as_other_person
         ItemRequest.stub(:find).with("42") { mock_item_request }
       
         put :cancel, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_and_requester_can_access'))
+        response.should redirect_to(root_path)
+      end
+
+    end
+
+    describe "PUT collected" do
+    
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :collected, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+      
+      it "should change request status to 'collected'" do
+        mock_item_request.should_receive(:collected!).once
+        put :collected, :id => "42"
+      end
+
+      it "should redirect to request page" do
+        put :collected, :id => "42"
+        flash[:notice].should eql(I18n.t('messages.item_requests.request_collected'))
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should allow requester to mark request as collected" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :collected, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should allow gifter to mark request as collected" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :collected, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should redirect other users trying to mark request as collected" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :collected, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_and_requester_can_access'))
+        response.should redirect_to(root_path)
+      end
+
+    end
+
+    describe "PUT complete" do
+    
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :complete, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+      
+      it "should change request status to 'complete'" do
+        mock_item_request.should_receive(:complete!).once
+        put :complete, :id => "42"
+      end
+
+      it "should redirect to request page" do
+        put :complete, :id => "42"
+        flash[:notice].should eql(I18n.t('messages.item_requests.request_completed'))
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should allow requester to mark request as complete" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :complete, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should allow gifter to mark request as complete" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :complete, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(request_path(mock_item_request))
+      end
+
+      it "should redirect other users trying to mark request as complete" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      
+        put :complete, :id => "42"
         flash[:alert].should eql(I18n.t('messages.only_gifter_and_requester_can_access'))
         response.should redirect_to(root_path)
       end

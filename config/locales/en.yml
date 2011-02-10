@@ -16,3 +16,5 @@ en:
       request_accepted: "Request has been accepted."
       request_rejected: "Request has been rejected."
       request_canceled: "Request has been canceled."
+      request_collected: "Request has been marked as collected."
+      request_completed: "Request has been marked as completed."
