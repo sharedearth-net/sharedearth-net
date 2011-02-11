@@ -1,0 +1,31 @@
+<%
+	# compact version of available item request actions based on user's role
+	# for example used in dashboard.html.erb
+%>
+
+<% if req.status == ItemRequest::STATUS_REQUESTED %>
+
+	<%= gifter_only(req) do %>
+		<%= link_to "Accept", accept_request_path(req), :id => "accept_button", :method => :put %> |
+		<%= link_to "Reject", reject_request_path(req), :id => "reject_button", :method => :put %> |
+	<% end %>
+
+	<%= requester_only(req) do %>
+		<%= link_to "Cancel", cancel_request_path(req), :id => "cancel_button", :method => :put %> |
+	<% end %>
+
+<% elsif req.status == ItemRequest::STATUS_ACCEPTED %>
+
+	<%= requester_and_gifter_only(req) do %>
+		<%= link_to "Cancel", cancel_request_path(req), :id => "cancel_button", :method => :put %> |
+		<%= link_to "Collected", collected_request_path(req), :id => "collected_button", :method => :put %> |
+		<%= link_to "Complete", complete_request_path(req), :id => "complete_button", :method => :put %> |
+	<% end %>
+
+<% elsif req.status == ItemRequest::STATUS_COLLECTED %>
+
+	<%= requester_and_gifter_only(req) do %>
+		<%= link_to "Complete", complete_request_path(req), :id => "complete_button", :method => :put %> |
+	<% end %>
+
+<% end %>

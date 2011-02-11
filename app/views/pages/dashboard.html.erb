@@ -13,7 +13,10 @@
 
 				&nbsp;&nbsp;
 
-				<%= link_to 'view request', request_path(req), :id => "request_#{req.id}" %>
+				|
+				<%= link_to 'View request', request_path(req), :id => "request_#{req.id}" %> |
+				<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
+
 			</li>
 		<% end %>
 	</ul>
