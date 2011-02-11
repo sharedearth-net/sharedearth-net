@@ -5,8 +5,14 @@
 	<ul>
 		<% @all_item_requests.each do |req| %>
 			<li>
-				<%= req.requester.name %> requested from <%= req.gifter.name %>
+				<%= link_to image_tag(req.requester.avatar), person_path(req.requester) %>
+
+				<%= link_to_person(req.requester) %>
+				requested <%= link_to req.item.name, item_path(req.item) %>
+				from <%= link_to_person(req.gifter, :downcase_you => true) %>
+
 				&nbsp;&nbsp;
+
 				<%= link_to 'view request', request_path(req), :id => "request_#{req.id}" %>
 			</li>
 		<% end %>

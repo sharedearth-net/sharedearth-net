@@ -24,7 +24,7 @@ describe "people/show.html.erb" do
   
   it "renders person avatar" do
     render
-    rendered.should match(/#{mock_person.user.avatar}/)    
+    rendered.should match(/#{mock_person.avatar}/)    
   end
   
   it "renders a link to edit profile only if showing currently signed in user" do

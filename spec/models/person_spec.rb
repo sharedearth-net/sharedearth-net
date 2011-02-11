@@ -42,3 +42,13 @@ describe Person, ".all_requests" do
   end
 
 end
+
+describe Person, ".avatar" do
+  
+  it "should return user's avatar" do
+    user = mock_model(User, :avatar => "avatar1.jpg")
+    person = Person.new(:user => user)
+    person.avatar.should eql(user.avatar)
+  end
+  
+end

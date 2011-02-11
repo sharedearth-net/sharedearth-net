@@ -5,22 +5,30 @@ describe "pages/dashboard.html.erb" do
   let(:signedin_user) { generate_mock_user_with_person }
   let(:current_person) { 
     mock_model(Person,
-      :name => "Current Person"
+      :name => "Current Person",
+      :avatar => "avatar-current.jpg"
     )
   }
 
   before(:each) do
     view.stub(:current_user).and_return(signedin_user)
     view.current_user.stub(:person).and_return(current_person)
+    current_person.stub(:user).and_return(signedin_user)
 
+    requester_user = mock_model(User)
     requester = mock_model(Person,
-      :name => "Joe Requester"
+      :name => "Joe Requester",
+      :avatar => "avatar1.jpg",
+      :user => requester_user
     ).as_null_object
 
+    gifter_user = mock_model(User)
     gifter = mock_model(Person,
-      :name => "Jane Gifter"
+      :name => "Jane Gifter",
+      :avatar => "avatar2.jpg",
+      :user => gifter_user
     ).as_null_object
-    
+
     item = stub_model(Item,
       :item_type => "MyItemType",
       :name => "MyItemName",
@@ -55,7 +63,6 @@ describe "pages/dashboard.html.erb" do
       :status => ItemRequest::STATUS_REQUESTED
     )
     
-    
     @all_item_requests = assign(:all_item_requests, [current_person_request, current_person_gift])
   end
 
@@ -64,10 +71,21 @@ describe "pages/dashboard.html.erb" do
     second_request = @all_item_requests.second
     
     render
+    # first request
+    rendered.should have_selector("a", :href => person_path(first_request.gifter))
+    # rendered.should match(/#{first_request.gifter.avatar}/)
     rendered.should contain(/#{first_request.gifter.name}/)
     rendered.should have_selector("a#request_#{first_request.id}", :href => request_path(first_request))
+    rendered.should contain(/#{first_request.item.name}/)
+    rendered.should have_selector("a", :href => item_path(first_request.item))
 
+    # second request
+    rendered.should have_selector("a", :href => person_path(second_request.requester))
+    rendered.should match(/#{second_request.requester.avatar}/)
     rendered.should contain(/#{second_request.requester.name}/)
     rendered.should have_selector("a#request_#{second_request.id}", :href => request_path(second_request))
+    rendered.should contain(/#{second_request.item.name}/)
+    rendered.should have_selector("a", :href => item_path(second_request.item))
+
   end
 end

@@ -31,6 +31,7 @@ describe PeopleController do
       it "should assign person's items as @items" do
         assigns(:items).should == mock_person.items
       end
+
     end
     
     describe "GET edit" do

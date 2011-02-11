@@ -1,4 +1,4 @@
-<h1><%= image_tag @person.user.avatar(:large) %> <%= @person.name %></h1>
+<h1><%= image_tag @person.avatar(:large) %> <%= @person.name %></h1>
 
 <%= link_to "Edit profile", edit_person_path(@person) if current_user.person == @person %>
 
