@@ -1,0 +1,5 @@
+/* styles for Internet Explorer 6 and lower, unvisible for others */
+
+.clearfix {
+	height:1%;
+}

@@ -1,0 +1,598 @@
+/* Created by Purecutdesign								*/
+/* Contact: tomcanji@purecutdesign.com					*/
+
+
+/* 1. Clearfix */
+
+.clearfix:after { /* ie.css, ie7.css */
+	content: "."; 
+	display: block; 
+	height: 0; 
+	clear: both; 
+	visibility: hidden;
+}
+
+/* Common */
+
+body {
+	font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+	margin: 0;
+}
+
+
+a:link,
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* container */
+
+#container {
+	width: 1002px;
+	margin: 0 auto;
+}
+
+	/* header */
+
+	#header {
+		height: 90px;
+	}
+		.header-lhs {
+			width: 61px;
+			height: 59px;
+			float: left;
+			margin-top: 5px;
+			text-indent: -1000em;
+			overflow: hidden;
+		}
+			.header-lhs img {
+				display: block;
+			}
+			
+			.header-lhs a:link,
+			.header-lhs a:visited {
+				display: block;
+				width: 61px;
+				height: 59px;
+				background: url('../images/logo.png') no-repeat top left;
+			}
+			
+		
+		.header-rhs {
+			width: 920px;
+			margin-left: 21px;
+			float: left;
+			margin-top: 10px;
+		}
+
+			.logo-type-holder {
+				width: 216px;
+				height: 24px;
+				text-indent: -1000em;
+			}
+			
+			.logo-type-holder a:link,
+			.logo-type-holder a:visited {
+				display: block;
+				background: url('../images/logo-type.png') no-repeat top left;
+				width: 216px;
+				height: 24px;
+			}
+				
+				
+			.status-holder {
+				width: 300px;
+				float: right;
+				text-align: right;
+				margin-top: 3px;
+			}
+			
+				.status-holder ul {
+					
+				}
+				
+					.status-holder ul li {
+						display: block;
+						float: right;
+						width: auto;
+						font-size: 11px;
+						margin-left: 6px;
+					}
+					
+						.status-holder ul li a:link,
+						.status-holder ul li a:visited {
+							font-size: 11px;
+							color: #aba8a8;
+							text-decoration: none;
+							height: 15px;
+							display: block;
+							padding-top: 4px;
+						}
+						
+						.status-holder ul li a:hover {
+							
+						}
+
+						
+						.status-holder ul li.giftact-rating a:link,
+						.status-holder ul li.giftact-rating a:visited {
+							background: url('../images/ic-gift-act-rating.png') no-repeat top left;
+							padding-left: 29px;
+							padding-bottom: 4px;
+						}
+						
+						
+						.status-holder ul li.activity-level a:link,
+						.status-holder ul li.activity-level a:visited {
+							background: url('../images/ic-activity-level.png') no-repeat top left;
+							padding-left: 29px;
+						}
+						
+							
+							.status-holder ul li.people-helped a:link,
+							.status-holder ul li.people-helped a:visited {
+								background: url('../images/ic-person.png') no-repeat top left;
+								padding-left: 19px;
+							}
+						
+
+								.status-holder ul li.giftactions a:link,
+								.status-holder ul li.giftactions a:visited {
+									background: url('../images/ic-giftactions.png') no-repeat top left;
+									padding-left: 15px;
+								}
+						
+						
+							.status-holder ul li.feedback-rating a:link,
+							.status-holder ul li.feedback-rating a:visited {
+								background: url('../images/ic-feedback-rating.png') no-repeat top left;
+								padding-left: 19px;
+							}
+					
+						
+			/* green bar */				
+			
+			.bar-holder {
+				background: url('../images/bg-nav.png') no-repeat top left;
+				width: 920px;
+				height: 24px;
+				margin-top: 9px;
+			}
+			
+				/* home button */
+						
+				.bar-holder-home {
+					float: left;
+					/*width: 217px;
+					text-align: right;
+                    vertical-align:middle;*/
+				}
+				
+					.bar-holder-home ul {
+						margin-left: 8px;
+                        margin-right: 0px;
+					}
+					
+						.bar-holder-home ul li {                            
+						}
+						
+							.bar-holder-home ul li a:link,
+							.bar-holder-home ul li a:visited {
+                                height: 21px;
+                                display: block;
+                                padding-top:3px;
+                                padding-left:5px;
+                                padding-right:5px;
+
+							}
+							
+							.bar-holder-home ul li a:hover {
+                                background: #6ea801;
+							}
+
+
+				.bar-holder-lhs {
+					
+				}
+				
+					.bar-holder-lhs ul {
+						/*margin-left: 20px;*/
+					}
+
+						.bar-holder-lhs ul li {
+							display: block;
+							float: left;
+							padding: 0 0px 0 0;
+							margin-right: 19px;
+                            margin-left: 3px;
+							font-size: 12px;
+							height: 24px;
+
+						}
+						
+							.bar-holder-lhs ul li:hover {
+								background: #6ea801;
+							}
+						
+							.bar-holder-lhs ul li a:link,
+							.bar-holder-lhs ul li a:visited {
+								color: #fff;
+								display: block;
+								padding: 4px 20px 0 5px;
+								background:  url('../images/arrow-down.png') no-repeat right 9px;
+								height: 20px;
+                                text-decoration: none;
+							}
+							
+							.bar-holder-lhs ul li a:hover {
+								color: #fff;
+								background: #6ea801 url('../images/arrow-up.png') no-repeat right 9px;
+							}
+							
+							.bar-holder-lhs ul li.last a:link,
+							.bar-holder-lhs ul li.last a:visited {
+								background: none;
+								padding-right: 8px;
+							}
+							
+							.bar-holder-lhs ul li.last a:hover {
+								background: none;
+							}
+				
+				/* login */
+						
+				.bar-holder-rhs {
+					float: right;
+					width: 243px;
+					text-align: right;
+                    vertical-align:middle;
+				}
+				
+					.bar-holder-rhs ul {
+						margin-right: 8px;
+					}
+					
+						.bar-holder-rhs ul li {
+							display: block;
+							float:right;
+							color: #fff;
+							font-size: 12px;
+							margin-right: 0px;
+							line-height: 14px;
+                            
+						}
+						
+							.bar-holder-rhs ul li a:link,
+							.bar-holder-rhs ul li a:visited {
+								color: #fff;
+                                height: 20px;
+                                display: block;
+                                text-decoration: none;
+                                padding-top:4px;
+                                padding-right: 5px;
+                                padding-left: 5px;
+							}
+							
+							.bar-holder-rhs ul li a:hover {
+                                background: #6ea801;
+							}
+                            
+							
+				
+				/* search */
+							
+				.search-holder {
+					width: 224px;
+					float: right;
+					margin-top: 4px;
+				}
+				
+						.search-holder input[type="text"] {
+							height: 13px;
+							padding:0;
+							border: 1px solid #000;
+							border-right: 0;
+							float: left;
+							width: 200px;
+							padding: 2px 0 0 0;
+							font-size: 11px;
+							line-height: 9px;
+							color: #7a7474;
+							padding-left: 2px;
+						}
+						
+						.search-holder button {
+							float: left;
+							text-indent: -1000em;
+							background: url('../images/bg-search-submit.png') no-repeat top left;
+							width: 18px;
+							height: 17px;
+							border: none;
+							cursor: pointer;
+							color: #fff;
+						}
+
+/* wrapper */					
+
+#wrapper {
+    height: auto !important;
+    min-height: 488px;
+}
+
+	/* content */
+
+	#content {
+		width: 511px;
+		float: left;
+	}
+
+		#content h2 {
+			font-size: 12px;
+			font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;
+			color: #127e0e;
+		}
+
+		.content-box-holder {
+			margin-bottom: 14px;
+		}
+	
+		.content-box-holder img {
+			display: block;
+		} 
+	
+		.content-box {
+			width: 481px;
+			background: #ebf5da;
+			padding: 0 15px 12px 15px;
+		}
+		
+			.content-box .thumb {
+				float: left;
+			}
+		
+			.inner-content {
+				width: 430px;
+				float: left;
+				margin-left: 7px;
+			}
+		
+			.inner-content p {
+				font-size: 12px;
+				color: #333;
+			}
+		
+			.inner-content a:link,
+			.inner-content a:visited {
+				color: #127e0e;
+				font-weight: bold;
+			}
+		
+			.inner-content a:hover {
+				color: #1aac15;
+			}
+		
+			.inner-content .action {
+				font-size: 11px;
+				color: #62775a;
+			}
+		
+				.inner-content .action ul {
+			
+				}
+			
+					.inner-content .action ul li {
+						display: block;
+						float: left;
+						margin-right: 17px;
+					}
+				
+						.inner-content .action ul li a:link,
+						.inner-content .action ul li a:visited {
+							color: #62775a;
+							font-weight: normal;
+						}
+					
+						.inner-content .action ul li a:hover {
+
+						}
+					
+				/* comments */
+			
+				.inner-content ul.comment-list {
+					clear: both;
+				}
+			
+					.inner-content ul.comment-list li {
+						width: 403px;
+						padding: 0 4px;
+						background: #f4f9eb;
+						margin-top: 5px;
+	                    margin-bottom: 0px;
+					}
+				
+					.inner-content ul.comment-list li p {
+						font-size: 11px;
+						padding-top: 3px;
+	                    padding-bottom: 3px;
+					}
+                
+	                .inner-content ul.comment-list li a:link,
+	                .inner-content ul.comment-list li a:visited {
+	                    font-weight: normal;
+	                }
+
+				
+						.inner-content ul.comment-list li p span {
+							display: block;
+	                        color: #62775a;
+	                        font-size: 10px;
+						}
+					
+					.inner-content ul.comment-list li .comment-box {
+						padding: 2px 2px 1px 2px;
+					}
+						
+						.inner-content ul.comment-list li .comment-box textarea {
+							height: 15px;
+							font-size: 9px;
+							color: #999;
+							border: 1px solid #8e948e;
+							padding: 2px 0 0 4px;
+							width: 393px;
+							overflow:auto;
+						}
+				
+	
+
+	/* sidebar */
+
+	#sidebar {
+		width: 464px;
+		float: left;
+		margin-left: 27px;
+	}
+
+		#sidebar h2 {
+			font-size: 12px;
+			font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;
+			color: #127e0e;
+		}
+	
+		#sidebar .sidebar-box {
+			margin-top: 10px;
+		}
+	
+		#sidebar .inner-content {
+		    margin-left: 0;
+		   	width: 459px;
+			float: none;
+		}
+	
+			#sidebar .inner-content p {
+				font-size: 11px;
+			}
+		
+				#sidebar .inner-content p span  {
+					font-size: 9px;
+	                color: #badb80;
+				}
+            
+	            #sidebar .inner-content p span a:link,
+	            #sidebar .inner-content p span a:visited  {
+	                color: #badb80;
+				}
+		
+			#sidebar .inner-content a:link,
+			#sidebar .inner-content a:visited {
+				color: #858f7c;
+	            font-weight: normal;
+
+			}
+		
+			#sidebar .inner-content a:hover {
+				color: #a0ac96;
+			}
+			
+			
+			#sidebar .inner-content a.name-trusted:link,
+			#sidebar .inner-content a.name-trusted:visited {
+				color: #127E0E;
+	            font-weight: normal;
+
+			}
+		
+			#sidebar .inner-content a.name-trusted:hover {
+
+			}
+			
+			#sidebar .inner-content a.name-untrusted:link,
+			#sidebar .inner-content a.name-untrusted:visited {
+				color: #858f7c;
+	            font-weight: normal;
+
+			}
+		
+			#sidebar .inner-content a.name-untrusted:hover {
+
+			}	
+		
+		
+
+		#sidebar .with-action {
+		
+		}
+		
+				#sidebar .with-action p img {
+					 vertical-align: top;
+				}
+							
+	/* button more */							
+
+	a.button-more:link,
+	a.button-more:visited {
+		float: right;
+		display: block;
+		color: #858f7c;
+		font-size: 10px;
+		background: url('../images/arrow-down-more.png') no-repeat bottom right;
+		padding-right: 9px;
+		height: 10px;
+		font-weight: bold;
+	}
+
+	a.button-more:hover {
+	
+	}
+
+
+/* Footer */
+
+#footer {
+	border-top: 1px solid #858f7c;
+	margin-top: 40px;
+}
+
+	#footer ul {
+		
+	}
+	
+		#footer ul li {
+			color: #858f7c;
+            padding-top:5px;
+			display: block;
+			float: left;
+			font-size: 10px;
+			line-height: 12px;
+		}
+			
+			#footer ul li a:link,
+			#footer ul li a:visited {
+				color: #858f7c;
+			}
+			
+			#footer ul li a:hover {
+
+			}
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
