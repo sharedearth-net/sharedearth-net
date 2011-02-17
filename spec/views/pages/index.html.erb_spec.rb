@@ -10,7 +10,7 @@ describe "pages/index.html.erb (aka homepage)" do
   end
 
   it "should have a link for signin with Facebook if not already signed in" do
-    view.should_receive(:current_user).and_return(nil)
+    view.should_receive(:current_user).at_least(:once).and_return(nil)
     
     render_index_with_layout
     rendered.should have_selector("a", :href => signin_path(:provider => 'facebook'))
