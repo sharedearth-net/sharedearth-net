@@ -1,13 +1,19 @@
 class Item < ActiveRecord::Base
+  include PaperclipWrapper
+
   has_many :item_requests
   belongs_to :owner, :polymorphic => true
 
-  has_attached_file :photo,
-                    :styles => { :medium => "300x300>", :thumb => "100x100>" },
-                    :storage => :s3,
-                    :s3_credentials => S3_CREDENTIALS,
-                    :path => "item-photos/:id-:basename-:style.:extension",
-                    :default_url => "/images/noimage-:style.png"
+  has_attachment :photo,
+                 :styles => { :medium => "300x300>", :thumb => "100x100>" },
+                 :default_url => "/images/noimage-:style.png"
+
+  # has_attached_file :photo,
+  #                   :styles => { :medium => "300x300>", :thumb => "100x100>" },
+  #                   :storage => :s3,
+  #                   :s3_credentials => S3_CREDENTIALS,
+  #                   :path => "item-photos/:id-:basename-:style.:extension",
+  #                   :default_url => "/images/noimage-:style.png"
                     
 
   validates_presence_of :item_type, :name, :owner_id, :owner_type
