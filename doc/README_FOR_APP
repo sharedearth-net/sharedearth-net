@@ -1,2 +1,5 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+#sharedearth.net developer docs
+
+In doc/ dir you will find various explanations on how to setup sharedearth.net and how to use it properly.
+
+You will also want to check spec/ dir which has comprehensive RSpec tests.
