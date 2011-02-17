@@ -5,9 +5,116 @@
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+	<%= favicon_link_tag 'favicon.ico' %>
+
 </head>
 <body>
 
+
+	<div id="container">
+		<div id="header">
+
+			<div class="header-lhs">
+				<%= link_to "sharedearth.net", root_path, :title => "sharedearth.net - trust. share. rewrite." %>
+			</div>
+
+			<div class="header-rhs">
+
+				<div class="clearfix">
+
+					<div class="status-holder">
+						<ul>
+							<li class="feedback-rating">
+								<%= link_to "100%", "#", :title => "Feedback Rating" %>
+							</li>
+							<li class="giftactions">
+								<%= link_to "32", "#", :title => "Gift Actions" %>
+							</li>
+							<li class="people-helped">
+								<%= link_to "5", "#", :title => "People Helped" %>
+							</li>
+							<li class="activity-level">
+								<%= link_to "L", "#", :title => "Activity Level" %>
+							</li>
+							<li class="giftact-rating">
+								<%= link_to "66", "#", :title => "Giftact Rating" %>
+							</li>
+						</ul>
+					</div>
+					<div class="logo-type-holder">
+						<%= link_to "sharedearth.net", root_path, :title => "sharedearth.net - trust. share. rewrite." %>
+					</div>
+
+				</div>
+
+				<div class="bar-holder">
+
+
+					<div class="bar-holder-rhs">
+						<ul>
+							<li>
+								<% if current_user %>
+								  	<%= link_to "Sign Out", signout_path %>
+								<% end %>
+							</li>
+							<li>
+								<% if current_user %>
+									<%= link_to current_user.person.name, person_path(current_user.person) %>
+								<% else %>
+									<%= link_to "Sign in with Facebook", signin_path('facebook') %>
+								<% end %>
+							</li>
+
+						</ul>
+					</div>
+
+					<div class="search-holder">
+						<form action="#">
+							<div>
+								<input type="text" value="Search" />
+								<button type="submit" title="Search">Search</button>
+							</div>
+						</form>
+					</div>
+
+					<div class="bar-holder-home">
+						<ul>				
+	                        <li>
+								<% if current_user %>
+							      <%= link_to image_tag("home.png"), dashboard_path, :title => "home" %>
+								<% end %>
+							</li>
+	                    </ul>
+					</div>
+
+					<div class="bar-holder-lhs">
+						<ul>
+							<li>
+								<%= link_to "share" %>
+							</li>
+							<li>
+								<%= link_to "ask" %>
+							</li>
+							<li class="last">
+								<%= link_to "view network" %>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		<!-- #header -->
+
+		
+				
+
+<!-- ......BASTI BEGIN .........-->
+
+
+<!--
 <div style="float:right;text-align:right;">
 	<% if current_user %>
 		Welcome <%= current_user.person.name %>!
@@ -24,7 +131,11 @@
 	<h2><%= link_to "sharedearth.net", root_path %></h2>
 </div>
 
-<hr style="clear:both;" />
+<hr style="clear:both;" />-->
+
+
+<!-- ......BASTI END .........-->
+
 
 <% flash.each do |name, msg| %>
 	<%
@@ -35,7 +146,36 @@
 	<%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
 <% end %>
 
-<%= yield %>
+<div id="wrapper" class="clearfix">
+	
+	<%= yield %>
+
+</div>
+
+<div id="footer">
+	<ul>
+		<li>
+			<%= link_to "Home", dashboard_path %>&nbsp;|&nbsp;
+		</li>
+		<li>
+			<%= link_to "Help" %>&nbsp;|&nbsp;
+		</li>
+		<li>
+			<%= link_to "Contact" %>&nbsp;|&nbsp;
+		</li>
+		<li>
+			<%= link_to "Privacy" %>&nbsp;|&nbsp;
+		</li>
+		<li>
+			<%= link_to "Terms of Use" %>
+		</li>
+	</ul>
+	
+</div>
+<!-- #footer -->
+
+</div>
+<!-- #container -->
 
 </body>
 </html>

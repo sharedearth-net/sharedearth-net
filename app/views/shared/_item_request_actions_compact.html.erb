@@ -6,12 +6,20 @@
 <% if req.status == ItemRequest::STATUS_REQUESTED %>
 
 	<%= gifter_only(req) do %>
-		<%= link_to "Accept", accept_request_path(req), :id => "accept_button", :method => :put %> |
-		<%= link_to "Reject", reject_request_path(req), :id => "reject_button", :method => :put %> |
+		<li>
+			<%= link_to "Accept", accept_request_path(req), :id => "accept_button", :method => :put %>
+		</li>
+		<li>
+			<%= link_to "Reject", reject_request_path(req), :id => "reject_button", :method => :put %>
+		</li>
+		
+		
 	<% end %>
-
+	
 	<%= requester_only(req) do %>
-		<%= link_to "Cancel", cancel_request_path(req), :id => "cancel_button", :method => :put %> |
+		<li>
+			<%= link_to "Cancel", cancel_request_path(req), :id => "cancel_button", :method => :put %>
+		</li>
 	<% end %>
 
 <% elsif req.status == ItemRequest::STATUS_ACCEPTED %>
