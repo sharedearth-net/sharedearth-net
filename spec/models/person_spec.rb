@@ -29,7 +29,7 @@ describe Person do
 
 end
 
-describe Person, ".all_requests" do
+describe Person, ".all_item_requests" do
 
   it "should return all requests for this person (both as gifter and requester)" do
     # OPTIMIZE: I don't like this test. Maybe there's better way to test this.
@@ -39,6 +39,20 @@ describe Person, ".all_requests" do
     ItemRequest.stub(:involves).and_return([first_request, second_request])
 
     person.all_item_requests.should eql([first_request, second_request])
+  end
+
+end
+
+describe Person, ".active_item_requests" do
+
+  it "should return active requests for this person (both as gifter and requester)" do
+    # OPTIMIZE: I don't like this test. Maybe there's better way to test this.
+    person = Person.new
+    first_request = mock_model(ItemRequest)
+    second_request = mock_model(ItemRequest)
+    ItemRequest.stub_chain(:involves, :active).and_return([first_request, second_request])
+
+    person.active_item_requests.should eql([first_request, second_request])
   end
 
 end

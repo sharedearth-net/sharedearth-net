@@ -12,9 +12,9 @@
 		</ul>
 
 
-		<% unless @all_item_requests.size.zero? %>
+		<% unless @active_item_requests.size.zero? %>
 			<ul>
-				<% @all_item_requests.each do |req| %>
+				<% @active_item_requests.each do |req| %>
 					<li class="content-box clearfix">
 						<%= link_to image_tag(req.requester.avatar, :class => "thumb"), person_path(req.requester) %>
 						<div class="inner-content">

@@ -14,6 +14,10 @@ class Person < ActiveRecord::Base
     ItemRequest.involves(self)
   end
   
+  def active_item_requests
+    ItemRequest.involves(self).active
+  end
+  
   def avatar(avatar_size = nil)
     self.user.avatar(avatar_size)
   end

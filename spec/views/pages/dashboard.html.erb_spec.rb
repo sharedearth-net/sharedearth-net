@@ -63,12 +63,12 @@ describe "pages/dashboard.html.erb" do
       :status => ItemRequest::STATUS_REQUESTED
     )
     
-    @all_item_requests = assign(:all_item_requests, [current_person_request, current_person_gift])
+    @active_item_requests = assign(:active_item_requests, [current_person_request, current_person_gift])
   end
 
-  it "renders a list of requests" do
-    first_request = @all_item_requests.first
-    second_request = @all_item_requests.second
+  it "renders a list of active requests" do
+    first_request = @active_item_requests.first
+    second_request = @active_item_requests.second
     
     render
     # first request

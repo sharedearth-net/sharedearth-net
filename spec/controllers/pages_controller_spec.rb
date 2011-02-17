@@ -31,12 +31,12 @@ describe PagesController do
         response.should render_template("pages/dashboard")
       end
       
-      it "assigns the current person's requests as @item_requests" do
+      it "assigns the current person's active requests as @active_item_requests" do
         mock_item_requests = [mock_model(Item), mock_model(Item)]
         signedin_user.stub(:person).and_return(mock_model(Person))
-        signedin_user.person.stub(:all_item_requests) { mock_item_requests }
+        signedin_user.person.stub(:active_item_requests) { mock_item_requests }
         get :dashboard
-        assigns(:all_item_requests).should eq(mock_item_requests)
+        assigns(:active_item_requests).should eq(mock_item_requests)
       end
 
     end
