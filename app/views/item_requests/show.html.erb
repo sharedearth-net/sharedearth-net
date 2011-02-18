@@ -1,39 +1,73 @@
-<%= image_tag @item_request.requester.avatar(:large), :style => "float:left;padding:10px;" %>
-<h1><%= @item_request.requester.name %></h1>
+<div id="content">
+		
+	<div class="content-box-holder no-bg">
+		<ul>
+			<li class="content-box clearfix">
 
-<p>
-	Would like to borrow a <strong><%= @item_request.item.name %></strong> from <%= @item_request.gifter.name %>
-</p>
+				<%= image_tag @item_request.requester.avatar(:large), :class => "thumb" %>
+				<div class="inner-content">
+					
+					<h2>
+						<%= @item_request.requester.name %>
+					</h2>
 
-<% if @item_request.description %>
-	<p><%= @item_request.description %></p>
-<% end %>
+					<p>
+						Would like to borrow a <strong><%= @item_request.item.name %></strong> from <%= @item_request.gifter.name %>
+					</p>
 
-<p>Status: <%= @item_request.status_name %></p>
+					<% if @item_request.description %>
+						<p><%= @item_request.description %></p>
+					<% end %>
 
-<% if @item_request.status == ItemRequest::STATUS_REQUESTED %>
+					<p>Status: <%= @item_request.status_name %></p>
+				
+				
+					<ul class="profile-request-list">
+				
+						<% if @item_request.status == ItemRequest::STATUS_REQUESTED %>
 
-	<%= gifter_only(@item_request) do %>
-		<%= link_to "Accept", accept_request_path(@item_request), :id => "accept_button", :method => :put %>
-		<%= link_to "Reject", reject_request_path(@item_request), :id => "reject_button", :method => :put %>
-	<% end %>
+							<%= gifter_only(@item_request) do %>
+								<li>
+									<%= link_to "Accept", accept_request_path(@item_request), :id => "accept_button", :method => :put, :class => "accept" %>
+								</li>
+								<li>
+									<%= link_to "Reject", reject_request_path(@item_request), :id => "reject_button", :method => :put %>
+								</li>
+						
+							<% end %>
 
-	<%= requester_only(@item_request) do %>
-		<%= link_to "Cancel", cancel_request_path(@item_request), :id => "cancel_button", :method => :put %>
-	<% end %>
+							<%= requester_only(@item_request) do %>
+								<li>
+									<%= link_to "Cancel", cancel_request_path(@item_request), :id => "cancel_button", :method => :put %>
+								</li>
+							<% end %>
 
-<% elsif @item_request.status == ItemRequest::STATUS_ACCEPTED %>
+						<% elsif @item_request.status == ItemRequest::STATUS_ACCEPTED %>
 
-	<%= requester_and_gifter_only(@item_request) do %>
-		<%= link_to "Cancel", cancel_request_path(@item_request), :id => "cancel_button", :method => :put %>
-		<%= link_to "Collected", collected_request_path(@item_request), :id => "collected_button", :method => :put %>
-		<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put %>
-	<% end %>
+							<%= requester_and_gifter_only(@item_request) do %>
+								<li>
+									<%= link_to "Cancel", cancel_request_path(@item_request), :id => "cancel_button", :method => :put %>
+								</li>
+								<li>
+									<%= link_to "Collected", collected_request_path(@item_request), :id => "collected_button", :method => :put %>
+								</li>
+								<li>
+									<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put %>
+								</li>
+							<% end %>
 
-<% elsif @item_request.status == ItemRequest::STATUS_COLLECTED %>
+						<% elsif @item_request.status == ItemRequest::STATUS_COLLECTED %>
 
-	<%= requester_and_gifter_only(@item_request) do %>
-		<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put %>
-	<% end %>
+							<%= requester_and_gifter_only(@item_request) do %>
+								<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put %>
+							<% end %>
 
-<% end %>
+						<% end %>
+					</ul>
+				
+				</div>
+			</li>
+		</ul>
+	</div><!-- /content-box-holder  -->
+	
+</div>

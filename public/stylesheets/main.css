@@ -579,12 +579,150 @@ a:hover {
 
 			}
 							
+
+			/* profile */
+
+			.no-bg .content-box {
+				background: #fff;
+			}
+			
+				.no-bg .content-box .thumb {
+					float: left;
+					width: 200px;
+				}
+
+				.no-bg .inner-content {
+					width: 270px;
+					background: #fff;
+					float: left;
+				}
+
+				#content .no-bg h2 {
+					font-size: 16px;
+					line-height: 19px;
+					font-family: verdana, arial, sans-serif;
+					margin-bottom: 6px;
+				}
+					
+					#content .no-bg h2 span {
+						font-size: 12px;
+						text-align: right;
+						font-weight: normal;
+					}	
+					
+						#content .no-bg h2 span a:link,
+						#content .no-bg h2 span a:visited {
+							font-weight: normal;
+						}
+
+				#content .no-bg p {
+					font-size: 12px;
+					font-family: verdana, arial, sans-serif;
+					color: #62775a;
+					margin-bottom: 15px;
+				}
+
+					#content .no-bg p a.giftactions:link,
+					#content .no-bg p a.giftactions:visited {
+						background: url('../images/ic-giftactions.png') no-repeat top left;
+						padding-left: 15px;
+						color: #62775a;
+						font-weight: normal;
+					}
+
+					#content .no-bg p a.people-helped:link,
+					#content .no-bg p a.people-helped:visited {
+						background: url('../images/ic-person.png') no-repeat top left;
+						padding-left: 19px;
+						color: #62775a;
+						font-weight: normal;
+					}
+
+					#content .no-bg p a.feedback-rating:link,
+					#content .no-bg p a.feedback-rating:visited {
+						background: url('../images/ic-feedback-rating.png') no-repeat top left;
+						padding-left: 19px;
+						padding-bottom: 3px;
+						color: #62775a;
+						font-weight: normal;
+					}
+
+				#content .no-bg p.status-holder-profile {
+					font-size: 11px;
+					line-height: 14px;
+					margin-bottom: 15px;
+				}
+
+				.content-box h3 {
+					font-family: verdana, arial, sans-serif;
+					font-size: 16px;
+					line-height: 18px;
+					margin: 0 0 8px 10px;
+				}
+
+				.content-box ul.profile-request-list {
+					margin-left: 10px;
+				}
+
+					.content-box ul.profile-request-list li {
+						display: block;
+						float: left;
+						text-align: center;
+						font-size: 13px;
+						margin-right: 13px;
+					}
+
+
+
+						.content-box ul.profile-request-list li a:link,
+						.content-box ul.profile-request-list li a:visited {
+							background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+							padding: 0 7px;
+							color: #234d4d;
+							display: block;
+							border: 1px solid #aab1a9;
+							line-height: 15px;
+							height: 18px;
+						}
+
+						.content-box ul.profile-request-list li a:hover {
+							text-decoration: none;
+						}
+
+						.content-box ul.profile-request-list li a.accept:link,
+						.content-box ul.profile-request-list li a.accept:visited {
+							color: #127e0e;
+						}						
 							
+			/* item list*/				
+
+			.items-list {
+				background: #eee;
+				border: 1px solid #ddd;
+				padding: 10px;
+			}
+			
+				.items-list ul {
+					
+				}
+				
+					.items-list ul li {
+						display: block;
+						float: left;
+						font-size: 12px;
+					}
+					
+						.items-list ul li img {
+							width: 30px;
+							float: left;
+							margin-right: 10px;
+						}
 							
-							
-							
-							
-							
+/* misc */
+
+.clearer {
+	clear: both;
+}
 							
 							
 							

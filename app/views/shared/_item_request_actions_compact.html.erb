@@ -25,15 +25,24 @@
 <% elsif req.status == ItemRequest::STATUS_ACCEPTED %>
 
 	<%= requester_and_gifter_only(req) do %>
-		<%= link_to "Cancel", cancel_request_path(req), :id => "cancel_button", :method => :put %> |
-		<%= link_to "Collected", collected_request_path(req), :id => "collected_button", :method => :put %> |
-		<%= link_to "Complete", complete_request_path(req), :id => "complete_button", :method => :put %> |
+		<li>
+			<%= link_to "Cancel", cancel_request_path(req), :id => "cancel_button", :method => :put %>
+		</li>
+		<li>	
+			<%= link_to "Collected", collected_request_path(req), :id => "collected_button", :method => :put %>
+		</li>
+		<li>
+			<%= link_to "Complete", complete_request_path(req), :id => "complete_button", :method => :put %>
+		</li>
+		
 	<% end %>
 
 <% elsif req.status == ItemRequest::STATUS_COLLECTED %>
 
 	<%= requester_and_gifter_only(req) do %>
-		<%= link_to "Complete", complete_request_path(req), :id => "complete_button", :method => :put %> |
+		<li>
+			<%= link_to "Complete", complete_request_path(req), :id => "complete_button", :method => :put %>
+		<li>
 	<% end %>
 
 <% end %>
