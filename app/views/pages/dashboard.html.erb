@@ -2,16 +2,6 @@
 	<div class="content-box-holder">
 		<%= image_tag("curve-top-content-box.png", :alt => "test")  %>
 
-		<ul>
-			<li class="content-box clearfix">
-				<h1>Dashboard</h1>
-			</li>
-			<li class="content-box clearfix">
-				<h2>Requests</h2>
-			</li>
-		</ul>
-
-
 		<% unless @active_item_requests.size.zero? %>
 			<ul>
 				<% @active_item_requests.each do |req| %>
@@ -40,7 +30,7 @@
 		<% else %>
 			<ul>
 				<li class="content-box clearfix">
-					No requests.
+					<h2>No requests.</h2>
 				</li>
 			</ul>
 		<% end %>

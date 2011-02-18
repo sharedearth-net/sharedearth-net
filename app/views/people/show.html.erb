@@ -1,21 +1,53 @@
-<h1><%= image_tag @person.avatar(:large) %> <%= @person.name %></h1>
-
-<%= link_to "Edit profile", edit_person_path(@person) if current_user.person == @person %>
-
-
-<h2>Items</h2>
-<% unless @items.size.zero? %>
-	<ul>
-		<% @items.each do |item| %>
-			<li>
-				<%= link_to image_tag(item.photo.url(:thumb)), item_path(item) %>
-				<%= link_to item.name, item_path(item) %>
-				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<%= link_to "Request this item", new_request_path(:item_id => item) %>
+<div id="content">
+		
+	<div class="content-box-holder no-bg">
+		<ul>
+			<li class="content-box clearfix">
+				
+				<%= image_tag @person.avatar(:large), :class => "thumb" %>
+				
+				<div class="inner-content">
+					<h2>
+						<%= @person.name %>
+						<span>
+							<%= link_to "Edit profile", edit_person_path(@person) if current_user.person == @person %>
+						</span>
+					</h2>
+					
+					<p class="status-holder-profile">
+					Gifted <a class="giftactions" href="#" title="Gift Actions">7</a> actions with <a class="people-helped" href="#" title="People Helped">4</a> 					different people. Positive feedback rating is <a class="feedback-rating" href="#" title="Feedback Rating">100%</a>
+					</p>
+					
+					<p>
+						Previous experience working in IT (data 
+						warehousing and business intelligence), but I 
+						guess my heart lies with evolutionary activism 
+						in the cultural and social space.
+					</p>
+				</div>
 			</li>
-		<% end %>
-	</ul>
-<% else %>
-	<p>This person has no items.</p>
-<% end %>
-
+			
+			<li>
+				<div class="items-list clearfix">
+					<h2>Items</h2>
+					<% unless @items.size.zero? %>
+						<ul>
+							<% @items.each do |item| %>
+								<li class="clearer">
+									<%= link_to image_tag(item.photo.url(:thumb)), item_path(item) %>
+									<%= link_to item.name, item_path(item) %>
+									&nbsp;&nbsp;|&nbsp;&nbsp;
+									<%= link_to "Request this item", new_request_path(:item_id => item) %>
+								</li>
+							<% end %>
+						</ul>
+					<% else %>
+						<p>This person has no items.</p>
+					<% end %>
+				</div>
+			</li>
+		</ul>
+		
+	</div><!-- /content-box-holder  -->
+	
+</div>
