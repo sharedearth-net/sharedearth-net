@@ -22,7 +22,9 @@ class ItemRequest < ActiveRecord::Base
   belongs_to :gifter, :polymorphic => true
 
   scope :involves, lambda { |entity| where("(requester_id = ? AND requester_type = ?) OR (gifter_id = ? AND gifter_type = ?) ", entity.id, entity.class.to_s, entity.id, entity.class.to_s) }
+  scope :involves_as_requester, lambda { |entity| where("requester_id = ? AND requester_type = ?", entity.id, entity.class.to_s) }
   scope :active, where("status IN (#{ACTIVE_STATUSES.join(",")})")
+  scope :unanswered, where(:status => STATUS_REQUESTED)
   
   # validates_presence_of :description
   validates_presence_of :requester_id, :requester_type

@@ -18,6 +18,14 @@ class Person < ActiveRecord::Base
     ItemRequest.involves(self).active
   end
   
+  def unanswered_requests(requester = nil)
+    # if requester
+    #   self.item_gifts.unanswered.involves_as_requester(requester)
+    # else
+    #   self.item_gifts.unanswered
+    # end
+  end
+  
   def avatar(avatar_size = nil)
     self.user.avatar(avatar_size)
   end
