@@ -28,7 +28,7 @@
 
 							<%= gifter_only(@item_request) do %>
 								<li>
-									<%= link_to "Accept", accept_request_path(@item_request), :id => "accept_button", :method => :put, :class => "accept" %>
+									<%= link_to "Accept", accept_request_path(@item_request), :id => "accept_button", :method => :put, :class => "positive" %>
 								</li>
 								<li>
 									<%= link_to "Reject", reject_request_path(@item_request), :id => "reject_button", :method => :put %>
@@ -49,17 +49,17 @@
 									<%= link_to "Cancel", cancel_request_path(@item_request), :id => "cancel_button", :method => :put %>
 								</li>
 								<li>
-									<%= link_to "Collected", collected_request_path(@item_request), :id => "collected_button", :method => :put %>
+									<%= link_to "Collected", collected_request_path(@item_request), :id => "collected_button", :method => :put, :class => "positive" %>
 								</li>
 								<li>
-									<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put %>
+									<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive" %>
 								</li>
 							<% end %>
 
 						<% elsif @item_request.status == ItemRequest::STATUS_COLLECTED %>
 
 							<%= requester_and_gifter_only(@item_request) do %>
-								<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put %>
+								<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive" %>
 							<% end %>
 
 						<% end %>

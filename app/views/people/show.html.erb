@@ -10,12 +10,19 @@
 					<h2>
 						<%= @person.name %>
 						<span>
-							<%= link_to "Edit profile", edit_person_path(@person) if current_user.person == @person %>
+							<%= link_to "edit profile", edit_person_path(@person) if current_user.person == @person %>
 						</span>
 					</h2>
 					
 					<p class="status-holder-profile">
-					Gifted <a class="giftactions" href="#" title="Gift Actions">7</a> actions with <a class="people-helped" href="#" title="People Helped">4</a> 					different people. Positive feedback rating is <a class="feedback-rating" href="#" title="Feedback Rating">100%</a>
+						<span>
+							<%= link_to "7", "#", :class => "giftactions", :title => "Gift Actions"  %> gift actions for
+						</span>
+						<span>
+							<%= link_to "4", "#", :class => "people-helped", :title => "People Helped"  %> different people.
+						</span>
+						<br />
+							<%= link_to "100%", "#", :class => "feedback-rating", :title => "Feedback Rating"  %> positive feedback for sharing and receiving 
 					</p>
 					
 					<p>
@@ -33,11 +40,41 @@
 					<% unless @items.size.zero? %>
 						<ul>
 							<% @items.each do |item| %>
-								<li class="clearer">
-									<%= link_to image_tag(item.photo.url(:thumb)), item_path(item) %>
-									<%= link_to item.name, item_path(item) %>
-									&nbsp;&nbsp;|&nbsp;&nbsp;
-									<%= link_to "Request this item", new_request_path(:item_id => item) %>
+								<li class="item clearer">
+									<%= link_to image_tag(item.photo.url(:thumb), :class => "thumb"), item_path(item) %>
+									<div>
+										<ul class="clearfix">
+											<li>
+												<%= link_to "gift", "#", :class => "positive"  %>&nbsp;|&nbsp;
+											</li>
+											<li>
+												<%= link_to item.name, item_path(item) %>&nbsp;|&nbsp;
+											</li>
+											<li>
+												2 person dome tent
+											</li>
+										</ul>
+										
+										
+										<ul class="action-list">
+											<li>
+												<%= link_to "7", "#", :class => "giftactions", :title => "Gift Actions" %>
+											</li>
+											<li>
+												<%= link_to "4", "#", :class => "people-helped", :title => "People Helped" %>
+											</li>
+											<li>
+												<%= link_to "view", item_path(item) %>
+											</li>
+											<li>
+												<%= link_to "request this item", new_request_path(:item_id => item) %>
+											</li>
+											<li>
+												<%= link_to "quick request", "#" %>
+											</li>
+										</ul>
+										
+									</div>
 								</li>
 							<% end %>
 						</ul>
