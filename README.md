@@ -9,7 +9,7 @@ To that end (as copyright is automatically assigned for all creative content), t
 
 *No warranty is offered or implied. Use at your own risk.* See [creativecommons.org/about/cc0](http://creativecommons.org/about/cc0) for more information.
 
-Note this project is in early alpha and as such the code is incomplete and potentially in error.
+Note this project is in early alpha and as such the code is incomplete and untested.
 
 
 ##Developer/Setup information
