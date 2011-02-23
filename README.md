@@ -5,12 +5,9 @@
 
 This is a project for the commons - for a world where everything is shared, and nothing is owned.
 
-To that end (as copyright is automatically assigned for all creative content), to the extent possible under law, the owners, contributors and developers have waived all copyright and related or neighboring rights to this source code. 
+To that end (as copyright is automatically assigned for all creative content), to the extent possible under law, the owners, contributors and developers have waived all copyright and related or neighboring rights to this source code. See [creativecommons.org/about/cc0](http://creativecommons.org/about/cc0) for more information.
 
-*No warranty is offered or implied. Use at your own risk.* See [creativecommons.org/about/cc0](http://creativecommons.org/about/cc0) for more information.
-
-Note this project is in early alpha and as such the code is incomplete and untested.
-
+*No warranty is offered or implied. Use at your own risk.* Additionally note this project is in early alpha and as such the code is incomplete and untested.
 
 ##Developer/Setup information
 
