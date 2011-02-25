@@ -22,7 +22,7 @@
 					<p>Status: <%= @item_request.status_name %></p>
 				
 				
-					<ul class="profile-request-list">
+					<ul class="action-buttons-list">
 				
 						<% if @item_request.status == ItemRequest::STATUS_REQUESTED %>
 
@@ -59,7 +59,9 @@
 						<% elsif @item_request.status == ItemRequest::STATUS_COLLECTED %>
 
 							<%= requester_and_gifter_only(@item_request) do %>
-								<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive" %>
+								<li>
+									<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive" %>
+								</li>
 							<% end %>
 
 						<% end %>

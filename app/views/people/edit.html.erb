@@ -1,13 +1,38 @@
-<h1>Edit profile</h1>
+<div id="content">
+		
+	<div class="content-box-holder no-bg">
+		<ul>
+			<li class="content-box clearfix">
+				<h2>Edit profile</h2>
 
-<%= form_for(@person, :html => { :multipart => true }) do |f| %>
-	<%= render :partial => "shared/error_messages", :locals => { :model => @person } %>
+				<%= form_for(@person, :html => { :multipart => true }) do |f| %>
+					<%= render :partial => "shared/error_messages", :locals => { :model => @person } %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %> or <%= link_to 'cancel', @person %>
-  </div>
-<% end %>
+				  <div class="field">
+					<ul class="form-holder">
+						<li>
+				    		<%= f.label :name %>
+						</li>
+						<li>
+				    		<%= f.text_field :name %>
+						</li>
+						<li>
+							<div class="actions">
+								<ul class="action-buttons-list">
+									<li>
+										<%= f.submit %>
+									</li>
+									<li>
+										<%= link_to 'cancel', @person %>
+									</li>	
+								</ul>
+							</div>
+						</li>
+					</ul>
+				  </div>
+				  
+				<% end %>
+			</li>
+		</ul>
+	</div><!-- /content-box-holder  -->
+</div>

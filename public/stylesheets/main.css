@@ -682,11 +682,11 @@ a:hover {
 					margin: 0 0 8px 10px;
 				}
 
-				.content-box ul.profile-request-list {
+				.content-box ul.action-buttons-list {
 					margin-left: 10px;
 				}
 
-					.content-box ul.profile-request-list li {
+					.content-box ul.action-buttons-list li {
 						display: block;
 						float: left;
 						text-align: center;
@@ -696,8 +696,8 @@ a:hover {
 
 
 
-						.content-box ul.profile-request-list li a:link,
-						.content-box ul.profile-request-list li a:visited {
+						.content-box ul.action-buttons-list li a:link,
+						.content-box ul.action-buttons-list li a:visited {
 							background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
 							padding: 0 7px;
 							color: #234d4d;
@@ -708,12 +708,12 @@ a:hover {
 							text-transform: capitalize;
 						}
 
-						.content-box ul.profile-request-list li a:hover {
+						.content-box ul.action-buttons-list li a:hover {
 							text-decoration: none;
 						}
 
-						.content-box ul.profile-request-list li a.positive:link,
-						.content-box ul.profile-request-list li a.positive:visited {
+						.content-box ul.action-buttons-list li a.positive:link,
+						.content-box ul.action-buttons-list li a.positive:visited {
 							color: #127e0e;
 						}						
 							
@@ -731,7 +731,7 @@ a:hover {
 						display: block;
 						float: left;
 						font-size: 12px;
-						color: #333;
+						color: #127e0e;
 					}
 					
 					.items-list ul li.item {
@@ -756,7 +756,7 @@ a:hover {
 						
 								.items-list ul li li a:link,
 								.items-list ul li li a:visited {
-									color: #333;
+									color: #858f7c;
 								}
 							
 							
@@ -778,6 +778,44 @@ a:hover {
 									color: #62775a;
 									font-weight: normal;
 								}
+								
+								
+								
+			/* edit profile */
+			
+			ul.form-holder {
+				
+			}
+			
+				ul.form-holder li {
+					display: block;
+				}
+				
+					ul.form-holder li label {
+						font-size: 12px;
+						font-family: verdana;
+					}
+					
+					ul.form-holder li input[type="text"] {
+						border: 1px solid #8E948E;
+					    color: #999999;
+					    font-size: 13px;
+					    height: 15px;
+					    overflow: auto;
+					    padding: 2px 0 0 4px;
+					    width: 393px;
+					}
+					
+					ul.form-holder li input[type="submit"] {
+						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+						padding: 0 7px;
+						color: #127e0e;
+						display: block;
+						border: 1px solid #aab1a9;
+						line-height: 15px;
+						text-transform: capitalize;
+						cursor: pointer;
+					}
 							
 /* misc */
 

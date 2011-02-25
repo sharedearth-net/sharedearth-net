@@ -16,13 +16,13 @@
 					
 					<p class="status-holder-profile">
 						<span>
-							<%= link_to "7", "#", :class => "giftactions", :title => "Gift Actions"  %> gift actions for
+							<%= link_to "7", "#", :class => "giftactions", :title => "Gift Actions"  %> gift actions
 						</span>
 						<span>
-							<%= link_to "4", "#", :class => "people-helped", :title => "People Helped"  %> different people.
+							<%= link_to "4", "#", :class => "people-helped", :title => "People Helped"  %> different people
 						</span>
 						<br />
-							<%= link_to "100%", "#", :class => "feedback-rating", :title => "Feedback Rating"  %> positive feedback for sharing and receiving 
+							<%= link_to "100%", "#", :class => "feedback-rating", :title => "Feedback Rating"  %> positive feedback
 					</p>
 					
 					<p>
@@ -45,7 +45,7 @@
 									<div>
 										<ul class="clearfix">
 											<li>
-												<%= link_to "gift", "#", :class => "positive"  %>&nbsp;|&nbsp;
+												<%= link_to "gift", "#"  %>&nbsp;|&nbsp;
 											</li>
 											<li>
 												<%= link_to item.name, item_path(item) %>&nbsp;|&nbsp;
@@ -64,10 +64,10 @@
 												<%= link_to "4", "#", :class => "people-helped", :title => "People Helped" %>
 											</li>
 											<li>
-												<%= link_to "view", item_path(item) %>
+												<%= link_to "view item", item_path(item) %>
 											</li>
 											<li>
-												<%= link_to "request this item", new_request_path(:item_id => item) %>
+												<%= link_to "request", new_request_path(:item_id => item) %>
 											</li>
 											<li>
 												<%= link_to "quick request", "#" %>
