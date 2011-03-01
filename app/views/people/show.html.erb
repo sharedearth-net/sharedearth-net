@@ -43,6 +43,7 @@
 								<li class="item clearer">
 									<%= link_to image_tag(item.photo.url(:thumb), :class => "thumb"), item_path(item) %>
 									<div>
+										<!-- basti-question: does this have to be a list? -->
 										<ul class="clearfix">
 											<li>
 												<%= link_to "gift", "#"  %>&nbsp;|&nbsp;
@@ -51,6 +52,7 @@
 												<%= link_to item.name, item_path(item) %>&nbsp;|&nbsp;
 											</li>
 											<li>
+												<!-- basti-question: what's this? -->
 												2 person dome tent
 											</li>
 										</ul>
@@ -80,6 +82,40 @@
 						</ul>
 					<% else %>
 						<p>This person has no items.</p>
+					<% end %>
+				</div>
+			</li>
+			<li>
+				<!-- tomcanji-todo: style requests -->
+				<div class="items-list clearfix">
+					<h2>Unanswered requests</h2>
+					<% unless @unanswered_requests.size.zero? %>
+						<ul>
+							<% @unanswered_requests.each do |req| %>
+								<li class="item clearer">
+									<%= link_to image_tag(req.item.photo.url(:thumb), :class => "thumb"), item_path(req.item) %>
+									<div>
+										<ul class="clearfix">
+											<li>
+												<!-- tomcanji-todo: everything is lowercased through CSS, but we need to display names -->
+												<%= link_to_person(req.requester) %>
+												requested <%= link_to req.item.name, item_path(req.item) %>
+												from <%= link_to_person(req.gifter, :downcase_you => true) %>
+											</li>
+										</ul>
+										
+										<ul class="action-list">
+											<li>
+												<%= time_ago_in_words req.created_at %> ago
+											</li>
+											<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
+										</ul>
+									</div>
+								</li>
+							<% end %>
+						</ul>						
+					<% else %>
+						<p>There are no unanswered requests.</p>
 					<% end %>
 				</div>
 			</li>

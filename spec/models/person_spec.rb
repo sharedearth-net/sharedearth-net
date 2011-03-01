@@ -57,12 +57,6 @@ describe Person, ".active_item_requests" do
 
 end
 
-describe Person, ".unanswered_requests" do
-
-  pending("TODO test for Person.unanswered_requests")
-
-end
-
 describe Person, ".avatar" do
   
   it "should return user's avatar" do

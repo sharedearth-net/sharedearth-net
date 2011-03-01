@@ -5,8 +5,12 @@ class PeopleController < ApplicationController
 
   def show
     @items = @person.items
-    # TODO: move this to model
-    # @unanswered_requests = current_user.person.item_gifts.where(:requester_id => @person, :requester_type => Person) unless @person.belongs_to? current_user
+
+    if @person.belongs_to? current_user
+      @unanswered_requests = @person.unanswered_requests
+    else
+      @unanswered_requests = @person.unanswered_requests(current_user.person)
+    end
 
     respond_to do |format|
       format.html # show.html.erb

@@ -5,6 +5,7 @@ describe PeopleController do
   let(:signedin_user) { generate_mock_user_with_person }
   let(:mock_person)   { mock_model(Person).as_null_object }
   let(:mock_items)    { [ mock_model(Item, :name => "Item1").as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
+  let(:mock_item_requests)    { [ mock_model(ItemRequest).as_null_object, mock_model(ItemRequest).as_null_object ] }
   
   it_should_require_signed_in_user_for_actions :show, :edit, :update
   
@@ -16,6 +17,7 @@ describe PeopleController do
     describe "GET show" do
       before do
         mock_person.stub(:items).and_return(mock_items)
+        mock_person.stub(:unanswered_requests).and_return(mock_item_requests)
         Person.stub(:find).with("37") { mock_person }
         get :show, :id => "37"
       end
@@ -30,6 +32,10 @@ describe PeopleController do
       
       it "should assign person's items as @items" do
         assigns(:items).should == mock_person.items
+      end
+
+      it "should assign person's unanswered requests as @unanswered_requests" do
+        assigns(:unanswered_requests).should == mock_person.unanswered_requests
       end
 
     end
