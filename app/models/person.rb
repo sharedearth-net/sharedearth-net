@@ -15,7 +15,7 @@ class Person < ActiveRecord::Base
   end
 
   def active_item_requests
-    ItemRequest.involves(self).active
+    ItemRequest.involves(self).active.order("created_at DESC")
   end
 
   def unanswered_requests(requester = nil)
