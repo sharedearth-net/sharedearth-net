@@ -9,9 +9,31 @@
 						<%= link_to image_tag(req.requester.avatar, :class => "thumb"), person_path(req.requester) %>
 						<div class="inner-content">
 							<p>
-								<%= link_to_person(req.requester) %>
-								requested <%= link_to req.item.name, item_path(req.item) %>
-								from <%= link_to_person(req.gifter, :downcase_you => true) %>
+								<% if req.requested? %>
+									<% if req.requester?(current_user.person) %>
+										<%= link_to_person(req.requester) %>
+										have requested
+										<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true) %>
+										<%= link_to req.item.name, item_path(req.item) %>
+									<% else %>
+										<%= link_to_person(req.requester) %>
+										has requested
+										<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true) %>
+										<%= link_to req.item.name, item_path(req.item) %>
+									<% end %>
+								<% elsif req.accepted? || req.collected? %>
+									<% if req.requester?(current_user.person) %>
+										<%= link_to_person(req.requester) %>
+										are sharing
+										<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true) %>
+										<%= link_to req.item.name, item_path(req.item) %>
+									<% else %>
+										<%= link_to_person(req.requester) %>
+										is sharing
+										<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true) %>
+										<%= link_to req.item.name, item_path(req.item) %>
+									<% end %>
+								<% end %>
 							</p>
 					
 							<div class="action clearfix">

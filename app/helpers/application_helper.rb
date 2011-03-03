@@ -16,10 +16,16 @@ module ApplicationHelper
   end
   
   def person_name(person, options = {})
-    defaults = { :downcase_you => false }
+    defaults = { :downcase_you => false, :possessive => false }
     options = defaults.merge(options)
-    name = (person.user == current_user ? "You" : person.name)
-    name.downcase! if options[:downcase_you] && person.user == current_user
+    
+    if person.user == current_user
+      name = options[:possessive] ? "Your" : "You"
+      name.downcase! if options[:downcase_you]
+    else
+      name = person.name
+      name = name.possessive if options[:possessive]
+    end
     name
   end
   

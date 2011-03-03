@@ -68,4 +68,28 @@ class ItemRequest < ActiveRecord::Base
     self.status = STATUS_COMPLETED
     save!
   end
+
+  def requested?
+    self.status == STATUS_REQUESTED
+  end
+
+  def accepted?
+    self.status == STATUS_ACCEPTED
+  end
+
+  def rejected?
+    self.status == STATUS_REJECTED
+  end
+
+  def canceled?
+    self.status == STATUS_CANCELED
+  end
+
+  def collected?
+    self.status == STATUS_COLLECTED
+  end
+
+  def completed?
+    self.status == STATUS_COMPLETED
+  end
 end
