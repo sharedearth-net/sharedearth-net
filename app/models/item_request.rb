@@ -32,16 +32,20 @@ class ItemRequest < ActiveRecord::Base
   validates_presence_of :item_id, :status
   validates_inclusion_of :status, :in => STATUSES.keys, :message => " must be in #{STATUSES.values.join ', '}"
 
-  def status_name
-    STATUSES[status]
-  end
-  
   def requester?(requester)
     self.requester == requester
   end
 
   def gifter?(gifter)
     self.gifter == gifter
+  end
+  
+  # #######
+  # Status related methods
+  # #######
+
+  def status_name
+    STATUSES[status]
   end
   
   def accept!

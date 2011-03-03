@@ -13,7 +13,7 @@
 
 <% @items.each do |item| %>
   <tr>
-		<td><%= image_tag item.photo.url(:thumb) %></td>
+		<td><%= image_tag item.photo.url(:small) %></td>
     <td><%= item.item_type %></td>
     <td><%= item.name %></td>
     <td><%= item.description %></td>

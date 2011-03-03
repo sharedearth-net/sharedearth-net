@@ -5,7 +5,12 @@ class Item < ActiveRecord::Base
   belongs_to :owner, :polymorphic => true
 
   has_attachment :photo,
-                 :styles => { :medium => "300x300>", :thumb => "100x100>" },
+                 :styles => {
+                   :large => "600x600>",
+                   :medium => "300x300>",
+                   :small => "100x100>",
+                   :square => "50x50#"
+                  },
                  :default_url => "/images/noimage-:style.png"
 
   # has_attached_file :photo,
