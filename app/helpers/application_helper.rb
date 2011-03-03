@@ -32,4 +32,19 @@ module ApplicationHelper
   def link_to_person(person, options = {})
     person.user == current_user ? person_name(person, options) : link_to(person_name(person, options), person_path(person))
   end
+
+  # Returns photo URL of either item being requested or the other user involved in request
+  def item_request_photo(item_request, options = {})
+    defaults = { :size => :medium }
+    options = defaults.merge(options)
+    
+    if item_request.item.photo?
+      item_request.item.photo.url(options[:size])
+    elsif item_request.requester?(current_user.person)
+      item_request.gifter.avatar(options[:size])
+    else
+      item_request.requester.avatar(options[:size])
+    end
+      
+  end
 end

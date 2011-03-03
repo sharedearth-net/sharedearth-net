@@ -6,7 +6,7 @@
 			<ul>
 				<% @active_item_requests.each do |req| %>
 					<li class="content-box clearfix">
-						<%= link_to image_tag(req.requester.avatar, :class => "thumb"), person_path(req.requester) %>
+						<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
 						<div class="inner-content">
 							<p>
 								<% if req.requested? %>
