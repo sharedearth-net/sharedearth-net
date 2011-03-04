@@ -41,7 +41,7 @@
 						<ul>
 							<% @items.each do |item| %>
 								<li class="item clearer">
-									<%= link_to image_tag(item.photo.url(:small), :class => "thumb"), item_path(item) %>
+									<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
 									<div>
 										<!-- basti-question: does this have to be a list? -->
 										<ul class="clearfix">
@@ -93,7 +93,7 @@
 						<ul>
 							<% @unanswered_requests.each do |req| %>
 								<li class="item clearer">
-									<%= link_to image_tag(req.item.photo.url(:small), :class => "thumb"), item_path(req.item) %>
+									<%= link_to image_tag(req.item.photo.url(:square), :class => "thumb"), item_path(req.item) %>
 									<div>
 										<ul class="clearfix">
 											<li>
