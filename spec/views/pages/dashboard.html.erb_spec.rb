@@ -35,7 +35,7 @@ describe "pages/dashboard.html.erb" do
       :description => "MyItemDescription",
       :owner_id => 1,
       :owner_type => "Owner Type"
-    )
+    ).as_null_object
 
     current_person_request = stub_model(ItemRequest,
       :requester_id => current_person.id,
@@ -47,8 +47,9 @@ describe "pages/dashboard.html.erb" do
       :item_id => item.id,
       :item => item,
       :description => "CurrentPersonActsAsRequester",
-      :status => ItemRequest::STATUS_REQUESTED
-    )
+      :status => ItemRequest::STATUS_REQUESTED,
+      :created_at => Time.now
+    ).as_null_object
     
     current_person_gift = stub_model(ItemRequest,
       :requester_id => requester.id,
@@ -60,8 +61,9 @@ describe "pages/dashboard.html.erb" do
       :item_id => item.id,
       :item => item,
       :description => "CurrentPersonActsAsRequester",
-      :status => ItemRequest::STATUS_REQUESTED
-    )
+      :status => ItemRequest::STATUS_REQUESTED,
+      :created_at => Time.now
+    ).as_null_object
     
     @active_item_requests = assign(:active_item_requests, [current_person_request, current_person_gift])
   end

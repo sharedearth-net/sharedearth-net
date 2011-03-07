@@ -37,7 +37,7 @@ module ApplicationHelper
   def item_request_photo(item_request, options = {})
     defaults = { :size => :medium }
     options = defaults.merge(options)
-    
+
     if item_request.item.photo?
       item_request.item.photo.url(options[:size])
     elsif item_request.requester?(current_user.person)
@@ -45,6 +45,5 @@ module ApplicationHelper
     else
       item_request.requester.avatar(options[:size])
     end
-      
   end
 end

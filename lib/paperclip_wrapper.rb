@@ -8,7 +8,6 @@ module PaperclipWrapper
 
   module ClassMethods
     def has_attachment(name, options = {})
-
       # generates a string containing the singular model name and the pluralized attachment name.
       # Examples: "item-photos", "user-avatars" or "asset-uploads"
       attachment_owner    = self.table_name.singularize
