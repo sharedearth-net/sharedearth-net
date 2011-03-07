@@ -3,9 +3,15 @@
 	# for example used in dashboard.html.erb
 %>
 
-<li>
-	<%= link_to 'view request', request_path(req), :id => "request_#{req.id}" %>
-</li>
+<% if [ItemRequest::STATUS_ACCEPTED, ItemRequest::STATUS_COLLECTED, ItemRequest::STATUS_COMPLETED].include? req.status %>
+	<li>
+		<%= link_to 'view action', request_path(req), :id => "request_#{req.id}" %>
+	</li>
+<% else %>
+	<li>
+		<%= link_to 'view request', request_path(req), :id => "request_#{req.id}" %>
+	</li>
+<% end %>
 
 <% if req.status == ItemRequest::STATUS_REQUESTED %>
 
