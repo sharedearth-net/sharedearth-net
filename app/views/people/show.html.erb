@@ -98,9 +98,7 @@
 										<ul class="clearfix">
 											<li>
 												<!-- tomcanji-todo: everything is lowercased through CSS, but we need to display names -->
-												<%= link_to_person(req.requester) %>
-												requested <%= link_to req.item.name, item_path(req.item) %>
-												from <%= link_to_person(req.gifter, :downcase_you => true) %>
+												<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
 											</li>
 										</ul>
 										
