@@ -779,6 +779,21 @@ a:hover {
 									font-weight: normal;
 								}
 								
+								#content .items-list ul li div p {
+									font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+									clear: both;
+									color: #127E0E;
+								    float: left;
+								    font-size: 12px;
+									margin: 0 0 6px 0;
+									line-height: 14px;
+								}
+								
+									#content .items-list ul li div p a:link,
+									#content .items-list ul li div p a:visited {
+										color: #858F7C;
+									}
+								
 								
 								
 			/* edit profile */

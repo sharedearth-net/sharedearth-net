@@ -30,7 +30,7 @@ module ApplicationHelper
   end
   
   def link_to_person(person, options = {})
-    person.user == current_user ? person_name(person, options) : link_to(person_name(person, options), person_path(person))
+    person.user == current_user ? person_name(person, options) : link_to(person_name(person, options), person_path(person), options)
   end
 
   # Returns photo URL of either item being requested or the other user involved in request

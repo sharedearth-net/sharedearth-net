@@ -43,22 +43,15 @@
 								<li class="item clearer">
 									<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
 									<div>
-										<!-- basti-question: does this have to be a list? -->
-										<ul class="clearfix">
-											<li>
-												<%= link_to "gift", "#"  %>&nbsp;|&nbsp;
-											</li>
-											<li>
-												<%= link_to item.name, item_path(item) %>&nbsp;|&nbsp;
-											</li>
-											<li>
-												<!-- basti-question: what's this? -->
-												2 person dome tent
-											</li>
-										</ul>
+										<p>
+											<%= link_to "gift", "#"  %>&nbsp;|&nbsp;
+											<%= link_to item.name, item_path(item) %>&nbsp;|
+											<!-- basti-question: what's this? -->
+											2 person dome tent
+										</p>
 										
 										
-										<ul class="action-list">
+										<ul class="action-list clearfix">
 											<li>
 												<%= link_to "7", "#", :class => "giftactions", :title => "Gift Actions" %>
 											</li>
@@ -98,6 +91,7 @@
 										<ul class="clearfix">
 											<li>
 												<!-- tomcanji-todo: everything is lowercased through CSS, but we need to display names -->
+												<!-- tomcanji-question: can you add a class to this? -->
 												<%= link_to_person(req.requester) %>
 												requested <%= link_to req.item.name, item_path(req.item) %>
 												from <%= link_to_person(req.gifter, :downcase_you => true) %>
