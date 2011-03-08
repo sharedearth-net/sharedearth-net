@@ -21,6 +21,12 @@
     <%= f.label :owner_type %><br />
     <%= f.text_field :owner_type %>
   </div> -->
+	<% if @item.photo? %>
+	  <div class="field">
+	    <%= f.label :current_photo %><br />
+	    <%= image_tag @item.photo.url(:small) %>
+	  </div>
+	<% end %>
   <div class="field">
     <%= f.label :photo %><br />
     <%= f.file_field :photo %>
