@@ -162,7 +162,7 @@ DEPENDENCIES
   possessive
   rails (= 3.0.5)
   rcov
-  rspec-rails (~> 2.4)
+  rspec-rails (~> 2.5)
   shoulda (~> 2.11)
   sqlite3-ruby
   webrat

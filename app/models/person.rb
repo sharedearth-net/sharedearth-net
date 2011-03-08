@@ -20,9 +20,9 @@ class Person < ActiveRecord::Base
 
   def unanswered_requests(requester = nil)
     if requester
-      self.item_gifts.unanswered.involves_as_requester(requester)
+      ItemRequest.unanswered.involves(self).involves(requester)
     else
-      self.item_gifts.unanswered
+      ItemRequest.unanswered.involves(self)
     end
   end
   

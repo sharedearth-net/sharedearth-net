@@ -36,6 +36,7 @@ describe "item_requests/show.html.erb" do
 
   before(:each) do
     view.stub(:current_user).and_return(signedin_user)
+    view.stub(:item_request_photo).and_return("item_request_photo.png")
 
     item = stub_model(Item,
       :item_type => "MyItemType",
@@ -75,13 +76,13 @@ describe "item_requests/show.html.erb" do
     rendered.should contain(/#{@item_request.description}/)
     rendered.should contain(/#{@item_request.status_name}/)
   end
-
+  
   describe "for request in 'requested' state" do
     
     before(:each) do
       with_request_status(ItemRequest::STATUS_REQUESTED)
     end
-
+  
     describe "to the gifter" do
       
       before(:each) do
@@ -92,11 +93,11 @@ describe "item_requests/show.html.erb" do
         render
         should_render_only([:accept_button, :reject_button])
       end
-
+  
     end
-
+  
     describe "to the requester" do
-
+  
       before(:each) do
         as_requester
       end
@@ -105,7 +106,7 @@ describe "item_requests/show.html.erb" do
         render
         should_render_only([:cancel_button])
       end
-
+  
     end
     
   end
@@ -115,26 +116,26 @@ describe "item_requests/show.html.erb" do
     before(:each) do
       with_request_status(ItemRequest::STATUS_ACCEPTED)
     end
-
+  
     describe "to the gifter" do
-
+  
       before(:each) do
         as_gifter
       end
-
+  
       it "should render cancel, collected and complete buttons" do
         render
         should_render_only([:cancel_button, :collected_button, :complete_button])
       end
           
     end
-
+  
     describe "to the requester" do
-
+  
       before(:each) do
         as_requester
       end
-
+  
       it "should render cancel, collected and complete buttons" do
         render
         should_render_only([:cancel_button, :collected_button, :complete_button])
@@ -143,32 +144,32 @@ describe "item_requests/show.html.erb" do
     end
     
   end
-
+  
   describe "for request in 'collected' state" do
         
     before(:each) do
       with_request_status(ItemRequest::STATUS_COLLECTED)
     end
-
+  
     describe "to the gifter" do
-
+  
       before(:each) do
         as_gifter
       end
-
+  
       it "should render complete button" do
         render
         should_render_only([:complete_button])
       end
           
     end
-
+  
     describe "to the requester" do
-
+  
       before(:each) do
         as_requester
       end
-
+  
       it "should render complete button" do
         render
         should_render_only([:complete_button])
@@ -177,15 +178,15 @@ describe "item_requests/show.html.erb" do
     end
     
   end
-
+  
   describe "for request in 'completed' state" do
     
     before(:each) do
       with_request_status(ItemRequest::STATUS_COMPLETED)
     end
-
+  
     describe "to the gifter" do
-
+  
       before(:each) do
         as_gifter
       end
@@ -196,13 +197,13 @@ describe "item_requests/show.html.erb" do
       end
           
     end
-
+  
     describe "to the requester" do
-
+  
       before(:each) do
         as_requester
       end
-
+  
       it "shouldn't render any buttons" do
         render
         should_render_only([]) # don't render any of the buttons
@@ -211,15 +212,15 @@ describe "item_requests/show.html.erb" do
     end
     
   end
-
+  
   describe "for request in 'rejected' state" do
     
     before(:each) do
       with_request_status(ItemRequest::STATUS_REJECTED)
     end
-
+  
     describe "to the gifter" do
-
+  
       before(:each) do
         as_gifter
       end
@@ -230,13 +231,13 @@ describe "item_requests/show.html.erb" do
       end
           
     end
-
+  
     describe "to the requester" do
-
+  
       before(:each) do
         as_requester
       end
-
+  
     end
     
     it "shouldn't render any buttons" do
@@ -245,15 +246,15 @@ describe "item_requests/show.html.erb" do
     end
         
   end
-
+  
   describe "for request in 'canceled' state" do
     
     before(:each) do
       with_request_status(ItemRequest::STATUS_CANCELED)
     end
-
+  
     describe "to the gifter" do
-
+  
       before(:each) do
         as_gifter
       end
@@ -264,13 +265,13 @@ describe "item_requests/show.html.erb" do
       end
           
     end
-
+  
     describe "to the requester" do
-
+  
       before(:each) do
         as_requester
       end
-
+  
     end
     
     it "shouldn't render any buttons" do

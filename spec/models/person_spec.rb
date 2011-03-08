@@ -50,7 +50,7 @@ describe Person, ".active_item_requests" do
     person = Person.new
     first_request = mock_model(ItemRequest)
     second_request = mock_model(ItemRequest)
-    ItemRequest.stub_chain(:involves, :active).and_return([first_request, second_request])
+    ItemRequest.stub_chain(:involves, :active, :order).and_return([first_request, second_request])
 
     person.active_item_requests.should eql([first_request, second_request])
   end

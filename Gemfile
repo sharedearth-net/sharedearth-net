@@ -34,7 +34,7 @@ gem "possessive"
 # and rake tasks are available in development mode:
 group :development, :test do
 	gem "shoulda", "~> 2.11"
-  gem "rspec-rails", "~> 2.4"
+  gem "rspec-rails", "~> 2.5"
 	gem "autotest"
 	gem "webrat"
 	gem "rcov"

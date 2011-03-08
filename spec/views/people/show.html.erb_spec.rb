@@ -7,7 +7,7 @@ describe "people/show.html.erb" do
         :user_id => 1
   ) }
   let(:mock_user) { generate_mock_user_with_person }
-  let(:mock_items){ [ mock_model(Item, :name => "Item1").as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
+  let(:mock_items){ [ stub_model(Item, :name => "Item1").as_null_object, stub_model(Item, :name => "Item2").as_null_object ] }
   
   before do
     mock_person.stub(:user).and_return(mock_user)
@@ -15,6 +15,7 @@ describe "people/show.html.erb" do
     view.stub(:current_user).and_return(mock_user)
     assign(:person, mock_person)
     assign(:items, mock_person.items)
+    assign(:unanswered_requests, [])
   end
 
   it "renders person name" do
@@ -45,7 +46,7 @@ describe "people/show.html.erb" do
     rendered.should have_selector("a", :href => item_path(mock_person.items.first))
     rendered.should have_selector("a", :href => item_path(mock_person.items.second))
   end
-
+  
   it "should render a link to request an item" do
     render
     rendered.should have_selector("a", :href => new_request_path(:item_id => mock_person.items.first))

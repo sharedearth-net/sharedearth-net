@@ -9,31 +9,7 @@
 						<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
 						<div class="inner-content">
 							<p>
-								<% if req.requested? %>
-									<% if req.requester?(current_user.person) %>
-										<%= link_to_person(req.requester) %>
-										have requested
-										<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true) %>
-										<%= link_to req.item.name, item_path(req.item) %>
-									<% else %>
-										<%= link_to_person(req.requester) %>
-										has requested
-										<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true) %>
-										<%= link_to req.item.name, item_path(req.item) %>
-									<% end %>
-								<% elsif req.accepted? || req.collected? %>
-									<% if req.requester?(current_user.person) %>
-										<%= link_to_person(req.requester) %>
-										are sharing
-										<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true) %>
-										<%= link_to req.item.name, item_path(req.item) %>
-									<% else %>
-										<%= link_to_person(req.requester) %>
-										is sharing
-										<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true) %>
-										<%= link_to req.item.name, item_path(req.item) %>
-									<% end %>
-								<% end %>
+								<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
 							</p>
 					
 							<div class="action clearfix">

@@ -20,6 +20,6 @@ class User < ActiveRecord::Base
   # :medium (same as :large)
   def avatar(avatar_size = nil)
     avatar_size = :large if avatar_size == :medium # simulate medium size
-    "http://graph.facebook.com/#{uid}/picture/"+(avatar_size ? "?type=#{avatar_size}" : "")
+    "http://graph.facebook.com/#{uid}/picture/"+(!avatar_size.blank? ? "?type=#{avatar_size}" : "")
   end
 end
