@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
   include PaperclipWrapper
-
+  
   has_many :item_requests
   belongs_to :owner, :polymorphic => true
 
@@ -31,7 +31,23 @@ class Item < ActiveRecord::Base
   validates_attachment_size :photo, :less_than => 1.megabyte
   validates_attachment_content_type :photo, :content_type => /image\//
   
+  scope :without_deleted, :conditions => { :deleted_at => nil }
+  
   def is_owner?(entity)
     self.owner == entity
+  end
+  
+  def deleted?
+    !deleted_at.nil?
+  end
+  
+  def delete
+    self.deleted_at = Time.zone.now
+    save!
+  end
+
+  def restore
+    self.deleted_at = nil
+    save!
   end
 end

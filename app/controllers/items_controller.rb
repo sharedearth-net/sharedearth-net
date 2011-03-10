@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.xml
   def index
-    @items = current_user.person.items
+    @items = current_user.person.items.without_deleted
 
     respond_to do |format|
       format.html # index.html.erb
@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.xml
   def destroy
-    @item.destroy
+    @item.delete
 
     respond_to do |format|
       format.html { redirect_to(items_url) }

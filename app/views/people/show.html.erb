@@ -86,7 +86,7 @@
 						<ul>
 							<% @unanswered_requests.each do |req| %>
 								<li class="item clearer">
-									<%= link_to image_tag(req.item.photo.url(:square), :class => "thumb"), item_path(req.item) %>
+									<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
 									<div>
 										<ul class="clearfix">
 											<li>

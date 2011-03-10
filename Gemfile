@@ -13,6 +13,10 @@ gem "paperclip", "~> 2.3"
 # https://github.com/bclubb/possessive
 gem "possessive"
 
+# didn't use rails3_acts_as_paranoid because it uses default_scope causing problems with, for example, item_request.item
+# https://github.com/goncalossilva/rails3_acts_as_paranoid
+# gem "rails3_acts_as_paranoid"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
