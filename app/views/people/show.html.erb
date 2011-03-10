@@ -43,19 +43,12 @@
 								<li class="item clearer">
 									<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
 									<div>
-										<!-- basti-question: does this have to be a list? -->
-										<ul class="clearfix">
-											<li>
-												<%= link_to "gift", "#"  %>&nbsp;|&nbsp;
-											</li>
-											<li>
-												<%= link_to item.name, item_path(item) %>&nbsp;|&nbsp;
-											</li>
-											<li>
-												<!-- basti-question: what's this? -->
-												2 person dome tent
-											</li>
-										</ul>
+										<p>
+											<%= link_to "gift", "#"  %>&nbsp;|&nbsp;
+											<%= link_to item.name, item_path(item) %>&nbsp;|
+											<!-- basti-question: what's this? -->
+											2 person dome tent
+										</p>
 										
 										
 										<ul class="action-list">
@@ -97,7 +90,9 @@
 									<div>
 										<ul class="clearfix">
 											<li>
-												<!-- tomcanji-todo: everything is lowercased through CSS, but we need to display names -->
+												<%= link_to_person(req.requester, :class => "capitalize") %>
+												requested <%= link_to req.item.name, item_path(req.item) %>
+												from <%= link_to_person(req.gifter, :downcase_you => true) %>
 												<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
 											</li>
 										</ul>
@@ -121,4 +116,106 @@
 		
 	</div><!-- /content-box-holder  -->
 	
-</div>
+</div><!-- /content -->
+
+<div id="sidebar" class="profile-holder">
+	
+	<div class="sidebar-box-holder">
+		<%= image_tag("curve-top-sidebar-box.png", :alt => "")  %>
+		
+		
+		<!-- basti-todo: trust profile -->
+		
+		<div class="sidebar-box-profile">
+			<h2>Andrea's Trust Profile</h2>
+			<ul>
+				<li class="clearfix">
+					<%= image_tag("ic-untrusted-profile.png", :class => "icons", :alt => "Untrusted Profile")  %>
+					<p>
+						Not in your trusted network
+					</p>
+				</li>
+				<li class="clearfix">
+					<%= image_tag("ic-trusted-profile.png", :class => "icons", :alt => "Trusted Profile")  %>
+					<p>
+						<a href="#">8</a> people from your trusted network
+					</p>
+				</li>
+				<li class="clearfix">
+					<%= image_tag("ic-extended-network.png", :class => "icons", :alt => "Extended Network")  %>
+					<p>
+						<a href="#">19</a> people from your extended network
+					</p>
+					<p>
+						<span>
+							<a href="#">
+								<%= image_tag("ic-village.png", :alt => "")  %>
+							</a>
+                            <a href="#">Chileans in Sydney</a> | <a href="#">Australia</a>
+						</span>
+                    </p>
+				</li>
+				
+				<li class="no-icon clearfix">
+					<p>
+						<a href="#">43</a> people in their trusted network
+					</p>
+				</li>
+			</ul>
+		</div>
+		<%= image_tag("curve-bottom-sidebar-box.png", :alt => "")  %>
+		
+	</div><!-- /sidebar-box-profile	-->
+	
+	
+	
+	<h2>Activity Profile</h2>
+	
+	
+	<!-- basti-todo: activity profile -->
+	<ul>
+		<li class="sidebar-box clearfix">
+			<div class="inner-content">
+				<p>
+					Andrea lent a modem to <a class="positive" href="#">Terry Waters</a>
+				</p>
+
+				<div class="action clearfix">
+					<ul>
+						<li>3 days ago</li>
+						<li><a href="#">comments(0)</a></li>
+					</ul>
+				</div>
+			</div>
+		</li>
+		<li class="sidebar-box clearfix">
+			<div class="inner-content">
+				<p>
+					Andrea borrowed a witches costume from <a class="positive" href="#">Dan Brown</a>
+				</p>
+
+				<div class="action clearfix">
+					<ul>
+						<li>2 weeks ago</li>
+						<li><a href="#">comments(0)</a></li>
+					</ul>
+				</div>
+			</div>
+		</li>
+		<li class="sidebar-box clearfix">
+			<div class="inner-content">
+				<p>
+					Andrea started sharing a BBQ
+				</p>
+
+				<div class="action clearfix">
+					<ul>
+						<li>3 weeks ago</li>
+						<li><a href="#">comments(0)</a></li>
+					</ul>
+				</div>
+			</div>
+		</li>
+	</ul>
+	
+</div><!-- sidebar -->
