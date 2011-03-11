@@ -3,6 +3,8 @@ class Person < ActiveRecord::Base
   has_many :items, :as => :owner
   has_many :item_requests, :as => :requester
   has_many :item_gifts, :as => :gifter, :class_name => "ItemRequest"
+  has_many :person_network_requests
+  has_many :received_person_network_requests, :as => :trusted_person, :class_name => "PersonNetworkRequest"
   
   validates_presence_of :user_id, :name
   
