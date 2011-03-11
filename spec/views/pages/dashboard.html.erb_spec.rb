@@ -78,7 +78,7 @@ describe "pages/dashboard.html.erb" do
     # rendered.should match(/#{first_request.gifter.avatar}/)
     rendered.should contain(/#{first_request.gifter.name}/)
     rendered.should have_selector("a#request_#{first_request.id}", :href => request_path(first_request))
-    rendered.should contain(/#{first_request.item.name}/)
+    rendered.should contain(/#{first_request.item.item_type}/)
     rendered.should have_selector("a", :href => item_path(first_request.item))
 
     # second request
@@ -86,7 +86,7 @@ describe "pages/dashboard.html.erb" do
     rendered.should match(/#{second_request.requester.avatar}/)
     rendered.should contain(/#{second_request.requester.name}/)
     rendered.should have_selector("a#request_#{second_request.id}", :href => request_path(second_request))
-    rendered.should contain(/#{second_request.item.name}/)
+    rendered.should contain(/#{second_request.item.item_type}/)
     rendered.should have_selector("a", :href => item_path(second_request.item))
 
   end

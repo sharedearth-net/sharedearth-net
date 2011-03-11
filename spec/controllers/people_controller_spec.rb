@@ -16,7 +16,7 @@ describe PeopleController do
 
     describe "GET show" do
       before do
-        mock_person.stub(:items).and_return(mock_items)
+        mock_person.stub_chain(:items, :without_deleted).and_return(mock_items)
         mock_person.stub(:unanswered_requests).and_return(mock_item_requests)
         Person.stub(:find).with("37") { mock_person }
         get :show, :id => "37"
@@ -31,7 +31,7 @@ describe PeopleController do
       end
       
       it "should assign person's items as @items" do
-        assigns(:items).should == mock_person.items
+        assigns(:items).should == mock_person.items.without_deleted
       end
 
       it "should assign person's unanswered requests as @unanswered_requests" do

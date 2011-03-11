@@ -36,4 +36,10 @@ describe Item do
   # apparently when should validate_attachment_size is run under Ruby 1.8.7 it hangs
   # (it should work correctly under Ruby 1.9.2+). For now we'll just comment it out.
   # it { should validate_attachment_size(:photo).less_than(1.megabyte) }
+
+  pending "should respond do deleted?" # test deleted? method
+  pending "should be soft-deleted (delete)" # test delete method
+  pending "should be able to get restored" # test restore method
+
+
 end
