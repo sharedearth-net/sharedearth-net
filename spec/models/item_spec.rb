@@ -13,6 +13,8 @@ describe Item do
 
   it { should validate_presence_of(:name) }
 
+  it { should validate_presence_of(:status) }
+
   it { should validate_presence_of(:owner_id) }
   
   it { should validate_presence_of(:owner_type) }

@@ -6,13 +6,18 @@ class ItemRequestsController < ApplicationController
 
   def new
     @item = Item.find(params[:item_id])
-    @item_request = ItemRequest.new(:item => @item)
-    @item_request.requester = current_user.person
-    @item_request.gifter    = @item_request.item.owner
+    
+    if @item.can_be_requested?    
+      @item_request = ItemRequest.new(:item => @item)
+      @item_request.requester = current_user.person
+      @item_request.gifter    = @item_request.item.owner
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @item_request }
+      respond_to do |format|
+        format.html # new.html.erb
+        format.xml  { render :xml => @item_request }
+      end
+    else
+      redirect_to(item_path(@item), :notice => I18n.t('messages.item_requests.item_not_available_for_request'))
     end
   end
 
@@ -29,14 +34,18 @@ class ItemRequestsController < ApplicationController
     @item_request.gifter    = @item_request.item.owner
     @item_request.status    = ItemRequest::STATUS_REQUESTED
 
-    respond_to do |format|
-      if @item_request.save
-        format.html { redirect_to(request_path(@item_request), :notice => 'Request was successfully created.') }
-        format.xml  { render :xml => @item_request, :status => :created, :location => @item_request }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @item_request.errors, :status => :unprocessable_entity }
+    if @item_request.item.can_be_requested?        
+      respond_to do |format|
+        if @item_request.save
+          format.html { redirect_to(request_path(@item_request), :notice => 'Request was successfully created.') }
+          format.xml  { render :xml => @item_request, :status => :created, :location => @item_request }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @item_request.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      redirect_to(item_path(@item), :notice => I18n.t('messages.item_requests.item_not_available_for_request'))
     end
   end
 

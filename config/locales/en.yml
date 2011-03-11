@@ -18,3 +18,8 @@ en:
       request_canceled: "Request has been canceled."
       request_collected: "Request has been marked as collected."
       request_completed: "Request has been marked as completed."
+      item_not_available_for_request: "Item is not available for request."
+    items:
+      marked_as_normal: "Item has been restored."
+      marked_as_lost: "Item has been marked as lost."
+      marked_as_damaged: "Item has been marked as damaged."

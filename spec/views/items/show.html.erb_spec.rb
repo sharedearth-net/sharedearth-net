@@ -18,7 +18,8 @@ describe "items/show.html.erb" do
       :name => "MyItemName",
       :description => "MyItemDescription",
       :owner_id => 1,
-      :owner_type => "Owner Type"
+      :owner_type => "Owner Type",
+      :status => Item::STATUS_NORMAL
     ))
   end
 
@@ -42,5 +43,59 @@ describe "items/show.html.erb" do
     as_other_user_not_owner
     render
     rendered.should_not have_selector("a", :href => edit_item_path(@item))
+  end
+
+  it "should render 'mark as lost' link to item owner" do
+    as_item_owner
+    render
+    rendered.should have_selector("a", :href => mark_as_lost_item_path(@item))
+  end
+
+  it "should not render 'mark as lost' link to non-owner" do
+    as_other_user_not_owner
+    render
+    rendered.should_not have_selector("a", :href => mark_as_lost_item_path(@item))
+  end
+
+  it "should render 'mark as damaged' link to item owner" do
+    as_item_owner
+    render
+    rendered.should have_selector("a", :href => mark_as_damaged_item_path(@item))
+  end
+
+  it "should not render 'mark as damaged' link to non-owner" do
+    as_other_user_not_owner
+    render
+    rendered.should_not have_selector("a", :href => mark_as_damaged_item_path(@item))
+  end
+
+  it "should render 'delete' link" do
+    as_item_owner
+    render
+    rendered.should have_selector("a", :href => item_path(@item))
+  end
+  
+  describe "for lost item" do
+    before do
+      @item.status = Item::STATUS_LOST
+    end
+    
+    it "should render 'mark as found' link" do
+      as_item_owner
+      render
+      rendered.should have_selector("a", :href => mark_as_normal_item_path(@item))
+    end
+  end
+
+  describe "for damaged item" do
+    before do
+      @item.status = Item::STATUS_DAMAGED
+    end
+    
+    it "should render 'mark as repaired' link" do
+      as_item_owner
+      render
+      rendered.should have_selector("a", :href => mark_as_normal_item_path(@item))
+    end
   end
 end

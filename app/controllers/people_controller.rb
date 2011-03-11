@@ -4,11 +4,11 @@ class PeopleController < ApplicationController
   before_filter :only_if_person_is_signed_in!, :only => [:edit, :update]
 
   def show
-    @items = @person.items.without_deleted
-
     if @person.belongs_to? current_user
+      @items = @person.items.without_deleted
       @unanswered_requests = @person.unanswered_requests
     else
+      @items = @person.items.without_deleted.visible_to_other_users
       @unanswered_requests = @person.unanswered_requests(current_user.person)
     end
 

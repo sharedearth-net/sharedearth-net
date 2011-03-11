@@ -21,6 +21,15 @@
 
 <%= owner_only(@item) do %>
 	<div>
-		<%= link_to 'Edit', edit_item_path(@item) %> |
+		<% if @item.normal? %>
+			<%= link_to 'Edit', edit_item_path(@item) %> |
+			<%= link_to 'Mark as lost', mark_as_lost_item_path(@item), :method => :put %> |
+			<%= link_to 'Mark as damaged', mark_as_damaged_item_path(@item), :method => :put %> |
+		<% elsif @item.lost? %>
+			<%= link_to 'Mark as found', mark_as_normal_item_path(@item), :method => :put %> |
+		<% elsif @item.damaged? %>
+			<%= link_to 'Mark as repaired', mark_as_normal_item_path(@item), :method => :put %> |
+		<% end %>
+    <%= link_to 'Delete', @item, :confirm => 'Are you sure?', :method => :delete %> |
 	</div>
 <% end %>

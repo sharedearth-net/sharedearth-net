@@ -1,8 +1,15 @@
 Sharedearthapp::Application.routes.draw do
 
-  resources :items
+  resources :items do
+    member do
+      put "mark_as_normal"
+      put "mark_as_lost"
+      put "mark_as_damaged"
+    end
+  end
+
   resources :people, :only => [:show, :edit, :update]
-  # resources :item_requests, :only => [:new, :show, :create, :update], :path => "request", :as => "request"
+
   resources :item_requests, :except => [:index, :destroy, :edit], :path => "requests", :as => "requests" do
     member do
       put "accept"

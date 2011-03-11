@@ -8,7 +8,7 @@ describe ItemsController do
     @mock_item ||= mock_model(Item, stubs).as_null_object
   end
   
-  it_should_require_signed_in_user_for_actions :index, :show, :new, :edit, :create, :update, :destroy
+  it_should_require_signed_in_user_for_actions :index, :show, :new, :edit, :create, :update, :destroy, :mark_as_lost#, :mark_as_normal, :mark_as_damaged
 
   describe "for signed in member" do
     before do
@@ -200,6 +200,105 @@ describe ItemsController do
         delete :destroy, :id => "1"
         response.should redirect_to(items_url)
       end
+    end
+
+    describe "PUT mark_as_normal" do
+
+      before do
+        Item.stub(:find).with("37") { mock_item }
+      end
+  
+      it "assigns the requested item as @item" do
+        put :mark_as_normal, :id => "37"
+        assigns(:item).should be(mock_item)
+      end
+      
+      it "should allow only owner edit the item" do
+        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
+
+        put :mark_as_normal, :id => "37"
+        assigns(:item).should be(mock_item)
+      end
+
+      it "should deny access for non-owner members" do
+        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
+      
+        put :mark_as_normal, :id => "37"
+        flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
+        response.should redirect_to(root_path)
+      end
+
+      it "should change request status to 'normal'" do
+        mock_item.should_receive(:normal!).once
+        put :mark_as_normal, :id => "37"
+      end
+
+    end
+
+    describe "PUT mark_as_lost" do
+
+      before do
+        Item.stub(:find).with("37") { mock_item }
+      end
+  
+      it "assigns the requested item as @item" do
+        put :mark_as_lost, :id => "37"
+        assigns(:item).should be(mock_item)
+      end
+      
+      it "should allow only owner edit the item" do
+        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
+
+        put :mark_as_lost, :id => "37"
+        assigns(:item).should be(mock_item)
+      end
+
+      it "should deny access for non-owner members" do
+        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
+      
+        put :mark_as_lost, :id => "37"
+        flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
+        response.should redirect_to(root_path)
+      end
+
+      it "should change request status to 'lost'" do
+        mock_item.should_receive(:lost!).once
+        put :mark_as_lost, :id => "37"
+      end
+
+    end
+
+    describe "PUT mark_as_damaged" do
+
+      before do
+        Item.stub(:find).with("37") { mock_item }
+      end
+  
+      it "assigns the requested item as @item" do
+        put :mark_as_damaged, :id => "37"
+        assigns(:item).should be(mock_item)
+      end
+      
+      it "should allow only owner edit the item" do
+        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
+
+        put :mark_as_damaged, :id => "37"
+        assigns(:item).should be(mock_item)
+      end
+
+      it "should deny access for non-owner members" do
+        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
+      
+        put :mark_as_damaged, :id => "37"
+        flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
+        response.should redirect_to(root_path)
+      end
+
+      it "should change request status to 'damaged'" do
+        mock_item.should_receive(:damaged!).once
+        put :mark_as_damaged, :id => "37"
+      end
+
     end
   end
 

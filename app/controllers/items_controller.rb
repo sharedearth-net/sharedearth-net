@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_item, :only => [:show, :edit, :update, :destroy]
-  before_filter :only_owner!, :only => [:edit, :update, :destroy]#:except => [:index, :new, :create]
+  before_filter :get_item, :only => [:show, :edit, :update, :destroy, :mark_as_normal, :mark_as_lost, :mark_as_damaged]
+  before_filter :only_owner!, :only => [:edit, :update, :destroy, :mark_as_normal, :mark_as_lost, :mark_as_damaged]
 
   # GET /items
   # GET /items.xml
@@ -78,6 +78,21 @@ class ItemsController < ApplicationController
       format.html { redirect_to(items_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def mark_as_normal
+    @item.normal!
+    redirect_to(item_path(@item), :notice => I18n.t('messages.items.marked_as_normal'))
+  end
+
+  def mark_as_lost
+    @item.lost!
+    redirect_to(item_path(@item), :notice => I18n.t('messages.items.marked_as_lost'))
+  end
+
+  def mark_as_damaged
+    @item.damaged!
+    redirect_to(item_path(@item), :notice => I18n.t('messages.items.marked_as_lost'))
   end
 
   private
