@@ -24,12 +24,6 @@
 					</li>
 				<% end %>
 			</ul>
-		<% else %>
-			<ul>
-				<li class="content-box clearfix">
-					<h2>No requests.</h2>
-				</li>
-			</ul>
 		<% end %>
 
 	<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
@@ -39,7 +33,7 @@
 	<div class="content-box-holder">
 		<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 
-		<% unless @person_network_requests.size.zero? %>
+		<% if @person_network_requests && !@person_network_requests.size.zero? %>
 			<ul>
 				<% @person_network_requests.each do |req| %>
 					<li class="content-box clearfix">
@@ -60,12 +54,6 @@
 						</div>
 					</li>
 				<% end %>
-			</ul>
-		<% else %>
-			<ul>
-				<li class="content-box clearfix">
-					<h2>No person network requests.</h2>
-				</li>
 			</ul>
 		<% end %>
 
