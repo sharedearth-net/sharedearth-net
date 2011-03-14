@@ -1,8 +1,7 @@
 <div id="content">
-	<div class="content-box-holder">
-		<%= image_tag("curve-top-content-box.png", :alt => "")  %>
-
-		<% unless @active_item_requests.size.zero? %>
+	<% unless @active_item_requests.size.zero? %>
+		<div class="content-box-holder">
+			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 			<ul>
 				<% @active_item_requests.each do |req| %>
 					<li class="content-box clearfix">
@@ -24,16 +23,15 @@
 					</li>
 				<% end %>
 			</ul>
-		<% end %>
 
-	<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
-	</div>
-	<!-- /.content-box-holder  -->
+		<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
+		</div>
+		<!-- /.content-box-holder  -->
+	<% end %>
 
-	<div class="content-box-holder">
-		<%= image_tag("curve-top-content-box.png", :alt => "")  %>
-
-		<% if @person_network_requests && !@person_network_requests.size.zero? %>
+	<% if @person_network_requests && !@person_network_requests.size.zero? %>
+		<div class="content-box-holder">
+			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 			<ul>
 				<% @person_network_requests.each do |req| %>
 					<li class="content-box clearfix">
@@ -55,10 +53,9 @@
 					</li>
 				<% end %>
 			</ul>
-		<% end %>
 
-	<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
-	</div>
-	<!-- /.content-box-holder  -->
-
+			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
+		</div>
+		<!-- /.content-box-holder  -->
+	<% end %>
 </div>
