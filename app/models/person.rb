@@ -32,6 +32,14 @@ class Person < ActiveRecord::Base
     self.user.avatar(avatar_size)
   end
 
+  def first_name
+    name.split.first
+  end
+
+  ###########
+  # Trust related methods
+  ###########
+  
   def request_trusted_relationship(person_requesting)
     self.received_people_network_requests.create(:person => person_requesting)
   end
@@ -39,12 +47,8 @@ class Person < ActiveRecord::Base
   def requested_trusted_relationship?(person_requesting)
     self.received_people_network_requests.where(:person_id => person_requesting).count > 0
   end
-  
-  def cancel_request_trusted_relationship(person_requesting)
-    self.received_people_network_requests.where(:person_id => person_requesting).first.destroy
-  end
-  
-  def first_name
-    name.split.first
+
+  def requested_trusted_relationship(person_requesting)
+    self.received_people_network_requests.where(:person_id => person_requesting).first
   end
 end

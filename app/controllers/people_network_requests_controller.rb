@@ -12,12 +12,9 @@ class PeopleNetworkRequestsController < ApplicationController
   end
   
   def destroy
-    @trusted_person = Person.find(params[:id])
-    if @trusted_person.cancel_request_trusted_relationship(current_user.person)
-      redirect_to(@trusted_person, :notice => I18n.t('messages.people.cancel_requested_trusted_relationship'))
-    else
-      # TODO: handle this better (should not happen)
-      redirect_to(@trusted_person)
-    end
+    people_network_request = PeopleNetworkRequest.find(params[:id])
+    trusted_person = people_network_request.trusted_person
+    people_network_request.destroy
+    redirect_to(trusted_person, :notice => I18n.t('messages.people.cancel_requested_trusted_relationship'))
   end
 end

@@ -4,6 +4,7 @@ describe PeopleNetworkRequestsController do
 
   let(:signedin_user) { generate_mock_user_with_person }
   let(:mock_person)   { mock_model(Person).as_null_object }
+  let(:mock_people_network_request)   { mock_model(PeopleNetworkRequest).as_null_object }
 
   it_should_require_signed_in_user_for_actions :all
 
@@ -42,23 +43,18 @@ describe PeopleNetworkRequestsController do
     describe "DELETE destroy" do
     
       before do
-        mock_person.stub(:belongs_to?).and_return(true)
-        Person.stub(:find).with("37") { mock_person }
+        # mock_person.stub(:belongs_to?).and_return(true)
+        mock_people_network_request.stub(:trusted_person).and_return(mock_person)
+        PeopleNetworkRequest.stub(:find).with("37") { mock_people_network_request }
       end
     
       it "cancels trusted relationship request" do
-        mock_person.should_receive(:cancel_request_trusted_relationship).with(signedin_user.person)
+        mock_people_network_request.should_receive(:destroy)
         delete :destroy, :id => "37"
       end
       
-      it "assigns the requested person as @trusted_person" do
-        mock_person.stub(:update_attributes).and_return(true)
-        delete :destroy, :id => "37"
-        assigns(:trusted_person).should be(mock_person)
-      end
-    
       it "redirects to the person page (profile)" do
-        mock_person.stub(:cancel_request_trusted_relationship).and_return(true)
+        mock_people_network_request.stub(:destroy).and_return(true)
         delete :destroy, :id => "37"
         response.should redirect_to(person_path(mock_person))
       end

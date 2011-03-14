@@ -96,19 +96,6 @@ describe Person, ".requested_trusted_relationship?" do
   
 end
 
-describe Person, ".cancel_request_trusted_relationship" do
-  
-  it "should destroy person network request" do
-    request_person = stub_model(Person, :name => "Requester")
-    person = stub_model(Person, :name => "Receiver")
-    person.request_trusted_relationship(request_person)
-    expect {
-      person.cancel_request_trusted_relationship(request_person)
-    }.to change { person.received_people_network_requests.count }.from(1).to(0)
-  end
-  
-end
-
 describe Person, ".first_name" do
   
   it "should return first name" do
