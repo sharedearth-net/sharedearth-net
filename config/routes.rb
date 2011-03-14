@@ -8,7 +8,15 @@ Sharedearthapp::Application.routes.draw do
     end
   end
 
-  resources :people, :only => [:show, :edit, :update]
+  resources :people, :only => [:show, :edit, :update] do
+    member do
+      post "request_trusted_relationship"
+      delete "cancel_request_trusted_relationship"
+    end
+  end
+  
+  # resources :people_network, :only => [] do
+  # end
 
   resources :item_requests, :except => [:index, :destroy, :edit], :path => "requests", :as => "requests" do
     member do

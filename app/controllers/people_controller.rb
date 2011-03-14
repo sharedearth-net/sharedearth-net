@@ -32,6 +32,24 @@ class PeopleController < ApplicationController
       end
     end
   end
+
+  def request_trusted_relationship    
+    if @person.request_trusted_relationship(current_user.person)
+      redirect_to(@person, :notice => I18n.t('messages.people.requested_trusted_relationship'))
+    else
+      # TODO: handle this better (should not happen)
+      redirect_to(@person)
+    end
+  end
+  
+  def cancel_request_trusted_relationship    
+    if @person.cancel_request_trusted_relationship(current_user.person)
+      redirect_to(@person, :notice => I18n.t('messages.people.cancel_requested_trusted_relationship'))
+    else
+      # TODO: handle this better (should not happen)
+      redirect_to(@person)
+    end
+  end
   
   private
   def get_person

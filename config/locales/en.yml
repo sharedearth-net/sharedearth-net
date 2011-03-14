@@ -23,3 +23,6 @@ en:
       marked_as_normal: "Item has been restored."
       marked_as_lost: "Item has been marked as lost."
       marked_as_damaged: "Item has been marked as damaged."
+    people:
+      requested_trusted_relationship: "Created request to establish trusted relationship."
+      cancel_requested_trusted_relationship: "Cancelled request to establish trusted relationship."

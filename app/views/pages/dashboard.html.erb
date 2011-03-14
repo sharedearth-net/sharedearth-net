@@ -32,6 +32,42 @@
 			</ul>
 		<% end %>
 
+	<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
+	</div>
+	<!-- /.content-box-holder  -->
+
+	<div class="content-box-holder">
+		<%= image_tag("curve-top-content-box.png", :alt => "")  %>
+
+		<% unless @person_network_requests.size.zero? %>
+			<ul>
+				<% @person_network_requests.each do |req| %>
+					<li class="content-box clearfix">
+						<%= image_tag(req.person.avatar(:square), :class => "thumb") %>
+						<div class="inner-content">
+							<p>
+								<%= render :partial => "shared/person_network_request_sentence", :locals => { :req => req } %>
+							</p>
+					
+							<div class="action clearfix">
+								<ul>
+									<li>
+										<%= time_ago_in_words req.created_at %> ago
+									</li>
+									<%= render :partial => "shared/person_network_request_actions_compact", :locals => { :req => req } %>
+								</ul>
+							</div>
+						</div>
+					</li>
+				<% end %>
+			</ul>
+		<% else %>
+			<ul>
+				<li class="content-box clearfix">
+					<h2>No person network requests.</h2>
+				</li>
+			</ul>
+		<% end %>
 
 	<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
 	</div>

@@ -15,5 +15,13 @@ describe PeopleController do
       { :put => "/people/1" }.should route_to(:controller => "people", :action => "update", :id => "1")
     end
 
+    it "recognizes and generates #request_trusted_relationship" do
+      { :post => "/people/1/request_trusted_relationship" }.should route_to(:controller => "people", :action => "request_trusted_relationship", :id => "1")
+    end
+
+    it "recognizes and generates #cancel_request_trusted_relationship" do
+      { :delete => "/people/1/cancel_request_trusted_relationship" }.should route_to(:controller => "people", :action => "cancel_request_trusted_relationship", :id => "1")
+    end
+
   end
 end

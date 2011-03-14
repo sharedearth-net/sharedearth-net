@@ -52,4 +52,6 @@ describe "people/show.html.erb" do
     rendered.should have_selector("a", :href => new_request_path(:item_id => mock_person.items.first))
     rendered.should have_selector("a", :href => new_request_path(:item_id => mock_person.items.second))
   end
+  
+  pending "should test Trust Profile request links"
 end

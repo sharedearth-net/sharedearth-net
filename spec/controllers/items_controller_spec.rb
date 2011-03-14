@@ -8,7 +8,7 @@ describe ItemsController do
     @mock_item ||= mock_model(Item, stubs).as_null_object
   end
   
-  it_should_require_signed_in_user_for_actions :index, :show, :new, :edit, :create, :update, :destroy, :mark_as_lost#, :mark_as_normal, :mark_as_damaged
+  it_should_require_signed_in_user_for_actions :all
 
   describe "for signed in member" do
     before do
