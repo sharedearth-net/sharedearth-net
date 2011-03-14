@@ -66,3 +66,39 @@ describe Person, ".avatar" do
   end
   
 end
+
+describe Person, ".request_trusted_relationship" do
+  
+  it "should create new person network request" do
+    request_person = stub_model(Person, :name => "Requester")
+    person = stub_model(Person, :name => "Receiver")
+    expect {
+      person.request_trusted_relationship(request_person)
+    }.to change { person.received_people_network_requests.count }.by(1)
+  end
+  
+end
+
+describe Person, ".requested_trusted_relationship?" do
+  
+  it "should return true if request for trusted relationship already exists" do
+    request_person = stub_model(Person, :name => "Requester")
+    person = stub_model(Person, :name => "Receiver")
+    person.request_trusted_relationship(request_person)
+    person.requested_trusted_relationship?(request_person).should be_true
+  end
+
+  it "should return false if request for trusted relationship doesn't exists" do
+    request_person = stub_model(Person, :name => "Requester")
+    person = stub_model(Person, :name => "Receiver")
+    person.requested_trusted_relationship?(request_person).should be_false
+  end
+  
+end
+
+describe Person, ".first_name" do
+  
+  it "should return first name" do
+    Person.new(:name => "Slobodan Kovacevic").first_name.should eql("Slobodan")
+  end
+end

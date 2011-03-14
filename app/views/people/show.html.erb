@@ -121,13 +121,19 @@
 <div id="sidebar" class="profile-holder">
 	
 	<div class="sidebar-box-holder">
-		<%= image_tag("curve-top-sidebar-box.png", :alt => "")  %>
-		
-		
-		<!-- basti-todo: trust profile -->
+		<%= image_tag("curve-top-sidebar-box.png")  %>
 		
 		<div class="sidebar-box-profile">
-			<h2>Andrea's Trust Profile</h2>
+			<h2>
+				<%= @person.first_name.possessive %> Trust Profile
+				<% if @person != current_user.person %>
+					<% if @person.requested_trusted_relationship?(current_user.person) %>
+						<%= link_to "cancel request", people_network_request_path(@person.requested_trusted_relationship(current_user.person)), :method => :delete %>
+					<% else %>
+						<%= link_to "establish trusted relationship", people_network_requests_path(:trusted_person_id => @person), :method => :post %>
+					<% end %>
+				<% end %>
+			</h2>
 			<ul>
 				<li class="clearfix">
 					<%= image_tag("ic-untrusted-profile.png", :class => "icons", :alt => "Untrusted Profile")  %>

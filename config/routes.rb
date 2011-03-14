@@ -9,6 +9,12 @@ Sharedearthapp::Application.routes.draw do
   end
 
   resources :people, :only => [:show, :edit, :update]
+    
+  resources :people_network_requests, :only => [:create, :destroy]
+
+  # post "people_network/confirm_request/:people_network_request_id", :to => "people_network#create", :as => "confirm_request"
+  # resources :people_network, :only => [] do
+  # end
 
   resources :item_requests, :except => [:index, :destroy, :edit], :path => "requests", :as => "requests" do
     member do

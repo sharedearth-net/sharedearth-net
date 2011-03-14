@@ -35,6 +35,8 @@ describe PagesController do
         mock_item_requests = [mock_model(Item), mock_model(Item)]
         signedin_user.stub(:person).and_return(mock_model(Person))
         signedin_user.person.stub(:active_item_requests) { mock_item_requests }
+        signedin_user.person.stub(:received_people_network_requests) { [] } # TODO
+        signedin_user.person.stub(:people_network_requests) { [] } # TODO
         get :dashboard
         assigns(:active_item_requests).should eq(mock_item_requests)
       end

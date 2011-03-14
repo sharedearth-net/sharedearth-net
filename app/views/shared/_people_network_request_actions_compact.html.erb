@@ -1,0 +1,11 @@
+<%
+	# compact version of available person network request actions based on user's role
+	# for example it's used in dashboard.html.erb
+%>
+
+<% if req.requester?(current_user.person) %>
+	<%= link_to "cancel", people_network_request_path(req), :method => :delete %>
+<% else %>
+	<%= link_to "confirm", "#", :method => :put %>
+	<%= link_to "deny", "#", :method => :put %>
+<% end %>
