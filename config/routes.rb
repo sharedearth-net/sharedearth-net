@@ -15,6 +15,7 @@ Sharedearthapp::Application.routes.draw do
     end
   end
   
+  # post "people_network/confirm_request/:people_network_request_id", :to => "people_network#create", :as => "confirm_request"
   # resources :people_network, :only => [] do
   # end
 
