@@ -135,58 +135,6 @@ describe PeopleController do
 
     end
 
-    describe "POST request_trusted_relationship" do
-
-      before do
-        mock_person.stub(:belongs_to?).and_return(true)
-        Person.stub(:find).with("37") { mock_person }
-      end
-
-      it "creates a new trusted relationship request" do
-        mock_person.should_receive(:request_trusted_relationship).with(signedin_user.person)
-        post :request_trusted_relationship, :id => "37"
-      end
-      
-      it "assigns the requested person as @person" do
-        mock_person.stub(:update_attributes).and_return(true)
-        post :request_trusted_relationship, :id => "37"
-        assigns(:person).should be(mock_person)
-      end
-
-      it "redirects to the person page (profile)" do
-        mock_person.stub(:request_trusted_relationship).and_return(true)
-        post :request_trusted_relationship, :id => "37"
-        response.should redirect_to(person_path(mock_person))
-      end
-
-    end
-
-    describe "POST cancel_request_trusted_relationship" do
-
-      before do
-        mock_person.stub(:belongs_to?).and_return(true)
-        Person.stub(:find).with("37") { mock_person }
-      end
-
-      it "cancels trusted relationship request" do
-        mock_person.should_receive(:cancel_request_trusted_relationship).with(signedin_user.person)
-        post :cancel_request_trusted_relationship, :id => "37"
-      end
-      
-      it "assigns the requested person as @person" do
-        mock_person.stub(:update_attributes).and_return(true)
-        post :cancel_request_trusted_relationship, :id => "37"
-        assigns(:person).should be(mock_person)
-      end
-
-      it "redirects to the person page (profile)" do
-        mock_person.stub(:cancel_request_trusted_relationship).and_return(true)
-        post :cancel_request_trusted_relationship, :id => "37"
-        response.should redirect_to(person_path(mock_person))
-      end
-
-    end
-
   end
 
 end

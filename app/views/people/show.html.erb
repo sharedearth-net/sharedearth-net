@@ -121,16 +121,16 @@
 <div id="sidebar" class="profile-holder">
 	
 	<div class="sidebar-box-holder">
-		<%= image_tag("curve-top-sidebar-box.png", :alt => "")  %>
+		<%= image_tag("curve-top-sidebar-box.png")  %>
 		
 		<div class="sidebar-box-profile">
 			<h2>
 				<%= @person.first_name.possessive %> Trust Profile
 				<% if @person != current_user.person %>
 					<% if @person.requested_trusted_relationship?(current_user.person) %>
-						<%= link_to "cancel request", cancel_request_trusted_relationship_person_path(@person), :method => :delete %>
+						<%= link_to "cancel request", people_network_request_path(@person), :method => :delete %>
 					<% else %>
-						<%= link_to "establish trusted relationship", request_trusted_relationship_person_path(@person), :method => :post %>
+						<%= link_to "establish trusted relationship", people_network_requests_path(:trusted_person_id => @person), :method => :post %>
 					<% end %>
 				<% end %>
 			</h2>
