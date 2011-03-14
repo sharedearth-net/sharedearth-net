@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PersonNetworkRequest do
+describe PeopleNetworkRequest do
   it { should belong_to(:person) }
   it { should belong_to(:trusted_person) }
   it { should validate_presence_of(:person_id) }

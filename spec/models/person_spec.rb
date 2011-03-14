@@ -74,7 +74,7 @@ describe Person, ".request_trusted_relationship" do
     person = stub_model(Person, :name => "Receiver")
     expect {
       person.request_trusted_relationship(request_person)
-    }.to change { person.received_person_network_requests.count }.by(1)
+    }.to change { person.received_people_network_requests.count }.by(1)
   end
   
 end
@@ -104,7 +104,7 @@ describe Person, ".cancel_request_trusted_relationship" do
     person.request_trusted_relationship(request_person)
     expect {
       person.cancel_request_trusted_relationship(request_person)
-    }.to change { person.received_person_network_requests.count }.from(1).to(0)
+    }.to change { person.received_people_network_requests.count }.from(1).to(0)
   end
   
 end

@@ -3,8 +3,8 @@ class Person < ActiveRecord::Base
   has_many :items, :as => :owner
   has_many :item_requests, :as => :requester
   has_many :item_gifts, :as => :gifter, :class_name => "ItemRequest"
-  has_many :person_network_requests
-  has_many :received_person_network_requests, :class_name => "PersonNetworkRequest", :foreign_key => "trusted_person_id"
+  has_many :people_network_requests
+  has_many :received_people_network_requests, :class_name => "PeopleNetworkRequest", :foreign_key => "trusted_person_id"
   
   validates_presence_of :user_id, :name
   
@@ -33,15 +33,15 @@ class Person < ActiveRecord::Base
   end
 
   def request_trusted_relationship(person_requesting)
-    self.received_person_network_requests.create(:person => person_requesting)
+    self.received_people_network_requests.create(:person => person_requesting)
   end
   
   def requested_trusted_relationship?(person_requesting)
-    self.received_person_network_requests.where(:person_id => person_requesting).count > 0
+    self.received_people_network_requests.where(:person_id => person_requesting).count > 0
   end
   
   def cancel_request_trusted_relationship(person_requesting)
-    self.received_person_network_requests.where(:person_id => person_requesting).first.destroy
+    self.received_people_network_requests.where(:person_id => person_requesting).first.destroy
   end
   
   def first_name

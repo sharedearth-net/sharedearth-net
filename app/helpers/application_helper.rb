@@ -48,12 +48,12 @@ module ApplicationHelper
   end
 
   # Returns photo URL of the other user involved in request
-  def person_network_request_photo(person_network_request, options = {})
+  def people_network_request_photo(people_network_request, options = {})
     defaults = { :size => :medium }
     options = defaults.merge(options)
 
-    if person_network_request.requester?(current_user.person)
-      person_network_request.trusted_person.avatar(options[:size])
+    if people_network_request.requester?(current_user.person)
+      people_network_request.trusted_person.avatar(options[:size])
     else
       current_user.person.avatar(options[:size])
     end
