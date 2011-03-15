@@ -7,4 +7,13 @@ class PeopleNetworkRequest < ActiveRecord::Base
   def requester?(person)
     self.person == person
   end
+
+  def trusted_person?(person)
+    self.trusted_person == person
+  end
+
+  def confirm!
+    PeopleNetwork.create_trust!(self.person, self.trusted_person) 
+    self.destroy
+  end
 end
