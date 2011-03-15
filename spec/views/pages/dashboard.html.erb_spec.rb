@@ -65,12 +65,12 @@ describe "pages/dashboard.html.erb" do
       :created_at => Time.now
     ).as_null_object
     
-    @active_item_requests = assign(:active_item_requests, [current_person_request, current_person_gift])
+    @requests = assign(:requests, [current_person_request, current_person_gift])
   end
 
   it "renders a list of active requests" do
-    first_request = @active_item_requests.first
-    second_request = @active_item_requests.second
+    first_request = @requests.first
+    second_request = @requests.second
     
     render
     # first request

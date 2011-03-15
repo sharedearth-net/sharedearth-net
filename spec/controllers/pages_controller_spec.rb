@@ -32,7 +32,7 @@ describe PagesController do
       end
       
       it "assigns the current person's active requests as @active_item_requests" do
-        mock_item_requests = [mock_model(Item), mock_model(Item)]
+        mock_item_requests = [mock_model(ItemRequest, :created_at => Time.now), mock_model(ItemRequest, :created_at => Time.now)]
         signedin_user.stub(:person).and_return(mock_model(Person))
         signedin_user.person.stub(:active_item_requests) { mock_item_requests }
         signedin_user.person.stub(:received_people_network_requests) { [] } # TODO

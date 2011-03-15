@@ -1,60 +1,50 @@
 <div id="content">
-	<% unless @active_item_requests.size.zero? %>
+	<% unless @requests.count.zero? %>
 		<div class="content-box-holder">
 			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 			<ul>
-				<% @active_item_requests.each do |req| %>
-					<li class="content-box clearfix">
-						<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
-						<div class="inner-content">
-							<p>
-								<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
-							</p>
+				<% @requests.each do |req| %>
+					<% if req.is_a? ItemRequest %>
+						<li class="content-box clearfix">
+							<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
+							<div class="inner-content">
+								<p>
+									<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
+								</p>
 					
-							<div class="action clearfix">
-								<ul>
-									<li>
-										<%= time_ago_in_words req.created_at %> ago
-									</li>
-									<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
-								</ul>
+								<div class="action clearfix">
+									<ul>
+										<li>
+											<%= time_ago_in_words req.created_at %> ago
+										</li>
+										<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
+									</ul>
+								</div>
 							</div>
-						</div>
-					</li>
+						</li>
+					<% elsif req.is_a? PeopleNetworkRequest %>
+						<li class="content-box clearfix">
+							<%= image_tag(people_network_request_photo(req, :size => :square), :class => "thumb") %>
+							<div class="inner-content">
+								<p>
+									<%= render :partial => "shared/people_network_request_sentence", :locals => { :req => req } %>
+								</p>
+					
+								<div class="action clearfix">
+									<ul>
+										<li>
+											<%= time_ago_in_words req.created_at %> ago
+										</li>
+										<%= render :partial => "shared/people_network_request_actions_compact", :locals => { :req => req } %>
+									</ul>
+								</div>
+							</div>
+						</li>
+					<% end %>
 				<% end %>
 			</ul>
 
 		<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
-		</div>
-		<!-- /.content-box-holder  -->
-	<% end %>
-
-	<% if @people_network_requests && !@people_network_requests.size.zero? %>
-		<div class="content-box-holder">
-			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
-			<ul>
-				<% @people_network_requests.each do |req| %>
-					<li class="content-box clearfix">
-						<%= image_tag(req.person.avatar(:square), :class => "thumb") %>
-						<div class="inner-content">
-							<p>
-								<%= render :partial => "shared/people_network_request_sentence", :locals => { :req => req } %>
-							</p>
-					
-							<div class="action clearfix">
-								<ul>
-									<li>
-										<%= time_ago_in_words req.created_at %> ago
-									</li>
-									<%= render :partial => "shared/people_network_request_actions_compact", :locals => { :req => req } %>
-								</ul>
-							</div>
-						</div>
-					</li>
-				<% end %>
-			</ul>
-
-			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
 		</div>
 		<!-- /.content-box-holder  -->
 	<% end %>

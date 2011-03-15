@@ -55,7 +55,7 @@ module ApplicationHelper
     if people_network_request.requester?(current_user.person)
       people_network_request.trusted_person.avatar(options[:size])
     else
-      current_user.person.avatar(options[:size])
+      people_network_request.person.avatar(options[:size])
     end
   end
 end
