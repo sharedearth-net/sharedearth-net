@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110314121212) do
+ActiveRecord::Schema.define(:version => 20110315204606) do
 
   create_table "item_requests", :force => true do |t|
     t.integer  "requester_id"
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(:version => 20110314121212) do
   end
 
   create_table "people_network_requests", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "trusted_person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "people_networks", :force => true do |t|
     t.integer  "person_id"
     t.integer  "trusted_person_id"
     t.datetime "created_at"

@@ -6,6 +6,6 @@
 <% if req.requester?(current_user.person) %>
 	<%= link_to "cancel", people_network_request_path(req), :method => :delete %>
 <% else %>
-	<%= link_to "confirm", "#", :method => :put %>
-	<%= link_to "deny", "#", :method => :put %>
+	<%= link_to "confirm", confirm_people_network_request_path(req), :method => :put %>
+	<%= link_to "deny", deny_people_network_request_path(req), :method => :put %>
 <% end %>

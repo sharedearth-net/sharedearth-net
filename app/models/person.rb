@@ -5,11 +5,17 @@ class Person < ActiveRecord::Base
   has_many :item_gifts, :as => :gifter, :class_name => "ItemRequest"
   has_many :people_network_requests
   has_many :received_people_network_requests, :class_name => "PeopleNetworkRequest", :foreign_key => "trusted_person_id"
+  has_many :people_networks
+  has_many :received_people_networks, :class_name => "PeopleNetwork", :foreign_key => "trusted_person_id"
   
   validates_presence_of :user_id, :name
-  
+
   def belongs_to?(some_user)
     user == some_user
+  end
+  
+  def trusts?(other_person)
+    self.people_networks.involves_as_trusted_person(other_person).first
   end
   
   def all_item_requests

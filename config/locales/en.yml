@@ -12,6 +12,8 @@ en:
     only_gifter_and_requester_can_access: "Sorry. Only requester and gifter can access request page."
     only_requester_can_access: "Sorry. Only requester can access request page."
     only_gifter_can_access: "Sorry. Only gifter can access request page."
+    only_requester_and_trusted_person_can_access: "Sorry. Only requester and trusted person can do that."
+    only_trusted_person_can_access: "Sorry. Only trusted person can do that."
     item_requests:
       request_accepted: "Request has been accepted."
       request_rejected: "Request has been rejected."
@@ -25,4 +27,8 @@ en:
       marked_as_damaged: "Item has been marked as damaged."
     people:
       requested_trusted_relationship: "Created request to establish trusted relationship."
-      cancel_requested_trusted_relationship: "Cancelled request to establish trusted relationship."
+    people_network_request:
+      request_confirmed: "Trust request has been accepted."
+      destroy: "Cancelled request to establish trusted relationship."
+    people_network:
+      destroy: "You withdrew your trust in this person."
