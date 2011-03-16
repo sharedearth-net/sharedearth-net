@@ -21,6 +21,8 @@ class ItemRequest < ActiveRecord::Base
   belongs_to :requester, :polymorphic => true
   belongs_to :gifter, :polymorphic => true
 
+  has_many :activity_logs, :as => :related
+
   scope :involves, lambda { |entity| where("(requester_id = ? AND requester_type = ?) OR (gifter_id = ? AND gifter_type = ?) ", entity.id, entity.class.to_s, entity.id, entity.class.to_s) }
   scope :involves_as_requester, lambda { |entity| where("requester_id = ? AND requester_type = ?", entity.id, entity.class.to_s) }
   scope :active, where("status IN (#{ACTIVE_STATUSES.join(",")})")

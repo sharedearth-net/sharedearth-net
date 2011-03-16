@@ -10,7 +10,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110315204606) do
+ActiveRecord::Schema.define(:version => 20110316090343) do
+
+  create_table "activity_logs", :force => true do |t|
+    t.integer  "event_code"
+    t.integer  "primary_id"
+    t.string   "primary_type"
+    t.integer  "action_object_id"
+    t.string   "action_object_type"
+    t.string   "action_object_type_readable"
+    t.integer  "secondary_id"
+    t.string   "secondary_type"
+    t.string   "secondary_short_name"
+    t.string   "secondary_full_name"
+    t.integer  "related_id"
+    t.string   "related_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activity_logs", ["event_code"], :name => "index_activity_logs_on_event_code"
+  add_index "activity_logs", ["primary_id", "primary_type"], :name => "index_activity_logs_on_primary_id_and_primary_type"
 
   create_table "item_requests", :force => true do |t|
     t.integer  "requester_id"
