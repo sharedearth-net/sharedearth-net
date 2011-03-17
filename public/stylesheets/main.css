@@ -748,9 +748,10 @@ a:hover {
 					}
 					
 						.items-list ul li .thumb {
-							width: 30px;
+							max-height: 32px;
 							float: left;
 							margin-right: 10px;
+							margin-top: 3px;
 						}
 						
 						.items-list ul li div {
@@ -769,12 +770,12 @@ a:hover {
 								}
 							
 							
-							.items-list ul.action-list {
+							ul.action-list {
 								clear: both;
 								margin-top: 5px;
 							}
 							
-							.items-list ul.action-list li {
+							ul.action-list li {
 								display: block;
 								float: left;
 								margin-right: 17px;
@@ -782,8 +783,8 @@ a:hover {
 								color: #62775a;
 							}
 
-								.items-list ul.action-list li a:link,
-								.items-list ul.action-list li a:visited {
+								ul.action-list li a:link,
+								ul.action-list li a:visited {
 									color: #62775a;
 									font-weight: normal;
 								}
@@ -791,7 +792,7 @@ a:hover {
 								#content .items-list ul li div p {
 									font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 									clear: both;
-									color: #127E0E;
+									color: #858F7C;
 								    float: left;
 								    font-size: 12px;
 									margin: 0 0 6px 0;
@@ -802,6 +803,13 @@ a:hover {
 									#content .items-list ul li div p a:visited {
 										color: #858F7C;
 									}
+									
+									
+						/* unanswered requests */
+						
+						.unanswered-requests {
+							
+						}
 									
 									
 						/* profile sidebar */

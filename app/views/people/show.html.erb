@@ -44,10 +44,11 @@
 									<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
 									<div>
 										<p>
-											<%= link_to "gift", "#"  %>&nbsp;|&nbsp;
-											<%= link_to item.name, item_path(item) %>&nbsp;|
+											gift&nbsp;&nbsp;|&nbsp;
+											<%= link_to "2 person dome tent", "#" %>&nbsp;&nbsp;|&nbsp;
+											<%= link_to item.name, item_path(item), :class => "positive" %>
 											<!-- basti-question: what's this? -->
-											2 person dome tent
+											
 										</p>
 										
 										
@@ -79,8 +80,7 @@
 				</div>
 			</li>
 			<li>
-				<!-- tomcanji-todo: style requests -->
-				<div class="items-list clearfix">
+				<div class="items-list unanswered-requests clearfix">
 					<h2>Unanswered requests</h2>
 					<% unless @unanswered_requests.size.zero? %>
 						<ul>
@@ -90,10 +90,12 @@
 									<div>
 										<ul class="clearfix">
 											<li>
-												<%= link_to_person(req.requester, :class => "capitalize") %>
-												requested <%= link_to req.item.name, item_path(req.item) %>
-												from <%= link_to_person(req.gifter, :downcase_you => true) %>
-												<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
+												<p>
+													<%= link_to_person(req.requester, :class => "capitalize") %>
+													requested <%= link_to req.item.name, item_path(req.item) %>
+													from <%= link_to_person(req.gifter, :downcase_you => true, :class => "capitalize positive") %>
+													<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
+												</p>
 											</li>
 										</ul>
 										

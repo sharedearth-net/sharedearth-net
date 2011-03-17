@@ -1,35 +1,156 @@
-<h1>Item: <%= @item.name %></h1>
-
-<p>
-  <b>Type:</b>
-  <%= @item.item_type %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @item.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @item.description %>
-</p>
-
-<p>
-	<%= image_tag @item.photo.url(:medium) %>
-</p>
-
-<%= owner_only(@item) do %>
-	<div>
-		<% if @item.normal? %>
-			<%= link_to 'Edit', edit_item_path(@item) %> |
-			<%= link_to 'Mark as lost', mark_as_lost_item_path(@item), :method => :put %> |
-			<%= link_to 'Mark as damaged', mark_as_damaged_item_path(@item), :method => :put %> |
-		<% elsif @item.lost? %>
-			<%= link_to 'Mark as found', mark_as_normal_item_path(@item), :method => :put %> |
-		<% elsif @item.damaged? %>
-			<%= link_to 'Mark as repaired', mark_as_normal_item_path(@item), :method => :put %> |
-		<% end %>
-    <%= link_to 'Delete', @item, :confirm => 'Are you sure?', :method => :delete %> |
+<div id="content">
+		
+	<div class="content-box-holder no-bg">
+		<ul>
+			<li class="content-box clearfix">
+				<%= image_tag @item.photo.url(:medium), :class => "thumb" %>
+				<div class="inner-content">
+					<h2>Item: <%= @item.name %></h2>
+					
+					<p class="status-holder-profile">
+						<span>
+							Type:
+							<%= @item.item_type %>
+						</span>
+						<span>
+							Name:
+							<%= @item.name %>
+						</span>
+						<span>
+							Description:
+							<%= @item.description %>
+						</span>
+					</p>
+				</div>
+			</li>
+			
+			<li class="content-box">
+				<%= owner_only(@item) do %>
+					<ul class="action-buttons-list">
+						<% if @item.normal? %>
+							<li><%= link_to 'Edit', edit_item_path(@item) %></li>
+							<li><%= link_to 'Mark as lost', mark_as_lost_item_path(@item), :method => :put %></li>
+							<li><%= link_to 'Mark as damaged', mark_as_damaged_item_path(@item), :method => :put %></li>
+						<% elsif @item.lost? %>
+							<li><%= link_to 'Mark as found', mark_as_normal_item_path(@item), :method => :put %></li>
+						<% elsif @item.damaged? %>
+							<li><%= link_to 'Mark as repaired', mark_as_normal_item_path(@item), :method => :put %></li>
+						<% end %>
+				    	<li>
+							<%= link_to 'Delete', @item, :confirm => 'Are you sure?', :method => :delete %>
+						</li>
+					</ul>
+				<% end %>
+			</li>
+		</ul>
 	</div>
-<% end %>
+
+</div><!-- /content -->
+
+<div id="sidebar" class="profile-holder">
+	
+	<div class="sidebar-box-holder">
+		<%= image_tag("curve-top-sidebar-box.png")  %>
+		
+		<!-- basti-todo	/ this is just static HTML -->
+		
+		<div class="sidebar-box-profile">
+			<h2>Predrag's Trust Profile</h2>
+			<ul>
+				<li class="clearfix">
+					<% if current_user.person.trusts?(@person) %>
+						<%= image_tag("ic-trusted-profile.png", :class => "icons", :alt => "Trusted Profile")  %>
+						<p>
+							In your trusted network
+						</p>
+					<% else %>
+						<%= image_tag("ic-untrusted-profile.png", :class => "icons", :alt => "Untrusted Profile")  %>
+						<p>
+							Not in your trusted network
+						</p>
+					<% end %>
+				</li>
+				<li class="clearfix">
+					<%= image_tag("ic-trusted-profile.png", :class => "icons", :alt => "Trusted Profile")  %>
+					<p>
+						<a href="#">8</a> people from your trusted network
+					</p>
+				</li>
+				<li class="clearfix">
+					<%= image_tag("ic-extended-network.png", :class => "icons", :alt => "Extended Network")  %>
+					<p>
+						<a href="#">19</a> people from your extended network
+					</p>
+					<p>
+						<span>
+							<a href="#">
+								<%= image_tag("ic-village.png", :alt => "")  %>
+							</a>
+                            <a href="#">Chileans in Sydney</a> | <a href="#">Australia</a>
+						</span>
+                    </p>
+				</li>
+				
+				<li class="no-icon clearfix">
+					<p>
+						<a href="#">43</a> people in their trusted network
+					</p>
+				</li>
+			</ul>
+		</div>
+		<%= image_tag("curve-bottom-sidebar-box.png", :alt => "")  %>
+		
+	</div><!-- /sidebar-box-profile	-->
+	
+	
+	
+	<h2>Activity Profile</h2>
+	
+	
+	<!-- basti-todo: activity profile -->
+	<ul>
+		<li class="sidebar-box clearfix">
+			<div class="inner-content">
+				<p>
+					Andrea lent a modem to <a class="positive" href="#">Terry Waters</a>
+				</p>
+
+				<div class="action clearfix">
+					<ul>
+						<li>3 days ago</li>
+						<li><a href="#">comments(0)</a></li>
+					</ul>
+				</div>
+			</div>
+		</li>
+		<li class="sidebar-box clearfix">
+			<div class="inner-content">
+				<p>
+					Andrea borrowed a witches costume from <a class="positive" href="#">Dan Brown</a>
+				</p>
+
+				<div class="action clearfix">
+					<ul>
+						<li>2 weeks ago</li>
+						<li><a href="#">comments(0)</a></li>
+					</ul>
+				</div>
+			</div>
+		</li>
+		<li class="sidebar-box clearfix">
+			<div class="inner-content">
+				<p>
+					Andrea started sharing a BBQ
+				</p>
+
+				<div class="action clearfix">
+					<ul>
+						<li>3 weeks ago</li>
+						<li><a href="#">comments(0)</a></li>
+					</ul>
+				</div>
+			</div>
+		</li>
+	</ul>
+	
+</div><!-- sidebar -->
