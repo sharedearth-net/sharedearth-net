@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe "items/show.html.erb" do
+
+  let(:signedin_user) { generate_mock_user_with_person }
   
   def as_item_owner
     view.stub(:current_user).and_return(stub_model(User))
@@ -13,12 +15,15 @@ describe "items/show.html.erb" do
   end
   
   before(:each) do
+    stub_template "shared/_trust_profile.html.erb" => "Trust profile"
+    view.stub(:current_user).and_return(signedin_user)
+
     @item = assign(:item, stub_model(Item,
       :item_type => "MyItemType",
       :name => "MyItemName",
       :description => "MyItemDescription",
       :owner_id => 1,
-      :owner_type => "Owner Type",
+      :owner_type => "Person",
       :status => Item::STATUS_NORMAL
     ))
   end
@@ -29,8 +34,6 @@ describe "items/show.html.erb" do
     rendered.should match(/MyItemType/)
     rendered.should match(/MyItemName/)
     rendered.should match(/MyItemDescription/)
-    # rendered.should match(/1/)
-    # rendered.should match(/Owner Type/)
   end
   
   it "should render edit link to item owner" do

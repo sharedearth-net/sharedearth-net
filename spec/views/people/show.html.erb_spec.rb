@@ -36,7 +36,7 @@ describe "people/show.html.erb" do
   
   it "shouldn't render a link to edit profile if viewing someone else's profile" do
     some_other_user = mock_model(User)
-    some_other_user.stub(:person)
+    some_other_user.stub(:person).and_return(mock_model(Person))
     some_other_user.stub_chain(:person, :trusts?).and_return(false)
     view.stub(:current_user).and_return(some_other_user)
     render

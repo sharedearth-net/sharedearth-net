@@ -35,6 +35,8 @@ describe "item_requests/show.html.erb" do
   let(:signedin_user) { generate_mock_user_with_person }
 
   before(:each) do
+    stub_template "shared/_trust_profile.html.erb" => "Trust profile"
+
     view.stub(:current_user).and_return(signedin_user)
     view.stub(:item_request_photo).and_return("item_request_photo.png")
 

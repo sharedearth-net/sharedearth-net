@@ -1,0 +1,59 @@
+<div class="sidebar-box-holder">
+	<%= image_tag("curve-top-sidebar-box.png")  %>		
+	<div class="sidebar-box-profile">
+		<h2>
+			<%= person.first_name.possessive %> Trust Profile
+			<% if person != current_user.person %>
+				<% if person.requested_trusted_relationship?(current_user.person) %>
+					<%= link_to "cancel request", people_network_request_path(person.requested_trusted_relationship(current_user.person)), :method => :delete %>
+				<% elsif people_network = current_user.person.trusts?(person) %>
+					<%= link_to "withdraw trust", people_network_path(people_network), :method => :delete %>
+				<% else %>
+					<%= link_to "establish trust", people_network_requests_path(:trusted_person_id => person), :method => :post %>
+				<% end %>
+			<% end %>
+		</h2>
+		<ul>
+			<li class="clearfix">
+				<% if current_user.person.trusts?(person) %>
+					<%= image_tag("ic-trusted-profile.png", :class => "icons", :alt => "Trusted Profile")  %>
+					<p>
+						In your trusted network
+					</p>
+				<% else %>
+					<%= image_tag("ic-untrusted-profile.png", :class => "icons", :alt => "Untrusted Profile")  %>
+					<p>
+						Not in your trusted network
+					</p>
+				<% end %>
+			</li>
+			<li class="clearfix">
+				<%= image_tag("ic-trusted-profile.png", :class => "icons", :alt => "Trusted Profile")  %>
+				<p>
+					<a href="#">8</a> people from your trusted network
+				</p>
+			</li>
+			<li class="clearfix">
+				<%= image_tag("ic-extended-network.png", :class => "icons", :alt => "Extended Network")  %>
+				<p>
+					<a href="#">19</a> people from your extended network
+				</p>
+				<p>
+					<span>
+						<a href="#">
+							<%= image_tag("ic-village.png", :alt => "")  %>
+						</a>
+                          <a href="#">Chileans in Sydney</a> | <a href="#">Australia</a>
+					</span>
+                  </p>
+			</li>
+			
+			<li class="no-icon clearfix">
+				<p>
+					<a href="#">43</a> people in their trusted network
+				</p>
+			</li>
+		</ul>
+	</div>
+	<%= image_tag("curve-bottom-sidebar-box.png", :alt => "")  %>
+</div><!-- /sidebar-box-profile	-->
