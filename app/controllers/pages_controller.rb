@@ -9,5 +9,7 @@ class PagesController < ApplicationController
     @people_network_requests = current_user.person.received_people_network_requests + current_user.person.people_network_requests
     @requests = @active_item_requests + @people_network_requests
     @requests.sort! { |a,b| b.created_at <=> a.created_at }
+    
+    @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC")
   end
 end

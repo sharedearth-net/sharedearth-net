@@ -48,4 +48,13 @@
 		</div>
 		<!-- /.content-box-holder  -->
 	<% end %>
+
+<ul>
+	<% @recent_activity_logs.each do |activity_log| %>
+		<li>
+			<%= activity_log.secondary_full_name %>
+		</li>
+	<% end %>
+</ul>
+
 </div>

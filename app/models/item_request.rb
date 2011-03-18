@@ -23,6 +23,8 @@ class ItemRequest < ActiveRecord::Base
 
   has_many :activity_logs, :as => :related
 
+  after_create :create_new_item_request_activity_log
+
   scope :involves, lambda { |entity| where("(requester_id = ? AND requester_type = ?) OR (gifter_id = ? AND gifter_type = ?) ", entity.id, entity.class.to_s, entity.id, entity.class.to_s) }
   scope :involves_as_requester, lambda { |entity| where("requester_id = ? AND requester_type = ?", entity.id, entity.class.to_s) }
   scope :active, where("status IN (#{ACTIVE_STATUSES.join(",")})")
@@ -97,5 +99,10 @@ class ItemRequest < ActiveRecord::Base
 
   def completed?
     self.status == STATUS_COMPLETED
+  end
+
+  private
+  def create_new_item_request_activity_log
+    ActivityLog.create_new_item_request_activity_log(self)
   end
 end
