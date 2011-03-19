@@ -1,0 +1,11 @@
+<%
+	# compact version of available activity log actions based on activity type
+	# for example used in dashboard.html.erb
+%>
+<li><a href="#">comments(0)</a></li>
+
+<% if activity_log.event_type.new_item_request_requester? || activity_log.event_type.new_item_request_gifter? %>
+	<li>
+		<%= link_to "view request", request_path(activity_log.related) %>
+	</li>
+<% end %>

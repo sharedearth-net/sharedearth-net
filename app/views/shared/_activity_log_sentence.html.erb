@@ -1,0 +1,17 @@
+<%
+	# NEW ITEM REQUEST REQUESTER
+%>
+<% if activity_log.event_type.new_item_request_requester? %>
+	You requested
+	<%= link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive" %>
+	<%= link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "positive" %>.
+<% end %>
+
+<%
+	# NEW ITEM REQUEST GIFTER
+%>
+<% if activity_log.event_type.new_item_request_gifter? %>
+	<%= link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" %>
+	requested your
+	<%= link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "positive" %>.
+<% end %>

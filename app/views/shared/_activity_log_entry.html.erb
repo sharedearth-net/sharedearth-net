@@ -1,0 +1,12 @@
+<div class="inner-content">
+	<p>
+		<%= render :partial => "shared/activity_log_sentence", :locals => { :activity_log => activity_log } %>
+	</p>
+
+	<div class="action clearfix">
+		<ul>
+			<li><%= time_ago_in_words activity_log.created_at %> ago</li>
+			<%= render :partial => "shared/activity_log_actions_compact", :locals => { :activity_log => activity_log } %>
+		</ul>
+	</div>
+</div>

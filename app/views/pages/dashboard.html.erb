@@ -49,10 +49,11 @@
 		<!-- /.content-box-holder  -->
 	<% end %>
 
+<h2>Latest Activity</h2>
 <ul>
 	<% @recent_activity_logs.each do |activity_log| %>
-		<li>
-			<%= activity_log.secondary_full_name %>
+		<li class="sidebar-box clearfix">
+			<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
 		</li>
 	<% end %>
 </ul>
