@@ -22,6 +22,7 @@ class ItemRequest < ActiveRecord::Base
   belongs_to :gifter, :polymorphic => true
 
   has_many :activity_logs, :as => :related
+  has_many :event_logs, :as => :related
 
   after_create :create_new_item_request_activity_log
 

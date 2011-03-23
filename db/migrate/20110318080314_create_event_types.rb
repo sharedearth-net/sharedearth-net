@@ -12,23 +12,23 @@ class CreateEventTypes < ActiveRecord::Migration
 
     # insert default event types
     event_type_names = [
-                          "ADD ITEM",
-                          "NEW ITEM REQUEST GIFTER",
-                          "NEW ITEM REQUEST REQUESTER",
-                          "ACCEPT RESPONSE GIFTER",
-                          "REJECT RESPONSE GIFTER",
-                          "ACCEPT RESPONSE REQUESTER",
-                          "REJECT RESPONSE REQUESTER",
-                          "COLLECTED GIFTER",
-                          "COLLECTED REQUESTER",
-                          "REQUESTER COMPLETED GIFTER",
-                          "REQUESTER COMPLETED REQUESTER",
-                          "GIFTER COMPLETED GIFTER",
-                          "GIFTER COMPLETED REQUESTER",
-                          "GIFTER CANCEL GIFTER",
-                          "GIFTER CANCEL REQUESTER",
-                          "REQUESTER CANCEL GIFTER",
-                          "REQUESTER CANCEL REQUESTER"
+                          "ADD ITEM", # 1
+                          "NEW ITEM REQUEST GIFTER", # 2
+                          "NEW ITEM REQUEST REQUESTER", # 3
+                          "ACCEPT RESPONSE GIFTER", # 4
+                          "REJECT RESPONSE GIFTER", # 5
+                          "ACCEPT RESPONSE REQUESTER", # 6
+                          "REJECT RESPONSE REQUESTER", # 7
+                          "COLLECTED GIFTER", # 8
+                          "COLLECTED REQUESTER", # 9
+                          "REQUESTER COMPLETED GIFTER", # 10
+                          "REQUESTER COMPLETED REQUESTER", # 11
+                          "GIFTER COMPLETED GIFTER", # 12
+                          "GIFTER COMPLETED REQUESTER", # 13
+                          "GIFTER CANCEL GIFTER", # 14
+                          "GIFTER CANCEL REQUESTER", # 15
+                          "REQUESTER CANCEL GIFTER", # 16
+                          "REQUESTER CANCEL REQUESTER" # 17
                         ]
 
     event_type_names.each do |event_type_name|

@@ -20,6 +20,9 @@ class Item < ActiveRecord::Base
   has_many :activity_logs, :as => :action_object
   has_many :activity_logs_as_related, :as => :related
 
+  has_many :event_logs, :as => :action_object
+  has_many :event_logs_as_related, :as => :related
+
   has_attachment :photo,
                  :styles => {
                    :large => "600x600>",

@@ -8,6 +8,7 @@ class EventType < ActiveRecord::Base
   }
   
   has_many :activity_logs
+  has_many :event_logs
 
   # #######
   # Group related methods

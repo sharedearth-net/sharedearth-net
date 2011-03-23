@@ -10,6 +10,9 @@ class Person < ActiveRecord::Base
 
   has_many :activity_logs, :as => :primary
   has_many :activity_logs_as_secondary, :as => :secondary
+
+  has_many :event_logs, :as => :primary
+  has_many :event_logs_as_secondary, :as => :secondary
   
   validates_presence_of :user_id, :name
 
