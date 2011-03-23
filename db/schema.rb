@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110323204226) do
+ActiveRecord::Schema.define(:version => 20110323205943) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer  "event_code"
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(:version => 20110323204226) do
 
   add_index "activity_logs", ["event_code"], :name => "index_activity_logs_on_event_code"
   add_index "activity_logs", ["primary_id", "primary_type"], :name => "index_activity_logs_on_primary_id_and_primary_type"
+
+  create_table "event_entities", :force => true do |t|
+    t.integer  "event_log_id"
+    t.integer  "entity_id"
+    t.string   "entity_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "event_entities", ["entity_id", "entity_type"], :name => "index_event_entities_on_entity_id_and_entity_type"
+  add_index "event_entities", ["event_log_id"], :name => "index_event_entities_on_event_log_id"
 
   create_table "event_logs", :force => true do |t|
     t.integer  "primary_id"

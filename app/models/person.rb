@@ -9,10 +9,13 @@ class Person < ActiveRecord::Base
   has_many :received_people_networks, :class_name => "PeopleNetwork", :foreign_key => "trusted_person_id"
 
   has_many :activity_logs, :as => :primary
-  has_many :activity_logs_as_secondary, :as => :secondary
+  has_many :activity_logs_as_secondary, :as => :secondary, :class_name => "ActivityLog"
 
   has_many :event_logs, :as => :primary
-  has_many :event_logs_as_secondary, :as => :secondary
+  has_many :event_logs_as_secondary, :as => :secondary, :class_name => "EventLog"
+
+  has_many :event_entities, :as => :entity
+  has_many :related_event_logs, :through => :event_entities, :source => :event_log
   
   validates_presence_of :user_id, :name
 
