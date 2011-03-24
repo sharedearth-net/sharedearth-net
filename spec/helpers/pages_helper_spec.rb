@@ -12,4 +12,5 @@ require 'spec_helper'
 # end
 describe PagesHelper do
   # pending "add some examples to (or delete) #{__FILE__}"
+  pending "TODO add test for recent_activity_sentance "
 end

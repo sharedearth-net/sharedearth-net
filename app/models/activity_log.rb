@@ -67,5 +67,41 @@ class ActivityLog < ActiveRecord::Base
       :event_type_id => EventType.new_item_request_requester
     )
   end
+  
+  # One method to log all activity
+  # First param: item_request object from which activity log will be created
+  # Second param: Type of the event for gifter
+  # Third param: Type of the event for the requester 
+  # #####
+  
+  def self.create_item_request_activity_log(item_request, event_type_gifter, event_type_requester)
+    event_code = ActivityLog.next_event_code
+
+    # create log for gifter
+    ActivityLog.create!(
+      :event_code => event_code,
+      :primary => item_request.gifter,
+      :action_object => item_request.item,
+      :action_object_type_readable => item_request.item.item_type,
+      :secondary => item_request.requester,
+      :secondary_short_name => item_request.requester.first_name,
+      :secondary_full_name => item_request.requester.name,
+      :related => item_request,
+      :event_type_id => event_type_gifter
+    )
+
+    # create log for requester
+    ActivityLog.create!(
+      :event_code => event_code,
+      :primary => item_request.requester,
+      :action_object => item_request.item,
+      :action_object_type_readable => item_request.item.item_type,
+      :secondary => item_request.gifter,
+      :secondary_short_name => item_request.gifter.first_name,
+      :secondary_full_name => item_request.gifter.name,
+      :related => item_request,
+      :event_type_id => event_type_requester
+    )
+  end
 
 end

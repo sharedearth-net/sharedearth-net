@@ -56,26 +56,31 @@ class ItemRequest < ActiveRecord::Base
   def accept!
     self.status = STATUS_ACCEPTED
     save!
+    create_item_request_accepted_activity_log
   end
 
   def reject!
     self.status = STATUS_REJECTED
     save!
+    create_item_request_rejected_activity_log
   end
 
   def cancel!
     self.status = STATUS_CANCELED
     save!
+    create_item_request_canceled_activity_log
   end
 
   def collected!
     self.status = STATUS_COLLECTED
     save!
+    create_item_request_collected_activity_log
   end
 
   def complete!
     self.status = STATUS_COMPLETED
     save!
+    create_item_request_completed_activity_log
   end
 
   def requested?
@@ -105,5 +110,25 @@ class ItemRequest < ActiveRecord::Base
   private
   def create_new_item_request_activity_log
     ActivityLog.create_new_item_request_activity_log(self)
+  end
+   
+  def create_item_request_accepted_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.item_request_accepted_gifter, EventType.item_request_accepted_requester)
+  end
+  
+  def create_item_request_rejected_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.item_request_rejected_gifter, EventType.item_request_rejected_requester)
+  end
+  
+  def create_item_request_canceled_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.item_request_canceled_gifter, EventType.item_request_canceled_requester)
+  end
+  
+  def create_item_request_collected_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.item_request_collected_gifter, EventType.item_request_collected_requester)
+  end
+  
+  def create_item_request_completed_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.item_request_completed_gifter, EventType.item_request_completed_requester)
   end
 end

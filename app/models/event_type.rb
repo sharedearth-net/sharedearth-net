@@ -59,6 +59,96 @@ class EventType < ActiveRecord::Base
     self.id == EventType.new_item_request_requester
   end
   
+  #ACCEPTED REQUESTS
+  
+  def self.item_request_accepted_gifter(return_only_id = true)
+    return_only_id ? 4 : EventType.find(4)
+  end
+  
+  def item_request_accepted_gifter?
+    self.id == EventType.item_request_accepted_gifter
+  end
+  
+  def self.item_request_accepted_requester(return_only_id = true)
+    return_only_id ? 6 : EventType.find(6)
+  end
+
+  def item_request_accepted_requester?
+    self.id == EventType.item_request_accepted_requester
+  end
+
+  #REJECTED REQUESTS
+    
+  def self.item_request_rejected_gifter(return_only_id = true)
+    return_only_id ? 5 : EventType.find(5)
+  end
+  
+  def item_request_rejected_gifter?
+    self.id == EventType.item_request_rejected_gifter
+  end
+  
+  def self.item_request_rejected_requester(return_only_id = true)
+    return_only_id ? 7 : EventType.find(7)
+  end
+
+  def item_request_rejected_requester?
+    self.id == EventType.item_request_rejected_requester
+  end
+  
+  #CANCELED REQUESTS
+  
+  def self.item_request_canceled_gifter(return_only_id = true)
+    return_only_id ? 13 : EventType.find(13)
+  end
+
+  def item_request_canceled_gifter?
+    self.id == EventType.item_request_canceled_gifter
+  end
+  
+  def self.item_request_canceled_requester(return_only_id = true)
+    return_only_id ? 14 : EventType.find(14)
+  end
+
+  def item_request_canceled_requester?
+    self.id == EventType.item_request_canceled_requester
+  end
+  
+  #COLLECTED REQUESTS
+  
+  def self.item_request_collected_gifter(return_only_id = true)
+    return_only_id ? 8 : EventType.find(8)
+  end
+
+  def item_request_collected_gifter?
+    self.id == EventType.item_request_collected_gifter
+  end
+  
+  def self.item_request_collected_requester(return_only_id = true)
+    return_only_id ? 9 : EventType.find(9)
+  end
+
+  def item_request_collected_requester?
+    self.id == EventType.item_request_collected_requester
+  end
+  
+  #COMPLETED REQUESTS
+  
+  def self.item_request_completed_gifter(return_only_id = true)
+    return_only_id ? 10 : EventType.find(8)
+  end
+
+  def item_request_completed_gifter?
+    self.id == EventType.item_request_completed_gifter
+  end
+  
+  def self.item_request_completed_requester(return_only_id = true)
+    return_only_id ? 11 : EventType.find(9)
+  end
+
+  def item_request_collected_requester?
+    self.id == EventType.item_request_completed_requester
+  end
+  
   # continuing with types for news feed
   #   { :id => 18, :name => "SHARING" },
   #   { :id => 19, :name => "ADD ITEM" },
