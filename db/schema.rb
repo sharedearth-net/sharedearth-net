@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110323205943) do
+ActiveRecord::Schema.define(:version => 20110324064045) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer  "event_code"
