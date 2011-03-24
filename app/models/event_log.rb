@@ -1,5 +1,4 @@
 class EventLog < ActiveRecord::Base
-  # t.integer :event_code - code connecting multiple ActivityLogs made for same event (e.g. one for requester, one for gifter)
   # t.integer :primary_id - primary entity (e.g. person) for whom this ActivityLog is made
   # t.string  :primary_type
   # t.string  :primary_short_name
@@ -24,6 +23,29 @@ class EventLog < ActiveRecord::Base
   has_many :event_entities
 
   validates_presence_of :primary_id, :primary_type, :primary_short_name, :primary_full_name
-  validates_presence_of :action_object_id, :action_object_type, :action_object_type_readable
-  validates_presence_of :related_id, :related_type
+  # validates_presence_of :action_object_id, :action_object_type, :action_object_type_readable
+  # validates_presence_of :related_id, :related_type
+
+  # #####
+  # create methods
+  # #####
+  def self.create_trust_established_event_log(first_person, second_person)
+    event_log = EventLog.create!(
+      :primary => first_person,
+      :primary_short_name => first_person.first_name,
+      :primary_full_name => first_person.name,
+      :action_object => nil,
+      :action_object_type_readable => nil,
+      :secondary => second_person,
+      :secondary_short_name => second_person.first_name,
+      :secondary_full_name => second_person.name,
+      :related => nil,
+      :event_type_id => EventType.trust_established
+    )
+    
+    EventEntity.create!(:event_log => event_log, :entity => first_person)
+    EventEntity.create!(:event_log => event_log, :entity => second_person)
+    
+    event_log
+  end
 end

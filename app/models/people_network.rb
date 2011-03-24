@@ -18,5 +18,6 @@ class PeopleNetwork < ActiveRecord::Base
   def self.create_trust!(first_person, second_person)
     PeopleNetwork.create!(:person => first_person, :trusted_person => second_person)
     PeopleNetwork.create!(:person => second_person, :trusted_person => first_person)
+    EventLog.create_trust_established_event_log(first_person, second_person)
   end
 end

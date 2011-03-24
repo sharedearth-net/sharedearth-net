@@ -69,4 +69,12 @@ class EventType < ActiveRecord::Base
   #   { :id => 24, :name => "ITEM DAMAGED" },
   #   { :id => 25, :name => "ITEM REPAIRED" },
   #   { :id => 26, :name => "FB FRIEND JOIN" }
+
+  def self.trust_established(return_only_id = true)
+    return_only_id ? 22 : EventType.find(22)
+  end
+  
+  def trust_established?
+    self.id == EventType.trust_established
+  end
 end

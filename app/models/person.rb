@@ -51,6 +51,30 @@ class Person < ActiveRecord::Base
     name.split.first
   end
 
+  def news_feed
+    # trying to replicate following query using AREL
+    # SELECT
+    # event_log_id, SUM(trusted_relationship_value) as total_relationship_value
+    # FROM
+    # event_entities ee
+    # INNER JOIN
+    #      (SELECT trusted_person_id, 4 as trusted_relationship_value FROM people_networks WHERE person_id = XYZ) network
+    #      ON ee.entity_id = network.trusted_person_id AND ee.entity_type = 'Person'
+    # GROUP BY ee.event_log_id
+    # ORDER BY ee.created_at DESC
+    # LIMIT 25
+  
+    ee = Arel::Table.new(EventEntity.table_name.to_sym)
+    pn = Arel::Table.new(PeopleNetwork.table_name.to_sym)
+
+    pn_network = pn.project(pn[:trusted_person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:person_id].eq(self.id))
+
+    query = ee.project(Arel.sql("#{ee.name}.event_log_id as event_log_id"), Arel.sql("SUM(trusted_relationship_value) as total_relationship_value"))
+    query = query.join(Arel.sql("INNER JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.trusted_person_id AND #{ee.name}.entity_type = 'Person'"))
+    query = query.group(ee[:event_log_id]).order("#{ee.name}.created_at DESC").take(25)
+    event_log_ids = EventEntity.find_by_sql(query.to_sql)
+  end
+
   ###########
   # Trust related methods
   ###########

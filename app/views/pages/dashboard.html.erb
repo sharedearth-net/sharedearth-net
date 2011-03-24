@@ -59,3 +59,22 @@
 </ul>
 
 </div>
+
+<div id="sidebar" class="profile-holder">
+	<div class="sidebar-box-holder">
+		<h2>News feed</h2>
+		<ul>
+			<% @event_logs.each do |event_log| %>
+				<li class="sidebar-box clearfix">
+					<pre>
+					<%= 
+						# render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
+						event_log.to_yaml
+					%>
+					</pre>
+					<br /><br /><br /><br />
+				</li>
+			<% end %>
+		</ul>		
+	</div>
+</div><!-- sidebar -->
