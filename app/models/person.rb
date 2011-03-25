@@ -27,6 +27,37 @@ class Person < ActiveRecord::Base
     self.people_networks.involves_as_trusted_person(other_person).first
   end
   
+  
+  #FIND CURRENT USER AND SHOWN USER MUTUAL FRIENDS COUNT
+  def trusted_network_count(other_person)
+    if self.id == other_person.id
+       return self.people_networks.involves(self).count
+    else
+      trusted_network = 0
+      self.people_networks.involves(self).each do | relationship | 
+         if(self.id != relationship.person_id)
+            trustee = Person.find(relationship.person_id)
+         else
+           trustee = Person.find(relationship.trusted_person_id)
+         end
+         unless trustee.people_networks.involves(other_person).empty? 
+           trusted_network += 1
+         end
+      end
+      
+      #DON'T INCLUDE ME AS MUTUAL FRIEND IF I TRUST THIS PERSON
+      if self.trusts?(other_person)
+         trusted_network -= 1
+      end
+    end
+    
+    trusted_network
+  end
+  
+  def trusts_me_count
+    self.people_networks.involves(self).count
+  end
+  
   def all_item_requests
     ItemRequest.involves(self)
   end

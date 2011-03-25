@@ -67,6 +67,30 @@ describe Person, ".avatar" do
   
 end
 
+describe Person, ".trusted_network_count(other_person)" do
+  
+  it "should return user's number friends of friends" do
+    first_user = mock_model(User)
+    second_user = mock_model(User)
+    first_person = Person.new(:user => first_user)
+    second_person = Person.new(:user => second_user)
+    #TO DO: Finish this test, create more people, and check network count
+  end
+  
+end
+
+describe Person, ".trusts_me_count" do
+  
+  it "should return number of users who trusts current user" do
+    first_user = mock_model(User)
+    second_user = mock_model(User)
+    first_person = Person.new(:user => first_user)
+    second_person = Person.new(:user => second_user)
+    #TO DO: Finish this test, create more people, and check trusts me count
+  end
+  
+end
+
 describe Person, ".request_trusted_relationship" do
   
   it "should create new person network request" do
