@@ -30,14 +30,16 @@
 			<li class="clearfix">
 				<%= image_tag("ic-trusted-profile.png", :class => "icons", :alt => "Trusted Profile")  %>
 				<p>
-					<a href="#">8</a> people from your trusted network
+					<a href="#"><%= current_user.person.trusted_network_count(person) %></a> people from your trusted network
 				</p>
 			</li>
+<!--
 			<li class="clearfix">
 				<%= image_tag("ic-extended-network.png", :class => "icons", :alt => "Extended Network")  %>
 				<p>
-					<a href="#">19</a> people from your extended network
+					<a href="#">0</a> people from your extended network
 				</p>
+
 				<p>
 					<span>
 						<a href="#">
@@ -45,12 +47,13 @@
 						</a>
                           <a href="#">Chileans in Sydney</a> | <a href="#">Australia</a>
 					</span>
-                  </p>
+        </p>
 			</li>
+-->
 			
 			<li class="no-icon clearfix">
 				<p>
-					<a href="#">43</a> people in their trusted network
+					<a href="#"><%= person.trusts_me_count %></a> people in their trusted network
 				</p>
 			</li>
 		</ul>
