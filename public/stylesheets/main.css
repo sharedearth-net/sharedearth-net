@@ -836,6 +836,37 @@ a:hover {
 									font-size: 14px;
 									font-family: verdana, arial, sans-serif;
 									padding-left: 0;
+									float: left;
+									width: 40%;
+								}
+								
+								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link {
+									float: right;
+									text-align: right;
+								}
+								
+								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link a:link,
+								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link a:visited {
+									color: #127e0e;
+								}
+								
+								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link a:hover {
+
+								}
+								
+								#sidebar .sidebar-box-holder .sidebar-box-profile h3 {
+									font-size: 11px;
+									font-family: verdana, arial, sans-serif;
+									padding-left: 0;
+									color: #315859;
+									font-weight: bold;
+									margin-top: 5px;
+								}
+								
+								
+								.devider {
+									display: block;
+									margin-top: 10px;
 								}
 								
 								
@@ -885,6 +916,67 @@ a:hover {
 											width: 40px;
 											margin-right: 14px;
 										}
+										
+										/* trust box action */
+										
+										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li a:link,
+										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li a:visited {
+											color: #62775A;
+										    font-weight: normal;
+										}
+										
+										
+										a.giftactions:link,
+										a.giftactions:visited {
+											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+											background: url('../images/ic-giftactions.png') no-repeat top left;
+										    padding: 5px 0 0 21px;
+											margin: 0 0 0 2px;
+											color: #62775a;
+											font-weight: normal;
+											font-size: 11px;
+										}
+
+ 										.sidebar-box-profile a.people-helped:link,
+										.sidebar-box-profile a.people-helped:visited {
+											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+											background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
+											padding: 5px 0 0 23px;
+											color: #62775a;
+											font-weight: normal;
+											font-size: 11px;
+
+										}
+
+										a.feedback-rating:link,
+										a.feedback-rating:visited {
+											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+											background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
+											padding: 6px 0 3px 22px;
+											color: #62775a;
+											font-weight: normal;
+											font-size: 11px;
+
+										}
+										
+										ul.action-list {
+											clear: both;
+											margin-top: 5px;
+										}
+
+										ul.action-list li {
+											display: block;
+											float: left;
+											margin-right: 17px;
+											font-size: 11px;
+											color: #62775a;
+										}
+
+											ul.action-list li a:link,
+											ul.action-list li a:visited {
+												color: #62775a;
+												font-weight: normal;
+											}
 										
 										
 							#sidebar.profile-holder h2 {
@@ -945,7 +1037,11 @@ a:hover {
 .clearer {
 	clear: both;
 }
-							
+
+.pic-medium {
+	max-width: 100px;
+	margin: 0 auto;
+}			
 							
 							
 							

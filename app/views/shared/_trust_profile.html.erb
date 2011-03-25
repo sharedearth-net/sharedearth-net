@@ -1,18 +1,44 @@
 <div class="sidebar-box-holder">
 	<%= image_tag("curve-top-sidebar-box.png")  %>		
 	<div class="sidebar-box-profile">
+		
+		<div class="clearfix">
 		<h2>
 			<%= person.first_name.possessive %> Trust Profile
+		</h2>
 			<% if person != current_user.person %>
 				<% if person.requested_trusted_relationship?(current_user.person) %>
+				<h2 class="rhs-link">
 					<%= link_to "cancel request", people_network_request_path(person.requested_trusted_relationship(current_user.person)), :method => :delete %>
+				</h2>
 				<% elsif people_network = current_user.person.trusts?(person) %>
+				<h2 class="rhs-link">
 					<%= link_to "withdraw trust", people_network_path(people_network), :method => :delete %>
+				</h2>
 				<% else %>
+				<h2 class="rhs-link">
 					<%= link_to "establish trust", people_network_requests_path(:trusted_person_id => person), :method => :post %>
+				</h2>
 				<% end %>
 			<% end %>
 		</h2>
+		</div>
+		
+		<%= image_tag("devider-trust-profile.png", :class => "devider clearer", :alt => "")  %>
+		<h3>Reputation</h3>
+		<ul class="action-list clearfix">
+			<li>
+				<%= link_to "7 gift actions", "#", :class => "giftactions", :title => "Gift Actions" %>
+			</li>
+			<li>
+				<%= link_to "4 different people", "#", :class => "people-helped", :title => "People Helped" %>
+			</li>
+			<li>
+				<%= link_to "100% positive feedback", "#", :class => "feedback-rating", :title => "People Helped" %>
+			</li>
+		</ul>
+		<%= image_tag("devider-trust-profile.png", :class => "devider", :alt => "")  %>
+		<h3>Trust Profile</h3>
 		<ul>
 			<li class="clearfix">
 				<% if current_user.person.trusts?(person) %>
