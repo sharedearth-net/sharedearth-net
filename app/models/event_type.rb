@@ -174,7 +174,7 @@ class EventType < ActiveRecord::Base
     return_only_id ? 21 : EventType.find(21)
   end
 
-  def item_request_completed_gifter?
+  def item_gifted?
     self.id == EventType.item_gifted
   end
 end
