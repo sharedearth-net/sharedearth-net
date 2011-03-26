@@ -102,7 +102,7 @@ class Person < ActiveRecord::Base
 
     query = ee.project(Arel.sql("#{ee.name}.event_log_id as event_log_id"), Arel.sql("SUM(trusted_relationship_value) as total_relationship_value"))
     query = query.join(Arel.sql("INNER JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.trusted_person_id AND #{ee.name}.entity_type = 'Person'"))
-    query = query.group(ee[:event_log_id]).order("#{ee.name}.created_at DESC").take(25)
+    query = query.group(ee[:event_log_id], ee[:created_at]).order("#{ee.name}.created_at DESC").take(25)
     event_log_ids = EventEntity.find_by_sql(query.to_sql)
   end
 
