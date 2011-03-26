@@ -4,6 +4,14 @@ class Item < ActiveRecord::Base
   STATUS_NORMAL  = 10.freeze
   STATUS_LOST    = 20.freeze
   STATUS_DAMAGED = 30.freeze
+  
+  PURPOSE_SHARE = 10.freeze
+  PURPOSE_GIFT  = 20.freeze
+  
+  PURPOSES = {
+    PURPOSE_SHARE => 'share',
+    PURPOSE_GIFT  => 'gift'
+  }
 
   STATUSES = {
     STATUS_NORMAL     => 'normal',
@@ -61,6 +69,15 @@ class Item < ActiveRecord::Base
     self.owner == entity
   end
   
+  def transfer_ownership_to(entity)
+    self.owner = entity
+    save!
+  end
+  
+  def purpose?
+    PURPOSES[self.purpose]
+  end
+  
   def deleted?
     !deleted_at.nil?
   end
@@ -113,4 +130,26 @@ class Item < ActiveRecord::Base
   def can_be_requested?
     REQUESTABLE_STATUSES.include? self.status
   end
+  
+  # #######
+  # Purpose related methods
+  # #######
+  def share?
+    self.purpose == PURPOSE_SHARE
+  end
+    
+  def gift?
+    self.purpose == PURPOSE_GIFT
+  end
+    
+  def share!
+    self.purpose = PURPOSE_SHARE
+    save!
+  end
+  
+  def gift!
+    self.purpose = PURPOSE_GIFT
+    save!
+  end
+  
 end
