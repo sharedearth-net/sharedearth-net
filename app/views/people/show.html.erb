@@ -71,8 +71,8 @@
 									<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
 									<div>
 										<p>
-											gift&nbsp;&nbsp;|&nbsp;
-											<%= link_to "2 person dome tent", "#" %>&nbsp;&nbsp;|&nbsp;
+											<%= item.purpose? %>&nbsp;&nbsp;|&nbsp;											
+											<%= link_to item.item_type, "#" %>&nbsp;&nbsp;|&nbsp;
 											<%= link_to item.name, item_path(item), :class => "positive" %>
 											<!-- basti-question: what's this? -->
 											

@@ -43,6 +43,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(params[:item])
     @item.owner = current_user.person
+    @item.status = Items::STATUS_NORMAL
 
     respond_to do |format|
       if @item.save
