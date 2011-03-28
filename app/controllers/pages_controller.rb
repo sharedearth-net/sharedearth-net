@@ -10,7 +10,7 @@ class PagesController < ApplicationController
     @requests = @active_item_requests + @people_network_requests
     @requests.sort! { |a,b| b.created_at <=> a.created_at }
     
-    @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC")
+    @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30)
     @event_logs = current_user.person.news_feed
   end
 end
