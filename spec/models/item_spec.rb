@@ -24,6 +24,14 @@ describe Item do
     item.is_owner?(person).should be_true
   end
   
+  it "should transfer ownership to new owner" do
+    #TO DO check if ownership is transfered
+  end
+  
+  it "should check type of the item" do
+    #TO DO check purpose of the item - for sharing or gifting
+  end
+  
   it "should verify owner (negative case)" do
     not_owner = mock_model(Person)
     item = Item.new(:owner => person)

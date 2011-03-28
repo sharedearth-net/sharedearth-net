@@ -134,7 +134,7 @@ class EventType < ActiveRecord::Base
   #COMPLETED REQUESTS
   
   def self.item_request_completed_gifter(return_only_id = true)
-    return_only_id ? 10 : EventType.find(8)
+    return_only_id ? 10 : EventType.find(10)
   end
 
   def item_request_completed_gifter?
@@ -142,7 +142,7 @@ class EventType < ActiveRecord::Base
   end
   
   def self.item_request_completed_requester(return_only_id = true)
-    return_only_id ? 11 : EventType.find(9)
+    return_only_id ? 11 : EventType.find(11)
   end
 
   def item_request_collected_requester?
@@ -166,5 +166,15 @@ class EventType < ActiveRecord::Base
   
   def trust_established?
     self.id == EventType.trust_established
+  end
+  
+  #COMPLETED GIFTING
+  
+  def self.item_gifted(return_only_id = true)
+    return_only_id ? 21 : EventType.find(21)
+  end
+
+  def item_gifted?
+    self.id == EventType.item_gifted
   end
 end

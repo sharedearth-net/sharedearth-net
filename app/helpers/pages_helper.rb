@@ -7,44 +7,43 @@ module PagesHelper
     requester           = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
     requester_possesive = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "positive"
-    event_type          = EventType.find(activity_log.event_type_id).name
     
     sentance = ""
-    case event_type
-    when EventType.find(1).name
-      sentance = " You started sharing your " + item
-    when EventType.find(2).name
-      sentance = requester + " requested your " + item
-    when EventType.find(3).name
-      sentance =  "You requested " + gifter_possesive +  " " +  item
-    when EventType.find(4).name
-      sentance = "You accepted " + requester_possesive + " request to share your " +  item
-    when EventType.find(5).name
-      sentance = "You rejected " + requester_possesive + " request to share your " +  item
-    when EventType.find(6).name
-      sentance = gifter + " accepted your request to share their " + item + " with you"
-    when EventType.find(7).name
-      sentance = gifter + " rejected your request to share their " + item
-    when EventType.find(8).name
+    case activity_log.event_type_id
+    when 1
+      sentance = " You are now sharing your " + item
+    when 2
+      sentance = requester + " made a request to borrow your " + item
+    when 3
+      sentance =  "You made a request to borrow " + gifter_possesive +  " " +  item
+    when 4
+      sentance = "You accepted " + requester_possesive + " request to borrow your " +  item
+    when 5
+      sentance = "You rejected " + requester_possesive + " request to borrow your " +  item
+    when 6
+      sentance = gifter + " accepted your request to borrow their " + item
+    when 7
+      sentance = gifter + " rejected your request to borrow their " + item
+    when 8
       sentance = requester + " collected your " + item
-    when EventType.find(9).name
+    when 9
       sentance =  "You collected " + gifter_possesive + " " +  item
-    when EventType.find(10).name
-      sentance =  requester + " completed the action sharing your " + item
-    when EventType.find(11).name
-      sentance =  "You completed the action sharing " + gifter_possesive + " " + item
-    when EventType.find(12).name
-      sentance =  "You completed the action sharing your " + item + " with " + requester
-    when EventType.find(13).name
+    when 10
+      sentance =  requester + " completed the action borrowing your " + item
+    when 11
+      sentance =  "You completed the action of borrowing " + gifter_possesive + " " + item
+    when 12
+      sentance =  "You completed the action of sharing your " + item + " with " + requester
+    when 13
       sentance =  gifter + " completed the action sharing their " + item + " with you "
-    when EventType.find(14).name
+    when 14
       sentance =  "You canceled the action sharing your " +  item + " with " + requester
-    when EventType.find(15).name
+    when 15
       sentance =  gifter + " canceled the action sharing their " + item + " with you "
-    when EventType.find(16).name
-      sentance =  requester + " canceled the request for your " + item
-    when EventType.find(17).name
-      sentance =  "You canceled the request for your " + gifter_possesive + " " + item
+    when 16
+      sentance =  requester + " canceled the request to borrow your " + item
+    when 17
+      sentance =  "You canceled the request to borrow " + gifter_possesive + " " + item
     else
       #
     end
