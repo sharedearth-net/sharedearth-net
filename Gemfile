@@ -42,4 +42,5 @@ group :development, :test do
 	gem "autotest"
 	gem "webrat"
 	gem "rcov"
+	gem 'factory_girl_rails'
 end
