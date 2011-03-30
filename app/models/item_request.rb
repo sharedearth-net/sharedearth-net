@@ -56,31 +56,51 @@ class ItemRequest < ActiveRecord::Base
   def accept!
     self.status = STATUS_ACCEPTED
     save!
-    create_item_request_accepted_activity_log
+    if self.item.purpose == Item::PURPOSE_SHARE
+      create_item_request_accepted_activity_log
+    else
+      create_gift_request_accepted_activity_log
+    end
   end
 
   def reject!
     self.status = STATUS_REJECTED
     save!
-    create_item_request_rejected_activity_log
+    if self.item.purpose == Item::PURPOSE_SHARE
+      create_item_request_rejected_activity_log
+    else
+      create_gift_request_rejected_activity_log
+    end
   end
 
-  def cancel!
+  def cancel!(current_user_initiator)
+    #TO DO There is better solution for this
+    @current_user_initiator = current_user_initiator   
     self.status = STATUS_CANCELED
     save!
-    create_item_request_canceled_activity_log
+    if self.item.purpose == Item::PURPOSE_SHARE
+      create_item_request_canceled_activity_log
+    else
+      create_gift_request_canceled_activity_log
+    end    
   end
 
-  def collected!
-    self.status = STATUS_COLLECTED
-    save!
-    create_item_request_collected_activity_log
+  def collected!(current_user_initiator)
+    #TO DO There is better solution for this
+    @current_user_initiator = current_user_initiator 
+    item_type_based_status
   end
 
-  def complete!
+  def complete!(current_user_initiator)
+    #TO DO There is better solution for this
+    @current_user_initiator = current_user_initiator 
     self.status = STATUS_COMPLETED
     save!
-    create_item_request_completed_activity_log
+    if self.item.purpose == Item::PURPOSE_SHARE
+      create_item_request_completed_activity_log
+    else
+      create_gift_request_completed_activity_log
+    end 
   end
 
   def requested?
@@ -108,6 +128,25 @@ class ItemRequest < ActiveRecord::Base
   end
 
   private
+  
+  def item_type_based_status
+    if self.item.purpose != Item::PURPOSE_GIFT 
+      self.status = STATUS_COLLECTED
+      create_item_request_collected_activity_log
+    else
+      self.status = STATUS_COMPLETED
+      change_ownership
+      create_gift_request_completed_activity_log
+    end
+    save!
+  end
+  
+  def change_ownership
+    self.item.owner_id = self.requester_id
+    self.item.owner_type = self.requester_type
+    self.item.save!  
+  end
+  
   def create_new_item_request_activity_log
     ActivityLog.create_new_item_request_activity_log(self)
   end
@@ -121,7 +160,11 @@ class ItemRequest < ActiveRecord::Base
   end
   
   def create_item_request_canceled_activity_log
-    ActivityLog.create_item_request_activity_log(self, EventType.item_request_canceled_gifter, EventType.item_request_canceled_requester)
+    if self.requester_id == @current_user_initiator.id
+      ActivityLog.create_item_request_activity_log(self, EventType.item_request_canceled_gifter, EventType.item_request_canceled_requester)
+    else
+      ActivityLog.create_item_request_activity_log(self, EventType.tem_gifter_canceled_gifter, EventType.item_gifter_canceled_requester)
+    end
   end
   
   def create_item_request_collected_activity_log
@@ -129,6 +172,36 @@ class ItemRequest < ActiveRecord::Base
   end
   
   def create_item_request_completed_activity_log
-    ActivityLog.create_item_request_activity_log(self, EventType.item_request_completed_gifter, EventType.item_request_completed_requester)
+    if self.requester_id == @current_user_initiator.id
+      ActivityLog.create_item_request_activity_log(self, EventType.item_request_completed_gifter, EventType.item_request_completed_requester)
+    else
+      ActivityLog.create_item_request_activity_log(self, EventType.item_gifter_completed_gifter, EventType.item_gifter_completed_requester)
+    end
+  end
+  
+  #GIFT ITEMS RELATED ACTIVITY LOG
+  
+  def create_gift_request_accepted_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.gift_accepted_gifter, EventType.gift_accepted_requester)
+  end
+  
+  def create_gift_request_rejected_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.gift_rejected_gifter, EventType.gift_rejected_requester)
+  end
+  
+  def create_gift_request_canceled_activity_log
+    if self.requester_id == @current_user_initiator.id
+      ActivityLog.create_item_request_activity_log(self, EventType.gift_requester_canceled_gifter, EventType.gift_requester_canceled_requester)
+    else
+      ActivityLog.create_item_request_activity_log(self, EventType.gift_gifter_canceled_gifter, EventType.gift_gifter_canceled_requester)
+    end
+  end
+    
+  def create_gift_request_completed_activity_log
+    if self.requester_id == @current_user_initiator.id
+      ActivityLog.create_item_request_activity_log(self, EventType.gift_requester_completed_gifter, EventType.gift_requester_completed_requester)
+    else
+      ActivityLog.create_item_request_activity_log(self, EventType.gift_gifter_completed_gifter, EventType.gift_requester_completed_requester)
+    end
   end
 end
