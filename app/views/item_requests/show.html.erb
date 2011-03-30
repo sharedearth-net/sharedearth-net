@@ -50,9 +50,11 @@
 								<li>
 									<%= link_to "Collected", collected_request_path(@item_request), :id => "collected_button", :method => :put, :class => "positive" %>
 								</li>
+								<% if  @item_request.item.purpose != Item::PURPOSE_GIFT %>
 								<li>
 									<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive" %>
 								</li>
+								<% end %>
 							<% end %>
 
 						<% elsif @item_request.status == ItemRequest::STATUS_COLLECTED %>
