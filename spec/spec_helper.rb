@@ -3,10 +3,18 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require "paperclip/matchers"
+require 'factory_girl'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+#Load all factories and report if there is duplicate definition
+begin
+  Dir[('factories/*.rb')].each {|f| require f } 
+rescue Factory::DuplicateDefinitionError
+  nil
+end
 
 RSpec.configure do |config|
   # == Mock Framework
