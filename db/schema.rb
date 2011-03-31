@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110324064045) do
+ActiveRecord::Schema.define(:version => 20110326121036) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer  "event_code"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20110324064045) do
     t.datetime "photo_updated_at"
     t.datetime "deleted_at"
     t.integer  "status"
+    t.integer  "purpose"
   end
 
   create_table "people", :force => true do |t|
