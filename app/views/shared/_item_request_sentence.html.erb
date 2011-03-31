@@ -1,25 +1,25 @@
 <% if req.requested? %>
 	<% if req.requester?(current_user.person) %>
-			<%= link_to_person(req.requester) %>
+			<%= link_to_person(req.requester, {:class => "positive" }) %>
 			have requested
 			<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-			<%= link_to req.item.item_type, item_path(req.item) %>
+			<%= link_to req.item.item_type, item_path(req.item), :class => "positive" %>
 	<% else %>
-		<%= link_to_person(req.requester) %>
+		<%= link_to_person(req.requester, {:class => "positive" }) %>
 		has requested
 		<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		<%= link_to req.item.item_type, item_path(req.item) %>
+		<%= link_to req.item.item_type, item_path(req.item), :class => "positive" %>
 	<% end %>
 <% elsif req.accepted? || req.collected? %>
 	<% if req.requester?(current_user.person) %>
-		<%= link_to_person(req.requester) %>
+		<%= link_to_person(req.requester, {:class => "positive" }) %>
 		are sharing
 		<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		<%= link_to req.item.item_type, item_path(req.item) %>
+		<%= link_to req.item.item_type, item_path(req.item), :class => "positive" %>
 	<% else %>
-		<%= link_to_person(req.requester) %>
+		<%= link_to_person(req.requester, {:class => "positive" }) %>
 		is sharing
 		<%= link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		<%= link_to req.item.item_type, item_path(req.item) %>
+		<%= link_to req.item.item_type, item_path(req.item), :class => "positive" %>
 	<% end %>
 <% end %>

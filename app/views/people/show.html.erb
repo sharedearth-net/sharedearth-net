@@ -118,9 +118,11 @@
 										<ul class="clearfix">
 											<li>
 												<p>
+												  <!--
 													<%= link_to_person(req.requester, :class => "capitalize") %>
 													requested <%= link_to req.item.name, item_path(req.item) %>
 													from <%= link_to_person(req.gifter, :downcase_you => true, :class => "capitalize positive") %>
+													-->
 													<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
 												</p>
 											</li>
