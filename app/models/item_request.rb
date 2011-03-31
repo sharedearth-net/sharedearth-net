@@ -136,6 +136,7 @@ class ItemRequest < ActiveRecord::Base
     else
       self.status = STATUS_COMPLETED
       change_ownership
+      #self.item.transfer_ownership_to(self.requester_id)
       create_gift_request_completed_activity_log
     end
     save!
@@ -163,7 +164,7 @@ class ItemRequest < ActiveRecord::Base
     if self.requester_id == @current_user_initiator.id
       ActivityLog.create_item_request_activity_log(self, EventType.item_request_canceled_gifter, EventType.item_request_canceled_requester)
     else
-      ActivityLog.create_item_request_activity_log(self, EventType.tem_gifter_canceled_gifter, EventType.item_gifter_canceled_requester)
+      ActivityLog.create_item_request_activity_log(self, EventType.item_gifter_canceled_gifter, EventType.item_gifter_canceled_requester)
     end
   end
   
