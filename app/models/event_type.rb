@@ -97,20 +97,36 @@ class EventType < ActiveRecord::Base
   
   #CANCELED REQUESTS
   
-  def self.item_request_canceled_gifter(return_only_id = true)
-    return_only_id ? 13 : EventType.find(13)
-  end
-
-  def item_request_canceled_gifter?
-    self.id == EventType.item_request_canceled_gifter
-  end
-  
-  def self.item_request_canceled_requester(return_only_id = true)
+  def self.item_gifter_canceled_gifter(return_only_id = true)
     return_only_id ? 14 : EventType.find(14)
   end
 
-  def item_request_canceled_requester?
-    self.id == EventType.item_request_canceled_requester
+  def item_gifter_canceled_gifter?
+    self.id == EventType.item_request_canceled_gifter
+  end
+  
+  def self.item_gifter_canceled_requester(return_only_id = true)
+    return_only_id ? 15 : EventType.find(15)
+  end
+
+  def item_gifter_canceled_requester?
+    self.id == EventType.item_gifter_canceled_requester
+  end
+  
+  def self.item_requester_canceled_gifter(return_only_id = true)
+    return_only_id ? 16 : EventType.find(16)
+  end
+
+  def item_requester_canceled_gifter?
+    self.id == EventType.item_requester_canceled_gifter
+  end
+  
+  def self.item_requester_canceled_requester(return_only_id = true)
+    return_only_id ? 17 : EventType.find(17)
+  end
+
+  def item_requester_canceled_requester?
+    self.id == EventType.item_requester_canceled_requester
   end
   
   #COLLECTED REQUESTS
