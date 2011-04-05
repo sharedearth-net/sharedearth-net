@@ -1,4 +1,4 @@
-<div id="content">
+<div id="content" class="dashboard">
 	<% unless @requests.count.zero? %>
 		<div class="content-box-holder">
 			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
@@ -48,15 +48,41 @@
 		</div>
 		<!-- /.content-box-holder  -->
 	<% end %>
+	
+	
+	<div class="content-box-holder">
+		<%= image_tag("curve-top-content-box.png", :alt => "")  %>
+		
+		<ul>
+			<li class="content-box clearfix">
+				<h2>Recent Activity</h2>
+			</li>
+			
+			<% @recent_activity_logs.each do |activity_log| %>
 
-<h2>Recent Activity</h2>
-<ul>
-	<% @recent_activity_logs.each do |activity_log| %>
-		<li class="sidebar-box clearfix">
-			<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
-		</li>
-	<% end %>
-</ul>
+				<li class="content-box clearfix">
+					
+					<!-- Nebojsa-todo - thumb image is static  -->
+					<img alt="?type=square" class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" />
+					
+					<div class="inner-content">
+						<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
+					</div>
+				</li>
+			<% end %>
+			
+			
+			<!-- Nebojsa-todo - button-more is static  -->
+			<li class="content-box clearfix">
+				<a href="#" class="button-more">
+					more
+				</a>
+			</li>
+		</ul>
+		<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
+	</div>
+	<!-- /.content-box-holder  -->
+	
 
 </div>
 

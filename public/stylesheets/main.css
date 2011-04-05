@@ -724,7 +724,20 @@ a:hover {
 						.content-box ul.action-buttons-list li a.positive:link,
 						.content-box ul.action-buttons-list li a.positive:visited {
 							color: #127e0e;
-						}						
+						}	
+						
+						
+			/* item-request */
+			
+			#content.item-request .no-bg .inner-content {
+				width: 300px;
+			}
+			
+			
+			#content.item-request .no-bg h2 span {
+				font-size: 16px;
+				color: #315859;
+			}
 							
 			/* item list*/				
 
@@ -843,6 +856,7 @@ a:hover {
 								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link {
 									float: right;
 									text-align: right;
+									font-size: 12px;
 								}
 								
 								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link a:link,
@@ -894,6 +908,7 @@ a:hover {
 											font-size: 12px;
 											font-family: verdana;
 											padding-top: 11px;
+											color: #62775a;
 										}
 										
 											#sidebar .sidebar-box-holder .sidebar-box-profile ul li p span {
@@ -1004,6 +1019,7 @@ a:hover {
 			
 				ul.form-holder li {
 					display: block;
+					margin: 3px 0;
 				}
 				
 					ul.form-holder li label {
@@ -1021,6 +1037,18 @@ a:hover {
 					    width: 393px;
 					}
 					
+					ul.form-holder li textarea {
+						border: 1px solid #8E948E;
+					    color: #999999;
+					    font-size: 13px;
+					    height: 115px;
+					    overflow: auto;
+					    padding: 2px 0 0 4px;
+					    width: 393px;
+					}
+					
+					
+					
 					ul.form-holder li input[type="submit"] {
 						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
 						padding: 0 7px;
@@ -1031,6 +1059,52 @@ a:hover {
 						text-transform: capitalize;
 						cursor: pointer;
 					}
+					
+					ul.form-holder li input[type="file"] {
+						margin-bottom: 10px;
+					}
+					
+					
+					
+					
+					
+					/* edit item */
+					
+					
+					.item-edit ul.action-buttons-list {
+						margin-left: 0px;
+					}
+
+						.item-edit ul.action-buttons-list li {
+							display: block;
+							float: left;
+							text-align: center;
+							font-size: 13px;
+							margin-right: 13px;
+						}
+
+
+
+							.item-edit ul.action-buttons-list li a:link,
+							.item-edit ul.action-buttons-list li a:visited {
+								background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+								padding: 0 7px;
+								color: #234d4d;
+								display: block;
+								border: 1px solid #aab1a9;
+								line-height: 15px;
+								height: 18px;
+								text-transform: capitalize;
+							}
+
+							.item-edit ul.action-buttons-list li a:hover {
+								text-decoration: none;
+							}
+
+							.item-edit ul.action-buttons-list li a.positive:link,
+							.item-edit ul.action-buttons-list li a.positive:visited {
+								color: #127e0e;
+							}
 							
 /* misc */
 
@@ -1040,7 +1114,7 @@ a:hover {
 
 .pic-medium {
 	max-width: 100px;
-	margin: 0 auto;
+	margin: 10px auto 15px auto;
 }			
 							
 							

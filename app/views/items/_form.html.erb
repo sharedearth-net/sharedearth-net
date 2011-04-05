@@ -1,23 +1,40 @@
 <%= form_for(@item, :html => { :multipart => true }) do |f| %>
 	<%= render :partial => "shared/error_messages", :locals => { :model => @item } %>
 
+
+
   <div class="field">
-    <%= f.label :item_type %><br />
-    <%= f.text_field :item_type %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    Purpose: 
-    <%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => true %> Share
-    <%= f.radio_button :purpose, Item::PURPOSE_GIFT %> Gift
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
+	<ul class="form-holder">
+    	<li>
+			<%= f.label :item_type %>
+		</li>
+		<li>
+    		<%= f.text_field :item_type %>
+		</li>
+
+
+    	<li>
+    		<%= f.label :name %>
+		</li>
+		<li>
+    		<%= f.text_field :name %>
+		</li>
+
+		<li>
+    		<%= f.label :Purpose %>
+		</li>
+		<li>
+    		<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => true %> <%= f.label :Share %>
+    		<%= f.radio_button :purpose, Item::PURPOSE_GIFT %> <%= f.label :Gift %>
+		</li>
+
+    	<li>
+    		<%= f.label :description %>
+		</li>
+		<li>
+    		<%= f.text_area :description %>
+		</li>
+ 
   <!-- <div class="field">
     <%= f.label :owner_id %><br />
     <%= f.text_field :owner_id %>
@@ -27,16 +44,22 @@
     <%= f.text_field :owner_type %>
   </div> -->
 	<% if @item.photo? %>
-	  <div class="field">
-	    <%= f.label :current_photo %><br />
-	    <%= image_tag @item.photo.url(:small) %>
-	  </div>
+	  
+		<li>
+   			<%= f.label :current_photo %>
+		</li>
+		<li>
+	   		<%= image_tag @item.photo.url(:small) %>
+		</li>
+	
 	<% end %>
-  <div class="field">
-    <%= f.label :photo %><br />
-    <%= f.file_field :photo %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+		<li>
+    		<%= f.label :photo %>
+    		<%= f.file_field :photo %>
+		</li>
+		<li>
+			<%= f.submit %>
+		</li>
 <% end %>
+	</ul>
+</div>

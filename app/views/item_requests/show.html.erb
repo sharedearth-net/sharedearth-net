@@ -1,27 +1,29 @@
-<div id="content">
+<div id="content" class="item-request">
 		
 	<div class="content-box-holder no-bg">
 		<ul>
 			<li class="content-box clearfix">
-				<%= image_tag item_request_photo(@item_request), :class => "thumb" %>
+				
+				<!--  Nebojsa-todo - requestor image is static	-->
+				
+				<%= image_tag "http://profile.ak.fbcdn.net/hprofile-ak-snc4/41494_806048396_6664_n.jpg", :class => "thumb" %>
+				
+				
+				
 				<div class="inner-content">
 					
 					<h2>
 						<%= @item_request.requester.name %>
+						
+						<span>
+							would like to borrow a <strong><%= @item_request.item.name %></strong> from you
+						</span>
 					</h2>
 
-					<p>
-						Would like to borrow a <strong><%= @item_request.item.name %></strong> from <%= @item_request.gifter.name %>
-					</p>
-
-					<% if @item_request.description %>
-						<p><%= @item_request.description %></p>
-					<% end %>
-
-					<p>Status: <%= @item_request.status_name %></p>
 				
-				
-					<ul class="action-buttons-list">
+					<%= image_tag item_request_photo(@item_request), :class => "pic-medium" %>
+					
+					<ul class="action-buttons-list clearfix">
 				
 						<% if @item_request.status == ItemRequest::STATUS_REQUESTED %>
 
@@ -67,6 +69,12 @@
 
 						<% end %>
 					</ul>
+				
+					<% if @item_request.description %>
+						<p><%= @item_request.description %></p>
+					<% end %>
+
+					<p>Status: <%= @item_request.status_name %></p>
 				
 				</div>
 			</li>

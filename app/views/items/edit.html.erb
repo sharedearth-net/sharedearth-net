@@ -1,6 +1,13 @@
-<h1>Editing item</h1>
+<div class="item-edit">
+	<h1>Editing item</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @item %> |
-<%= link_to 'Back', items_path %>
+	<%= render 'form' %>
+	<ul class="action-buttons-list">
+		<li>
+			<%= link_to 'Show', @item, :class => "positive" %>
+		</li>
+		<li>
+			<%= link_to 'Back', items_path %>
+		</li>
+	</ul>
+</div>
