@@ -47,6 +47,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
+        @item.create_new_item_event_log
         format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
@@ -93,7 +94,7 @@ class ItemsController < ApplicationController
 
   def mark_as_damaged
     @item.damaged!
-    redirect_to(item_path(@item), :notice => I18n.t('messages.items.marked_as_lost'))
+    redirect_to(item_path(@item), :notice => I18n.t('messages.items.marked_as_damaged'))
   end
 
   private
