@@ -26,8 +26,8 @@ class Person < ActiveRecord::Base
   def trusts?(other_person)
     self.people_networks.involves_as_trusted_person(other_person).first
   end
-  
-  
+
+
   #FIND CURRENT USER AND SHOWN USER MUTUAL FRIENDS COUNT
   def trusted_network_count(other_person)
     if self.id == other_person.id
@@ -104,6 +104,15 @@ class Person < ActiveRecord::Base
     query = query.join(Arel.sql("INNER JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.trusted_person_id AND #{ee.name}.entity_type = 'Person'"))
     query = query.group(ee[:event_log_id], ee[:created_at]).order("#{ee.name}.created_at DESC").take(25)
     event_log_ids = EventEntity.find_by_sql(query.to_sql)
+    
+    people_network = PeopleNetwork.find_all_by_person_id(self.id)
+    event_log_ids = EventEntity.find_all_by_entity_id(self.id)
+    people_network.each do |pn|
+      event_log_ids += EventEntity.involves(pn.trusted_person)
+    end
+    
+    event_log_ids
+    
   end
 
   ###########
