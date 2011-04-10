@@ -43,4 +43,5 @@ group :development, :test do
 	gem "webrat"
 	gem "rcov"
 	gem 'factory_girl_rails'
+	gem "ruby-debug"
 end
