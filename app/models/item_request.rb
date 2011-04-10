@@ -133,11 +133,12 @@ class ItemRequest < ActiveRecord::Base
     if self.item.purpose != Item::PURPOSE_GIFT 
       self.status = STATUS_COLLECTED
       create_item_request_collected_activity_log
+      create_sharing_event_log
   else
       self.status = STATUS_COMPLETED
       change_ownership
-      #self.item.transfer_ownership_to(self.requester_id)
       create_gift_request_completed_activity_log
+      create_gifting_event_log
     end
     save!
   end
@@ -146,6 +147,14 @@ class ItemRequest < ActiveRecord::Base
     self.item.owner_id = self.requester_id
     self.item.owner_type = self.requester_type
     self.item.save!  
+  end
+  
+  def create_sharing_event_log
+    EventLog.create_news_event_log(self.requester, self.gifter,  self.item , EventType.sharing)
+  end
+  
+  def create_gifting_event_log
+    EventLog.create_news_event_log(self.requester, self.gifter,  self.item , EventType.gifting)
   end
   
   def create_new_item_request_activity_log
