@@ -61,9 +61,7 @@
 			<% @recent_activity_logs.each do |activity_log| %>
 
 				<li class="content-box clearfix">
-					
-					<!-- Nebojsa-todo - thumb image is static  -->
-					<img alt="?type=square" class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" />
+					<%= image_tag activity_log.secondary.avatar(:square), :class => "thumb" %>
 					
 					<div class="inner-content">
 						<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
