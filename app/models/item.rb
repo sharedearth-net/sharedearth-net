@@ -64,7 +64,7 @@ class Item < ActiveRecord::Base
   scope :only_lost, :conditions => { :status => STATUS_LOST }
   scope :only_damaged, :conditions => { :status => STATUS_DAMAGED }
   scope :visible_to_other_users, where("status IN (#{STATUSES_VISIBLE_TO_OTHER_USERS.join(",")})")
-  
+
   def is_owner?(entity)
     self.owner == entity
   end
@@ -111,19 +111,21 @@ class Item < ActiveRecord::Base
   def damaged?
     self.status == STATUS_DAMAGED
   end
+  
+  def damaged!
+    self.status = STATUS_DAMAGED
+    save!
+    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_damaged)
+  end
 
   def normal!
     self.status = STATUS_NORMAL
     save!
+    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_repaired)
   end
 
   def lost!
     self.status = STATUS_LOST
-    save!
-  end
-
-  def damaged!
-    self.status = STATUS_DAMAGED
     save!
   end
   
@@ -150,6 +152,10 @@ class Item < ActiveRecord::Base
   def gift!
     self.purpose = PURPOSE_GIFT
     save!
+  end
+  
+  def create_new_item_event_log
+    EventLog.create_news_event_log(self.owner, nil,  self , EventType.add_item)
   end
   
 end
