@@ -374,7 +374,8 @@ class EventType < ActiveRecord::Base
   
   
   
-  
+
+=begin
   
   def self.new_gift_item_request_gifter(return_only_id = true)
     return_only_id ? 39 : EventType.find(39)
@@ -551,7 +552,7 @@ class EventType < ActiveRecord::Base
   def neutral_feedback_requester?
     self.id == EventType.neutral_feedback_requester
   end
-
+=end
   
   
 end
