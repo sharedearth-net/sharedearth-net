@@ -26,57 +26,113 @@ module PagesHelper
     else
       #
     end
-    
-    #SAME PRINCIPLE AS UNDER
+
   end
   
   def add_item_sentence(event_log)
     item    = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
+    gifter  = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
+
     if event_log.involved_as_requester?(current_user.person)
       sentence = "You are now sharing your" + " " + item
     else
-      person  = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
-      sentence = person + " " + "is now sharing their" + " " + item
+      sentence = gifter + " " + "is now sharing their" + " " + item
     end
     sentence.html_safe
   end
   
   def sharing_sentence(event_log)
-   item    = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
+   item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
+	 requester           = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
+	 requester_possesive = link_to event_log.primary_short_name.possessive, person_path(event_log.primary), :class => "positive"
+   gifter              = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => "positive"
+	 gifter_possesive    = link_to event_log.secondary_short_name.possessive, person_path(event_log.secondary), :class => "positive"
+
    if event_log.involved_as_requester?(current_user.person)
-     person_possesive  = link_to event_log.secondary_short_name.possessive, person_path(event_log.secondary), :class => "positive"
-     sentence = "You borrowed" + " " + person_possesive.html_safe + " " + item
+     sentence = "You borrowed " + gifter_possesive.html_safe + " " + item
    elsif event_log.involved_as_gifter?(current_user.person)
-     person  = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
-     sentence = person + " " + "borrowed your" + " " + item
-     
-     #event_log.trusted_person_as_requester
-     #event_log.trusted_person_as_gifter
+     sentence = requester + " borrowed your " + item
+   elsif current_user.person.trusts?(event_log.primary) && !current_user.person.trusts?(event_log.secondary)
+     sentence = requester + " borrowed " + gifter_possesive + " " + item
+	 elsif !current_user.person.trusts?(event_log.primary) && current_user.person.trusts?(event_log.secondary)
+     sentence = gifter + " shared their " + item + " with " + requester
+	 elsif current_user.person.trusts?(event_log.primary) && current_user.person.trusts?(event_log.secondary)
+      sentence = gifter + " " + "shared their" + " " + item + " with " + requester 
    else
-      #TODO change this
-     sentence = "My friends sharing" + " " + item
+     sentence = ""
    end
-     sentence.html_safe
+   
+   sentence.html_safe
   end
   
   def gifting_sentence(event_log)
-   item    = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
+   item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
+	 requester           = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
+	 requester_possesive = link_to event_log.primary_short_name.possessive, person_path(event_log.primary), :class => "positive"
+   gifter              = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => "positive"
+	 gifter_possesive    = link_to event_log.secondary_short_name.possessive, person_path(event_log.secondary), :class => "positive"
+
    if event_log.involved_as_requester?(current_user.person)
-     person_possesive  = link_to event_log.secondary_short_name.possessive, person_path(event_log.secondary), :class => "positive"
-     sentence = "You received" + " " + person_possesive.html_safe + " " + item
+     sentence = "You borrowed " + gifter_possesive.html_safe + " " + item
    elsif event_log.involved_as_gifter?(current_user.person)
-     person  = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
-     sentence = "You gifted your" + item + " to " + person
+     sentence = requester + " borrowed your " + item
+   elsif current_user.person.trusts?(event_log.primary) && !current_user.person.trusts?(event_log.secondary)
+     sentence = requester + " received " + gifter_possesive + " " + item
+	 elsif !current_user.person.trusts?(event_log.primary) && current_user.person.trusts?(event_log.secondary)
+     sentence = gifter + " gifted their " + item + " to " + requester
+	 elsif current_user.person.trusts?(event_log.primary) && current_user.person.trusts?(event_log.secondary)
+      sentence = gifter + " gifted their " + item + " with " + requester 
    else
-      #TODO change this
-     sentence = "My friends sharing" + " " + item
+     sentence = ""
    end
-     sentence.html_safe
+   
+   sentence.html_safe
   end
   
-  #TODO TEST THIS
   def trust_established_sentence(event_log)
+	  first_person       = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
+    first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => "positive"
+    second_person      = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => "positive"
+    second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => "positive"
+
+    if event_log.involved_as_requester?(current_user.person)
+      sentence = "You have established a trusted relationship with " + second_person
+    elsif event_log.involved_as_gifter?(current_user.person)
+      sentence = "You have established a trusted relationship with " + first_person
+    elsif current_user.person.trusts?(event_log.primary)
+      sentence = first_person + " has established a trusted relationship with " + second_person_full
+    elsif current_user.person.trusts?(event_log.secondary)
+      sentence = second_person + " has established a trusted relationship with " + first_person_full
+    elsif current_user.person.trusts?(event_log.primary) && current_user.person.trusts?(event_log.secondary)
+      sentence = first_person + " and " + second_person + " have established a trusted relationship"
+    else 
+      sentence = ""
+    end
+
+    sentence.html_safe
+  end
+
+  def trust_withdrawn_sentence(event_log)
+	  first_person       = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
+    first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => "positive"
+    second_person      = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => "positive"
+    second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => "positive"
+
+    if event_log.involved_as_requester?(current_user.person)
+      sentence = "You have withdrawn your trust for " + second_person
+    elsif event_log.involved_as_gifter?(current_user.person)
+      sentence = first_person + " has withdrawn their trust for you"
+    elsif current_user.person.trusts?(event_log.primary)
+      sentence = first_person + " has withdrawn their trust for " + second_person_full
+    elsif current_user.person.trusts?(event_log.secondary)
+      sentence = second_person + " has withdrawn their trust for " + first_person_full
+    elsif current_user.person.trusts?(event_log.primary) && current_user.person.trusts?(event_log.secondary)
+      sentence = first_person + " has withdrawn their trust for " + second_person
+    else
+      sentence = ""
+    end
     
+    sentence.html_safe
   end
   
   def item_damaged_sentence(event_log)
