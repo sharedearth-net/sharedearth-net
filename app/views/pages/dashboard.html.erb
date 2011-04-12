@@ -69,13 +69,6 @@
 				</li>
 			<% end %>
 			
-			
-			<!-- Nebojsa-todo - button-more is static  -->
-			<li class="content-box clearfix">
-				<a href="#" class="button-more">
-					more
-				</a>
-			</li>
 		</ul>
 		<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
 	</div>
@@ -92,13 +85,19 @@
 				<li class="sidebar-box clearfix">
 					<pre>
 					<%= 
-						# render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
+						 render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
 						# event_log.to_yaml
 					%>
 					</pre>
 					<br /><br /><br /><br />
 				</li>
 			<% end %>
+			<!-- Nebojsa-todo - button-more is static  -->
+			<li class="content-box clearfix">
+				<a href="#" class="button-more">
+					more
+				</a>
+			</li>
 		</ul>		
 	</div>
 </div><!-- sidebar -->
