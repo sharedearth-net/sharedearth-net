@@ -58,6 +58,10 @@ class EventLog < ActiveRecord::Base
   def involved_as_gifter?(person)
     self.secondary_id == person.id
   end
+
+  def involved?(person)
+    self.secondary_id == person.id || self.primary_id == person.id
+  end
   
     
   # One method to log all events
