@@ -94,8 +94,8 @@ class Person < ActiveRecord::Base
     # GROUP BY ee.event_log_id
     # ORDER BY ee.created_at DESC
     # LIMIT 25
-  
-    ee = Arel::Table.new(EventEntity.table_name.to_sym)
+   
+		ee = Arel::Table.new(EventEntity.table_name.to_sym)
     pn = Arel::Table.new(PeopleNetwork.table_name.to_sym)
 
     pn_network = pn.project(pn[:trusted_person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:person_id].eq(self.id))
@@ -104,15 +104,16 @@ class Person < ActiveRecord::Base
     query = query.join(Arel.sql("INNER JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.trusted_person_id AND #{ee.name}.entity_type = 'Person'"))
     query = query.group(ee[:event_log_id], ee[:created_at]).order("#{ee.name}.created_at DESC").take(25)
     event_log_ids = EventEntity.find_by_sql(query.to_sql)
-    
-    people_network = PeopleNetwork.find_all_by_person_id(self.id)
-    event_log_ids = EventEntity.find_all_by_entity_id(self.id)
-    people_network.each do |pn|
-      event_log_ids += EventEntity.involves(pn.trusted_person)
-    end
-    
-    event_log_ids
-    
+   
+=begin    
+    #FIND ALL PEOPLE THAT ARE CONNECTED TO ME, AND RETURN ALL EVENTS RELATED TO THEM - NO DUPLICATIONS
+		#TODO : MAKE Arel OUT OF THIS QUERIES
+  
+		people_network = PeopleNetwork.find_all_by_person_id(self.id)
+		list = Person.find_all_by_id(self.id)
+		list += people_network.map{|p| p.trusted_person}
+		event_log_ids = EventEntity.find(:all, :select => 'DISTINCT event_log_id', :conditions => ["entity_id IN (?) and entity_type=? ", list, "Person"], :order => 'created_at DESC').take(25)
+=end 
   end
 
   ###########
