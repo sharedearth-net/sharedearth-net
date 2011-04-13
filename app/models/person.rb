@@ -105,7 +105,7 @@ class Person < ActiveRecord::Base
     query = query.group(ee[:event_log_id], ee[:created_at]).order("#{ee.name}.created_at DESC").take(25)
     event_log_ids = EventEntity.find_by_sql(query.to_sql)
    
-=begin    
+   
     #FIND ALL PEOPLE THAT ARE CONNECTED TO ME, AND RETURN ALL EVENTS RELATED TO THEM - NO DUPLICATIONS
 		#TODO : MAKE Arel OUT OF THIS QUERIES
   
@@ -113,7 +113,7 @@ class Person < ActiveRecord::Base
 		list = Person.find_all_by_id(self.id)
 		list += people_network.map{|p| p.trusted_person}
 		event_log_ids = EventEntity.find(:all, :select => 'DISTINCT event_log_id', :conditions => ["entity_id IN (?) and entity_type=? ", list, "Person"], :order => 'created_at DESC').take(25)
-=end 
+
   end
 
   ###########
