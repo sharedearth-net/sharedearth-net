@@ -1,9 +1,6 @@
 module PagesHelper
-  def event_log_sentence(event_entity)
-  if event_entity.nil?
-    return
-  end
-  event_log = event_entity.event_log
+  def event_log_sentence(event_log)
+  
     case event_log.event_type.id
     when 18
       sharing_sentence(event_log)
@@ -155,6 +152,11 @@ module PagesHelper
       sentence = person_possesive + " " + "item" + " " + item + " " + "has been repaired"
     end
     sentence.html_safe
+  end
+  
+  def fb_friend_join_sentence(event_log)
+    first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => "positive"
+    sentence = first_person_full + " has connected to sharedearth.net "  
   end
   
 
