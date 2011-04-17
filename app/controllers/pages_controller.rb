@@ -12,5 +12,6 @@ class PagesController < ApplicationController
     
     @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30)
     @event_logs = current_user.person.news_feed
+    @news_feed_cashe = EventDisplay.find_all_by_person_id(current_user.person.id) #Temporarily for testing the view
   end
 end
