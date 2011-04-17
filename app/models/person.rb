@@ -113,6 +113,15 @@ class Person < ActiveRecord::Base
 		list = Person.find_all_by_id(self.id)
 		list += people_network.map{|p| p.trusted_person}
 		event_log_ids = EventEntity.find(:all, :select => 'DISTINCT event_log_id', :conditions => ["entity_id IN (?) and entity_type=? ", list, "Person"], :order => 'event_log_id DESC').take(25)
+		
+		# CASHE PREVIOUSLY SHOWN NEWS FEED
+		event_log_ids.each do |e|
+		  conditions = { :type_id =>  EventDisplay::DASHBOARD_FEED, 
+                   :person_id => self.id,
+                   :event_id => e.event_log_id }
+
+          ed = EventDisplay.find(:first, :conditions => conditions) || EventDisplay.create(conditions) 
+		end
 
   end
 
