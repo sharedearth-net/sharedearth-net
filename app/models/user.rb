@@ -11,6 +11,22 @@ class User < ActiveRecord::Base
       user.nickname = auth["user_info"]["nickname"]
       user.create_person(:name => auth["user_info"]["name"])
     end
+    
+    inform_mutural_friends(auth)
+  end
+  
+  #Inform everybody if this person is their friend on fb
+  def inform_mutural_friends(auth)
+    token = auth["credentials"]["token"]
+    registered_user = FbGraph::User.me(token)
+    friends_list = registered_user.friends(options = {:access_token => token})  
+    friends_list.each do |friend|
+      connection = User.find(:first, :conditions => ['uid = ?', friend.identifier])
+      if !connection.nil? 
+        #First parameter user that joined second person that is informed
+        EventLog.create_news_event_log(user, ou,  nil , EventType.friend_join)
+      end
+    end
   end
   
   # Available avatar sizes
