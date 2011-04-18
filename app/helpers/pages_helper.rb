@@ -186,7 +186,7 @@ module PagesHelper
     when 8
       person
     when 9
-      surrent_person
+      current_person
     when 10
       person
     when 11
