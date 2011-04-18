@@ -104,16 +104,7 @@ class Person < ActiveRecord::Base
     query = query.join(Arel.sql("INNER JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.trusted_person_id AND #{ee.name}.entity_type = 'Person'"))
     query = query.group(ee[:event_log_id], ee[:created_at]).order("#{ee.name}.created_at DESC").take(25)
     event_log_ids = EventEntity.find_by_sql(query.to_sql)
-   
-   
-    #FIND ALL PEOPLE THAT ARE CONNECTED TO ME, AND RETURN ALL EVENTS RELATED TO THEM - NO DUPLICATIONS
-		#TODO : MAKE Arel OUT OF THIS QUERIES
-  
-		people_network = PeopleNetwork.find_all_by_person_id(self.id)
-		list = Person.find_all_by_id(self.id)
-		list += people_network.map{|p| p.trusted_person}
-		event_log_ids = EventEntity.find(:all, :select => 'DISTINCT event_log_id', :conditions => ["entity_id IN (?) and entity_type=? ", list, "Person"], :order => 'event_log_id DESC').take(25)
-		
+
 		# CASHE PREVIOUSLY SHOWN NEWS FEED IF NOT ALREADY CASHED
 		event_log_ids.each do |e|
 		  conditions = { :type_id =>  EventDisplay::DASHBOARD_FEED, 
