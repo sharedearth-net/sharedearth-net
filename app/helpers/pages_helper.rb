@@ -160,6 +160,81 @@ module PagesHelper
     sentence.html_safe 
   end
   
+  def recent_activity_avatar(activity_log)
+    current_person = current_user.person
+    if current_person != activity_log.secondary
+      person = activity_log.secondary
+    else
+      person = activity_log.primary
+    end
+    
+    case activity_log.event_type_id
+    when 1
+      current_person
+    when 2
+      person
+    when 3
+      current_person
+    when 4
+      current_person
+    when 5
+      current_person
+    when 6
+      person
+    when 7
+      person
+    when 8
+      person
+    when 9
+      surrent_person
+    when 10
+      person
+    when 11
+      current_person
+    when 12
+      current_person
+    when 13
+      person
+    when 14
+      current_person
+    when 15
+      person
+    when 16
+      person
+    when 17
+      current_person
+       
+      
+    when 27
+      current_person
+    when 28
+      current_person
+    when 29
+      person
+    when 30
+      person
+    when 31
+      person
+    when 32
+      current_person
+    when 33
+      current_person
+    when 34
+      person
+    when 35
+      current_person
+    when 36
+      person
+    when 37
+      person
+    when 38
+      current_person
+    else
+      current_person
+    end
+    
+  end
+  
 
   def recent_activity_sentence(activity_log)
   
