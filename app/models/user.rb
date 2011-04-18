@@ -11,8 +11,9 @@ class User < ActiveRecord::Base
       user.nickname = auth["user_info"]["nickname"]
       user.create_person(:name => auth["user_info"]["name"])
     end
-    
-    inform_mutural_friends(auth)
+    user = User.find_by_uid(auth["uid"])
+    user.inform_mutural_friends(auth)
+    user
   end
   
   #Inform everybody if this person is their friend on fb
@@ -24,7 +25,7 @@ class User < ActiveRecord::Base
       connection = User.find(:first, :conditions => ['uid = ?', friend.identifier])
       if !connection.nil? 
         #First parameter user that joined second person that is informed
-        EventLog.create_news_event_log(user, ou,  nil , EventType.friend_join)
+        EventLog.create_news_event_log(self.person, connection.person,  nil , EventType.fb_friend_join)
       end
     end
   end
