@@ -68,6 +68,12 @@
 					</div>
 				</li>
 			<% end %>
+			<!-- Nebojsa-todo - button-more is static  -->
+			<li class="content-box clearfix">
+				<a href="#" class="button-more">
+					more
+				</a>
+			</li>
 			
 		</ul>
 		<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
@@ -92,18 +98,11 @@
 					<br /><br /><br /><br />
 				</li>
 			<% end unless @event_logs.nil? %>
-			<!-- Nebojsa-todo - button-more is static  -->
-			<li class="content-box clearfix">
-				<a href="#" class="button-more">
-					more
-				</a>
-			</li>
 			<!-- Previous news feed temp - check for design  -->
-			<% @news_feed_cashe.each do |news_cashe| %>
+			<p> News feed history </p>
+			<% @news_feed_cashe.each do |event_log| %>
 				<li class="sidebar-box clearfix">
-					<pre>
-					<% event_log = EventLog.find_by_id(news_cashe.event_id)%>
-					
+					<pre>					
 					<%= 
 						 render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
 					%>
