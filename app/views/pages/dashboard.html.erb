@@ -61,7 +61,7 @@
 			<% @recent_activity_logs.each do |activity_log| %>
 
 				<li class="content-box clearfix">
-					<%= image_tag activity_log.secondary.avatar(:square), :class => "thumb" %>
+					<%= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb" %>
 					
 					<div class="inner-content">
 						<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
