@@ -4,8 +4,14 @@
 %>
 
 <% if req.requester?(current_user.person) %>
-	<%= link_to "cancel", people_network_request_path(req), :method => :delete %>
+	<li>	
+	  <%= link_to "cancel", people_network_request_path(req), :id => "cancel_button", :method => :delete %>
+	</li>
 <% else %>
-	<%= link_to "confirm", confirm_people_network_request_path(req), :method => :put %>
-	<%= link_to "deny", deny_people_network_request_path(req), :method => :put %>
+	<li>	
+	  <%= link_to "confirm", confirm_people_network_request_path(req), :id => "confirm_button", :method => :put %>
+	</li>
+	<li>	
+	  <%= link_to "deny", deny_people_network_request_path(req), :id => "deny_button", :method => :put %>
+	</li>
 <% end %>
