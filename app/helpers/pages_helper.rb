@@ -156,7 +156,8 @@ module PagesHelper
   
   def fb_friend_join_sentence(event_log)
     first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => "positive"
-    sentence = first_person_full + " has connected to sharedearth.net "  
+    sentence = first_person_full + " has connected to sharedearth.net " 
+    sentence.html_safe 
   end
   
 
