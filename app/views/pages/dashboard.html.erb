@@ -93,40 +93,18 @@
 						 render :partial => "shared/event_log_entry", :locals => { :event_log => event_entity.event_log }
 					%>
 			</li>
-			<% end unless @event_logs.nil? %>
-			<h2>News feed histroy</h2> <!--check this of needs this -->
-			<% @news_feed_cashe.each do |event_log| %>
-			<li class="sidebar-box clearfix">
+			<% end unless @event_logs.nil? %>		
+		<a href="#" class="button-more">
+			more
+		</a>
+		<ul>	
+		<% @news_feed_cashe.each do |event_log| %>
+		  <li class="sidebar-box clearfix">
 					<%= 
 						 render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
 					%>
 			</li>
 			<% end unless @news_feed_cashe.nil? %>
-			<!-- Static news feed -->
-			<li class="sidebar-box clearfix">
-				
-				<div class="inner-content">
-          
-					<p>
-					  <a href="#">Gavin Maden</a> is requesting a spade
-					</p>
-			
-					<div class="action clearfix">
-						<ul>
-							<li>4 days ago</li>
-							<li><a href="#">view request</a></li>
-							<li><a href="#">offer</a></li>
-							<li><a href="#">comments(0)</a></li>
-						</ul>
-					</div>
-				</div>
-			  
-			</li>
 		</ul>
-		<!-- / this is the static news feed	-->
-		
-		<a href="#" class="button-more">
-			more
-		</a>	
 	</div>
 </div><!-- sidebar -->
