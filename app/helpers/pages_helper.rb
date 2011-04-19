@@ -27,8 +27,8 @@ module PagesHelper
   end
   
   def add_item_sentence(event_log)
-    item    = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
-    gifter  = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
+    item    = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id)
+    gifter  = link_to event_log.primary_short_name, person_path(event_log.primary)
 
     if event_log.involved_as_requester?(current_user.person)
       sentence = "You are now sharing your" + " " + item
@@ -39,11 +39,11 @@ module PagesHelper
   end
   
   def sharing_sentence(event_log)
-   item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
-	 requester           = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
-	 requester_possesive = link_to event_log.primary_short_name.possessive, person_path(event_log.primary), :class => "positive"
-   gifter              = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => "positive"
-	 gifter_possesive    = link_to event_log.secondary_short_name.possessive, person_path(event_log.secondary), :class => "positive"
+   item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id)
+	 requester           = link_to event_log.primary_short_name, person_path(event_log.primary)
+	 requester_possesive = link_to event_log.primary_short_name.possessive, person_path(event_log.primary)
+   gifter              = link_to event_log.secondary_short_name, person_path(event_log.secondary)
+	 gifter_possesive    = link_to event_log.secondary_short_name.possessive, person_path(event_log.secondary)
 
    if event_log.involved_as_requester?(current_user.person)
      sentence = "You borrowed " + gifter_possesive.html_safe + " " + item
@@ -63,11 +63,11 @@ module PagesHelper
   end
   
   def gifting_sentence(event_log)
-   item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
-	 requester           = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
-	 requester_possesive = link_to event_log.primary_short_name.possessive, person_path(event_log.primary), :class => "positive"
-   gifter              = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => "positive"
-	 gifter_possesive    = link_to event_log.secondary_short_name.possessive, person_path(event_log.secondary), :class => "positive"
+   item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id)
+	 requester           = link_to event_log.primary_short_name, person_path(event_log.primary)
+	 requester_possesive = link_to event_log.primary_short_name.possessive, person_path(event_log.primary)
+   gifter              = link_to event_log.secondary_short_name, person_path(event_log.secondary)
+	 gifter_possesive    = link_to event_log.secondary_short_name.possessive, person_path(event_log.secondary)
 
    if event_log.involved_as_requester?(current_user.person)
      sentence = "You borrowed " + gifter_possesive.html_safe + " " + item
@@ -87,10 +87,10 @@ module PagesHelper
   end
   
   def trust_established_sentence(event_log)
-	  first_person       = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
-    first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => "positive"
-    second_person      = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => "positive"
-    second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => "positive"
+	  first_person       = link_to event_log.primary_short_name, person_path(event_log.primary)
+    first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary)
+    second_person      = link_to event_log.secondary_short_name, person_path(event_log.secondary)
+    second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary)
 
     if event_log.involved_as_requester?(current_user.person)
       sentence = "You have established a trusted relationship with " + second_person
@@ -110,10 +110,10 @@ module PagesHelper
   end
 
   def trust_withdrawn_sentence(event_log)
-	  first_person       = link_to event_log.primary_short_name, person_path(event_log.primary), :class => "positive"
-    first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => "positive"
-    second_person      = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => "positive"
-    second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => "positive"
+	  first_person       = link_to event_log.primary_short_name, person_path(event_log.primary)
+    first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary)
+    second_person      = link_to event_log.secondary_short_name, person_path(event_log.secondary)
+    second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary)
 
     if event_log.involved_as_requester?(current_user.person)
       sentence = "You have withdrawn your trust for " + second_person
@@ -133,29 +133,29 @@ module PagesHelper
   end
   
   def item_damaged_sentence(event_log)
-    item    = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
+    item    = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id)
     if event_log.action_object.is_owner?(current_user.person)
       sentence = "Your item" + " " + item + " " + "is broken"
     else
-      person_possesive  = link_to event_log.primary_short_name.possessive, person_path(event_log.primary), :class => "positive"
+      person_possesive  = link_to event_log.primary_short_name.possessive, person_path(event_log.primary)
       sentence = person_possesive + " " + "item" + " " + item + " " + "is broken"
     end
     sentence.html_safe
   end
   
   def item_repaired_sentence(event_log)
-    item    = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => "positive"
+    item    = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id)
     if event_log.action_object.is_owner?(current_user.person)
       sentence = "Your item" + " " + item + " " + "has been broken"
     else
-      person_possesive  = link_to event_log.primary_short_name.possessive, person_path(event_log.primary), :class => "positive"
+      person_possesive  = link_to event_log.primary_short_name.possessive, person_path(event_log.primary)
       sentence = person_possesive + " " + "item" + " " + item + " " + "has been repaired"
     end
     sentence.html_safe
   end
   
   def fb_friend_join_sentence(event_log)
-    first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => "positive"
+    first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary)
     sentence = first_person_full + " has connected to sharedearth.net " 
     sentence.html_safe 
   end
