@@ -98,7 +98,7 @@ class Person < ActiveRecord::Base
 		ee = Arel::Table.new(EventEntity.table_name.to_sym)
     pn = Arel::Table.new(PeopleNetwork.table_name.to_sym)
 
-    pn_network = pn.project(pn[:trusted_person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:person_id].eq(self.id))
+    pn_network = pn.project(pn[:trusted_person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:trusted_person_id].eq(self.id))
 
     query = ee.project(Arel.sql("#{ee.name}.event_log_id as event_log_id"), Arel.sql("SUM(trusted_relationship_value) as total_relationship_value"))
     query = query.join(Arel.sql("INNER JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.trusted_person_id AND #{ee.name}.entity_type = 'Person'"))
