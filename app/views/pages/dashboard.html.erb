@@ -87,31 +87,28 @@
 	<div class="sidebar-box-holder">
 		<h2>News feed</h2>
 		<ul>
+		  <% @event_logs.each do |event_entity| %>
 			<li class="sidebar-box clearfix">
-				<% @event_logs.each do |event_entity| %>
-				
 					<%= 
 						 render :partial => "shared/event_log_entry", :locals => { :event_log => event_entity.event_log }
-						# event_log.to_yaml
 					%>
-				<% end unless @event_logs.nil? %>
-				<!-- Previous news feed temp - check for design  -->
-			
-				<h2>News feed history</h2>
-				<% @news_feed_cashe.each do |event_log| %>				
+			</li>
+			<% end unless @event_logs.nil? %>
+			<h2>News feed histroy</h2> <!--check this of needs this -->
+			<% @news_feed_cashe.each do |event_log| %>
+			<li class="sidebar-box clearfix">
 					<%= 
 						 render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
 					%>
-				<% end unless @news_feed_cashe.nil?%>
 			</li>
-		</ul>
-		
-		<!-- this is the static news feed	-->
-		<ul>
+			<% end unless @news_feed_cashe.nil? %>
+			<!-- Static news feed -->
 			<li class="sidebar-box clearfix">
+				
 				<div class="inner-content">
+          
 					<p>
-						<a href="#">Gavin Maden</a> is requesting a spade
+					  <a href="#">Gavin Maden</a> is requesting a spade
 					</p>
 			
 					<div class="action clearfix">
@@ -123,6 +120,7 @@
 						</ul>
 					</div>
 				</div>
+			  
 			</li>
 		</ul>
 		<!-- / this is the static news feed	-->
