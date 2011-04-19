@@ -44,6 +44,12 @@ a:hover {
 	text-transform: capitalize !important;
 }
 
+
+a.normal:link,
+a.normal:visited {
+	font-weight: normal !important;
+}
+
 /* container */
 
 #container {

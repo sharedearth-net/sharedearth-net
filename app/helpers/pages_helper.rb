@@ -246,7 +246,7 @@ module PagesHelper
     
     requester           = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
     requester_possesive = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
-    item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "positive"
+    item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "positive normal"
     
     sentence = ""
     case activity_log.event_type_id
