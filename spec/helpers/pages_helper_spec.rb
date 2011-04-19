@@ -425,3 +425,47 @@ describe PagesHelper, "When printing activity log sentances" do
   
   #pending "TODO add test for recent_activity_sentance "
 end
+
+describe PagesHelper, "When printing event log sentances" do
+
+  it "should generate sentace for add item sentence" do
+    #TODO
+  end
+  
+  it "should generate sentace for sharing sentence" do
+    #TODO
+  end
+  
+  it "should generate sentace for gifting sentence" do
+    #TODO
+  end
+  
+  it "should generate sentace for trust established sentence" do
+    #TODO
+  end
+  
+  it "should generate sentace for trust withdrawn sentence" do
+    #TODO
+  end
+  
+  it "should generate sentace for item repaired sentence" do
+    #TODO
+  end
+  
+  it "should generate sentace for fb friend join sentence" do
+    #TODO
+  end
+  
+
+end
+
+describe PagesHelper, "When printing avatar for activity log event" do
+
+  it "should generate sentace for recent activit avatar" do
+    #TODO
+  end
+end
+
+
+
+
