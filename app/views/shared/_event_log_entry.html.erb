@@ -4,9 +4,6 @@
 	</p>
 
 	<div class="action clearfix">
-		<ul>
-			<li><%= time_ago_in_words event_log.created_at %> ago</li>
-			<%#= render :partial => "shared/event_log_actions_compact", :locals => { :event_log => event_log } %>
-		</ul>
+			<%= render :partial => "shared/event_log_actions_compact", :locals => { :event_log => event_log } %>
 	</div>
 </div>
