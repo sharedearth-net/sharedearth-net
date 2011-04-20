@@ -94,11 +94,11 @@
 					%>
 			</li>
 			<% end unless @event_logs.nil? %>		
-		<a href="#" class="button-more">
+		<a href="#more_news" class="button-more">
 			more
 		</a>
 		<ul>	
-		<% @news_feed_cashe.each do |event_log| %>
+		  <% @news_feed_cashe.each do |event_log| %>
 		  <li class="sidebar-box clearfix">
 					<%= 
 						 render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
