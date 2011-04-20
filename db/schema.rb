@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110417141156) do
+ActiveRecord::Schema.define(:version => 20110419150524) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer   "event_code"
@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(:version => 20110417141156) do
   add_index "activity_logs", ["primary_id", "primary_type"], :name => "index_activity_logs_on_primary_id_and_primary_type"
 
   create_table "event_displays", :force => true do |t|
-    t.integer  "type_id"
-    t.integer  "person_id"
-    t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "type_id"
+    t.integer   "person_id"
+    t.integer   "event_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "event_entities", :force => true do |t|
@@ -128,13 +128,20 @@ ActiveRecord::Schema.define(:version => 20110417141156) do
     t.timestamp "updated_at"
   end
 
+  create_table "person_gift_act_ratings", :force => true do |t|
+    t.integer  "person_id"
+    t.float    "gift_act_rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string    "provider"
     t.string    "uid"
     t.string    "nickname"
     t.timestamp "created_at"
     t.timestamp "updated_at"
-    t.integer   "token"
+    t.string    "token"
   end
 
 end
