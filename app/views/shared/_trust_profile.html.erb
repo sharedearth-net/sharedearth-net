@@ -28,10 +28,10 @@
 		<h3>Reputation</h3>
 		<ul class="action-list clearfix">
 			<li>
-				<%= link_to "7 gift actions", "#", :class => "giftactions", :title => "Gift Actions" %>
+				<%= link_to current_user.person.gift_act_actions.to_s + " gift actions", "#", :class => "giftactions", :title => "Gift Actions" %>
 			</li>
 			<li>
-				<%= link_to "4 different people", "#", :class => "people-helped", :title => "People Helped" %>
+				<%= link_to current_user.person.people_helped.to_s + " different people", "#", :class => "people-helped", :title => "People Helped" %>
 			</li>
 			<li>
 				<%= link_to "100% positive feedback", "#", :class => "feedback-rating", :title => "People Helped" %>
