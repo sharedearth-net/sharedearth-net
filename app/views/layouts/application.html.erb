@@ -36,7 +36,7 @@
 							</li>
 							<li class="giftact-rating">
 								<% if !current_user.nil? -%>
-								  <%= link_to "66", "#", :title => "Giftact Rating" %>
+								  <%= link_to current_user.person.gift_act_rating, "#", :title => "Giftact Rating" %>
 								<% else -%>
 								  <%= link_to "0", "#", :title => "Giftact Rating" %>
 								<% end -%>
