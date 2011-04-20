@@ -368,13 +368,10 @@ class EventType < ActiveRecord::Base
   end
   
   
+  def self.completed_request_ids
+    [10,11,12,13,31,32,33,34]
+  end
   
-  
-  
-  
-  
-  
-
 =begin
   
   def self.new_gift_item_request_gifter(return_only_id = true)
