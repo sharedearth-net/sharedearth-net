@@ -29,6 +29,8 @@ class ActivityLog < ActiveRecord::Base
   validates_presence_of :event_code
   validates_presence_of :action_object_id, :action_object_type, :action_object_type_readable
   validates_presence_of :related_id, :related_type
+  
+  scope :gift_actions, lambda { |entity| where("(primary_id = ? and event_type_id IN (?) ) ", entity.id, EventType.completed_request_ids) }
 
   def self.next_event_code
     current_max = ActivityLog.maximum(:event_code)
