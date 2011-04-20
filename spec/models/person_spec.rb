@@ -126,3 +126,19 @@ describe Person, ".first_name" do
     Person.new(:name => "Slobodan Kovacevic").first_name.should eql("Slobodan")
   end
 end
+
+describe Person, "When printing user trust profile" do
+
+  it "should generate proper gift act rating" do
+  #TODO
+  end
+  
+  it "should generate proper number of people helped" do
+  #TODO
+  end
+  
+  it "should generate proper number of gift act actions" do
+  #TODO
+  end
+  
+  
