@@ -98,7 +98,7 @@ class Person < ActiveRecord::Base
 		ee = Arel::Table.new(EventEntity.table_name.to_sym)
     pn = Arel::Table.new(PeopleNetwork.table_name.to_sym)
 
-    pn_network = pn.project(pn[:trusted_person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:trusted_person_id].eq(self.id))
+    pn_network = pn.project(pn[:trusted_person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:person_id].eq(self.id))
 
     query = ee.project(Arel.sql("#{ee.name}.event_log_id as event_log_id"), Arel.sql("SUM(trusted_relationship_value) as total_relationship_value"))
     query = query.join(Arel.sql("INNER JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.trusted_person_id AND #{ee.name}.entity_type = 'Person'"))
@@ -113,18 +113,37 @@ class Person < ActiveRecord::Base
 
       EventDisplay.find(:first, :conditions => conditions) || EventDisplay.create(conditions) 
 		end
-
   end
   
   #SHOW NEWS FEED THAT ARE STORED IN CASHE, BUT NOT SHOWN AT SAME TIME AS CURRENT NEWS FEED
   def news_feed_cashe(event_log_ids)
-    event_ids = []
-    event_ids.push(event_log_ids.map{|e| e.event_log_id})
+    news_event_logs = event_log_ids.map{|e| e.event_log_id}
     event_displays = EventDisplay.find(:all, :conditions => ["type_id=? and person_id=? and event_id not in (?)", 
-    		                                     EventDisplay::DASHBOARD_FEED, self.id, event_ids[0]], :order => 'event_id DESC').take(25)
-    event_ids.clear
-    event_ids.push(event_displays.map{|e| e.event_id})
-    EventLog.find(:all, :conditions => ["id IN (?)", event_ids[0]], :order => 'created_at DESC') 
+    		                                     EventDisplay::DASHBOARD_FEED, self.id, news_event_logs], :order => 'event_id DESC').take(25)
+    news_cashe_event_logs = event_displays.map{|e| e.event_id}
+    EventLog.find(:all, :conditions => ["id IN (?)", news_cashe_event_logs], :order => 'created_at DESC') 
+  end
+  
+  def gift_act_actions
+    ActivityLog.gift_actions(self).size
+  end
+  
+  def people_helped
+    ActivityLog.find(:all, :select => 'DISTINCT secondary_id', 
+                     :conditions => ["primary_id =? and primary_type=? and secondary_type=? and event_type_id IN (?)", 
+                                      self.id, "Person", "Person", EventType.completed_request_ids]).size
+  end
+  
+  def gift_act_rating
+    rating = (self.people_helped - 1 + self.gift_act_actions.to_f/20)
+    update_gift_act_rating(rating)
+    rating
+  end
+  
+  def update_gift_act_rating(rating)
+    gift_act = PersonGiftActRating.find_or_create_by_person_id(:person_id => self.id)
+    gift_act.gift_act_rating = rating
+    gift_act.save!
   end
 
   ###########
