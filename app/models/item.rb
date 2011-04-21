@@ -54,6 +54,8 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :item_type, :name, :owner_id, :owner_type, :status
   validates_inclusion_of :status, :in => STATUSES.keys, :message => " must be in #{STATUSES.values.join ', '}"
+  
+  before_update :update_available?
 
   # validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 1.megabyte
@@ -72,6 +74,11 @@ class Item < ActiveRecord::Base
   def transfer_ownership_to(entity)
     self.owner = entity
     save!
+  end
+  
+  def active_request_by?(user)
+    item_request = ItemRequest.find(:last, :conditions => ["requester_id =? and requester_type=? and item_id=?", user.person.id,"Person", self.id])
+    item_request.nil? ? false : ItemRequest::ACTIVE_STATUSES.include?(item_request.status)    
   end
   
   def purpose?
@@ -156,6 +163,28 @@ class Item < ActiveRecord::Base
   
   def create_new_item_event_log
     EventLog.create_news_event_log(self.owner, nil,  self , EventType.add_item)
+  end
+  
+  # #######
+  # Metods related to item availability - true/false, if item is available
+  # #######
+  
+  def available!
+    self.available = true
+    save!
+  end
+  
+  def in_use!
+    self.available = false
+    save!
+  end
+  
+  def available?
+    self.available
+  end
+  
+  def update_available?
+    self.available? if self.purpose_changed?
   end
   
 end
