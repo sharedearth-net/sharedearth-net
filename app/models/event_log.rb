@@ -23,6 +23,7 @@ class EventLog < ActiveRecord::Base
   has_many :event_entities
   
   scope :involves, lambda { |entity| where("(primary_id = ? AND primary_type = ?) OR (secondary_id = ? AND secondary_type = ?) ", entity.id, entity.class.to_s, entity.id, entity.class.to_s) }
+  scope :completed_requests, lambda { |entity| where("event_type_id IN (?)", EventType.events_completed) }
 
   validates_presence_of :primary_id, :primary_type, :primary_short_name, :primary_full_name
   # validates_presence_of :action_object_id, :action_object_type, :action_object_type_readable
