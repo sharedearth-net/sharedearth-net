@@ -65,12 +65,14 @@
 											<li>
 												<%= link_to "view item", item_path(item) %>
 											</li>
+											<%unless item.active_request_by?(current_user)%>
 											<li>
 												<%= link_to "request", new_request_path(:item_id => item) %>
 											</li>
 											<li>
 												<%= link_to "quick request", "#" %>
 											</li>
+											<% end -%>
 										</ul>
 										
 									</div>
