@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110419150524) do
+ActiveRecord::Schema.define(:version => 20110420143805) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer   "event_code"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20110419150524) do
     t.timestamp "deleted_at"
     t.integer   "status"
     t.integer   "purpose"
+    t.boolean   "available"
   end
 
   create_table "people", :force => true do |t|
