@@ -238,14 +238,14 @@ module PagesHelper
 
   def recent_activity_sentence(activity_log)
   
-    gifter              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
-    gifter_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
+    gifter              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
+    gifter_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
     person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
-    person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
-    person_full         = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
+    person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive "unless activity_log.secondary_short_name.nil?
+    person_full         = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
     
-    requester           = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
-    requester_possesive = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
+    requester           = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
+    requester_possesive = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "positive normal"
     
     sentence = ""
