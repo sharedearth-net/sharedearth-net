@@ -161,4 +161,20 @@ class Person < ActiveRecord::Base
   def requested_trusted_relationship(person_requesting)
     self.received_people_network_requests.where(:person_id => person_requesting).first
   end
+  
+  ###########
+  # Recent activity on personal page methods
+  ###########
+  
+  def public_events
+    EventLog.involves(self).completed_requests.take(10)
+  end
+  
+  def activity_involved_with(current_user)
+    ActivityLog.find(:all, 
+                                              :conditions => ["(primary_id = ? AND primary_type = ? AND secondary_id = ? AND secondary_type = ? and event_type_id IN (?)) ", 
+                                              self.id, self.class.to_s, current_user.person.id, current_user.person.class.to_s, EventType.personal_actions])
+  end
+  
+  
 end
