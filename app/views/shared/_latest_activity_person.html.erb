@@ -1,0 +1,105 @@
+<!-- 
+basti-todo: Latest Activity (note below is from Dan)
+	
+Latest Activity consists of chronological events from the NewsFeed
+model that relate to the item\person in question. for the item page,
+it should show the latest activity relating to the item. for the
+people & request page it should show the latest activity relating to
+the other person.
+
+for someone else looking at an item page, and the Latest Activity should show
+chronological events that the item has been involved in. As mentioned
+above, use the NewsFeed model to generate this, not the RecentActivity
+model.
+
+when looking at a request page, and the Latest Activity should show events
+relating to the other person in the transaction as well.
+-->
+<h2>Latest Activity</h2>
+<ul>
+  <% person.activity_involved_with(current_user).each do |activity_log| -%>
+  <li class="sidebar-box clearfix">
+		<div class="inner-content">
+			<p>
+				<%= recent_activity_sentence(activity_log) %>  
+			</p>
+
+			<div class="action clearfix">
+				<ul>
+					<li><%= time_ago_in_words activity_log.created_at %> ago</li>
+					<li><a href="#">comments(0)</a></li>
+				</ul>
+			</div>
+		</div>
+	</li>
+  <% end unless person.activity_involved_with(current_user).nil?-%>
+  <% person.public_events.each do |event_log| -%>
+  <li class="sidebar-box clearfix">
+		<div class="inner-content">
+			<p>
+				<%= event_log_sentence(event_log) %>  
+			</p>
+
+			<div class="action clearfix">
+				<ul>
+					<li><%= time_ago_in_words event_log.created_at %> ago</li>
+					<li><a href="#">comments(0)</a></li>
+				</ul>
+			</div>
+		</div>
+	</li>
+  <% end unless person.public_events.nil?-%>
+  <% if person.public_events.nil?%>
+  <li class="sidebar-box clearfix">
+		<div class="inner-content">
+			<p>
+				This person doesn't have any activity yet
+			</p>
+		</div>
+	</li>
+	<% end -%>
+  
+	<li class="sidebar-box clearfix">
+		<div class="inner-content">
+			<p>
+				Andrea lent a modem to <a class="positive" href="#">Terry Waters</a>
+			</p>
+
+			<div class="action clearfix">
+				<ul>
+					<li>3 days ago</li>
+					<li><a href="#">comments(0)</a></li>
+				</ul>
+			</div>
+		</div>
+	</li>
+	<li class="sidebar-box clearfix">
+		<div class="inner-content">
+			<p>
+				Andrea borrowed a witches costume from <a class="positive" href="#">Dan Brown</a>
+			</p>
+
+			<div class="action clearfix">
+				<ul>
+					<li>2 weeks ago</li>
+					<li><a href="#">comments(0)</a></li>
+				</ul>
+			</div>
+		</div>
+	</li>
+	<li class="sidebar-box clearfix">
+		<div class="inner-content">
+			<p>
+				Andrea started sharing a BBQ
+			</p>
+
+			<div class="action clearfix">
+				<ul>
+					<li>3 weeks ago</li>
+					<li><a href="#">comments(0)</a></li>
+				</ul>
+			</div>
+		</div>
+	</li>
+</ul>
+
