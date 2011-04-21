@@ -56,51 +56,37 @@ class ItemRequest < ActiveRecord::Base
   def accept!
     self.status = STATUS_ACCEPTED
     save!
-    if self.item.purpose == Item::PURPOSE_SHARE
-      create_item_request_accepted_activity_log
-    else
-      create_gift_request_accepted_activity_log
-    end
+    self.item.share? ? create_item_request_accepted_activity_log : create_gift_request_accepted_activity_log
+    self.item.in_use!
   end
 
   def reject!
     self.status = STATUS_REJECTED
     save!
-    if self.item.purpose == Item::PURPOSE_SHARE
-      create_item_request_rejected_activity_log
-    else
-      create_gift_request_rejected_activity_log
-    end
+    self.item.share? ? create_item_request_rejected_activity_log : create_gift_request_rejected_activity_log
+    self.item.available!
   end
 
   def cancel!(current_user_initiator)
-    #TO DO There is better solution for this
     @current_user_initiator = current_user_initiator.person.id   
     self.status = STATUS_CANCELED
     save!
-    if self.item.purpose == Item::PURPOSE_SHARE
-      create_item_request_canceled_activity_log
-    else
-      create_gift_request_canceled_activity_log
-    end    
+    self.item.share? ? create_item_request_canceled_activity_log : create_gift_request_canceled_activity_log
+    self.item.available! 
   end
 
   def collected!(current_user_initiator)
-    #TO DO There is better solution for this
     @current_user_initiator = current_user_initiator.person.id 
     item_type_based_status
+    self.item.in_use!
   end
 
   def complete!(current_user_initiator)
-    #TO DO There is better solution for this
     @current_user_initiator = current_user_initiator.person.id 
     self.status = STATUS_COMPLETED
     save!
-    if self.item.purpose == Item::PURPOSE_SHARE
-      create_item_request_completed_activity_log
-    else
-      create_gift_request_completed_activity_log
-    end 
+    self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
+    self.item.available! 
   end
 
   def requested?
