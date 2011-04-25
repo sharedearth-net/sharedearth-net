@@ -87,13 +87,14 @@
 	<div class="sidebar-box-holder">
 		<h2>News feed</h2>
 		<ul>
-		  <% @news_feed_cashe.each do |event_log| %>
+		  <% @events.each do |event| %>
 		  <li class="sidebar-box clearfix">
+		      <% event_log = EventLog.find_by_id(event.event_id) %>
 					<%= 
 						 render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
 					%>
 			</li>
-			<% end unless @news_feed_cashe.nil? %>
+			<% end unless @events.nil? %>
 		  <%= will_paginate @events, :page_links=>false %> 		
 		<a href="#more_news" class="button-more">
       more
