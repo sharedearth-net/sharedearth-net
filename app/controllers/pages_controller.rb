@@ -12,11 +12,9 @@ class PagesController < ApplicationController
     
     @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30)
     @event_logs = current_user.person.news_feed
-    @news_feed_cashe = current_user.person.news_feed_cashe(@event_logs) if !@event_logs.empty?
+    @events = EventDisplay.paginate(:page => params[:page], :per_page => 25)
+    event_logs = @events.map{|e| e.event_id}
+    @news_feed_cashe = EventLog.find(:all, :conditions => ["id in (?)", event_logs])    
    end
-   
-   def more_news
-    render :layout => false
-  end
 
 end
