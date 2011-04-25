@@ -168,6 +168,7 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    will_paginate (3.0.pre2)
     xml-simple (1.0.14)
 
 PLATFORMS
@@ -188,3 +189,4 @@ DEPENDENCIES
   shoulda (~> 2.11)
   sqlite3-ruby
   webrat
+  will_paginate (~> 3.0.pre2)
