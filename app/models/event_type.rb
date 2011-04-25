@@ -380,6 +380,10 @@ class EventType < ActiveRecord::Base
     [1,3,4,5,9,11,12,14,17,27,28,32,33,35,38]
   end
   
+  def self.personal_actions_objective
+    [2,6,7,10,13,15,16,29,30,31,34,36,37]
+  end
+  
 =begin
   
   def self.new_gift_item_request_gifter(return_only_id = true)
