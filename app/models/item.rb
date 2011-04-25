@@ -56,6 +56,7 @@ class Item < ActiveRecord::Base
   validates_inclusion_of :status, :in => STATUSES.keys, :message => " must be in #{STATUSES.values.join ', '}"
   
   before_update :update_available?
+  before_update :edit_available?
 
   # validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 1.megabyte
@@ -184,7 +185,11 @@ class Item < ActiveRecord::Base
   end
   
   def update_available?
-    self.available? if self.purpose_changed?
+    self.available? if self.purpose_changed? 
+  end
+  
+  def edit_available?
+    !self.lost?
   end
   
 end
