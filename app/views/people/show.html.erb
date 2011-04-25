@@ -16,10 +16,10 @@
 
 					<p class="status-holder-profile">
 						<span>
-							<%= link_to "7", "#", :class => "giftactions", :title => "Gift Actions"  %> gift actions
+							<%= link_to current_user.person.gift_act_actions.to_s + " gift actions", "#", :class => "giftactions", :title => "Gift Actions" %>
 						</span>
 						<span>
-							<%= link_to "4", "#", :class => "people-helped", :title => "People Helped"  %> different people
+							<%= link_to current_user.person.people_helped.to_s + " different people", "#", :class => "people-helped", :title => "People Helped" %>
 						</span>
 						<br />
 							<%= link_to "100%", "#", :class => "feedback-rating", :title => "Feedback Rating"  %> positive feedback
