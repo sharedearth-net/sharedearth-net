@@ -11,10 +11,9 @@ class PagesController < ApplicationController
     @requests.sort! { |a,b| b.created_at <=> a.created_at }
     
     @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30)
-    @event_logs = current_user.person.news_feed
-    @events = EventDisplay.paginate(:page => params[:page], :per_page => 25)
-    event_logs = @events.map{|e| e.event_id}
-    @news_feed_cashe = EventLog.find(:all, :conditions => ["id in (?)", event_logs])    
+    event_logs = current_user.person.news_feed
+    @events = EventDisplay.paginate(:page => params[:page], :per_page => 25, :conditions => [ 'person_id=?', current_user.person.id ], 
+                                                                             :order => 'created_at DESC')
    end
 
 end
