@@ -17,7 +17,7 @@ relating to the other person in the transaction as well.
 -->
 <h2>Latest Activity</h2>
 <ul>
-  <% person.activity_involved_with(current_user).each do |activity_log| -%>
+  <% person.public_activities(current_user).each do |activity_log| -%>
   <li class="sidebar-box clearfix">
 		<div class="inner-content">
 			<p>
@@ -32,7 +32,7 @@ relating to the other person in the transaction as well.
 			</div>
 		</div>
 	</li>
-  <% end unless person.activity_involved_with(current_user).nil?-%>
+  <% end unless person.public_activities(current_user).nil?-%>
   <% person.public_events.each do |event_log| -%>
   <li class="sidebar-box clearfix">
 		<div class="inner-content">
