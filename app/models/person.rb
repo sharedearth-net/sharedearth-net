@@ -168,14 +168,13 @@ class Person < ActiveRecord::Base
   ###########
   
   def public_events
-    EventLog.involves(self).completed_requests.take(10)
+    EventLog.involves(self).completed_requests.order("#{EventLog.table_name}.created_at DESC").take(10)
   end
   
-  def activity_involved_with(current_user)
+  def  public_activities(current_user)
     ActivityLog.find(:all, 
-                                              :conditions => ["(primary_id = ? AND primary_type = ? AND secondary_id = ? AND secondary_type = ? and event_type_id IN (?)) ", 
-                                              self.id, self.class.to_s, current_user.person.id, current_user.person.class.to_s, EventType.personal_actions])
+                         :conditions => ["(primary_id = ? AND primary_type = ? AND secondary_id = ? AND secondary_type = ? and event_type_id IN (?)) ", 
+                         current_user.person.id, current_user.person.class.to_s, self.id, self.class.to_s, EventType.personal_actions_objective], :order => 'created_at DESC').take(10)
   end
-  
   
 end
