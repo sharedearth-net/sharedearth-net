@@ -106,11 +106,12 @@ class Person < ActiveRecord::Base
     event_log_ids = EventEntity.find_by_sql(query.to_sql)
 
 		# CASHE PREVIOUSLY SHOWN NEWS FEED IF NOT ALREADY CASHED
+		event_log_ids = event_log_ids.reverse
+	
 		event_log_ids.each do |e|
 		  conditions = { :type_id =>  EventDisplay::DASHBOARD_FEED, 
                    :person_id => self.id,
                    :event_id => e.event_log_id }
-
       EventDisplay.find(:first, :conditions => conditions) || EventDisplay.create(conditions) 
 		end
   end
