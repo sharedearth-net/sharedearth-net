@@ -24,7 +24,7 @@
     		<%= f.label :Purpose %>
 		</li>
 		<li>
-		    <% if @item.update_available? || @item.new_record? %>
+		    <% if @item.purpose_update_available? || @item.new_record? %>
     		  <%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share? %> <%= f.label :Share %>
     		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift? %> <%= f.label :Gift %>
     		<% else %>
