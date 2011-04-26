@@ -78,7 +78,7 @@ module PagesHelper
 	 elsif !current_user.person.trusts?(event_log.primary) && current_user.person.trusts?(event_log.secondary)
      sentence = gifter + " gifted their " + item + " to " + requester
 	 elsif current_user.person.trusts?(event_log.primary) && current_user.person.trusts?(event_log.secondary)
-      sentence = gifter + " gifted their " + item + " with " + requester 
+      sentence = gifter + " gifted their " + item + " to " + requester 
    else
      sentence = ""
    end
