@@ -86,6 +86,7 @@ class ItemRequest < ActiveRecord::Base
     self.status = STATUS_COMPLETED
     save!
     self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
+    create_sharing_event_log
     self.item.available! 
   end
 
@@ -119,7 +120,6 @@ class ItemRequest < ActiveRecord::Base
     if self.item.purpose != Item::PURPOSE_GIFT 
       self.status = STATUS_COLLECTED
       create_item_request_collected_activity_log
-      create_sharing_event_log
   else
       self.status = STATUS_COMPLETED
       change_ownership
