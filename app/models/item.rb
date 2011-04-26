@@ -185,8 +185,8 @@ class Item < ActiveRecord::Base
     self.available
   end
   
-  def update_available?
-    self.available? && !self.lost? && !self.damaged? && !self.deleted?
+  def purpose_update_available?
+    self.available?
   end
   
   
