@@ -3,9 +3,9 @@ module PagesHelper
   def event_log_sentence(event_log, person, feed)
    
     
-    @same_person = person.nil? ? true : false
+    @same_person = (person.nil? || (current_user.person == person)) ? true : false
     person||= current_user.person
-   (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "positive normal" : text_class = ""
+    (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "positive normal" : text_class = ""
    
     @item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => text_class unless event_log.action_object_type_readable.nil?
     @requester           = link_to event_log.primary_short_name, person_path(event_log.primary), :class => text_class unless event_log.primary_short_name.nil?
@@ -46,7 +46,12 @@ module PagesHelper
   def add_item_sentence(event_log, person)
    
     if event_log.involved_as_requester?(person)
-      sentence = "You are now sharing your" + " " + @item
+       if @same_person
+         sentence = "You are now sharing your" + " " + @item
+       else
+         sentence = event_log.primary_short_name + " " + "is now sharing their" + " " + @item
+       end
+      
     else
       sentence = @requester + " " + "is now sharing their" + " " + @item
     end
@@ -110,9 +115,17 @@ module PagesHelper
   def trust_established_sentence(event_log, person)
 
     if event_log.involved_as_requester?(person)
-      sentence = "You have established a trusted relationship with " + @second_person
+      if @same_person
+         sentence = "You have established a trusted relationship with " + @second_person
+       else
+         sentence = event_log.primary_short_name + " has established a trusted relationship with " + @second_person
+      end
     elsif event_log.involved_as_gifter?(person)
-      sentence = "You have established a trusted relationship with " + @first_person
+      if @same_person
+         sentence = "You have established a trusted relationship with " + @first_person
+      else
+         sentence = event_log.primary_short_name + " has established a trusted relationship with " + @first_person
+      end
     elsif person.trusts?(event_log.primary)
       sentence = @first_person + " has established a trusted relationship with " + @second_person_full
     elsif person.trusts?(event_log.secondary)
@@ -127,11 +140,18 @@ module PagesHelper
   end
 
   def trust_withdrawn_sentence(event_log, person)
-  
     if event_log.involved_as_requester?(person)
-      sentence = "You have withdrawn your trust for " + @second_person
+      if @same_person
+         sentence = "You have withdrawn your trust for " + @second_person
+       else
+         sentence = event_log.primary_short_name +  " has withdrawn their trust for " + @second_person_full
+      end
     elsif event_log.involved_as_gifter?(person)
-      sentence = @first_person + " has withdrawn their trust for you"
+      if @same_person
+         sentence = @first_person + " has withdrawn their trust for you"
+      else
+         sentence = @first_person + " has withdrawn their trust for " + event_log.secondary_short_name
+      end
     elsif person.trusts?(event_log.primary)
       sentence = @first_person + " has withdrawn their trust for " + @second_person_full
     elsif person.trusts?(event_log.secondary)
@@ -147,7 +167,11 @@ module PagesHelper
   
   def item_damaged_sentence(event_log, person)
     if event_log.action_object.is_owner?(person)
-      sentence = "Your " + " " + @item + " " + "is broken"
+       if @same_person
+         sentence = "Your " + " " + @item + " " + "is broken"
+       else
+         sentence = event_log.primary_short_name.possessive + " " + @item + " " + "is broken"
+       end
     else
       sentence = @requester_possesive + " " + @item + " " + "is broken"
     end
@@ -156,7 +180,11 @@ module PagesHelper
   
   def item_repaired_sentence(event_log, person)
     if event_log.action_object.is_owner?(person)
-      sentence = "Your " + " " + @item + " " + "has been broken"
+       if @same_person
+         sentence = "Your " + " " + @item + " " + "has been repaired"
+       else
+         sentence = event_log.primary_short_name.possessive + " " + @item + " " + "has been repaired"
+       end
     else
       sentence = @requester_possesive + " " + @item + " " + "has been repaired"
     end
