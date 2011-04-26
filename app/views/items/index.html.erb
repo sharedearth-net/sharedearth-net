@@ -18,7 +18,9 @@
     <td><%= item.name %></td>
     <td><%= item.description %></td>
     <td><%= link_to 'Show', item %></td>
+    <% if item.normal? %>
     <td><%= link_to 'Edit', edit_item_path(item) %></td>
+    <% end %>
     <td><%= link_to 'Delete', item, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
