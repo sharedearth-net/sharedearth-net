@@ -44,6 +44,7 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
     @item.owner = current_user.person
     @item.status = Item::STATUS_NORMAL
+    @item.available = true
 
     respond_to do |format|
       if @item.save
