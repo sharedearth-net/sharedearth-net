@@ -120,6 +120,10 @@ class Item < ActiveRecord::Base
     self.status == STATUS_DAMAGED
   end
   
+  def deleted?
+    self.deleted_at != nil
+  end
+  
   def damaged!
     self.status = STATUS_DAMAGED
     save!
@@ -185,11 +189,8 @@ class Item < ActiveRecord::Base
   end
   
   def update_available?
-    self.available? if self.purpose_changed? 
+    self.available? && !self.lost? && !self.damaged? && !self.deleted?
   end
   
-  def edit_available?
-    !self.lost?
-  end
   
 end
