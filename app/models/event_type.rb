@@ -384,6 +384,10 @@ class EventType < ActiveRecord::Base
     [2,6,7,10,13,15,16,29,30,31,34,36,37]
   end
   
+  def self.current_actions_underway
+    [4,6,8,9,27,29]
+  end
+  
 =begin
   
   def self.new_gift_item_request_gifter(return_only_id = true)
