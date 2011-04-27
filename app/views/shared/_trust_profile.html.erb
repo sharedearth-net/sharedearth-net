@@ -4,7 +4,7 @@
 		
 		<div class="clearfix">
 		<h2>
-			<%= person.first_name.possessive %> Trust Profile
+			<%= person.first_name %> 
 		</h2>
 			<% if person != current_user.person %>
 				<% if person.requested_trusted_relationship?(current_user.person) %>
