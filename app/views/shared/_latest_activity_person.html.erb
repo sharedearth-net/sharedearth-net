@@ -17,39 +17,35 @@ relating to the other person in the transaction as well.
 -->
 <h2>Latest Activity</h2>
 <ul>
+  <% feed = Array.new()%>
   <% person.public_events.each do |event_log| -%>
-  <li class="sidebar-box clearfix">
-		<div class="inner-content">
-			<p>
-				<%= event_log_sentence(event_log, person, EventDisplay::RECENT_ACTIVITY_FEED) %>  
-			</p>
-
-			<div class="action clearfix">
-				<ul>
-					<li><%= time_ago_in_words event_log.created_at %> ago</li>
-					<li><a href="#">comments(0)</a></li>
-				</ul>
-			</div>
-		</div>
-	</li>
+    <% sentence = event_log_sentence(event_log, person, EventDisplay::RECENT_ACTIVITY_FEED) %>  
+    <% time = event_log.created_at %>
+    <% feed.push({"value" => sentence, "time" => time })%>
   <% end unless person.public_events.empty?-%>
   <% person.public_activities(current_user).each do |activity_log| -%>
+    <% sentence = recent_activity_sentence_personal(activity_log) %>  
+    <% time = activity_log.created_at %>
+    <% feed.push({"value" => sentence, "time" => time })%>
+  <% end unless person.public_activities(current_user).empty? || (current_user.person == person)-%>
+  
+  <% feed = feed.sort_by { |feed| feed["time"] }.last(7).reverse%>
+  <% feed.each do |sentence|%>
   <li class="sidebar-box clearfix">
 		<div class="inner-content">
 			<p>
-				<%= recent_activity_sentence(activity_log) %>  
+				<%= sentence["value"]%>
 			</p>
-
 			<div class="action clearfix">
 				<ul>
-					<li><%= time_ago_in_words activity_log.created_at %> ago</li>
+					<li><%= time_ago_in_words sentence["time"] %> ago</li>
 					<li><a href="#">comments(0)</a></li>
 				</ul>
 			</div>
 		</div>
 	</li>
-  <% end unless person.public_activities(current_user).empty? || (current_user.person == person)-%>
-  <% if person.public_events.empty? && person.public_activities(current_user).empty?%>
+  <% end unless feed.empty? %>
+  <% if feed.empty?%>
   <li class="sidebar-box clearfix">
 		<div class="inner-content">
 			<p>
