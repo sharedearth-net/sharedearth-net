@@ -21,7 +21,9 @@
     <% if item.normal? %>
     <td><%= link_to 'Edit', edit_item_path(item) %></td>
     <% end %>
+    <% if item.available? -%>
     <td><%= link_to 'Delete', item, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end -%>
   </tr>
 <% end %>
 </table>
