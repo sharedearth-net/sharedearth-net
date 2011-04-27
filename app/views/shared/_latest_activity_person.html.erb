@@ -24,11 +24,7 @@ relating to the other person in the transaction as well.
     <% feed.push({"value" => sentence, "time" => time })%>
   <% end unless person.public_events.empty?-%>
   <% person.public_activities(current_user).each do |activity_log| -%>
-    <% if person == current_user.person %>
-      <% sentence = recent_activity_sentence(activity_log) %>  
-    <% else %>
-      <% sentence = recent_activity_sentence_personal(activity_log) %>  
-    <% end %>
+    <% sentence = recent_activity_sentence(activity_log) %>
     <% time = activity_log.created_at %>
     <% feed.push({"value" => sentence, "time" => time })%>
   <% end unless person.public_activities(current_user).empty? -%>
