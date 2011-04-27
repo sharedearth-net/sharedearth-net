@@ -36,7 +36,7 @@
 						<% elsif @item.damaged? %>
 							<li><%= link_to 'Mark as repaired', mark_as_normal_item_path(@item), :method => :put %></li>
 						<% end %>
-				    <% if item.available? -%>
+				    <% if @item.available? -%>
   				    <li><%= link_to 'Delete', @item, :confirm => 'Are you sure?', :method => :delete %></li>
 				    <% end -%>  						
 					</ul>
