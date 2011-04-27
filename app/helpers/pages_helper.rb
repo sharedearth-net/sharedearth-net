@@ -270,44 +270,6 @@ module PagesHelper
     end
     
   end
-  
-   def recent_activity_sentence_personal(activity_log)
-    person                = Person.find_by_id(activity_log.primary_id)
-    if activity_log.primary != person
-      requester           = link_to person.first_name, person_path(person), :class => "positive"
-      requester_possesive = link_to person.first_name.possessive, person_path(person), :class => "positive"
-    else
-      requester = person.first_name
-      requester_possesive = person.first_name.possessive
-    end
-    if current_user.person != person 
-      gifter              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
-      gifter_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
-    else
-      gifter = activity_log.secondary_short_name
-      gifter_possesive = activity_log.secondary_short_name.possessive
-    end
-    item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "positive normal"
-   
-     case activity_log.event_type_id
-     when 4
-       sentence = requester + " accepted " + gifter_possesive + " request to borrow their " + item
-     when 6
-       sentence = gifter + " accepted " + requester_possesive + " request to borrow their " +  item
-     when 8
-       sentence = requester + " collected " + gifter_possesive + " " + item
-     when 9
-       sentence = requester + " collected " + gifter_possesive + " " +  item
-     when 27
-       sentence = requester + " accepted " + gifter_possesive + " request for their " + item
-     when 29
-       sentence = gifter + " accepted " + requester_possesive + " request for their " + item      
-     else
-       # 
-     end 
-     
-     sentence.html_safe
-   end
 
   def recent_activity_sentence(activity_log)
   
