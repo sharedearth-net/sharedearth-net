@@ -177,7 +177,7 @@ class Person < ActiveRecord::Base
       #SHOW EVENTS INVOLVING CURRENT USER AND PERSON WHOOSE PROFILE IS BEEING VIEWED
       activites = ActivityLog.find(:all, 
                          :conditions => ["(primary_id = ? AND primary_type = ? AND secondary_id = ? AND secondary_type = ? and event_type_id IN (?)) ", 
-                         current_user.person.id, current_user.person.class.to_s, self.id, self.class.to_s, EventType.current_actions_underway], :order => 'created_at DESC').take(10)
+                         self.id, self.class.to_s, current_user.person.id, current_user.person.class.to_s,  EventType.current_actions_underway], :order => 'created_at DESC').take(10)
     else
       current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(10)
     end
