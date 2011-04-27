@@ -45,6 +45,7 @@ a:hover {
 }
 
 
+
 a.normal:link,
 a.normal:visited {
 	font-weight: normal !important;
@@ -940,6 +941,11 @@ a.normal:visited {
 										
 										/* trust box action */
 										
+										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li {
+											font-size: 12px;
+											margin-right: 13px;
+										}
+										
 										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li a:link,
 										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li a:visited {
 											color: #62775A;
@@ -951,22 +957,19 @@ a.normal:visited {
 										a.giftactions:visited {
 											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 											background: url('../images/ic-giftactions.png') no-repeat top left;
-										    padding: 5px 0 0 21px;
+										    padding: 4px 0 0 21px;
 											margin: 0 0 0 2px;
 											color: #62775a;
 											font-weight: normal;
-											font-size: 11px;
 										}
 
  										.sidebar-box-profile a.people-helped:link,
 										.sidebar-box-profile a.people-helped:visited {
 											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 											background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
-											padding: 5px 0 0 23px;
+											padding: 2px 0 0 23px;
 											color: #62775a;
 											font-weight: normal;
-											font-size: 11px;
-
 										}
 
 										a.feedback-rating:link,
@@ -976,8 +979,6 @@ a.normal:visited {
 											padding: 6px 0 3px 22px;
 											color: #62775a;
 											font-weight: normal;
-											font-size: 11px;
-
 										}
 										
 										ul.action-list {
