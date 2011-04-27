@@ -291,17 +291,17 @@ module PagesHelper
    
      case activity_log.event_type_id
      when 4
-       sentence = gifter + " accepted " + requester_possesive + " request to borrow their " +  item
+       sentence = requester + " accepted " + gifter_possesive + " request to borrow their " + item
      when 6
-       sentence = gifter + " accepted " + requester_possesive + " request to borrow their " + item
+       sentence = gifter + " accepted " + requester_possesive + " request to borrow their " +  item
      when 8
        sentence = requester + " collected " + gifter_possesive + " " + item
      when 9
        sentence = requester + " collected " + gifter_possesive + " " +  item
      when 27
-       sentence = gifter + " accepted " + requester_possesive + " request for their " + item
+       sentence = requester + " accepted " + gifter_possesive + " request for their " + item
      when 29
-       sentence = gifter + " accepted " + requester_possesive + " request for their " + item
+       sentence = gifter + " accepted " + requester_possesive + " request for their " + item      
      else
        # 
      end 
