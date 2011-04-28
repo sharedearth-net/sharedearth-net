@@ -87,7 +87,7 @@
 	
 	<%= render :partial => "shared/trust_profile", :locals => { :person => (@item_request.gifter?(current_user.person) ? @item_request.requester : @item_request.gifter) } %>
 	
-	<%= render :partial => "shared/latest_activity" %>
+	<%= render :partial => "shared/latest_activity_person", :locals => { :person => (@item_request.gifter?(current_user.person) ? @item_request.requester : @item_request.gifter) } %>
 	
 </div><!-- sidebar -->
 
