@@ -11,15 +11,7 @@
 				
 				
 				<div class="inner-content">
-					
-					<h2>
-						<%= @item_request.requester.name %>
-						
-						<span>
-							would like to borrow a <strong><%= @item_request.item.name %></strong> from you
-						</span>
-					</h2>
-
+					<%= render :partial => "shared/item_request_sentence", :locals => { :req => @item_request, :dashboard => false } %>
 				
 					<%= image_tag item_request_photo(@item_request), :class => "pic-medium" %>
 					
