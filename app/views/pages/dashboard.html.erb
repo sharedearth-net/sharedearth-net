@@ -9,7 +9,7 @@
 							<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
 							<div class="inner-content">
 								<p>
-									<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
+									<%= render :partial => "shared/item_request_sentence", :locals => { :req => req, :dashboard => true } %>
 								</p>
 					
 								<div class="action clearfix">
