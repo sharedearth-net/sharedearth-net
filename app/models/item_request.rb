@@ -78,7 +78,7 @@ class ItemRequest < ActiveRecord::Base
   def collected!(current_user_initiator)
     @current_user_initiator = current_user_initiator.person.id 
     item_type_based_status
-    self.item.in_use!
+    self.item.gift? ? self.item.available! : self.item.in_use!
   end
 
   def complete!(current_user_initiator)
@@ -117,10 +117,10 @@ class ItemRequest < ActiveRecord::Base
   private
   
   def item_type_based_status
-    if self.item.purpose != Item::PURPOSE_GIFT 
+    if self.item.share?
       self.status = STATUS_COLLECTED
       create_item_request_collected_activity_log
-  else
+    else
       self.status = STATUS_COMPLETED
       change_ownership
       create_gift_request_completed_activity_log
