@@ -56,27 +56,27 @@ class ItemRequestsController < ApplicationController
   
   def accept
     @item_request.accept!
-    redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_accepted'))
+    redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_accepted'))
   end
   
   def reject
     @item_request.reject!
-    redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_rejected'))
+    redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_rejected'))
   end
   
   def cancel
     @item_request.cancel!(current_user)
-    redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_canceled'))
+    redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_canceled'))
   end
   
   def collected
     @item_request.collected!(current_user)
-    redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_collected'))
+    redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_collected'))
   end
   
   def complete
     @item_request.complete!(current_user)
-    redirect_to(request_path(@item_request), :notice => I18n.t('messages.item_requests.request_completed'))
+    redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_completed'))
   end
   
   private
