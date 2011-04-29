@@ -3,18 +3,18 @@
 			  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 			  <% sentence = "made a request to borrow" %>
 			  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-			  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+			  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
 	  <% else %>
 	    <% if req.requester?(current_user.person) -%>
 	        <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 			    <% sentence = "requested" %>
 			    <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-			    <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+			    <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
 	    <% else -%>
 	        <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 			    <% sentence = "has requested" %>
 			    <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-			    <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+			    <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
 	    <% end -%>    
 	  <% end %>
 <% elsif req.accepted? %>
@@ -23,31 +23,31 @@
 		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 		  <% sentence = "are sharing" %>
 		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
 	  <% else %>
 		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 		  <% sentence = "is sharing" %>
 		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
 	  <% end %>
   <% else %>
     <% if req.requester?(current_user.person) %>
 		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 		  <% sentence = "have to collect" %>
 		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
 	  <% else %>
 		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 		  <% sentence = "will collect" %>
 		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
 	  <% end %>
   <% end %>
 <% elsif req.collected? %>
 		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 		  <% sentence = "collected" %>
 		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
 <% end %>
 
 <% if dashboard -%>

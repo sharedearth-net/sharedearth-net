@@ -5,7 +5,7 @@
 		<div class="clearfix">
 		<h2>
 			<!--  Nebojsa - the link below is empty - should lead to person's profile -->
-			<%= link_to person.first_name, "", :class => "positive" %> 
+			<%= link_to person.first_name, "", :class => "loged-out" %> 
 		</h2>
 			<% if person != current_user.person %>
 				<% if person.requested_trusted_relationship?(current_user.person) %>
