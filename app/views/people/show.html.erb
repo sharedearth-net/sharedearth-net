@@ -101,7 +101,7 @@
 													requested <%= link_to req.item.name, item_path(req.item) %>
 													from <%= link_to_person(req.gifter, :downcase_you => true, :class => "capitalize positive") %>
 													-->
-													<%= render :partial => "shared/item_request_sentence", :locals => { :req => req } %>
+													<%= render :partial => "shared/item_request_sentence", :locals => { :req => req, :dashboard => true } %>
 												</p>
 											</li>
 										</ul>
