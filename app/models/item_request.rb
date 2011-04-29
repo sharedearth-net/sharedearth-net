@@ -69,6 +69,9 @@ class ItemRequest < ActiveRecord::Base
 
   def cancel!(current_user_initiator)
     @current_user_initiator = current_user_initiator.person.id   
+    if self.accepted? && self.requester?(@current_user_initiator)
+      self.gifter.reputation_rating.increase_gift_actions_count
+    end 
     self.status = STATUS_CANCELED
     save!
     self.item.share? ? create_item_request_canceled_activity_log : create_gift_request_canceled_activity_log
