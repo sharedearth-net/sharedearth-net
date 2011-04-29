@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110420143805) do
+ActiveRecord::Schema.define(:version => 20110429105506) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer   "event_code"
@@ -132,6 +132,21 @@ ActiveRecord::Schema.define(:version => 20110420143805) do
   create_table "person_gift_act_ratings", :force => true do |t|
     t.integer  "person_id"
     t.float    "gift_act_rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reputation_ratings", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "gift_actions"
+    t.integer  "distinct_people"
+    t.integer  "total_actions"
+    t.integer  "positive_feedback"
+    t.integer  "negative_feedback"
+    t.integer  "requests_received"
+    t.integer  "requests_answered"
+    t.integer  "trusted_network_count"
+    t.integer  "activity_level"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
