@@ -6,7 +6,7 @@
 			  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
 	  <% else %>
 	    <% if req.requester?(current_user.person) -%>
-	        <%= person_one = link_to_person(req.requester, {:class => "positive" }) %>
+	        <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 			    <% sentence = "requested" %>
 			    <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
 			    <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
@@ -20,44 +20,44 @@
 <% elsif req.accepted? %>
   <% if req.item.share? -%>
     <% if req.requester?(current_user.person) %>
-		  <%= link_to_person(req.requester, {:class => "positive" }) %>
-		  are sharing
-		  <%= link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <%= link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
+		  <% sentence = "are sharing" %>
+		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
 	  <% else %>
-		  <%= link_to_person(req.requester, {:class => "positive" }) %>
-		  is sharing
-		  <%= link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <%= link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
+		  <% sentence = "is sharing" %>
+		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
 	  <% end %>
   <% else %>
     <% if req.requester?(current_user.person) %>
-		  <%= link_to_person(req.requester, {:class => "positive" }) %>
-		  have to collect
-		  <%= link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <%= link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
+		  <% sentence = "have to collect" %>
+		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
 	  <% else %>
-		  <%= link_to_person(req.requester, {:class => "positive" }) %>
-		  will collect
-		  <%= link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <%= link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
+		  <% sentence = "will collect" %>
+		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
 	  <% end %>
   <% end %>
 <% elsif req.collected? %>
-		  <%= link_to_person(req.requester, {:class => "positive" }) %>
-		  collected
-		  <%= link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
-		  <%= link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
+		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
+		  <% sentence = "collected" %>
+		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
+		  <% item = link_to req.item.item_type, item_path(req.item), :class => "positive normal" %>
 <% end %>
 
 <% if dashboard -%>
-  <%= (person_one + " " + sentence+ " " + person_two + " " + item) unless person_one.nil? && sentence.nil?%>
+  <%= (person_one + " " + sentence+ " " + person_two + " " + item).html_safe unless person_one.nil? && sentence.nil?%>
 <% else -%>
    <h2>
 						<%= person_one %>
 						
 						<span>
-							<%= sentence + " "  + person_two %> <strong><%= item %></strong>
+							<%= (sentence + " "  + person_two).html_safe %> <strong><%= item %></strong>
 						</span>
 	</h2>
 <% end -%>
