@@ -82,6 +82,9 @@ class ItemRequest < ActiveRecord::Base
     @current_user_initiator = current_user_initiator.person.id 
     item_type_based_status
     self.item.gift? ? self.item.available! : self.item.in_use!
+    if self.item.gift?
+      self.gifter.reputation_rating.increase_gift_actions_count
+    end
   end
 
   def complete!(current_user_initiator)
@@ -91,6 +94,7 @@ class ItemRequest < ActiveRecord::Base
     self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
     create_sharing_event_log
     self.item.available! 
+    self.gifter.reputation_rating.increase_gift_actions_count
   end
 
   def requested?
