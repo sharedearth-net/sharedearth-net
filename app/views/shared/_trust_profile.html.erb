@@ -50,7 +50,12 @@
 				<% else %>
 					<%= image_tag("ic-untrusted-profile.png", :class => "icons", :alt => "Untrusted Profile")  %>
 					<p>
-						Not in your trusted network
+					<% if person.requested_trusted_relationship?(current_user.person) %>
+						 Establish trust request pending
+					<% else %>
+					   Not in your trusted network
+					<% end %>
+
 					</p>
 				<% end %>
 			</li>
