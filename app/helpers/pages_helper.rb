@@ -275,7 +275,7 @@ module PagesHelper
   
     gifter              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
     gifter_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
-    person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
+    person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"  unless activity_log.secondary.nil?
     person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive "unless activity_log.secondary_short_name.nil?
     person_full         = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
     

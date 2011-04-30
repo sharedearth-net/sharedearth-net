@@ -49,6 +49,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         @item.create_new_item_event_log
+        @item.create_new_item_activity_log
         format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else

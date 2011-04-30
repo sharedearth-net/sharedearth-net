@@ -166,6 +166,10 @@ class Item < ActiveRecord::Base
   def create_new_item_event_log
     EventLog.create_news_event_log(self.owner, nil,  self , EventType.add_item)
   end
+
+  def create_new_item_activity_log
+    ActivityLog.create_add_item_activity_log(self)
+  end
   
   # #######
   # Metods related to item availability - true/false, if item is available

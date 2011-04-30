@@ -159,7 +159,7 @@ class Person < ActiveRecord::Base
   end
   
   ###########
-  # Recent activity on personal page methods
+  # Latest activity on personal page methods
   ###########
   
   def public_events
