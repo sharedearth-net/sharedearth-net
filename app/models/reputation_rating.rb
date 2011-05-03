@@ -40,7 +40,11 @@ validates_presence_of :person_id
   
   #  PositiveFeedbackRating: = (PositiveFeedback + (NeutralFeedback/2))/TotalActions
   def positive_feedback_rating
-    self.positive_feedback_count + (self.negative_feedback_count /2)/self.total_actions_count
+    if self.total_actions_count != 0 || self.negative_feedback_count != 0 
+      self.positive_feedback_count + (self.negative_feedback_count / 2) / self.total_actions_count
+    else
+      0
+    end
   end
   
   def increase_gift_actions_count
@@ -71,11 +75,13 @@ validates_presence_of :person_id
   def increase_requests_received_count
     self.requests_received += 1
     save!
+    change_activity_level
   end
   
   def increase_requests_answered_count
     self.requests_answered += 1
     save!
+    change_activity_level 
   end
   
   def increase_trusted_network_count_count
@@ -88,9 +94,25 @@ validates_presence_of :person_id
     save!
   end
   
-  def increase_activity_level_count
-    self.activity_level += 1
+  def set_activity_level(level)
+    self.activity_level = level
     save!
+  end
+  
+  
+  def change_activity_level
+   if self.requests_received != 0 && self.requests_answered != 0
+     return
+   end
+    activity = self.requests_received / self.requests_answered
+    if activity > 0.5 && activity < 0.8
+      self.activity_level = 1
+    elsif activity > 0.8
+      self.activity_level = 2
+    else
+       break
+    end
+    save!      
   end
   
   
