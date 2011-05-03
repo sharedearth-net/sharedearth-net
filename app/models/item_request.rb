@@ -91,7 +91,7 @@ class ItemRequest < ActiveRecord::Base
       self.gifter.reputation_rating.increase_gift_actions_count
       self.gifter.reputation_rating.increase_total_actions_count
       self.requester.reputation_rating.increase_total_actions_count
-      self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted_with?(self.requester)
+      self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted?(self.gifter, self.requester)
     end
     item_type_based_status
   end
@@ -104,27 +104,19 @@ class ItemRequest < ActiveRecord::Base
     self.gifter.reputation_rating.increase_gift_actions_count
     self.gifter.reputation_rating.increase_total_actions_count
     self.requester.reputation_rating.increase_total_actions_count
-    self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted_with?(self.requester)
+    self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted?(self.gifter, self.requester)
     self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
     create_sharing_event_log
   end
   
   #CHECK IF SOME COMPLETED REQUEST WITH OTHER PERSON EXSISTS AND IF THERE IS INTERACTION WHEN REQUEST WAS ACCEPTED AND THEN CANCELED BY REQUESTER
-  def already_interacted_with?(other_person)
-    completed = ActivityLog.find(:first, :conditions => ["primary_id=? and primary_type=? and secondary_id=? and secondary_type=? and event_type_id IN (?)", self.gifter_id, self.gifter_type, self.requester_id, self.requester_type, EventType.completed_request_ids])
+  def already_interacted?(first_person, second_person)
+    completed = ItemRequest.find(:first, :conditions => ["gifter_id=? and gifter_type=? and requester_id=? and requester_type=? and status IN (?)", first_person.id, "Person", second_person.id, "Person", [STATUS_COMPLETED]])
     if !completed.nil? 
-      return true
+      true
+    else 
+      false
     end
-     requests = ActivityLog.find(:all, :conditions => ["primary_id=? and primary_type=? and secondary_id=? and secondary_type=? and event_type_id IN (?)", self.gifter_id, self.gifter_type, self.requester_id, self.requester_type, EventType.activity_accepted])
-    if !requests.nil?
-      requests.each do |requested|
-      canceled = ActivityLog.find(:first, :conditions => ["primary_id=? and primary_type=? and secondary_id=? and secondary_type=? and action_object_id=? and action_object_type=? and event_type_id IN (?)", self.gifter_id, self.gifter_type, self.requester_id, self.requester_type, requested.action_object_id, requested.action_object_type, EventType.activity_canceled]) 
-        if !canceled.nil?        
-           return true
-        end
-      end
-    end
-    false
   end
 
   def requested?
