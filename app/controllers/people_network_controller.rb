@@ -7,6 +7,8 @@ class PeopleNetworkController < ApplicationController
     trusted_person = @people_network.trusted_person
     EventLog.create_news_event_log(@people_network.person, @people_network.trusted_person, nil, EventType.trust_withdrawn)
     PeopleNetwork.involves(@people_network.person).involves(@people_network.trusted_person).limit(2).destroy_all
+    @people_network.person.reputation_rating.decrease_trusted_network_count_count
+    @people_network.trusted_person.reputation_rating.decrease_trusted_network_count_count
     redirect_to(trusted_person, :notice => I18n.t('messages.people_network.destroy'))
   end
 end
