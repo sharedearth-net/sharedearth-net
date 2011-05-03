@@ -111,4 +111,19 @@ class ActivityLog < ActiveRecord::Base
     )
   end
 
+  def self.create_add_item_activity_log(item)
+     event_code = ActivityLog.next_event_code
+
+     # create log for owner
+     ActivityLog.create!(
+       :event_code => event_code,
+       :primary => item.owner,
+       :action_object => item,
+       :action_object_type_readable => item.item_type,
+       :related => item,
+       :event_type_id => EventType.add_item
+     )
+   end
+
+
 end

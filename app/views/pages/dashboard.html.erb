@@ -55,14 +55,14 @@
 		
 		<ul>
 			<li class="content-box clearfix">
-				<h2>Recent Activity</h2>
+				<h2 class="default-title">Recent Activity</h2>
 			</li>
 			
 			<% @recent_activity_logs.each do |activity_log| %>
 
 				<li class="content-box clearfix">
 					<%= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb" %>
-					
+
 					<div class="inner-content">
 						<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
 					</div>
@@ -83,9 +83,9 @@
 
 </div>
 
-<div id="sidebar" class="profile-holder">
+<div id="sidebar">
 	<div class="sidebar-box-holder">
-		<h2>News feed</h2>
+		<h2 class="default-title">News Feed</h2>
 		<ul>
 		  <% @events.each do |event| %>
 		  <li class="sidebar-box clearfix">

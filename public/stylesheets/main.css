@@ -30,6 +30,13 @@ a:hover {
 }
 
 
+#content a.item-link:link,
+#content a.item-link:visited,
+#sidebar .inner-content a.item-link:link,
+#sidebar .inner-content a.item-link:visited {
+	color: #333333;
+}
+
 #content a.positive:link,
 #content a.positive:visited {
 	color: #127e0e !important;
@@ -44,7 +51,10 @@ a:hover {
 	text-transform: capitalize !important;
 }
 
-
+a.loged-out:link,
+a.loged-out:visited {
+	color: #858F7C;
+}
 
 a.normal:link,
 a.normal:visited {
@@ -360,6 +370,14 @@ a.normal:visited {
 			font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;
 			color: #127e0e;
 		}
+		
+		#content h2.default-title {
+			color: #858F7C;
+			font-family: verdana,arial,sans-serif;
+		    font-size: 11px;
+		    font-weight: bold;
+		}
+		
 
 		.content-box-holder {
 			margin-bottom: 14px;
@@ -374,6 +392,7 @@ a.normal:visited {
 			background: #ebf5da;
 			padding: 0 15px 12px 15px;
 		}
+		
 		
 			.content-box .thumb {
 				float: left;
@@ -394,7 +413,6 @@ a.normal:visited {
 			.inner-content a:link,
 			.inner-content a:visited {
 				color: #127e0e;
-				font-weight: bold;
 			}
 		
 			.inner-content a:hover {
@@ -486,6 +504,13 @@ a.normal:visited {
 			font-size: 12px;
 			font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;
 			color: #127e0e;
+		}
+		
+		#sidebar h2.default-title {
+			color: #858F7C;
+			font-family: verdana,arial,sans-serif;
+		    font-size: 11px;
+		    font-weight: bold;
 		}
 	
 		#sidebar .sidebar-box {
@@ -943,7 +968,7 @@ a.normal:visited {
 										
 										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li {
 											font-size: 12px;
-											margin-right: 13px;
+											margin-right: 7px;
 										}
 										
 										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li a:link,
@@ -1002,10 +1027,10 @@ a.normal:visited {
 										
 										
 							#sidebar.profile-holder h2 {
-								font-size: 14px;
 								font-family: verdana, arial, sans-serif;
 								padding-left: 16px;
 							}
+							
 							
 							#sidebar.profile-holder p {
 								font-size: 12px;
