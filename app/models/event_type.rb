@@ -376,6 +376,14 @@ class EventType < ActiveRecord::Base
     [18,19,21]
   end
   
+  def self.activity_accepted
+    [4,6,27,29]
+  end
+  
+  def self.activity_canceled
+    [17,38]
+  end
+  
   def self.personal_actions
     [1,3,4,5,9,11,12,14,17,27,28,32,33,35,38]
   end
