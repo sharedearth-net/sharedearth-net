@@ -58,6 +58,7 @@ class ItemRequest < ActiveRecord::Base
     save!
     self.item.share? ? create_item_request_accepted_activity_log : create_gift_request_accepted_activity_log
     self.item.in_use!
+    self.item.owner.reputation_rating.increase_requests_answered_count
   end
 
   def reject!
@@ -65,6 +66,7 @@ class ItemRequest < ActiveRecord::Base
     save!
     self.item.share? ? create_item_request_rejected_activity_log : create_gift_request_rejected_activity_log
     self.item.available!
+    self.item.owner.reputation_rating.increase_requests_answered_count
   end
 
   def cancel!(current_user_initiator)
@@ -180,6 +182,7 @@ class ItemRequest < ActiveRecord::Base
   
   def create_new_item_request_activity_log
     ActivityLog.create_new_item_request_activity_log(self)
+    self.item.owner.reputation_rating.increase_requests_received_count
   end
    
   def create_item_request_accepted_activity_log
