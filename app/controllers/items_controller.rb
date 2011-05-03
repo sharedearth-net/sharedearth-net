@@ -50,6 +50,7 @@ class ItemsController < ApplicationController
       if @item.save
         @item.create_new_item_event_log
         @item.create_new_item_activity_log
+        current_user.person.reputation_rating.set_activity_level(1) if current_user.person.reputation_rating.activity_level == 0
         format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
