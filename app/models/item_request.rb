@@ -71,6 +71,8 @@ class ItemRequest < ActiveRecord::Base
     @current_user_initiator = current_user_initiator.person.id   
     if self.accepted? && (self.requester.id == @current_user_initiator)
       self.gifter.reputation_rating.increase_gift_actions_count
+      self.gifter.reputation_rating.increase_total_actions_count
+      self.requester.reputation_rating.increase_total_actions_count
       self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted_with?(self.requester)
     end 
     self.status = STATUS_CANCELED
@@ -85,6 +87,8 @@ class ItemRequest < ActiveRecord::Base
     self.item.gift? ? self.item.available! : self.item.in_use!
     if self.item.gift?
       self.gifter.reputation_rating.increase_gift_actions_count
+      self.gifter.reputation_rating.increase_total_actions_count
+      self.requester.reputation_rating.increase_total_actions_count
       self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted_with?(self.requester)
     end
     item_type_based_status
@@ -96,6 +100,8 @@ class ItemRequest < ActiveRecord::Base
     save!
     self.item.available! 
     self.gifter.reputation_rating.increase_gift_actions_count
+    self.gifter.reputation_rating.increase_total_actions_count
+    self.requester.reputation_rating.increase_total_actions_count
     self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted_with?(self.requester)
     self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
     create_sharing_event_log
