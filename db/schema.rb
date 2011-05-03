@@ -130,10 +130,10 @@ ActiveRecord::Schema.define(:version => 20110429105506) do
   end
 
   create_table "person_gift_act_ratings", :force => true do |t|
-    t.integer  "person_id"
-    t.float    "gift_act_rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "person_id"
+    t.float     "gift_act_rating"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "reputation_ratings", :force => true do |t|
