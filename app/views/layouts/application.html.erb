@@ -26,13 +26,13 @@
 								<%= link_to "100%", "#", :title => "Feedback Rating" %>
 							</li>
 							<li class="giftactions">
-								<%= link_to "32", "#", :title => "Gift Actions" %>
+								<%= link_to current_user.person.reputation_rating.gift_actions_count.to_s, "#", :title => "Gift Actions" %>
 							</li>
 							<li class="people-helped">
-								<%= link_to "5", "#", :title => "People Helped" %>
+								<%= link_to current_user.person.reputation_rating.distinct_people_count.to_s, "#", :title => "People Helped" %>
 							</li>
 							<li class="activity-level">
-								<%= link_to "L", "#", :title => "Activity Level" %>
+								<%= link_to current_user.person.reputation_rating.activity_level_count.to_s, "#", :title => "Activity Level" %>
 							</li>
 							<li class="giftact-rating">
 								<% if !current_user.nil? -%>
