@@ -75,7 +75,7 @@ class ItemRequest < ActiveRecord::Base
       self.gifter.reputation_rating.increase_gift_actions_count
       self.gifter.reputation_rating.increase_total_actions_count
       self.requester.reputation_rating.increase_total_actions_count
-      self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted_with?(self.requester)
+      self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted?(self.gifter, self.requester)
     end 
     self.status = STATUS_CANCELED
     save!
@@ -113,10 +113,19 @@ class ItemRequest < ActiveRecord::Base
   def already_interacted?(first_person, second_person)
     completed = ItemRequest.find(:first, :conditions => ["gifter_id=? and gifter_type=? and requester_id=? and requester_type=? and status IN (?)", first_person.id, "Person", second_person.id, "Person", [STATUS_COMPLETED]])
     if !completed.nil? 
-      true
-    else 
-      false
+      return true
     end
+    canceled = ItemRequest.find(:all, :conditions => ["gifter_id=? and gifter_type=? and requester_id=? and requester_type=? and status IN (?)", first_person.id, "Person", second_person.id, "Person", [STATUS_ACCEPTED]])
+    canceled.each do |request|
+    ac =    ActivityLog.find(:first,
+                     :conditions => ["primary_id =? and primary_type=? and secondary_id=? and secondary_type=? and action_object_id=? and event_type_id IN (?)", 
+                                      second_person.id, "Person", first_person.id, "Person", request.item_id, EventType.activity_canceled])
+      if !ac.nil?
+        return true
+      end
+    end
+    
+    false
   end
 
   def requested?
