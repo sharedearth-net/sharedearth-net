@@ -19,8 +19,8 @@ class PeopleNetwork < ActiveRecord::Base
   def self.create_trust!(first_person, second_person)
     PeopleNetwork.create!(:person => first_person, :trusted_person => second_person)
     PeopleNetwork.create!(:person => second_person, :trusted_person => first_person)
-    first_person.reputation_rating.increase_trusted_network_count_count
-    second_person.reputation_rating.increase_trusted_network_count_count
+    first_person.reputation_rating.increase_trusted_network_count
+    second_person.reputation_rating.increase_trusted_network_count
     EventLog.create_trust_established_event_log(first_person, second_person)
   end
 end
