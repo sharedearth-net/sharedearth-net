@@ -16,10 +16,10 @@
 
 					<p class="status-holder-profile">
 						<span>
-							<%= link_to current_user.person.reputation_rating.gift_actions_count.to_s + " gift actions", "#", :class => "giftactions", :title => "Gift Actions" %>
+							<%= link_to @person.reputation_rating.gift_actions_count.to_s + " gift actions", "#", :class => "giftactions", :title => "Gift Actions" %>
 						</span>
 						<span>
-							<%= link_to current_user.person.reputation_rating.distinct_people_count.to_s + " different people", "#", :class => "people-helped", :title => "People Helped" %>
+							<%= link_to @person.reputation_rating.distinct_people_count.to_s + " different people", "#", :class => "people-helped", :title => "People Helped" %>
 						</span>
 						<br />
 							<%= link_to "100%", "#", :class => "feedback-rating", :title => "Feedback Rating"  %> positive feedback
