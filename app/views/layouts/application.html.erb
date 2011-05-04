@@ -26,20 +26,16 @@
 								<%= link_to "100%", "#", :title => "Feedback Rating" %>
 							</li>
 							<li class="giftactions">
-								<%= link_to current_user.person.reputation_rating.gift_actions_count.to_s, "#", :title => "Gift Actions" %>
+								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.gift_actions_count.to_s : "0", "#", :title => "Gift Actions" %>
 							</li>
 							<li class="people-helped">
-								<%= link_to current_user.person.reputation_rating.distinct_people_count.to_s, "#", :title => "People Helped" %>
+								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.distinct_people_count.to_s : "0", "#", :title => "People Helped" %>
 							</li>
 							<li class="activity-level">
-								<%= link_to current_user.person.reputation_rating.activity_level_count.to_s, "#", :title => "Activity Level" %>
+								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.activity_level_count.to_s : "0", "#", :title => "Activity Level" %>
 							</li>
 							<li class="giftact-rating">
-								<% if !current_user.nil? -%>
-								  <%= link_to current_user.person.gift_act_rating, "#", :title => "Giftact Rating" %>
-								<% else -%>
-								  <%= link_to "0", "#", :title => "Giftact Rating" %>
-								<% end -%>
+							  <%= link_to !current_user.nil? ? current_user.person.gift_act_rating : "0", "#", :title => "Giftact Rating" %>
 							</li>
 						</ul>
 					</div>
