@@ -101,14 +101,20 @@ validates_presence_of :person_id
   
   
   def change_activity_level
-   if self.requests_received != 0 && self.requests_answered != 0
+   if self.requests_received == 0 && self.requests_answered == 0 && self.person.items.count == 0
+     self.activity_level = 0
+     save!
+     return
+   elsif self.person.items.count != 0 &&  self.requests_received == 0 && self.requests_answered == 0
+     self.activity_level = 1
+     save!
      return
    end
     activity = self.requests_received / self.requests_answered
     if activity > 0.5 && activity < 0.8
-      self.activity_level = 1
-    elsif activity > 0.8
       self.activity_level = 2
+    elsif activity > 0.8
+      self.activity_level = 3
     else
        break
     end
