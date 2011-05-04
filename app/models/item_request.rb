@@ -28,8 +28,11 @@ class ItemRequest < ActiveRecord::Base
 
   scope :involves, lambda { |entity| where("(requester_id = ? AND requester_type = ?) OR (gifter_id = ? AND gifter_type = ?) ", entity.id, entity.class.to_s, entity.id, entity.class.to_s) }
   scope :involves_as_requester, lambda { |entity| where("requester_id = ? AND requester_type = ?", entity.id, entity.class.to_s) }
+  scope :involves_as_gifter, lambda { |entity| where("gifter_id = ? AND gifter_type = ?", entity.id, entity.class.to_s) }
+  scope :answered_gifter, lambda { |entity| where("gifter_id = ? AND gifter_type = ? and status IN (?)", entity.id, entity.class.to_s, [STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_COMPLETED]) }
   scope :active, where("status IN (#{ACTIVE_STATUSES.join(",")})")
   scope :unanswered, where(:status => STATUS_REQUESTED)
+  scope :answered, where(:status => [STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_COMPLETED])
   
   # validates_presence_of :description
   validates_presence_of :requester_id, :requester_type
