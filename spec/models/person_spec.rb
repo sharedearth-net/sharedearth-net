@@ -141,4 +141,6 @@ describe Person, "When printing user trust profile" do
   #TODO
   end
   
+end
+  
   
