@@ -27,6 +27,7 @@ Sharedearthapp::Application.routes.draw do
       put "cancel"
       put "collected"
     end
+    resources :feedbacks
   end
   
   match "/auth/:provider/callback" => "sessions#create"
