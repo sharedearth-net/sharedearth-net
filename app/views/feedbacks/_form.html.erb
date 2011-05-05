@@ -1,0 +1,12 @@
+<%= form_for @feedback, :url => request_feedbacks_path(@request) do |f| %>
+  <%= render :partial => "shared/error_messages", :locals => { :model => @feedback } %>
+  <p>
+    <%= f.label :feedback %><br />
+    <%= f.text_field :feedback %>
+  </p>
+  <p>
+    <%= f.label :feedback_note %><br />
+    <%= f.text_field :feedback_note %>
+  </p>
+  <p><%= f.submit %></p><%= link_to 'Skip', request_path(@request) %>
+<% end %>
