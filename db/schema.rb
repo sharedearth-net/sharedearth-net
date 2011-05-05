@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110504101336) do
+ActiveRecord::Schema.define(:version => 20110504130148) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer   "event_code"
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(:version => 20110504101336) do
     t.integer   "group"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+  end
+
+  create_table "feedbacks", :force => true do |t|
+    t.integer  "item_request_id"
+    t.integer  "person_id"
+    t.string   "feedback"
+    t.string   "feedback_note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "item_requests", :force => true do |t|
