@@ -161,7 +161,7 @@ class EventType < ActiveRecord::Base
     return_only_id ? 11 : EventType.find(11)
   end
 
-  def item_request_collected_requester?
+  def item_request_completed_requester?
     self.id == EventType.item_request_completed_requester
   end
   
@@ -394,6 +394,10 @@ class EventType < ActiveRecord::Base
   
   def self.current_actions_underway
     [2,3,4,6,8,9,27,29]
+  end
+  
+  def completed?
+    self.item_request_completed_gifter? || self.item_request_completed_requester? || self.item_gifter_completed_gifter? || self.item_gifter_collected_requester?
   end
   
 =begin
