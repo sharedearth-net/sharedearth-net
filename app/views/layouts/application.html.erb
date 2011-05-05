@@ -32,7 +32,9 @@
 								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.distinct_people_count.to_s : "0", "#", :title => "People Helped" %>
 							</li>
 							<li class="activity-level">
+							<% if !current_user.nil? -%>
 							  <% current_user.person.reputation_rating.change_activity_level %>
+							<% end -%>		  
 								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.activity_level_count.to_s : "0", "#", :title => "Activity Level" %>
 							</li>
 							<li class="giftact-rating">
