@@ -83,4 +83,27 @@
 	
 </div><!-- sidebar -->
 
+<%# TEMP CODE%>
+<% if @item_request.completed? -%>
+
+<% if @item_request.feedbacks.size != 2 -%>
+  Both parties didn't leave feedback yet.  
+<% else -%>
+  <% @item_request.feedbacks.each do |feedback|%>
+    <% person = Person.find_by_id(feedback.person_id)%>
+    <p>
+    <%= person.name %>
+    </p>
+    <p>
+    <%= feedback.feedback%>
+    </p>
+    <p>
+    <%= feedback.feedback_note if feedback.feedback != 'positive'%>
+    </p>
+  <% end %>
+<% end -%>
+<%= link_to "Add feedback", new_request_feedback_path(@item_request), {:class => 'get'} %>   
+  
+<% end -%>  
+
 
