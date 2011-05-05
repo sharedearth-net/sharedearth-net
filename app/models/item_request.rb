@@ -23,6 +23,7 @@ class ItemRequest < ActiveRecord::Base
 
   has_many :activity_logs, :as => :related
   has_many :event_logs, :as => :related
+  has_many :feedbacks
 
   after_create :create_new_item_request_activity_log
 
