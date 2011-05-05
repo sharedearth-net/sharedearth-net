@@ -51,8 +51,8 @@
 <% end %>
 
 <% if dashboard -%>
-  <%= (person_one + " " + sentence+ " " + person_two + " " + item).html_safe unless person_one.nil? && sentence.nil?%>
-<% else -%>
+  <%= (person_one + " " + sentence+ " " + person_two + " " + item).html_safe unless person_one.nil? && sentence.nil? if !person_one.nil? && !person_two.nil? && !sentence.nil?%>
+<% elsif !person_one.nil? && !person_two.nil? && !sentence.nil? -%>
    <h2>
 						<%= person_one %>
 						
