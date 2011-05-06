@@ -116,7 +116,7 @@ validates_presence_of :person_id
     elsif activity > 0.8
       self.activity_level = 3
     else
-       break
+       #
     end
     save!      
   end
