@@ -29,10 +29,7 @@ class ItemRequestsController < ApplicationController
   end
   
   def create
-    @item_request           = ItemRequest.new(params[:item_request])
-    @item_request.requester = current_user.person
-    @item_request.gifter    = @item_request.item.owner
-    @item_request.status    = ItemRequest::STATUS_REQUESTED
+    @item_request = ItemRequest.new_by_requester(params[:item_request], current_user.person)
 
     if @item_request.item.can_be_requested?        
       respond_to do |format|
