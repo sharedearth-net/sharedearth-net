@@ -27,3 +27,4 @@ capybara-*.html
 **.orig
 # config/*.yml
 rerun.txt
+/.idea/
