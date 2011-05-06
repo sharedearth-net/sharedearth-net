@@ -48,5 +48,7 @@ group :development, :test do
 	gem "webrat"
 	gem "rcov"
 	gem 'factory_girl_rails'
-	gem "ruby-debug"
+	gem "ruby-debug19"
 end
+gem "simplecov", :require => false, :group => :test
+
