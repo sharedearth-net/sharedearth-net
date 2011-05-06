@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    user_id = session[:user_id]
+    @current_user ||= User.find(user_id) if user_id
     # TODO: should handle unlikely case where user with that ID no longer exists
   end
   
