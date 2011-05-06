@@ -22,7 +22,7 @@ class ItemRequest < ActiveRecord::Base
   belongs_to :gifter, :polymorphic => true
 
   has_many :activity_logs, :as => :related
-  has_many :event_logs, :as => :related
+  has_many :event_logs, :as => :relatedcan
   has_many :feedbacks
 
   after_create :create_new_item_request_activity_log
@@ -47,6 +47,14 @@ class ItemRequest < ActiveRecord::Base
 
   def gifter?(gifter)
     self.gifter == gifter
+  end
+  
+  def self.new_by_requester(params, requester)
+    item_request           = self.new(params)
+    item_request.requester = requester
+    item_request.gifter    = item_request.item.owner
+    item_request.status    = ItemRequest::STATUS_REQUESTED
+    item_request
   end
   
   # #######
