@@ -72,6 +72,11 @@ validates_presence_of :person_id
     save!
   end
   
+  def increase_neutral_feedback_count
+    self.neutral_feedback += 1
+    save!
+  end
+  
   def increase_requests_received_count
     self.requests_received += 1
     save!
