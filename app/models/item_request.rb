@@ -34,6 +34,7 @@ class ItemRequest < ActiveRecord::Base
   scope :active, where("status IN (#{ACTIVE_STATUSES.join(",")})")
   scope :unanswered, where(:status => STATUS_REQUESTED)
   scope :answered, where(:status => [STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_COMPLETED])
+  scope :older_than_2_weeks, where("created_at > ? and created_at < ? and status = ?",15.days.ago, 14.days.ago, STATUS_COMPLETED)
   
   # validates_presence_of :description
   validates_presence_of :requester_id, :requester_type
