@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110504130148) do
+ActiveRecord::Schema.define(:version => 20110509092008) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer   "event_code"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20110504130148) do
     t.integer  "activity_level"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "neutral_feedback"
   end
 
   create_table "users", :force => true do |t|
