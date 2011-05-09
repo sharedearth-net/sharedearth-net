@@ -4,7 +4,7 @@ class Feedback < ActiveRecord::Base
   FEEDBACK_NEUTRAL   = 30.freeze
 
 
-  FEEDBACKS = {
+  FEEDBACK_TYPES = {
     FEEDBACK_POSITIVE  => 'positive',
     FEEDBACK_NEGATIVE   => 'negative',
     FEEDBACK_NEUTRAL  => 'neutral'
@@ -17,6 +17,7 @@ class Feedback < ActiveRecord::Base
   after_create :feedback_reputation_count
   
   scope :as_person, lambda { |entity| where("person_id = ?", entity.id) }
+  scope :for_item_request, lambda { |entity| where("item_request_id = ?", entity.id) }
   
   def feedback_reputation_count
     feedback_person = (self.item_request.requester != self.person)? self.item_request.requester : self.item_request.gifter
@@ -29,6 +30,14 @@ class Feedback < ActiveRecord::Base
         feedback_person.reputation_rating.increase_neutral_feedback_count
       else
         #
+    end
+  end
+  
+  def self.create_default_feedback(person, item_request)
+    create! do |feedback|
+      feedback.item_request_id = item_request.id
+      feedback.person_id = person.id
+      feedback.feedback = 'positive'
     end
   end
   
