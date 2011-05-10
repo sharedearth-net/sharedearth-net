@@ -41,4 +41,8 @@ class Feedback < ActiveRecord::Base
     end
   end
   
+  def self.exists_for?(item_request_id, person_id)
+    Feedback.find_by_item_request_id_and_person_id(item_request_id, person_id).nil? ? true : false
+  end
+  
 end
