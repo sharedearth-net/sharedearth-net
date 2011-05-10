@@ -110,19 +110,19 @@ class ItemRequest < ActiveRecord::Base
   end
 
   def complete!(current_user_initiator)
-    @current_user_initiator = current_user_initiator.person.id 
-    self.status = STATUS_COMPLETED
-    save!
+    @current_user_initiator = current_user_initiator.person.id
     self.item.available! 
     self.gifter.reputation_rating.increase_gift_actions_count
     self.gifter.reputation_rating.increase_total_actions_count
     self.requester.reputation_rating.increase_total_actions_count
     self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted?(self.gifter, self.requester)
     self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
+    self.status = STATUS_COMPLETED
+    save!
     create_sharing_event_log
   end
   
-  #CHECK IF SOME COMPLETED REQUEST WITH OTHER PERSON EXSISTS AND IF THERE IS INTERACTION WHEN REQUEST WAS ACCEPTED AND THEN CANCELED BY REQUESTER
+  #CHECK IF SOME COMPLETED REQUEST WITH OTHER PERSON EXISTS AND IF THERE IS INTERACTION WHEN REQUEST WAS ACCEPTED AND THEN CANCELED BY REQUESTER
   def already_interacted?(first_person, second_person)
     completed = ItemRequest.find(:first, :conditions => ["gifter_id=? and gifter_type=? and requester_id=? and requester_type=? and status IN (?)", first_person.id, "Person", second_person.id, "Person", [STATUS_COMPLETED]])
     if !completed.nil? 
