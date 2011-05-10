@@ -1,13 +1,15 @@
 <%= form_for @feedback, :url => request_feedbacks_path(@request) do |f| %>
   <%= render :partial => "shared/error_messages", :locals => { :model => @feedback } %>
   <p>
-    <%= f.radio_button :feedback, 'positive' %> <%= f.label :Positive %>
-    <%= f.radio_button :feedback, 'neutral' %> <%= f.label :Neutral %>
-    <%= f.radio_button :feedback, 'negative' %> <%= f.label :Negative %>
+    <%= f.radio_button :feedback, 'positive', :onclick => "show_feedback(false)" %> <%= f.label :Positive %>
+    <%= f.radio_button :feedback, 'neutral', :onclick => "show_feedback(true)" %> <%= f.label :Neutral %>
+    <%= f.radio_button :feedback, 'negative', :onclick => "show_feedback(true)" %> <%= f.label :Negative %>
   </p>
   <p>
     <%= f.label :feedback_note %><br />
+    <div id="feedback_note" style="display:none;"">
     <%= f.text_area :feedback_note %>
+    </div>
   </p>
-  <p><%= f.submit %></p><%= link_to 'Skip', request_path(@request) %>
+  <p><%= f.submit %></p><%= link_to 'Do that later', request_path(@request) %>
 <% end %>
