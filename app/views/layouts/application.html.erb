@@ -33,7 +33,7 @@
 							</li>
 							<li class="activity-level">
 							<% if !current_user.nil? -%>
-							  <% current_user.person.reputation_rating.change_activity_level %>
+							  <% current_user.person.reputation_rating.activity_level? %>
 							<% end -%>		  
 								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.activity_level_count.to_s : "0", "#", :title => "Activity Level" %>
 							</li>
