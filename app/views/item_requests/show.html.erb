@@ -95,14 +95,12 @@
     <%= person.name %>
     </p>
     <p>
-    <%= feedback.feedback%>
-    </p>
-    <p>
+    <%= feedback.feedback%> |
     <%= feedback.feedback_note if feedback.feedback != 'positive'%>
     </p>
   <% end %>
 <% end -%>
-<%= link_to "Add feedback", new_request_feedback_path(@item_request), {:class => 'get'} %>   
+<%= link_to "Add feedback", new_request_feedback_path(@item_request), {:class => 'get'} if !@item_request.has_left_feedback?(current_user.person.id) %>   
   
 <% end -%>  
 
