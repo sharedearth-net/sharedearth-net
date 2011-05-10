@@ -164,6 +164,10 @@ class ItemRequest < ActiveRecord::Base
   def completed?
     self.status == STATUS_COMPLETED
   end
+  
+  def has_left_feedback?(person_id)
+    !Feedback.exists_for?(self.id, person_id)
+  end
 
   private
   
