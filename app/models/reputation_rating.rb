@@ -30,7 +30,7 @@ validates_presence_of :person_id
     self.requests_answered
   end
   
-  def trusted_network_count_count
+  def trusted_network_volume
     self.trusted_network_count
   end
   
@@ -89,12 +89,12 @@ validates_presence_of :person_id
     change_activity_level 
   end
   
-  def increase_trusted_network_count_count
+  def increase_trusted_network_count
     self.trusted_network_count += 1
     save!
   end
   
-  def decrease_trusted_network_count_count
+  def decrease_trusted_network_count
     self.trusted_network_count -= 1
     save!
   end
@@ -106,15 +106,10 @@ validates_presence_of :person_id
   
   
   def change_activity_level
-   if self.requests_received == 0 && self.requests_answered == 0 && self.person.items.count == 0
-     self.activity_level = 0
-     save!
-     return
-   elsif self.person.items.count != 0 &&  self.requests_received == 0 && self.requests_answered == 0
-     self.activity_level = 1
-     save!
-     return
-   end
+    set_beginner_activity || set_activity_level  
+  end 
+  
+  def set_activity_level
     activity = self.requests_received / self.requests_answered
     if activity > 0.5 && activity < 0.8
       self.activity_level = 2
@@ -123,8 +118,21 @@ validates_presence_of :person_id
     else
        #
     end
-    save!      
+    save!  
   end
   
+  def set_beginner_activity
+     if (self.requests_received == 0 || self.requests_answered == 0) && self.person.items.count == 0
+       self.activity_level = 0
+       save!
+     elsif (self.requests_received == 0 || self.requests_answered == 0) && self.person.items.count != 0
+       self.activity_level = 1
+       save!
+     end     
+  end 
+  
+  def activity_level?
+    self.activity_level
+  end
   
 end
