@@ -1,6 +1,6 @@
 class AddNeutralFeedbackToReputation < ActiveRecord::Migration
   def self.up
-    add_column :reputation_ratings, :neutral_feedback, :string
+    add_column :reputation_ratings, :neutral_feedback, :integer
   end
 
   def self.down
