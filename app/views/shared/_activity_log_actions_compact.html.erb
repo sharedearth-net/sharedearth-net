@@ -9,15 +9,14 @@
 	</li>
 <% end %>
 
-<% current_user_feedback = activity_log.related.feedbacks.as_person(current_user.person)%>
-<% if activity_log.event_type.completed? && current_user_feedback.empty? %>
+<% if activity_log.related.completed? && activity_log.related.has_left_feedback?(current_user.person.id) %>
 	<li>
-		<%= link_to "leave feedback", new_request_feedback_path(activity_log.related) %>
+	  <%= link_to "show feedback", request_path(activity_log.related) %>
 	</li>
-<% elsif activity_log.event_type.completed? && activity_log.related.feedbacks.size != 0 %>
-  <li>
-		<%= link_to "show feedback", request_path(activity_log.related) %>
-	</li>
+<% elsif activity_log.related.completed? %>
+    <li>
+      <%= link_to "leave feedback", new_request_feedback_path(activity_log.related) %>
+    </li>
 <% end %>
 
 
