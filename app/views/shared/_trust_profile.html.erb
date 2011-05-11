@@ -35,7 +35,7 @@
 				<%= link_to person.reputation_rating.distinct_people_count.to_s + " different people", "#", :class => "people-helped", :title => "People Helped" %>
 			</li>
 			<li>
-				<%= link_to "100% positive feedback", "#", :class => "feedback-rating", :title => "People Helped" %>
+				<%= link_to person.reputation_rating.feedback_rating?.to_s + "%", "#", :class => "feedback-rating", :title => "Feedback rating" %>
 			</li>
 		</ul>
 		<%= image_tag("devider-trust-profile.png", :class => "devider", :alt => "")  %>
