@@ -16,8 +16,10 @@ class Person < ActiveRecord::Base
 
   has_many :event_entities, :as => :entity
   has_many :related_event_logs, :through => :event_entities, :source => :event_log
-  
+
+  has_many :feedbacks
   has_one :reputation_rating
+
   validates_presence_of :user_id, :name
 
   def belongs_to?(some_user)
