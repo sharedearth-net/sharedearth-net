@@ -375,7 +375,6 @@ a.normal:visited {
 			color: #858F7C;
 			font-family: verdana,arial,sans-serif;
 		    font-size: 11px;
-		    font-weight: bold;
 		}
 		
 
@@ -510,12 +509,12 @@ a.normal:visited {
 			color: #858F7C;
 			font-family: verdana,arial,sans-serif;
 		    font-size: 11px;
-		    font-weight: bold;
 		}
 	
 		#sidebar .sidebar-box {
 			margin-top: 10px;
 		}
+	
 	
 		#sidebar .inner-content {
 		    margin-left: 0;
@@ -901,7 +900,7 @@ a.normal:visited {
 								}
 								
 								#sidebar .sidebar-box-holder .sidebar-box-profile h3 {
-									font-size: 11px;
+									font-size: 10px;
 									font-family: verdana, arial, sans-serif;
 									padding-left: 0;
 									color: #315859;
@@ -1037,9 +1036,13 @@ a.normal:visited {
 								font-family: verdana, arial, sans-serif;
 							}
 							
+								#sidebar.profile-holder .sidebar-box p {
+									font-size: 13px;
+								}
+							
 							#sidebar.profile-holder .inner-content {
 								padding-left: 16px;
-							}
+							} 
 								
 								
 								
