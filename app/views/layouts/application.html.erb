@@ -23,7 +23,7 @@
 					<div class="status-holder">
 						<ul>
 							<li class="feedback-rating">
-								<%= link_to !current_user.nil? ? (current_user.person.reputation_rating.feedback_rating?.to_s + "%") : "0%", "#", :title => "Feedback Rating" %>
+								<%= link_to !current_user.nil? ? (current_user.person.reputation_rating.feedback_rating?.to_s + "%") : "0%", "#", :title => "'Positive Feedback Rating" %>
 							</li>
 							<li class="giftactions">
 								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.gift_actions_count.to_s : "0", "#", :title => "Gift Actions" %>
