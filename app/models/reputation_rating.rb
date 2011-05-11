@@ -137,7 +137,7 @@ validates_presence_of :person_id
   
   def feedback_rating?
     if self.positive_feedback == 0 && self.negative_feedback == 0 && self.neutral_feedback == 0 
-      100
+      nil
     elsif positive_feedback == 0 && (self.negative_feedback != 0 || self.neutral_feedback != 0)
       0
     else
