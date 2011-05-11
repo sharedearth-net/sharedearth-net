@@ -23,7 +23,7 @@
 					<div class="status-holder">
 						<ul>
 							<li class="feedback-rating">
-								<%= link_to "100%", "#", :title => "Feedback Rating" %>
+								<%= link_to !current_user.nil? ? (current_user.person.reputation_rating.feedback_rating?.to_s + "%") : "0%", "#", :title => "Feedback Rating" %>
 							</li>
 							<li class="giftactions">
 								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.gift_actions_count.to_s : "0", "#", :title => "Gift Actions" %>
@@ -38,7 +38,7 @@
 								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.activity_level_count.to_s : "0", "#", :title => "Activity Level" %>
 							</li>
 							<li class="giftact-rating">
-							  <%= link_to !current_user.nil? ? current_user.person.gift_act_rating : "0", "#", :title => "Giftact Rating" %>
+							  <%= link_to !current_user.nil? ? current_user.person.trusted_network_count(current_user.person) : "0", "#", :title => "Giftact Rating" %>
 							</li>
 						</ul>
 					</div>
