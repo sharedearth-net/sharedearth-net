@@ -135,4 +135,18 @@ validates_presence_of :person_id
     self.activity_level
   end
   
+  def feedback_rating?
+    if self.positive_feedback == 0 && self.negative_feedback == 0 && self.neutral_feedback == 0 
+      100
+    elsif positive_feedback == 0 && (self.negative_feedback != 0 || self.neutral_feedback != 0)
+      0
+    else
+      (self.positive_feedback * 100) / self.feedback_count
+    end
+  end
+  
+  def feedback_count
+    self.positive_feedback + self.negative_feedback + self.neutral_feedback
+  end
+  
 end
