@@ -13,3 +13,12 @@
   </p>
   <p><%= f.submit %></p><%= link_to 'Do that later', request_path(@request) %>
 <% end %>
+<script language="javascript">
+checked_negative = document.getElementById('feedback_feedback_neutral').checked || document.getElementById('feedback_feedback_negative').checked 
+document.getElementById("feedback_note").style.display = checked_negative ? "block" : "none";
+
+function show_feedback(note)
+{
+ document.getElementById("feedback_note").style.display = note ? "block" : "none";
+}
+</script>
