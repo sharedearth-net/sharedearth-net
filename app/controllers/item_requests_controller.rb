@@ -29,9 +29,14 @@ class ItemRequestsController < ApplicationController
   end
   
   def create
-    @item_request = ItemRequest.new_by_requester(params[:item_request], current_user.person)
+    if params[:item_id].nil?
+      @item_request = ItemRequest.new_by_requester(params[:item_request], current_user.person)
+    else
+      @item = Item.find(params[:item_id])
+      @item_request = ItemRequest.new(:requester=> current_user.person, :item_id => @item.id, :gifter=> @item.owner, :status => ItemRequest::STATUS_REQUESTED)
+    end
 
-    if @item_request.item.can_be_requested?        
+    if @item_request.item.can_be_requested?
       respond_to do |format|
         if @item_request.save
           format.html { redirect_to(request_path(@item_request), :notice => 'Request was successfully created.') }
