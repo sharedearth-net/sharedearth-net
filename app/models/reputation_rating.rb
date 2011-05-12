@@ -146,7 +146,7 @@ validates_presence_of :person_id
   end
   
   def feedback_count
-    self.positive_feedback + self.negative_feedback + self.neutral_feedback
+    self.positive_feedback + self.negative_feedback
   end
   
 end
