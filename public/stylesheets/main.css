@@ -525,10 +525,16 @@ a.normal:visited {
 			#sidebar .inner-content p {
 				font-size: 11px;
 			}
+			
+				#sidebar .inner-content p a:link,
+				#sidebar .inner-content p a:visited {
+					color: #333;
+				}
+			
 		
 				#sidebar .inner-content p span  {
 					font-size: 9px;
-	                color: #badb80;
+					color: #badb80;
 				}
             
 	            #sidebar .inner-content p span a:link,
@@ -540,7 +546,6 @@ a.normal:visited {
 			#sidebar .inner-content a:visited {
 				color: #858f7c;
 	            font-weight: normal;
-
 			}
 		
 			#sidebar .inner-content a:hover {
@@ -669,6 +674,11 @@ a.normal:visited {
 					font-family: verdana, arial, sans-serif;
 					color: #62775a;
 					margin-bottom: 15px;
+				}
+				
+				#content p.default-text {
+					font-size: 13px;
+					color: #333;
 				}
 
 				#content .no-bg p span {

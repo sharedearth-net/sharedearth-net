@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110509092008) do
+ActiveRecord::Schema.define(:version => 20110512104213) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer  "event_code"
@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(:version => 20110509092008) do
 
   add_index "activity_logs", ["event_code"], :name => "index_activity_logs_on_event_code"
   add_index "activity_logs", ["primary_id", "primary_type"], :name => "index_activity_logs_on_primary_id_and_primary_type"
+
+  create_table "entities", :force => true do |t|
+    t.integer  "entity_type_id"
+    t.integer  "specific_entity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "entity_types", :force => true do |t|
+    t.string   "entity_type_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "event_displays", :force => true do |t|
     t.integer  "type_id"
@@ -158,7 +171,16 @@ ActiveRecord::Schema.define(:version => 20110509092008) do
     t.integer  "activity_level"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "neutral_feedback"
+    t.integer  "neutral_feedback",      :default => 0
+  end
+
+  create_table "resource_networks", :force => true do |t|
+    t.integer  "entity_id"
+    t.integer  "entity_type_id"
+    t.integer  "resource_id"
+    t.integer  "resource_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
