@@ -4,11 +4,7 @@
 		<ul>
 			<li class="content-box clearfix">
 				
-				<!--  Nebojsa-todo - requestor image is static	-->
-				
-				<%= image_tag "http://profile.ak.fbcdn.net/hprofile-ak-snc4/41494_806048396_6664_n.jpg", :class => "thumb" %>
-				
-				
+				<%= image_tag @item_request.requester.avatar(:large), :class => "thumb" %>
 				
 				<div class="inner-content">
 					<%= render :partial => "shared/item_request_sentence", :locals => { :req => @item_request, :dashboard => false } %>
