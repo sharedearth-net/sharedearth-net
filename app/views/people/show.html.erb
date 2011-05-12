@@ -57,10 +57,10 @@
 										
 										<ul class="action-list">
 											<li>
-												<%= link_to "7", "#", :class => "giftactions", :title => "Gift Actions" %>
+												<%= link_to item.owner.reputation_rating.gift_actions_count.to_s, "#", :class => "giftactions", :title => "Gift Actions" %>
 											</li>
 											<li>
-												<%= link_to "4", "#", :class => "people-helped", :title => "People Helped" %>
+												<%= link_to item.owner.reputation_rating.distinct_people_count.to_s, "#", :class => "people-helped", :title => "People Helped" %>
 											</li>
 											<li>
 												<%= link_to "view item", item_path(item) %>
@@ -70,7 +70,7 @@
 												<%= link_to "request", new_request_path(:item_id => item) %>
 											</li>
 											<li>
-												<%= link_to "quick request", "#" %>
+												<%= link_to "quick request", requests_path(:item_id => item.id), :method => :post %>
 											</li>
 											<% end -%>
 										</ul>
