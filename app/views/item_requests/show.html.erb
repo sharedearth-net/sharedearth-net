@@ -9,7 +9,7 @@
 				<div class="inner-content">
 					<%= render :partial => "shared/item_request_sentence", :locals => { :req => @item_request, :dashboard => false } %>
 				
-					<%= image_tag item_request_photo(@item_request), :class => "pic-medium" %>
+					<%= image_tag @item_request.item.photo.url(:medium), :class => "pic-medium" if @item_request.item.photo? %>
 					
 					<ul class="action-buttons-list clearfix">
 				
