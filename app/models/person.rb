@@ -21,6 +21,8 @@ class Person < ActiveRecord::Base
   has_one :reputation_rating
 
   validates_presence_of :user_id, :name
+  
+  #after_create :create_entity_for_person
 
   def belongs_to?(some_user)
     user == some_user
@@ -29,7 +31,20 @@ class Person < ActiveRecord::Base
   def trusts?(other_person)
     self.people_networks.involves_as_trusted_person(other_person).first
   end
-
+  
+  def create_entity_for_person
+    Entity.create!(:entity_type_id => EntityType::PERSON_ENTITY, :specific_entity_id => self.id)
+  end
+  
+  def trusted_network_size
+    self.people_networks.count
+  end
+  
+  def extended_network_size
+    relationship = self.people_networks(:trusted_person_id)
+    friends = Person.find(:all, :conditions => ["id IN (?)", relationship])
+    size = friends.each { |person| person.people_networks.count }.sum
+  end
 
   #FIND CURRENT USER AND SHOWN USER MUTUAL FRIENDS COUNT
   def trusted_network_count(other_person)
