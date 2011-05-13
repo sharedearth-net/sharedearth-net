@@ -23,8 +23,13 @@ class ItemRequestsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @item }
+      if @item_request.completed?
+        format.html { render 'completed'}
+        format.xml  { render :xml => @item }
+      else
+        format.html # show.html.erb
+        format.xml  { render :xml => @item }
+      end
     end
   end
   
