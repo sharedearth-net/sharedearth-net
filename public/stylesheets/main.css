@@ -1151,6 +1151,365 @@ a.normal:visited {
 								color: #127e0e;
 							}
 							
+							
+							
+							
+							/* COMPLETED REQUEST */
+
+							#wrapper .completed-request {
+
+							}
+
+								/* feeback */
+
+								#wrapper .completed-request .feedback-holder {
+									position: relative;
+									width: 128px;
+									margin: 0 auto 40px auto;
+								}
+
+									#wrapper .completed-request .feedback-holder img {
+										position: relative;
+										width: 108px;
+										margin: 0 auto;
+										display: block;
+									}
+
+
+									#wrapper .completed-request .feedback {
+										position: absolute;
+										height: 128px;
+										width: 128px;
+										background: #c7cac1;
+										top: 10px;
+										z-index: -10;
+									}
+
+
+									#wrapper .completed-request .positive-feedback {
+										background: #78b800;
+									}
+
+									#wrapper .completed-request .negative-feedback {
+										background: #f00;
+									}
+
+
+
+								/* sidebar left */
+
+								#wrapper .completed-request #sidebar-left {
+									width: 210px;
+									float: left;
+									margin-left: 82px;
+								}
+
+
+									#wrapper .completed-request #sidebar-left .sidebar-box {
+										background: #ebf5da;
+										width: 195px;
+									}
+
+
+										#wrapper .completed-request #sidebar-left .sidebar-box h2 {
+											font-size: 14px;
+											font-family: verdana, arial, sans-serif;
+											color: #127e0e;
+											padding-left: 13px;
+										}
+
+										#wrapper .completed-request #sidebar-left .sidebar-box h3 {
+											color: #315859;
+										    font-family: verdana,arial,sans-serif;
+										    font-size: 11px;
+										    font-weight: bold;
+										    margin-top: 5px;
+										    padding-left: 13px;
+										}
+
+
+										#wrapper .completed-request #sidebar-left .sidebar-box .devider {
+
+										}
+
+										#wrapper .completed-request #sidebar-left .sidebar-box ul.action-list {
+											padding-left: 13px;
+										}
+
+										#wrapper .completed-request #sidebar-left .sidebar-box  a.people-helped:link,
+										#wrapper .completed-request #sidebar-left .sidebar-box  a.people-helped:visited {
+											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+											background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
+											padding: 5px 0 0 23px;
+											color: #62775a;
+											font-weight: normal;
+											font-size: 11px;
+										}
+
+
+										#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list {
+											padding: 10px 0 0 13px;
+										}
+
+											#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li {
+												float: left;
+												display: block;
+												margin-right: 10px;
+											}
+
+
+												#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li.no-icon {
+													border: 1px solid #bbdc80;
+													font-size: 11px;
+													font-weight: bold;
+													padding: 1px;
+													margin-top: 2px;
+												}
+
+
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a:link,
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a:visited {
+														font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+														padding: 14px 0 10px 34px;
+														color: #62775a;
+														font-weight: normal;
+														font-size: 11px;
+													}
+
+
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li.no-icon a:link,
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li.no-icon a:visited {
+														color: #62775a;
+													}
+
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a.untrusted:link,
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a.untrusted:visited {
+														background: url('../images/ic-untrusted-profile-small.png') no-repeat 1px 0;
+														padding-top: 10px;
+													}
+
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a.trusted:link,
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a.trusted:visited {
+														background: url('../images/ic-trusted-profile-small.png') no-repeat 1px 0;
+													}
+
+
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a.extended:link,
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a.extended:visited {
+														background: url('../images/ic-extended-network-small.png') no-repeat 1px 0;
+													}
+
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li.no-icon a:link,
+													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li.no-icon a:visited {
+														padding: 0px;
+														font-weight: bold;
+													}
+
+								/* content */
+
+								#wrapper .completed-request #content {
+									width: 460px;
+									float: left;
+
+								}
+
+									#wrapper .completed-request #content h2 {
+										font-size: 16px;
+										color: #62775a;
+									}
+
+									#wrapper .completed-request #content .item-holder {
+										background: url('../images/bg-item-completed-request.png') no-repeat center top ;
+										width: 234px;
+										height: 96px;
+										padding: 66px 113px;
+										text-align: center;
+										margin-bottom: 7px;
+									}
+
+
+										#wrapper .completed-request #content .item-holder img {
+											border: 1px solid #333;
+										}
+
+
+								#wrapper .completed-request #content .messages-holder {
+									width: 336px;
+									margin: 0 auto;
+								}
+
+									#wrapper .completed-request #content p {
+										font-size: 12px;
+										color: #333;
+										margin-bottom: 10px;
+									}
+
+
+									#wrapper .completed-request #content .message {
+										padding: 7px;
+									}
+
+										#wrapper .completed-request #content .good {
+											border: 4px solid #78b800;
+											border-right: none;
+											border-left: none;
+										}
+
+										#wrapper .completed-request #content .bad {
+											border: 4px solid #d33727;
+											border-right: none;
+											border-left: none;
+										}
+
+
+
+								#wrapper .completed-request #content .content-box {
+									width: 336px;
+									margin: 0 auto;
+									padding: 0;
+									background: #fff;
+								}
+
+									#wrapper .completed-request #content .thumb {
+										width: 28px;
+										height: 28px;
+										margin-right: 7px;
+									}
+
+									#wrapper .completed-request #content .inner-content {
+									    width: 336px;
+										margin-left: 0;
+									}
+
+
+										#wrapper .completed-request #content .inner-content ul.comment-list li  {
+											width: 328px;
+											margin-top: 0;
+										}
+
+										#wrapper .completed-request #content .inner-content ul.comment-list li.no-bg  {
+											background: #fff;
+											padding: 0;
+										}
+
+										#wrapper .completed-request #content .inner-content ul.comment-list li .comment-box {
+											padding: 0;	
+										}
+
+											#wrapper .completed-request #content .inner-content ul.comment-list li .comment-box textarea {
+												width: 330px;
+											}
+
+
+								/* sidebar right */
+
+								#wrapper .completed-request #sidebar {
+									width: 250px;
+									float: left;
+									margin-left: 0;
+								}
+
+								#wrapper .completed-request #sidebar .sidebar-box {
+									background: #ebf5da;
+									width: 195px;
+									margin-top: 0;
+								}
+
+
+									#wrapper .completed-request #sidebar .sidebar-box h2 {
+										font-size: 14px;
+										font-family: verdana, arial, sans-serif;
+										color: #127e0e;
+										padding-left: 13px;
+									}
+
+									#wrapper .completed-request #sidebar .sidebar-box h3 {
+										color: #315859;
+									    font-family: verdana,arial,sans-serif;
+									    font-size: 11px;
+									    font-weight: bold;
+									    margin-top: 5px;
+									    padding-left: 13px;
+									}
+
+
+									#wrapper .completed-request #sidebar .sidebar-box .devider {
+
+									}
+
+									#wrapper .completed-request #sidebar .sidebar-box ul.action-list {
+										padding: 13px;
+									}
+
+									#wrapper .completed-request #sidebar .sidebar-box  a.people-helped:link,
+									#wrapper .completed-request #sidebar .sidebar-box  a.people-helped:visited {
+										font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+										background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
+										padding: 5px 0 0 23px;
+										color: #62775a;
+										font-weight: normal;
+										font-size: 11px;
+									}
+
+
+									#wrapper .completed-request #sidebar .sidebar-box ul.trust-list {
+										padding: 10px 0 0 13px;
+									}
+
+										#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li {
+											float: left;
+											display: block;
+											margin-right: 10px;
+										}
+
+
+											#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li.no-icon {
+												border: 1px solid #bbdc80;
+												font-size: 11px;
+												font-weight: bold;
+												padding: 1px;
+												margin-top: 2px;
+											}
+
+
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a:link,
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a:visited {
+													font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+													padding: 14px 0 10px 34px;
+													color: #62775a;
+													font-weight: normal;
+													font-size: 11px;
+												}
+
+
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li.no-icon a:link,
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li.no-icon a:visited {
+													color: #62775a;
+												}
+
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a.untrusted:link,
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a.untrusted:visited {
+													background: url('../images/ic-untrusted-profile-small.png') no-repeat 1px 0;
+													padding-top: 10px;
+												}
+
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a.trusted:link,
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a.trusted:visited {
+													background: url('../images/ic-trusted-profile-small.png') no-repeat 1px 0;
+												}
+
+
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a.extended:link,
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a.extended:visited {
+													background: url('../images/ic-extended-network-small.png') no-repeat 1px 0;
+												}
+
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li.no-icon a:link,
+												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li.no-icon a:visited {
+													padding: 0px;
+													font-weight: bold;
+												}
+							
 /* misc */
 
 .clearer {

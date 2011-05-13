@@ -1,3 +1,5 @@
+
+
 <div id="content" class="item-request">
 		
 	<div class="content-box-holder no-bg">
@@ -78,6 +80,188 @@
 	<%= render :partial => "shared/latest_activity_person", :locals => { :person => (@item_request.gifter?(current_user.person) ? @item_request.requester : @item_request.gifter) } %>
 	
 </div><!-- sidebar -->
+
+
+
+
+
+<%# Completed request static HTML %>
+
+
+<div class="completed-request">
+	<div id="sidebar-left">
+	
+		<div class="feedback-holder">
+			<%= image_tag('profile-narrow-1.png', :alt => "")  %>
+			<div class="feedback negative-feedback"></div>
+		</div>
+	
+	
+		<div class="sidebar-box-holder">
+			
+			<%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
+		
+			<div class="sidebar-box">
+			
+				<h2>Andrea Guerrini</h2>
+		
+				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
+			
+				<h3>Reputation</h3>
+				<ul class="action-list clearfix">
+					<li>
+						<a href="#" class="giftactions" title="Gift Actions">7</a>
+					</li>
+					<li>
+						<a href="#" class="people-helped" title="People Helped">4</a>
+					</li>
+					<li>
+						<a class="feedback-rating" href="#">100%</a>
+					</li>
+				</ul>
+				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
+				<h3>Trust Profile</h3>
+			
+				<ul class="trust-list clearfix">
+					<li class="clearfix">
+						<a href="#" class="untrusted" title="Untrusted Profile"></a>
+					</li>
+					<li class="clearfix">
+						<a href="#" class="trusted" title="Trusted Profile">7</a>
+					</li>
+					<li class="clearfix">
+						<a href="#" class="extended" title="Extended Network">7</a>
+					</li>								
+					<li class="no-icon clearfix">
+						<a href="#">43</a>
+					</li>
+				</ul>
+			
+			
+			</div>
+			<%= image_tag('curve-bottom-sidebar-box-small.png', :alt => "")  %>
+		</div>
+	
+	</div><!--	/sidebar-left	-->
+
+	<div id="content">
+	
+		<h2><strong>Andrea Guerrini</strong> shared her <a href="#">bike</a> with <a href="#">Dan Gooden</a></h2>
+
+		<div class="item-holder">
+			<%= image_tag('item-completed-sample.png', :alt => "Item Completed Sample")  %>
+		</div>
+
+
+		<div class="messages-holder">
+			<p class="message bad">
+				Andrea Guerrini Dan returned the bike with a flat 
+				tyre and refused to take responsibility for it
+			</p>
+	
+	
+			<p>
+				<a href="#">Dan Gooden</a> would like to borrow your 24 speed Giant 
+				mountain bike on the 30th October
+			</p>
+		</div>
+	
+		<div class="content-box-holder">
+
+			<ul>
+				<li class="content-box clearfix">
+				
+					<div class="inner-content">
+					
+						<ul class="comment-list">
+							<li>	
+								<%= image_tag('thumb-sample-1.png', :alt => "Andrea Guerrini", :class => "thumb")  %>
+								<p>
+									<a href="#">Peter Smith</a> says: Hi!
+									<span>2 minutes ago</span>
+								</p>
+							</li>
+							<li class="no-bg">
+								<div class="comment-box">
+									<textarea rows="1" cols="13">Comment</textarea>
+								</div>
+							</li>
+
+						</ul>
+
+					</div>
+				</li>
+			</ul>
+
+		</div>
+	
+		<!-- /.content-box-holder  --> 
+	
+	</div><!--	/content -->
+
+	<div id="sidebar">
+	
+	
+		<div class="feedback-holder">
+			<%= image_tag('profile-narrow-2.png', :alt => "")  %>
+			<div class="feedback positive-feedback"></div>
+		</div>
+	
+	
+	
+		<div class="sidebar-box-holder">
+			<%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
+			<div class="sidebar-box">
+			
+				<h2>Andrea Guerrini</h2>
+				
+				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
+				
+			
+				<h3>Reputation</h3>
+				<ul class="action-list clearfix">
+					<li>
+						<a href="#" class="giftactions" title="Gift Actions">7</a>
+					</li>
+					<li>
+						<a href="#" class="people-helped" title="People Helped">4</a>
+					</li>
+					<li>
+						<a class="feedback-rating" href="#">100%</a>
+					</li>
+				</ul>
+				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
+				<h3>Trust Profile</h3>
+			
+				<ul class="trust-list clearfix">
+					<li class="clearfix">
+						<a href="#" class="untrusted" title="Untrusted Profile"></a>
+					</li>
+					<li class="clearfix">
+						<a href="#" class="trusted" title="Trusted Profile">7</a>
+					</li>
+					<li class="clearfix">
+						<a href="#" class="extended" title="Extended Network">7</a>
+					</li>								
+					<li class="no-icon clearfix">
+						<a href="#">43</a>
+					</li>
+				</ul>
+			
+			
+			</div>
+			<%= image_tag('curve-bottom-sidebar-box-small.png', :alt => "")  %>
+		</div>
+	
+	
+	</div><!--	/sidebar  -->
+
+</div><!--	/completed-request  -->
+
+
+<%# Completed request static HTML end %>
+
+
 
 <%# TEMP CODE%>
 <% if @item_request.completed? -%>
