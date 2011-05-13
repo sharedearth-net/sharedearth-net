@@ -16,15 +16,9 @@
 
 					<p class="status-holder-profile">
 						<span>
-							<%= link_to @person.reputation_rating.gift_actions_count.to_s + " gift actions", "#", :class => "giftactions", :title => "Gift Actions" %>
+							Sydney, Australia
 						</span>
-						<span>
-							<%= link_to @person.reputation_rating.distinct_people_count.to_s + " different people", "#", :class => "people-helped", :title => "People Helped" %>
-						</span>
-						<br />
-							<%= link_to "100%", "#", :class => "feedback-rating", :title => "Feedback Rating"  %> positive feedback
 					</p>
-					
 					<p>
 						Previous experience working in IT (data 
 						warehousing and business intelligence), but I 
@@ -80,13 +74,13 @@
 							<% end %>
 						</ul>
 					<% else %>
-						<p>This person has no items.</p>
+						<p class="default-text">No items are currently being shared.</p>
 					<% end %>
 				</div>
 			</li>
 			<li>
 				<div class="items-list unanswered-requests clearfix">
-					<h2>Unanswered requests</h2>
+					<h2>Requests</h2>
 					<% unless @unanswered_requests.size.zero? %>
 						<ul>
 							<% @unanswered_requests.each do |req| %>
@@ -117,7 +111,7 @@
 							<% end %>
 						</ul>						
 					<% else %>
-						<p>There are no unanswered requests.</p>
+						<p class="default-text">There are no unanswered requests.</p>
 					<% end %>
 				</div>
 			</li>
