@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
   def index
     if params[:search]
       @items = Item.search(params[:search], current_user.person.id)
-      @sql = Item.sql(params[:search], current_user.person.id)
     else
       @items = current_user.person.items.without_deleted
     end
