@@ -17,8 +17,12 @@ class PeopleNetwork < ActiveRecord::Base
   # end
 
   def self.create_trust!(first_person, second_person)
-    PeopleNetwork.create!(:person => first_person, :trusted_person => second_person)
-    PeopleNetwork.create!(:person => second_person, :trusted_person => first_person)
+    PeopleNetwork.create!(:person => first_person, :trusted_person => second_person,
+                          :entity_id => second_person, 
+                          :entity_type_id => EntityType::TRUSTED_PERSON_ENTITY)
+    PeopleNetwork.create!(:person => second_person, :trusted_person => first_person, 
+                          :entity_id => first_person, 
+                          :entity_type_id => EntityType::TRUSTED_PERSON_ENTITY)
     first_person.reputation_rating.increase_trusted_network_count
     second_person.reputation_rating.increase_trusted_network_count
     EventLog.create_trust_established_event_log(first_person, second_person)
