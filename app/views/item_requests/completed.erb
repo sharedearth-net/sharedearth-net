@@ -135,7 +135,7 @@
 			<% if @item_request.both_parties_lef_feedback? -%>
 			  <%= feedback_box_colour(@item_request.feedback_from_requester?) %>
 			<% else -%>
-			  <div class="feedback positive-feedback"></div>
+			  <div class="feedback negative-feedback"></div>
 			<% end -%>		
 		</div>
 	
@@ -160,7 +160,7 @@
 			    </li>
 			    <li>
 			      <% feedback_rating = current_user.person.reputation_rating.feedback_rating?%>
-				    <%= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", :class => "feedback-rating", :title => "Positive Feedback Rating" %>
+				    <%= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", :class => "feedback-rating ", :title => "Positive Feedback Rating" %>
 			    </li>
 				</ul>
 				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
