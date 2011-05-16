@@ -55,6 +55,8 @@ class Item < ActiveRecord::Base
   validates_presence_of :item_type, :name, :owner_id, :owner_type, :status
   validates_inclusion_of :status, :in => STATUSES.keys, :message => " must be in #{STATUSES.values.join ', '}"
   
+  #after_create :create_entity_for_item
+  
   # validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 1.megabyte
   validates_attachment_content_type :photo, :content_type => /image\//
@@ -68,10 +70,31 @@ class Item < ActiveRecord::Base
   def is_owner?(entity)
     self.owner == entity
   end
+
+  def self.search(search, person_id)
+    if search.empty?
+        nil
+    else
+        items_sql = "select distinct resource_id from resource_networks where entity_id in (select entity_id from people_networks where person_id = #{person_id} and entity_type_id = 7)"     
+        words = search.split(/[ ]/)
+        item_type_like = words.map{|k| "item_type LIKE '%#{k}%' " }.join(" AND ")
+        item_name_like = words.map{|k| "name LIKE '%#{k}%'" }.join(" AND ")
+        item_desc_like = words.map{|k| "description LIKE '%#{k}%'" }.join(" AND ")
+        sql_like = "(" + item_type_like + ") OR (" + item_name_like + ") OR (" + item_desc_like + ")"
+        search_sql = "select id from items where id in (#{items_sql}) and (#{sql_like})"
+        items_ids = ActiveRecord::Base.connection.execute(search_sql) 
+        item_ids = items_ids.map{|i| i["id"]}
+        Item.find(:all, :conditions => ["id IN (?)", item_ids])
+    end
+  end
   
   def transfer_ownership_to(entity)
     self.owner = entity
     save!
+  end
+  
+  def create_entity_for_item
+    Entity.create!(:entity_type_id => EntityType::ITEM_ENTITY, :specific_entity_id => self.id)
   end
   
   def active_request_by?(user)
@@ -164,7 +187,7 @@ class Item < ActiveRecord::Base
   end
   
   def create_new_item_event_log
-    EventLog.create_news_event_log(self.owner, nil,  self , EventType.add_item)
+    #EventLog.create_news_event_log(self.owner, nil,  self , EventType.add_item)
   end
 
   def create_new_item_activity_log
@@ -192,6 +215,6 @@ class Item < ActiveRecord::Base
   def purpose_update_available?
     self.available?
   end
-  
+    
   
 end
