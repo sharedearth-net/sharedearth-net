@@ -1,9 +1,9 @@
 <%= form_for @feedback, :url => request_feedbacks_path(@request) do |f| %>
   <%= render :partial => "shared/error_messages", :locals => { :model => @feedback } %>
   <p>
-    <%= f.radio_button :feedback, Item::FEEDBACK_POSITIVE, :onclick => "show_feedback(false)" %> <%= f.label :Positive %>
-    <%= f.radio_button :feedback, Item::FEEDBACK_NEUTRAL, :onclick => "show_feedback(true)" %> <%= f.label :Neutral %>
-    <%= f.radio_button :feedback, Item::FEEDBACK_NEGATIVE, :onclick => "show_feedback(true)" %> <%= f.label :Negative %>
+    <%= f.radio_button :feedback, Feedback::FEEDBACK_POSITIVE, :onclick => "show_feedback(false)" %> <%= f.label :Positive %>
+    <%= f.radio_button :feedback, Feedback::FEEDBACK_NEUTRAL, :onclick => "show_feedback(true)" %> <%= f.label :Neutral %>
+    <%= f.radio_button :feedback, Feedback::FEEDBACK_NEGATIVE, :onclick => "show_feedback(true)" %> <%= f.label :Negative %>
   </p>
   <p>
     <%= f.label :feedback_note %><br />
