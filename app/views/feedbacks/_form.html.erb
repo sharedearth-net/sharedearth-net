@@ -1,18 +1,47 @@
-<%= form_for @feedback, :url => request_feedbacks_path(@request) do |f| %>
-  <%= render :partial => "shared/error_messages", :locals => { :model => @feedback } %>
-  <p>
-    <%= f.radio_button :feedback, Feedback::FEEDBACK_POSITIVE, :onclick => "show_feedback(false)" %> <%= f.label :Positive %>
-    <%= f.radio_button :feedback, Feedback::FEEDBACK_NEUTRAL, :onclick => "show_feedback(true)" %> <%= f.label :Neutral %>
-    <%= f.radio_button :feedback, Feedback::FEEDBACK_NEGATIVE, :onclick => "show_feedback(true)" %> <%= f.label :Negative %>
-  </p>
-  <p>
-    <%= f.label :feedback_note %><br />
-    <div id="feedback_note" style="display:none;"">
-    <%= f.text_area :feedback_note %>
-    </div>
-  </p>
-  <p><%= f.submit %></p><%= link_to 'Do that later', request_path(@request) %>
-<% end %>
+<%= image_tag("curve-top-feedback.png", :class => "feedback-box-curves", :alt => "")  %>
+<div class="feedback-box">
+	<p>
+		Please rate your experience sharing your bike with <%= link_to 'Josh', '#', :class => "positive" %>
+	</p>
+	<%= form_for @feedback, :url => request_feedbacks_path(@request) do |f| %>
+	  <%= render :partial => "shared/error_messages", :locals => { :model => @feedback } %>
+		<ul class="feedback-buttons clearfix">
+			<li class="positive">
+				<%= f.radio_button :feedback, Feedback::FEEDBACK_POSITIVE, :onclick => "show_feedback(false)" %> <%= f.label :Positive %>
+			</li>
+			<li>
+				<%= f.radio_button :feedback, Feedback::FEEDBACK_NEUTRAL, :onclick => "show_feedback(true)" %> <%= f.label :Neutral %>
+			</li>
+			<li class="negative">
+				<%= f.radio_button :feedback, Feedback::FEEDBACK_NEGATIVE, :onclick => "show_feedback(true)" %> <%= f.label :Negative %>
+			</li>
+		</ul>
+		
+		<%= image_tag("curve-top-feedback-message.png", :class => "feedback-box-curves", :alt => "")  %>
+		<div class="feedback-message">
+			<%= f.label :feedback_note %>
+			<div id="feedback_note" style="display:none;">
+				<%= f.text_area :feedback_note %>
+			</div>
+		</div>
+		<%= image_tag("curve-bottom-feedback-message.png", :class => "feedback-box-curves", :alt => "")  %>
+		
+		<ul class="feedback-submit clearfix">
+			<li>
+				<%= f.submit :value => "Submit" %>
+			</li>
+			<li>
+				<%= link_to 'Later', request_path(@request) %>
+			</li>
+		</ul>
+		
+		<% end %>
+	
+</div>
+
+<%= image_tag("curve-bottom-feedback.png", :class => "feedback-box-curves", :alt => "")  %>
+
+
 <script language="javascript">
 checked_negative = document.getElementById('feedback_feedback_neutral').checked || document.getElementById('feedback_feedback_negative').checked 
 document.getElementById("feedback_note").style.display = checked_negative ? "block" : "none";
@@ -22,3 +51,4 @@ function show_feedback(note)
  document.getElementById("feedback_note").style.display = note ? "block" : "none";
 }
 </script>
+

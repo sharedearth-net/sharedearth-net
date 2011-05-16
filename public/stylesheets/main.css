@@ -37,6 +37,9 @@ a:hover {
 	color: #333333;
 }
 
+
+#wrapper a.positive:link,
+#wrapper a.positive:visited,
 #content a.positive:link,
 #content a.positive:visited {
 	color: #127e0e !important;
@@ -71,7 +74,7 @@ a.normal:visited {
 	/* header */
 
 	#header {
-		height: 90px;
+		height: 80px;
 	}
 		.header-lhs {
 			width: 61px;
@@ -523,7 +526,7 @@ a.normal:visited {
 		}
 	
 			#sidebar .inner-content p {
-				font-size: 11px;
+				font-size: 12px;
 			}
 			
 				#sidebar .inner-content p a:link,
@@ -670,7 +673,7 @@ a.normal:visited {
 						}
 
 				#content .no-bg p {
-					font-size: 10px;
+					font-size: 11px;
 					font-family: verdana, arial, sans-serif;
 					color: #62775a;
 					margin-bottom: 15px;
@@ -723,6 +726,7 @@ a.normal:visited {
 					font-size: 11px;
 					line-height: 14px;
 					margin-bottom: 15px;
+					margin-top: -5px;
 				}
 
 				.content-box h3 {
@@ -775,9 +779,13 @@ a.normal:visited {
 			}
 			
 			
+			#content.item-request .no-bg h2 {
+				text-align: center;
+			}
+			
 			#content.item-request .no-bg h2 span {
 				font-size: 16px;
-				color: #315859;
+				color: #333;
 			}
 							
 			/* item list*/				
@@ -946,7 +954,7 @@ a.normal:visited {
 									}
 									
 										#sidebar .sidebar-box-holder .sidebar-box-profile ul li p {
-											font-size: 12px;
+											font-size: 11px;
 											font-family: verdana;
 											padding-top: 11px;
 											color: #62775a;
@@ -976,7 +984,7 @@ a.normal:visited {
 										/* trust box action */
 										
 										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li {
-											font-size: 12px;
+											font-size: 11px;
 											margin-right: 7px;
 										}
 										
@@ -1047,7 +1055,7 @@ a.normal:visited {
 							}
 							
 								#sidebar.profile-holder .sidebar-box p {
-									font-size: 13px;
+									font-size: 12px;
 								}
 							
 							#sidebar.profile-holder .inner-content {
@@ -1343,6 +1351,11 @@ a.normal:visited {
 										color: #333;
 										margin-bottom: 10px;
 									}
+									
+										#wrapper .completed-request #content p a:link,
+										#wrapper .completed-request #content p a:visited {
+											color: #333;
+										}
 
 
 									#wrapper .completed-request #content .message {
@@ -1439,7 +1452,7 @@ a.normal:visited {
 									}
 
 									#wrapper .completed-request #sidebar .sidebar-box ul.action-list {
-										padding: 13px;
+										padding: 0 0 0 13px;
 									}
 
 									#wrapper .completed-request #sidebar .sidebar-box  a.people-helped:link,
@@ -1510,6 +1523,108 @@ a.normal:visited {
 													padding: 0px;
 													font-weight: bold;
 												}
+			
+						/* Feedback */
+						
+						.feedback-box-curves {
+							display: block;
+						}
+						
+						.feedback-box {
+							background: #fff;
+							border-right: 2px solid #076d04;
+							border-left: 2px solid #076d04;
+							width: 428px;
+							padding: 10px 28px;
+						}
+						
+							#wrapper .feedback-box p {
+								font-size: 14px;
+								font-family: verdana, arial, sans-serif;
+								margin-bottom: 20px;
+							}
+						
+						
+							ul.feedback-buttons {
+								margin: 0 0 10px 54px;
+							}
+						
+								ul.feedback-buttons li {
+									display: block;
+									float: left;
+									width: 88px;
+									border-top: 3px solid #c7cac1;
+									border-bottom: 3px solid #c7cac1;
+									margin-right: 25px;
+									padding-bottom: 3px;
+								}
+							
+								ul.feedback-buttons li.positive {
+									border-top-color: #71b838;
+									border-bottom-color: #71b838;
+								}
+							
+								ul.feedback-buttons li.negative {
+									border-top-color: #d33727;
+									border-bottom-color: #d33727;
+								}
+							
+							
+									ul.feedback-buttons li label {
+										font-size: 14px;
+										color: #333;
+										line-height: 17px;
+										font-family: verdana, arial, sans-serif;
+									}
+								
+						
+						.feedback-message {
+							background: #ebf4d9;
+							padding: 5px;
+							width: 413px;
+						}
+						
+						
+							.feedback-message label {
+								font-size: 14px;
+								font-family: verdana, arial, sans-serif;
+								color: #333;
+								margin-bottom: 41px;
+							}
+							
+						
+							.feedback-message textarea {
+								width: 410px;
+								margin: 4px auto 0 auto;
+								display: block;
+								height: 128px;
+							}
+							
+							
+							ul.feedback-submit {
+								margin-top: 10px;
+							}
+							
+								ul.feedback-submit li {
+									font-size: 14px;
+									display: block;
+									float: left;
+									line-height: 17px;
+									width: 50%;
+									text-align: center;
+								}
+							
+								ul.feedback-submit li input {
+									font-size: 14px;
+									font-family: verdana, arial, sans-serif;
+									color: #097b05;
+									background: none;
+									border: none;
+									line-height: 13px;
+									padding: 0;
+									margin-top: -3px;
+									cursor: pointer;
+								}
 							
 /* misc */
 
@@ -1522,7 +1637,11 @@ a.normal:visited {
 	margin: 10px auto 15px auto;
 }			
 							
-							
+		/* flash notice */					
+		
+		.flash-notice {
+			background: #333;
+		}
 							
 							
 							
