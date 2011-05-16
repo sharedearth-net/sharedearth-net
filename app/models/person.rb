@@ -45,6 +45,7 @@ class Person < ActiveRecord::Base
     friends = Person.find(:all, :conditions => ["id IN (?)", people_ids])
     size = 0
     friends.each { |person| size += person.people_networks.count }
+    size
   end
 
   #FIND CURRENT USER AND SHOWN USER MUTUAL FRIENDS COUNT
