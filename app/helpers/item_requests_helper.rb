@@ -8,7 +8,7 @@ module ItemRequestsHelper
       when Feedback::FEEDBACK_NEUTRAL
         html = "<div class=\"feedback neutral-feedback\"></div>"
       else
-        #
+        html = ""
     end
     html.html_safe
   end
