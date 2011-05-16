@@ -41,13 +41,10 @@ class Person < ActiveRecord::Base
   end
   
   def extended_network_size
-    relationship = self.people_networks(:trusted_person_id)
-    friends = Person.find(:all, :conditions => ["id IN (?)", relationship])
-    if friends.count == 1
-      friends.people_networks.count
-    else
-      size = friends.each { |person| person.people_networks.count }.sum
-    end
+    people_ids = self.people_networks.map{|i| i["trusted_person_id"]}
+    friends = Person.find(:all, :conditions => ["id IN (?)", people_ids])
+    size = 0
+    friends.each { |person| size += person.people_networks.count }
   end
 
   #FIND CURRENT USER AND SHOWN USER MUTUAL FRIENDS COUNT
