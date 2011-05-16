@@ -1164,22 +1164,21 @@ a.normal:visited {
 
 								#wrapper .completed-request .feedback-holder {
 									position: relative;
-									width: 128px;
-									margin: 0 auto 40px auto;
+									margin: 0 auto 20px auto;
+									height: 210px;
+									text-align: center;
 								}
 
 									#wrapper .completed-request .feedback-holder img {
-										position: relative;
-										width: 108px;
-										margin: 0 auto;
-										display: block;
+										max-width: 175px;
 									}
 
 
 									#wrapper .completed-request .feedback {
 										position: absolute;
-										height: 128px;
-										width: 128px;
+										margin: 0 auto;
+										height: 110px;
+										width: 195px;
 										background: #c7cac1;
 										top: 10px;
 										z-index: -10;
@@ -1199,9 +1198,10 @@ a.normal:visited {
 								/* sidebar left */
 
 								#wrapper .completed-request #sidebar-left {
-									width: 210px;
+									width: 195px;
 									float: left;
 									margin-left: 82px;
+									margin-right: 15px;
 								}
 
 
@@ -1404,9 +1404,10 @@ a.normal:visited {
 								/* sidebar right */
 
 								#wrapper .completed-request #sidebar {
-									width: 250px;
+									width: 195px;
 									float: left;
 									margin-left: 0;
+									margin-right: 55px;
 								}
 
 								#wrapper .completed-request #sidebar .sidebar-box {
