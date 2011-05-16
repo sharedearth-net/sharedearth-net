@@ -58,6 +58,18 @@ class ItemRequest < ActiveRecord::Base
     item_request
   end
   
+  def both_parties_lef_feedback?
+    self.feedbacks.count == 2
+  end
+  
+  def feedback_from_gifter?
+    Feedback.find_by_item_request_id_and_person_id(self.id, self.gifter.id).feedback
+  end
+  
+  def feedback_from_requester?
+    Feedback.find_by_item_request_id_and_person_id(self.id, self.requester.id).feedback
+  end
+  
   # #######
   # Status related methods
   # #######
