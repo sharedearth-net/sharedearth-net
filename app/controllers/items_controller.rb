@@ -6,7 +6,12 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.xml
   def index
-    @items = current_user.person.items.without_deleted
+    if params[:search]
+      @items = Item.search(params[:search], current_user.person.id)
+      @sql = Item.sql(params[:search], current_user.person.id)
+    else
+      @items = current_user.person.items.without_deleted
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +49,7 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
     @item.owner = current_user.person
     @item.status = Item::STATUS_NORMAL
-    @item.available = true
+    #@item.available = true
 
     respond_to do |format|
       if @item.save
@@ -108,4 +113,5 @@ class ItemsController < ApplicationController
   def only_owner!
     redirect_to(root_path, :alert => I18n.t('messages.only_owner_can_access')) and return unless @item.is_owner?(current_user.person)
   end
+  
 end
