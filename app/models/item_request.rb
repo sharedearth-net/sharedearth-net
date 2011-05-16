@@ -64,7 +64,7 @@ class ItemRequest < ActiveRecord::Base
   
   #TODO test this
   def feedback_from_gifter?
-    feedback = Feedback.find_by_item_request_id_and_person_id(self.id, self.gifter.id).feedback
+    feedback = Feedback.find_by_item_request_id_and_person_id(self.id, self.gifter.id)
     feedback.feedback
   end
   
