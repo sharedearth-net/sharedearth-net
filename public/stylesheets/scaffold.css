@@ -26,8 +26,8 @@ div.field, div.actions {
 }
 
 .flash-notice {
-  border: green 2px solid;
-  background: #afa;
+  background: #fff;
+	color: #62775a;
 }
 
 .flash-alert {
