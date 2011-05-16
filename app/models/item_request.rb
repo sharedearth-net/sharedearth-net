@@ -62,12 +62,15 @@ class ItemRequest < ActiveRecord::Base
     self.feedbacks.count == 2
   end
   
+  #TODO test this
   def feedback_from_gifter?
-    Feedback.find_by_item_request_id_and_person_id(self.id, self.gifter.id).feedback
+    feedback = Feedback.find_by_item_request_id_and_person_id(self.id, self.gifter.id).feedback
+    feedback.feedback
   end
   
   def feedback_from_requester?
-    Feedback.find_by_item_request_id_and_person_id(self.id, self.requester.id).feedback
+    feedback = Feedback.find_by_item_request_id_and_person_id(self.id, self.requester.id)
+    feedback.feedback
   end
   
   # #######
