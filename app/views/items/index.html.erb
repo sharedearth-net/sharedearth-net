@@ -25,7 +25,7 @@
     <td><%= link_to 'Delete', item, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end -%>
   </tr>
-<% end %>
+<% end if !@items.nil?%>
 </table>
 
 <br />
