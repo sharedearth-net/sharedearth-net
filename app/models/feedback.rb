@@ -23,11 +23,11 @@ class Feedback < ActiveRecord::Base
   def feedback_reputation_count
     feedback_person = (self.item_request.requester != self.person)? self.item_request.requester : self.item_request.gifter
     case self.feedback
-      when 'positive'
+      when FEEDBACK_POSITIVE
         feedback_person.reputation_rating.increase_positive_feedback_count
-      when 'negative'
+      when FEEDBACK_NEGATIVE
         feedback_person.reputation_rating.increase_negative_feedback_count
-      when 'neutral'
+      when FEEDBACK_NEUTRAL
         feedback_person.reputation_rating.increase_neutral_feedback_count
       else
         #
@@ -35,19 +35,23 @@ class Feedback < ActiveRecord::Base
   end
   
   def neutral_and_negative?
-    self.feedback == 'negative' || self.feedback == 'neutral'
+    self.feedback == FEEDBACK_NEGATIVE || self.feedback == FEEDBACK_NEUTRAL
   end
   
   def self.create_default_feedback(person, item_request)
     create! do |feedback|
       feedback.item_request_id = item_request.id
       feedback.person_id = person.id
-      feedback.feedback = 'positive'
+      feedback.feedback = FEEDBACK_POSITIVE
     end
   end
   
   def self.exists_for?(item_request_id, person_id)
     Feedback.find_by_item_request_id_and_person_id(item_request_id, person_id).nil? ? true : false
+  end
+  
+  def feedback_mark_from(item_request_id, person_id)
+    Feedback.find_by_item_request_id_and_person_id(item_request_id, person_id)
   end
   
 end
