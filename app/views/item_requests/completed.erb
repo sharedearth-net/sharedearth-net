@@ -2,9 +2,13 @@
 	<div id="sidebar-left">
 	
 		<div class="feedback-holder">
-			<%= image_tag @item_request.gifter.avatar(:large), :alt => "", :width => 108, :height => 148 %>
+			<%= image_tag @item_request.gifter.avatar(:large), :alt => "" %>
 			<%#= image_tag('profile-narrow-1.png', :alt => "")  %>
-			<div class="feedback negative-feedback"></div>
+			<% if @item_request.both_parties_lef_feedback? -%>
+			  <%= feedback_box_colour(@item_request.feedback_from_gifter?) %>
+			<% else -%>
+			  <div class="feedback positive-feedback"></div>
+			<% end -%>			
 		</div>
 	
 	
@@ -74,7 +78,7 @@
 		   
       <% if @item_request.feedbacks.size == 2 -%>
         <% @item_request.feedbacks.each do |feedback|%>
-          <% if feedback.feedback == 'neutral' || feedback.feedback == 'negative' %>
+          <% if feedback.feedback == Feedback::FEEDBACK_NEUTRAL || feedback.feedback == Feedback::FEEDBACK_NEGATIVE %>
           <% person = Person.find_by_id(feedback.person_id)%>
           <p class="message bad">
 				    <%= person.name %> <%= feedback.feedback_note %>
@@ -126,9 +130,13 @@
 	
 	
 		<div class="feedback-holder">
-		  <%= image_tag @item_request.requester.avatar(:large), :alt => "", :width => 108, :height => 148 %>
+		  <%= image_tag @item_request.requester.avatar(:large), :alt => "" %>
 			<%#= image_tag('profile-narrow-2.png', :alt => "")  %>
-			<div class="feedback positive-feedback"></div>
+			<% if @item_request.both_parties_lef_feedback? -%>
+			  <%= feedback_box_colour(@item_request.feedback_from_requester?) %>
+			<% else -%>
+			  <div class="feedback positive-feedback"></div>
+			<% end -%>		
 		</div>
 	
 	
