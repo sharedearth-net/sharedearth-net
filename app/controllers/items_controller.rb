@@ -48,13 +48,13 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
     @item.owner = current_user.person
     @item.status = Item::STATUS_NORMAL
-    #@item.available = true
+    @item.available = true
 
     respond_to do |format|
       if @item.save
         @item.create_new_item_event_log
         @item.create_new_item_activity_log
-        current_user.person.reputation_rating.set_activity_level(1) if current_user.person.reputation_rating.activity_level == 0
+        current_user.person.reputation_rating.update_attributes(:activity_level => 1) if current_user.person.items.count == 1
         format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
