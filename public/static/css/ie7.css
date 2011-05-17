@@ -1,0 +1,5 @@
+/* styles for Internet Explorer 7, unvisible for others */
+
+.clearfix {
+	zoom: 1;
+}
