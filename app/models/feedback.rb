@@ -22,8 +22,8 @@ class Feedback < ActiveRecord::Base
   scope :for_item_request, lambda { |entity| where("item_request_id = ?", entity.id) }
   
   def feedback_reputation_count
-    feedback_person = (self.item_request.requester != self.person)? self.item_request.requester : self.item_request.gifter
-    case self.feedback
+    feedback_person = (self.item_request.requester.id != self.person.id)? self.item_request.requester : self.item_request.gifter
+    case self.feedback.to_i
       when FEEDBACK_POSITIVE
         feedback_person.reputation_rating.increase_positive_feedback_count
       when FEEDBACK_NEGATIVE
