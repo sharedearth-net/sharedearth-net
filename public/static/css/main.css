@@ -1,0 +1,144 @@
+/* Created by Purecutdesign								*/
+/* Contact: tomcanji@purecutdesign.com					*/
+
+
+/* 1. Clearfix */
+
+.clearfix:after { /* ie.css, ie7.css */
+	content: "."; 
+	display: block; 
+	height: 0; 
+	clear: both; 
+	visibility: hidden;
+}
+
+/* Common */
+
+body {
+	background: #ffffff url('../graphics/bg-body.jpg') no-repeat center 30px;
+	font-family: "Trebuchet MS", arial, sans-serif;
+	color: #fff;
+}
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}
+
+a:link,
+a:visited {
+	text-decoration: none;
+	color: #949479;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+/* container */
+
+#container {
+	width: 1025px;
+	margin: 0 auto;
+}
+
+h1 {
+	width: 309px;
+	height: 370px;
+	text-indent: -1000em;
+	margin: 95px 0 0 153px;
+	float: left;
+}
+
+
+	h1 a:link,
+	h1 a:visited {
+		background: url('../graphics/logo.png') no-repeat top left;
+		width: 309px;
+		height: 370px;
+		display: block;
+		overflow: hidden;
+	}
+	
+	/* content */
+
+	#content {
+		width: 478px;
+		float: left;
+		margin: 215px 0 0 0;
+		padding: 0 0 0 70px;
+	}
+
+		#content p {
+			width: 320px;
+			font-size: 15px;
+			line-height: 18px;
+			color: #495943;
+			margin-bottom: 10px;
+		}
+		
+		
+		.button-holder-connect {
+			float: left;
+			width: 117px;
+			margin-left: 34px;
+		}
+		
+			#content .button-holder-connect p {
+				width: auto;
+				font-size: 10px;
+				font-family: verdana, arial, sans-serif;
+				float: none;
+				line-height: 12px;
+				margin: 0;
+			}
+		
+			.button-holder-connect h2 {
+				width: 96px;
+				height: 42px;
+				text-indent: -1000em;
+			}
+		
+			.button-holder-connect a:link,
+			.button-holder-connect a:visited {
+				display: block;
+				background: url('../graphics/bt-connect.png') no-repeat top left;
+				width: 96px;
+				height: 42px;
+				overflow: hidden;
+			}
+			
+			
+		.button-holder-host {
+			float: left;
+			text-indent: -1000em;
+			width: 96px;
+		}
+		
+			.button-holder-host a:link,
+			.button-holder-host a:visited {
+				display: block;
+				background: url('../graphics/bt-host.png') no-repeat top left;
+				width: 96px;
+				height: 42px;
+				overflow: hidden;
+			}
+
+		/* Footer */
+		
+		#footer {
+			clear: both;
+			text-align: right;
+			padding-top: 225px;
+		}
+		
+			#footer p {
+				font-size: 10px;
+				color: #949479;
+				font-family: verdana, arial, sans-serif;
+				margin-right: 10px;
+			}
+			
+
