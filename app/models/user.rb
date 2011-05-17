@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
       user.uid = auth["uid"]
       user.nickname = auth["user_info"]["nickname"]
       user.create_person(:name => auth["user_info"]["name"])
+      user.person.create_reputation_rating(:gift_actions => 0,:distinct_people => 0, 
+                              :total_actions => 0, :positive_feedback => 0, :negative_feedback => 0, :neutral_feedback => 0,
+                              :requests_received => 0,  :requests_answered => 0, :trusted_network_count => 0,  :activity_level => 0)
     end
     user = User.find_by_uid(auth["uid"])
     user.inform_mutural_friends(auth)
@@ -24,7 +27,7 @@ class User < ActiveRecord::Base
     friends_list.each do |friend|
       connection = User.find(:first, :conditions => ['uid = ?', friend.identifier])
       if !connection.nil? 
-        #First parameter user that joined second person that is informed
+        #First parameter user that joined, second person that is informed
         EventLog.create_news_event_log(self.person, connection.person,  nil , EventType.fb_friend_join)
       end
     end
