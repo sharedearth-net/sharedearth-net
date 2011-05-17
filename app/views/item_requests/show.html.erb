@@ -44,7 +44,7 @@
 								</li>
 								<% if  @item_request.item.purpose != Item::PURPOSE_GIFT %>
 								<li>
-									<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive" %>
+									<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive", :remote => true %>
 								</li>
 								<% end %>
 							<% end %>
@@ -53,7 +53,7 @@
 
 							<%= requester_and_gifter_only(@item_request) do %>
 								<li>
-									<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive" %>
+									<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive", :remote => true %>
 								</li>
 							<% end %>
 
