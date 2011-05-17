@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_user
+  
+  layout :dynamic_layout
 
   private
 
@@ -13,5 +15,10 @@ class ApplicationController < ActionController::Base
   
   def authenticate_user!
     redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in') unless current_user
+  end
+  
+  # Control which layout is used.
+  def dynamic_layout
+    current_user.nil? ? 'welcome' : 'application'
   end
 end
