@@ -1,5 +1,220 @@
-<h1>Listing items</h1>
+<!--
+	search static begin
+-->
 
+<div id="search-holder" class="clearfix">
+	
+	<div id="sidebar-left">
+		
+		<h2>Show</h2>
+		
+		<ul>
+			<li class="all">
+				<a href="#">All results</a>
+			</li>
+			<li class="items selected">
+				<a href="#">Items</a>
+			</li>
+			<li class="people">
+				<a href="#">People</a>
+			</li>
+			<li class="community">
+				<a href="#">Communities</a>
+			</li>
+			<li>
+				<a href="#">Villages</a>
+			</li>
+			<li class="separator">
+				&nbsp;
+			</li>
+			<li class="all">
+				<a href="#">All your networks</a>
+			</li>
+			<li class="community">
+				<a href="#">Evolver Sydney</a>
+			</li>
+			<li class="community">
+				<a href="#">Sydney Java Community</a>
+			</li>
+			<li class="village selected">
+				<a href="#">Sydney</a>
+			</li>
+			<li class="village">
+				<a href="#">Newtown</a>
+			</li>
+		</ul>
+		
+	</div><!--	/sidebar-left	-->
+	
+	<div id="content">
+		
+		<div class="content-box-holder no-bg">
+			<div class="search-holder">
+				<form action="#">
+					<div>
+						<input type="text" value="Search" /> <button type="submit" title="Search">Search</button>
+					</div>
+				</form>
+			</div>
+			<h2>
+				<%= link_to image_tag('ic-items-community.png', :alt => "Items", :title => "Items") %>
+				Items in 
+				<%= link_to image_tag('ic-village-comm.png', :alt => "Village", :title => "Village") %>
+				Sydney
+			</h2>
+			
+			
+			<div class="items-list clearfix">
+				<h3>
+					From your trusted network
+				</h3>
+				<ul class="clearfix">
+					<li class="item clearer">
+						<a href="/items/1">
+							<img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" />
+						</a>
+						<div>
+							<p>
+								gift&nbsp;|&nbsp;
+								<a href="#">42 person school bus</a>&nbsp;|
+								<a href="/items/1" class="positive">Bus</a>
+							</p>
+							<ul class="action-list">
+								<li>
+									<a href="#" class="positive capitalize">Nicky Lewis</a>
+								</li>
+								<li>
+									<a href="#" class="communities" title="Communities">3 communities</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="item clearer">
+						<a href="/items/1">
+							<img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" />
+						</a>
+						<div>
+							<p>
+								gift&nbsp;|&nbsp;
+								<a href="#">42 person school bus</a>&nbsp;|
+								<a href="/items/1" class="positive">Bus</a>
+							</p>
+							<ul class="action-list">
+								<li>
+									<a href="#" class="positive capitalize">Nicky Lewis</a>
+								</li>
+								<li>
+									<a href="#" class="communities capitalize" title="Communities">Evolver Sydney</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="item clearer">
+						<a href="/items/1"><img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" /></a>
+						<div>
+							<p>
+								gift&nbsp;|&nbsp;
+								<a href="#">42 person school bus</a>&nbsp;|
+								<a href="/items/1" class="positive">Bus</a>
+							</p>
+							<ul class="action-list">
+								<li>
+									<a href="#" class="positive capitalize">Nicky Lewis</a>
+								</li>
+								<li>
+									<a href="#" class="communities" title="Communities">3 communities</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="item clearer">
+						<a href="/items/1"><img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" /></a>
+						<div>
+							<p>
+								gift&nbsp;|&nbsp;
+								<a href="#">42 person school bus</a>&nbsp;|
+								<a href="/items/1" class="positive">Bus</a>
+							</p>
+							<ul class="action-list">
+								<li>
+									<a href="#" class="positive capitalize">Nicky Lewis</a>
+								</li>
+								<li>
+									<a href="#" class="communities" title="Communities">3 communities</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="item clearer">
+						<a href="/items/1"><img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" /></a>
+						<div>
+							<p>
+								gift&nbsp;|&nbsp;
+								<a href="#">42 person school bus</a>&nbsp;|
+								<a href="/items/1" class="positive">Bus</a>
+							</p>
+							<ul class="action-list">
+								<li>
+									<a href="#" class="positive capitalize">Nicky Lewis</a>
+								</li>
+								<li>
+									<a href="#" class="communities" title="Communities">3 communities</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					
+				</ul>
+				<a href="#" class="button-more">
+					2 more
+				</a>
+			</div><!-- /items-list -->
+			
+			<div class="items-list clearfix">
+				<h3>
+					From your extended network
+				</h3>
+				<ul class="clearfix">
+					<li class="item clearer">
+						<a href="/items/1"><img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" /></a>
+						<div>
+							<p>
+								gift&nbsp;|&nbsp;
+								<a href="#">42 person school bus</a>&nbsp;|
+								<a href="/items/1" class="positive">Bus</a>
+							</p>
+							<ul class="action-list">
+								<li>
+									<a href="#" class="positive capitalize">Gavin Madden</a>
+								</li>
+								<li>
+									<a href="#" class="communities capitalize" title="Communities">Sydney</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+				<a href="#" class="button-more">
+					23 more
+				</a>
+			</div><!-- /items-list -->
+		
+		</div><!-- /content-box-holder  -->
+		
+	</div><!--	/content -->
+	
+</div><!--	/search-holder -->
+
+
+
+
+<!--
+	search static end
+-->
+
+
+<h1>Listing items</h1>
+ 
 <table>
   <tr>
 		<th>Photo</th>

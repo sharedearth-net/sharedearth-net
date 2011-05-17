@@ -1625,6 +1625,150 @@ a.normal:visited {
 									margin-top: -3px;
 									cursor: pointer;
 								}
+								
+								
+								
+								/* Search Page - content */
+
+								#wrapper #search-holder #content {
+									height: 200px;
+									width: 764px;
+								}
+
+									#wrapper #search-holder #content .search-holder {
+										width: 484px;
+									}
+
+										#wrapper #search-holder #content .search-holder input[type="text"] {
+											height: 13px;
+											width: 460px;
+										}
+
+									#wrapper #search-holder #content h2 {
+										font-size: 13px;
+									}
+
+									#wrapper #search-holder #content h3 {
+										font-family: verdana,arial,sans-serif;
+										font-size: 11px;
+										color: #127E0E;
+									}
+
+									#wrapper #search-holder #content h2 img {
+										display: inline;
+										vertical-align: middle;
+									}
+
+
+									#wrapper #search-holder #content .items-list {
+										padding-top: 2px;
+									}
+
+									#wrapper #search-holder #content .items-list ul li.item {
+										margin-top: 12px;
+										margin-bottom: 4px;
+									}
+
+									#wrapper #search-holder #content .items-list ul li .thumb {
+									    float: left;
+									    margin-right: 10px;
+									    margin-top: 3px;
+									    max-height: 32px;
+									}
+
+									#wrapper #search-holder #content .no-bg a.communities:link,
+									#wrapper #search-holder #content .no-bg a.communities:visited {
+									    background: url("../images/ic-community-community.png") no-repeat left top transparent;
+									    color: #62775A;
+									    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+									    font-size: 11px;
+									    font-weight: normal;
+									    margin: 0 0 0 2px;
+									    padding: 5px 0 0 28px;
+									}
+
+								/* Search Page - sidebar-left */
+
+								#wrapper #search-holder #sidebar-left {
+									float: left;
+									width: 223px;
+									padding: 0 0 0 7px;
+								}
+
+									#wrapper #search-holder #sidebar-left h2 {
+										color: #127E0E;
+									    font-family: verdana, arial, sans-serif;
+									    font-size: 12px;
+
+									}
+
+
+									#wrapper #search-holder #sidebar-left ul {
+										margin-top: 11px;
+										width: 175px;
+									}
+
+										#wrapper #search-holder #sidebar-left ul li {
+											font-size: 11px;
+										}
+
+											#wrapper #search-holder #sidebar-left ul li a:link,
+											#wrapper #search-holder #sidebar-left ul li a:visited {
+												color: #127e0e;
+												display: block;
+												padding: 4px 0px 1px 29px;
+												background:  url('../images/ic-village.png') no-repeat 3px 4px;
+												height: 20px;
+						                        text-decoration: none;
+												margin-bottom: 5px;
+											}
+
+
+											#wrapper #search-holder #sidebar-left ul li:hover,
+											#wrapper #search-holder #sidebar-left ul li.selected {
+												background: url('../images/community-list-hover.png') no-repeat 0 0;
+
+											}
+
+											#wrapper #search-holder #sidebar-left ul li.all a:link,
+											#wrapper #search-holder #sidebar-left ul li.all a:visited {
+													background: url('../images/ic-all-networks-community.png') no-repeat 1px 2px;
+												}
+
+											#wrapper #search-holder #sidebar-left ul li.items a:link,
+											#wrapper #search-holder #sidebar-left ul li.items a:visited {
+													background: url('../images/ic-items-community.png') no-repeat 1px 1px;
+												}
+
+											#wrapper #search-holder #sidebar-left ul li.people a:link,
+											#wrapper #search-holder #sidebar-left ul li.people a:visited {
+													background: url('../images/ic-people-community.png') no-repeat 1px 1px;
+												}
+
+											#wrapper #search-holder #sidebar-left ul li.trusted a:link,
+											#wrapper #search-holder #sidebar-left ul li.trusted a:visited {
+													background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
+												}
+
+											#wrapper #search-holder #sidebar-left ul li.extend a:link,
+											#wrapper #search-holder #sidebar-left ul li.extend a:visited {
+													background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
+												}
+
+											#wrapper #search-holder #sidebar-left ul li.community a:link,
+											#wrapper #search-holder #sidebar-left ul li.community a:visited {
+													background: url('../images/ic-community-community.png') no-repeat 1px 1px;
+												}							
+
+										#wrapper #search-holder #sidebar-left ul li.separator {
+											border-bottom: 1px solid #aeadad;
+											height: 6px;
+											margin: 0 16px 7px 4px;
+										}
+
+										#wrapper #search-holder #sidebar-left ul li.separator:hover {
+											background: none;
+										}
 							
 /* misc */
 
