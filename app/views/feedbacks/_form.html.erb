@@ -1,5 +1,6 @@
 <style>
 		.black_overlay{
+		  
 			display: block;
 			position: absolute;
 			top: 0%;
@@ -13,19 +14,31 @@
 			filter: alpha(opacity=80);
 		}
 		.white_content {
+		/* css3 drop shadow */
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+     
+    /* css3 border radius */
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+     
+    background:#eee;
 			display: block;
 			position: absolute;
-			top: 25%;
-			left: 25%;
-			width: 50%;
-			height: 50%;
+			left: 35%;
+			top: 15%;
+			width: 490px;
+			height: 350px;
 			padding: 16px;
-			border: 16px solid orange;
+			border: 3px solid black;
 			background-color: white;
 			z-index:1002;
 			overflow: auto;
 		}
+		
 	</style>
+	
+	
 
 <div id="light" class="white_content">
 <%= image_tag("curve-top-feedback.png", :class => "feedback-box-curves", :alt => "")  %>
