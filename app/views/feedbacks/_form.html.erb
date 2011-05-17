@@ -44,7 +44,8 @@
 <%= image_tag("curve-top-feedback.png", :class => "feedback-box-curves", :alt => "")  %>
 <div class="feedback-box" style="display='block'">
 	<p>
-		Please rate your experience sharing your bike with <%= link_to 'Josh', '#', :class => "positive" %>
+		<!-- Please rate your experience sharing your bike with <%= link_to 'Josh', '#', :class => "positive" %> -->
+		Please rate your experience sharing 
 	</p>
 	<%= form_for @feedback, :url => request_feedbacks_path(@request) do |f| %>
 	  <%= render :partial => "shared/error_messages", :locals => { :model => @feedback } %>
