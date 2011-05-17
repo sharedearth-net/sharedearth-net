@@ -1,5 +1,6 @@
+<div id="light" class="white_content">
 <%= image_tag("curve-top-feedback.png", :class => "feedback-box-curves", :alt => "")  %>
-<div class="feedback-box">
+<div class="feedback-box" style="display='block'">
 	<p>
 		Please rate your experience sharing your bike with <%= link_to 'Josh', '#', :class => "positive" %>
 	</p>
@@ -20,7 +21,7 @@
 		<%= image_tag("curve-top-feedback-message.png", :class => "feedback-box-curves", :alt => "")  %>
 		<div class="feedback-message">
 			<%= f.label :feedback_note %>
-			<div id="feedback_note" style="display:none;">
+			<div id="feedback_note">
 				<%= f.text_area :feedback_note %>
 			</div>
 		</div>
@@ -43,7 +44,9 @@
 
 
 <script language="javascript">
-checked_negative = document.getElementById('feedback_feedback_neutral').checked || document.getElementById('feedback_feedback_negative').checked 
+checked_negative = false
+checked_negative = document.getElementById('feedback_feedback_20').checked || document.getElementById('feedback_feedback_30').checked 
+checked_positive = document.getElementById('feedback_feedback_10').checked
 document.getElementById("feedback_note").style.display = checked_negative ? "block" : "none";
 
 function show_feedback(note)
@@ -51,4 +54,6 @@ function show_feedback(note)
  document.getElementById("feedback_note").style.display = note ? "block" : "none";
 }
 </script>
+</div>
+<div id="fade" class="black_overlay"></div>
 
