@@ -72,17 +72,17 @@ class ItemRequestsController < ApplicationController
   end
   
   def cancel
-    @item_request.cancel!(current_user)
+    @item_request.cancel!(current_user.person)
     redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_canceled'))
   end
   
   def collected
-    @item_request.collected!(current_user)
+    @item_request.collected!
     redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_collected'))
   end
   
   def complete
-    @item_request.complete!(current_user)
+    @item_request.complete!(current_user.person)
     redirect_to(new_request_feedback_path(@item_request)) #:notice => I18n.t('messages.item_requests.request_completed')
   end
   
