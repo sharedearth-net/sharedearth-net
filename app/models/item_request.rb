@@ -97,47 +97,42 @@ class ItemRequest < ActiveRecord::Base
     self.item.owner.reputation_rating.increase_requests_answered_count
   end
 
-  def cancel!(current_user_initiator)
-    @current_user_initiator = current_user_initiator.person.id   
-    if self.accepted? && (self.requester.id == @current_user_initiator)
-      self.gifter.reputation_rating.increase_gift_actions_count
-      self.gifter.reputation_rating.increase_total_actions_count
-      self.requester.reputation_rating.increase_total_actions_count
-      self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted?(self.gifter, self.requester)
+  def cancel!(person_initiator)
+    @person_initiator = person_initiator.id   
+    if self.accepted? && (self.requester.id == @person_initiator)
+      self.update_reputation_for_parties_involved
     end 
-    self.status = STATUS_CANCELED
-    save!
     self.item.share? ? create_item_request_canceled_activity_log : create_gift_request_canceled_activity_log
     self.item.available! 
+    self.status = STATUS_CANCELED
+    save!
   end
-  
 
-  def collected!(current_user_initiator)
-    @current_user_initiator = current_user_initiator.person.id 
+  def collected!
     self.item.gift? ? self.item.available! : self.item.in_use!
-    if self.item.gift?
-      self.gifter.reputation_rating.increase_gift_actions_count
-      self.gifter.reputation_rating.increase_total_actions_count
-      self.requester.reputation_rating.increase_total_actions_count
-      self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted?(self.gifter, self.requester)
-    end
+    self.update_reputation_for_parties_involved if self.item.gift?
     item_type_based_status
   end
 
-  def complete!(current_user_initiator)
-    @current_user_initiator = current_user_initiator.person.id
+  def complete!(person_initiator)
+    @person_initiator = person_initiator.id
     self.item.available! 
-    self.gifter.reputation_rating.increase_gift_actions_count
-    self.gifter.reputation_rating.increase_total_actions_count
-    self.requester.reputation_rating.increase_total_actions_count
-    self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted?(self.gifter, self.requester)
-    self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
     self.status = STATUS_COMPLETED
     save!
+    self.update_reputation_for_parties_involved
+    self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
     create_sharing_event_log
   end
   
+  def update_reputation_for_parties_involved
+      self.gifter.reputation_rating.increase_gift_actions_count
+      self.gifter.reputation_rating.increase_total_actions_count
+      self.requester.reputation_rating.increase_total_actions_count
+      self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted?(self.gifter, self.requester)
+  end
+  
   #CHECK IF SOME COMPLETED REQUEST WITH OTHER PERSON EXISTS AND IF THERE IS INTERACTION WHEN REQUEST WAS ACCEPTED AND THEN CANCELED BY REQUESTER
+  # TODO: Make this method way better
   def already_interacted?(first_person, second_person)
     completed = ItemRequest.find(:first, :conditions => ["gifter_id=? and gifter_type=? and requester_id=? and requester_type=? and status IN (?)", first_person.id, "Person", second_person.id, "Person", [STATUS_COMPLETED]])
     if !completed.nil? 
@@ -227,7 +222,7 @@ class ItemRequest < ActiveRecord::Base
   end
   
   def create_item_request_canceled_activity_log
-    if self.requester_id == @current_user_initiator
+    if self.requester_id == @person_initiator
       ActivityLog.create_item_request_activity_log(self, EventType.item_requester_canceled_gifter, EventType.item_requester_canceled_requester)
     else
       ActivityLog.create_item_request_activity_log(self, EventType.item_gifter_canceled_gifter, EventType.item_gifter_canceled_requester)
@@ -239,7 +234,7 @@ class ItemRequest < ActiveRecord::Base
   end
   
   def create_item_request_completed_activity_log
-    if self.requester_id == @current_user_initiator
+    if self.requester_id == @person_initiator
       ActivityLog.create_item_request_activity_log(self, EventType.item_request_completed_gifter, EventType.item_request_completed_requester)
     else
       ActivityLog.create_item_request_activity_log(self, EventType.item_gifter_completed_gifter, EventType.item_gifter_completed_requester)
