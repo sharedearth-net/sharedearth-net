@@ -1,14 +1,31 @@
 require 'spec_helper'
 
 module ItemRequestSpecHelper
-
+  def setup_item_request_helper_environment
+    @requester_user = Factory(:user)
+    @requester      = Factory(:person, :user => @requester_user)
+    reputation  = Factory(:reputation_rating, :person_id => @requester.id)
+    @gifter_user = Factory(:user, :uid => '111')
+    @gifter      = Factory(:person, :user => @gifter_user)
+    reputation  = Factory(:reputation_rating, :person_id => @gifter.id)
+    @item        = Factory(:item, :owner => @gifter)
+    @item_request = Factory(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
+  end
+  
+  def delete_item_request_helper_environment
+    @item_request.delete
+    @gifter.delete
+    @gifter_user.delete
+    @requester.delete
+    @requster_user.delete
+  end
   def valid_item_request_attributes
     {
       :requester_id => 1,
       :requester_type => "Person",
       :gifter_id => 2,
       :gifter_type => "Person",
-      :item_id => 3,
+      :item_id => @item.id,
       :description => "ItemRequestDescription",
       :status => ItemRequest::STATUS_REQUESTED
     }
@@ -95,7 +112,7 @@ describe ItemRequest, ".accept!" do
   include ItemRequestSpecHelper
 
   before(:each) do
-    @item_request = ItemRequest.new(valid_item_request_attributes)
+    setup_item_request_helper_environment
   end
   
   it "should update status to accepted" do
@@ -110,14 +127,16 @@ describe ItemRequest, ".accept!" do
     @item_request = ItemRequest.new # invalid object attrs
     expect { @item_request.accept! }.to raise_error
   end
-
+  after(:all) do
+    delete_item_request_helper_environment
+  end
 end
 
 describe ItemRequest, ".reject!" do
   include ItemRequestSpecHelper
 
   before(:each) do
-    @item_request = ItemRequest.new(valid_item_request_attributes)
+    setup_item_request_helper_environment
   end
   
   it "should update status to rejected" do
@@ -139,20 +158,20 @@ describe ItemRequest, ".cancel!" do
   include ItemRequestSpecHelper
 
   before(:each) do
-    @item_request = ItemRequest.new(valid_item_request_attributes)
+    setup_item_request_helper_environment
   end
   
   it "should update status to canceled" do
-    expect { @item_request.cancel! }.to change { @item_request.status }.from(ItemRequest::STATUS_REQUESTED).to(ItemRequest::STATUS_CANCELED)
+    expect { @item_request.cancel!(@requester) }.to change { @item_request.status }.from(ItemRequest::STATUS_REQUESTED).to(ItemRequest::STATUS_CANCELED)
   end
 
   it "should save the request object" do
-    expect { @item_request.cancel! }.to change { @item_request.changed? }.to(false)
+    expect { @item_request.cancel!(@requester) }.to change { @item_request.changed? }.to(false)
   end
 
   it "should raise exception if request object is cannot be saved" do
     @item_request = ItemRequest.new # invalid object attrs
-    expect { @item_request.cancel! }.to raise_error
+    expect { @item_request.cancel!(@requester) }.to raise_error
   end
 
 end
@@ -161,7 +180,7 @@ describe ItemRequest, ".collected!" do
   include ItemRequestSpecHelper
 
   before(:each) do
-    @item_request = ItemRequest.new(valid_item_request_attributes)
+    setup_item_request_helper_environment
   end
   
   it "should update status to collected" do
@@ -176,27 +195,26 @@ describe ItemRequest, ".collected!" do
     @item_request = ItemRequest.new # invalid object attrs
     expect { @item_request.collected! }.to raise_error
   end
-
 end
 
 describe ItemRequest, ".complete!" do
   include ItemRequestSpecHelper
 
   before(:each) do
-    @item_request = ItemRequest.new(valid_item_request_attributes)
+    setup_item_request_helper_environment
   end
   
   it "should update status to completed" do
-    expect { @item_request.complete! }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
   end
 
   it "should save the request object" do
-    expect { @item_request.complete! }.to change { @item_request.changed? }.to(false)
+    expect { @item_request.complete!(@requester) }.to change { @item_request.changed? }.to(false)
   end
 
   it "should raise exception if request object is cannot be saved" do
     @item_request = ItemRequest.new # invalid object attrs
-    expect { @item_request.complete! }.to raise_error
+    expect { @item_request.complete!(@requester) }.to raise_error
   end
 
 end
