@@ -1,11 +1,25 @@
 Factory.define :user do |u|
   u.provider "Facebook"
-  u.uid      "1221401522"
+  u.sequence(:uid) { |n| n.to_s }
   u.nickname "demo"
 end
 
 Factory.define :person do |p|
   p.name "Test Member"
+end
+
+Factory.define :reputation_rating do |r|
+  r.person_id 1
+  r.gift_actions 0
+  r.distinct_people 0
+  r.total_actions 0
+  r.positive_feedback 0
+  r.negative_feedback 0
+  r.neutral_feedback  0
+  r.requests_received 0
+  r.requests_answered 0
+  r.trusted_network_count 0
+  r.activity_level 0
 end
 
 Factory.define :item do |i|
@@ -20,9 +34,9 @@ end
 
 Factory.define :item_request do |i|
   i.requester_type "Person"
-  #requester_id
+  #i.requester 
   i.gifter_type "Person"
-  #gifter_id
+  #i.gifter
   i.description "Would you like to borrow me something?"
   i.status ItemRequest::STATUS_REQUESTED
 end
