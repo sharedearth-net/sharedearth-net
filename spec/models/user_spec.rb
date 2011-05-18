@@ -17,6 +17,9 @@ module UserSpecHelper
       "user_info" => {
         "name" => "Slobodan Kovacevic",
         "nickname" => "basti"
+      },
+      "credentials" => {
+        "token" => "111111111"
       }
     }
   end
