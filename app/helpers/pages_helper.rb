@@ -367,10 +367,8 @@ module PagesHelper
       sentence =  person + " canceled the request for your " + item
     when 38
       sentence =  "You cancelled the request for " + person_possesive + " " + item 
-      
     
-
-=begin
+    #Check if sentence underneath are according to documentation, maybe they have changed  
     when 39
       sentence =  person + " made a request to borrow your " + item  #this is duplicate of  - 2, not used at this moment, left for possible future use
     when 40
@@ -415,7 +413,7 @@ module PagesHelper
       sentence =  person + " has left you neutral feedback after borrowing your " + item
     when 60
       sentence =  person + " has left you neutral feedback after sharing their " + item + " with you"
-=end
+
       
     else
       #
