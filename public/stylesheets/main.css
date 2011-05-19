@@ -1323,7 +1323,10 @@ a.normal:visited {
 
 									#wrapper .completed-request #content h2 {
 										font-size: 16px;
-										color: #62775a;
+										color: #333;
+										font-family: verdana,arial,sans-serif;
+									    line-height: 19px;
+										text-align: center;
 									}
 
 									#wrapper .completed-request #content .item-holder {
@@ -1613,18 +1616,36 @@ a.normal:visited {
 									width: 50%;
 									text-align: center;
 								}
+								
+								ul.feedback-submit li a:link,
+								ul.feedback-submit li a:visited {
+									background: #cce5a0 url("../images/bg-bt-request-list.png") repeat-x 0 0;
+								    border: 1px solid #AAB1A9;
+								    color: #234D4D;
+								    height: 22px;
+								    line-height: 15px;
+								    padding: 1px 7px 1px 7px;
+								    text-transform: capitalize;
+									
+								}
 							
 								ul.feedback-submit li input {
 									font-size: 14px;
 									font-family: verdana, arial, sans-serif;
-									color: #097b05;
-									background: none;
-									border: none;
-									line-height: 13px;
-									padding: 0;
-									margin-top: -3px;
 									cursor: pointer;
+									background: #cce5a0 url("../images/bg-bt-request-list.png") repeat-x 0 0;
+								    border: 1px solid #AAB1A9;
+								    color: #097b05;
+								    height: 21px;
+								    line-height: 15px;
+								    padding: 0 7px 2px 7px;
+									margin-top: -2px;
+								    text-transform: capitalize;
 								}
+								
+									ul.feedback-submit li input:hover {
+										text-decoration: underline;
+									}
 								
 								
 								
