@@ -50,6 +50,9 @@ group :development, :test do
 	gem 'factory_girl_rails'
 	gem 'ffaker'
 	gem 'spork', '~> 0.9.0.rc'
+	gem 'cucumber'
+  gem 'cucumber-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
-gem "simplecov", :require => false, :group => :test
 
