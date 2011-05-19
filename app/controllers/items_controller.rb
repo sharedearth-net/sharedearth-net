@@ -11,6 +11,14 @@ class ItemsController < ApplicationController
     else
       @items = current_user.person.items.without_deleted
     end
+    @trusted, @extended = [], []
+    @items.each do |item|
+      if item.in_trusted_network_for_person?(current_user.person)
+        @trusted.push(item) 
+      else
+        @extended.push(item)
+      end
+    end
 
     respond_to do |format|
       format.html # index.html.erb
