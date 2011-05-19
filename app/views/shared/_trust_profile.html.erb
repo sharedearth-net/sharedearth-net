@@ -63,7 +63,7 @@
 			<li class="clearfix">
 				<%= image_tag("ic-trusted-profile.png", :class => "icons", :alt => "Trusted Profile")  %>
 				<p>
-					<a href="#"><%= trusted_network = current_user.person.trusted_network_count(person) %></a> <%= (trusted_network == 1) ? "person" : "people" %> from your trusted network
+					<a href="#"><%= trusted_network = current_user.person.mutural_friends_count(person) %></a> <%= (trusted_network == 1) ? "person" : "people" %> from your trusted network
 				</p>
 			</li>
 <!--
