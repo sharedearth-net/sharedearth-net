@@ -7,7 +7,7 @@ describe "people/show.html.erb" do
         :user_id => 1
   ) }
   let(:mock_user) { generate_mock_user_with_person }
-  let(:mock_items){ [ stub_model(Item, :name => "Item1").as_null_object, stub_model(Item, :name => "Item2").as_null_object ] }
+  let(:mock_items){ [ stub_model(Item, :name => "Item1", :owner_id => 1, :owner_type => "Person").as_null_object, stub_model(Item, :name => "Item2", :owner_id => 1, :owner_type => "Person").as_null_object ] }
   
   before do
     mock_person.stub(:user).and_return(mock_user)
