@@ -58,7 +58,7 @@ class ItemRequest < ActiveRecord::Base
     item_request
   end
   
-  def both_parties_lef_feedback?
+  def both_parties_left_feedback?
     self.feedbacks.count == 2
   end
   
