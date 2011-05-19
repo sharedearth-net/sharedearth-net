@@ -48,6 +48,8 @@ group :development, :test do
 	gem "webrat"
 	gem "rcov"
 	gem 'factory_girl_rails'
+	gem 'ffaker'
+	gem 'spork', '~> 0.9.0.rc'
 end
 gem "simplecov", :require => false, :group => :test
 
