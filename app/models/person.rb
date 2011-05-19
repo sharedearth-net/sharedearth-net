@@ -22,7 +22,7 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :user_id, :name
   
-  #after_create :create_entity_for_person
+  after_create :create_entity_for_person
 
   def belongs_to?(some_user)
     user == some_user
@@ -47,31 +47,13 @@ class Person < ActiveRecord::Base
     friends.each { |person| size += person.people_networks.count }
     size
   end
-
-  #FIND CURRENT USER AND SHOWN USER MUTUAL FRIENDS COUNT
-  def trusted_network_count(other_person)
-    if self.id == other_person.id
-       return self.people_networks.involves(self).count
-    else
-      trusted_network = 0
-      self.people_networks.involves(self).each do | relationship | 
-         if(self.id != relationship.person_id)
-            trustee = Person.find(relationship.person_id)
-         else
-           trustee = Person.find(relationship.trusted_person_id)
-         end
-         unless trustee.people_networks.involves(other_person).empty? 
-           trusted_network += 1
-         end
-      end
-      
-      #DON'T INCLUDE ME AS MUTUAL FRIEND IF I TRUST THIS PERSON
-      if self.trusts?(other_person)
-         trusted_network -= 1
-      end
+  
+  def mutural_friends_count(other_person)
+    mutural_friends = 0
+    self.people_networks.each do |pn| 
+      mutural_friends+=1 if pn.trusted_person.trusts?(other_person)
     end
-    
-    trusted_network
+    mutural_friends
   end
   
   def trusts_me_count
@@ -105,16 +87,16 @@ class Person < ActiveRecord::Base
   def news_feed
     # Updated SQL to get all events relating to anyone in a user's trusted
     # network or to themselves
-   
+    self_id = self.id
 		ee = Arel::Table.new(EventEntity.table_name.to_sym)
     pn = Arel::Table.new(PeopleNetwork.table_name.to_sym)
 
-    pn_network = pn.project(pn[:trusted_person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:person_id].eq(self.id))
+    pn_network = pn.project(pn[:trusted_person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:person_id].eq(self_id))
 
     query = ee.project(Arel.sql("#{ee.name}.event_log_id as event_log_id"), Arel.sql("SUM(trusted_relationship_value) as total_relationship_value"))
     query = query.join(Arel.sql("LEFT JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.trusted_person_id AND #{ee.name}.entity_type = 'Person'"))
     query = query.group(ee[:event_log_id], ee[:created_at]).order("#{ee.name}.created_at DESC").take(25)
-    query = query.where(Arel.sql("trusted_person_id IS NOT NULL or (#{ee.name}.entity_type = 'Person' and #{ee.name}.entity_id = #{self.id})"))
+    query = query.where(Arel.sql("trusted_person_id IS NOT NULL or (#{ee.name}.entity_type = 'Person' and #{ee.name}.entity_id = #{self_id})"))
 
     event_log_ids = EventEntity.find_by_sql(query.to_sql)
 
@@ -123,7 +105,7 @@ class Person < ActiveRecord::Base
 	
 		event_log_ids.each do |e|
 		  conditions = { :type_id =>  EventDisplay::DASHBOARD_FEED, 
-                   :person_id => self.id,
+                   :person_id => self_id,
                    :event_id => e.event_log_id }
       EventDisplay.find(:first, :conditions => conditions) || EventDisplay.create(conditions) 
 		end
@@ -178,7 +160,7 @@ class Person < ActiveRecord::Base
   end
   
   ###########
-  # Latest activity on personal page methods
+  # Latest activity methods for personal page
   ###########
   
   def public_events
@@ -186,16 +168,15 @@ class Person < ActiveRecord::Base
   end
   
   def  public_activities(current_user)
-    if current_user.person.id != self.id
-      #SHOW EVENTS INVOLVING CURRENT USER AND PERSON WHOOSE PROFILE IS BEEING VIEWED
-      activites = ActivityLog.find(:all, 
-                         :conditions => ["(primary_id = ? AND primary_type = ? AND secondary_id = ? AND secondary_type = ? and event_type_id IN (?)) ", 
-                         current_user.person.id, current_user.person.class.to_s, self.id, self.class.to_s,  EventType.current_actions_underway], :order => 'created_at DESC').take(7)
+    if !current_user.person.same_as_person?(self)
+      activites = ActivityLog.activities_involving(self, current_user.person).order("created_at desc").limit(7)
     else
-      activites = ActivityLog.find(:all, 
-                         :conditions => ["(primary_id = ? AND primary_type = ? and event_type_id IN (?)) ", 
-                         current_user.person.id, current_user.person.class.to_s,  EventType.current_actions_underway], :order => 'created_at DESC').take(7)
+      activites = ActivityLog.public_activities(current_user.person).order("created_at desc").limit(7)
     end
+  end
+  
+  def same_as_person?(person)
+    self.id == person.id
   end
   
 end
