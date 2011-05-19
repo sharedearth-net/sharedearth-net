@@ -83,7 +83,7 @@ class ItemRequestsController < ApplicationController
   
   def complete
     @item_request.complete!(current_user.person)
-    redirect_to(new_request_feedback_path(@item_request)) #:notice => I18n.t('messages.item_requests.request_completed')
+    redirect_to(new_request_feedback_path(@item_request), :notice => I18n.t('messages.item_requests.request_completed'))
   end
   
   private
