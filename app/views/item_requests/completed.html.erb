@@ -4,10 +4,10 @@
 		<div class="feedback-holder">
 			<%= image_tag @item_request.gifter.avatar(:large), :alt => "" %>
 			<%#= image_tag('profile-narrow-1.png', :alt => "")  %>
-			<% if @item_request.both_parties_lef_feedback? -%>
-			  <%= feedback_box_colour(@item_request.feedback_from_gifter?) %>
+			<% if @item_request.both_parties_left_feedback? -%>
+			  <%= feedback_box_colour(@item_request.feedback_from_requester?) %>
 			<% else -%>
-			  <div class="feedback positive-feedback"></div>
+			  <div class="feedback neutral-feedback"></div>
 			<% end -%>			
 		</div>
 	
@@ -31,7 +31,7 @@
 				    <%= link_to @item_request.gifter.reputation_rating.distinct_people_count.to_s, "#", :class => "people-helped", :title => "People Helped" %>
 			    </li>
 			    <li>
-			      <% feedback_rating = current_user.person.reputation_rating.feedback_rating?%>
+			      <% feedback_rating = @item_request.gifter.reputation_rating.feedback_rating?%>
 				    <%= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", :class => "feedback-rating", :title => "Positive Feedback Rating" %>
 			    </li>
 				</ul>
@@ -131,10 +131,10 @@
 		<div class="feedback-holder">
 		  <%= image_tag @item_request.requester.avatar(:large), :alt => "" %>
 			<%#= image_tag('profile-narrow-2.png', :alt => "")  %>
-			<% if @item_request.both_parties_lef_feedback? -%>
-			  <%= feedback_box_colour(@item_request.feedback_from_requester?) %>
+			<% if @item_request.both_parties_left_feedback? -%>
+			  <%= feedback_box_colour(@item_request.feedback_from_gifter?) %>
 			<% else -%>
-			  <div class="feedback negative-feedback"></div>
+			  <div class="feedback neutral-feedback"></div>
 			<% end -%>		
 		</div>
 	
@@ -158,7 +158,7 @@
 				    <%= link_to @item_request.requester.reputation_rating.distinct_people_count.to_s, "#", :class => "people-helped", :title => "People Helped" %>
 			    </li>
 			    <li>
-			      <% feedback_rating = current_user.person.reputation_rating.feedback_rating?%>
+			      <% feedback_rating = @item_request.requester.reputation_rating.feedback_rating?%>
 				    <%= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", :class => "feedback-rating ", :title => "Positive Feedback Rating" %>
 			    </li>
 				</ul>
