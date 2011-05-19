@@ -49,13 +49,14 @@
 	<div id="content">
 		
 		<div class="content-box-holder no-bg">
-			<div class="search-holder">
-				<form action="#">
-					<div>
-						<input type="text" value="Search" /> <button type="submit" title="Search">Search</button>
-					</div>
-				</form>
-			</div>
+		  <div class="search-holder">
+					    <%= form_tag items_path, :method => 'get' do %>
+                <div>
+                  <%= text_field_tag :search, params[:search] %>
+                  <button type="submit" title="Search">Search</button>
+                </div>
+              <% end %>
+		  </div>
 			<h2>
 				<%= link_to image_tag('ic-items-community.png', :alt => "Items", :title => "Items") %>
 				Items in 
@@ -63,25 +64,28 @@
 				Sydney
 			</h2>
 			
+			<% if @trusted.empty? && @extended.empty?%>
+			  <h3>Sorry, there is no item with those words</h3>
+			<% end %>
 			
+  		<% if !@trusted.empty?%>
 			<div class="items-list clearfix">
 				<h3>
 					From your trusted network
 				</h3>
 				<ul class="clearfix">
-					<li class="item clearer">
-						<a href="/items/1">
-							<img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" />
-						</a>
-						<div>
+				<% @trusted.each do |item| %>
+          <li class="item clearer">
+		        <%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
+		        <div>
 							<p>
-								gift&nbsp;|&nbsp;
-								<a href="#">42 person school bus</a>&nbsp;|
-								<a href="/items/1" class="positive">Bus</a>
+								<%= item.purpose? %>&nbsp;|&nbsp;
+								<%= link_to item.item_type, "#" %>&nbsp;|
+								<%= link_to item.name, item_path(item), :class => "positive" %>
 							</p>
 							<ul class="action-list">
 								<li>
-									<a href="#" class="positive capitalize">Nicky Lewis</a>
+									<%= link_to_person(item.owner, :class => "positive capitalize") %>
 								</li>
 								<li>
 									<a href="#" class="communities" title="Communities">3 communities</a>
@@ -89,115 +93,45 @@
 							</ul>
 						</div>
 					</li>
-					<li class="item clearer">
-						<a href="/items/1">
-							<img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" />
-						</a>
-						<div>
-							<p>
-								gift&nbsp;|&nbsp;
-								<a href="#">42 person school bus</a>&nbsp;|
-								<a href="/items/1" class="positive">Bus</a>
-							</p>
-							<ul class="action-list">
-								<li>
-									<a href="#" class="positive capitalize">Nicky Lewis</a>
-								</li>
-								<li>
-									<a href="#" class="communities capitalize" title="Communities">Evolver Sydney</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li class="item clearer">
-						<a href="/items/1"><img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" /></a>
-						<div>
-							<p>
-								gift&nbsp;|&nbsp;
-								<a href="#">42 person school bus</a>&nbsp;|
-								<a href="/items/1" class="positive">Bus</a>
-							</p>
-							<ul class="action-list">
-								<li>
-									<a href="#" class="positive capitalize">Nicky Lewis</a>
-								</li>
-								<li>
-									<a href="#" class="communities" title="Communities">3 communities</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li class="item clearer">
-						<a href="/items/1"><img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" /></a>
-						<div>
-							<p>
-								gift&nbsp;|&nbsp;
-								<a href="#">42 person school bus</a>&nbsp;|
-								<a href="/items/1" class="positive">Bus</a>
-							</p>
-							<ul class="action-list">
-								<li>
-									<a href="#" class="positive capitalize">Nicky Lewis</a>
-								</li>
-								<li>
-									<a href="#" class="communities" title="Communities">3 communities</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li class="item clearer">
-						<a href="/items/1"><img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" /></a>
-						<div>
-							<p>
-								gift&nbsp;|&nbsp;
-								<a href="#">42 person school bus</a>&nbsp;|
-								<a href="/items/1" class="positive">Bus</a>
-							</p>
-							<ul class="action-list">
-								<li>
-									<a href="#" class="positive capitalize">Nicky Lewis</a>
-								</li>
-								<li>
-									<a href="#" class="communities" title="Communities">3 communities</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-					
+        <% end if !@trusted.nil?%>
 				</ul>
 				<a href="#" class="button-more">
 					2 more
 				</a>
-			</div><!-- /items-list -->
-			
+			</div><!-- /trusted items-list -->
+			<% end %>
+			<% if !@extended.empty?%>
 			<div class="items-list clearfix">
 				<h3>
 					From your extended network
 				</h3>
 				<ul class="clearfix">
-					<li class="item clearer">
-						<a href="/items/1"><img alt="1-bus-square" class="thumb" src="http://s3.amazonaws.com/sharedearth-development-pedja/item-photos/1-bus-square.jpg?1297952266" /></a>
-						<div>
+					<% @extended.each do |item| %>
+          <li class="item clearer">
+		        <%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
+		        <div>
 							<p>
-								gift&nbsp;|&nbsp;
-								<a href="#">42 person school bus</a>&nbsp;|
-								<a href="/items/1" class="positive">Bus</a>
+								<%= item.purpose? %>&nbsp;|&nbsp;
+								<%= link_to item.item_type, "#" %>&nbsp;|
+								<%= link_to item.name, item_path(item), :class => "positive" %>
 							</p>
 							<ul class="action-list">
 								<li>
-									<a href="#" class="positive capitalize">Gavin Madden</a>
+									<%= link_to_person(item.owner, :class => "positive capitalize") %>
 								</li>
 								<li>
-									<a href="#" class="communities capitalize" title="Communities">Sydney</a>
+									<a href="#" class="communities" title="Communities">3 communities</a>
 								</li>
 							</ul>
 						</div>
 					</li>
+        <% end%>
 				</ul>
 				<a href="#" class="button-more">
 					23 more
 				</a>
-			</div><!-- /items-list -->
+			</div><!-- /extended items-list -->
+			<% end %>
 		
 		</div><!-- /content-box-holder  -->
 		
@@ -205,46 +139,3 @@
 	
 </div><!--	/search-holder -->
 
-
-
-
-<!--
-	search static end
--->
-
-<!-- OLD DYNAMIC
-<h1>Listing items</h1>
- 
-<table>
-  <tr>
-		<th>Photo</th>
-    <th>Type</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @items.each do |item| %>
-  <tr>
-		<td><%= image_tag item.photo.url(:small) %></td>
-    <td><%= item.item_type %></td>
-    <td><%= item.name %></td>
-    <td><%= item.description %></td>
-    <td><%= link_to 'Show', item %></td>
-    <% if item.normal? %>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <% end %>
-    <% if item.available? -%>
-    <td><%= link_to 'Delete', item, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end -%>
-  </tr>
-<% end if !@items.nil?%>
-</table>
-
-<br />
-
-<%= link_to 'New Item', new_item_path %>
-
--->
