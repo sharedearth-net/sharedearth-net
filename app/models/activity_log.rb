@@ -32,10 +32,11 @@ class ActivityLog < ActiveRecord::Base
   
   scope :gift_actions, lambda { |entity| where("(primary_id = ? and event_type_id IN (?) ) ", entity.id, EventType.completed_request_ids) }
   scope :involves, lambda { |entity| where("(primary_id = ? AND primary_type = ?) OR (secondary_id = ? AND secondary_type = ?) ", entity.id, entity.class.to_s, entity.id, entity.class.to_s) }
-  
   scope :completed_requests, lambda { |entity| where("event_type_id IN (?)", EventType.completed_request_ids) }
-  
   scope :personal_actions, lambda { |entity| where("event_type_id IN (?)", EventType.personal_actions) }
+  scope :activities_involving, lambda { |p1,p2| where("(primary_id = ? AND primary_type = ? AND secondary_id = ? AND secondary_type = ? and event_type_id IN (?)) ", 
+                                                      p1.id, p1.class.to_s, p2.id, p2.class.to_s, EventType.current_actions_underway) }
+  scope :public_activities, lambda { |entity| where("(primary_id = ? AND primary_type = ? and event_type_id IN (?) ) ", entity.id, entity.class.to_s, EventType.current_actions_underway) }
 
   def self.next_event_code
     current_max = ActivityLog.maximum(:event_code)
