@@ -14,19 +14,6 @@ class FeedbacksController < ApplicationController
       render :action => 'new'
     end
   end
-
-  def edit
-    @feedback = Feedback.find(params[:id])
-  end
-
-  def update
-    @feedback = Feedback.find(params[:id])
-    if @feedback.update_attributes(params[:feedback])
-      redirect_to dashboard_path, :notice  => "Successfully updated feedback."
-    else
-      render :action => 'edit'
-    end
-  end
   
   protected
   
