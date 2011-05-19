@@ -196,10 +196,10 @@ describe ItemRequestsController do
         put :accept, :id => "42"
       end
 
-      it "should redirect to request page" do
+      it "should redirect to dashboard page" do
         put :accept, :id => "42"
         flash[:notice].should eql(I18n.t('messages.item_requests.request_accepted'))
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should allow only gifter to accept the request" do
@@ -208,7 +208,7 @@ describe ItemRequestsController do
       
         put :accept, :id => "42"
         flash[:alert].should be_blank # make sure this is not an error redirect
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should redirect requester trying to accept the request" do
@@ -217,7 +217,7 @@ describe ItemRequestsController do
       
         put :accept, :id => "42"
         flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(request_url(mock_item_request))
       end
 
       it "should redirect other users trying to accept the request" do
@@ -226,7 +226,7 @@ describe ItemRequestsController do
       
         put :accept, :id => "42"
         flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(request_url(mock_item_request))
       end
 
     end
@@ -247,10 +247,10 @@ describe ItemRequestsController do
         put :reject, :id => "42"
       end
 
-      it "should redirect to request page" do
+      it "should redirect to dashboard page" do
         put :reject, :id => "42"
         flash[:notice].should eql(I18n.t('messages.item_requests.request_rejected'))
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should allow only gifter to reject the request" do
@@ -259,7 +259,7 @@ describe ItemRequestsController do
       
         put :reject, :id => "42"
         flash[:alert].should be_blank # make sure this is not an error redirect
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should redirect requester trying to reject the request" do
@@ -268,7 +268,7 @@ describe ItemRequestsController do
       
         put :reject, :id => "42"
         flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(request_url(mock_item_request))
       end
 
       it "should redirect other users trying to reject the request" do
@@ -277,7 +277,7 @@ describe ItemRequestsController do
       
         put :reject, :id => "42"
         flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(request_url(mock_item_request))
       end
 
     end
@@ -298,10 +298,10 @@ describe ItemRequestsController do
         put :cancel, :id => "42"
       end
 
-      it "should redirect to request page" do
+      it "should redirect to dashboard page" do
         put :cancel, :id => "42"
         flash[:notice].should eql(I18n.t('messages.item_requests.request_canceled'))
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should allow requester to cancel the request" do
@@ -310,7 +310,7 @@ describe ItemRequestsController do
       
         put :cancel, :id => "42"
         flash[:alert].should be_blank # make sure this is not an error redirect
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should allow gifter to cancel the request" do
@@ -319,7 +319,7 @@ describe ItemRequestsController do
       
         put :cancel, :id => "42"
         flash[:alert].should be_blank # make sure this is not an error redirect
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should redirect other users trying to cancel the request" do
@@ -349,10 +349,10 @@ describe ItemRequestsController do
         put :collected, :id => "42"
       end
 
-      it "should redirect to request page" do
+      it "should redirect to dashboard page" do
         put :collected, :id => "42"
         flash[:notice].should eql(I18n.t('messages.item_requests.request_collected'))
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should allow requester to mark request as collected" do
@@ -361,7 +361,7 @@ describe ItemRequestsController do
       
         put :collected, :id => "42"
         flash[:alert].should be_blank # make sure this is not an error redirect
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should allow gifter to mark request as collected" do
@@ -370,7 +370,7 @@ describe ItemRequestsController do
       
         put :collected, :id => "42"
         flash[:alert].should be_blank # make sure this is not an error redirect
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should redirect other users trying to mark request as collected" do
@@ -403,7 +403,7 @@ describe ItemRequestsController do
       it "should redirect to request page" do
         put :complete, :id => "42"
         flash[:notice].should eql(I18n.t('messages.item_requests.request_completed'))
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(new_request_feedback_path(mock_item_request))
       end
 
       it "should allow requester to mark request as complete" do
@@ -412,7 +412,7 @@ describe ItemRequestsController do
       
         put :complete, :id => "42"
         flash[:alert].should be_blank # make sure this is not an error redirect
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(new_request_feedback_path(mock_item_request))
       end
 
       it "should allow gifter to mark request as complete" do
@@ -421,7 +421,7 @@ describe ItemRequestsController do
       
         put :complete, :id => "42"
         flash[:alert].should be_blank # make sure this is not an error redirect
-        response.should redirect_to(request_path(mock_item_request))
+        response.should redirect_to(new_request_feedback_path(mock_item_request))
       end
 
       it "should redirect other users trying to mark request as complete" do
