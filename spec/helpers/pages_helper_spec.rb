@@ -8,7 +8,7 @@ module PagesSpecHelper
     @user = Factory(:user)
     @person = Factory(:person, :user => @user)
     @item = Factory(:item, :owner => @person)
-    @activity_log = Factory(:activity_log, :event_type_id => 1, :secondary_id => @person, :action_object_id => @item)
+    @activity_log = Factory(:activity_log, :event_type_id => 1, :secondary_id => @person.id, :action_object_id => @item.id)
   end
 
 end
