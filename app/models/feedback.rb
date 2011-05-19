@@ -14,7 +14,7 @@ class Feedback < ActiveRecord::Base
   belongs_to :item_request
   belongs_to :person
   
-  after_create :feedback_reputation_count
+  after_create :feedback_reputation_count, :if => :both_parties_left_feedback?
   validates_presence_of :feedback_note , :if => :neutral_and_negative?
   validates_presence_of :feedback
   
@@ -22,17 +22,27 @@ class Feedback < ActiveRecord::Base
   scope :for_item_request, lambda { |entity| where("item_request_id = ?", entity.id) }
   
   def feedback_reputation_count
-    feedback_person = (self.item_request.requester.id != self.person.id)? self.item_request.requester : self.item_request.gifter
-    case self.feedback.to_i
-      when FEEDBACK_POSITIVE
-        feedback_person.reputation_rating.increase_positive_feedback_count
-      when FEEDBACK_NEGATIVE
-        feedback_person.reputation_rating.increase_negative_feedback_count
-      when FEEDBACK_NEUTRAL
-        feedback_person.reputation_rating.increase_neutral_feedback_count
+    self.item_request.feedbacks.each do |feedback|
+      if feedback.person_id == self.item_request.requester.id
+        feedback_person = self.item_request.gifter
       else
-        #
+        feedback_person = self.item_request.requester
+      end
+      case feedback.feedback.to_i
+        when FEEDBACK_POSITIVE
+          feedback_person.reputation_rating.increase_positive_feedback_count
+        when FEEDBACK_NEGATIVE
+          feedback_person.reputation_rating.increase_negative_feedback_count
+        when FEEDBACK_NEUTRAL
+          feedback_person.reputation_rating.increase_neutral_feedback_count
+        else
+          #
+      end
     end
+  end
+  
+  def both_parties_left_feedback?
+    self.item_request.both_parties_left_feedback?
   end
   
   def neutral_and_negative?
