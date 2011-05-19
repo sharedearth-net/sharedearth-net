@@ -14,25 +14,15 @@ module ItemRequestsHelper
   end
   
   def item_request_completed_sentence(item_request)
-    gifter        = link_to_person(@item_request.gifter)
-    gifter_you    = link_to_person(item_request.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive")
-    item          = link_to @item_request.item.item_type, item_path(@item_request.item)
-    requester     = link_to_person(@item_request.requester)
-    requester_you = link_to_person(item_request.requester, :downcase_you => true, :possessive => true, :class => "capitalize positive")
+    gifter        =  link_to item_request.gifter.name, person_path(item_request.gifter), :class => "capitalize positive"
+    item          = link_to item_request.item.item_type, item_path(item_request.item), :class => "capitalize positive"
+    requester     = link_to item_request.requester.name, person_path(item_request.requester), :class => "capitalize positive"
     
     case item_request.item.purpose
       when Item::PURPOSE_SHARE
-        if item_request.requester?(current_user.person)
-          html = "<strong>You</strong> borrowed #{gifter}'s #{item}"
-        else
-          html = "<strong>#{requester}</strong> borrowed your #{item}"
-        end
+        html = "#{gifter} shared their #{item} with #{requester}"
       when Item::PURPOSE_GIFT
-        if item_request.requester?(current_user.person)
-          html = "<strong>You</strong> received #{gifter}'s #{item}"
-        else
-          html = "<strong>You</strong> gifted your #{item} to #{requester}"
-        end
+        html = "#{gifter} gifted their #{item} to #{requester}"
       else
         html = ""
     end
