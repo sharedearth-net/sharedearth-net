@@ -39,7 +39,7 @@
 								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.activity_level_count.to_s : "0", "#", :title => "Activity Level" %>
 							</li>
 							<li class="giftact-rating">
-							  <%= link_to !current_user.nil? ? current_user.person.trusted_network_count(current_user.person) : "0", "#", :title => "Number of people in your trusted network" %>
+							  <%= link_to !current_user.nil? ? current_user.person.mutural_friends_count(current_user.person) : "0", "#", :title => "Number of people in your trusted network" %>
 							</li>
 						</ul>
 					</div>
