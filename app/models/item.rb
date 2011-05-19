@@ -93,6 +93,10 @@ class Item < ActiveRecord::Base
     save!
   end
   
+  def in_trusted_network_for_person?(person)
+    self.owner.trusts?(person)
+  end
+  
   def create_entity_for_item
     Entity.create!(:entity_type_id => EntityType::ITEM_ENTITY, :specific_entity_id => self.id)
   end
