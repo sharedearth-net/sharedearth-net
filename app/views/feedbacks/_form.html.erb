@@ -61,14 +61,16 @@
 			</li>
 		</ul>
 		
-		<%= image_tag("curve-top-feedback-message.png", :class => "feedback-box-curves", :alt => "")  %>
-		<div class="feedback-message">
-			<%= f.label :feedback_note %>
-			<div id="feedback_note">
-				<%= f.text_area :feedback_note %>
+		<div id="hide">
+			<%= image_tag("curve-top-feedback-message.png", :class => "feedback-box-curves", :alt => "")  %>
+			<div class="feedback-message">
+				<%= f.label :feedback_note, "What Happened?" %>
+				<div id="feedback_note">
+					<%= f.text_area :feedback_note %>
+				</div>
 			</div>
+			<%= image_tag("curve-bottom-feedback-message.png", :class => "feedback-box-curves", :alt => "")  %>
 		</div>
-		<%= image_tag("curve-bottom-feedback-message.png", :class => "feedback-box-curves", :alt => "")  %>
 		
 		<ul class="feedback-submit clearfix">
 			<li>
@@ -90,11 +92,11 @@
 checked_negative = false
 checked_negative = document.getElementById('feedback_feedback_20').checked || document.getElementById('feedback_feedback_30').checked 
 checked_positive = document.getElementById('feedback_feedback_10').checked
-document.getElementById("feedback_note").style.display = checked_negative ? "block" : "none";
+document.getElementById("hide").style.display = checked_negative ? "block" : "none";
 
 function show_feedback(note)
 {
- document.getElementById("feedback_note").style.display = note ? "block" : "none";
+ document.getElementById("hide").style.display = note ? "block" : "none";
 }
 </script>
 </div>
