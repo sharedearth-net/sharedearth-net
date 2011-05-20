@@ -15,7 +15,7 @@ class Feedback < ActiveRecord::Base
   belongs_to :person
   
   after_create :feedback_reputation_count, :if => :both_parties_left_feedback?
-  validates_presence_of :feedback_note , :if => :neutral_and_negative?
+  validates_presence_of :feedback_note , :if => :neutral_or_negative?
   validates_presence_of :feedback
   
   scope :as_person, lambda { |entity| where("person_id = ?", entity.id) }
@@ -45,7 +45,7 @@ class Feedback < ActiveRecord::Base
     self.item_request.both_parties_left_feedback?
   end
   
-  def neutral_and_negative?
+  def neutral_or_negative?
     self.feedback.to_i == FEEDBACK_NEGATIVE || self.feedback.to_i == FEEDBACK_NEUTRAL
   end
   
