@@ -75,9 +75,9 @@
    
 		<div class="messages-holder">
 		   
-      <% if @item_request.feedbacks.size == 2 -%>
+      <% if @item_request.both_parties_left_feedback? -%>
         <% @item_request.feedbacks.each do |feedback|%>
-          <% if feedback.feedback == Feedback::FEEDBACK_NEUTRAL || feedback.feedback == Feedback::FEEDBACK_NEGATIVE %>
+          <% if feedback.neutral_or_negative? %>
           <% person = Person.find_by_id(feedback.person_id)%>
           <p class="message bad">
 				    <%= person.name %> <%= feedback.feedback_note %>
