@@ -1,6 +1,6 @@
 module ItemRequestsHelper
   def feedback_box_colour(feedback)
-    case feedback
+    case feedback.to_i
       when Feedback::FEEDBACK_POSITIVE
         html = "<div class=\"feedback positive-feedback\"></div>"
       when Feedback::FEEDBACK_NEGATIVE
