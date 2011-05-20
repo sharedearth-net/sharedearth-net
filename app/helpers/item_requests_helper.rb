@@ -15,7 +15,7 @@ module ItemRequestsHelper
   
   def item_request_completed_sentence(item_request)
     gifter        =  link_to item_request.gifter.name, person_path(item_request.gifter), :class => "capitalize positive"
-    item          = link_to item_request.item.item_type, item_path(item_request.item), :class => "capitalize positive"
+    item          = link_to item_request.item.item_type, item_path(item_request.item), :class => "positive"
     requester     = link_to item_request.requester.name, person_path(item_request.requester), :class => "capitalize positive"
     
     case item_request.item.purpose
