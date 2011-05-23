@@ -70,6 +70,10 @@ class Item < ActiveRecord::Base
   def is_owner?(entity)
     self.owner == entity
   end
+  
+  def has_photo?
+    self.photo.nil?
+  end
 
   def self.search(search, person_id)
     if search.empty?
