@@ -400,8 +400,7 @@ class EventType < ActiveRecord::Base
     self.item_request_completed_gifter? || self.item_request_completed_requester? || self.item_gifter_completed_gifter? || self.item_gifter_collected_requester?
   end
   
-=begin
-  
+  #NEW EVENT TYPES, CHECK FOR DUPLICATES WITH PREVIOUS ONE  
   def self.new_gift_item_request_gifter(return_only_id = true)
     return_only_id ? 39 : EventType.find(39)
   end
@@ -576,8 +575,6 @@ class EventType < ActiveRecord::Base
 
   def neutral_feedback_requester?
     self.id == EventType.neutral_feedback_requester
-  end
-=end
-  
+  end  
   
 end
