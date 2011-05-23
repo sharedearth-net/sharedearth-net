@@ -326,16 +326,24 @@ a.normal:visited {
 				.search-holder {
 					width: 224px;
 					float: right;
-					margin-top: 4px;
+					margin-top: 2px;
 				}
 				
+					.search-bg-holder-first {
+						border: 1px solid #b1d76e;
+					}
+					
+					.search-bg-holder-second {
+						border: 1px solid #c3e08f;
+					}
+				
 						.search-holder input[type="text"] {
-							height: 13px;
+							height: 12px;
 							padding:0;
-							border: 1px solid #000;
+							border: 1px solid #76b900;
 							border-right: 0;
 							float: left;
-							width: 200px;
+							width: 197px;
 							padding: 2px 0 0 0;
 							font-size: 11px;
 							line-height: 9px;
@@ -347,8 +355,8 @@ a.normal:visited {
 							float: left;
 							text-indent: -1000em;
 							background: url('../images/bg-search-submit.png') no-repeat top left;
-							width: 18px;
-							height: 17px;
+							width: 20px;
+							height: 16px;
 							border: none;
 							cursor: pointer;
 							color: #fff;
@@ -1172,7 +1180,7 @@ a.normal:visited {
 
 								#wrapper .completed-request .feedback-holder {
 									position: relative;
-									margin: 0 auto 20px auto;
+									margin: 75px auto 20px auto;
 									height: 210px;
 									text-align: center;
 								}
@@ -1629,6 +1637,10 @@ a.normal:visited {
 								    text-transform: capitalize;
 									
 								}
+								
+								ul.feedback-submit li a:hover {
+									text-decoration: none;
+								}
 							
 								ul.feedback-submit li input {
 									font-size: 14px;
@@ -1645,7 +1657,7 @@ a.normal:visited {
 								}
 								
 									ul.feedback-submit li input:hover {
-										text-decoration: underline;
+										text-decoration: none;
 									}
 								
 								

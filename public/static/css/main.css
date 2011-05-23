@@ -14,10 +14,18 @@
 
 /* Common */
 
+html {
+	background:  url('../graphics/bg-html.jpg')  no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
 body {
-	background: #c0de88 url('../graphics/bg-body.jpg') no-repeat center 30px;
 	font-family: "Trebuchet MS", arial, sans-serif;
 	color: #fff;
+	
 }
 
 strong {
@@ -40,8 +48,9 @@ a:hover {
 /* container */
 
 #container {
-	width: 1025px;
+	max-width: 960px;
 	margin: 0 auto;
+	
 }
 
 h1 {
@@ -65,7 +74,7 @@ h1 {
 	/* content */
 
 	#content {
-		width: 478px;
+		width: 413px;
 		float: left;
 		margin: 215px 0 0 0;
 		padding: 0 0 0 70px;
@@ -131,7 +140,7 @@ h1 {
 		#footer {
 			clear: both;
 			text-align: right;
-			padding-top: 225px;
+			padding-top: 125px;
 		}
 		
 			#footer p {
