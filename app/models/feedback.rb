@@ -15,6 +15,8 @@ class Feedback < ActiveRecord::Base
   belongs_to :person
   
   after_create :feedback_reputation_count, :if => :both_parties_left_feedback?
+  #TEMPORARY REMOVED, ADD NEW EVENT LOG TYPES FIRST WITH MIGRATION
+  #after_create :post_feedback_event_log, :if => :both_parties_left_feedback?
   validates_presence_of :feedback_note , :if => :neutral_or_negative?
   validates_presence_of :feedback
   
@@ -63,6 +65,35 @@ class Feedback < ActiveRecord::Base
   
   def feedback_mark_from(item_request_id, person_id)
     Feedback.find_by_item_request_id_and_person_id(item_request_id, person_id)
+  end
+  
+  def  post_feedback_event_log
+    self.item_request.feedbacks.each do |feedback|
+      if feedback.requester_feedback?
+        object_person  = self.item_request.gifter
+        subject_person = self.item_request.requester
+      else
+        object_person  = self.item_request.requester
+        subject_person = self.item_request.gifter
+      end
+      case feedback.feedback.to_i
+        when FEEDBACK_POSITIVE
+          event_type = feedback.requester_feedback? ? EventType.positive_feedback_gifter : EventType.positive_feedback_requester
+          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type)
+        when FEEDBACK_NEGATIVE
+          event_type = requester_feedback? ? EventType.negative_feedback_gifter : EventType.negative_feedback_requester
+          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type)
+        when FEEDBACK_NEUTRAL
+          event_type = requester_feedback? ? EventType.neutral_feedback_gifter : EventType.neutral_feedback_requester
+          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type)
+        else
+          #
+      end
+    end
+  end
+  
+  def requester_feedback?
+    self.person_id == self.item_request.requester.id
   end
   
 end
