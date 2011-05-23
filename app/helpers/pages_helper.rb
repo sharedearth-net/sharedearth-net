@@ -272,16 +272,17 @@ module PagesHelper
   end
 
   def recent_activity_sentence(activity_log)
-  
-    gifter              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
-    gifter_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
-    person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"  unless activity_log.secondary.nil?
-    person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"unless activity_log.secondary_short_name.nil?
-    person_full         = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
-    
-    requester           = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
-    requester_possesive = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
-    item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link"
+    gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
+    unless activity_log.secondary_short_name.nil?
+      gifter              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
+      gifter_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
+      person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"  unless activity_log.secondary.nil?
+      person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"unless activity_log.secondary_short_name.nil?
+      person_full         = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
+      requester           = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
+      requester_possesive = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
+    end
+    item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
     
     sentence = ""
     case activity_log.event_type_id
@@ -414,7 +415,6 @@ module PagesHelper
     when 60
       sentence =  person + " has left you neutral feedback after sharing their " + item + " with you"
 
-      
     else
       #
     end
