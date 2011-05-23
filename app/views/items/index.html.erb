@@ -79,17 +79,22 @@
 		        <%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
 		        <div>
 							<p>
-								<%= item.purpose? %>&nbsp;|&nbsp;
+  							<%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;|&nbsp;
 								<%= link_to item.item_type, "#" %>&nbsp;|
-								<%= link_to item.name, item_path(item), :class => "positive" %>
+								<%= item.purpose? %>		
 							</p>
 							<ul class="action-list">
 								<li>
 									<%= link_to_person(item.owner, :class => "positive capitalize") %>
 								</li>
 								<li>
-									<a href="#" class="communities" title="Communities">3 communities</a>
+									<%= link_to "view item", item_path(item) %>
+								</li>				
+								<%unless item.active_request_by?(current_user) || item.is_owner?(current_user.person)%>
+								<li>
+									<%= link_to "request", requests_path(:item_id => item.id), :method => :post %>
 								</li>
+								<% end -%>		
 							</ul>
 						</div>
 					</li>
@@ -103,7 +108,7 @@
 			<% if !@extended.empty?%>
 			<div class="items-list clearfix">
 				<h3>
-					From your extended network
+					<%= params[:search].nil? ? "Items" : "From your extended network" %>
 				</h3>
 				<ul class="clearfix">
 					<% @extended.each do |item| %>
@@ -111,17 +116,24 @@
 		        <%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
 		        <div>
 							<p>
-								<%= item.purpose? %>&nbsp;|&nbsp;
+  							<%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;|&nbsp;
 								<%= link_to item.item_type, "#" %>&nbsp;|
-								<%= link_to item.name, item_path(item), :class => "positive" %>
+								<%= item.purpose? %>		
 							</p>
 							<ul class="action-list">
+							  <% unless item.is_owner?(current_user.person) %>
 								<li>
 									<%= link_to_person(item.owner, :class => "positive capitalize") %>
 								</li>
+								<% end %>
 								<li>
-									<a href="#" class="communities" title="Communities">3 communities</a>
+									<%= link_to "view item", item_path(item) %>
+								</li>				
+								<%unless item.active_request_by?(current_user) || item.is_owner?(current_user.person) %>
+								<li>
+									<%= link_to "request", requests_path(:item_id => item.id), :method => :post %>
 								</li>
+								<% end -%>		
 							</ul>
 						</div>
 					</li>
