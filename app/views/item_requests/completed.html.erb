@@ -66,12 +66,10 @@
 	<div id="content">
 	
 		<h2><%= item_request_completed_sentence(@item_request)%></h2>
-
+		
 		<div class="item-holder">
-  		<%= image_tag @item_request.item.photo.url(:small), :alt => "Item Completed Sample" %>
-			<%#= image_tag('item-completed-sample.png', :alt => "Item Completed Sample")  %>
+  		<%= image_tag @item_request.item.photo.url(:small), :alt => "Item Completed Sample" if @item_request.item.has_photo? %>
 		</div>
-  
    
 		<div class="messages-holder">
 		   
