@@ -10,6 +10,12 @@ class ChangeFeedbackFieldToInteger < ActiveRecord::Migration
           f.feedback_int = Feedback::FEEDBACK_NEGATIVE
         when 'neutral'
           f.feedback_int = Feedback::FEEDBACK_NEUTRAL
+        when '10'
+          f.feedback_int = Feedback::FEEDBACK_POSITIVE
+        when '20'
+          f.feedback_int = Feedback::FEEDBACK_NEGATIVE
+        when '30'
+          f.feedback_int = Feedback::FEEDBACK_NEUTRAL
         else
           #    
       end
