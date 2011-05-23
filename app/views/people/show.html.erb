@@ -41,13 +41,10 @@
 									<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
 									<div>
 										<p>
-											<%= item.purpose? %>&nbsp;&nbsp;|&nbsp;											
+										  <%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;|&nbsp;										
 											<%= link_to item.item_type, "#" %>&nbsp;&nbsp;|&nbsp;
-											<%= link_to item.name, item_path(item), :class => "positive" %>
-											<!-- basti-question: what's this? -->
-											
+											<%= item.purpose? %>	
 										</p>
-										
 										
 										<ul class="action-list">
 											<li>
@@ -59,7 +56,7 @@
 											<li>
 												<%= link_to "view item", item_path(item) %>
 											</li>
-											<%unless item.active_request_by?(current_user)%>
+											<%unless item.active_request_by?(current_user) || item.is_owner?(current_user.person)%>
 											<li>
 												<%= link_to "request", requests_path(:item_id => item.id), :method => :post %>
 											</li>
