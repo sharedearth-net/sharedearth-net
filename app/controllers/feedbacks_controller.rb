@@ -2,7 +2,7 @@ class FeedbacksController < ApplicationController
   before_filter :get_request
 
   def new
-    @feedback = Feedback.new
+    @feedback = Feedback.new(:feedback => Feedback::FEEDBACK_POSITIVE)
   end
 
   def create
