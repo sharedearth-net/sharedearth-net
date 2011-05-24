@@ -22,7 +22,7 @@ class PeopleNetworkRequestsController < ApplicationController
   
   def confirm
     @people_network_request.confirm!
-    redirect_to(person_path(@people_network_request.trusted_person), :notice => I18n.t('messages.people_network_request.request_confirmed'))
+    redirect_to_back({:notice => I18n.t('messages.people_network_request.request_confirmed')})
   end
 
   # used destroy for trusted_person too
