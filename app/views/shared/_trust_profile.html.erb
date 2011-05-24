@@ -15,6 +15,10 @@
 				<h2 class="rhs-link">
 					<%= link_to "withdraw trust", people_network_path(people_network), :method => :delete %>
 				</h2>
+				<% elsif current_user.person.requested_trusted_relationship?(person) %>
+				<h2 class="rhs-link">
+				  <%= link_to "confirm trust", confirm_people_network_request_path(current_user.person.requested_trusted_relationship(person)), :id => "confirm_button", :method => :put %>
+				</h2>
 				<% else %>
 				<h2 class="rhs-link">
 					<%= link_to "establish trust", people_network_requests_path(:trusted_person_id => person), :method => :post %>
