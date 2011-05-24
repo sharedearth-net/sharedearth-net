@@ -1173,7 +1173,7 @@ a.normal:visited {
 							/* COMPLETED REQUEST */
 
 							#wrapper .completed-request {
-
+								background: url('../images/bg-item-completed-request-fade.png') no-repeat 273px -70px;
 							}
 
 								/* feeback */
@@ -1181,13 +1181,13 @@ a.normal:visited {
 								#wrapper .completed-request .feedback-holder {
 									position: relative;
 									margin: 75px auto 20px auto;
-									height: 210px;
+									height: 225px;
 									text-align: center;
 								}
 
 									#wrapper .completed-request .feedback-holder img {
-										max-width: 175px;
-										max-height: 175px;
+										max-width: 225px;
+										max-height: 225px;
 									}
 
 
@@ -1195,7 +1195,7 @@ a.normal:visited {
 										position: absolute;
 										margin: 0 auto;
 										height: 110px;
-										width: 195px;
+										width: 245px;
 										background: #c7cac1;
 										top: 10px;
 										z-index: -10;
@@ -1215,12 +1215,17 @@ a.normal:visited {
 								/* sidebar left */
 
 								#wrapper .completed-request #sidebar-left {
-									width: 195px;
+									width: 245px;
 									float: left;
-									margin-left: 82px;
+									margin-left: 15px;
 									margin-right: 15px;
 								}
-
+								
+								
+								#wrapper .completed-request #sidebar-left .sidebar-box-holder {
+									width: 195px;
+									margin: 0 auto;
+								}
 
 									#wrapper .completed-request #sidebar-left .sidebar-box {
 										background: #ebf5da;
@@ -1339,7 +1344,6 @@ a.normal:visited {
 									}
 
 									#wrapper .completed-request #content .item-holder {
-										background: url('../images/bg-item-completed-request.png') no-repeat center top ;
 										width: 234px;
 										height: 96px;
 										padding: 66px 113px;
@@ -1429,12 +1433,17 @@ a.normal:visited {
 								/* sidebar right */
 
 								#wrapper .completed-request #sidebar {
-									width: 195px;
+									width: 245px;
 									float: left;
 									margin-left: 0;
-									margin-right: 55px;
+									margin-right: 5px;
 								}
-
+								
+								#wrapper .completed-request #sidebar .sidebar-box-holder {
+									width: 195px;
+									margin: 0 auto;
+								}
+								
 								#wrapper .completed-request #sidebar .sidebar-box {
 									background: #ebf5da;
 									width: 195px;
@@ -1592,8 +1601,8 @@ a.normal:visited {
 						
 						.feedback-message {
 							background: #ebf4d9;
-							padding: 5px;
-							width: 413px;
+							padding: 0 16px 5px 16px;
+							width: 391px;
 						}
 						
 						
@@ -1606,8 +1615,8 @@ a.normal:visited {
 							
 						
 							.feedback-message textarea {
-								width: 410px;
-								margin: 4px auto 0 auto;
+								width: 389px;
+								margin: 12px auto 0 auto;
 								display: block;
 								height: 128px;
 							}

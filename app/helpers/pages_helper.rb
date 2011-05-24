@@ -5,7 +5,7 @@ module PagesHelper
     
     @same_person = (person.nil? || (current_user.person == person)) ? true : false
     person||= current_user.person
-    (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "positive normal" : text_class = ""
+    (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "normal" : text_class = ""
    
     @item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => text_class unless event_log.action_object_type_readable.nil?
     @requester           = link_to event_log.primary_short_name, person_path(event_log.primary), :class => text_class unless event_log.primary_short_name.nil?
@@ -274,13 +274,13 @@ module PagesHelper
   def recent_activity_sentence(activity_log)
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
     unless activity_log.secondary_short_name.nil?
-      gifter              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
-      gifter_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
+      gifter              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => ""
+      gifter_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => ""
       person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"  unless activity_log.secondary.nil?
       person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"unless activity_log.secondary_short_name.nil?
       person_full         = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
-      requester           = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
-      requester_possesive = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
+      requester           = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "" unless activity_log.secondary_short_name.nil?
+      requester_possesive = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "" unless activity_log.secondary_short_name.nil?
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
     
