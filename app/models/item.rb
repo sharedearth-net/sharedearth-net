@@ -223,6 +223,9 @@ class Item < ActiveRecord::Base
   def purpose_update_available?
     self.available?
   end
-    
+  
+  def public_activities
+     ActivityLog.item_public_activities(self).order("created_at desc").take(7)
+  end   
   
 end
