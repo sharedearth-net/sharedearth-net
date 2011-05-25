@@ -378,14 +378,12 @@ a.normal:visited {
 
 		#content h2 {
 			font-size: 12px;
-			font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;
+			/*font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;*/
 			color: #127e0e;
 		}
 		
 		#content h2.default-title {
-			color: #858F7C;
-			font-family: verdana,arial,sans-serif;
-		    font-size: 11px;
+
 		}
 		
 
@@ -512,14 +510,12 @@ a.normal:visited {
 
 		#sidebar h2 {
 			font-size: 12px;
-			font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;
+			/*font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;*/
 			color: #127e0e;
 		}
 		
 		#sidebar h2.default-title {
-			color: #858F7C;
-			font-family: verdana,arial,sans-serif;
-		    font-size: 11px;
+
 		}
 	
 		#sidebar .sidebar-box {
@@ -534,7 +530,7 @@ a.normal:visited {
 		}
 	
 			#sidebar .inner-content p {
-				font-size: 12px;
+				/*font-size: 12px;*/
 			}
 			
 				#sidebar .inner-content p a:link,
@@ -666,7 +662,7 @@ a.normal:visited {
 				#content .no-bg h2 {
 					font-size: 16px;
 					line-height: 19px;
-					font-family: verdana, arial, sans-serif;
+					/*font-family: verdana, arial, sans-serif;*/
 					margin-bottom: 6px;
 				}
 					
@@ -681,13 +677,13 @@ a.normal:visited {
 							font-weight: normal;
 						}
 						
-				#content.profile .no-bg .items-list {
+				/*#content.profile .no-bg .items-list {
 					padding-left: 0;
-				}
+				}*/
 						
 				#content .no-bg p {
 					font-size: 11px;
-					font-family: verdana, arial, sans-serif;
+					/*font-family: verdana, arial, sans-serif;*/
 					color: #62775a;
 					margin-bottom: 15px;
 				}
@@ -704,7 +700,7 @@ a.normal:visited {
 				
 					#content .no-bg a.giftactions:link,
 					#content .no-bg a.giftactions:visited {
-						font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+						/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 						background: url('../images/ic-giftactions.png') no-repeat top left;
 					    padding: 5px 0 0 21px;
 						margin: 0 0 0 2px;
@@ -715,7 +711,7 @@ a.normal:visited {
 
 					#content .no-bg a.people-helped:link,
 					#content .no-bg a.people-helped:visited {
-						font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+						/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 						background: url('../images/ic-person.png') no-repeat 1px 0;
 						padding: 5px 0 0 23px;
 						color: #62775a;
@@ -726,7 +722,7 @@ a.normal:visited {
 
 					#content .no-bg a.feedback-rating:link,
 					#content .no-bg a.feedback-rating:visited {
-						font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+						/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 						background: url('../images/ic-feedback-rating.png') no-repeat 2px 2px;
 						padding: 6px 0 3px 22px;
 						color: #62775a;
@@ -743,7 +739,7 @@ a.normal:visited {
 				}
 
 				.content-box h3 {
-					font-family: verdana, arial, sans-serif;
+					/*font-family: verdana, arial, sans-serif;*/
 					font-size: 16px;
 					line-height: 18px;
 					margin: 0 0 8px 10px;
@@ -865,7 +861,7 @@ a.normal:visited {
 								}
 								
 								#content .items-list ul li div p {
-									font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+									/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 									clear: both;
 									color: #858F7C;
 								    float: left;
@@ -910,7 +906,7 @@ a.normal:visited {
 							
 								#sidebar .sidebar-box-holder .sidebar-box-profile h2 {
 									font-size: 14px;
-									font-family: verdana, arial, sans-serif;
+									/*font-family: verdana, arial, sans-serif;*/
 									padding-left: 0;
 									float: left;
 									width: 40%;
@@ -933,7 +929,7 @@ a.normal:visited {
 								
 								#sidebar .sidebar-box-holder .sidebar-box-profile h3 {
 									font-size: 10px;
-									font-family: verdana, arial, sans-serif;
+									/*font-family: verdana, arial, sans-serif;*/
 									padding-left: 0;
 									color: #315859;
 									font-weight: bold;
@@ -969,7 +965,7 @@ a.normal:visited {
 									
 										#sidebar .sidebar-box-holder .sidebar-box-profile ul li p {
 											font-size: 11px;
-											font-family: verdana;
+											/*font-family: verdana;*/
 											padding-top: 11px;
 											color: #62775a;
 										}
@@ -1011,7 +1007,7 @@ a.normal:visited {
 										
 										a.giftactions:link,
 										a.giftactions:visited {
-											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+											/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 											background: url('../images/ic-giftactions.png') no-repeat top left;
 										    padding: 4px 0 0 21px;
 											margin: 0 0 0 2px;
@@ -1021,7 +1017,7 @@ a.normal:visited {
 
  										.sidebar-box-profile a.people-helped:link,
 										.sidebar-box-profile a.people-helped:visited {
-											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+											/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 											background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
 											padding: 2px 0 0 23px;
 											color: #62775a;
@@ -1030,7 +1026,7 @@ a.normal:visited {
 
 										a.feedback-rating:link,
 										a.feedback-rating:visited {
-											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+											/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 											background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
 											padding: 6px 0 3px 22px;
 											color: #62775a;
@@ -1058,14 +1054,14 @@ a.normal:visited {
 										
 										
 							#sidebar.profile-holder h2 {
-								font-family: verdana, arial, sans-serif;
+								/*font-family: verdana, arial, sans-serif;*/
 								padding-left: 16px;
 							}
 							
 							
 							#sidebar.profile-holder p {
 								font-size: 12px;
-								font-family: verdana, arial, sans-serif;
+								/*font-family: verdana, arial, sans-serif;*/
 							}
 							
 								#sidebar.profile-holder .sidebar-box p {
@@ -1091,7 +1087,7 @@ a.normal:visited {
 				
 					ul.form-holder li label {
 						font-size: 12px;
-						font-family: verdana;
+						/*font-family: verdana;*/
 					}
 					
 					ul.form-holder li input[type="text"] {
@@ -1240,14 +1236,14 @@ a.normal:visited {
 
 										#wrapper .completed-request #sidebar-left .sidebar-box h2 {
 											font-size: 14px;
-											font-family: verdana, arial, sans-serif;
+											/*font-family: verdana, arial, sans-serif;*/
 											color: #127e0e;
 											padding-left: 13px;
 										}
 
 										#wrapper .completed-request #sidebar-left .sidebar-box h3 {
 											color: #315859;
-										    font-family: verdana,arial,sans-serif;
+										    /*font-family: verdana,arial,sans-serif;*/
 										    font-size: 11px;
 										    font-weight: bold;
 										    margin-top: 5px;
@@ -1265,7 +1261,7 @@ a.normal:visited {
 
 										#wrapper .completed-request #sidebar-left .sidebar-box  a.people-helped:link,
 										#wrapper .completed-request #sidebar-left .sidebar-box  a.people-helped:visited {
-											font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+											/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 											background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
 											padding: 5px 0 0 23px;
 											color: #62775a;
@@ -1296,7 +1292,7 @@ a.normal:visited {
 
 													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a:link,
 													#wrapper .completed-request #sidebar-left .sidebar-box ul.trust-list li a:visited {
-														font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+														/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 														padding: 14px 0 10px 34px;
 														color: #62775a;
 														font-weight: normal;
@@ -1343,7 +1339,7 @@ a.normal:visited {
 									#wrapper .completed-request #content h2 {
 										font-size: 16px;
 										color: #333;
-										font-family: verdana,arial,sans-serif;
+										/*font-family: verdana,arial,sans-serif;*/
 									    line-height: 19px;
 										text-align: center;
 									}
@@ -1458,14 +1454,14 @@ a.normal:visited {
 
 									#wrapper .completed-request #sidebar .sidebar-box h2 {
 										font-size: 14px;
-										font-family: verdana, arial, sans-serif;
+										/*font-family: verdana, arial, sans-serif;*/
 										color: #127e0e;
 										padding-left: 13px;
 									}
 
 									#wrapper .completed-request #sidebar .sidebar-box h3 {
 										color: #315859;
-									    font-family: verdana,arial,sans-serif;
+									    /*font-family: verdana,arial,sans-serif;*/
 									    font-size: 11px;
 									    font-weight: bold;
 									    margin-top: 5px;
@@ -1483,7 +1479,7 @@ a.normal:visited {
 
 									#wrapper .completed-request #sidebar .sidebar-box  a.people-helped:link,
 									#wrapper .completed-request #sidebar .sidebar-box  a.people-helped:visited {
-										font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+										/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 										background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
 										padding: 5px 0 0 23px;
 										color: #62775a;
@@ -1514,7 +1510,7 @@ a.normal:visited {
 
 												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a:link,
 												#wrapper .completed-request #sidebar .sidebar-box ul.trust-list li a:visited {
-													font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+													/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 													padding: 14px 0 10px 34px;
 													color: #62775a;
 													font-weight: normal;
@@ -1566,7 +1562,7 @@ a.normal:visited {
 						
 							#wrapper .feedback-box p {
 								font-size: 14px;
-								font-family: verdana, arial, sans-serif;
+								/*font-family: verdana, arial, sans-serif;*/
 								margin-bottom: 20px;
 							}
 						
@@ -1600,7 +1596,7 @@ a.normal:visited {
 										font-size: 14px;
 										color: #333;
 										line-height: 17px;
-										font-family: verdana, arial, sans-serif;
+										/*font-family: verdana, arial, sans-serif;*/
 									}
 								
 						
@@ -1613,7 +1609,7 @@ a.normal:visited {
 						
 							.feedback-message label {
 								font-size: 14px;
-								font-family: verdana, arial, sans-serif;
+								/*font-family: verdana, arial, sans-serif;*/
 								color: #333;
 								margin-bottom: 41px;
 							}
@@ -1658,7 +1654,7 @@ a.normal:visited {
 							
 								ul.feedback-submit li input {
 									font-size: 14px;
-									font-family: verdana, arial, sans-serif;
+									/*font-family: verdana, arial, sans-serif;*/
 									cursor: pointer;
 									background: #cce5a0 url("../images/bg-bt-request-list.png") repeat-x 0 0;
 								    border: 1px solid #AAB1A9;
@@ -1697,7 +1693,7 @@ a.normal:visited {
 									}
 
 									#wrapper #search-holder #content h3 {
-										font-family: verdana,arial,sans-serif;
+										/*font-family: verdana,arial,sans-serif;*/
 										font-size: 11px;
 										color: #127E0E;
 									}
@@ -1728,7 +1724,7 @@ a.normal:visited {
 									#wrapper #search-holder #content .no-bg a.communities:visited {
 									    background: url("../images/ic-community-community.png") no-repeat left top transparent;
 									    color: #62775A;
-									    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+									    /*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 									    font-size: 11px;
 									    font-weight: normal;
 									    margin: 0 0 0 2px;
@@ -1745,7 +1741,7 @@ a.normal:visited {
 
 									#wrapper #search-holder #sidebar-left h2 {
 										color: #127E0E;
-									    font-family: verdana, arial, sans-serif;
+									    /*font-family: verdana, arial, sans-serif;*/
 									    font-size: 12px;
 
 									}
@@ -1834,11 +1830,104 @@ a.normal:visited {
 		.flash-notice {
 			background: #333;
 		}
+		
+		
+		
+/* new font styles */
+
+
+h2.default-title {
+	color: #315859;
+	font-size: 12px;
+}
+
+/* Event sentences in Requests\Actions and Recent Activity on the dashboard */
+
+#dashboard-page p {
+	color: #333;
+	font-size: 12px;
+}
+
+	#dashboard-page p a:link,
+	#dashboard-page p a:visited {
+		color: #333;
+	}
+	
+	/* class 'trusted' should be added dynamicaly if the name of person is in trusted network*/
+	
+	#dashboard-page p a.trusted:link,
+	#dashboard-page p a.trusted:visited {
+		color: #127e0e;
+	}
+
+
+/* Event sentences in News Feed (on dashboard) and Latest Activity (on profile pages) */
+
+#dashboard-page #sidebar p,
+#profile-page #sidebar .inner-content p {
+	color: #62775a;
+	font-size: 12px;
+}
+
+
+	#dashboard-page #sidebar p a:link,
+	#dashboard-page #sidebar p a:visited,
+	#profile-page #sidebar .inner-content p a:link,
+	#profile-page #sidebar .inner-content p a:visited {
+		color: #62775a;
+	}
+	
+	
+	/* class 'trusted' should be added dynamicaly if the name of person is in trusted network*/
+	
+	#dashboard-page #sidebar p a.trusted:link,
+	#dashboard-page #sidebar p a.trusted:visited,
+	#profile-page #sidebar .inner-content p a.trusted:link,
+	#profile-page #sidebar .inner-content p a.trusted:visited {
+		color: #127e0e;
+	}
+	
+
+/* Time since (e.g. 43 minutes ago) under Event Sentences (on dashboard and profile pages) */
+
+
+#dashboard-page #content .action li,
+#dashboard-page #sidebar .action li,
+#profile-page #sidebar .action li,
+#profile-page #content ul.action-list li,
+#request-page #sidebar .action li {
+	color: #858f7c;
+	font-size: 11px;
+}
+
+
+
+/* Action shortcuts (e.g. 'accept', 'reject') under Event Sentences (on dashboard and profile pages), and under an item listing */
+
+/*11 #5A776F*/
+	
+	
+
 							
-							
-							
-							
-							
+/* page specific */	
+#profile-page .items-list {
+	padding-left: 0;
+}
+
+#sidebar.profile-holder h2 {
+	padding-left: 16px;
+}
+
+
+
+
+	#sidebar.profile-holder .sidebar-box p {
+		font-size: 12px;
+	}
+
+#sidebar.profile-holder .inner-content {
+	padding-left: 16px;
+}					
 							
 							
 							

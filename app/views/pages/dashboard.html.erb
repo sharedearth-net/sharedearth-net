@@ -1,103 +1,105 @@
-<div id="content" class="dashboard">
-	<% unless @requests.count.zero? %>
+<div id="dashboard-page">
+	<div id="content">
+		<% unless @requests.count.zero? %>
+			<div class="content-box-holder">
+				<%= image_tag("curve-top-content-box.png", :alt => "")  %>
+				<ul>
+					<% @requests.each do |req| %>
+						<% if req.is_a? ItemRequest %>
+							<li class="content-box clearfix">
+								<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
+								<div class="inner-content">
+									<p>
+										<%= render :partial => "shared/item_request_sentence", :locals => { :req => req, :dashboard => true } %>
+									</p>
+					
+									<div class="action clearfix">
+										<ul>
+											<li>
+												<%= time_ago_in_words req.created_at %> ago
+											</li>
+											<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
+										</ul>
+									</div>
+								</div>
+							</li>
+						<% elsif req.is_a? PeopleNetworkRequest %>
+							<li class="content-box clearfix">
+								<%= image_tag(people_network_request_photo(req, :size => :square), :class => "thumb") %>
+								<div class="inner-content">
+									<p>
+										<%= render :partial => "shared/people_network_request_sentence", :locals => { :req => req } %>
+									</p>
+					
+									<div class="action clearfix">
+										<ul>
+											<li>
+												<%= time_ago_in_words req.created_at %> ago
+											</li>
+											<%= render :partial => "shared/people_network_request_actions_compact", :locals => { :req => req } %>
+										</ul>
+									</div>
+								</div>
+							</li>
+						<% end %>
+					<% end %>
+				</ul>
+
+			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
+			</div>
+			<!-- /.content-box-holder  -->
+		<% end %>
+	
+	
 		<div class="content-box-holder">
 			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
+		
 			<ul>
-				<% @requests.each do |req| %>
-					<% if req.is_a? ItemRequest %>
-						<li class="content-box clearfix">
-							<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
-							<div class="inner-content">
-								<p>
-									<%= render :partial => "shared/item_request_sentence", :locals => { :req => req, :dashboard => true } %>
-								</p>
-					
-								<div class="action clearfix">
-									<ul>
-										<li>
-											<%= time_ago_in_words req.created_at %> ago
-										</li>
-										<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
-									</ul>
-								</div>
-							</div>
-						</li>
-					<% elsif req.is_a? PeopleNetworkRequest %>
-						<li class="content-box clearfix">
-							<%= image_tag(people_network_request_photo(req, :size => :square), :class => "thumb") %>
-							<div class="inner-content">
-								<p>
-									<%= render :partial => "shared/people_network_request_sentence", :locals => { :req => req } %>
-								</p>
-					
-								<div class="action clearfix">
-									<ul>
-										<li>
-											<%= time_ago_in_words req.created_at %> ago
-										</li>
-										<%= render :partial => "shared/people_network_request_actions_compact", :locals => { :req => req } %>
-									</ul>
-								</div>
-							</div>
-						</li>
-					<% end %>
-				<% end %>
-			</ul>
+				<li class="content-box clearfix">
+					<h2 class="default-title">Recent Activity</h2>
+				</li>
+			
+				<% @recent_activity_logs.each do |activity_log| %>
 
-		<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
+					<li class="content-box clearfix">
+						<%= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb" %>
+
+						<div class="inner-content">
+							<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
+						</div>
+					</li>
+				<% end %>
+				<!-- Nebojsa-todo - button-more is static  -->
+				<li class="content-box clearfix">
+					<a href="#" class="button-more">
+						more
+					</a>
+				</li>
+			
+			</ul>
+			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
 		</div>
 		<!-- /.content-box-holder  -->
-	<% end %>
 	
-	
-	<div class="content-box-holder">
-		<%= image_tag("curve-top-content-box.png", :alt => "")  %>
-		
-		<ul>
-			<li class="content-box clearfix">
-				<h2 class="default-title">Recent Activity</h2>
-			</li>
-			
-			<% @recent_activity_logs.each do |activity_log| %>
 
-				<li class="content-box clearfix">
-					<%= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb" %>
+	</div><!-- /.content  -->
 
-					<div class="inner-content">
-						<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
-					</div>
+	<div id="sidebar">
+		<div class="sidebar-box-holder">
+			<h2 class="default-title">News Feed</h2>
+			<ul>
+			  <% @events.each do |event| %>
+			  <li class="sidebar-box clearfix">
+			      <% event_log = EventLog.find_by_id(event.event_id) %>
+						<%= 
+							 render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
+						%>
 				</li>
-			<% end %>
-			<!-- Nebojsa-todo - button-more is static  -->
-			<li class="content-box clearfix">
-				<a href="#" class="button-more">
-					more
-				</a>
-			</li>
-			
-		</ul>
-		<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
-	</div>
-	<!-- /.content-box-holder  -->
-	
-
-</div>
-
-<div id="sidebar">
-	<div class="sidebar-box-holder">
-		<h2 class="default-title">News Feed</h2>
-		<ul>
-		  <% @events.each do |event| %>
-		  <li class="sidebar-box clearfix">
-		      <% event_log = EventLog.find_by_id(event.event_id) %>
-					<%= 
-						 render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
-					%>
-			</li>
-			<% end unless @events.nil? %>
-		  <%= will_paginate @events, :page_links=>false %> 		
-		<a href="#more_news" class="button-more">
-      more
-		</a>
-	</div>
-</div><!-- sidebar -->
+				<% end unless @events.nil? %>
+			  <%= will_paginate @events, :page_links=>false %> 		
+			<a href="#more_news" class="button-more">
+	      more
+			</a>
+		</div>
+	</div><!-- sidebar -->
+</div><!--	/dashboard -->
