@@ -48,7 +48,7 @@
 </div><!-- /content -->
 
 <div id="sidebar" class="profile-holder">
-	<%= render :partial => "shared/trust_profile", :locals => { :person => @item.owner } %>
+	<%= render :partial => "shared/trust_profile", :locals => { :person => @item.owner, :page => 'item' } %>
 		
-	<%= render :partial => "shared/latest_activity_person", :locals => { :person =>  @item.owner } %>
+	<%= render :partial => "shared/latest_activity_item", :locals => { :item =>  @item } %>
 </div><!-- sidebar -->
