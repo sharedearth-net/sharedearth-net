@@ -14,17 +14,30 @@
 
 /* Common */
 
+
+html,body{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: "Trebuchet MS", arial, sans-serif;
+	color: #fff;
+}
+
+body{
+	background: url('../graphics/bg-body.jpg') no-repeat center center;
+}
+
+h1 {color:#fff;margin:0;padding:0}
+
+
+
 html {
-	background:  url('../graphics/bg-html.jpg')  no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+	background: url('../graphics/bg-html.png') repeat-x 0 0 ;
+
 }
 
 body {
-	font-family: "Trebuchet MS", arial, sans-serif;
-	color: #fff;
+
 	
 }
 
@@ -48,9 +61,16 @@ a:hover {
 /* container */
 
 #container {
-	max-width: 960px;
+	width: 960px;
 	margin: 0 auto;
-	
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -348px;/* half elements height*/
+	margin-left: -512px;/* half elements width*/
+	height: 558px;
+	overflow: auto;/* allow content to scroll inside element */
+	text-align: left;
 }
 
 h1 {
@@ -140,7 +160,7 @@ h1 {
 		#footer {
 			clear: both;
 			text-align: right;
-			padding-top: 125px;
+			padding-top: 75px;
 		}
 		
 			#footer p {
