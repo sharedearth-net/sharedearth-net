@@ -114,7 +114,7 @@ class ItemsController < ApplicationController
 
   private
   def get_item
-    @item = Item.find(params[:id])
+    @item = Item.find_by_id(params[:id])
   end
   
   def only_owner!
