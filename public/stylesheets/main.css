@@ -1674,54 +1674,54 @@ a.normal:visited {
 								
 								/* Search Page - content */
 
-								#wrapper #search-holder #content {
+								#search-page #content {
 									height: 200px;
 									width: 764px;
 								}
 
-									#wrapper #search-holder #content .search-holder {
+									#search-page #content .search-holder {
 										width: 484px;
 									}
 
-										#wrapper #search-holder #content .search-holder input[type="text"] {
+										#search-page #content .search-holder input[type="text"] {
 											height: 13px;
 											width: 460px;
 										}
 
-									#wrapper #search-holder #content h2 {
+									#search-page #content h2 {
 										font-size: 13px;
 									}
 
-									#wrapper #search-holder #content h3 {
+									#search-page #content h3 {
 										/*font-family: verdana,arial,sans-serif;*/
 										font-size: 11px;
 										color: #127E0E;
 									}
 
-									#wrapper #search-holder #content h2 img {
+									#search-page #content h2 img {
 										display: inline;
 										vertical-align: middle;
 									}
 
 
-									#wrapper #search-holder #content .items-list {
+									#search-page #content .items-list {
 										padding-top: 2px;
 									}
 
-									#wrapper #search-holder #content .items-list ul li.item {
+									#search-page #content .items-list ul li.item {
 										margin-top: 12px;
 										margin-bottom: 4px;
 									}
 
-									#wrapper #search-holder #content .items-list ul li .thumb {
+									#search-page #content .items-list ul li .thumb {
 									    float: left;
 									    margin-right: 10px;
 									    margin-top: 3px;
 									    max-height: 32px;
 									}
 
-									#wrapper #search-holder #content .no-bg a.communities:link,
-									#wrapper #search-holder #content .no-bg a.communities:visited {
+									#search-page #content .no-bg a.communities:link,
+									#search-page #content .no-bg a.communities:visited {
 									    background: url("../images/ic-community-community.png") no-repeat left top transparent;
 									    color: #62775A;
 									    /*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
@@ -1733,13 +1733,13 @@ a.normal:visited {
 
 								/* Search Page - sidebar-left */
 
-								#wrapper #search-holder #sidebar-left {
+								#search-page #sidebar-left {
 									float: left;
 									width: 223px;
 									padding: 0 0 0 7px;
 								}
 
-									#wrapper #search-holder #sidebar-left h2 {
+									#search-page #sidebar-left h2 {
 										color: #127E0E;
 									    /*font-family: verdana, arial, sans-serif;*/
 									    font-size: 12px;
@@ -1747,17 +1747,17 @@ a.normal:visited {
 									}
 
 
-									#wrapper #search-holder #sidebar-left ul {
+									#search-page #sidebar-left ul {
 										margin-top: 11px;
 										width: 175px;
 									}
 
-										#wrapper #search-holder #sidebar-left ul li {
+										#search-page #sidebar-left ul li {
 											font-size: 11px;
 										}
 
-											#wrapper #search-holder #sidebar-left ul li a:link,
-											#wrapper #search-holder #sidebar-left ul li a:visited {
+											#search-page #sidebar-left ul li a:link,
+											#search-page #sidebar-left ul li a:visited {
 												color: #127e0e;
 												display: block;
 												padding: 4px 0px 1px 29px;
@@ -1768,49 +1768,49 @@ a.normal:visited {
 											}
 
 
-											#wrapper #search-holder #sidebar-left ul li:hover,
-											#wrapper #search-holder #sidebar-left ul li.selected {
+											#search-page #sidebar-left ul li:hover,
+											#search-page #sidebar-left ul li.selected {
 												background: url('../images/community-list-hover.png') no-repeat 0 0;
 
 											}
 
-											#wrapper #search-holder #sidebar-left ul li.all a:link,
-											#wrapper #search-holder #sidebar-left ul li.all a:visited {
+											#search-page #sidebar-left ul li.all a:link,
+											#search-page #sidebar-left ul li.all a:visited {
 													background: url('../images/ic-all-networks-community.png') no-repeat 1px 2px;
 												}
 
-											#wrapper #search-holder #sidebar-left ul li.items a:link,
-											#wrapper #search-holder #sidebar-left ul li.items a:visited {
+											#search-page #sidebar-left ul li.items a:link,
+											#search-page #sidebar-left ul li.items a:visited {
 													background: url('../images/ic-items-community.png') no-repeat 1px 1px;
 												}
 
-											#wrapper #search-holder #sidebar-left ul li.people a:link,
-											#wrapper #search-holder #sidebar-left ul li.people a:visited {
+											#search-page #sidebar-left ul li.people a:link,
+											#search-page #sidebar-left ul li.people a:visited {
 													background: url('../images/ic-people-community.png') no-repeat 1px 1px;
 												}
 
-											#wrapper #search-holder #sidebar-left ul li.trusted a:link,
-											#wrapper #search-holder #sidebar-left ul li.trusted a:visited {
+											#search-page #sidebar-left ul li.trusted a:link,
+											#search-page #sidebar-left ul li.trusted a:visited {
 													background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
 												}
 
-											#wrapper #search-holder #sidebar-left ul li.extend a:link,
-											#wrapper #search-holder #sidebar-left ul li.extend a:visited {
+											#search-page #sidebar-left ul li.extend a:link,
+											#search-page #sidebar-left ul li.extend a:visited {
 													background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
 												}
 
-											#wrapper #search-holder #sidebar-left ul li.community a:link,
-											#wrapper #search-holder #sidebar-left ul li.community a:visited {
+											#search-page #sidebar-left ul li.community a:link,
+											#search-page #sidebar-left ul li.community a:visited {
 													background: url('../images/ic-community-community.png') no-repeat 1px 1px;
 												}							
 
-										#wrapper #search-holder #sidebar-left ul li.separator {
+										#search-page #sidebar-left ul li.separator {
 											border-bottom: 1px solid #aeadad;
 											height: 6px;
 											margin: 0 16px 7px 4px;
 										}
 
-										#wrapper #search-holder #sidebar-left ul li.separator:hover {
+										#search-page #sidebar-left ul li.separator:hover {
 											background: none;
 										}
 							
@@ -1836,9 +1836,18 @@ a.normal:visited {
 /* new font styles */
 
 
+/* Section Headings shown above content "Recent Activity" and "News Feed" - dashboard, "Latest Activity"  - profile pages, "From your trusted network" - search page */ 
+
 h2.default-title {
 	color: #315859;
 	font-size: 12px;
+}
+
+/* items/request headline on profile page */
+#content h3 {
+	line-height: 19px;
+    margin-bottom: 6px;
+	color: #127E0E;
 }
 
 /* Event sentences in Requests\Actions and Recent Activity on the dashboard */
@@ -1904,11 +1913,104 @@ h2.default-title {
 
 /* Action shortcuts (e.g. 'accept', 'reject') under Event Sentences (on dashboard and profile pages), and under an item listing */
 
-/*11 #5A776F*/
-	
-	
 
-							
+#search-page .action-list a:link,
+#search-page .action-list a:visited,
+#dashboard-page .action a:link,
+#dashboard-page .action a:visited,
+#profile-page #content ul.action-list li a:link,
+#profile-page #content ul.action-list li a:visited,
+#profile-page .action a:link,
+#profile-page .action a:visited {
+	color: #5a776f;
+	font-size: 11px;
+}
+
+/* Main action shortcuts shown in near headers (e.g. 'establish trust', 'edit profile' etc) */
+	
+#profile-page #content h2 span a:link,
+#profile-page #profile-page #content h2 span a:visited,
+#profile-page #sidebar h2.rhs-link  a:link,
+#profile-page #sidebar h2.rhs-link  a:visited {
+	color: #127e0e;
+	font-size: 12px;
+}
+
+
+/* Headings on pages when a person name (e.g. Dan Gooden) or item (e.g. 26 Speed Mountain Bike) or Action\Request sentences: */
+
+#request-page #content h2,
+#profile-page #content h2,
+#request-page #content .no-bg h2 a:link,
+#request-page #content .no-bg h2 a:visited {
+	color: #333;
+	font-size: 16px;
+}
+
+	/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
+
+	#request-page #content h2.trusted,
+	#profile-page #content h2.trusted,
+	#request-page #content .no-bg h2.trusted a:link,
+	#request-page #content .no-bg h2.trusted a:visited {
+		color: #127e0e;
+	}
+
+
+
+/* Headings on page when a community name, or search page (e.g. "Items in Sydney") */ 
+
+#search-page #content h2 {
+	color: #127e0e;
+	font-size: 16px;
+}
+
+
+
+/* Name on top of T&R box */
+
+
+#sidebar .sidebar-box-holder .sidebar-box-profile h2,
+#wrapper .completed-request #sidebar-left .sidebar-box h2,
+#wrapper .completed-request #sidebar .sidebar-box h2  {
+	color: #62775a;
+	font-size: 14px;
+}
+
+	/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
+	
+	#wrapper .completed-request #sidebar-left .sidebar-box h2.trusted a:link,
+	#wrapper .completed-request #sidebar-left .sidebar-box h2.trusted a:visited,
+	#wrapper .completed-request #sidebar .sidebar-box h2.trusted a:link,
+	#wrapper .completed-request #sidebar .sidebar-box h2.trusted a:visited,
+	#sidebar .sidebar-box-holder .sidebar-box-profile h2.trusted a:link,
+	#sidebar .sidebar-box-holder .sidebar-box-profile h2.trusted a:visited {
+		color: #127e0e;
+	}
+
+
+/* Reputation & Trust Headings for T&R box */
+
+
+#sidebar .sidebar-box-holder .sidebar-box-profile h3,
+#wrapper .completed-request #sidebar-left .sidebar-box h3,
+#wrapper .completed-request #sidebar .sidebar-box h3 {
+		font-family: verdana, tahoma, arial, sans-serif;
+		color: #315859;
+		font-size: 10px;
+		font-weight: bold;
+	}
+
+
+/* Reputation & Trust metrics: 11 #62775a*/
+
+#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li,
+#sidebar .sidebar-box-holder .sidebar-box-profile ul li p {
+    color: #62775A;
+    font-size: 21px;
+	}
+			
+			
 /* page specific */	
 #profile-page .items-list {
 	padding-left: 0;

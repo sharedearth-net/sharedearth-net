@@ -35,7 +35,7 @@
 			
 				<li>
 					<div class="items-list clearfix">
-						<h2>Items</h2>
+						<h3>Items</h3>
 						<% unless @items.size.zero? %>
 							<ul>
 								<% @items.each do |item| %>
@@ -70,13 +70,13 @@
 								<% end %>
 							</ul>
 						<% else %>
-							<p class="default-text">No items are currently being shared.</p>
+							<p>No items are currently being shared.</p>
 						<% end %>
 					</div>
 				</li>
 				<li>
 					<div class="items-list unanswered-requests clearfix">
-						<h2>Requests</h2>
+						<h3>Requests</h3>
 						<% unless @unanswered_requests.size.zero? %>
 							<ul>
 								<% @unanswered_requests.each do |req| %>
@@ -107,7 +107,7 @@
 								<% end %>
 							</ul>						
 						<% else %>
-							<p class="default-text">There are no unanswered requests.</p>
+							<p>There are no unanswered requests.</p>
 						<% end %>
 					</div>
 				</li>
