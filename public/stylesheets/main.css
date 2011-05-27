@@ -64,6 +64,9 @@ a.normal:visited {
 	font-weight: normal !important;
 }
 
+
+/*............Application Global............*/
+
 /* container */
 
 #container {
@@ -205,9 +208,6 @@ a.normal:visited {
 						
 				.bar-holder-home {
 					float: left;
-					/*width: 217px;
-					text-align: right;
-                    vertical-align:middle;*/
 				}
 				
 					.bar-holder-home ul {
@@ -232,14 +232,6 @@ a.normal:visited {
                                 background: #6ea801;
 							}
 
-
-				.bar-holder-lhs {
-					
-				}
-				
-					.bar-holder-lhs ul {
-						/*margin-left: 20px;*/
-					}
 
 						.bar-holder-lhs ul li {
 							display: block;
@@ -362,6 +354,36 @@ a.normal:visited {
 							color: #fff;
 						}
 
+						/* Footer */
+
+						#footer {
+							border-top: 1px solid #858f7c;
+							margin-top: 40px;
+						}
+
+							#footer ul {
+
+							}
+
+								#footer ul li {
+									color: #858f7c;
+						            padding-top:5px;
+									display: block;
+									float: left;
+									font-size: 10px;
+									line-height: 12px;
+								}
+
+									#footer ul li a:link,
+									#footer ul li a:visited {
+										color: #858f7c;
+									}
+
+									#footer ul li a:hover {
+
+									}
+
+
 /* wrapper */					
 
 #wrapper {
@@ -369,136 +391,223 @@ a.normal:visited {
     min-height: 488px;
 }
 
-	/* content */
 
+/*............Standard Elements............*/
+
+	/* Content */
+	
 	#content {
 		width: 511px;
 		float: left;
 	}
-
+	
+		#content p {
+			font-size: 11px;
+			color: #62775a;
+			margin-bottom: 15px;
+		}
+	
+			#content p span {
+				display: block;
+				height: 19px;
+			}
+	
 		#content h2 {
-			font-size: 12px;
-			/*font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;*/
-			color: #127e0e;
+			line-height: 19px;
+			margin-bottom: 6px;
 		}
 		
-		#content h2.default-title {
+			#content h2 span {
+				text-align: right;
+			}
 
-		}
-		
-
+	
 		.content-box-holder {
 			margin-bottom: 14px;
 		}
-	
-		.content-box-holder img {
-			display: block;
-		} 
-	
-		.content-box {
-			width: 481px;
-			background: #ebf5da;
-			padding: 0 15px 12px 15px;
-		}
+
+			.content-box-holder img {
+				display: block;
+			} 
 		
-		
-			.content-box .thumb {
-				float: left;
-				width: 50px;
-			}
-		
-			.inner-content {
-				width: 412px;
-				float: left;
-				margin-left: 7px;
-			}
-		
-			.inner-content p {
-				font-size: 12px;
-				color: #333;
-			}
-		
-			.inner-content a:link,
-			.inner-content a:visited {
-				color: #127e0e;
-			}
-		
-			.inner-content a:hover {
-				color: #1aac15;
-			}
-		
-			.inner-content .action {
-				font-size: 11px;
-				color: #62775a;
-			}
-		
-				.inner-content .action ul {
-			
+				.content-box {
+					width: 481px;
+					padding: 0 15px 12px 0px;
 				}
-			
-					.inner-content .action ul li {
-						display: block;
+		
+					.content-box .thumb {
 						float: left;
-						margin-right: 17px;
-					}
-				
-						.inner-content .action ul li a:link,
-						.inner-content .action ul li a:visited {
-							color: #62775a;
-							font-weight: normal;
-						}
-					
-						.inner-content .action ul li a:hover {
-
-						}
-					
-				/* comments */
-			
-				.inner-content ul.comment-list {
-					clear: both;
-				}
-			
-					.inner-content ul.comment-list li {
-						width: 403px;
-						padding: 0 4px;
-						background: #f4f9eb;
-						margin-top: 5px;
-	                    margin-bottom: 0px;
-					}
-				
-					.inner-content ul.comment-list li p {
-						font-size: 11px;
-						padding-top: 3px;
-	                    padding-bottom: 3px;
-					}
-                
-	                .inner-content ul.comment-list li a:link,
-	                .inner-content ul.comment-list li a:visited {
-	                    font-weight: normal;
-	                }
-
-				
-						.inner-content ul.comment-list li p span {
-							display: block;
-	                        color: #62775a;
-	                        font-size: 10px;
-						}
-					
-					.inner-content ul.comment-list li .comment-box {
-						padding: 2px 2px 1px 2px;
+						width: 100px;
 					}
 						
-						.inner-content ul.comment-list li .comment-box textarea {
-							height: 15px;
-							font-size: 9px;
-							color: #999;
-							border: 1px solid #8e948e;
-							padding: 2px 0 0 4px;
-							width: 393px;
-							overflow:auto;
+
+						.inner-content {
+							width: 270px;
+							float: left;
+							margin-left: 7px;
 						}
+					
+							.inner-content .action ul li {
+								display: block;
+								float: left;
+								margin-right: 17px;
+							}
+							
+		
+		/*  icons - trust box, items etc. */
+		
+		a.giftactions:link,
+		a.giftactions:visited {
+			background: url('../images/ic-giftactions.png') no-repeat top left;
+		    padding: 5px 0 0 21px;
+			margin: 0 0 0 2px;
+		}
+
+		a.people-helped:link,
+		a.people-helped:visited {
+			background: url('../images/ic-person.png') no-repeat 1px 0;
+			padding: 5px 0 0 23px;
+		}
+
+		a.feedback-rating:link,
+		a.feedback-rating:visited {
+			background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
+			padding: 6px 0 3px 22px;						
+		}
+		
+
+		/* Buttons */
+		
+			/* action buttons */
+
+			ul.action-buttons-list {
+				margin-left: 10px;
+			}
+
+				ul.action-buttons-list li {
+					display: block;
+					float: left;
+					text-align: center;
+					font-size: 13px;
+					margin-right: 13px;
+				}
 				
+					ul.action-buttons-list li a:link,
+					ul.action-buttons-list li a:visited {
+						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+						padding: 0 7px;
+						color: #234d4d;
+						display: block;
+						border: 1px solid #aab1a9;
+						line-height: 15px;
+						height: 18px;
+						text-transform: capitalize;
+					}
+
+					ul.action-buttons-list li a:hover {
+						text-decoration: none;
+					}
+
+						ul.action-buttons-list li a.positive:link,
+						ul.action-buttons-list li a.positive:visited {
+							color: #127e0e;
+						}
+			
+			
+			/* button more */							
+
+			a.button-more:link,
+			a.button-more:visited {
+				float: right;
+				display: block;
+				color: #858f7c;
+				font-size: 10px;
+				background: url('../images/arrow-down-more.png') no-repeat bottom right;
+				padding-right: 9px;
+				height: 10px;
+				font-weight: bold;
+			}
+							
+							/* comments */
+
+							.inner-content ul.comment-list {
+								clear: both;
+							}
+
+								.inner-content ul.comment-list li {
+									width: 403px;
+									padding: 0 4px;
+									background: #f4f9eb;
+									margin-top: 5px;
+				                    margin-bottom: 0px;
+								}
+
+								.inner-content ul.comment-list li p {
+									font-size: 11px;
+									padding-top: 3px;
+				                    padding-bottom: 3px;
+								}
+
+				                .inner-content ul.comment-list li a:link,
+				                .inner-content ul.comment-list li a:visited {
+				                    font-weight: normal;
+				                }
+
+
+									.inner-content ul.comment-list li p span {
+										display: block;
+				                        color: #62775a;
+				                        font-size: 10px;
+									}
+
+								.inner-content ul.comment-list li .comment-box {
+									padding: 2px 2px 1px 2px;
+								}
+
+									.inner-content ul.comment-list li .comment-box textarea {
+										height: 15px;
+										font-size: 9px;
+										color: #999;
+										border: 1px solid #8e948e;
+										padding: 2px 0 0 4px;
+										width: 393px;
+										overflow:auto;
+									}
+
+
+
+/*............Dahboard Page............*/
+				
+	/* content */
 	
+	
+	#dashboard-page #content p {
+		margin-bottom: 0;
+	}
+
+		#dashboard-page #content p span {
+			display: inline;
+			height: auto;
+		}
+	
+	#dashboard-page #content h2 {
+		line-height: 15px;
+		margin-bottom: 0;
+	}
+	
+	#dashboard-page .content-box {
+		background: #ebf5da;
+		padding: 0 15px 12px 15px;
+	}
+	
+		#dashboard-page .content-box .thumb {
+			width: 50px;
+		}
+		
+			#dashboard-page .inner-content {
+				width: 412px;
+				float: left;
+			}
 
 	/* sidebar */
 
@@ -508,15 +617,6 @@ a.normal:visited {
 		margin-left: 27px;
 	}
 
-		#sidebar h2 {
-			font-size: 12px;
-			/*font-family: "Century Gothic", "lucida grande", tahoma, verdana, arial, sans-serif;*/
-			color: #127e0e;
-		}
-		
-		#sidebar h2.default-title {
-
-		}
 	
 		#sidebar .sidebar-box {
 			margin-top: 10px;
@@ -528,271 +628,37 @@ a.normal:visited {
 		   	width: 459px;
 			float: none;
 		}
+				
 	
-			#sidebar .inner-content p {
-				/*font-size: 12px;*/
-			}
-			
-				#sidebar .inner-content p a:link,
-				#sidebar .inner-content p a:visited {
-					color: #333;
-				}
-			
-		
-				#sidebar .inner-content p span  {
-					font-size: 9px;
-					color: #badb80;
-				}
-            
-	            #sidebar .inner-content p span a:link,
-	            #sidebar .inner-content p span a:visited  {
-	                color: #badb80;
-				}
-		
-			#sidebar .inner-content a:link,
-			#sidebar .inner-content a:visited {
-				color: #858f7c;
-	            font-weight: normal;
-			}
-		
-			#sidebar .inner-content a:hover {
-				color: #a0ac96;
-			}
-			
-			
-			#sidebar .inner-content a.name-trusted:link,
-			#sidebar .inner-content a.name-trusted:visited {
-				color: #127E0E;
-	            font-weight: normal;
-
-			}
-		
-			#sidebar .inner-content a.name-trusted:hover {
-
-			}
-			
-			#sidebar .inner-content a.name-untrusted:link,
-			#sidebar .inner-content a.name-untrusted:visited {
-				color: #858f7c;
-	            font-weight: normal;
-
-			}
-		
-			#sidebar .inner-content a.name-untrusted:hover {
-
-			}	
-		
-		
-
-		#sidebar .with-action {
-		
-		}
 		
 				#sidebar .with-action p img {
 					 vertical-align: top;
 				}
 							
-	/* button more */							
 
-	a.button-more:link,
-	a.button-more:visited {
-		float: right;
-		display: block;
-		color: #858f7c;
-		font-size: 10px;
-		background: url('../images/arrow-down-more.png') no-repeat bottom right;
-		padding-right: 9px;
-		height: 10px;
-		font-weight: bold;
-	}
-
-	a.button-more:hover {
-	
-	}
-
-
-/* Footer */
-
-#footer {
-	border-top: 1px solid #858f7c;
-	margin-top: 40px;
+/*............Profile Page............*/				
+				
+#content p.status-holder-profile {
+	font-size: 11px;
+	line-height: 14px;
+	margin-bottom: 15px;
+	margin-top: -5px;
 }
 
-	#footer ul {
-		
+						
+						
+/*............Request Page............*/
+			
+#request-page #content .inner-content {
+	width: 300px;
 	}
-	
-		#footer ul li {
-			color: #858f7c;
-            padding-top:5px;
-			display: block;
-			float: left;
-			font-size: 10px;
-			line-height: 12px;
-		}
-			
-			#footer ul li a:link,
-			#footer ul li a:visited {
-				color: #858f7c;
-			}
-			
-			#footer ul li a:hover {
-
-			}
-							
-
-			/* profile */
-
-			.no-bg .content-box {
-				background: #fff;
-				padding-left: 0;
-			}
-			
-				.no-bg .content-box .thumb {
-					float: left;
-					width: 100px;
-				}
-
-				.no-bg .inner-content {
-					width: 270px;
-					background: #fff;
-					float: left;
-				}
-
-				#content .no-bg h2 {
-					font-size: 16px;
-					line-height: 19px;
-					/*font-family: verdana, arial, sans-serif;*/
-					margin-bottom: 6px;
-				}
-					
-					#content .no-bg h2 span {
-						font-size: 12px;
-						text-align: right;
-						font-weight: normal;
-					}	
-					
-						#content .no-bg h2 span a:link,
-						#content .no-bg h2 span a:visited {
-							font-weight: normal;
-						}
-						
-				/*#content.profile .no-bg .items-list {
-					padding-left: 0;
-				}*/
-						
-				#content .no-bg p {
-					font-size: 11px;
-					/*font-family: verdana, arial, sans-serif;*/
-					color: #62775a;
-					margin-bottom: 15px;
-				}
-				
-				#content p.default-text {
-					font-size: 13px;
-					color: #333;
-				}
-
-				#content .no-bg p span {
-					display: block;
-					height: 19px;
-				}
-				
-					#content .no-bg a.giftactions:link,
-					#content .no-bg a.giftactions:visited {
-						/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
-						background: url('../images/ic-giftactions.png') no-repeat top left;
-					    padding: 5px 0 0 21px;
-						margin: 0 0 0 2px;
-						color: #62775a;
-						font-weight: normal;
-						font-size: 11px;
-					}
-
-					#content .no-bg a.people-helped:link,
-					#content .no-bg a.people-helped:visited {
-						/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
-						background: url('../images/ic-person.png') no-repeat 1px 0;
-						padding: 5px 0 0 23px;
-						color: #62775a;
-						font-weight: normal;
-						font-size: 11px;
-						
-					}
-
-					#content .no-bg a.feedback-rating:link,
-					#content .no-bg a.feedback-rating:visited {
-						/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
-						background: url('../images/ic-feedback-rating.png') no-repeat 2px 2px;
-						padding: 6px 0 3px 22px;
-						color: #62775a;
-						font-weight: normal;
-						font-size: 11px;
-						
-					}
-
-				#content .no-bg p.status-holder-profile {
-					font-size: 11px;
-					line-height: 14px;
-					margin-bottom: 15px;
-					margin-top: -5px;
-				}
-
-				.content-box h3 {
-					/*font-family: verdana, arial, sans-serif;*/
-					font-size: 16px;
-					line-height: 18px;
-					margin: 0 0 8px 10px;
-				}
-
-				.content-box ul.action-buttons-list {
-					margin-left: 10px;
-				}
-
-					.content-box ul.action-buttons-list li {
-						display: block;
-						float: left;
-						text-align: center;
-						font-size: 13px;
-						margin-right: 13px;
-					}
-
-
-
-						.content-box ul.action-buttons-list li a:link,
-						.content-box ul.action-buttons-list li a:visited {
-							background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
-							padding: 0 7px;
-							color: #234d4d;
-							display: block;
-							border: 1px solid #aab1a9;
-							line-height: 15px;
-							height: 18px;
-							text-transform: capitalize;
-						}
-
-						.content-box ul.action-buttons-list li a:hover {
-							text-decoration: none;
-						}
-
-						.content-box ul.action-buttons-list li a.positive:link,
-						.content-box ul.action-buttons-list li a.positive:visited {
-							color: #127e0e;
-						}	
-						
-						
-			/* item-request */
-			
-			#content.item-request .no-bg .inner-content {
-				width: 300px;
-			}
 			
 			
-			#content.item-request .no-bg h2 {
+#request-page #content h2 {
 				text-align: center;
 			}
 			
-			#content.item-request .no-bg h2 span {
+#request-page #content h2 span {
 				font-size: 16px;
 				color: #333;
 			}
@@ -861,7 +727,6 @@ a.normal:visited {
 								}
 								
 								#content .items-list ul li div p {
-									/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 									clear: both;
 									color: #858F7C;
 								    float: left;
@@ -894,17 +759,17 @@ a.normal:visited {
 								display: block;
 							}
 						
-							.sidebar-box-profile {
+							.trust-reputation-box {
 								background: #ebf5da;
 								padding: 0 15px 12px 16px;
 								width: 425px;
 							}
 							
-							#sidebar .sidebar-box-holder .sidebar-box-profile {
+							#sidebar .sidebar-box-holder .trust-reputation-box {
 								margin-top: 0;
 							}
 							
-								#sidebar .sidebar-box-holder .sidebar-box-profile h2 {
+								#sidebar .sidebar-box-holder .trust-reputation-box h2 {
 									font-size: 14px;
 									/*font-family: verdana, arial, sans-serif;*/
 									padding-left: 0;
@@ -912,22 +777,22 @@ a.normal:visited {
 									width: 40%;
 								}
 								
-								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link {
+								#sidebar .sidebar-box-holder .trust-reputation-box h2.rhs-link {
 									float: right;
 									text-align: right;
 									font-size: 12px;
 								}
 								
-								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link a:link,
-								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link a:visited {
+								#sidebar .sidebar-box-holder .trust-reputation-box h2.rhs-link a:link,
+								#sidebar .sidebar-box-holder .trust-reputation-box h2.rhs-link a:visited {
 									color: #127e0e;
 								}
 								
-								#sidebar .sidebar-box-holder .sidebar-box-profile h2.rhs-link a:hover {
+								#sidebar .sidebar-box-holder .trust-reputation-box h2.rhs-link a:hover {
 
 								}
 								
-								#sidebar .sidebar-box-holder .sidebar-box-profile h3 {
+								#sidebar .sidebar-box-holder .trust-reputation-box h3 {
 									font-size: 10px;
 									/*font-family: verdana, arial, sans-serif;*/
 									padding-left: 0;
@@ -943,49 +808,49 @@ a.normal:visited {
 								}
 								
 								
-								#sidebar .sidebar-box-holder .sidebar-box-profile ul {
+								#sidebar .sidebar-box-holder .trust-reputation-box ul {
 									
 								}
 								
-									#sidebar .sidebar-box-holder .sidebar-box-profile ul li {
+									#sidebar .sidebar-box-holder .trust-reputation-box ul li {
 										margin-top: 4px;
 									}
 									
 										
 									
-									#sidebar .sidebar-box-holder .sidebar-box-profile ul li.no-icon {
+									#sidebar .sidebar-box-holder .trust-reputation-box ul li.no-icon {
 										padding-left: 54px;
 									}
 									
-									#sidebar .sidebar-box-holder .sidebar-box-profile ul li a:link,
-									#sidebar .sidebar-box-holder .sidebar-box-profile ul li a:visited {
+									#sidebar .sidebar-box-holder .trust-reputation-box ul li a:link,
+									#sidebar .sidebar-box-holder .trust-reputation-box ul li a:visited {
 										color: #127e0e;
 										font-weight: bold;
 									}
 									
-										#sidebar .sidebar-box-holder .sidebar-box-profile ul li p {
+										#sidebar .sidebar-box-holder .trust-reputation-box ul li p {
 											font-size: 11px;
 											/*font-family: verdana;*/
 											padding-top: 11px;
 											color: #62775a;
 										}
 										
-											#sidebar .sidebar-box-holder .sidebar-box-profile ul li p span {
+											#sidebar .sidebar-box-holder .trust-reputation-box ul li p span {
 												color: #badb80;
 												font-size: 9px;
 											}
 											
-												#sidebar .sidebar-box-holder .sidebar-box-profile ul li p span img {
+												#sidebar .sidebar-box-holder .trust-reputation-box ul li p span img {
 													float: left;
 												}
 											
-												#sidebar .sidebar-box-holder .sidebar-box-profile ul li p span a:link,
-												#sidebar .sidebar-box-holder .sidebar-box-profile ul li p span a:visited {
+												#sidebar .sidebar-box-holder .trust-reputation-box ul li p span a:link,
+												#sidebar .sidebar-box-holder .trust-reputation-box ul li p span a:visited {
 													    color: #badb80;
 														font-weight: normal;
 													}
 									
-										#sidebar .sidebar-box-holder .sidebar-box-profile ul li img.icons {
+										#sidebar .sidebar-box-holder .trust-reputation-box ul li img.icons {
 											float: left;
 											width: 40px;
 											margin-right: 14px;
@@ -993,20 +858,20 @@ a.normal:visited {
 										
 										/* trust box action */
 										
-										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li {
+										#sidebar .sidebar-box-holder .trust-reputation-box ul.action-list li {
 											font-size: 11px;
 											margin-right: 7px;
 										}
 										
-										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li a:link,
-										#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li a:visited {
+										#sidebar .sidebar-box-holder .trust-reputation-box ul.action-list li a:link,
+										#sidebar .sidebar-box-holder .trust-reputation-box ul.action-list li a:visited {
 											color: #62775A;
 										    font-weight: normal;
 										}
 										
 										
-										a.giftactions:link,
-										a.giftactions:visited {
+										#sidebar .sidebar-box-holder .trust-reputation-box a.giftactions:link,
+										#sidebar .sidebar-box-holder .trust-reputation-box a.giftactions:visited {
 											/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 											background: url('../images/ic-giftactions.png') no-repeat top left;
 										    padding: 4px 0 0 21px;
@@ -1015,8 +880,8 @@ a.normal:visited {
 											font-weight: normal;
 										}
 
- 										.sidebar-box-profile a.people-helped:link,
-										.sidebar-box-profile a.people-helped:visited {
+ 										#sidebar .sidebar-box-holder .trust-reputation-box a.people-helped:link,
+										#sidebar .sidebar-box-holder .trust-reputation-box a.people-helped:visited {
 											/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 											background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
 											padding: 2px 0 0 23px;
@@ -1024,8 +889,8 @@ a.normal:visited {
 											font-weight: normal;
 										}
 
-										a.feedback-rating:link,
-										a.feedback-rating:visited {
+										#sidebar .sidebar-box-holder a.feedback-rating:link,
+										#sidebar .sidebar-box-holder a.feedback-rating:visited {
 											/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 											background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
 											padding: 6px 0 3px 22px;
@@ -1835,8 +1700,27 @@ a.normal:visited {
 		
 /* new font styles */
 
+#content h2 {
+	font-size: 12px;
+	color: #127e0e;
+}
+
+#sidebar h2 {
+	font-size: 12px;
+	color: #127e0e;
+}
+
+
+ /* content sentences */
+
+	.content-box h3 {
+		font-size: 16px;
+		line-height: 18px;
+		margin: 0 0 8px 10px;
+	}
 
 /* Section Headings shown above content "Recent Activity" and "News Feed" - dashboard, "Latest Activity"  - profile pages, "From your trusted network" - search page */ 
+
 
 h2.default-title {
 	color: #315859;
@@ -1873,7 +1757,8 @@ h2.default-title {
 /* Event sentences in News Feed (on dashboard) and Latest Activity (on profile pages) */
 
 #dashboard-page #sidebar p,
-#profile-page #sidebar .inner-content p {
+#profile-page #sidebar .inner-content p,
+#request-page #sidebar .inner-content p {
 	color: #62775a;
 	font-size: 12px;
 }
@@ -1882,7 +1767,9 @@ h2.default-title {
 	#dashboard-page #sidebar p a:link,
 	#dashboard-page #sidebar p a:visited,
 	#profile-page #sidebar .inner-content p a:link,
-	#profile-page #sidebar .inner-content p a:visited {
+	#profile-page #sidebar .inner-content p a:visited,
+	#request-page #sidebar .inner-content p a:link,
+	#request-page #sidebar .inner-content p a:visited {
 		color: #62775a;
 	}
 	
@@ -1921,7 +1808,9 @@ h2.default-title {
 #profile-page #content ul.action-list li a:link,
 #profile-page #content ul.action-list li a:visited,
 #profile-page .action a:link,
-#profile-page .action a:visited {
+#profile-page .action a:visited,
+#request-page .action a:link, 
+#request-page .action a:visited {
 	color: #5a776f;
 	font-size: 11px;
 }
@@ -1970,7 +1859,7 @@ h2.default-title {
 /* Name on top of T&R box */
 
 
-#sidebar .sidebar-box-holder .sidebar-box-profile h2,
+#sidebar .sidebar-box-holder .trust-reputation-box h2,
 #wrapper .completed-request #sidebar-left .sidebar-box h2,
 #wrapper .completed-request #sidebar .sidebar-box h2  {
 	color: #62775a;
@@ -1983,8 +1872,8 @@ h2.default-title {
 	#wrapper .completed-request #sidebar-left .sidebar-box h2.trusted a:visited,
 	#wrapper .completed-request #sidebar .sidebar-box h2.trusted a:link,
 	#wrapper .completed-request #sidebar .sidebar-box h2.trusted a:visited,
-	#sidebar .sidebar-box-holder .sidebar-box-profile h2.trusted a:link,
-	#sidebar .sidebar-box-holder .sidebar-box-profile h2.trusted a:visited {
+	#sidebar .sidebar-box-holder .trust-reputation-box h2.trusted a:link,
+	#sidebar .sidebar-box-holder .trust-reputation-box h2.trusted a:visited {
 		color: #127e0e;
 	}
 
@@ -1992,7 +1881,7 @@ h2.default-title {
 /* Reputation & Trust Headings for T&R box */
 
 
-#sidebar .sidebar-box-holder .sidebar-box-profile h3,
+#sidebar .sidebar-box-holder .trust-reputation-box h3,
 #wrapper .completed-request #sidebar-left .sidebar-box h3,
 #wrapper .completed-request #sidebar .sidebar-box h3 {
 		font-family: verdana, tahoma, arial, sans-serif;
@@ -2004,14 +1893,28 @@ h2.default-title {
 
 /* Reputation & Trust metrics: 11 #62775a*/
 
-#sidebar .sidebar-box-holder .sidebar-box-profile ul.action-list li,
-#sidebar .sidebar-box-holder .sidebar-box-profile ul li p {
-    color: #62775A;
-    font-size: 21px;
+.trust-reputation-box ul.action-list li,
+.trust-reputation-box ul li p {
+    color: blue;
+    font-size: 11px;
 	}
-			
+	
+	
+/* this is for the villages */	
+
+#sidebar .inner-content p span  {
+	font-size: 9px;
+	color: #badb80;
+}
+
+#sidebar .inner-content p span a:link,
+#sidebar .inner-content p span a:visited  {
+    color: #badb80;
+}
+	
 			
 /* page specific */	
+
 #profile-page .items-list {
 	padding-left: 0;
 }
@@ -2019,9 +1922,6 @@ h2.default-title {
 #sidebar.profile-holder h2 {
 	padding-left: 16px;
 }
-
-
-
 
 	#sidebar.profile-holder .sidebar-box p {
 		font-size: 12px;
