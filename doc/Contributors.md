@@ -1,6 +1,7 @@
 #sharedearth.net contributors
 
-Dan Gooden 			- founder\initial vision
+#major
+Dan Gooden 		- founder\initial vision
 
 Andrea Guerrini		- idea development & feedback
 
@@ -12,10 +13,12 @@ Predrag Tomcanji	- css\html creation
 
 Nebojsa Zoric		- developer
 
-Josh B				- code review
+Dwight M		- AJAX development
 
-Daniel H			- contributing designer
 
-Dwight M			- AJAX development
+#minor
+Josh B			- code review
 
-Matt M				- contributing designer
+Daniel H		- contributing designer
+
+Matt M			- contributing designer
