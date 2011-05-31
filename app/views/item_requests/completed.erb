@@ -1,4 +1,4 @@
-<div class="completed-request">
+<div id="completed-request-page" class="clearfix">
 	<div id="sidebar-left">
 	
 		<div class="feedback-holder">
@@ -12,11 +12,11 @@
 		</div>
 	
 	
-		<div class="sidebar-box-holder">
+		<div class="trust-box-holder">
 			
 			<%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
 		
-			<div class="sidebar-box">
+			<div class="trust-reputation-box">
 			
 				<h2><%= @item_request.gifter.name%></h2>
 		
@@ -141,9 +141,9 @@
 	
 	
 	
-		<div class="sidebar-box-holder">
+		<div class="trust-box-holder">
 			<%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
-			<div class="sidebar-box">
+			<div class="trust-reputation-box">
 			
 				<h2><%= @item_request.requester.name%></h2>
 				
@@ -192,5 +192,5 @@
 	
 	</div><!--	/sidebar  -->
 
-</div><!--	/completed-request  -->
+</div><!--	/completed-request-page  -->
 
