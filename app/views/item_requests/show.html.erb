@@ -71,7 +71,7 @@
 	
 	</div><!-- /content -->
 
-	<div id="sidebar" class="profile-holder">
+	<div id="sidebar">
 	
 		<%= render :partial => "shared/trust_profile", :locals => { :person => (@item_request.gifter?(current_user.person) ? @item_request.requester : @item_request.gifter), :page => 'request' } %>
 	

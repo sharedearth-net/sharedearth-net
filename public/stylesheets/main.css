@@ -19,7 +19,6 @@ body {
 	margin: 0;
 }
 
-
 a:link,
 a:visited {
 	text-decoration: none;
@@ -29,14 +28,12 @@ a:hover {
     text-decoration: underline;
 }
 
-
 #content a.item-link:link,
 #content a.item-link:visited,
 #sidebar .inner-content a.item-link:link,
 #sidebar .inner-content a.item-link:visited {
 	color: #333333;
 }
-
 
 #wrapper a.positive:link,
 #wrapper a.positive:visited,
@@ -65,7 +62,9 @@ a.normal:visited {
 }
 
 
+
 /*............Application Global............*/
+
 
 /* container */
 
@@ -74,11 +73,21 @@ a.normal:visited {
 	margin: 0 auto;
 }
 
+
+/* wrapper */					
+
+#wrapper {
+    height: auto !important;
+    min-height: 488px;
+}
+
+
 	/* header */
 
 	#header {
 		height: 95px;
 	}
+	
 		.header-lhs {
 			width: 61px;
 			height: 59px;
@@ -87,6 +96,7 @@ a.normal:visited {
 			text-indent: -1000em;
 			overflow: hidden;
 		}
+		
 			.header-lhs img {
 				display: block;
 			}
@@ -100,7 +110,6 @@ a.normal:visited {
 				background: url('../images/logo.png') no-repeat top left;
 			}
 			
-		
 		.header-rhs {
 			width: 920px;
 			margin-left: 21px;
@@ -123,7 +132,6 @@ a.normal:visited {
 				width: 216px;
 				height: 24px;
 			}
-				
 				
 			.status-holder {
 				width: 300px;
@@ -157,7 +165,6 @@ a.normal:visited {
 						.status-holder ul li a:hover {
 							
 						}
-
 						
 						.status-holder ul li.giftact-rating a:link,
 						.status-holder ul li.giftact-rating a:visited {
@@ -166,20 +173,17 @@ a.normal:visited {
 							padding-bottom: 4px;
 						}
 						
-						
 						.status-holder ul li.activity-level a:link,
 						.status-holder ul li.activity-level a:visited {
 							background: url('../images/ic-activity-level.png') no-repeat top left;
 							padding-left: 29px;
 						}
-						
 							
 						.status-holder ul li.people-helped a:link,
 						.status-holder ul li.people-helped a:visited {
 								background: url('../images/ic-person.png') no-repeat top left;
 								padding-left: 19px;
 						}
-						
 
 						.status-holder ul li.giftactions a:link,
 						.status-holder ul li.giftactions a:visited {
@@ -187,13 +191,12 @@ a.normal:visited {
 								padding-left: 15px;
 						}
 						
-						
 						.status-holder ul li.feedback-rating a:link,
 						.status-holder ul li.feedback-rating a:visited {
 							background: url('../images/ic-feedback-rating.png') no-repeat top left;
 							padding-left: 19px;
 						}
-					
+						
 						
 			/* green bar */				
 			
@@ -204,6 +207,7 @@ a.normal:visited {
 				margin-top: 5px;
 			}
 			
+			
 				/* home button */
 						
 				.bar-holder-home {
@@ -213,9 +217,10 @@ a.normal:visited {
 					.bar-holder-home ul {
 						margin-left: 8px;
                         margin-right: 0px;
-					}trust-box-holder
+					}
 					
 						.bar-holder-home ul li {                            
+					
 						}
 						
 							.bar-holder-home ul li a:link,
@@ -225,13 +230,11 @@ a.normal:visited {
                                 padding-top:3px;
                                 padding-left:5px;
                                 padding-right:5px;
-
 							}
 							
 							.bar-holder-home ul li a:hover {
                                 background: #6ea801;
 							}
-
 
 						.bar-holder-lhs ul li {
 							display: block;
@@ -273,6 +276,7 @@ a.normal:visited {
 								background: none;
 							}
 				
+				
 				/* login */
 						
 				.bar-holder-rhs {
@@ -312,7 +316,6 @@ a.normal:visited {
 							}
                             
 							
-				
 				/* search */
 							
 				.search-holder {
@@ -354,47 +357,42 @@ a.normal:visited {
 							color: #fff;
 						}
 
-						/* Footer */
+					
+	/* footer */
 
-						#footer {
-							border-top: 1px solid #858f7c;
-							margin-top: 40px;
-						}
+	#footer {
+		border-top: 1px solid #858f7c;
+		margin-top: 40px;
+	}
 
-							#footer ul {
+		#footer ul {
 
-							}
+		}
 
-								#footer ul li {
-									color: #858f7c;
-						            padding-top:5px;
-									display: block;
-									float: left;
-									font-size: 10px;
-									line-height: 12px;
-								}
+			#footer ul li {
+				color: #858f7c;
+	            padding-top:5px;
+				display: block;
+				float: left;
+				font-size: 10px;
+				line-height: 12px;
+			}
 
-									#footer ul li a:link,
-									#footer ul li a:visited {
-										color: #858f7c;
-									}
+				#footer ul li a:link,
+				#footer ul li a:visited {
+					color: #858f7c;
+				}
 
-									#footer ul li a:hover {
+				#footer ul li a:hover {
 
-									}
+				}
 
-
-/* wrapper */					
-
-#wrapper {
-    height: auto !important;
-    min-height: 488px;
-}
 
 
 /*............Standard Elements............*/
 
-	/* Content */
+
+	/* global - content */
 	
 	#content {
 		width: 511px;
@@ -421,7 +419,6 @@ a.normal:visited {
 				text-align: right;
 			}
 
-	
 		.content-box-holder {
 			margin-bottom: 14px;
 		}
@@ -438,8 +435,7 @@ a.normal:visited {
 					.content-box .thumb {
 						float: left;
 						width: 100px;
-					}
-						
+					}	
 
 						.inner-content {
 							width: 270px;
@@ -452,9 +448,123 @@ a.normal:visited {
 								float: left;
 								margin-right: 17px;
 							}
+	
+
+	/* global - sidebar */
+
+	#sidebar {
+		width: 464px;
+		float: left;
+		margin-left: 27px;
+	}
+
+		#sidebar .sidebar-box {
+			margin-top: 10px;
+		}
+
+			#sidebar .inner-content {
+			    margin-left: 0;
+			   	width: 459px;
+				float: none;
+				padding-left: 16px;
+			}
+
+
+		/* trust and reputation box */
+
+		.trust-box-holder {
+			margin-bottom: 18px;
+			margin-left: 8px;
+		}
+
+			.trust-box-holder img {
+				display: block;
+			}
+
+
+			.trust-reputation-box {
+				background: #ebf5da;
+				padding: 0 15px 12px 16px;
+				width: 425px;
+			}						
 							
+	/* global -item list */				
+
+	.items-list {
+		padding: 10px;
+	}
+
+		.items-list ul {
+
+		}
+
+			.items-list ul li {
+				display: block;
+				float: left;
+				font-size: 12px;
+				color: #127e0e;
+			}
+
+			.items-list ul li.item {
+				margin-bottom: 10px;
+			}
+
+				.items-list ul li .thumb {
+					max-height: 32px;
+					float: left;
+					margin-right: 10px;
+					margin-top: 3px;
+				}
+
+				.items-list ul li div {
+					width: 430px;
+					float: left;
+				}
+
+					.items-list ul li a:link,
+					.items-list ul li a:visited {
+						text-transform: lowercase;
+					}
+
+						.items-list ul li li a:link,
+						.items-list ul li li a:visited {
+							color: #858f7c;
+						}
+
+					ul.action-list {
+						clear: both;
+						margin-top: 5px;
+					}
+
+					ul.action-list li {
+						display: block;
+						float: left;
+						margin-right: 17px;
+						font-size: 11px;
+						color: #62775a;
+					}
+
+						ul.action-list li a:link,
+						ul.action-list li a:visited {
+							color: #62775a;
+							font-weight: normal;
+						}
+
+						#content .items-list ul li div p {
+							clear: both;
+							color: #858F7C;
+						    float: left;
+						    font-size: 12px;
+							margin: 0 0 6px 0;
+							line-height: 14px;
+						}
+
+							#content .items-list ul li div p a:link,
+							#content .items-list ul li div p a:visited {
+								color: #858F7C;
+							}							
 		
-		/*  icons - trust box, items etc. */
+		/*  global - icons - trust box, items etc. */
 		
 		a.giftactions:link,
 		a.giftactions:visited {
@@ -475,145 +585,9 @@ a.normal:visited {
 			padding: 6px 0 3px 22px;						
 		}
 		
+
+		/* buttons */
 		
-		/* Sidebar */
-		
-			/* trust and reputation box */
-		
-			.trust-box-holder {
-				margin-bottom: 18px;
-				margin-left: 8px;
-			}
-		
-				.trust-box-holder img {
-					display: block;
-				}
-				
-				
-				.trust-reputation-box {
-					background: #ebf5da;
-					padding: 0 15px 12px 16px;
-					width: 425px;
-				}
-				
-				/* sidebar right */
-
-				#completed-request-page #sidebar {
-					width: 245px;
-					float: left;
-					margin-left: 16px;
-					margin-right: 5px;
-				}
-				
-				#completed-request-page .trust-box-holder {
-					width: 195px;
-					margin: 0 auto;
-				}
-				
-				#completed-request-page .trust-reputation-box {
-					background: #ebf5da;
-					width: 195px;
-					margin-top: 0;
-					padding: 0;
-				}
-
-
-					#completed-request-page #sidebar .trust-reputation-box h2,
-					#completed-request-page #sidebar-left .trust-reputation-box h2 {
-						font-size: 14px;
-						color: #127e0e;
-						padding-left: 13px;
-						width: 100%;
-					}
-
-					#completed-request-page .trust-reputation-box h3 {
-						color: #315859;
-					    font-size: 11px;
-					    font-weight: bold;
-					    margin-top: 5px;
-					    padding-left: 13px;
-					}
-
-
-					#completed-request-page .trust-reputation-box .devider {
-						margin-top: 10px;
-						display: block;
-						clear: both;
-					}
-
-					#completed-request-page .trust-reputation-box ul.action-list {
-						padding: 0 0 0 13px;
-					}
-
-					#completed-request-page .trust-reputation-box  a.people-helped:link,
-					#completed-request-page .trust-reputation-box  a.people-helped:visited {
-						background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
-						padding: 5px 0 0 23px;
-						color: #62775a;
-						font-weight: normal;
-						font-size: 11px;
-					}
-
-
-					#completed-request-page .trust-reputation-box ul.trust-list {
-						padding: 10px 0 0 13px;
-					}
-
-						#completed-request-page .trust-reputation-box ul.trust-list li {
-							float: left;
-							display: block;
-							margin-right: 10px;
-						}
-
-
-							#completed-request-page .trust-reputation-box ul.trust-list li.no-icon {
-								border: 1px solid #bbdc80;
-								font-size: 11px;
-								font-weight: bold;
-								padding: 1px;
-								margin-top: 2px;
-							}
-
-
-								#completed-request-page .trust-reputation-box ul.trust-list li a:link,
-								#completed-request-page .trust-reputation-box ul.trust-list li a:visited {
-									padding: 14px 0 10px 34px;
-									color: #62775a;
-									font-weight: normal;
-									font-size: 11px;
-								}
-
-
-								#completed-request-page .trust-reputation-box ul.trust-list li.no-icon a:link,
-								#completed-request-page .trust-reputation-box ul.trust-list li.no-icon a:visited {
-									color: #62775a;
-								}
-
-								#completed-request-page .trust-reputation-box ul.trust-list li a.untrusted:link,
-								#completed-request-page .trust-reputation-box ul.trust-list li a.untrusted:visited {
-									background: url('../images/ic-untrusted-profile-small.png') no-repeat 1px 0;
-									padding-top: 10px;
-								}
-
-								#completed-request-page .trust-reputation-box ul.trust-list li a.trusted:link,
-								#completed-request-page .trust-reputation-box ul.trust-list li a.trusted:visited {
-									background: url('../images/ic-trusted-profile-small.png') no-repeat 1px 0;
-								}
-
-
-								#completed-request-page .trust-reputation-box ul.trust-list li a.extended:link,
-								#completed-request-page .trust-reputation-box ul.trust-list li a.extended:visited {
-									background: url('../images/ic-extended-network-small.png') no-repeat 1px 0;
-								}
-
-								#completed-request-page .trust-reputation-box ul.trust-list li.no-icon a:link,
-								#completed-request-page .trust-reputation-box ul.trust-list li.no-icon a:visited {
-									padding: 0px;
-									font-weight: bold;
-								}
-			
-
-		/* Buttons */
 		
 			/* action buttons */
 
@@ -664,59 +638,59 @@ a.normal:visited {
 				height: 10px;
 				font-weight: bold;
 			}
+			
 							
-							/* comments */
+		/* comments */
 
-							.inner-content ul.comment-list {
-								clear: both;
-							}
+		.inner-content ul.comment-list {
+			clear: both;
+		}
 
-								.inner-content ul.comment-list li {
-									width: 403px;
-									padding: 0 4px;
-									background: #f4f9eb;
-									margin-top: 5px;
-				                    margin-bottom: 0px;
-								}
+			.inner-content ul.comment-list li {
+				width: 403px;
+				padding: 0 4px;
+				background: #f4f9eb;
+				margin-top: 5px;
+	                  margin-bottom: 0px;
+			}
 
-								.inner-content ul.comment-list li p {
-									font-size: 11px;
-									padding-top: 3px;
-				                    padding-bottom: 3px;
-								}
+			.inner-content ul.comment-list li p {
+				font-size: 11px;
+				padding-top: 3px;
+	                  padding-bottom: 3px;
+			}
 
-				                .inner-content ul.comment-list li a:link,
-				                .inner-content ul.comment-list li a:visited {
-				                    font-weight: normal;
-				                }
+	              .inner-content ul.comment-list li a:link,
+	              .inner-content ul.comment-list li a:visited {
+	                  font-weight: normal;
+	              }
 
+				.inner-content ul.comment-list li p span {
+					display: block;
+	                      color: #62775a;
+	                      font-size: 10px;
+				}
 
-									.inner-content ul.comment-list li p span {
-										display: block;
-				                        color: #62775a;
-				                        font-size: 10px;
-									}
+			.inner-content ul.comment-list li .comment-box {
+				padding: 2px 2px 1px 2px;
+			}
 
-								.inner-content ul.comment-list li .comment-box {
-									padding: 2px 2px 1px 2px;
-								}
-
-									.inner-content ul.comment-list li .comment-box textarea {
-										height: 15px;
-										font-size: 9px;
-										color: #999;
-										border: 1px solid #8e948e;
-										padding: 2px 0 0 4px;
-										width: 393px;
-										overflow:auto;
-									}
+				.inner-content ul.comment-list li .comment-box textarea {
+					height: 15px;
+					font-size: 9px;
+					color: #999;
+					border: 1px solid #8e948e;
+					padding: 2px 0 0 4px;
+					width: 393px;
+					overflow:auto;
+				}
 
 
 
 /*............Dahboard Page............*/
 				
-	/* content */
-	
+				
+	/* dashboard - content */
 	
 	#dashboard-page #content p {
 		margin-bottom: 0;
@@ -746,65 +720,52 @@ a.normal:visited {
 				float: left;
 			}
 
-	/* sidebar */
 
-	#sidebar {
-		width: 464px;
-		float: left;
-		margin-left: 27px;
-	}
-
-	
-		#sidebar .sidebar-box {
-			margin-top: 10px;
-		}
-	
-	
-		#sidebar .inner-content {
-		    margin-left: 0;
-		   	width: 459px;
-			float: none;
-		}
-				
-	
+	/* dashboard - sidebar */
 		
-				#sidebar .with-action p img {
-					 vertical-align: top;
-				}
-				
-				
-	
-							
-
+		#dashboard-page #sidebar .inner-content {
+			padding-left: 0;
+		}
+		
+			#sidebar .with-action p img {
+			 	vertical-align: top;
+			}
+			
+			
+			
 /*............Profile Page............*/				
 				
-#content p.status-holder-profile {
-	font-size: 11px;
-	line-height: 14px;
-	margin-bottom: 15px;
-	margin-top: -5px;
-}
-
-
-	/* profile sidebar */
 	
+	/* profile - content */	
+
+	#profile-page .items-list {
+		padding-left: 0;
+	}
 	
-		#sidebar.profile-holder h2 {
+	#content p.status-holder-profile {
+		font-size: 11px;
+		line-height: 14px;
+		margin-bottom: 15px;
+		margin-top: -5px;
+	}
+
+	/* profile - sidebar */	
+	
+		#profile-page #sidebar h2 {
 			padding-left: 16px;
 		}
-
 	
-		#sidebar.profile-holder .trust-reputation-box h2 {
+		#profile-page #sidebar .trust-reputation-box h2 {
 			font-size: 14px;
 			padding-left: 0;
 			float: left;
 			width: 40%;
 		}	
 		
-		#sidebar .trust-reputation-box h2.rhs-link {
+		#profile-page #sidebar .trust-reputation-box h2.rhs-link {
 			float: right;
 			text-align: right;
-			font-size: 12px;
+			font-size: 14px;
 		}
 		
 		.trust-reputation-box h2.rhs-link a:link,
@@ -824,12 +785,10 @@ a.normal:visited {
 			margin-top: 5px;
 		}
 		
-		
 		.devider {
 			display: block;
 			margin-top: 10px;
 		}
-		
 		
 		.trust-reputation-box ul {
 			
@@ -838,9 +797,7 @@ a.normal:visited {
 			.trust-reputation-box ul li {
 				margin-top: 4px;
 			}
-			
-				
-			
+
 			.trust-reputation-box ul li.no-icon {
 				padding-left: 54px;
 			}
@@ -878,7 +835,8 @@ a.normal:visited {
 					margin-right: 14px;
 				}
 				
-				/* trust box action */
+				
+				/* profile - trust box action */
 				
 				.trust-reputation-box ul.action-list li {
 					font-size: 11px;
@@ -890,7 +848,6 @@ a.normal:visited {
 					color: #62775A;
 				    font-weight: normal;
 				}
-				
 				
 				.trust-reputation-box a.giftactions:link,
 				.trust-reputation-box a.giftactions:visited {
@@ -911,7 +868,6 @@ a.normal:visited {
 
 				.trust-reputation-box a.feedback-rating:link,
 				.trust-reputation-box a.feedback-rating:visited {
-					/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
 					background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
 					padding: 6px 0 3px 22px;
 					color: #62775a;
@@ -936,753 +892,639 @@ a.normal:visited {
 						color: #62775a;
 						font-weight: normal;
 					}
-				
-				
-	
-	
-	#sidebar.profile-holder p {
-		font-size: 12px;
-		/*font-family: verdana, arial, sans-serif;*/
-	}
-	
-		#sidebar.profile-holder .sidebar-box p {
-			font-size: 12px;
-		}
-	
-	#sidebar.profile-holder .inner-content {
-		padding-left: 16px;
-	}
+
 
 						
 /*............Request Page............*/
 			
-#request-page #content .inner-content {
-	width: 300px;
+
+	/* request - content */
+			
+	#request-page #content .inner-content {
+		width: 300px;
+	}
+				
+	#request-page #content h2 {
+		text-align: center;
 	}
 			
+		#request-page #content h2 span {
+			font-size: 16px;
+			color: #333;
+		}
+		
+	
+	/* request - sidebar */	
+	
+	#request-page #sidebar h2 {
+		padding-left: 16px;
+	}
+	
+		#request-page #sidebar .trust-reputation-box h2 {
+			font-size: 14px;
+			padding-left: 0;
+			float: left;
+			width: 40%;
+		}	
+		
+		#request-page #sidebar .trust-reputation-box h2.rhs-link {
+			float: right;
+			text-align: right;
+			font-size: 14px;
+		}
+
+
+
+/*............Edit Profile............*/
 			
-#request-page #content h2 {
+	ul.form-holder {
+				
+	}
+			
+		ul.form-holder li {
+			display: block;
+			margin: 3px 0;
+		}
+		
+			ul.form-holder li label {
+				font-size: 12px;
+			}
+			
+			ul.form-holder li input[type="text"] {
+				border: 1px solid #8E948E;
+			    color: #999999;
+			    font-size: 13px;
+			    height: 15px;
+			    overflow: auto;
+			    padding: 2px 0 0 4px;
+			    width: 393px;
+			}
+			
+			ul.form-holder li textarea {
+				border: 1px solid #8E948E;
+			    color: #999999;
+			    font-size: 13px;
+			    height: 115px;
+			    overflow: auto;
+			    padding: 2px 0 0 4px;
+			    width: 393px;
+			}
+
+			ul.form-holder li input[type="submit"] {
+				background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+				padding: 0 7px;
+				color: #127e0e;
+				display: block;
+				border: 1px solid #aab1a9;
+				line-height: 15px;
+				text-transform: capitalize;
+				cursor: pointer;
+			}
+			
+			ul.form-holder li input[type="file"] {
+				margin-bottom: 10px;
+			}
+			
+			
+			
+/*............Edit Item............*/
+						
+	.item-edit ul.action-buttons-list {
+		margin-left: 0px;
+	}
+
+		.item-edit ul.action-buttons-list li {
+			display: block;
+			float: left;
+			text-align: center;
+			font-size: 13px;
+			margin-right: 13px;
+		}
+
+			.item-edit ul.action-buttons-list li a:link,
+			.item-edit ul.action-buttons-list li a:visited {
+				background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+				padding: 0 7px;
+				color: #234d4d;
+				display: block;
+				border: 1px solid #aab1a9;
+				line-height: 15px;
+				height: 18px;
+				text-transform: capitalize;
+			}
+
+			.item-edit ul.action-buttons-list li a:hover {
+				text-decoration: none;
+			}
+
+			.item-edit ul.action-buttons-list li a.positive:link,
+			.item-edit ul.action-buttons-list li a.positive:visited {
+				color: #127e0e;
+			}
+							
+							
+							
+/*............Completed Request............*/							
+	
+	#completed-request-page {
+		background: url('../images/bg-item-completed-request-fade.png') no-repeat 273px -70px;
+	}				
+
+		#completed-request-page #sidebar {
+			width: 245px;
+			float: left;
+			margin-left: 16px;
+			margin-right: 5px;
+		}
+
+			#completed-request-page .trust-box-holder {
+				width: 195px;
+				margin: 0 auto;
+			}
+
+			#completed-request-page .trust-reputation-box {
+				background: #ebf5da;
+				width: 195px;
+				margin-top: 0;
+				padding: 0;
+			}
+
+				#completed-request-page .trust-reputation-box h2 {
+					font-size: 14px;
+					color: #127e0e;
+					padding-left: 13px;
+					width: 100%;
+				}
+
+				#completed-request-page .trust-reputation-box h3 {
+					color: #315859;
+				    font-size: 11px;
+				    font-weight: bold;
+				    margin-top: 5px;
+				    padding-left: 13px;
+				}
+
+				#completed-request-page .devider {
+					margin-top: 10px;
+					display: block;
+					clear: both;
+				}
+
+				#completed-request-page ul.action-list {
+					padding: 0 0 0 13px;
+				}
+
+				#completed-request-page a.people-helped:link,
+				#completed-request-page a.people-helped:visited {
+					background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
+					padding: 5px 0 0 23px;
+					color: #62775a;
+					font-weight: normal;
+					font-size: 11px;
+				}
+
+					#completed-request-page ul.trust-list {
+						padding: 10px 0 0 13px;
+					}
+
+						#completed-request-page ul.trust-list li {
+							float: left;
+							display: block;
+							margin-right: 10px;
+						}
+
+							#completed-request-page ul.trust-list li.no-icon {
+								border: 1px solid #bbdc80;
+								font-size: 11px;
+								font-weight: bold;
+								padding: 1px;
+								margin-top: 2px;
+							}
+
+								ul.trust-list li a:link,
+								ul.trust-list li a:visited {
+									padding: 14px 0 10px 34px;
+									color: #62775a;
+									font-weight: normal;
+									font-size: 11px;
+								}
+
+								ul.trust-list li.no-icon a:link,
+								ul.trust-list li.no-icon a:visited {
+									color: #62775a;
+								}
+
+								ul.trust-list li a.untrusted:link,
+								ul.trust-list li a.untrusted:visited {
+									background: url('../images/ic-untrusted-profile-small.png') no-repeat 1px 0;
+									padding-top: 10px;
+								}
+
+								ul.trust-list li a.trusted:link,
+								ul.trust-list li a.trusted:visited {
+									background: url('../images/ic-trusted-profile-small.png') no-repeat 1px 0;
+								}
+
+								ul.trust-list li a.extended:link,
+								ul.trust-list li a.extended:visited {
+									background: url('../images/ic-extended-network-small.png') no-repeat 1px 0;
+								}
+
+								ul.trust-list li.no-icon a:link,
+								ul.trust-list li.no-icon a:visited {
+									padding: 0px;
+									font-weight: bold;
+								}
+
+
+		/* completed request - sidebar left */
+
+		#sidebar-left {
+			width: 245px;
+			float: left;
+			margin-right: 30px;
+		}
+
+
+		/* completed request - content */
+
+		#completed-request-page #content {
+			width: 460px;
+			float: left;
+		}
+
+			#completed-request-page #content h2 {
+				font-size: 16px;
+				color: #333;
+			    line-height: 19px;
+				text-align: center;
+			}
+
+			.item-holder {
+				width: 234px;
+				height: 96px;
+				padding: 66px 113px;
+				text-align: center;
+				margin-bottom: 7px;
+			}
+
+				.item-holder img {
+					border: 1px solid #333;
+				}
+
+
+				.messages-holder {
+						width: 336px;
+						margin: 0 auto;
+				}
+
+				#completed-request-page #content p {
+					font-size: 12px;
+					color: #333;
+					margin-bottom: 10px;
+				}
+
+					#completed-request-page #content p a:link,
+					#completed-request-page #content p a:visited {
+							color: #333;
+					}
+
+				.message {
+					padding: 7px;
+				}
+
+				.good {
+					border: 4px solid #78b800;
+					border-right: none;
+					border-left: none;
+				}
+
+				.bad {
+					border: 4px solid #d33727;
+					border-right: none;
+					border-left: none;
+				}
+
+				#completed-request-page .content-box {
+					width: 336px;
+					margin: 0 auto;
+					padding: 0;
+					background: #fff;
+				}
+
+					#completed-request-page .thumb {
+						width: 28px;
+						height: 28px;
+						margin-right: 7px;
+					}
+
+					#completed-request-page .inner-content {
+					    width: 336px;
+						margin-left: 0;
+					}
+
+					#completed-request-page ul.comment-list li  {
+						width: 328px;
+						margin-top: 0;
+					}
+
+					#completed-request-page ul.comment-list li.no-bg  {
+						background: #fff;
+						padding: 0;
+					}
+
+						#completed-request-page .comment-box {
+							padding: 0;	
+						}
+
+							#completed-request-page .comment-box textarea {
+								width: 330px;
+							}
+	
+	
+	/* completed request - leave feedback */
+	
+	.feedback-box-curves {
+		display: block;
+	}
+	
+	.feedback-box {
+		background: #fff;
+		border-right: 2px solid #076d04;
+		border-left: 2px solid #076d04;
+		width: 428px;
+		padding: 10px 28px;
+	}
+	
+		#wrapper .feedback-box p {
+			font-size: 14px;
+			margin-bottom: 20px;
+		}
+	
+		ul.feedback-buttons {
+			margin: 0 0 10px 54px;
+		}
+	
+			ul.feedback-buttons li {
+				display: block;
+				float: left;
+				width: 88px;
+				border-top: 3px solid #c7cac1;
+				border-bottom: 3px solid #c7cac1;
+				margin-right: 25px;
+				padding-bottom: 3px;
+			}
+		
+			ul.feedback-buttons li.positive {
+				border-top-color: #71b838;
+				border-bottom-color: #71b838;
+			}
+		
+			ul.feedback-buttons li.negative {
+				border-top-color: #d33727;
+				border-bottom-color: #d33727;
+			}
+		
+				ul.feedback-buttons li label {
+					font-size: 14px;
+					color: #333;
+					line-height: 17px;
+				}
+	
+	.feedback-message {
+		background: #ebf4d9;
+		padding: 0 16px 5px 16px;
+		width: 391px;
+	}
+	
+		.feedback-message label {
+			font-size: 14px;
+			color: #333;
+			margin-bottom: 41px;
+		}	
+	
+		.feedback-message textarea {
+			width: 389px;
+			margin: 12px auto 0 auto;
+			display: block;
+			height: 128px;
+		}
+		
+		ul.feedback-submit {
+			margin-top: 10px;
+		}
+		
+			ul.feedback-submit li {
+				font-size: 14px;
+				display: block;
+				float: left;
+				line-height: 17px;
+				width: 50%;
 				text-align: center;
 			}
 			
-#request-page #content h2 span {
-				font-size: 16px;
-				color: #333;
-			}
-							
-			/* item list*/				
-
-			.items-list {
-				padding: 10px;
+			ul.feedback-submit li a:link,
+			ul.feedback-submit li a:visited {
+				background: #cce5a0 url("../images/bg-bt-request-list.png") repeat-x 0 0;
+			    border: 1px solid #AAB1A9;
+			    color: #234D4D;
+			    height: 22px;
+			    line-height: 15px;
+			    padding: 1px 7px 1px 7px;
+			    text-transform: capitalize;
 			}
 			
-				.items-list ul {
-					
+			ul.feedback-submit li a:hover {
+				text-decoration: none;
+			}
+		
+			ul.feedback-submit li input {
+				font-size: 14px;
+				cursor: pointer;
+				background: #cce5a0 url("../images/bg-bt-request-list.png") repeat-x 0 0;
+			    border: 1px solid #AAB1A9;
+			    color: #097b05;
+			    height: 21px;
+			    line-height: 15px;
+			    padding: 0 7px 2px 7px;
+				margin-top: -2px;
+			    text-transform: capitalize;
+			}
+			
+				ul.feedback-submit li input:hover {
+					text-decoration: none;
 				}
-				
-					.items-list ul li {
-						display: block;
-						float: left;
-						font-size: 12px;
-						color: #127e0e;
-					}
-					
-					.items-list ul li.item {
-						margin-bottom: 10px;
-					}
-					
-						.items-list ul li .thumb {
-							max-height: 32px;
-							float: left;
-							margin-right: 10px;
-							margin-top: 3px;
-						}
-						
-						.items-list ul li div {
-							width: 430px;
-							float: left;
-						}
-						
-							.items-list ul li a:link,
-							.items-list ul li a:visited {
-								text-transform: lowercase;
-							}
-						
-								.items-list ul li li a:link,
-								.items-list ul li li a:visited {
-									color: #858f7c;
-								}
-							
-							
-							ul.action-list {
-								clear: both;
-								margin-top: 5px;
-							}
-							
-							ul.action-list li {
-								display: block;
-								float: left;
-								margin-right: 17px;
-								font-size: 11px;
-								color: #62775a;
-							}
 
-								ul.action-list li a:link,
-								ul.action-list li a:visited {
-									color: #62775a;
-									font-weight: normal;
-								}
-								
-								#content .items-list ul li div p {
-									clear: both;
-									color: #858F7C;
-								    float: left;
-								    font-size: 12px;
-									margin: 0 0 6px 0;
-									line-height: 14px;
-								}
-								
-									#content .items-list ul li div p a:link,
-									#content .items-list ul li div p a:visited {
-										color: #858F7C;
-									}
-									
-									
-						/* unanswered requests */
-						
-						.unanswered-requests {
-							
-						}
-									
-									
-						
-								
-								
-								
-			/* edit profile */
-			
-			ul.form-holder {
-				
+
+	/* completed request - feeback left */
+
+	.feedback-holder {
+		position: relative;
+		margin: 75px auto 20px auto;
+		height: 225px;
+		text-align: center;
+	}
+
+			.feedback-holder img {
+				max-width: 225px;
+				max-height: 225px;
 			}
+
+			.feedback {
+				position: absolute;
+				margin: 0 auto;
+				height: 110px;
+				width: 245px;
+				background: #c7cac1;
+				top: 10px;
+				z-index: -10;
+			}
+
+			.positive-feedback {
+				background: #78b800;
+			}
+
+			.negative-feedback {
+				background: #f00;
+			}					
 			
-				ul.form-holder li {
+
+	
+/*............Search Page............*/										
+	
+	#search-page #content {
+		width: 704px;
+	}
+
+		#search-page .search-holder {
+			width: 484px;
+		}
+		
+			#search-page .search-holder input[type="text"] {
+				height: 13px;
+				width: 460px;
+			}
+
+		#search-page #content h2 {
+			font-size: 13px;
+		}
+
+		#search-page #content h3 {
+			font-size: 11px;
+			color: #127E0E;
+		}
+
+			#search-page #content h2 img {
+				display: inline;
+				vertical-align: middle;
+			}
+
+		#search-page .items-list {
+			padding-top: 2px;
+		}
+
+			#search-page .items-list ul li.item {
+				margin-top: 12px;
+				margin-bottom: 4px;
+			}
+
+				#search-page .items-list ul li .thumb {
+				    float: left;
+				    margin-right: 10px;
+				    margin-top: 3px;
+				    max-height: 32px;
+				}
+
+				#search-page a.communities:link,
+				#search-page a.communities:visited {
+				    background: url("../images/ic-community-community.png") no-repeat left top transparent;
+				    color: #62775A;
+				    font-size: 11px;
+				    font-weight: normal;
+				    margin: 0 0 0 2px;
+				    padding: 5px 0 0 28px;
+				}
+
+
+	/* search page - sidebar-left */
+
+	#search-page #sidebar-left {
+		float: left;
+		width: 223px;
+		padding: 0 0 0 7px;
+	}
+
+		#search-page #sidebar-left h2 {
+			color: #127E0E;
+		    font-size: 12px;
+
+		}
+
+		#search-page #sidebar-left ul {
+			margin-top: 11px;
+			width: 175px;
+		}
+
+			#search-page #sidebar-left ul li {
+				font-size: 11px;
+			}
+
+				#search-page #sidebar-left ul li a:link,
+				#search-page #sidebar-left ul li a:visited {
+					color: #127e0e;
 					display: block;
-					margin: 3px 0;
+					padding: 4px 0px 1px 29px;
+					background:  url('../images/ic-village.png') no-repeat 3px 4px;
+					height: 20px;
+                    text-decoration: none;
+					margin-bottom: 5px;
 				}
-				
-					ul.form-holder li label {
-						font-size: 12px;
-						/*font-family: verdana;*/
-					}
-					
-					ul.form-holder li input[type="text"] {
-						border: 1px solid #8E948E;
-					    color: #999999;
-					    font-size: 13px;
-					    height: 15px;
-					    overflow: auto;
-					    padding: 2px 0 0 4px;
-					    width: 393px;
-					}
-					
-					ul.form-holder li textarea {
-						border: 1px solid #8E948E;
-					    color: #999999;
-					    font-size: 13px;
-					    height: 115px;
-					    overflow: auto;
-					    padding: 2px 0 0 4px;
-					    width: 393px;
-					}
-					
-					
-					
-					ul.form-holder li input[type="submit"] {
-						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
-						padding: 0 7px;
-						color: #127e0e;
-						display: block;
-						border: 1px solid #aab1a9;
-						line-height: 15px;
-						text-transform: capitalize;
-						cursor: pointer;
-					}
-					
-					ul.form-holder li input[type="file"] {
-						margin-bottom: 10px;
-					}
-					
-					
-					
-					
-					
-					/* edit item */
-					
-					
-					.item-edit ul.action-buttons-list {
-						margin-left: 0px;
+
+				#search-page #sidebar-left ul li:hover,
+				#search-page #sidebar-left ul li.selected {
+					background: url('../images/community-list-hover.png') no-repeat 0 0;
+				}
+
+				#search-page #sidebar-left ul li.all a:link,
+				#search-page #sidebar-left ul li.all a:visited {
+						background: url('../images/ic-all-networks-community.png') no-repeat 1px 2px;
+				}
+
+				#search-page #sidebar-left ul li.items a:link,
+				#search-page #sidebar-left ul li.items a:visited {
+						background: url('../images/ic-items-community.png') no-repeat 1px 1px;
+				}
+
+				#search-page #sidebar-left ul li.people a:link,
+				#search-page #sidebar-left ul li.people a:visited {
+						background: url('../images/ic-people-community.png') no-repeat 1px 1px;
 					}
 
-						.item-edit ul.action-buttons-list li {
-							display: block;
-							float: left;
-							text-align: center;
-							font-size: 13px;
-							margin-right: 13px;
-						}
-
-
-
-							.item-edit ul.action-buttons-list li a:link,
-							.item-edit ul.action-buttons-list li a:visited {
-								background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
-								padding: 0 7px;
-								color: #234d4d;
-								display: block;
-								border: 1px solid #aab1a9;
-								line-height: 15px;
-								height: 18px;
-								text-transform: capitalize;
-							}
-
-							.item-edit ul.action-buttons-list li a:hover {
-								text-decoration: none;
-							}
-
-							.item-edit ul.action-buttons-list li a.positive:link,
-							.item-edit ul.action-buttons-list li a.positive:visited {
-								color: #127e0e;
-							}
-							
-							
-							
-							
-							/* COMPLETED REQUEST */
-
-							#wrapper #completed-request-page {
-								background: url('../images/bg-item-completed-request-fade.png') no-repeat 273px -70px;
-							}
-
-								/* feeback */
-
-								#wrapper #completed-request-page .feedback-holder {
-									position: relative;
-									margin: 75px auto 20px auto;
-									height: 225px;
-									text-align: center;
-								}
-
-									#wrapper #completed-request-page .feedback-holder img {
-										max-width: 225px;
-										max-height: 225px;
-									}
-
-
-									#wrapper #completed-request-page .feedback {
-										position: absolute;
-										margin: 0 auto;
-										height: 110px;
-										width: 245px;
-										background: #c7cac1;
-										top: 10px;
-										z-index: -10;
-									}
-
-
-									#wrapper #completed-request-page .positive-feedback {
-										background: #78b800;
-									}
-
-									#wrapper #completed-request-page .negative-feedback {
-										background: #f00;
-									}
-
-
-
-								/* sidebar left */
-
-								#wrapper #completed-request-page #sidebar-left {
-									width: 245px;
-									float: left;
-									margin-right: 30px;
-								}
-								
-								
-								#wrapper #completed-request-page #sidebar-left .trust-box-holder {
-									width: 195px;
-									margin: 0 auto;
-								}
-
-									#wrapper #completed-request-page #sidebar-left .sidebar-box {
-										background: #ebf5da;
-										width: 195px;
-									}
-
-
-										#wrapper #completed-request-page #sidebar-left .sidebar-box h2 {
-											font-size: 14px;
-											/*font-family: verdana, arial, sans-serif;*/
-											color: #127e0e;
-											padding-left: 13px;
-										}
-
-										#wrapper #completed-request-page #sidebar-left .sidebar-box h3 {
-											color: #315859;
-										    /*font-family: verdana,arial,sans-serif;*/
-										    font-size: 11px;
-										    font-weight: bold;
-										    margin-top: 5px;
-										    padding-left: 13px;
-										}
-
-
-										#wrapper #completed-request-page #sidebar-left .sidebar-box .devider {
-
-										}
-
-										#wrapper #completed-request-page #sidebar-left .sidebar-box ul.action-list {
-											padding-left: 13px;
-										}
-
-										#wrapper #completed-request-page #sidebar-left .sidebar-box  a.people-helped:link,
-										#wrapper #completed-request-page #sidebar-left .sidebar-box  a.people-helped:visited {
-											/*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
-											background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
-											padding: 5px 0 0 23px;
-											color: #62775a;
-											font-weight: normal;
-											font-size: 11px;
-										}
-
-
-										#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list {
-											padding: 10px 0 0 13px;
-										}
-
-											#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li {
-												float: left;
-												display: block;
-												margin-right: 10px;
-											}
-
-
-												#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li.no-icon {
-													border: 1px solid #bbdc80;
-													font-size: 11px;
-													font-weight: bold;
-													padding: 1px;
-													margin-top: 2px;
-												}
-
-
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li a:link,
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li a:visited {
-														padding: 14px 0 10px 34px;
-														color: #62775a;
-														font-weight: normal;
-														font-size: 11px;
-													}
-
-
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li.no-icon a:link,
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li.no-icon a:visited {
-														color: #62775a;
-													}
-
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li a.untrusted:link,
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li a.untrusted:visited {
-														background: url('../images/ic-untrusted-profile-small.png') no-repeat 1px 0;
-														padding-top: 10px;
-													}
-
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li a.trusted:link,
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li a.trusted:visited {
-														background: url('../images/ic-trusted-profile-small.png') no-repeat 1px 0;
-													}
-
-
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li a.extended:link,
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li a.extended:visited {
-														background: url('../images/ic-extended-network-small.png') no-repeat 1px 0;
-													}
-
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li.no-icon a:link,
-													#wrapper #completed-request-page #sidebar-left .sidebar-box ul.trust-list li.no-icon a:visited {
-														padding: 0px;
-														font-weight: bold;
-													}
-
-								/* content */
-
-								#wrapper #completed-request-page #content {
-									width: 460px;
-									float: left;
-
-								}
-
-									#wrapper #completed-request-page #content h2 {
-										font-size: 16px;
-										color: #333;
-										/*font-family: verdana,arial,sans-serif;*/
-									    line-height: 19px;
-										text-align: center;
-									}
-
-									#wrapper #completed-request-page #content .item-holder {
-										width: 234px;
-										height: 96px;
-										padding: 66px 113px;
-										text-align: center;
-										margin-bottom: 7px;
-									}
-
-
-										#wrapper #completed-request-page #content .item-holder img {
-											border: 1px solid #333;
-										}
-
-
-								#wrapper #completed-request-page #content .messages-holder {
-									width: 336px;
-									margin: 0 auto;
-								}
-
-									#wrapper #completed-request-page #content p {
-										font-size: 12px;
-										color: #333;
-										margin-bottom: 10px;
-									}
-									
-										#wrapper #completed-request-page #content p a:link,
-										#wrapper #completed-request-page #content p a:visited {
-											color: #333;
-										}
-
-
-									#wrapper #completed-request-page #content .message {
-										padding: 7px;
-									}
-
-										#wrapper #completed-request-page #content .good {
-											border: 4px solid #78b800;
-											border-right: none;
-											border-left: none;
-										}
-
-										#wrapper #completed-request-page #content .bad {
-											border: 4px solid #d33727;
-											border-right: none;
-											border-left: none;
-										}
-
-
-
-								#wrapper #completed-request-page #content .content-box {
-									width: 336px;
-									margin: 0 auto;
-									padding: 0;
-									background: #fff;
-								}
-
-									#wrapper #completed-request-page #content .thumb {
-										width: 28px;
-										height: 28px;
-										margin-right: 7px;
-									}
-
-									#wrapper #completed-request-page #content .inner-content {
-									    width: 336px;
-										margin-left: 0;
-									}
-
-
-										#wrapper #completed-request-page #content .inner-content ul.comment-list li  {
-											width: 328px;
-											margin-top: 0;
-										}
-
-										#wrapper #completed-request-page #content .inner-content ul.comment-list li.no-bg  {
-											background: #fff;
-											padding: 0;
-										}
-
-										#wrapper #completed-request-page #content .inner-content ul.comment-list li .comment-box {
-											padding: 0;	
-										}
-
-											#wrapper #completed-request-page #content .inner-content ul.comment-list li .comment-box textarea {
-												width: 330px;
-											}
-
-
-								
-						/* Feedback */
-						
-						.feedback-box-curves {
-							display: block;
-						}
-						
-						.feedback-box {
-							background: #fff;
-							border-right: 2px solid #076d04;
-							border-left: 2px solid #076d04;
-							width: 428px;
-							padding: 10px 28px;
-						}
-						
-							#wrapper .feedback-box p {
-								font-size: 14px;
-								/*font-family: verdana, arial, sans-serif;*/
-								margin-bottom: 20px;
-							}
-						
-						
-							ul.feedback-buttons {
-								margin: 0 0 10px 54px;
-							}
-						
-								ul.feedback-buttons li {
-									display: block;
-									float: left;
-									width: 88px;
-									border-top: 3px solid #c7cac1;
-									border-bottom: 3px solid #c7cac1;
-									margin-right: 25px;
-									padding-bottom: 3px;
-								}
-							
-								ul.feedback-buttons li.positive {
-									border-top-color: #71b838;
-									border-bottom-color: #71b838;
-								}
-							
-								ul.feedback-buttons li.negative {
-									border-top-color: #d33727;
-									border-bottom-color: #d33727;
-								}
-							
-							
-									ul.feedback-buttons li label {
-										font-size: 14px;
-										color: #333;
-										line-height: 17px;
-										/*font-family: verdana, arial, sans-serif;*/
-									}
-								
-						
-						.feedback-message {
-							background: #ebf4d9;
-							padding: 0 16px 5px 16px;
-							width: 391px;
-						}
-						
-						
-							.feedback-message label {
-								font-size: 14px;
-								/*font-family: verdana, arial, sans-serif;*/
-								color: #333;
-								margin-bottom: 41px;
-							}
-							
-						
-							.feedback-message textarea {
-								width: 389px;
-								margin: 12px auto 0 auto;
-								display: block;
-								height: 128px;
-							}
-							
-							
-							ul.feedback-submit {
-								margin-top: 10px;
-							}
-							
-								ul.feedback-submit li {
-									font-size: 14px;
-									display: block;
-									float: left;
-									line-height: 17px;
-									width: 50%;
-									text-align: center;
-								}
-								
-								ul.feedback-submit li a:link,
-								ul.feedback-submit li a:visited {
-									background: #cce5a0 url("../images/bg-bt-request-list.png") repeat-x 0 0;
-								    border: 1px solid #AAB1A9;
-								    color: #234D4D;
-								    height: 22px;
-								    line-height: 15px;
-								    padding: 1px 7px 1px 7px;
-								    text-transform: capitalize;
-									
-								}
-								
-								ul.feedback-submit li a:hover {
-									text-decoration: none;
-								}
-							
-								ul.feedback-submit li input {
-									font-size: 14px;
-									/*font-family: verdana, arial, sans-serif;*/
-									cursor: pointer;
-									background: #cce5a0 url("../images/bg-bt-request-list.png") repeat-x 0 0;
-								    border: 1px solid #AAB1A9;
-								    color: #097b05;
-								    height: 21px;
-								    line-height: 15px;
-								    padding: 0 7px 2px 7px;
-									margin-top: -2px;
-								    text-transform: capitalize;
-								}
-								
-									ul.feedback-submit li input:hover {
-										text-decoration: none;
-									}
-								
-								
-								
-								/* Search Page - content */
-
-								#search-page #content {
-									height: 200px;
-									width: 764px;
-								}
-
-									#search-page #content .search-holder {
-										width: 484px;
-									}
-
-										#search-page #content .search-holder input[type="text"] {
-											height: 13px;
-											width: 460px;
-										}
-
-									#search-page #content h2 {
-										font-size: 13px;
-									}
-
-									#search-page #content h3 {
-										/*font-family: verdana,arial,sans-serif;*/
-										font-size: 11px;
-										color: #127E0E;
-									}
-
-									#search-page #content h2 img {
-										display: inline;
-										vertical-align: middle;
-									}
-
-
-									#search-page #content .items-list {
-										padding-top: 2px;
-									}
-
-									#search-page #content .items-list ul li.item {
-										margin-top: 12px;
-										margin-bottom: 4px;
-									}
-
-									#search-page #content .items-list ul li .thumb {
-									    float: left;
-									    margin-right: 10px;
-									    margin-top: 3px;
-									    max-height: 32px;
-									}
-
-									#search-page #content .no-bg a.communities:link,
-									#search-page #content .no-bg a.communities:visited {
-									    background: url("../images/ic-community-community.png") no-repeat left top transparent;
-									    color: #62775A;
-									    /*font-family: "lucida grande",tahoma,verdana,arial,sans-serif;*/
-									    font-size: 11px;
-									    font-weight: normal;
-									    margin: 0 0 0 2px;
-									    padding: 5px 0 0 28px;
-									}
-
-								/* Search Page - sidebar-left */
-
-								#search-page #sidebar-left {
-									float: left;
-									width: 223px;
-									padding: 0 0 0 7px;
-								}
-
-									#search-page #sidebar-left h2 {
-										color: #127E0E;
-									    /*font-family: verdana, arial, sans-serif;*/
-									    font-size: 12px;
-
-									}
-
-
-									#search-page #sidebar-left ul {
-										margin-top: 11px;
-										width: 175px;
-									}
-
-										#search-page #sidebar-left ul li {
-											font-size: 11px;
-										}
-
-											#search-page #sidebar-left ul li a:link,
-											#search-page #sidebar-left ul li a:visited {
-												color: #127e0e;
-												display: block;
-												padding: 4px 0px 1px 29px;
-												background:  url('../images/ic-village.png') no-repeat 3px 4px;
-												height: 20px;
-						                        text-decoration: none;
-												margin-bottom: 5px;
-											}
-
-
-											#search-page #sidebar-left ul li:hover,
-											#search-page #sidebar-left ul li.selected {
-												background: url('../images/community-list-hover.png') no-repeat 0 0;
-
-											}
-
-											#search-page #sidebar-left ul li.all a:link,
-											#search-page #sidebar-left ul li.all a:visited {
-													background: url('../images/ic-all-networks-community.png') no-repeat 1px 2px;
-												}
-
-											#search-page #sidebar-left ul li.items a:link,
-											#search-page #sidebar-left ul li.items a:visited {
-													background: url('../images/ic-items-community.png') no-repeat 1px 1px;
-												}
-
-											#search-page #sidebar-left ul li.people a:link,
-											#search-page #sidebar-left ul li.people a:visited {
-													background: url('../images/ic-people-community.png') no-repeat 1px 1px;
-												}
-
-											#search-page #sidebar-left ul li.trusted a:link,
-											#search-page #sidebar-left ul li.trusted a:visited {
-													background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
-												}
-
-											#search-page #sidebar-left ul li.extend a:link,
-											#search-page #sidebar-left ul li.extend a:visited {
-													background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
-												}
-
-											#search-page #sidebar-left ul li.community a:link,
-											#search-page #sidebar-left ul li.community a:visited {
-													background: url('../images/ic-community-community.png') no-repeat 1px 1px;
-												}							
-
-										#search-page #sidebar-left ul li.separator {
-											border-bottom: 1px solid #aeadad;
-											height: 6px;
-											margin: 0 16px 7px 4px;
-										}
-
-										#search-page #sidebar-left ul li.separator:hover {
-											background: none;
-										}
+				#search-page #sidebar-left ul li.trusted a:link,
+				#search-page #sidebar-left ul li.trusted a:visited {
+						background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
+					}
+
+				#search-page #sidebar-left ul li.extend a:link,
+				#search-page #sidebar-left ul li.extend a:visited {
+						background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
+					}
+
+				#search-page #sidebar-left ul li.community a:link,
+				#search-page #sidebar-left ul li.community a:visited {
+						background: url('../images/ic-community-community.png') no-repeat 1px 1px;
+					}							
+
+			#search-page #sidebar-left ul li.separator {
+				border-bottom: 1px solid #aeadad;
+				height: 6px;
+				margin: 0 16px 7px 4px;
+			}
+
+			#search-page #sidebar-left ul li.separator:hover {
+				background: none;
+			}
+		
 							
 /* misc */
 
@@ -1701,28 +1543,7 @@ a.normal:visited {
 			background: #333;
 		}
 		
-
-
-		/* page specific */	
-
-		#profile-page .items-list {
-			padding-left: 0;
-		}
-
-		h2 {
-			padding-left: 16px;
-		}
-
-			#sidebar.profile-holder .trust-reputation-box p {
-				font-size: 12px;
-			}
-
-		#sidebar.profile-holder .inner-content {
-			padding-left: 16px;
-		}
-		
-		
-/* new font styles */
+/*............Font Styles............*/	
 
 #content h2 {
 	font-size: 12px;
@@ -1730,7 +1551,7 @@ a.normal:visited {
 }
 
 #sidebar h2 {
-	font-size: 12pxtrust-reputation-box;
+	font-size: 12px;
 	color: #127e0e;
 }
 
@@ -1757,7 +1578,7 @@ h2.default-title {
     margin-bottom: 6px;
 	color: #127E0E;
 }
-trust-box-holder
+
 /* Event sentences in Requests\Actions and Recent Activity on the dashboard */
 
 #dashboard-page p {
@@ -1935,10 +1756,3 @@ trust-box-holder
 #sidebar .inner-content p span a:visited  {
     color: #badb80;
 }
-	
-			
-					
-							
-							
-							
-							
