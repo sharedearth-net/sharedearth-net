@@ -1,11 +1,13 @@
 Factory.define :user do |u|
   u.provider "Facebook"
-  u.sequence(:uid) { |n| n.to_s }
-  u.nickname "demo"
+  u.sequence(:uid) { |n| rand(6) + n }
+  u.nickname "Shary"
 end
 
 Factory.define :person do |p|
-  p.name "Test Member"
+  p.name "Sharen"
+  p.association :user, :factory => :user
+  p.association :reputation_rating, :factory => :reputation_rating
 end
 
 Factory.define :reputation_rating do |r|
@@ -26,6 +28,7 @@ Factory.define :item do |i|
   i.item_type "Bike"
   i.name "Mountainbike"
   i.description "Big beautifyl bike"
+  #i.association :owner, :factory => :person
   i.owner_id 1
   i.owner_type "Person"
   i.status Item::STATUS_NORMAL
