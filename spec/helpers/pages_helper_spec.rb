@@ -5,8 +5,7 @@ include PeopleHelper
 module PagesSpecHelper
 
   def setup_pages_helper_environment
-    @user = Factory(:user)
-    @person = Factory(:person, :user => @user)
+    @person = Factory(:person)
     @item = Factory(:item, :owner => @person)
     @activity_log = Factory(:activity_log, :event_type_id => 1, :secondary_id => @person.id, :action_object_id => @item.id)
   end
