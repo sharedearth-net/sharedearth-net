@@ -15,7 +15,7 @@
 /* Common */
 
 body {
-	font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+	font-family: "lucida grande", verdana, tahoma, arial, sans-serif;
 	margin: 0;
 }
 
@@ -26,13 +26,6 @@ a:visited {
 
 a:hover {
     text-decoration: underline;
-}
-
-#content a.item-link:link,
-#content a.item-link:visited,
-#sidebar .inner-content a.item-link:link,
-#sidebar .inner-content a.item-link:visited {
-	color: #333333;
 }
 
 #wrapper a.positive:link,
@@ -51,10 +44,12 @@ a:hover {
 	text-transform: capitalize !important;
 }
 
-a.loged-out:link,
+/* trust and reputation - when person is logged out */
+
+/* a.loged-out:link,
 a.loged-out:visited {
 	color: #858F7C;
-}
+}*/
 
 a.normal:link,
 a.normal:visited {
@@ -526,10 +521,6 @@ a.normal:visited {
 						text-transform: lowercase;
 					}
 
-						.items-list ul li li a:link,
-						.items-list ul li li a:visited {
-							color: #858f7c;
-						}
 
 					ul.action-list {
 						clear: both;
@@ -541,14 +532,8 @@ a.normal:visited {
 						float: left;
 						margin-right: 17px;
 						font-size: 11px;
-						color: #62775a;
 					}
 
-						ul.action-list li a:link,
-						ul.action-list li a:visited {
-							color: #62775a;
-							font-weight: normal;
-						}
 
 						#content .items-list ul li div p {
 							clear: both;
@@ -756,7 +741,6 @@ a.normal:visited {
 		}
 	
 		#profile-page #sidebar .trust-reputation-box h2 {
-			font-size: 14px;
 			padding-left: 0;
 			float: left;
 			width: 40%;
@@ -767,16 +751,7 @@ a.normal:visited {
 			text-align: right;
 			font-size: 14px;
 		}
-		
-		.trust-reputation-box h2.rhs-link a:link,
-		.trust-reputation-box h2.rhs-link a:visited {
-			color: #127e0e;
-		}
-		
-		.trust-reputation-box h2.rhs-link a:hover {
-
-		}
-		
+				
 		.trust-reputation-box h3 {
 			font-size: 10px;
 			padding-left: 0;
@@ -843,18 +818,11 @@ a.normal:visited {
 					margin-right: 7px;
 				}
 				
-				.trust-reputation-box ul.action-list li a:link,
-				.trust-reputation-box ul.action-list li a:visited {
-					color: #62775A;
-				    font-weight: normal;
-				}
-				
 				.trust-reputation-box a.giftactions:link,
 				.trust-reputation-box a.giftactions:visited {
 					background: url('../images/ic-giftactions.png') no-repeat top left;
 				    padding: 4px 0 0 21px;
 					margin: 0 0 0 2px;
-					color: #62775a;
 					font-weight: normal;
 				}
 
@@ -862,7 +830,6 @@ a.normal:visited {
 				.trust-reputation-box a.people-helped:visited {
 					background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
 					padding: 2px 0 0 23px;
-					color: #62775a;
 					font-weight: normal;
 				}
 
@@ -870,7 +837,6 @@ a.normal:visited {
 				.trust-reputation-box a.feedback-rating:visited {
 					background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
 					padding: 6px 0 3px 22px;
-					color: #62775a;
 					font-weight: normal;
 				}
 				
@@ -884,14 +850,7 @@ a.normal:visited {
 					float: left;
 					margin-right: 17px;
 					font-size: 11px;
-					color: #62775a;
 				}
-
-					ul.action-list li a:link,
-					ul.action-list li a:visited {
-						color: #62775a;
-						font-weight: normal;
-					}
 
 
 						
@@ -1050,16 +1009,11 @@ a.normal:visited {
 			}
 
 				#completed-request-page .trust-reputation-box h2 {
-					font-size: 14px;
-					color: #127e0e;
 					padding-left: 13px;
 					width: 100%;
 				}
 
 				#completed-request-page .trust-reputation-box h3 {
-					color: #315859;
-				    font-size: 11px;
-				    font-weight: bold;
 				    margin-top: 5px;
 				    padding-left: 13px;
 				}
@@ -1542,26 +1496,178 @@ a.normal:visited {
 		.flash-notice {
 			background: #333;
 		}
+	
+	
 		
 /*............Font Styles............*/	
 
-#content h2 {
-	font-size: 12px;
-	color: #127e0e;
-}
+	
+	/* Section Headings shown above content (e.g. on the dashboard, "Recent Activity" above the posts on the left, and "News Feed" above the posts on the right...) */
 
+
+#content h2,
 #sidebar h2 {
-	font-size: 12px;
-	color: #127e0e;
+	font-size: 12px; 
+	color: #315859;
 }
+	
+	
+	/* Event sentences in Requests\Actions and Recent Activity on the dashboard */
+	
+	#dashboard-page p {
+		font-size: 12px; 
+		color: #333;
+	}
+	
+		#dashboard-page p a:link,
+		#dashboard-page p a:visited {
+			color: #333;
+		}
+	
+	
+		/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
+	
+		#dashboard-page p a.trusted:link,
+		#dashboard-page p a.trusted:visited {
+			color: #127e0e;
+		}
+	
+	
+	/* Event sentences in News Feed (on dashboard) and Latest Activity (on profile pages) */
+
+	#sidebar p {
+		color: #62775a;
+		font-size: 12px;
+	}
+
+		#sidebar p a:link,
+		#sidebar p a:visited {
+			color: #62775a;
+		}
 
 
- /* content sentences */
+		/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
 
-	.content-box h3 {
+		#sidebar p a.trusted:link,
+		#sidebar p a.trusted:visited {
+			color: #127e0e;
+		}
+		
+		
+	/* Time since (e.g. 43 minutes ago) under Event Sentences (on dashboard and profile pages) */
+
+	.action li,
+	ul.action-list li {
+		color: #858f7c;
+		font-size: 11px;
+	}
+	
+	
+	/* Action shortcuts (e.g. 'accept', 'reject') under Event Sentences (on dashboard and profile pages), and under an item listing */
+
+	.action-list a:link,
+	.action-list a:visited,
+	.action a:link,
+	.action a:visited {
+		color: #5a776f;
+		font-size: 11px;
+	}
+	
+	
+	/* Main action shortcuts shown in near headers (e.g. 'establish trust', 'edit profile' etc) */
+
+	h2 span a:link,
+	h2 span a:visited,
+	#sidebar h2.rhs-link a:link,
+	#sidebar h2.rhs-link a:visited {
+		color: #127e0e;
+		font-size: 12px;
+	}
+	
+	
+	/* Headings on pages when a person name (e.g. Dan Gooden) or item (e.g. 26 Speed Mountain Bike) or Action\Request sentences: */
+
+	#request-page #content h2,
+	#profile-page #content h2,
+	#request-page #content h2 a:link,
+	#request-page #content h2 a:visited {
+		color: #333;
 		font-size: 16px;
-		line-height: 18px;
-		margin: 0 0 8px 10px;
+	}
+
+		/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
+
+		#request-page #content h2.trusted,
+		#profile-page #content h2.trusted,
+		#request-page #content .no-bg h2.trusted a:link,
+		#request-page #content .no-bg h2.trusted a:visited {
+			color: #127e0e;
+		}
+			
+			
+	/* Headings on page when a community name, or search page (e.g. "Items in Sydney") */ 
+
+	#search-page #content h2 {
+		color: #127e0e;
+		font-size: 16px;
+	}
+	
+	
+	/* Name on top of T&R box */
+
+	#sidebar .trust-reputation-box h2,
+	#sidebar-left .trust-reputation-box h2,
+	.trust-reputation-box h2 a:link,
+	.trust-reputation-box h2 a:visited {
+		color: #62775a;
+		font-size: 14px;
+	}
+
+
+		/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
+		
+		
+		#sidebar .trust-reputation-box h2.trusted,
+		#sidebar-left .trust-reputation-box h2.trusted,
+		.trust-reputation-box h2.trusted a:link,
+		.trust-reputation-box h2.trusted a:visited {
+			color: #127e0e;
+		}
+		
+		
+	/* Reputation & Trust Headings for T&R box */
+
+	.trust-reputation-box h3 {
+		font-family: verdana, tahoma, arial, sans-serif;
+		color: #315859;
+		font-size: 10px;
+		font-weight: bold;
+	}
+	
+	/* Reputation & Trust metrics: 11 #62775a*/
+
+	#sidebar .trust-reputation-box ul.action-list li,
+	#sidebar .trust-reputation-box ul li p,
+	.trust-reputation-box ul.action-list li a:link,
+	.trust-reputation-box ul.action-list li a:visited {
+	    color: #62775a;
+	    font-size: 11px;
+	}
+	
+	
+	/* Secondary details (e.g. location info "Sydney Australia"): 11  */
+
+	p.status-holder-profile span {
+		font-size: 11px;
+		color: #62775a;
+	}
+	
+	
+	/* Descriptive information (Bio for person, item description for items, about for villages\communities):  */
+	
+	#content p.description {
+		font-size: 11px;
+		color: #858f7c;
 	}
 
 /* Section Headings shown above content "Recent Activity" and "News Feed" - dashboard, "Latest Activity"  - profile pages, "From your trusted network" - search page */ 
@@ -1579,170 +1685,7 @@ h2.default-title {
 	color: #127E0E;
 }
 
-/* Event sentences in Requests\Actions and Recent Activity on the dashboard */
 
-#dashboard-page p {
-	color: #333;
-	font-size: 12px;
-}
-
-	#dashboard-page p a:link,
-	#dashboard-page p a:visited {
-		color: #333;
-	}
-	
-	/* class 'trusted' should be added dynamicaly if the name of person is in trusted network*/
-	
-	#dashboard-page p a.trusted:link,
-	#dashboard-page p a.trusted:visited {
-		color: #127e0e;
-	}
-
-
-/* Event sentences in News Feed (on dashboard) and Latest Activity (on profile pages) */
-
-#dashboard-page #sidebar p,
-#profile-page #sidebar .inner-content p,
-#request-page #sidebar .inner-content p {
-	color: #62775a;
-	font-size: 12px;
-}
-
-
-	#dashboard-page #sidebar p a:link,
-	#dashboard-page #sidebar p a:visited,
-	#profile-page #sidebar .inner-content p a:link,
-	#profile-page #sidebar .inner-content p a:visited,
-	#request-page #sidebar .inner-content p a:link,
-	#request-page #sidebar .inner-content p a:visited {
-		color: #62775a;
-	}
-	
-	
-	/* class 'trusted' should be added dynamicaly if the name of person is in trusted network*/
-	
-	#dashboard-page #sidebar p a.trusted:link,
-	#dashboard-page #sidebar p a.trusted:visited,
-	#profile-page #sidebar .inner-content p a.trusted:link,
-	#profile-page #sidebar .inner-content p a.trusted:visited {
-		color: #127e0e;
-	}
-	
-
-/* Time since (e.g. 43 minutes ago) under Event Sentences (on dashboard and profile pages) */
-
-
-#dashboard-page #content .action li,
-#dashboard-page #sidebar .action li,
-#profile-page #sidebar .action li,
-#profile-page #content ul.action-list li,
-#request-page #sidebar .action li {
-	color: #858f7c;
-	font-size: 11px;
-}
-
-
-
-/* Action shortcuts (e.g. 'accept', 'reject') under Event Sentences (on dashboard and profile pages), and under an item listing */
-
-
-#search-page .action-list a:link,
-#search-page .action-list a:visited,
-#dashboard-page .action a:link,
-#dashboard-page .action a:visited,
-#profile-page #content ul.action-list li a:link,
-#profile-page #content ul.action-list li a:visited,
-#profile-page .action a:link,
-#profile-page .action a:visited,
-#request-page .action a:link, 
-#request-page .action a:visited {
-	color: #5a776f;
-	font-size: 11px;
-}
-
-/* Main action shortcuts shown in near headers (e.g. 'establish trust', 'edit profile' etc) */
-	
-#profile-page #content h2 span a:link,
-#profile-page #profile-page #content h2 span a:visited,
-#profile-page #sidebar h2.rhs-link  a:link,
-#profile-page #sidebar h2.rhs-link  a:visited {
-	color: #127e0e;
-	font-size: 12px;
-}
-
-
-/* Headings on pages when a person name (e.g. Dan Gooden) or item (e.g. 26 Speed Mountain Bike) or Action\Request sentences: */
-
-#request-page #content h2,
-#profile-page #content h2,
-#request-page #content .no-bg h2 a:link,
-#request-page #content .no-bg h2 a:visited {
-	color: #333;
-	font-size: 16px;
-}
-
-	/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
-
-	#request-page #content h2.trusted,
-	#profile-page #content h2.trusted,
-	#request-page #content .no-bg h2.trusted a:link,
-	#request-page #content .no-bg h2.trusted a:visited {
-		color: #127e0e;
-	}
-
-
-
-/* Headings on page when a community name, or search page (e.g. "Items in Sydney") */ 
-
-#search-page #content h2 {
-	color: #127e0e;
-	font-size: 16px;
-}
-
-
-
-/* Name on top of T&R box */
-
-
-#sidebar .trust-box-holder .trust-reputation-box h2,
-#wrapper #completed-request-page #sidebar-left .trust-reputation-box h2,
-#wrapper #completed-request-page #sidebar .trust-reputation-box h2  {
-	color: #62775a;
-	font-size: 14px;
-}
-
-	/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
-	
-	#wrapper #completed-request-page #sidebar-left .trust-reputation-box h2.trusted a:link,
-	#wrapper #completed-request-page #sidebar-left .trust-reputation-box h2.trusted a:visited,
-	#wrapper #completed-request-page #sidebar .trust-reputation-box h2.trusted a:link,
-	#wrapper #completed-request-page #sidebar .trust-reputation-box h2.trusted a:visited,
-	#sidebar .trust-box-holder .trust-reputation-box h2.trusted a:link,
-	#sidebar .trust-box-holder .trust-reputation-box h2.trusted a:visited {
-		color: #127e0e;
-	}
-
-
-/* Reputation & Trust Headings for T&R box */
-
-
-#sidebar .trust-box-holder .trust-reputation-box h3,
-#wrapper #completed-request-page #sidebar-left .trust-reputation-box h3,
-#wrapper #completed-request-page #sidebar .trust-reputation-box h3 {
-		font-family: verdana, tahoma, arial, sans-serif;
-		color: #315859;
-		font-size: 10px;
-		font-weight: bold;
-	}
-
-
-/* Reputation & Trust metrics: 11 #62775a*/
-
-#sidebar .trust-reputation-box ul.action-list li,
-#sidebar .trust-reputation-box ul li p {
-    color: #62775A;
-    font-size: 11px;
-	}
 	
 	
 /* this is for the villages */	
