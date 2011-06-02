@@ -6,7 +6,7 @@ gem 'rails', '3.0.5'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'omniauth'
+gem 'omniauth', "~> 0.2.0"
 gem "aws-s3"
 gem "paperclip", "~> 2.3"
 
@@ -54,6 +54,8 @@ group :development, :test do
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'pickle'
+  gem 'ruby-debug'
 end
 gem "simplecov", :require => false, :group => :test
 
