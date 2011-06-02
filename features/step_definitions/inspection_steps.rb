@@ -39,7 +39,9 @@ Then /^I (should|should not) see the (word|words|long date|long dates|short date
   error_words = []
   words.each do |word|
     begin
-      browser.body.gsub(/\s+/, ' ').should match(/#{word}/)
+      steps %Q{
+      Then I should see "#{word}"
+      }
     rescue Exception => e
       error_words << word
     end
