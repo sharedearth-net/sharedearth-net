@@ -10,12 +10,18 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       root_path
-
+    when /the new item page/
+      new_item_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    
+    #For rest of the controllers index page that are not defined
+    #Example: units page
+    when /([^\"]*) page/
+      "#{$1}"
 
     else
       begin
