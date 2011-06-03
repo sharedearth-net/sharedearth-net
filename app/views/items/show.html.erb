@@ -1,54 +1,59 @@
-<div id="content">
+<div id="items-page">
+	<div id="content">
 		
-	<div class="content-box-holder no-bg">
-		<ul>
-			<li class="content-box clearfix">
-				<%= image_tag @item.photo.url(:medium), :class => "thumb" %>
-				<div class="inner-content">
-					<h2>Item: <%= @item.name %></h2>
+		<div class="content-box-holder no-bg">
+			<ul>
+				<li class="content-box clearfix">
+					<%= image_tag @item.photo.url(:medium), :class => "thumb" %>
+					<div class="inner-content">
+						<h2>Item: <%= @item.name %></h2>
 					
-					<p class="status-holder-profile">
-						<span>
-							Type:
-							<%= @item.item_type %>
-						</span>
-						<span>
-							Name:
-							<%= @item.name %>
-						</span>
-						<span>
-							Description:
-							<%= @item.description %>
-						</span>
-					</p>
-				</div>
-			</li>
+						<p class="descriptione">
+							<span>
+								Type:
+								<%= @item.item_type %>
+							</span>
+							<span>
+								Name:
+								<%= @item.name %>
+							</span>
+							<span>
+								Description:
+								<%= @item.description %>
+							</span>
+						</p>
+					</div>
+				</li>
 			
-			<li class="content-box">
-				<%= owner_only(@item) do %>
-					<ul class="action-buttons-list">
-						<% if @item.normal? %>
-							<li><%= link_to 'Edit', edit_item_path(@item) %></li>
-							<li><%= link_to 'Mark as lost', mark_as_lost_item_path(@item), :method => :put %></li>
-							<li><%= link_to 'Mark as damaged', mark_as_damaged_item_path(@item), :method => :put %></li>
-						<% elsif @item.lost? %>
-							<li><%= link_to 'Mark as found', mark_as_normal_item_path(@item), :method => :put %></li>
-						<% elsif @item.damaged? %>
-							<li><%= link_to 'Mark as repaired', mark_as_normal_item_path(@item), :method => :put %></li>
-						<% end %>
-				    <% if @item.available? -%>
-  				    <li><%= link_to 'Delete', @item, :confirm => 'Are you sure?', :method => :delete %></li>
-				    <% end -%>  						
-					</ul>
-				<% end %>
-			</li>
-		</ul>
-	</div>
+				<li class="content-box">
+					<%= owner_only(@item) do %>
+						<ul class="action-buttons-list">
+							<% if @item.normal? %>
+								<li><%= link_to 'Edit', edit_item_path(@item) %></li>
+								<li><%= link_to 'Mark as lost', mark_as_lost_item_path(@item), :method => :put %></li>
+								<li><%= link_to 'Mark as damaged', mark_as_damaged_item_path(@item), :method => :put %></li>
+							<% elsif @item.lost? %>
+								<li><%= link_to 'Mark as found', mark_as_normal_item_path(@item), :method => :put %></li>
+							<% elsif @item.damaged? %>
+								<li><%= link_to 'Mark as repaired', mark_as_normal_item_path(@item), :method => :put %></li>
+							<% end %>
+					    <% if @item.available? -%>
+	  				    <li><%= link_to 'Delete', @item, :confirm => 'Are you sure?', :method => :delete %></li>
+					    <% end -%>  						
+						</ul>
+					<% end %>
+				</li>
+			</ul>
+		</div>
 
-</div><!-- /content -->
+	</div><!-- /content -->
 
-<div id="sidebar">
-	<%#= render :partial => "shared/trust_profile", :locals => { :person => @item.owner, :page => 'item' } %>
-		
-	<%= render :partial => "shared/latest_activity_item", :locals => { :item =>  @item } %>
-</div><!-- sidebar -->
+	<div id="sidebar">
+		<%#= render :partial => "shared/trust_profile", :locals => { :person => @item.owner, :page => 'item' } %>
+		<%#= render :partial => "shared/latest_activity_item", :locals => { :item =>  @item } %>
+	</div><!-- /sidebar -->
+	
+</div><!-- /items-page -->
+
+
+
