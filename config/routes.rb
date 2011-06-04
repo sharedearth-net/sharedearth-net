@@ -31,6 +31,8 @@ Sharedearthapp::Application.routes.draw do
   end
   
   match "/auth/:provider/callback" => "sessions#create"
+  #Removed for new omniauth version where this messes up the routes, enable when running cucumber
+  #match "/auth/:provider" => "sessions#create", :as => :signin # this is dummy route, since this will be handled by OmniAuth
   match "/signout" => "sessions#destroy", :as => :signout
 
   match "/dashboard", :to => "pages#dashboard"
