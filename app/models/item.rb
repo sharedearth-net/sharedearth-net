@@ -55,7 +55,8 @@ class Item < ActiveRecord::Base
   validates_presence_of :item_type, :name, :owner_id, :owner_type, :status
   validates_inclusion_of :status, :in => STATUSES.keys, :message => " must be in #{STATUSES.values.join ', '}"
   
-  #after_create :create_entity_for_item
+  after_create :create_entity_for_item
+  after_create :add_to_resource_network
   
   # validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 1.megabyte
@@ -72,7 +73,11 @@ class Item < ActiveRecord::Base
   end
   
   def has_photo?
-    self.photo.nil?
+    !self.photo_file_name.nil?
+  end
+  
+  def add_to_resource_network
+    ResourceNetwork.create!(:entity_id => self.owner.id, :entity_type_id => 1, :resource_id => self.id, :resource_type_id => 2)
   end
 
   def self.search(search, person_id)
