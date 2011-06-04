@@ -18,7 +18,7 @@ module PagesHelper
     @second_person      = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_short_name.nil?
     @second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
 
-    case event_log.event_type.id
+    case event_log.event_type_id
     when 18
       sharing_sentence(event_log, person)
     when 19
