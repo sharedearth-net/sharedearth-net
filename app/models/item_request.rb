@@ -117,9 +117,11 @@ class ItemRequest < ActiveRecord::Base
   def complete!(person_initiator)
     @person_initiator = person_initiator.id
     self.item.available! 
+    self.update_reputation_for_parties_involved
     self.status = STATUS_COMPLETED
     save!
-    self.update_reputation_for_parties_involved
+    
+    
     self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
     create_sharing_event_log
   end
@@ -128,26 +130,24 @@ class ItemRequest < ActiveRecord::Base
       self.gifter.reputation_rating.increase_gift_actions_count
       self.gifter.reputation_rating.increase_total_actions_count
       self.requester.reputation_rating.increase_total_actions_count
-      self.gifter.reputation_rating.increase_distinct_people_count if !already_interacted?(self.gifter, self.requester)
+      self.gifter.reputation_rating.increase_distinct_people_count unless already_interacted?(self.gifter, self.requester) || canceled_requests_involving(self.gifter, self.requester)
   end
   
   #CHECK IF SOME COMPLETED REQUEST WITH OTHER PERSON EXISTS AND IF THERE IS INTERACTION WHEN REQUEST WAS ACCEPTED AND THEN CANCELED BY REQUESTER
-  # TODO: Make this method way better
   def already_interacted?(first_person, second_person)
-    completed = ItemRequest.find(:first, :conditions => ["gifter_id=? and gifter_type=? and requester_id=? and requester_type=? and status IN (?)", first_person.id, "Person", second_person.id, "Person", [STATUS_COMPLETED]])
-    if !completed.nil? 
-      return true
-    end
-    canceled = ItemRequest.find(:all, :conditions => ["gifter_id=? and gifter_type=? and requester_id=? and requester_type=? and status IN (?)", first_person.id, "Person", second_person.id, "Person", [STATUS_ACCEPTED]])
+    completed = ItemRequest.find(:first, :conditions => ["gifter_id=? and gifter_type=? and requester_id=? and requester_type=? and status IN (?)", 
+                                                          first_person.id, "Person", second_person.id, "Person", [STATUS_COMPLETED]])
+    completed.nil? ? false : true
+  end
+  
+  def canceled_requests_involving(first_person, second_person)
+    canceled = ItemRequest.find(:all, :conditions => ["gifter_id=? and gifter_type=? and requester_id=? and requester_type=? and status IN (?)", 
+                                                       first_person.id, "Person", second_person.id, "Person", [STATUS_ACCEPTED]])
     canceled.each do |request|
-    ac =    ActivityLog.find(:first,
-                     :conditions => ["primary_id =? and primary_type=? and secondary_id=? and secondary_type=? and action_object_id=? and event_type_id IN (?)", 
-                                      second_person.id, "Person", first_person.id, "Person", request.item_id, EventType.activity_canceled])
-      if !ac.nil?
-        return true
-      end
+      activity_log = ActivityLog.find(:first, :conditions => ["primary_id =? and primary_type=? and secondary_id=? and secondary_type=? and action_object_id=? and event_type_id IN (?)", 
+                                                              second_person.id, "Person", first_person.id, "Person", request.item_id, EventType.activity_canceled])
+      return true unless activity_log.nil?
     end
-    
     false
   end
 
