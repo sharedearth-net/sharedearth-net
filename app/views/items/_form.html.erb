@@ -25,11 +25,11 @@
 		</li>
 		<li>
 		    <% if @item.purpose_update_available? || @item.new_record? %>
-    		  <%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share? %> <%= f.label :Share %>
-    		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift? %> <%= f.label :Gift %>
+    		  <%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :id => :share %> <%= f.label :Share %>
+    		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift %> <%= f.label :Gift %>
     		<% else %>
-	    		<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled" %> <%= f.label :Share %>
-    		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled"  %> <%= f.label :Gift %>
+	    		<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled", :id => :share  %> <%= f.label :Share %>
+    		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled", :id => :gift   %> <%= f.label :Gift %>
     		<% end %>
 		</li>
 
