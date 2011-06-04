@@ -1,6 +1,6 @@
 Factory.define :user do |u|
   u.provider "Facebook"
-  u.sequence(:uid) { |n| rand(6) + n }
+  u.sequence(:uid) { |n|  "#{n}" }
   u.nickname "Shary"
 end
 
@@ -36,6 +36,7 @@ Factory.define :item do |i|
 end
 
 Factory.define :item_request do |i|
+  i.association :item, :factory => :item
   i.requester_type "Person"
   #i.requester 
   i.gifter_type "Person"
@@ -43,6 +44,17 @@ Factory.define :item_request do |i|
   i.description "Would you like to borrow me something?"
   i.status ItemRequest::STATUS_REQUESTED
 end
+
+Factory.define :feedback do |f|
+  f.association :item_request, :factory => :item_request
+  f.person_id 1
+  f.feedback Feedback::FEEDBACK_POSITIVE
+end
+
+Factory.define :people_network do |p|
+  p.entity_type_id 7
+end
+
 
 Factory.define :activity_log do |i|
   i.event_code 1
