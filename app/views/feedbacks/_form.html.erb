@@ -51,13 +51,13 @@
 	  <%= render :partial => "shared/error_messages", :locals => { :model => @feedback } %>
 		<ul class="feedback-buttons clearfix">
 			<li class="positive">
-				<%= f.radio_button :feedback, Feedback::FEEDBACK_POSITIVE, :onclick => "show_feedback(false)" %> <%= f.label :Positive %>
+				<%= f.radio_button :feedback, Feedback::FEEDBACK_POSITIVE, :onclick => "show_feedback(false)", :id => :positive %> <%= f.label :Positive %>
 			</li>
 			<li>
-				<%= f.radio_button :feedback, Feedback::FEEDBACK_NEUTRAL, :onclick => "show_feedback(true)" %> <%= f.label :Neutral %>
+				<%= f.radio_button :feedback, Feedback::FEEDBACK_NEUTRAL, :onclick => "show_feedback(true)", :id => :neutral %> <%= f.label :Neutral %>
 			</li>
 			<li class="negative">
-				<%= f.radio_button :feedback, Feedback::FEEDBACK_NEGATIVE, :onclick => "show_feedback(true)" %> <%= f.label :Negative %>
+				<%= f.radio_button :feedback, Feedback::FEEDBACK_NEGATIVE, :onclick => "show_feedback(true)", :id => :negative %> <%= f.label :Negative %>
 			</li>
 		</ul>
 		
@@ -66,7 +66,7 @@
 			<div class="feedback-message">
 				<%= f.label :feedback_note, "What happened?" %>
 				<div id="feedback_note">
-					<%= f.text_area :feedback_note %>
+					<%= f.text_area :feedback_note, :id => :note %>
 				</div>
 			</div>
 			<%= image_tag("curve-bottom-feedback-message.png", :class => "feedback-box-curves", :alt => "")  %>
