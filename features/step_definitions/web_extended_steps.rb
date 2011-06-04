@@ -40,6 +40,18 @@ Then /^(?:|I )should see name "([^"]*)" on the row containing "([^"]*)"$/ do |na
   end
 end
 
+Then /^I should see "([^"]*)" in css class "([^"]*)"$/ do |word, css|
+  within ".#{css}" do |scope|
+	  Then %{I should see "#{word}"}
+  end
+end
+
+Then /^I should not see "([^"]*)" in css class "([^"]*)"$/ do |word, css|
+  within ".#{css}" do |scope|
+	  Then %{I should not see "#{word}"}
+  end
+end
+
 #Then I should see clients table
 #  | Zeus   | in care  |
 #  | Atina  | out of care  |
@@ -55,3 +67,13 @@ end
 Then /^show me the page to your scenario$/ do
   current_path = URI.parse(current_url).select(:path, :query).compact.join('?')
 end
+
+Then /^I should see "(.*)" in "([^"]*)"$/ do |word,css|
+  within(:css, '#{css}') { Then %{I should see "#{word}""} }
+end
+
+Then /^I should not see "(.*)" in "([^"]*)"$/ do |word,css|
+  within(:css, '#{css}') { Then %{I should not see "#{word}""} }
+end
+
+
