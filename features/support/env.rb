@@ -3,7 +3,9 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file 
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
-
+require 'rubygems'
+require 'spork'
+Spork.prefork do
 require 'cucumber/rails'
 
 require 'capybara'
@@ -49,3 +51,8 @@ end
 #     DatabaseCleaner.strategy = :transaction
 #   end
 #
+end
+Spork.each_run do
+  # This code will be run each time you run your specs.
+  #Load all factories and report if there is duplicate definition
+end
