@@ -90,8 +90,8 @@
 
 <script language="javascript">
 checked_negative = false
-checked_negative = document.getElementById('feedback_feedback_20').checked || document.getElementById('feedback_feedback_30').checked 
-checked_positive = document.getElementById('feedback_feedback_10').checked
+checked_negative = document.getElementById('negative').checked || document.getElementById('neutral').checked 
+checked_positive = document.getElementById('positive').checked
 document.getElementById("hide").style.display = checked_negative ? "block" : "none";
 
 function show_feedback(note)
