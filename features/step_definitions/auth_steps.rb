@@ -13,11 +13,11 @@ Given /^I am signed in with provider "([^"]*)"$/ do |provider|
 end
 
 Given /^the user is logged in$/ do
-  steps %Q{
+    steps %Q{
     Given I am on the home page
-    Then I should see "Connect"
-    And I follow "Connect"
-    Then I should see "News"
+    Then I follow "Connect"
+    Then I should see "disconnect"
+    Then I should see "Signed in"
     }
 end
 
