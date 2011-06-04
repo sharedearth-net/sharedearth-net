@@ -5,10 +5,12 @@
 <div class="action clearfix">
 						<ul>
 							<li><%= time_ago_in_words event_log.created_at %> ago</li>
+							<% unless event_log.event_type.nil? %>
 							<% if event_log.event_type.new_item_request_requester? || event_log.event_type.new_item_request_gifter? %>
 	              <li>
-		              <%= link_to "view request", request_path(event_log.related) %>
+		              <%= link_to "view request", request_path(event_log.related) unless event_log.nil?%>
 	              </li>
+              <% end %>
               <% end %>
 							<li><a href="#">offer</a></li>
 							<li><a href="#">comments(0)</a></li>
