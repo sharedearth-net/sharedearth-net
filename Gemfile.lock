@@ -231,7 +231,7 @@ DEPENDENCIES
   factory_girl_rails
   fb_graph
   ffaker
-  omniauth (= 0.2.0)
+  omniauth (~> 0.2.0)
   paperclip (~> 2.3)
   pickle
   possessive
