@@ -49,7 +49,7 @@
 	</div><!-- /content -->
 
 	<div id="sidebar">
-		<%= render :partial => "shared/trust_profile", :locals => { :person => @item.owner, :page => 'item' } %>
+		<%= render :partial => "shared/trust_profile", :locals => { :person => @item.owner, :name => true } %>
 		<%= render :partial => "shared/latest_activity_item", :locals => { :item =>  @item } %>
 	</div><!-- /sidebar -->
 	
