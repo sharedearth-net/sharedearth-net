@@ -33,3 +33,10 @@ Sharedearthapp::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 end
+
+#Fix for Capybara losing session with omniauth. Rake uses example.org but Capybara uses www.example.com and it breaks session
+module Rack
+  module Test
+    DEFAULT_HOST = "www.example.com"
+  end
+end
