@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
       else
         @extended.push(item)
       end
-    end
+    end unless @item.nil?
 
     respond_to do |format|
       format.html # index.html.erb
