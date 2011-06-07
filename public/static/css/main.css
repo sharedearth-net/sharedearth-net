@@ -68,7 +68,7 @@ a:hover {
 	left: 50%;
 	margin-top: -348px;/* half elements height*/
 	margin-left: -512px;/* half elements width*/
-	height: 558px;
+	height: 688px;
 	overflow: auto;/* allow content to scroll inside element */
 	text-align: left;
 }
@@ -160,7 +160,7 @@ h1 {
 		#footer {
 			clear: both;
 			text-align: right;
-			padding-top: 75px;
+			padding-top: 205px;
 		}
 		
 			#footer p {
