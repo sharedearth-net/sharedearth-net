@@ -119,7 +119,7 @@
 
 	<div id="sidebar">
 
-		<%= render :partial => "shared/trust_profile", :locals => { :person => @person, :page => 'item' } %>
+		<%= render :partial => "shared/trust_profile", :locals => { :person => @person, :name => false } %>
 
 		<%= render :partial => "shared/latest_activity_person", :locals => { :person => @person } %>
 	
