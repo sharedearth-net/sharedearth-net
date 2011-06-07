@@ -3,9 +3,8 @@
 	<div class="trust-reputation-box">
 		
 		<div class="clearfix">
-		<% if page != 'request' -%>
 		  <h2>
-			<%= link_to person.name, person_path(person), :class => "loged-out" %> 
+			<%= link_to person.name, person_path(person), :class => "loged-out" if name %> 
 		</h2>
 
 			<% if person != current_user.person %>
@@ -28,7 +27,6 @@
 				<% end %>
 			<% end %>
 		</h2>
-				<% end -%>
 		</div>
 		
 		<%= image_tag("devider-trust-profile.png", :class => "devider clearer", :alt => "")  %>
