@@ -7,7 +7,9 @@ module PagesSpecHelper
   def setup_pages_helper_environment
     @person = Factory(:person)
     @item = Factory(:item, :owner => @person)
-    @activity_log = Factory(:activity_log, :event_type_id => 1, :secondary_id => @person.id, :action_object_id => @item.id)
+    @other_person = Factory(:person, :name => "John")
+    @current_user = @other_person.user
+    @activity_log = Factory(:activity_log, :event_type_id => 1, :secondary_id => @person.id, :primary_id => @other_person.id, :action_object_id => @item.id)
   end
 
 end
@@ -99,7 +101,7 @@ describe PagesHelper, "When printing activity log sentances" do
   it "should generate sentace for REQUESTER COMPLETED GIFTER event type" do
     @activity_log.event_type_id = 10  
     html = recent_activity_sentence(@activity_log)
-    html.should == "#{@person_link} completed the action borrowing your #{@item_link}"
+    html.should == "#{@person_link} completed the action of borrowing your #{@item_link}"
   end
   
     it "should generate sentace for REQUESTER COMPLETED REQUESTER event type" do
@@ -117,7 +119,7 @@ describe PagesHelper, "When printing activity log sentances" do
   it "should generate sentace for GIFTER COMPLETED REQUESTER event type" do
     @activity_log.event_type_id = 13  
     html = recent_activity_sentence(@activity_log)
-    html.should == "#{@person_link} completed the action sharing their #{@item_link} with you "
+    html.should == "#{@person_link} completed the action of sharing their #{@item_link} with you "
   end
   
   it "should generate sentace for GIFTER CANCEL GIFTER event type" do
