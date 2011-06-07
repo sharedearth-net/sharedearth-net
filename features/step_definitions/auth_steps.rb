@@ -13,11 +13,7 @@ Given /^I am signed in with provider "([^"]*)"$/ do |provider|
 end
 
 Given /^the user is logged in$/ do
-    steps %Q{
-    Given I am on the home page
-    Then I follow "Connect"
-    Then I should see "disconnect"
-    Then I should see "Signed in"
-    }
+  omniauth_mock_facebook
+  visit "/auth/facebook"
 end
 
