@@ -1,6 +1,6 @@
 Factory.define :user do |u|
   u.provider "Facebook"
-  u.sequence(:uid) { |n|  "#{n}" }
+  u.sequence(:uid) { |n|  Time.now.to_s + "#{n}" }
   u.nickname "Shary"
 end
 
@@ -65,8 +65,8 @@ Factory.define :activity_log do |i|
   i.action_object_type_readable "Bike"
   i.secondary_type "Person"
   i.secondary_id 1
-  i.secondary_short_name "Maria"
-  i.secondary_full_name "Maria Bell"
+  i.secondary_short_name "Sharen"
+  i.secondary_full_name "Sharen Bell"
   i.related_id 1
   i.related_type "ItemRequest"
   i.event_type_id 1
