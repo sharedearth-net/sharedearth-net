@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
+gem 'rails', '3.0.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -17,6 +17,9 @@ gem "possessive"
 gem "fb_graph"
 
 gem "will_paginate", "~> 3.0.pre2"
+
+gem 'rake', '0.8.7'
+
 
 # didn't use rails3_acts_as_paranoid because it uses default_scope causing problems with, for example, item_request.item
 # https://github.com/goncalossilva/rails3_acts_as_paranoid
