@@ -6,13 +6,14 @@ Feature: Welcome page
   
 @omniauth_test
   Scenario: Load welcome page
-   Given the user is logged in
+   Given I am signed in with provider "Facebook"
+   Then I should see "disconnect"
    Then I follow "John"
-   Then I should see "Edit"
+   Then I should see "edit"
   
 
   Scenario: Sign in thru Facebook
-    Given I am on the home page
-    Then I should see "Connect"
-    And I follow "Connect"
-    Then I should see "News"
+    Given the user is logged in
+    Then I should see "disconnect"
+    Then I follow "John"
+    Then I should see "edit"
