@@ -84,7 +84,8 @@ class Item < ActiveRecord::Base
     if search.empty?
         nil
     else
-        items_sql = "select distinct resource_id from resource_networks where entity_id in (select entity_id from people_networks where person_id = #{person_id} and entity_type_id = 7)"     
+        person = Person.find_by_id(person_id)
+        items_sql = "select distinct resource_id from resource_networks where entity_id in (select entity_id from people_networks where person_id IN (#{person.searchable_core_of_friends}) and entity_type_id = 7)"     
         words = search.split(/[ ]/)
         item_type_like = words.map{|k| "item_type LIKE '%#{k}%' " }.join(" AND ")
         item_name_like = words.map{|k| "name LIKE '%#{k}%'" }.join(" AND ")
