@@ -40,6 +40,12 @@ class Person < ActiveRecord::Base
     self.people_networks.count
   end
   
+  def searchable_core_of_friends
+    ids = self.people_networks.map { |n| n.trusted_person_id }
+    ids.push( self.id)
+    ids = ids.map! { |k| "#{k}" }.join(",")
+  end
+  
   def extended_network_size
     people_ids = self.people_networks.map{|i| i["trusted_person_id"]}
     friends = Person.find(:all, :conditions => ["id IN (?)", people_ids])
