@@ -51,7 +51,7 @@ Feature: Items management page
     Then I should see "bike"
     When I fill in "search" with "bike"
     Then I press "Search" 
-    And I should see "Bike"
+    And I should see "bike"
     And I should see "Mountainbike"
     Then I should see "view item"
     And I should see "From your trusted network"
