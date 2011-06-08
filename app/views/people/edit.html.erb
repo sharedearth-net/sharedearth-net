@@ -1,38 +1,76 @@
-<div id="content">
+<div id="edit-profile-page">
+
+	<div id="content">
+
+		<div class="content-box-holder no-bg">
+			<ul>
+				<li class="content-box clearfix">
+				
+					<%= image_tag @person.avatar(:large), :class => "thumb" %>
+				
+					<div class="inner-content">
+						<h2>Edit profile</h2>
+						<%= form_for(@person, :html => { :multipart => true }) do |f| %>
+							<%= render :partial => "shared/error_messages", :locals => { :model => @person } %>
+
+						  <div class="field">
+							<ul class="form-holder">
+								<!--
+								<li>
+														    		<%= f.label :name %>
+																</li>-->
+								
+								<li>
+						    		<%= f.text_field :name %>
+								</li>
+							</ul>
+						  </div>
 		
-	<div class="content-box-holder no-bg">
-		<ul>
-			<li class="content-box clearfix">
-				<h2>Edit profile</h2>
+						<p class="status-holder-profile">
+							<span>
+								Sydney, Australia
+							</span>
+						</p>
+						<p class="description">
+							Previous experience working in IT (data 
+							warehousing and business intelligence), but I 
+							guess my heart lies with evolutionary activism 
+							in the cultural and social space.
+						</p>
+					
+						<div class="field">
+							<ul class="form-holder">
+								<li>
+									<div class="actions">
+										<ul class="action-buttons-list">
+											<li>
+												<%= f.submit 'Save' %>
+											</li>
+											<li>
+												<%= link_to 'cancel', @person %>
+											</li>	
+										</ul>
+									</div>
+								</li>
+							</ul>
+						  </div>
 
-				<%= form_for(@person, :html => { :multipart => true }) do |f| %>
-					<%= render :partial => "shared/error_messages", :locals => { :model => @person } %>
+						<% end %>
+					
+					</div><!--	/inner-content	-->
+				</li>
+			</ul>
 
-				  <div class="field">
-					<ul class="form-holder">
-						<li>
-				    		<%= f.label :name %>
-						</li>
-						<li>
-				    		<%= f.text_field :name %>
-						</li>
-						<li>
-							<div class="actions">
-								<ul class="action-buttons-list">
-									<li>
-										<%= f.submit %>
-									</li>
-									<li>
-										<%= link_to 'cancel', @person %>
-									</li>	
-								</ul>
-							</div>
-						</li>
-					</ul>
-				  </div>
-				  
-				<% end %>
-			</li>
-		</ul>
-	</div><!-- /content-box-holder  -->
-</div>
+		</div><!-- /content-box-holder  -->
+
+	</div><!-- /content -->
+	
+	<div id="sidebar">
+
+		<%= render :partial => "shared/trust_profile", :locals => { :person => @person, :name => false } %>
+
+		<%= render :partial => "shared/latest_activity_person", :locals => { :person => @person } %>
+	
+	</div><!-- sidebar -->
+	
+</div><!-- /edit-profile-page -->
