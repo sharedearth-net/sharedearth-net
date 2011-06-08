@@ -61,13 +61,13 @@ a:hover {
 /* container */
 
 #container {
-	width: 960px;
+	width: 1002px;
 	margin: 0 auto;
 	position:absolute;
 	top: 50%;
 	left: 50%;
 	margin-top: -348px;/* half elements height*/
-	margin-left: -512px;/* half elements width*/
+	margin-left: -502px;/* half elements width*/
 	height: 688px;
 	overflow: auto;/* allow content to scroll inside element */
 	text-align: left;

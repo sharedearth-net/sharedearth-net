@@ -988,7 +988,7 @@ a.normal:visited {
 	}				
 
 		#completed-request-page #sidebar {
-			width: 195px;
+			width: 196px;
 			float: right;
 			margin: 0;
 		}
@@ -1083,7 +1083,7 @@ a.normal:visited {
 		/* completed request - sidebar left */
 
 		#sidebar-left {
-			width: 195px;
+			width: 196px;
 			float: left;
 			margin-left: 0;
 		}
@@ -1092,7 +1092,7 @@ a.normal:visited {
 		/* completed request - content */
 
 		#completed-request-page #content {
-			width: 612px;
+			width: 610px;
 			float: left;
 		}
 
@@ -1314,6 +1314,7 @@ a.normal:visited {
 		margin: 40px auto 20px auto;
 		height: 225px;
 		text-align: center;
+		width: 170px;
 	}
 
 			.feedback-holder img {
@@ -1323,12 +1324,11 @@ a.normal:visited {
 
 			.feedback {
 				position: absolute;
-				margin: 0 auto;
 				height: 90px;
 				width: 170px;
 				background: #c7cac1;
 				top: 10px;
-				left: 12px;
+				left: 0px;
 				z-index: -10;
 			}
 

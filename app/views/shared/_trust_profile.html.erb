@@ -3,9 +3,9 @@
 	<div class="trust-reputation-box">
 		
 		<div class="clearfix">
-		  <h2>
-			<%= link_to person.name, person_path(person), :class => "loged-out" if name %> 
-		</h2>
+			<h2>
+				<%= link_to person.name, person_path(person), :class => "loged-out" if name %> 
+			</h2>
 
 			<% if person != current_user.person %>
 				<% if person.requested_trusted_relationship?(current_user.person) %>
