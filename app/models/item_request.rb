@@ -120,8 +120,6 @@ class ItemRequest < ActiveRecord::Base
     self.update_reputation_for_parties_involved
     self.status = STATUS_COMPLETED
     save!
-    
-    
     self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
     create_sharing_event_log
   end
