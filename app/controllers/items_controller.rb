@@ -18,10 +18,10 @@ class ItemsController < ApplicationController
       else
         @extended.push(item)
       end
-    end unless @item.nil?
+    end unless @items.nil?
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :action => 'search' if params[:search] }
       format.xml  { render :xml => @items }
     end
   end
