@@ -396,6 +396,10 @@ class EventType < ActiveRecord::Base
     [2,3,4,6,8,9,27,29]
   end
   
+    def self.current_actions_underway_items
+    [2,4,8,27]
+  end
+  
   def completed?
     self.item_request_completed_gifter? || self.item_request_completed_requester? || self.item_gifter_completed_gifter? || self.item_gifter_collected_requester?
   end
