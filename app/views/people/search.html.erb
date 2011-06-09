@@ -1,0 +1,25 @@
+<div id="search-page" class="clearfix">
+
+  <%= "Sorry, nothing matches your search criteria" if @people.empty?%>
+
+	<%= render :partial => "shared/search_sidebar" %>
+	
+	<div id="content">
+    <h1>Listing persons</h1>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th></th>
+      </tr>
+
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= link_to person.name, person_path(person) %></td>
+      </tr>
+    <% end if !@people.nil?%>
+    </table>
+
+    <br />
+  </div>
+</div>
