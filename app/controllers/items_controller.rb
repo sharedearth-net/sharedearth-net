@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
   def index
     if params[:search]
       @items = Item.search(params[:search], current_user.person.id)
+      redirect_to people_path(:search => params[:search]) and return if @items.empty?
     else
       @items = current_user.person.items.without_deleted
     end
