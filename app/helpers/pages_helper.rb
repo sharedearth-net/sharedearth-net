@@ -294,11 +294,12 @@ module PagesHelper
         
       possesive = item.is_owner?(@current_user.person) ? "your" : "their"
 
-      person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"  unless activity_log.secondary.nil?
-      person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"unless activity_log.secondary_short_name.nil?
-      person_full         = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
+    
+    person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"  unless activity_log.secondary.nil?
+    person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"unless activity_log.secondary_short_name.nil?
+    person_full         = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
     
     sentence = ""
     case activity_log.event_type_id
