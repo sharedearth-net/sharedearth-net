@@ -120,7 +120,7 @@ class Person < ActiveRecord::Base
 		event_log_ids.each do |e|
 		  conditions = { :type_id =>  EventDisplay::DASHBOARD_FEED, 
                    :person_id => self_id,
-                   :event_id => e.event_log_id }
+                   :event_log_id => e.event_log_id }
       EventDisplay.find(:first, :conditions => conditions) || EventDisplay.create(conditions) 
 		end
   end
@@ -128,9 +128,9 @@ class Person < ActiveRecord::Base
   #SHOW NEWS FEED THAT ARE STORED IN CASHE, BUT NOT SHOWN AT SAME TIME AS CURRENT NEWS FEED
   def news_feed_cashe(event_log_ids)
     news_event_logs = event_log_ids.map{|e| e.event_log_id}
-    event_displays = EventDisplay.find(:all, :conditions => ["type_id=? and person_id=? and event_id not in (?)", 
-    		                                     EventDisplay::DASHBOARD_FEED, self.id, news_event_logs], :order => 'event_id DESC').take(25)
-    news_cashe_event_logs = event_displays.map{|e| e.event_id}
+    event_displays = EventDisplay.find(:all, :conditions => ["type_id=? and person_id=? and event_log_id not in (?)", 
+    		                                     EventDisplay::DASHBOARD_FEED, self.id, news_event_logs], :order => 'event_log_id DESC').take(25)
+    news_cashe_event_logs = event_displays.map{|e| e.event_log_id}
     EventLog.find(:all, :conditions => ["id IN (?)", news_cashe_event_logs], :order => 'created_at DESC') 
   end
   
