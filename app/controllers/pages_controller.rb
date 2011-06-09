@@ -13,7 +13,7 @@ class PagesController < ApplicationController
     @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30)
     event_logs = current_user.person.news_feed
     @events = EventDisplay.paginate(:page => params[:page], :per_page => 25, :conditions => [ 'person_id=?', current_user.person.id ], 
-                                                                             :order => 'created_at DESC')
+                                                                             :order => 'created_at DESC', :include => [:event_log])
    end
 
 end
