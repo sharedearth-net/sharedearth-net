@@ -90,9 +90,8 @@
 			<ul>
 			  <% @events.each do |event| %>
 			  <li class="sidebar-box clearfix">
-			      <% event_log = EventLog.find_by_id(event.event_id) %>
 						<%= 
-							 render :partial => "shared/event_log_entry", :locals => { :event_log => event_log }
+							 render :partial => "shared/event_log_entry", :locals => { :event_log => event.event_log }
 						%>
 				</li>
 				<% end unless @events.nil? %>
