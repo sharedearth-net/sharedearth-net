@@ -1,0 +1,16 @@
+<h1>My friends</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+
+<% @people.each do |person| %>
+  <tr>
+    <td><%= link_to person.name, person_path(person) %></td>
+  </tr>
+<% end if !@people.nil?%>
+</table>
+
+<br />
