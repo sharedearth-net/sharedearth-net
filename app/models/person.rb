@@ -40,10 +40,18 @@ class Person < ActiveRecord::Base
     self.people_networks.count
   end
   
+  def self.search(search)
+    Person.where("name LIKE ?", "%#{search}%")  
+  end
+  
   def searchable_core_of_friends
     ids = self.people_networks.map { |n| n.trusted_person_id }
     ids.push( self.id)
     ids = ids.map! { |k| "#{k}" }.join(",")
+  end
+  
+  def trusted_friends
+    self.people_networks.map { |n| n.trusted_person }    
   end
   
   def extended_network_size
