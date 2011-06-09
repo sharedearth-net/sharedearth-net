@@ -1,0 +1,41 @@
+<div id="sidebar-left">
+		
+		<h2>Show</h2>
+		
+		<ul>
+			<li class="all">
+				<a href="#">All results</a>
+			</li>
+			<li class="items selected">
+				<a href="#">Items</a>
+			</li>
+			<li class="people">
+				<%= link_to 'People', people_path(:search => params[:search]) %>
+			</li>
+			<li class="community">
+				<a href="#">Communities</a>
+			</li>
+			<li>
+				<a href="#">Villages</a>
+			</li>
+			<li class="separator">
+				&nbsp;
+			</li>
+			<li class="all">
+				<a href="#">All your networks</a>
+			</li>
+			<li class="community">
+				<a href="#">Evolver Sydney</a>
+			</li>
+			<li class="community">
+				<a href="#">Sydney Java Community</a>
+			</li>
+			<li class="village selected">
+				<a href="#">Sydney</a>
+			</li>
+			<li class="village">
+				<a href="#">Newtown</a>
+			</li>
+		</ul>
+		
+</div><!--	/sidebar-left	-->
