@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110517171940) do
+ActiveRecord::Schema.define(:version => 20110609092150) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer  "event_code"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20110517171940) do
   create_table "event_displays", :force => true do |t|
     t.integer  "type_id"
     t.integer  "person_id"
-    t.integer  "event_id"
+    t.integer  "event_log_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -94,10 +94,10 @@ ActiveRecord::Schema.define(:version => 20110517171940) do
   create_table "feedbacks", :force => true do |t|
     t.integer  "item_request_id"
     t.integer  "person_id"
-    t.integer  "feedback",        :limit => 255
     t.string   "feedback_note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "feedback"
   end
 
   create_table "item_requests", :force => true do |t|
