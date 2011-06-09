@@ -19,6 +19,7 @@ class EventLog < ActiveRecord::Base
   belongs_to :action_object, :polymorphic => true # e.g. item
   belongs_to :related, :polymorphic => true # e.g. item_request
   belongs_to :event_type
+  has_one :event_display
   
   has_many :event_entities
   
