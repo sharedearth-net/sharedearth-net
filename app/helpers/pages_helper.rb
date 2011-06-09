@@ -273,14 +273,30 @@ module PagesHelper
 
   def recent_activity_sentence(activity_log)
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
-    unless activity_log.secondary_short_name.nil?
-      gifter              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => ""
-      gifter_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => ""
+    item = activity_log.action_object
+    unless activity_log.secondary_short_name.nil? || item.nil?
+      if(item.is_owner?(activity_log.secondary))     
+        gifter              = (activity_log.secondary == @current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive")
+        gifter_possesive    = (activity_log.secondary == @current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive")
+      
+        requester           = (activity_log.primary == @current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive")
+        requester_possesive = (activity_log.primary == @current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary), :class => "positive")
+        
+        
+      else
+        requester           = (activity_log.secondary == @current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive")
+        requester_possesive = (activity_log.secondary == @current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive")
+      
+        gifter           =  (activity_log.primary == @current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive")
+        gifter_possesive = (activity_log.primary == @current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary), :class => "positive")
+        
+      end
+        
+      possesive = item.is_owner?(@current_user.person) ? "your" : "their"
+
       person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"  unless activity_log.secondary.nil?
       person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"unless activity_log.secondary_short_name.nil?
       person_full         = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive" unless activity_log.secondary_short_name.nil?
-      requester           = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "" unless activity_log.secondary_short_name.nil?
-      requester_possesive = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "" unless activity_log.secondary_short_name.nil?
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
     
@@ -289,37 +305,37 @@ module PagesHelper
     when 1
       sentence = "You are now sharing your " + item 
     when 2
-      sentence = requester + " made a request to borrow your " + item
+      sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
     when 3
-      sentence =  "You made a request to borrow " + gifter_possesive +  " " +  item
+      sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
     when 4
-      sentence = "You accepted " + requester_possesive + " request to borrow your " +  item
+      sentence = gifter + " accepted " + requester_possesive + " request to borrow " + possesive + " " + item  # Check this one
     when 5
-      sentence = "You rejected " + requester_possesive + " request to borrow your " +  item
+      sentence = gifter + " rejected " + requester_possesive + " request to borrow " + possesive + " " +  item  # Check this one
     when 6
-      sentence = gifter + " accepted your request to borrow their " + item
+      sentence = gifter + " accepted " + requester_possesive + " request to borrow " + possesive + " " + item
     when 7
-      sentence = gifter + " rejected your request to borrow their " + item
+      sentence = gifter + " rejected " + requester_possesive + " request to borrow " + possesive + " " + item
     when 8
-      sentence = requester + " collected your " + item
+      sentence = requester + " collected " + gifter_possesive + " " + item
     when 9
-      sentence =  "You collected " + gifter_possesive + " " +  item
+      sentence = requester + " collected " + gifter_possesive + " " +  item
     when 10
-      sentence =  requester + " completed the action borrowing your " + item
+      sentence = requester + " completed the action of borrowing " + possesive + " " + item
     when 11
-      sentence =  "You completed the action of borrowing " + gifter_possesive + " " + item
+      sentence = requester + " completed the action of borrowing " + gifter_possesive + " " + item
     when 12
-      sentence =  "You completed the action of sharing your " + item + " with " + requester
+      sentence = gifter + " completed the action of sharing " + possesive + " " + item + " with " + requester
     when 13
-      sentence =  gifter + " completed the action sharing their " + item + " with you "
+      sentence = gifter + " completed the action of sharing their " + item + " with " + requester
     when 14
-      sentence =  "You canceled the action sharing your " +  item + " with " + requester
+      sentence = gifter + " canceled the action sharing " + possesive + " " + item + " with " + requester
     when 15
-      sentence =  gifter + " canceled the action sharing their " + item + " with you "
+      sentence = gifter + " canceled the action sharing their " + item + " with " + requester
     when 16
-      sentence =  requester + " canceled the request to borrow your " + item
+      sentence = requester + " canceled the request to borrow " + possesive + " " + item
     when 17
-      sentence =  "You canceled the request to borrow " + gifter_possesive + " " + item
+      sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
       
       
       
