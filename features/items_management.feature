@@ -77,7 +77,7 @@ Feature: Items management page
     Then I should see "Bike"
     When I fill in "search" with "Bike"
     Then I press "Search" 
-    Then I should see "Sorry, there is no item with those words"
+    Then I should see "Sorry, nothing matches your search criteria"
     
    
       
