@@ -1,7 +1,19 @@
 class PeopleController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_person
+  before_filter :get_person, :except => [:index]
   before_filter :only_if_person_is_signed_in!, :only => [:edit, :update]
+  
+  def index
+    if params[:search]
+      @people = Person.search(params[:search])
+    else
+      @people = current_user.person.trusted_friends
+    end
+    respond_to do |format|
+      format.html { render :action => 'search' if params[:search] }
+      format.xml  { render :xml => @people }
+    end
+  end
 
   def show
     if @person.belongs_to? current_user
