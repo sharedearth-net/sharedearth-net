@@ -390,7 +390,7 @@ a.normal:visited {
 	/* global - content */
 	
 	#content {
-		width: 511px;
+		width: 524px;
 		float: left;
 	}
 	
@@ -424,8 +424,8 @@ a.normal:visited {
 			} 
 		
 				.content-box {
-					width: 481px;
-					padding: 0 15px 12px 0px;
+					width: 516px;
+					padding: 0 0 12px 0px;
 				}
 		
 					.content-box .thumb {
@@ -434,7 +434,7 @@ a.normal:visited {
 					}	
 
 						.inner-content {
-							width: 270px;
+							width: 351px;
 							float: left;
 							margin-left: 15px;
 						}
@@ -449,9 +449,9 @@ a.normal:visited {
 	/* global - sidebar */
 
 	#sidebar {
-		width: 464px;
+		width: 456px;
 		float: left;
-		margin-left: 27px;
+		margin-left: 22px;
 	}
 
 		#sidebar .sidebar-box {
@@ -460,7 +460,7 @@ a.normal:visited {
 
 			#sidebar .inner-content {
 			    margin-left: 0;
-			   	width: 459px;
+			   	width: 440px;
 				float: none;
 				padding-left: 16px;
 			}
@@ -470,7 +470,6 @@ a.normal:visited {
 
 		.trust-box-holder {
 			margin-bottom: 18px;
-			margin-left: 8px;
 		}
 
 			.trust-box-holder img {
@@ -722,6 +721,10 @@ a.normal:visited {
 				
 	
 	/* profile - content */	
+	
+	#profile-page #content h2 span {
+			float: right;
+		}
 	
 	#profile-page #content h3 {
 		line-height: 19px;
@@ -1401,7 +1404,6 @@ a.normal:visited {
 		}
 
 		#search-page #sidebar-left ul {
-			margin-top: 11px;
 			width: 175px;
 		}
 
@@ -1525,9 +1527,100 @@ a.normal:visited {
 			.item-edit ul.action-buttons-list li a.positive:visited {
 				color: #127e0e;
 			}
-							
-							
 
+
+
+/*............Manage Resources Page............*/
+
+#manage-resources-page #content {
+	width: 837px;
+}
+
+	#manage-resources-page #content h3 {
+		clear: both;
+	}
+
+	#manage-resources-page ul.action-buttons-list {
+		margin: 0;
+	}
+
+		#manage-resources-page ul.action-buttons-list li {
+			margin: 4px 0 15px 0;
+		}
+
+	#manage-resources-page .items-list {
+		padding-top: 2px;
+		padding-left: 0;
+		margin-bottom: 10px;
+	}
+
+		#manage-resources-page .items-list ul li.item {
+			margin-top: 12px;
+			margin-bottom: 4px;
+		}
+
+
+	/* manage resources page - sidebar-left */
+
+	#manage-resources-page #sidebar-left {
+		float: left;
+		width: 150px;
+		padding: 0 15px 0 0;
+	}
+
+		#manage-resources-page #sidebar-left ul {
+			margin-top: 11px;
+			width: 175px;
+		}
+
+			#manage-resources-page #sidebar-left ul li {
+
+			}
+
+				#manage-resources-page #sidebar-left ul li a:link,
+				#manage-resources-page #sidebar-left ul li a:visited {
+					display: block;
+					padding: 4px 0px 1px 29px;
+					background:  url('../images/ic-village.png') no-repeat 3px 4px;
+					height: 20px;
+	                text-decoration: none;
+					margin-bottom: 5px;
+				}
+
+				#manage-resources-page #sidebar-left ul li:hover,
+				#manage-resources-page #sidebar-left ul li.selected {
+					background: url('../images/resources-list-hover.png') no-repeat 0 0;
+				}
+
+				#manage-resources-page #sidebar-left ul li.all a:link,
+				#manage-resources-page #sidebar-left ul li.all a:visited {
+						background: url('../images/ic-all-networks-community.png') no-repeat 1px 2px;
+				}
+
+				#manage-resources-page #sidebar-left ul li.items a:link,
+				#manage-resources-page #sidebar-left ul li.items a:visited {
+						background: url('../images/ic-items-community.png') no-repeat 1px 1px;
+				}
+
+				#manage-resources-page #sidebar-left ul li.people a:link,
+				#manage-resources-page #sidebar-left ul li.people a:visited {
+						background: url('../images/ic-people-community.png') no-repeat 1px 1px;
+				}
+
+				#manage-resources-page #sidebar-left ul li.trusted a:link,
+				#manage-resources-page #sidebar-left ul li.trusted a:visited {
+						background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
+				}
+
+				#manage-resources-page #sidebar-left ul li.extend a:link,
+				#manage-resources-page #sidebar-left ul li.extend a:visited {
+						background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
+				}
+
+				#manage-resources-page #sidebar-left ul li.community a:link,
+				#manage-resources-page #sidebar-left ul li.community a:visited {
+						background: url('../images/ic-community-community.png') no-repeat 1px 1px;
+				}
 
 						
 /* misc */
@@ -1557,12 +1650,12 @@ a.normal:visited {
 	#content h2,
 	#sidebar h2,
 	#search-page #content h3.default-title, 
+	#manage-resources-page #content h3.default-title,
 	#dashboard-page #content h3,
 	#profile-page #content h3 {
 		font-size: 12px; 
 		color: #315859;
 	}
-	
 	
 	
 	/* Event sentences in Requests\Actions and Recent Activity on the dashboard */
@@ -1658,6 +1751,7 @@ a.normal:visited {
 
 		/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
 		
+		#edit-profile-page #content h2,
 		#completed-request-page #content h2.trusted,
 		#completed-request-page #content h2.trusted a:link,
 		#completed-request-page #content h2.trusted a:visited,
@@ -1684,7 +1778,6 @@ a.normal:visited {
 
 			/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
 
-
 			#sidebar .trust-reputation-box h2.trusted,
 			#sidebar-left .trust-reputation-box h2.trusted,
 			.trust-reputation-box h2.trusted a:link,
@@ -1704,7 +1797,6 @@ a.normal:visited {
 
 
 		/* Reputation & Trust metrics */
-		
 		
 		ul.trust-list li a:link,
 		ul.trust-list li a:visited,
@@ -1735,6 +1827,7 @@ a.normal:visited {
 			
 	/* Headings on page when a community name, or search page (e.g. "Items in Sydney") */ 
 
+	#manage-resources-page #content h2,
 	#search-page #content h2 {
 		color: #127e0e;
 		font-size: 16px;
@@ -1765,12 +1858,14 @@ a.normal:visited {
 		
 		/* Search Filter box (e.g. "All results", "Items", etc): */ 
 		
-		
+		#manage-resources-page #sidebar-left ul li,
 		#search-page #sidebar-left ul li {
 			font-size: 12px;
 			color: #127e0e;
 		}
 		
+			#manage-resources-page #sidebar-left ul li a:link,
+			#manage-resources-page #sidebar-left ul li a:visited,
 			#search-page #sidebar-left ul li a:link,
 			#search-page #sidebar-left ul li a:visited {
 				color: #127e0e;
