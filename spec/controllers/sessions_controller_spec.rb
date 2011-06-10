@@ -22,7 +22,7 @@ describe SessionsController do
 
   describe "GET 'create'" do
     before do
-      @auth = {"provider" => "facebook", "uid" => "111111", "user_info" => { "name" => "Slobodan Kovacevic", "nickname" => "basti" } }
+      @auth = {"provider" => "facebook", "uid" => "111111", "user_info" => { "name" => "Slobodan Kovacevic", "nickname" => "basti" }, "credentials" => { "token" => "101448083266993|e988f10d01ea27bff083648b.1-625817457|vbqk5KMmrxogpCzR9A2JFA_KEBg"} }
       @user = mock_model(User)
       request.stub!(:env).and_return({ "omniauth.auth" => @auth })
     end
