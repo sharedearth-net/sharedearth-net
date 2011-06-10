@@ -28,7 +28,7 @@ Factory.define :item do |i|
   i.item_type "Bike"
   i.name "Mountainbike"
   i.description "Big beautifyl bike"
-  #i.association :owner, :factory => :person
+  i.association :owner, :factory => :person
   i.owner_id 1
   i.owner_type "Person"
   i.status Item::STATUS_NORMAL
@@ -36,17 +36,19 @@ Factory.define :item do |i|
 end
 
 Factory.define :item_request do |i|
-  i.association :item, :factory => :item
+  #i.association :item, :factory => :item
   i.requester_type "Person"
-  #i.requester 
+  #i.association :requester, :factory => :person
+  #i.association :gifter, :factory => :person
   i.gifter_type "Person"
-  #i.gifter
   i.description "Would you like to borrow me something?"
   i.status ItemRequest::STATUS_REQUESTED
 end
 
 Factory.define :feedback do |f|
   f.association :item_request, :factory => :item_request
+  #f.association :requester, :factory => :person
+  #f.association :gifter, :factory => :person
   f.person_id 1
   f.feedback Feedback::FEEDBACK_POSITIVE
 end
