@@ -390,7 +390,7 @@ a.normal:visited {
 	/* global - content */
 	
 	#content {
-		width: 511px;
+		width: 524px;
 		float: left;
 	}
 	
@@ -424,8 +424,8 @@ a.normal:visited {
 			} 
 		
 				.content-box {
-					width: 481px;
-					padding: 0 15px 12px 0px;
+					width: 516px;
+					padding: 0 0 12px 0px;
 				}
 		
 					.content-box .thumb {
@@ -434,7 +434,7 @@ a.normal:visited {
 					}	
 
 						.inner-content {
-							width: 270px;
+							width: 351px;
 							float: left;
 							margin-left: 15px;
 						}
@@ -449,9 +449,9 @@ a.normal:visited {
 	/* global - sidebar */
 
 	#sidebar {
-		width: 464px;
+		width: 456px;
 		float: left;
-		margin-left: 27px;
+		margin-left: 22px;
 	}
 
 		#sidebar .sidebar-box {
@@ -460,7 +460,7 @@ a.normal:visited {
 
 			#sidebar .inner-content {
 			    margin-left: 0;
-			   	width: 459px;
+			   	width: 440px;
 				float: none;
 				padding-left: 16px;
 			}
@@ -470,7 +470,6 @@ a.normal:visited {
 
 		.trust-box-holder {
 			margin-bottom: 18px;
-			margin-left: 8px;
 		}
 
 			.trust-box-holder img {
@@ -722,6 +721,10 @@ a.normal:visited {
 				
 	
 	/* profile - content */	
+	
+	#profile-page #content h2 span {
+			float: right;
+		}
 	
 	#profile-page #content h3 {
 		line-height: 19px;
@@ -1400,7 +1403,6 @@ a.normal:visited {
 		}
 
 		#search-page #sidebar-left ul {
-			margin-top: 11px;
 			width: 175px;
 		}
 
