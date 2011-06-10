@@ -1659,6 +1659,7 @@ a.normal:visited {
 
 		/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
 		
+		#edit-profile-page #content h2,
 		#completed-request-page #content h2.trusted,
 		#completed-request-page #content h2.trusted a:link,
 		#completed-request-page #content h2.trusted a:visited,

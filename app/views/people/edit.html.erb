@@ -9,18 +9,15 @@
 					<%= image_tag @person.avatar(:large), :class => "thumb" %>
 				
 					<div class="inner-content">
-						<h2>Edit profile</h2>
+						<h2>Edit Profile</h2>
 						<%= form_for(@person, :html => { :multipart => true }) do |f| %>
 							<%= render :partial => "shared/error_messages", :locals => { :model => @person } %>
 
 						  <div class="field">
 							<ul class="form-holder">
-								<!--
 								<li>
-														    		<%= f.label :name %>
-																</li>-->
-								
-								<li>
+									<%= f.label "Visible Name"  %>
+									
 						    		<%= f.text_field :name %>
 								</li>
 							</ul>
