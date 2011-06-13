@@ -722,9 +722,14 @@ a.normal:visited {
 	
 	/* profile - content */	
 	
-	#profile-page #content h2 span {
-			float: right;
+	#profile-page #content h2 {
+			margin-top: 18px;
 		}
+	
+		#profile-page #content h2 span {
+				float: right;
+				margin-top: 3px;
+			}
 	
 	#profile-page #content h3 {
 		line-height: 19px;
@@ -1569,7 +1574,6 @@ a.normal:visited {
 	}
 
 		#manage-resources-page #sidebar-left ul {
-			margin-top: 11px;
 			width: 175px;
 		}
 
