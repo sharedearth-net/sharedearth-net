@@ -1,15 +1,17 @@
 <div id="sidebar-left">
+
 		
 		<ul>
 			<li class="all">
 				<a href="#">All results</a>
 			</li>
-			<li class="items selected">
-				<a href="#">Items</a>
+			<li class= "items <%= (params[:controller] == 'items') ? "selected" : ""%>" > 
+				<%= link_to 'Items', items_path(:search => params[:search], :override => 'false') %>
 			</li>
-			<li class="people">
+			<li class="people <%= (params[:controller] == 'people') ? "selected" : ""%>">
 				<%= link_to 'People', people_path(:search => params[:search]) %>
 			</li>
+			<!--
 			<li class="community">
 				<a href="#">Communities</a>
 			</li>
@@ -34,6 +36,7 @@
 			<li class="village">
 				<a href="#">Newtown</a>
 			</li>
+			-->
 		</ul>
 		
 </div><!--	/sidebar-left	-->
