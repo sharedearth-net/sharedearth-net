@@ -120,7 +120,7 @@ describe ItemRequest, ".accept!" do
   end
 
   it "should save the request object" do
-    expect { @item_request.accept! }.to change { @item_request.changed? }.to(false)
+    expect { @item_request.accept! }.to change { @item_request.status }.to(ItemRequest::STATUS_ACCEPTED)
   end
 
   it "should raise exception if request object is cannot be saved" do
@@ -144,7 +144,7 @@ describe ItemRequest, ".reject!" do
   end
 
   it "should save the request object" do
-    expect { @item_request.reject! }.to change { @item_request.changed? }.to(false)
+    expect { @item_request.reject! }.to change { @item_request.status }.to(ItemRequest::STATUS_REJECTED)
   end
 
   it "should raise exception if request object is cannot be saved" do
@@ -166,7 +166,7 @@ describe ItemRequest, ".cancel!" do
   end
 
   it "should save the request object" do
-    expect { @item_request.cancel!(@requester) }.to change { @item_request.changed? }.to(false)
+    expect { @item_request.cancel!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_CANCELED)
   end
 
   it "should raise exception if request object is cannot be saved" do
@@ -188,7 +188,7 @@ describe ItemRequest, ".collected!" do
   end
 
   it "should save the request object" do
-    expect { @item_request.collected! }.to change { @item_request.changed? }.to(false)
+    expect { @item_request.collected! }.to change { @item_request.status }.to(ItemRequest::STATUS_COLLECTED)
   end
 
   it "should raise exception if request object is cannot be saved" do
@@ -209,7 +209,7 @@ describe ItemRequest, ".complete!" do
   end
 
   it "should save the request object" do
-    expect { @item_request.complete!(@requester) }.to change { @item_request.changed? }.to(false)
+    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
   end
 
   it "should raise exception if request object is cannot be saved" do
