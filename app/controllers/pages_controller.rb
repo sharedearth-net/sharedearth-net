@@ -10,7 +10,7 @@ class PagesController < ApplicationController
     @requests = @active_item_requests + @people_network_requests
     @requests.sort! { |a,b| b.created_at <=> a.created_at }
     
-    @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30)
+    @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30) unless current_user.person.activity_logs.empty?
     event_logs = current_user.person.news_feed
     @events = EventDisplay.paginate(:page => params[:page], :per_page => 25, :conditions => [ 'person_id=?', current_user.person.id ], 
                                                                              :order => 'created_at DESC', :include => [:event_log])
