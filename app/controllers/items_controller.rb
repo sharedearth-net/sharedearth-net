@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   def index
     if params[:search]
       @items = Item.search(params[:search], current_user.person.id)
-      redirect_to people_path(:search => params[:search]) and return if @items.empty?
+      redirect_to people_path(:search => params[:search]) and return if @items.empty? && params[:override].nil?
     else
       @items = current_user.person.items.without_deleted
     end
@@ -81,6 +81,7 @@ class ItemsController < ApplicationController
         format.html { redirect_to(@item, :notice => 'Item was successfully updated.') }
         format.xml  { head :ok }
       else
+      
         format.html { render :action => "edit" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end
@@ -93,7 +94,7 @@ class ItemsController < ApplicationController
     @item.delete
 
     respond_to do |format|
-      format.html { redirect_to(items_url) }
+      format.html { redirect_to(items_path) }
       format.xml  { head :ok }
     end
   end
