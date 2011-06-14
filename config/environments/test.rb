@@ -40,3 +40,5 @@ module Rack
     DEFAULT_HOST = "www.example.com"
   end
 end
+
+OmniAuth.config.test_mode = true
