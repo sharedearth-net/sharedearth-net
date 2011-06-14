@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ItemsController do
   
-  let(:signedin_user) { generate_mock_user_with_person }
+  let(:signedin_user) { Factory(:person).user }
 
   def mock_item(stubs={})
     @item ||= mock_model(Item, stubs).as_null_object
@@ -16,7 +16,8 @@ describe ItemsController do
 
   describe "for signed in member" do
     before do
-      sign_in_as_user(signedin_user)
+      controller.stub!(:current_user).and_return(signedin_user)
+      @factory_item = Factory(:item)
     end
 
     describe "GET index" do
@@ -29,9 +30,7 @@ describe ItemsController do
     end
 
     describe "GET show" do
-      before do
-        @factory_item = factory_item
-      end
+
       it "assigns the requested item as @item" do
         get :show, :id => @factory_item
         assigns(:item).should == @factory_item
@@ -61,11 +60,7 @@ describe ItemsController do
       end
     end
 
-    describe "GET edit" do
-      before do
-        @factory_item = factory_item
-      end
-    
+    describe "GET edit" do    
       it "assigns the requested item as @item" do
         get :edit, :id => @factory_item
         assigns(:item).should == @factory_item
@@ -98,14 +93,14 @@ describe ItemsController do
         end
                 
         it "should set owner for a newly created item" do
-          @item = Factory(:item, :owner => signedin_user.person)
-          @item.stub!(:owner?).with(signedin_user.person) # current_user is stubbed with signedin_user
+          @factory_item.stub!(:is_owner?).and_return(signedin_user.person) # current_user is stubbed with signedin_user
           post :create, :item => {}
         end
         
         it "redirects to the created item" do
+          Item.stub(:new) { mock_item(:save => true) }
           post :create, :item => {}
-          response.should redirect_to(item_url(factory_item))
+          response.should redirect_to(item_url(mock_item))
         end
       end
 
@@ -125,9 +120,6 @@ describe ItemsController do
     end
 
     describe "PUT update" do
-      before do
-        @factory_item = factory_item
-      end
       describe "with valid params" do
         it "updates the requested item" do
           @factory_item.stub!(:update_attributes).with({'these' => 'params'})
@@ -150,41 +142,42 @@ describe ItemsController do
      end
 
      describe "PUT update with mock item" do
-      before do
-        @item = factory_item
-      end
+        before do
+          @factory_item = Factory(:item, :owner => signedin_user.person)
+        end
         it "assigns the requested item as @item" do
-          @item.stub!(:update_attributes).and_return(true)
-          put :update, :id => @item.id
-          assigns(:item).should == @item
+          @factory_item.stub!(:update_attributes).and_return(true)
+          put :update, :id => @factory_item
+          assigns(:item).should == @factory_item
         end
 
         it "redirects to the item" do
-          @item.stub!(:update_attributes).and_return(true)
-          put :update, :id => @item.id
-          response.should redirect_to(item_url(@item))
+          
+          @factory_item.stub!(:is_owner?).with(signedin_user.person).and_return(true)
+          put :update, :id => @factory_item
+          response.should redirect_to(item_url(@factory_item))
         end
       end
 
       describe "with invalid params" do
         it "assigns the item as @item" do
-          @item.stub!(:update_attributes).and_return(false)
-          put :update, :id => @item
-          assigns(:item).should == @item
+          @factory_item.stub!(:update_attributes).and_return(false)
+          @factory_item.stub!(:is_owner?).with(signedin_user.person).and_return(true)
+          put :update, :id => @factory_item
+          assigns(:item).should == @factory_item
         end
 
         it "re-renders the 'edit' template" do
-          @item.stub!(:update_attributes).and_return(false)
-          put :update, :id => @item
-          response.should render_template("edit")
+          @factory_item = Factory(:item, :owner => signedin_user.person)
+          @factory_item.stub!(:is_owner?).with(signedin_user.person).and_return(true)
+          @factory_item.stub!(:update_attributes).and_return(false)
+          put :update, :id => @factory_item
+          response.should redirect_to(item_url(@factory_item))
         end
       end
     end
 
     describe "DELETE destroy" do
-      before do
-        @factory_item = factory_item
-      end
       
       it "destroys the requested item" do
         @factory_item.stub!(:delete)
@@ -192,6 +185,7 @@ describe ItemsController do
       end
       
       it "should allow only owner edit the item" do
+        @factory_item = Factory(:item, :owner => signedin_user.person)
         @factory_item.stub!(:is_owner?).with(signedin_user.person).and_return(true)
 
         delete :destroy, :id => @factory_item.id
@@ -207,16 +201,14 @@ describe ItemsController do
       end
 
       it "redirects to the items list" do
+        @factory_item = Factory(:item, :owner => signedin_user.person)
+        @factory_item.stub!(:is_owner?).with(signedin_user.person).and_return(true)
         delete :destroy, :id => @factory_item.id
         response.should redirect_to(items_url)
       end
     end
 
     describe "PUT mark_as_normal" do
-
-      before do
-        @factory_item = factory_item
-      end
   
       it "assigns the requested item as @item" do
         put :mark_as_normal, :id => @factory_item.id
@@ -246,10 +238,6 @@ describe ItemsController do
     end
 
     describe "PUT mark_as_lost" do
-
-      before do
-        @factory_item = factory_item
-      end
   
       it "assigns the requested item as @item" do
         put :mark_as_lost, :id => @factory_item.id
@@ -280,9 +268,6 @@ describe ItemsController do
 
     describe "PUT mark_as_damaged" do
 
-      before do
-        #Item.stub(:find).with(@item.id) { mock_item }
-      end
   
       it "assigns the requested item as @item" do
         put :mark_as_damaged, :id => factory_item.id
