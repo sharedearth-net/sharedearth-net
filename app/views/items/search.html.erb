@@ -15,9 +15,9 @@
 		  </div>
 			<h2>
 				<%= link_to image_tag('ic-items-community.png', :alt => "Items", :title => "Items") %>
-				Items in 
+				Found items <!-- in 
 				<%= link_to image_tag('ic-village-comm.png', :alt => "Village", :title => "Village") %>
-				Sydney
+				Sydney -->
 			</h2>
 			
 			<% if @trusted.empty? && @extended.empty?%>
@@ -34,9 +34,10 @@
           <%= render :partial => "item", :locals => {:item => item} %>
         <% end if !@trusted.nil?%>
 				</ul>
-				<a href="#" class="button-more">
+				<!--<a href="#" class="button-more">
 					2 more
 				</a>
+				-->
 			</div><!-- /trusted items-list -->
 			<% end %>
 			<% if !@extended.empty?%>
