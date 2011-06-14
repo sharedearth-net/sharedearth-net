@@ -67,9 +67,9 @@ Feature: Items management page
     Then I should see "Mobile"
     When I fill in "search" with "Mobile"
     Then I press "Search" 
-    And I should see "Mobile"
-    Then I should see "view item"
-    And I should see "From your extended network"
+    And I should not see "Mobile"
+    Then I should not see "view item"
+    And I should not see "From your extended network"
     
   Scenario: Item is searched but it belongs to someone that is not in my trusted nor extended network
     And "Maria" is the owner of item with name "Bike"
