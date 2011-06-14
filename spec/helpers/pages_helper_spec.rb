@@ -31,10 +31,17 @@ describe PagesHelper, "When printing activity log sentances" do
 
   before(:all) do
     setup_pages_helper_environment
+    helper.stub!(:current_user).and_return(@current_user)
     @item_link = "<a href=\"/items/#{@item.id}\" class=\"item-link\">#{@item.item_type}</a>"
-    @person_link = "<a href=\"/people/#{@activity_log.secondary_id}\" class=\"positive\">#{@activity_log.secondary_short_name}</a>"
-    @person_full_link = "<a href=\"/people/#{@activity_log.secondary_id}\" class=\"positive\">#{@activity_log.secondary_full_name}</a>"
-    @person_possesive_link =  "<a href=\"/people/#{@activity_log.secondary_id}\" class=\"positive\">#{@activity_log.secondary_short_name}'s</a>"
+    if(@item.is_owner?(@activity_log.secondary))     
+      @person_link = "<a href=\"/people/#{@activity_log.secondary_id}\" class=\"positive\">#{@activity_log.secondary_short_name}</a>"
+      @person_full_link = "<a href=\"/people/#{@activity_log.secondary_id}\" class=\"positive\">#{@activity_log.secondary_full_name}</a>"
+      @person_possesive_link =  "<a href=\"/people/#{@activity_log.secondary_id}\" class=\"positive\">#{@activity_log.secondary_short_name}'s</a>"
+    else
+      @person_link = "<a href=\"/people/#{@activity_log.primary_id}\" class=\"positive\">#{@activity_log.primary.first_name}</a>"
+      @person_full_link = "<a href=\"/people/#{@activity_log.primary_id}\" class=\"positive\">#{@activity_log.primary.full_name}</a>"
+      @person_possesive_link =  "<a href=\"/people/#{@activity_log.primary_id}\" class=\"positive\">#{@activity_log.primary.first_name.possesive}'s</a>"
+    end
   end
     
   after(:all) do
