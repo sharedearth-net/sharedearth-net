@@ -63,7 +63,7 @@
 								<% if current_user %>
 									<%= link_to current_user.person.name, person_path(current_user.person) %>
 								<% else %>
-									<%= link_to "Sign in with Facebook", signin_path('facebook') %>
+									<%= link_to "Sign in with Facebook", '/auth/facebook' %>
 								<% end %>
 							</li>
 
