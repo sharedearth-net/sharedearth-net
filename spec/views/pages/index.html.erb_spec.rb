@@ -10,18 +10,17 @@ describe "pages/index.html.erb (aka homepage)" do
   end
 
   it "should have a link for signin with Facebook if not already signed in" do
-    view.should_receive(:current_user).at_least(:once).and_return(nil)
+    view.stub!(:current_user).and_return(nil)
     
     render_index_with_layout
-    rendered.should have_selector("a", :href => signin_path(:provider => 'facebook'))
+    rendered.should have_selector("a", :href => '/auth/facebook')
   end
   
   describe "for signed in member" do
 
     before do
-      person = mock_person(:name => "Slobodan Kovacevic")
-      signedin_user.stub!(:person).and_return(person)
-      view.should_receive(:current_user).at_least(:once).and_return(signedin_user) # makes sure that we are checking current_user at least once
+      @person = Factory(:person)
+      view.should_receive(:current_user).at_least(:once).and_return(@person.user) # makes sure that we are checking current_user at least once
     end
     
     it "should have a link for signout" do
@@ -36,7 +35,7 @@ describe "pages/index.html.erb (aka homepage)" do
 
     it "should have a link to see profile page" do
       render_index_with_layout
-      rendered.should have_selector("a", :href => person_path(signedin_user.person))
+      rendered.should have_selector("a", :href => person_path(@person))
     end
 
     it "should have a link to see dashboard" do
