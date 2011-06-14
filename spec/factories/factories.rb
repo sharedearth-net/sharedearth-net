@@ -36,10 +36,10 @@ Factory.define :item do |i|
 end
 
 Factory.define :item_request do |i|
-  #i.association :item, :factory => :item
+  i.association :item, :factory => :item
   i.requester_type "Person"
-  #i.association :requester, :factory => :person
-  #i.association :gifter, :factory => :person
+  i.association :requester, :factory => :person
+  i.association :gifter, :factory => :person
   i.gifter_type "Person"
   i.description "Would you like to borrow me something?"
   i.status ItemRequest::STATUS_REQUESTED
@@ -47,9 +47,7 @@ end
 
 Factory.define :feedback do |f|
   f.association :item_request, :factory => :item_request
-  #f.association :requester, :factory => :person
-  #f.association :gifter, :factory => :person
-  f.person_id 1
+  f.association :person, :factory => :person
   f.feedback Feedback::FEEDBACK_POSITIVE
 end
 
