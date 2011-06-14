@@ -276,23 +276,23 @@ module PagesHelper
     item = activity_log.action_object
     unless activity_log.secondary_short_name.nil? || item.nil?
       if(item.is_owner?(activity_log.secondary))     
-        gifter              = (activity_log.secondary == @current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive")
-        gifter_possesive    = (activity_log.secondary == @current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive")
+        gifter              = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive")
+        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive")
       
-        requester           = (activity_log.primary == @current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive")
-        requester_possesive = (activity_log.primary == @current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary), :class => "positive")
+        requester           = (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive")
+        requester_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary), :class => "positive")
         
         
       else
-        requester           = (activity_log.secondary == @current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive")
-        requester_possesive = (activity_log.secondary == @current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive")
+        requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive")
+        requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive")
       
-        gifter           =  (activity_log.primary == @current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive")
-        gifter_possesive = (activity_log.primary == @current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary), :class => "positive")
+        gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive")
+        gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary), :class => "positive")
         
       end
         
-      possesive = item.is_owner?(@current_user.person) ? "your" : "their"
+      possesive = item.is_owner?(current_user.person) ? "your" : "their"
 
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
