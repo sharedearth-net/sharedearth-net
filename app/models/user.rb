@@ -23,14 +23,18 @@ class User < ActiveRecord::Base
   def inform_mutural_friends(auth)
     token = auth["credentials"]["token"]
     registered_user = FbGraph::User.me(token)
-    friends_list = registered_user.friends(options = {:access_token => token})  
+    begin
+      friends_list = registered_user.friends(options = {:access_token => token})  
+    rescue
+      puts "Access token was incorrect"
+    end
     friends_list.each do |friend|
       connection = User.find(:first, :conditions => ['uid = ?', friend.identifier])
       if !connection.nil? 
         #First parameter user that joined, second person that is informed
         EventLog.create_news_event_log(self.person, connection.person,  nil , EventType.fb_friend_join)
       end
-    end
+    end unless friends_list.nil?
   end
   
   # Available avatar sizes
