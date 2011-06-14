@@ -21,11 +21,11 @@ describe "item_requests/show.html.erb" do
   end
 
   def as_gifter
-    signedin_user.stub(:person).and_return(@item_request.gifter)
+    view.stub!(:current_user).and_return(ItemRequest.first.gifter.user)
   end
 
   def as_requester
-    signedin_user.stub(:person).and_return(@item_request.requester)
+    view.stub!(:current_user).and_return(ItemRequest.first.requester.user)
   end
 
   def with_request_status(status)
@@ -36,47 +36,18 @@ describe "item_requests/show.html.erb" do
 
   before(:each) do
     stub_template "shared/_trust_profile.html.erb" => "Trust profile"
-
-    view.stub(:current_user).and_return(signedin_user)
+    @item_request = Factory(:item_request)
+    view.stub!(:current_user).and_return(@item_request.gifter.user)
     view.stub(:item_request_photo).and_return("item_request_photo.png")
 
-    item = stub_model(Item,
-      :item_type => "MyItemType",
-      :name => "MyItemName",
-      :description => "MyItemDescription",
-      :owner_id => 1,
-      :owner_type => "Owner Type"
-    )
-    
-    requester = mock_model(Person,
-      :name => "Joe Requester"
-    ).as_null_object
-
-    gifter = mock_model(Person,
-      :name => "Jane Gifter"
-    ).as_null_object
-
-    @item_request = assign(:item_request, stub_model(ItemRequest,
-      :requester_id => requester.id,
-      :requester_type => "Person",
-      :requester => requester,
-      :gifter_id => gifter.id,
-      :gifter_type => "Person",
-      :gifter => gifter, 
-      :item_id => item.id,
-      :item => item,
-      :description => "MyRequestDescription",
-      :status => ItemRequest::STATUS_REQUESTED
-    ))
   end
 
   it "renders attributes" do
     render
-    rendered.should contain(/#{@item_request.item.name}/)
+    rendered.should contain(/#{@item_request.item.item_type}/)
     rendered.should contain(/#{@item_request.gifter.name}/)
     rendered.should contain(/#{@item_request.requester.name}/)
     rendered.should contain(/#{@item_request.description}/)
-    rendered.should contain(/#{@item_request.status_name}/)
   end
   
   describe "for request in 'requested' state" do
