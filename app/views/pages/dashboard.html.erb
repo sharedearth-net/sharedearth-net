@@ -68,7 +68,7 @@
 							<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
 						</div>
 					</li>
-				<% end %>
+				<% end unless @recent_activity_logs.nil?%>
 				<!-- Nebojsa-todo - button-more is static  -->
 				<li class="content-box clearfix">
 					<a href="#" class="button-more">
@@ -94,8 +94,8 @@
 							 render :partial => "shared/event_log_entry", :locals => { :event_log => event.event_log }
 						%>
 				</li>
-				<% end unless @events.nil? %>
-			  <%= will_paginate @events, :page_links=>false %> 		
+			  <%= will_paginate @events, :page_links=>false %> 
+				<% end unless @events.nil? %>		
 			<a href="#more_news" class="button-more">
 	      more
 			</a>
