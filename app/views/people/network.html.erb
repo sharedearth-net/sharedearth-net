@@ -1,0 +1,14 @@
+Mutural network:
+  <br />
+<% @mutural_friends.each do |p| -%>
+ <%= p.name%>
+  <br />
+<% end unless @mutural_friends.empty?-%>
+  <br />
+Extended network:
+  <br />
+<% @trusted_network.each do |p| -%>
+ <%= p.name%>
+    <br />
+<% end unless @trusted_network.empty?-%>
+
