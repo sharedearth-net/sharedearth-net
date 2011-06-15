@@ -2,7 +2,7 @@
 	<div id="sidebar-left">
 	
 		<div class="feedback-holder">
-			<%= image_tag @item_request.gifter.avatar(:large), :alt => "" %>
+			<%= image_tag @item_request.gifter.avatar(:medium), :alt => "" %>
 			<%#= image_tag('profile-narrow-1.png', :alt => "")  %>
 			<% if @item_request.both_parties_left_feedback? -%>
 			  <%= feedback_box_colour(@item_request.feedback_from_requester?) %>
