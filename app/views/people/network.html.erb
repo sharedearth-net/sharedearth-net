@@ -1,3 +1,118 @@
+
+
+<div id="user-trusted-page">
+	<div id="sidebar-left">
+		<%= image_tag("user-trusted-network.jpg", :class => "", :alt => "")  %>
+		<ul>
+			<li class="all">
+				<a href="#">All</a>
+			</li>
+			<li class="all">
+				<a href="#">Mutual</a>
+			</li>
+			<li class="extended selected">
+				<a href="#">Extended</a>
+			</li>
+			<li class="people">
+				<a href="#">Others</a>
+			</li>
+		</ul>
+	
+	</div><!--	/sidebar-left	-->
+
+	<div id="content">
+	
+		<div class="content-box-holder no-bg">
+		
+			<h2>Andrea Guerrini <%= image_tag("arrow-right.png", :class => "", :alt => "")  %> Trusted Network</h2>
+			<ul>
+				<li class="clearfix">
+					<%= image_tag("ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile")  %>
+					<p>
+						In your trusted network
+					</p>
+				</li>
+			</ul>
+			
+			<h3 class="default-title">In your mutual networks</h3>
+			
+			<ul>
+				<% @mutural_friends.each do |p| -%>
+				<li class="people-holder clearfix">
+					<%= image_tag("thumb-trusted-net-1.png", :class => "thumb", :alt => "")  %>
+					<p>
+						<%= p.name%>
+					</p>
+				</li>
+				<% end unless @mutural_friends.empty?-%>
+				<li class="clearfix">
+					<%= image_tag("ic-trusted-net-others-green.png", :class => "icons", :alt => "Trusted Profile")  %>
+					<p>
+						<a href="#">
+							23
+						</a>
+						people in your mutual network
+					</p>
+				</li>
+			</ul>
+			
+			<h3 class="default-title">In your extended network</h3>
+			
+			<ul>
+				<% @trusted_network.each do |p| -%>
+				<li class="people-holder clearfix">
+					<%= image_tag("thumb-trusted-net-1.png", :class => "thumb", :alt => "")  %>
+					<p>
+						<%= p.name%>
+					</p>
+				</li>
+				<% end unless @trusted_network.empty?-%>
+				<li class="clearfix">
+					<%= image_tag("ic-extended-network.png", :class => "icons", :alt => "Extended Network")  %>
+					<p>
+						<a href="#">0</a> people from your extended network
+					</p>
+				</li>
+			</ul>
+			
+			<h3 class="default-title">Others</h3>
+			
+			<ul>
+				<li class="people-holder clearfix">
+					<%= image_tag("thumb-trusted-net-1.png", :class => "thumb", :alt => "")  %>
+					<p>
+						<a href="#">John Shearer</a>
+					</p>
+				</li>
+				<li class="people-holder clearfix">
+					<%= image_tag("thumb-trusted-net-2.png", :class => "thumb", :alt => "")  %>
+					<p>
+						<a href="#">Allen Nicholson</a>
+					</p>
+				</li>
+				<li class="clearfix">
+					<%= image_tag("ic-people.png", :class => "icons", :alt => "Others")  %>
+					<p>
+						<a href="#">2</a> others
+					</p>
+				</li>
+			</ul>
+			
+			<ul>
+				<li class="clearfix">
+					<%= image_tag("ic-trusted-network.png", :class => "icons", :alt => "Trusted Network")  %>
+					<p>
+						<a href="#">7</a> people in their trusted network
+					</p>
+				</li>
+			</ul>
+			
+		</div><!-- /content-box-holder  -->
+	
+	</div><!--	/content -->
+	
+</div><!--	/user-trusted-page -->
+
 Mutural network:
   <br />
 <% @mutural_friends.each do |p| -%>
