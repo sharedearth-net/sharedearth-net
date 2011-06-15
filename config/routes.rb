@@ -8,7 +8,11 @@ Sharedearthapp::Application.routes.draw do
     end
   end
 
-  resources :people, :only => [:show, :edit, :update, :index]
+  resources :people, :only => [:show, :edit, :update, :index] do
+    member do 
+      get :network
+    end
+  end
     
   resources :people_network_requests, :only => [:create, :destroy] do
     member do
