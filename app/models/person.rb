@@ -54,6 +54,14 @@ class Person < ActiveRecord::Base
     self.people_networks.map { |n| n.trusted_person }    
   end
   
+  def mutural_friends(other_person)
+    mutural_friends = []
+    self.people_networks.each do |n| 
+      mutural_friends.push(n.trusted_person) if n.trusted_person.trusts?(other_person)
+    end
+    mutural_friends
+  end
+  
   def extended_network_size
     people_ids = self.people_networks.map{|i| i["trusted_person_id"]}
     friends = Person.find(:all, :conditions => ["id IN (?)", people_ids])
