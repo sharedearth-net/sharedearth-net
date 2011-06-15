@@ -34,7 +34,7 @@ class Item < ActiveRecord::Base
   has_attachment :photo,
                  :styles => {
                    :large => "600x600>",
-                   :medium => "200x200>",
+                   :medium => "150x150>",
                    :small => "100x100>",
                    :square => "50x50#"
                   },
