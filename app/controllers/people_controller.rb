@@ -29,6 +29,16 @@ class PeopleController < ApplicationController
       format.xml  { render :xml => @item }
     end
   end
+  
+  def network
+    @trusted_network = @person.trusted_friends
+    @mutural_friends = @person.mutural_friends(current_user.person)
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @item }
+    end
+  end
 
   def edit
   end
