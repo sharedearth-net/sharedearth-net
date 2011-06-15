@@ -94,8 +94,8 @@
 							 render :partial => "shared/event_log_entry", :locals => { :event_log => event.event_log }
 						%>
 				</li>
-			  <%= will_paginate @events, :page_links=>false %> 
 				<% end unless @events.nil? %>		
+			  <%= will_paginate @events, :page_links=>false unless @events.nil?%> 
 			<a href="#more_news" class="button-more">
 	      more
 			</a>
