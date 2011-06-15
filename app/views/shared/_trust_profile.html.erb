@@ -72,10 +72,9 @@
 				
 				<%= image_tag("ic-trusted-net-others-green.png", :class => "icons", :alt => "Trusted Profile")  %>
 				<p>
-					<a href="#">
-					<%= trusted_network = current_user.person.mutural_friends_count(person) %>
-					</a>
-					<%= (trusted_network == 1) ? "person" : "people" %> from your trusted network
+				 <% trusted_network = current_user.person.mutural_friends_count(person) %>
+				 <% network = (trusted_network == 1) ? "#{trusted_network} person from your trusted network" : "#{trusted_network} people from your trusted network" %> 
+				  <%= link_to network, (network_person_path(person))%>					
 				</p>
 			</li>
 <!--
