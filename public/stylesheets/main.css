@@ -1106,7 +1106,8 @@ a.normal:visited {
 
 			.item-holder img {
 				border: 1px solid #333;
-				max-width: 200px;
+				max-width: 150px;
+				max-height: 150px;
 			}
 
 
