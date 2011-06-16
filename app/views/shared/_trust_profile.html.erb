@@ -44,7 +44,7 @@
 			</li>
 		</ul>
 		<%= image_tag("devider-trust-profile.png", :class => "devider", :alt => "")  %>
-		<h3>Trust Profile</h3>
+		<h3>Trust Profile - <%= link_to 'View network', (network_person_path(person))%>			</h3>
 		<ul>
 			<li class="clearfix">
 				<% if current_user.person.trusts?(person) %>
@@ -72,7 +72,7 @@
 				
 				<%= image_tag("ic-trusted-net-others-green.png", :class => "icons", :alt => "Trusted Profile")  %>
 				<p>
-				 <% trusted_network = current_user.person.mutural_friends_count(person) %>
+				 <% trusted_network = current_user.person.mutural_friends(person).count %>
 				 <% network = (trusted_network == 1) ? "#{trusted_network} person from your trusted network" : "#{trusted_network} people from your trusted network" %> 
 				  <%= link_to network, (network_person_path(person))%>					
 				</p>
