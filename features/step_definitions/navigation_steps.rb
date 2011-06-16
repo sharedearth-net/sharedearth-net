@@ -8,4 +8,9 @@ Given /^Looking at my person page$/ do
   visit person_path(person)
 end
 
+Given /^Looking at person network page with name "([^"]*)"$/ do |name|
+  person = Person.find_by_name("#{name}")
+  visit network_person_path(person)
+end
+
 
