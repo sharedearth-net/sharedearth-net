@@ -41,7 +41,7 @@ class Person < ActiveRecord::Base
   end
   
   def self.search(search)
-    search.empty? ? '' : Person.where("name LIKE ?", "%#{search}%")
+    search.empty? ? '' : Person.where("name ILIKE ?", "%#{search}%")
   end
   
   def searchable_core_of_friends
