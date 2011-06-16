@@ -2,14 +2,14 @@
 
 		
 		<ul>
-			<li class="all">
-				<a href="#">All results</a>
+			<li class="all <%= (params[:type] == 'all') ? "selected" : ""%>">
+				<%= link_to 'All results', search_index_path(:search => params[:search], :type => 'all') %>
 			</li>
-			<li class= "items <%= (params[:controller] == 'items') ? "selected" : ""%>" > 
-				<%= link_to 'Items', items_path(:search => params[:search], :override => 'false') %>
+			<li class= "items <%= (params[:type] == 'items') ? "selected" : ""%>" > 
+				<%= link_to 'Items', search_index_path(:search => params[:search], :type => 'items') %>
 			</li>
-			<li class="people <%= (params[:controller] == 'people') ? "selected" : ""%>">
-				<%= link_to 'People', people_path(:search => params[:search]) %>
+			<li class="people <%= (params[:type] == 'people') ? "selected" : ""%>">
+				<%= link_to 'People', search_index_path(:search => params[:search], :type => 'people') %>
 			</li>
 			<!--
 			<li class="community">
