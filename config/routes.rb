@@ -1,5 +1,7 @@
 Sharedearthapp::Application.routes.draw do
 
+  get "search/index"
+
   resources :items do
     member do
       put "mark_as_normal"
