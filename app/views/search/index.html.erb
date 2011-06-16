@@ -1,0 +1,67 @@
+<div id="search-page" class="clearfix">
+
+
+	<%= render :partial => "shared/search_sidebar" %>
+	
+	<div id="content">
+	
+		<div class="content-box-holder no-bg">
+			<div class="search-holder">
+				<%= form_tag items_path, :method => 'get' do %>
+	        <div>
+	          <%= text_field_tag :search, params[:search] %>
+	          <button type="submit" title="Search">Search</button>
+	        </div>
+	      <% end %>
+			</div>
+				<h2>
+					<%= link_to image_tag('ic-items-community.png', :alt => "Items", :title => "Items") + " Items" if items_search %>
+					<%= link_to image_tag('ic-village-comm.png', :alt => "Village", :title => "Village") + " People" if people_search %>
+					<%= link_to image_tag('ic-items-community.png', :alt => "All results", :title => "All results") + " All results" if all_search %>
+				</h2>
+		
+			<% if (((@items.empty? && items_search) || (@people.empty? && people_search)) && !all_search) || (all_search && @items.empty? && @people.empty? )%>
+			  <h3>Search term not found</h3>
+			<% end %>
+			<% unless @items.empty? -%>
+			  <div class="items-list clearfix">
+			  <h3 class="default-title">
+					From your trusted network
+				</h3>
+				<ul class="clearfix">
+				<% @items.each do |item| %>
+          <%= render :partial => "items/item", :locals => {:item => item} %>
+        <% end%>
+				</ul>
+				<!--<a href="#" class="button-more">
+					2 more
+				</a>
+				-->
+				</div><!-- /items-list -->
+			<% end -%>
+			<% unless @people.empty? -%>
+			  <div class="items-list clearfix">
+			  <h3 class="default-title">
+					From your trusted network
+				</h3>
+				<ul class="clearfix">
+				<% @people.each do |person| %>
+          <%= render :partial => "people/person", :locals => {:person => person} %>
+        <% end%>
+				</ul>
+				<!--<a href="#" class="button-more">
+					2 more
+				</a>
+				-->
+				</div><!-- /items-list -->
+			<% end -%>
+			
+			
+			
+	
+		</div><!-- /content-box-holder  -->
+	
+	</div><!--	/content -->
+	
+</div><!--	/search-page -->
+			
