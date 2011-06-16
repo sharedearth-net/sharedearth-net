@@ -4,11 +4,9 @@ class PeopleController < ApplicationController
   before_filter :only_if_person_is_signed_in!, :only => [:edit, :update]
   
   def index
-    if params[:search]
-      @people = Person.search(params[:search])
-    else
-      @people = current_user.person.trusted_friends
-    end
+  
+    @people = current_user.person.trusted_friends
+    
     respond_to do |format|
       format.html { render :action => 'search' if params[:search] }
       format.xml  { render :xml => @people }
@@ -31,9 +29,24 @@ class PeopleController < ApplicationController
   end
   
   def network
-    @trusted_network = @person.trusted_friends
-    @mutural_friends = @person.mutural_friends(current_user.person)
-
+    @other, @mutual_friends, @trusted_network = [], [], []
+    unless params[:type].nil?
+      case params[:type]
+          when 'mutual'
+            @mutual_friends = @person.mutural_friends(current_user.person) 
+          when 'extended'
+            @trusted_network = @person.trusted_friends
+          when 'other'
+            mutual_friends = @person.mutural_friends(current_user.person)
+            trusted_network = @person.trusted_friends
+            @other = trusted_network - mutual_friends
+          else
+            #
+      end
+    else       
+      @trusted_network = @person.trusted_friends
+      @mutual_friends = @person.mutural_friends(current_user.person)
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @item }
