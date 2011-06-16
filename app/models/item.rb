@@ -87,9 +87,9 @@ class Item < ActiveRecord::Base
         person = Person.find_by_id(person_id)
         items_sql = "select distinct resource_id from resource_networks where entity_id in (select entity_id from people_networks where person_id = #{person_id} and entity_type_id = 7)"     
         words = search.split(/[ ]/)
-        item_type_like = words.map{|k| "item_type LIKE '%#{k}%' " }.join(" AND ")
-        item_name_like = words.map{|k| "name LIKE '%#{k}%'" }.join(" AND ")
-        item_desc_like = words.map{|k| "description LIKE '%#{k}%'" }.join(" AND ")
+        item_type_like = words.map{|k| "item_type ILIKE '%#{k}%' " }.join(" AND ")
+        item_name_like = words.map{|k| "name ILIKE '%#{k}%'" }.join(" AND ")
+        item_desc_like = words.map{|k| "description ILIKE '%#{k}%'" }.join(" AND ")
         sql_like = "(" + item_type_like + ") OR (" + item_name_like + ") OR (" + item_desc_like + ")"
         search_sql = "select id from items where id in (#{items_sql}) and (#{sql_like})"
         items_ids = ActiveRecord::Base.connection.execute(search_sql) 
