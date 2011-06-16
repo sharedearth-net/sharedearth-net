@@ -6,20 +6,8 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.xml
   def index
-    if params[:search]
-      @items = Item.search(params[:search], current_user.person.id)
-      redirect_to people_path(:search => params[:search]) and return if @items.empty? && params[:override].nil?
-    else
-      @items = current_user.person.items.without_deleted
-    end
-    @trusted, @extended = [], []
-    @items.each do |item|
-      if item.in_trusted_network_for_person?(current_user.person)
-        @trusted.push(item) 
-      else
-        @extended.push(item)
-      end
-    end unless @items.nil?
+  
+    @items = current_user.person.items.without_deleted
 
     respond_to do |format|
       format.html { render :action => 'search' if params[:search] }
