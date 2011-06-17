@@ -23,7 +23,7 @@ Feature: Leaving feedback affects reputation
     When I fill in the following:
      | note   | My negative opinion |
     And press "Submit"
-    Then I should see "Successfully created feedback"
+    Then I should see "show feedback"
     Then I follow "show feedback"
     And I should not see "My negative opinion"
     
