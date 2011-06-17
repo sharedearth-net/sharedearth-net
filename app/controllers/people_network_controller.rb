@@ -9,6 +9,6 @@ class PeopleNetworkController < ApplicationController
     PeopleNetwork.involves(@people_network.person).involves(@people_network.trusted_person).limit(2).destroy_all
     @people_network.person.reputation_rating.decrease_trusted_network_count
     @people_network.trusted_person.reputation_rating.decrease_trusted_network_count
-    redirect_to(trusted_person, :notice => I18n.t('messages.people_network.destroy'))
+    redirect_to trusted_person
   end
 end
