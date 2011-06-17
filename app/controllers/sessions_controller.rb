@@ -42,11 +42,11 @@ class SessionsController < ApplicationController
     user.token = token
     user.save!
     session[:user_id] = user.id
-    redirect_to dashboard_path, :notice => I18n.t('messages.signed_in')
+    redirect_to dashboard_path
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, :notice => I18n.t('messages.signed_out')
+    redirect_to root_path
   end
 end
