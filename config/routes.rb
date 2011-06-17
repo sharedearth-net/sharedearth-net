@@ -13,6 +13,7 @@ Sharedearthapp::Application.routes.draw do
   resources :people, :only => [:show, :edit, :update, :index] do
     member do 
       get :network
+      get :my_network
     end
   end
     
