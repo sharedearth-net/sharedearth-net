@@ -7,22 +7,22 @@ class PeopleNetworkRequestsController < ApplicationController
   def create
     @trusted_person = Person.find(params[:trusted_person_id])
     if @trusted_person.request_trusted_relationship(current_user.person)
-      redirect_to(@trusted_person, :notice => I18n.t('messages.people.requested_trusted_relationship'))
+      redirect_to @trusted_person
     else
       # TODO: handle this better (should not happen)
-      redirect_to(@trusted_person)
+      redirect_to @trusted_person
     end  
   end
   
   def destroy
     trusted_person = @people_network_request.trusted_person
     @people_network_request.destroy
-    redirect_to(trusted_person, :notice => I18n.t('messages.people_network_request.destroy'))
+    redirect_to trusted_person
   end
   
   def confirm
     @people_network_request.confirm!
-    redirect_to(@people_network_request.trusted_person, {:notice => I18n.t('messages.people_network_request.request_confirmed')})
+    redirect_to @people_network_request.trusted_person
   end
 
   # used destroy for trusted_person too
