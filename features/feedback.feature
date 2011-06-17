@@ -18,7 +18,7 @@ Feature: Leaving feedback
     And I follow "complete"
     Then I choose "positive"
     And press "Submit"
-    Then I should see "Successfully created feedback"
+    Then I should see "show feedback"
     
   Scenario: I leave neutral feedback
     Given "Maria" requested item with name "Mobile" from "John"
@@ -31,7 +31,7 @@ Feature: Leaving feedback
      When I fill in the following:
      | note   | My neutral opinion |
     And press "Submit"
-    Then I should see "Successfully created feedback"
+    Then I should see "show feedback"
     
   Scenario: I leave negative feedback
     Given "Maria" requested item with name "Mobile" from "John"
@@ -44,7 +44,7 @@ Feature: Leaving feedback
      When I fill in the following:
      | note   | My negative opinion |
     And press "Submit"
-    Then I should see "Successfully created feedback"
+    Then I should see "show feedback"
     
     
     

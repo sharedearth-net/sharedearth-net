@@ -16,7 +16,9 @@ Feature: Items management page
      | Description | Nice mobile phone   |
     And I choose "share"
     Then I press "Create Item"
-    And I should see "Item was successfully created."
+    And I should see "Samsung"
+    And I should see "Nice mobile phone"
+    And I should see "phone"
   
   Scenario: Adding new item for sharing
     Given I am on the new item page
@@ -27,7 +29,9 @@ Feature: Items management page
      | Description | Nice mobile phone   |
     And I choose "share"
     Then I press "Create Item"
-    And I should see "Item was successfully created." 
+    And I should see "Samsung"
+    And I should see "Nice mobile phone"
+    And I should see "phone"
     
   Scenario: Adding new item for gifting
     Given I am on the new item page
@@ -37,7 +41,9 @@ Feature: Items management page
      | Description | Nice mobile phone   |
     And I choose "share"
     Then I press "Create Item"
-    And I should see "Item was successfully created."
+    And I should see "Samsung"
+    And I should see "Nice mobile phone"
+    And I should see "phone"
     And Looking at person page with name "John"
     Then I follow "view item"
     And I should see "Samsung"

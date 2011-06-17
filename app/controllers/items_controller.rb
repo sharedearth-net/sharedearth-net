@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
         @item.create_new_item_event_log
         @item.create_new_item_activity_log
         current_user.person.reputation_rating.update_attributes(:activity_level => 1) if current_user.person.items.count == 1
-        format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
+        format.html { redirect_to @item }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
         format.html { render :action => "new" }
@@ -66,7 +66,7 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update_attributes(params[:item])
-        format.html { redirect_to(@item, :notice => 'Item was successfully updated.') }
+        format.html { redirect_to @item }
         format.xml  { head :ok }
       else
       
@@ -89,17 +89,17 @@ class ItemsController < ApplicationController
 
   def mark_as_normal
     @item.normal!
-    redirect_to(item_path(@item), :notice => I18n.t('messages.items.marked_as_normal'))
+    redirect_to item_path(@item)
   end
 
   def mark_as_lost
     @item.lost!
-    redirect_to(item_path(@item), :notice => I18n.t('messages.items.marked_as_lost'))
+    redirect_to item_path(@item)
   end
 
   def mark_as_damaged
     @item.damaged!
-    redirect_to(item_path(@item), :notice => I18n.t('messages.items.marked_as_damaged'))
+    redirect_to item_path(@item)
   end
 
   private

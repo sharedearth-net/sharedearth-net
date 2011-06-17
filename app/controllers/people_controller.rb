@@ -55,6 +55,7 @@ class PeopleController < ApplicationController
   end
   
   def my_network
+    @items = @person.trusted_friends_items
   end
 
   def edit
@@ -63,7 +64,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        format.html { redirect_to(@person, :notice => 'Profile was successfully updated.') }
+        format.html { redirect_to @person }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

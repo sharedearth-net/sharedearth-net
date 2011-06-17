@@ -9,7 +9,7 @@ class FeedbacksController < ApplicationController
     @feedback =  @request.feedbacks.build(params[:feedback])
     @feedback.person_id = current_user.person.id
     if @feedback.save
-      redirect_to dashboard_path, :notice => "Successfully created feedback."
+      redirect_to dashboard_path
     else
       render :action => 'new'
     end

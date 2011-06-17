@@ -9,7 +9,7 @@
 					<%= image_tag @person.avatar(:large), :class => "thumb" %>
 				
 					<div class="inner-content">
-						<h2>
+						<h2 class='trusted'>
 							<%= @person.name %>
 							<span>
 								<%= link_to "edit profile", edit_person_path(@person) if current_user.person == @person %>

@@ -11,7 +11,7 @@ Feature: Relationship management page
   Scenario: Requests trusted relationship
     Given Looking at person page with name "Maria"
     Then I follow "establish trust"
-    And I should see "Created request to establish trusted relationship."
+    And I should see "Establish trust request pending"
     
     
 
