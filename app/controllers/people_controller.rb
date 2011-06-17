@@ -29,13 +29,13 @@ class PeopleController < ApplicationController
   end
   
   def network
-    @other, @mutual_friends, @trusted_network = [], [], []
+    @other, @mutual_friends, @trusted_network, @extended_network = [], [], [], []
     unless params[:type].nil?
       case params[:type]
           when 'mutual'
             @mutual_friends = @person.mutural_friends(current_user.person) 
           when 'extended'
-            @trusted_network = @person.trusted_friends
+            #
           when 'other'
             mutual_friends = @person.mutural_friends(current_user.person)
             trusted_network = @person.trusted_friends
@@ -46,11 +46,15 @@ class PeopleController < ApplicationController
     else       
       @trusted_network = @person.trusted_friends
       @mutual_friends = @person.mutural_friends(current_user.person)
+      @other = @trusted_network - @mutual_friends
     end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @item }
     end
+  end
+  
+  def my_network
   end
 
   def edit
