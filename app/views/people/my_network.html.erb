@@ -1,1 +1,104 @@
-Your network
+<div id="community-page" class="clearfix">
+			
+	<div id="sidebar-left">
+		
+		<ul>
+			<li class="all">
+				<a href="#">All your networks</a>
+			</li>
+			<li class="trusted">
+				<a href="#">Trusted network</a>
+			</li>
+			<li class="extend">
+				<a href="#">Extended network</a>
+			</li>
+			
+			<li class="separator">
+				&nbsp;
+			</li>
+			<li class="community">
+				<a href="#">Evolver Sydney</a>
+			</li>
+			<li class="community">
+				<a href="#">Sydney Java Community</a>
+			</li>
+			<li class="village">
+				<a href="#">Sydney</a>
+			</li>
+			<li class="village">
+				<a href="#">Newtown</a>
+			</li>
+		</ul>
+		
+	</div><!--	/sidebar-left	-->
+	
+	<div id="content">
+		
+		<div class="content-box-holder no-bg">
+			<ul>
+				<li class="content-box clearfix">
+					<%= image_tag("cummunity-thumb.png", :class => "thumb", :alt => "Your Community")  %>
+					<div class="inner-content">
+						<h2>
+							<%= image_tag("ic-village-community.png", :class => "", :alt => "")  %>
+							Newtown 
+						</h2>
+
+						<p class="status-holder-profile">
+							<span>
+								<a href="#">Australia</a>&nbsp;&nbsp;
+								<a href="#">View location</a>
+							</span>
+						</p>
+
+						<p class="description">
+							A sharedearth village for sharing and receiving in the Inner West
+						</p>
+						
+						<p>
+							<a href="#">8</a> people in your trusted network 
+							belong to this village.
+							<br />
+							<a href="#" class="button-more">
+								view all members
+							</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+			
+					<!--
+						<ul class="community-buttons-list clearfix">
+							<li>
+								<a href="#">comments</a>
+							</li>
+							<li class="current">
+								<a href="#">items</a>
+							</li>
+							<li>
+								<a href="#">skills</a>
+							</li>
+							<li>
+								<a href="#">request</a>
+							</li>
+						</ul>
+						
+						<div class="community-list-content">
+							<p>
+								<a href="#">Axes</a>, <a href="#">Bikes</a>, <a href="#">Books</a>, <a href="#">Camping Lantern</a>, <a href="#">Camping Stove</a>, 
+								<a href="#">Coffee Machine</a>, <a href="#">Cooking Pans</a>, <a href="#">Cooking Pots</a>, <a href="#">Hammers</a>, 
+								<a href="#">Mobile Phones</a>, <a href="#">Rope</a>, <a href="#">Scooter</a>, <a href="#">Soldering Iron</a>, <a href="#">Spade</a>, 
+								<a href="#">Spanners Surfboards</a>, <a href="#">Tents</a>, <a href="#">Torches</a>, <a href="#">Wireless Modem</a>
+							</p>
+						</div>
+					-->
+						
+		</div><!-- /content-box-holder  -->
+		
+	</div><!--	/content -->
+	
+	<div id="sidebar">
+		<%= render :partial => "shared/latest_activity_person", :locals => { :person => @person } %>
+	</div><!-- /sidebar	-->
+	
+</div><!-- /community-page -->

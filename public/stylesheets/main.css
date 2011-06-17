@@ -934,6 +934,109 @@ a.normal:visited {
 			padding-left: 16px;
 		}
 										
+
+
+/*............Community Page............*/
+
+#community-page #sidebar-left {
+	padding: 0 15px 0 0;
+	width: 173px;
+}
+
+	#community-page #sidebar-left ul {
+	    margin-top: 11px;
+	    width: 175px;
+	}
+	
+	#community-page #sidebar-left ul li a:link,
+	#community-page #sidebar-left ul li a:visited {
+		display: block;
+		padding: 4px 0px 1px 29px;
+		height: 20px;
+        text-decoration: none;
+		margin-bottom: 5px;
+	}
+	
+	#community-page #sidebar-left ul li:hover,
+	#community-page #sidebar-left ul li.selected {
+		background: url('../images/my-community-list-hover.png') no-repeat 0 0;
+	}
+	
+	#community-page #sidebar-left ul li.separator {
+		background: #aeadad;
+		height: 1px;
+		margin: 8px 5px 6px 5px;
+	}
+	
+		#community-page #sidebar-left ul li.separator:hover {
+			background: none;
+		}
+
+	#community-page #sidebar-left ul li.all a:link,
+	#community-page #sidebar-left ul li.all a:visited {
+			background: url('../images/ic-trusted-network-user.png') no-repeat 1px 2px;
+	}
+
+	#community-page #sidebar-left ul li.extended a:link,
+	#community-page #sidebar-left ul li.extended a:visited {
+			background: url('../images/ic-extended-network-user.png') no-repeat 1px 1px;
+	}
+
+	#user-trusted-page #sidebar-left ul li.people a:link,
+	#user-trusted-page #sidebar-left ul li.people a:visited {
+			background: url('../images/ic-people-community.png') no-repeat 1px 1px;
+	}
+
+	#community-page #sidebar-left ul li.trusted a:link,
+	#community-page #sidebar-left ul li.trusted a:visited {
+			background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
+	}
+
+	#community-page #sidebar-left ul li.extend a:link,
+	#community-page #sidebar-left ul li.extend a:visited {
+			background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
+	}
+
+	#community-page #sidebar-left ul li.community a:link,
+	#community-page #sidebar-left ul li.community a:visited {
+			background: url('../images/ic-community-community.png') no-repeat 1px 1px;
+	}
+	
+	#community-page #sidebar-left ul li.village a:link,
+	#community-page #sidebar-left ul li.village a:visited {
+			background: url('../images/ic-village.png') no-repeat 1px 4px;
+	}
+	
+	
+	/* community page - content */
+	
+	#community-page #content {
+	    width: 452px;
+	}
+	
+		#community-page .inner-content {
+			width: 295px;
+		}
+	
+		#community-page #content h2 img {
+		    float: left;
+		}
+		
+		
+		#community-page .button-more {
+			float: left;
+		}
+	
+	
+	/* community page - sidebar */
+	
+	#community-page #sidebar {
+	    width: 340px;
+	}
+	
+		#community-page #sidebar h2 {
+			padding-left: 16px;
+		}
 										
 
 /*............Request Page............*/
@@ -1531,6 +1634,11 @@ a.normal:visited {
 		width: 150px;
 		padding: 0 15px 0 0;
 	}
+	
+		#user-trusted-page #sidebar-left .thumb {
+			max-width: 150px;
+		}
+	
 
 		#user-trusted-page #sidebar-left ul {
 			margin-top: 11px;
@@ -1929,8 +2037,10 @@ a.normal:visited {
 			
 			
 	/* Secondary details (e.g. location info "Sydney Australia") */
-
-	p.status-holder-profile span {
+	
+	p.status-holder-profile span,
+	p.status-holder-profile span a:link,
+	p.status-holder-profile span a:visited {
 		font-size: 11px;
 		color: #62775a;
 	}
@@ -1946,6 +2056,7 @@ a.normal:visited {
 			
 	/* Headings on page when a community name, or search page (e.g. "Items in Sydney") */ 
 
+	#community-page #content h2,
 	#user-trusted-page #content h2,
 	#manage-resources-page #content h2,
 	#search-page #content h2 {
@@ -1978,13 +2089,16 @@ a.normal:visited {
 		
 		/* Search Filter box (e.g. "All results", "Items", etc): */ 
 		
+		#community-page #sidebar-left ul li,
 		#user-trusted-page #sidebar-left ul li,
 		#manage-resources-page #sidebar-left ul li,
 		#search-page #sidebar-left ul li {
 			font-size: 12px;
 			color: #127e0e;
 		}
-		
+			
+			#community-page #sidebar-left ul li a:link,
+			#community-page #sidebar-left ul li a:visited,
 			#user-trusted-page #sidebar-left ul li a:link,
 			#user-trusted-page #sidebar-left ul li a:visited,
 			#manage-resources-page #sidebar-left ul li a:link,
