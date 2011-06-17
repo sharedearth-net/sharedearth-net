@@ -44,7 +44,7 @@ class ItemRequestsController < ApplicationController
     if @item_request.item.can_be_requested?
       respond_to do |format|
         if @item_request.save
-          format.html { redirect_to(request_path(@item_request), :notice => 'Request was successfully created.') }
+          format.html { redirect_to(request_path(@item_request)) }
           format.xml  { render :xml => @item_request, :status => :created, :location => @item_request }
         else
           format.html { render :action => "new" }
@@ -63,27 +63,27 @@ class ItemRequestsController < ApplicationController
   
   def accept
     @item_request.accept!
-    redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_accepted'))
+    redirect_to dashboard_path
   end
   
   def reject
     @item_request.reject!
-    redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_rejected'))
+    redirect_to dashboard_path
   end
   
   def cancel
     @item_request.cancel!(current_user.person)
-    redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_canceled'))
+    redirect_to dashboard_path
   end
   
   def collected
     @item_request.collected!
-    redirect_to(dashboard_path, :notice => I18n.t('messages.item_requests.request_collected'))
+    redirect_to dashboard_path
   end
   
   def complete
     @item_request.complete!(current_user.person)
-    redirect_to(new_request_feedback_path(@item_request), :notice => I18n.t('messages.item_requests.request_completed'))
+    redirect_to new_request_feedback_path(@item_request)
   end
   
   private
