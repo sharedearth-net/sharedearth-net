@@ -29,10 +29,7 @@
 			<h2><%= @person.name %> <%= image_tag("arrow-right.png", :class => "", :alt => "")  %> Trusted Network</h2>
 			<ul>
 				<li class="clearfix">
-					<%= image_tag("ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile")  %>
-					<p>
-						In your trusted network
-					</p>
+					<%= in_network?(current_user.person, @person )%>
 				</li>
 			</ul>
 			<% if !@mutual_friends.empty? %>
