@@ -54,6 +54,12 @@ class Person < ActiveRecord::Base
     self.people_networks.map { |n| n.trusted_person }    
   end
   
+  def trusted_friends_items
+    items = []
+    self.trusted_friends.map{|f| f.items.map{|i|items.push(i)}}  
+    items  
+  end
+  
   def mutural_friends(other_person)
     mutural_friends = []
     self.people_networks.each do |n| 
