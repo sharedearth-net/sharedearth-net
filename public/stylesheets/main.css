@@ -1634,6 +1634,11 @@ a.normal:visited {
 		width: 150px;
 		padding: 0 15px 0 0;
 	}
+	
+		#user-trusted-page #sidebar-left .thumb {
+			max-width: 150px;
+		}
+	
 
 		#user-trusted-page #sidebar-left ul {
 			margin-top: 11px;
