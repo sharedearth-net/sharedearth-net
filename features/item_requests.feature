@@ -13,7 +13,7 @@ Feature: Item requests management page
   Scenario: Requests item 
     Given Looking at person page with name "Maria"
     Then I follow "request"
-    And I should see the words "successfully", "Bike"
+    And I should see the words "request", "Bike"
     
   Scenario: I accept someones request for my item
     Given "Maria" requested item with name "Mobile" from "John"
