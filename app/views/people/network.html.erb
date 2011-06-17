@@ -35,7 +35,6 @@
 					</p>
 				</li>
 			</ul>
-			<%= '<h3>This user has no trusted relationships at the moment</h3>' if @person.trusted_network_size == 0%>
 			<% if !@mutual_friends.empty? %>
 			<h3 class="default-title">In your mutual network</h3>
 			
@@ -52,7 +51,7 @@
 					<%= image_tag("ic-trusted-net-others-green.png", :class => "icons", :alt => "Trusted Profile")  %>
 					<p>
 						<a href="#">
-							<%= trusted_network = current_user.person.mutural_friends_count(@person) %>
+							<%= trusted_network = @person.mutural_friends_count(current_user.person) %>
 						</a>
 						<%= (trusted_network == 1) ? " person " : " people " %> in your mutual network
 					</p>
