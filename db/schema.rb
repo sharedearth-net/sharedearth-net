@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110609092150) do
+ActiveRecord::Schema.define(:version => 20110620073331) do
 
   create_table "activity_logs", :force => true do |t|
     t.integer  "event_code"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20110609092150) do
     t.string   "entity_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "user_only",    :default => false
   end
 
   add_index "event_entities", ["entity_id", "entity_type"], :name => "index_event_entities_on_entity_id_and_entity_type"
