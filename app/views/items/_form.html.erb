@@ -1,42 +1,46 @@
 <%= form_for(@item, :html => { :multipart => true }) do |f| %>
 	<%= render :partial => "shared/error_messages", :locals => { :model => @item } %>
 
-
-
-  <div class="field">
+	<div class="lhs">
+		<ul class="form-holder">
+		<% if @item.photo? %>
+			<li class="clearfix">
+	   			<%= f.label :current_photo %>
+			</li>
+			<li class="clearfix">
+		   		<%= image_tag @item.photo.url(:small), :class => "item-pic" %>
+			</li>
+		<% end %>
+			<li class="button-holder">
+	    		<%= f.label :photo %>
+				<%= image_tag("bt-fake-file-upload.png", :alt => "")  %>
+	    		<%= f.file_field :photo, :class => 'realupload' %>
+			</li>
+		</ul>
+	</div>
+		
+  <div class="rhs">
 	<ul class="form-holder">
-    	<li>
+    	<li class="clearfix">
 			<%= f.label :item_type %>
-		</li>
-		<li>
     		<%= f.text_field :item_type %>
 		</li>
-
-
-    	<li>
+    	<li class="clearfix">
     		<%= f.label :name %>
-		</li>
-		<li>
     		<%= f.text_field :name %>
 		</li>
-
-		<li>
-    		<%= f.label :Purpose %>
-		</li>
-		<li>
+		<li class="clearfix">
+			<%= f.label :Purpose %>
 		    <% if @item.purpose_update_available? || @item.new_record? %>
-    		  <%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :id => :share %> <%= f.label :Share %>
-    		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift %> <%= f.label :Gift %>
+    		  <%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :id => :share %> <%= f.label :Share, "To Share", :class => "radio-labels-holder" %>
+    		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift %> <%= f.label :Gift, "To Give Away", :class => "radio-labels-holder" %>
     		<% else %>
 	    		<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled", :id => :share  %> <%= f.label :Share %>
     		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled", :id => :gift   %> <%= f.label :Gift %>
     		<% end %>
 		</li>
-
-    	<li>
+    	<li class="clearfix">
     		<%= f.label :description %>
-		</li>
-		<li>
     		<%= f.text_area :description %>
 		</li>
  
@@ -48,22 +52,16 @@
     <%= f.label :owner_type %><br />
     <%= f.text_field :owner_type %>
   </div> -->
-	<% if @item.photo? %>
-	  
-		<li>
-   			<%= f.label :current_photo %>
-		</li>
-		<li>
-	   		<%= image_tag @item.photo.url(:small) %>
-		</li>
 	
-	<% end %>
-		<li>
-    		<%= f.label :photo %>
-    		<%= f.file_field :photo %>
-		</li>
-		<li>
-			<%= f.submit %>
+		<li class="clearfix">
+			<ul class="action-buttons-list">
+				<li>
+					<%= f.submit 'OK' %>
+				</li>
+				<li>
+					<%= link_to 'Cancel', items_path %>
+				</li>
+			</ul>
 		</li>
 <% end %>
 	</ul>
