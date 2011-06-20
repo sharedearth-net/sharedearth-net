@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_one :person
 
-  validates_presence_of :provider, :uid, :nickname
+  validates_presence_of :provider, :uid
   validates_uniqueness_of :uid, :scope => :provider
 
   def self.create_with_omniauth(auth)
@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
       connection = User.find(:first, :conditions => ['uid = ?', friend.identifier])
       if !connection.nil? 
         #First parameter user that joined, second person that is informed
-        EventLog.create_news_event_log(self.person, connection.person,  nil , EventType.fb_friend_join)
+        EventLog.fb_friend_join_event_log(self.person, connection.person, EventType.fb_friend_join)
       end
     end unless friends_list.nil?
   end
