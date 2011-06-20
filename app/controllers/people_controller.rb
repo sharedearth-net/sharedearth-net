@@ -2,7 +2,8 @@ class PeopleController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_person, :except => [:index]
   before_filter :only_if_person_is_signed_in!, :only => [:edit, :update]
-  
+  before_filter :only_own_network!, :only => [:my_network]
+
   def index
   
     @people = current_user.person.trusted_friends
@@ -30,6 +31,7 @@ class PeopleController < ApplicationController
   
   def network
     @other, @mutual_friends, @trusted_network, @extended_network = [], [], [], []
+    current_person = current_user.person
     unless params[:type].nil?
       case params[:type]
           when 'mutual'
@@ -40,6 +42,7 @@ class PeopleController < ApplicationController
             mutual_friends = @person.mutural_friends(current_user.person)
             trusted_network = @person.trusted_friends
             @other = trusted_network - mutual_friends
+            @other.delete_at(@other.index(current_person) || @other.length) unless @person.belongs_to? current_user
           else
             #
       end
@@ -47,6 +50,7 @@ class PeopleController < ApplicationController
       @trusted_network = @person.trusted_friends
       @mutual_friends = @person.mutural_friends(current_user.person)
       @other = @trusted_network - @mutual_friends
+      @other.delete_at(@other.index(current_person) || @other.length) unless @person.belongs_to? current_user
     end
     respond_to do |format|
       format.html # show.html.erb
@@ -55,7 +59,16 @@ class PeopleController < ApplicationController
   end
   
   def my_network
-    @items = @person.trusted_friends_items
+    unless params[:type].nil?
+      case params[:type]
+          when 'trusted'
+            @items = @person.trusted_friends_items
+          else
+            #
+      end
+    else           
+      @items = @person.trusted_friends_items
+    end
     @events = EventDisplay.paginate(:page => params[:page], :per_page => 10, :conditions => [ 'person_id=?', current_user.person.id ], 
                                                                              :order => 'created_at DESC', :include => [:event_log])
   end
@@ -82,5 +95,9 @@ class PeopleController < ApplicationController
   
   def only_if_person_is_signed_in!
     redirect_to(root_path, :alert => I18n.t('messages.you_cannot_edit_others')) and return unless @person.belongs_to? current_user
+  end
+  
+  def only_own_network!
+    redirect_to(root_path, :alert => I18n.t('messages.people.only_own_network')) and return unless @person.belongs_to? current_user
   end
 end
