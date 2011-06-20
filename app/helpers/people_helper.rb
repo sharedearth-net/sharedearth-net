@@ -15,6 +15,10 @@ module PeopleHelper
    params[:type] == 'extended'
  end
  
+ def trusted_network
+   params[:type] == 'trusted'
+ end
+ 
  def in_network?(current_person, other_person )
    	if current_person.trusts?(other_person)
 			image = image_tag("ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile")
