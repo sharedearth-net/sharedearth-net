@@ -98,9 +98,8 @@
 					<%= image_tag("ic-extended-network.png", :class => "icons", :alt => "Extended Network")  %>
 					<p>
 				  	<a href="#">
-							<%= trusts_me = @person.trusts_me_count %>
 						</a>
-						<%= (trusts_me == 1) ? " other " : " others " %>
+						<%= (@other.count == 1) ? " other " : " others " %>
 					</p>
 				</li>
 			</ul>
