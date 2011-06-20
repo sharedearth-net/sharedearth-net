@@ -27,6 +27,7 @@ en:
       marked_as_damaged: "Item has been marked as damaged."
     people:
       requested_trusted_relationship: "Created request to establish trusted relationship."
+      only_own_network: "Sorry. You can only see your own network"
     people_network_request:
       request_confirmed: "Trust request has been accepted."
       destroy: "Cancelled request to establish trusted relationship."
