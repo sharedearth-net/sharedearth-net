@@ -116,4 +116,21 @@ class EventLog < ActiveRecord::Base
     
     event_log
   end
+  
+  def self.fb_friend_join_event_log(first_person, second_person, event_type)
+    event_log = EventLog.create!(
+      :primary => first_person,
+      :primary_short_name => first_person.first_name,
+      :primary_full_name => first_person.name,
+      :action_object => nil,
+      :action_object_type_readable => nil,
+      :secondary => second_person,
+      :secondary_short_name => second_person.first_name,
+      :secondary_full_name => second_person.name,
+      :related => nil,
+      :event_type_id => event_type
+    )
+    EventEntity.create!(:event_log => event_log, :entity => first_person, :user_only => true)
+    EventEntity.create!(:event_log => event_log, :entity => second_person, :user_only => true)    
+  end
 end
