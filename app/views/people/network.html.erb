@@ -95,11 +95,12 @@
 				</li>
 				<% end-%>
 				<li class="clearfix">
-					<%= image_tag("ic-extended-network.png", :class => "icons", :alt => "Extended Network")  %>
+					<%= image_tag("ic-people.png", :class => "icons", :alt => "Extended Network")  %>
 					<p>
 				  	<a href="#">
+							<%= other_count = @other.count %>
 						</a>
-						<%= (@other.count == 1) ? " other " : " others " %>
+						<%= (other_count == 1) ? " other " : " others " %>
 					</p>
 				</li>
 			</ul>
