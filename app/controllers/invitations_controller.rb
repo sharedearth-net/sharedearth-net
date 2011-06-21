@@ -1,8 +1,8 @@
 class InvitationsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:index, :validate]
   before_filter :admin_access, :except => [:index, :validate]
   
-  layout :beta_layout
+  layout :dynamic_layout
   
   def index
     if administrator?
@@ -49,6 +49,7 @@ class InvitationsController < ApplicationController
      unless invitation.nil? || invitation.invitation_active
         invitation.update_attributes(:invitee_person_id => current_user.person.id, :accepted_date => Time.now, :invitation_active => false)
         current_user.person.update_attributes(:authorised_account => true)
+        #current_user.inform_mutural_friends(auth)
         redirect_to dashboard_path and return
      end
    end 
@@ -65,7 +66,7 @@ class InvitationsController < ApplicationController
     redirect_to dashboard_path, :notice => "Wrong url" if !administrator?
   end
   
-  def beta_layout
+  def dynamic_layout
     administrator? ? 'application' : 'beta_welcome'
   end
 end
