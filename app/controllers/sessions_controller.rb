@@ -42,7 +42,11 @@ class SessionsController < ApplicationController
     user.token = token
     user.save!
     session[:user_id] = user.id
-    redirect_to dashboard_path
+    if user.person.authorised?
+      redirect_to dashboard_path
+    else
+      redirect_to invitations_path
+    end
   end
 
   def destroy
