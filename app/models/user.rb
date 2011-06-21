@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
                               :requests_received => 0,  :requests_answered => 0, :trusted_network_count => 0,  :activity_level => 0)
     end
     user = User.find_by_uid(auth["uid"])
-    user.inform_mutural_friends(auth)
+    #IF STATEMENT IS ONLY FOR BETA PHASE BECAUSE INFORMING MUTUAL FRIENDS WILL BE DONE WHEN ENTERED PROPER CODE
+    user.inform_mutural_friends(auth) if user.person.authorised? 
     user
   end
   
