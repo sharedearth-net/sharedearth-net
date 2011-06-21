@@ -36,7 +36,7 @@ class Item < ActiveRecord::Base
                    :large => "600x600>",
                    :medium => "150x150>",
                    :small => "100x100>",
-                   :square => "50x50#"
+                   :square => "50x50"
                   },
                  :default_url => "/images/noimage-:style.png"
 
