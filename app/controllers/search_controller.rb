@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  before_filter :authenticate_user!
   def index
     @people, @items = [],[]
     unless params[:search].nil? || params[:search].empty?
