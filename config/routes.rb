@@ -1,5 +1,11 @@
 Sharedearthapp::Application.routes.draw do
 
+  resources :invitations, :except => [:destroy, :edit, :show] do
+    collection do
+        put "validate"
+    end
+  end
+
   get "search/index"
 
   resources :items do
