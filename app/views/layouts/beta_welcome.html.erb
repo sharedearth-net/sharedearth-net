@@ -30,6 +30,7 @@
 		<div id="content" class="clearfix">
 
       <h2>Beta testing</h2>
+                  <%= link_to "Sign in with different account", signout_path, :class => 'disconnect' %>
 			<p>	
 				sharedearth.net is a social network for humans to build 
 				<strong>trust</strong> and <strong>share</strong> possessions and skills, helping us rewrite 
@@ -46,7 +47,17 @@
       <% end %>
 			<div class="button-holder-connect">
 				<h2>
-						<%= yield %>
+						Enter key
+            <%= form_tag validate_invitations_path, :method => 'put' do %>
+	            <p>
+                <%= label_tag 'Enter your invitation code' %><br />
+                <%= text_field_tag :key, params[:key] %>
+                  <%= submit_tag 'Enter code' %>
+              </p>
+	                      
+
+            <% end %>
+            
 				</h2>
 			</div>
 
