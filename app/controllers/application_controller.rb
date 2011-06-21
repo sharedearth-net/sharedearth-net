@@ -14,12 +14,20 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate_user!
-    redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in') unless current_user
+    if current_user
+      redirect_to root_path, :alert => "You are not authorised to access that page" if !current_user.person.authorised?
+    else
+      redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
+    end
   end
   
   # Control which layout is used.
   def dynamic_layout
-    current_user.nil? ? 'welcome' : 'application'
+    if current_user.nil?
+      'welcome'
+    else
+      current_user.person.authorised? ? 'application' : 'beta_welcome'
+    end
   end
   
   #Redirection with optional notice
