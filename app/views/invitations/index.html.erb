@@ -1,0 +1,24 @@
+<h2>Invitations</h2>
+
+<table style="width: 700px; height: 300px; padding:5px;" border="0">
+  <tr>
+    <th>Inviter Person</th>
+    <th>Unique Key</th>
+    <th>Invitation Active</th>
+    <th>Accepted Date</th>
+    <th>Invitee Person</th>
+  </tr>
+  <% for invitation in @invitations %>
+    <tr>
+      <% person = Person.find_by_id(invitation.inviter_person_id) %>
+      <td><%= link_to person.name, person_path(person) %></td>
+      <td><%= invitation.invitation_unique_key %></td>
+      <td><%= invitation.invitation_active %></td>
+      <td><%= invitation.accepted_date %></td>
+       <% person = Person.find_by_id(invitation.invitee_person_id) %>
+      <td><%= link_to person.name, person_path(person) unless person.nil?%></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<p><%= link_to "New Invitations", new_invitation_path %></p>
