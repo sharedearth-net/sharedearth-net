@@ -1,4 +1,4 @@
-<h2>Your Network Activity</h2>
+<h2><%= title.nil? ? 'Your Network Activity' : title %></h2>
 	<ul>
 	  <% events.each do |event| %>
 	  <li class="sidebar-box clearfix">
@@ -7,7 +7,9 @@
 				%>
 		</li>
 		<% end unless @events.nil? %>		
+	</ul>
 	  <%= will_paginate @events, :page_links=>false unless @events.nil?%> 
 	<a href="#more_news" class="button-more">
      more
 	</a>
+	
