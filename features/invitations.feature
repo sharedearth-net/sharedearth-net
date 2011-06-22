@@ -6,7 +6,7 @@ Feature: Sending invitations
   
   Background:
     Given the user is logged in
-    Given I am on ivitations page
+    Given I am on invitations page
     
-  Scenario: Admin generates one ivitation
-    And I should see "Invitation generated"
+  Scenario: Regular user shouldn't have access to invitations list
+    And I should not see "New Invitations"

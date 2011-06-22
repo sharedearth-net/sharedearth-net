@@ -31,12 +31,12 @@ Feature: Viewing someone else's trusted network and my own
     Given "Sebastian" has trusted relationship with "Nik"
     Given "Nik" has trusted relationship with "John"
     Given Looking at person network page with name "Maria"
-    Then I follow "Extended"
-    And I should see "Nik"
-    And I should not see "Sebastian"
-    And I should not see "John"
+    #Then I follow "Extended"
+    #And I should see "Nik"
+    #And I should not see "Sebastian"
+    #And I should not see "John"
     
-  Scenario: Maria has other friends beside mutual friends with me, but I am in other list too
+  Scenario: Maria has other friends beside mutual friends with me, but I am also firend with her and se shouldn't see me
     Given a person exists with name: "Kolumbo"
     Given "Maria" has trusted relationship with "John"
     Given "Maria" has trusted relationship with "Sebastian"
@@ -47,7 +47,7 @@ Feature: Viewing someone else's trusted network and my own
     And I should see "Sebastian"
     And I should see "Kolumbo"
     And I should not see "Nik"
-    Then I should see "John" in css class "people-holder"
+    Then I should not see "John" in css class "people-holder"
   
   Scenario: Maria has other friends and I am not in trusted relationship with Maria
     Given a person exists with name: "Kolumbo"

@@ -13,9 +13,9 @@ Feature: Viewing someone else's trusted network and my own
     
   Scenario: I should see the page
     And I follow "view network"
-    Then I should see "Your network"
-    Then I should see "Trusted network"
-    Then I should see "News Feed"
+    Then I should see "Your Network"
+    Then I should see "Trusted Network"
+    Then I should see "Trusted Network Activity"
     
     
   Scenario: I should see the my friends items
