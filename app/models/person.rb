@@ -36,6 +36,11 @@ class Person < ActiveRecord::Base
     self.authorised_account
   end
   
+  def authorise!
+    self.authorised_account = true
+    save!
+  end
+  
   def create_entity_for_person
     Entity.create!(:entity_type_id => EntityType::PERSON_ENTITY, :specific_entity_id => self.id)
   end
