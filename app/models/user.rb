@@ -16,13 +16,12 @@ class User < ActiveRecord::Base
     end
     user = User.find_by_uid(auth["uid"])
     #IF STATEMENT IS ONLY FOR BETA PHASE BECAUSE INFORMING MUTUAL FRIENDS WILL BE DONE WHEN ENTERED PROPER CODE
-    user.inform_mutural_friends(auth) if user.person.authorised? 
+    user.inform_mutural_friends(auth["credentials"]["token"]) if user.person.authorised? 
     user
   end
   
   #Inform everybody if this person is their friend on fb
-  def inform_mutural_friends(auth)
-    token = auth["credentials"]["token"]
+  def inform_mutural_friends(token)
     registered_user = FbGraph::User.me(token)
     begin
       friends_list = registered_user.friends(options = {:access_token => token})  
