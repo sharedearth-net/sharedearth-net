@@ -1,0 +1,2 @@
+module ReguestedInvitationsHelper
+end
