@@ -1,19 +1,9 @@
 class InvitationsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :validate]
-  before_filter :admin_access, :except => [:index, :validate]
-  
-  layout :dynamic_layout
-  
+  before_filter :authenticate_user!, :except => [:validate, :key]
+  before_filter :admin_access, :only => [:index, :new, :create]
+    
   def index
-    if administrator?
-      @invitations = Invitation.all
-    else
-      unless current_user.person.authorised?
-        render :template => 'invitations/key' 
-      else
-        redirect_to dashboard_path, :notice => "Wrong url"
-      end
-    end
+    @invitations = Invitation.all
   end
 
   def new
@@ -49,13 +39,13 @@ class InvitationsController < ApplicationController
      unless invitation.nil? || invitation.invitation_active
         invitation.update_attributes(:invitee_person_id => current_user.person.id, :accepted_date => Time.now, :invitation_active => false)
         current_user.person.update_attributes(:authorised_account => true)
-        #current_user.inform_mutural_friends(auth)
+        current_user.inform_mutural_friends(session[:fb_token])
         redirect_to dashboard_path and return
      end
    end 
-   redirect_to invitations_path, :notice => "Please use correct code or make sure it was not used before." 
+   redirect_to root_path, :notice => "The code you have provided is invalid or inactive" 
   end
-    
+      
   private
   
   def administrator?
@@ -66,7 +56,4 @@ class InvitationsController < ApplicationController
     redirect_to dashboard_path, :notice => "Wrong url" if !administrator?
   end
   
-  def dynamic_layout
-    administrator? ? 'application' : 'beta_welcome'
-  end
 end
