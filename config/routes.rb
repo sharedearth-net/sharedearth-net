@@ -1,5 +1,7 @@
 Sharedearthapp::Application.routes.draw do
 
+  get "reguested_invitations/create"
+
   resources :invitations, :except => [:destroy, :edit, :show] do
     collection do
         put "validate"
