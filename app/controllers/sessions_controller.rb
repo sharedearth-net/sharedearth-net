@@ -46,7 +46,7 @@ class SessionsController < ApplicationController
     if user.person.authorised?
       redirect_to dashboard_path
     else
-      redirect_to invitations_path
+      redirect_to root_path
     end
   end
 
