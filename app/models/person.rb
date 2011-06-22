@@ -59,7 +59,7 @@ class Person < ActiveRecord::Base
   end
   
   def self.with_items_more_than(items_count)
-    people = Person.all.collect { |p| p if p.items.without_deleted.count > items_count }.compact!
+    people = Person.all.collect { |p| p if p.items.without_deleted.count >= items_count.to_i }.delete_if {|p| p.nil?}
   end
   
   def trusted_friends_items
