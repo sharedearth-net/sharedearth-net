@@ -28,37 +28,21 @@
 		</h1>
 
 		<div id="content" class="clearfix">
-
-      <h2>Beta testing</h2>
-                  <%= link_to "Sign in with different account", signout_path, :class => 'disconnect' %>
-			<p>	
-				sharedearth.net is a social network for humans to build 
-				<strong>trust</strong> and <strong>share</strong> possessions and skills, helping us rewrite 
-				our cultural and economic stories to reflect our emerging 
-				experience of universal <strong>interconnection</strong>.
-			</p>
-			<% flash.each do |name, msg| %>
-	      <%
-		      # this will output all set flash messages and it will give each appropriate id
-		      # possible values include: flash-notice and flash-alert
-		      # (CSS rules also allow flash-info - which is not used at the moment)
-	      %>
+				<% flash.each do |name, msg| %>
 	      <%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
-      <% end %>
-			<div class="button-holder-connect">
-				<h2>
-						Enter key
-            <%= form_tag validate_invitations_path, :method => 'put' do %>
-	            <p>
-                <%= label_tag 'Enter your invitation code' %><br />
-                <%= text_field_tag :key, params[:key] %>
-                  <%= submit_tag 'Enter code' %>
-              </p>
-	                      
-
-            <% end %>
-            
-				</h2>
+        <% end %>
+        <h2>Beta testing</h2><%= button_to 'Disconnect', signout_path %><br />
+        Please enter your invitation code to continue, or request an invitation<br />
+                  
+              <%= form_tag validate_invitations_path, :method => 'put' do %>
+	              <p>
+                  <%= label_tag 'Enter your invitation code' %>
+                  <%= text_field_tag :key, params[:key] %>
+                    <%= submit_tag 'Submit' %>
+                </p>
+              <% end %>
+              <%= button_to 'Request invitation', reguested_invitations_create_path, :method => 'get' %>
+              
 			</div>
 
 		</div>
