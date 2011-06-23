@@ -1,6 +1,8 @@
 Sharedearthapp::Application.routes.draw do
 
   get "reguested_invitations/create"
+  
+  resources :comments, :only => [:create]
 
   resources :invitations, :except => [:destroy, :edit, :show] do
     collection do
