@@ -1,0 +1,8 @@
+<div class="adding_comment">&nbsp;</div>
+<%=form_for(Comment.new) do |f|%>
+ <%=f.hidden_field :commentable_id, :value=> commentable.id %><br/>
+ <%= f.hidden_field :commentable_type, :value => commentable.class.name %>
+ <%=f.label :comment%><br/>
+ <%=f.text_area :comment, :style=>"width:320;height:80px"%><br/><br/>
+ <%=f.submit "Add comment"%>
+<%end%>
