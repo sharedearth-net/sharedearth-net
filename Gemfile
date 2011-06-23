@@ -20,6 +20,8 @@ gem "will_paginate", "~> 3.0.pre2"
 
 gem 'rake', '0.8.7'
 
+gem "acts_as_commentable"
+
 
 # didn't use rails3_acts_as_paranoid because it uses default_scope causing problems with, for example, item_request.item
 # https://github.com/goncalossilva/rails3_acts_as_paranoid
