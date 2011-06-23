@@ -1,4 +1,6 @@
 class ItemRequest < ActiveRecord::Base
+  acts_as_commentable
+  
   STATUS_REQUESTED = 10.freeze
   STATUS_ACCEPTED  = 20.freeze
   STATUS_COMPLETED = 30.freeze
