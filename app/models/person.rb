@@ -32,6 +32,15 @@ class Person < ActiveRecord::Base
     self.people_networks.involves_as_trusted_person(other_person).first
   end
   
+  def authorised?
+    self.authorised_account
+  end
+  
+  def authorise!
+    self.authorised_account = true
+    save!
+  end
+  
   def create_entity_for_person
     Entity.create!(:entity_type_id => EntityType::PERSON_ENTITY, :specific_entity_id => self.id)
   end
@@ -52,6 +61,10 @@ class Person < ActiveRecord::Base
   
   def trusted_friends
     self.people_networks.map { |n| n.trusted_person }    
+  end
+  
+  def self.with_items_more_than(items_count)
+    people = Person.all.collect { |p| p if p.items.without_deleted.count >= items_count.to_i }.delete_if {|p| p.nil?}
   end
   
   def trusted_friends_items

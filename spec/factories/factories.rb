@@ -8,6 +8,7 @@ Factory.define :person do |p|
   p.name "Sharen"
   p.association :user, :factory => :user
   p.association :reputation_rating, :factory => :reputation_rating
+  p.authorised_account true
 end
 
 Factory.define :reputation_rating do |r|

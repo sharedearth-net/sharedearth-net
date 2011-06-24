@@ -1,0 +1,21 @@
+<%= form_tag (invitations_path, :method => 'post', :multipart => true) do %>
+	<p>
+    <%= label_tag 'Number of invitations' %><br />
+    <%= text_field_tag 'invitations' %>
+  </p>
+  <p>
+    <%= label_tag 'Number of items person have' %><br />
+    <%= text_field_tag 'items' %>
+  </p>
+	          
+  <button type="submit" title="Generate">Generate</button>
+  <%= submit_tag 'Preview', :name => 'preview_button' %>
+<% end %>
+
+  <% if params[:preview_button] %>
+    <p>
+    Number of invitations <%= @invitation_count%> <br />
+    Number of people who would be invited <%= @people_count%>
+    </p>
+  <% end %>
+

@@ -21,6 +21,7 @@ Feature: Searching for items and people
   Scenario: Person is searched and found, but no item is showed
     Given "Maria" has trusted relationship with "John"
     And "Maria" is the owner of item with name "Plane"
+    Then I should see "disconnect"
     When I fill in "search" with "Maria"
     Then I press "Search" 
     And I should see "From your trusted network"

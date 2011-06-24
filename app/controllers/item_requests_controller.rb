@@ -22,6 +22,7 @@ class ItemRequestsController < ApplicationController
   end
 
   def show
+    @comments = @item_request.comments
     respond_to do |format|
       if @item_request.completed?
         format.html { render 'completed'}

@@ -42,11 +42,20 @@ class SessionsController < ApplicationController
     user.token = token
     user.save!
     session[:user_id] = user.id
-    redirect_to dashboard_path
+    session[:fb_token] = auth["credentials"]["token"] if auth['provider'] == 'facebook'
+    if user.person.authorised?
+      redirect_to dashboard_path
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
+    split_token = session[:fb_token].split("|")
+    fb_api_key = split_token[0]
+    fb_session_key = split_token[1]
+    session[:fb_token] = nil
     session[:user_id] = nil
-    redirect_to root_path
+    redirect_to "http://www.facebook.com/logout.php?api_key=#{fb_api_key}&session_key=#{fb_session_key}&confirm=1&next=#{root_url}";
   end
 end

@@ -512,7 +512,7 @@ a.normal:visited {
 			}
 
 				.items-list ul li .thumb {
-					max-height: 32px;
+					max-height: 50px;
 					float: left;
 					margin-right: 10px;
 					margin-top: 3px;
@@ -1522,7 +1522,7 @@ a.normal:visited {
 				    float: left;
 				    margin-right: 10px;
 				    margin-top: 3px;
-				    max-height: 32px;
+				    max-height: 50px;
 				}
 
 				#search-page a.communities:link,
