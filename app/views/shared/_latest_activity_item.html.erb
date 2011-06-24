@@ -15,32 +15,34 @@ model.
 when looking at a request page, and the Latest Activity should show events
 relating to the other person in the transaction as well.
 -->
-<h2 class="default-title">Latest Activity</h2>
-<ul>
-  <% item_activities = item.public_activities %>
-  <% item_activities.each do |al|%>
-  <li class="sidebar-box clearfix">
-		<div class="inner-content">
-			<p>
-				<%= recent_activity_sentence(al) %>
-			</p>
-			<div class="action clearfix">
-				<ul>
-					<li><%= time_ago_in_words al.created_at %> ago</li>
-					<li><a href="#">comments(0)</a></li>
-				</ul>
+<div class="latest-activity">
+	<h2 class="default-title">Latest Activity</h2>
+	<ul>
+	  <% item_activities = item.public_activities %>
+	  <% item_activities.each do |al|%>
+	  <li class="sidebar-box clearfix">
+			<div class="inner-content">
+				<p>
+					<%= recent_activity_sentence(al) %>
+				</p>
+				<div class="action clearfix">
+					<ul>
+						<li><%= time_ago_in_words al.created_at %> ago</li>
+						<li><a href="#">comments(0)</a></li>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</li>
-  <% end unless item_activities.empty? %>
-  <% if item_activities.empty? %>
-  <li class="sidebar-box clearfix">
-		<div class="inner-content">
-			<p>
-				This item doesn't have any activity yet
-			</p>
-		</div>
-	</li>
-	<% end -%>
-</ul>
+		</li>
+	  <% end unless item_activities.empty? %>
+	  <% if item_activities.empty? %>
+	  <li class="sidebar-box clearfix">
+			<div class="inner-content">
+				<p>
+					This item doesn't have any activity yet
+				</p>
+			</div>
+		</li>
+		<% end -%>
+	</ul>
+</div><!-- /latest-activity -->
 

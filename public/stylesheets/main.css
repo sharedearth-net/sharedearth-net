@@ -1104,6 +1104,8 @@ a.normal:visited {
 			padding-left: 0;
 			float: left;
 			width: 40%;
+			height: 17px;
+		    margin-top: 9px;
 		}	
 	
 		#request-page #sidebar .trust-reputation-box h2.rhs-link {
@@ -2052,13 +2054,13 @@ a.normal:visited {
 	/* Event sentences in News Feed (on dashboard) and Latest Activity (on profile pages) */
 
 	#sidebar p {
-		color: #62775a;
+		color: #5c5c5c;
 		font-size: 12px;
 	}
 
 		#sidebar p a:link,
 		#sidebar p a:visited {
-			color: #62775a;
+			color: #5c5c5c;
 		}
 
 
@@ -2074,9 +2076,36 @@ a.normal:visited {
 
 	.action li,
 	ul.action-list li {
-		color: #858f7c;
+		color: #838683;
 		font-size: 11px;
 	}
+	
+	
+		/* Time since (e.g. 43 minutes ago) under Event Sentences (for Requests\Actions and Recent Activity) */ 
+	
+		.requests .action li,
+		.requests ul.action-list li {
+			color: #838683;
+			font-size: 11px;
+		}
+		
+
+		/* Action shortcuts (43 minutes ago) under Event Sentences (for News Feed and Latest Activity) */ 
+		
+		.network-activity .action li,
+		.network-activity .ul.action-list li {
+			color: #81927b;
+			font-size: 11px;
+		}
+
+	
+		/* Time since (e.g. 43 minutes ago) under Event Sentences (for News Feed and Latest Activity)*/ 
+	
+		.latest-activity .action li,
+		.latest-activity .ul.action-list li {
+			color: #9c9e9c;
+			font-size: 11px;
+		}
 	
 	
 	/* Action shortcuts (e.g. 'accept', 'reject') under Event Sentences (on dashboard and profile pages), and under an item listing */
@@ -2114,7 +2143,7 @@ a.normal:visited {
 	#request-page #content h2 a:visited,
 	#items-page #content h2 a:link,
 	#items-page #content h2 a:visited {
-		color: #333;
+		color: #62775a;
 		font-size: 16px;
 	}
 
@@ -2159,6 +2188,8 @@ a.normal:visited {
 		/* Reputation & Trust Headings for T&R box */
 
 		.trust-reputation-box h3,
+		.trust-reputation-box h3 a:link,
+		.trust-reputation-box h3 a:visited,
 		#item-edit-page label {
 			font-family: verdana, tahoma, arial, sans-serif;
 			color: #315859;
@@ -2186,7 +2217,7 @@ a.normal:visited {
 	p.status-holder-profile span a:link,
 	p.status-holder-profile span a:visited {
 		font-size: 11px;
-		color: #62775a;
+		color: #81927b;
 	}
 
 
@@ -2194,7 +2225,7 @@ a.normal:visited {
 	
 	#content p.description {
 		font-size: 11px;
-		color: #858f7c;
+		color: #9c9e9c;
 	}
 
 			
@@ -2215,7 +2246,7 @@ a.normal:visited {
 	#content .items-list ul p a:link,
 	#content .items-list ul p a:visited {
 		font-size: 12px;
-		color: #858f7c;
+		color: #62775a;
 	}
 	
 	
@@ -2238,7 +2269,7 @@ a.normal:visited {
 		#manage-resources-page #sidebar-left ul li,
 		#search-page #sidebar-left ul li {
 			font-size: 12px;
-			color: #127e0e;
+			color: #62775a;
 		}
 			
 			#community-page #sidebar-left ul li a:link,
@@ -2249,7 +2280,7 @@ a.normal:visited {
 			#manage-resources-page #sidebar-left ul li a:visited,
 			#search-page #sidebar-left ul li a:link,
 			#search-page #sidebar-left ul li a:visited {
-				color: #127e0e;
+				color: #62775a;
 			}
 
 
