@@ -149,7 +149,8 @@
 	
 	<div id="sidebar">
 		<%#= render :partial => "shared/latest_activity_person", :locals => { :person => @person } %>
-		<%= render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => 'Trusted Network Activity' } %>
+		<% title = trusted_network ? 'Trusted Network Activity' : 'Your Network Activity' %>
+		<%= render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => title } %>
 	</div><!-- /sidebar	-->
 	
 </div><!-- /community-page -->
