@@ -201,11 +201,11 @@ class ItemRequest < ActiveRecord::Base
   end
   
   def create_sharing_event_log
-    EventLog.create_news_event_log(self.requester, self.gifter,  self.item , EventType.sharing)
+    EventLog.create_news_event_log(self.requester, self.gifter,  self.item , EventType.sharing, self)
   end
   
   def create_gifting_event_log
-    EventLog.create_news_event_log(self.requester, self.gifter,  self.item , EventType.gifting)
+    EventLog.create_news_event_log(self.requester, self.gifter,  self.item , EventType.gifting, self)
   end
   
   def create_new_item_request_activity_log

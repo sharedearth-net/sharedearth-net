@@ -79,13 +79,13 @@ class Feedback < ActiveRecord::Base
       case feedback.feedback.to_i
         when FEEDBACK_POSITIVE
           event_type = feedback.requester_feedback? ? EventType.positive_feedback_gifter : EventType.positive_feedback_requester
-          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type)
+          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type, nil)
         when FEEDBACK_NEGATIVE
           event_type = requester_feedback? ? EventType.negative_feedback_gifter : EventType.negative_feedback_requester
-          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type)
+          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type, nil)
         when FEEDBACK_NEUTRAL
           event_type = requester_feedback? ? EventType.neutral_feedback_gifter : EventType.neutral_feedback_requester
-          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type)
+          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type, nil)
         else
           #
       end

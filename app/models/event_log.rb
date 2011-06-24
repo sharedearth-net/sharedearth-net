@@ -74,7 +74,7 @@ class EventLog < ActiveRecord::Base
   # #####
   # USE: If there is no second person nor object in event, just use nil on those places
   
-  def self.create_news_event_log(first_person, second_person, object, event_type)
+  def self.create_news_event_log(first_person, second_person, object, event_type, related)
     if(second_person.nil?)
       second_person_first_name = nil
       second_person_name = nil
@@ -98,7 +98,7 @@ class EventLog < ActiveRecord::Base
       :secondary => second_person,
       :secondary_short_name => second_person_first_name,
       :secondary_full_name => second_person_name,
-      :related => nil,
+      :related => related,
       :event_type_id => event_type
     )
     

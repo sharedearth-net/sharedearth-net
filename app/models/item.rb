@@ -161,13 +161,13 @@ class Item < ActiveRecord::Base
   def damaged!
     self.status = STATUS_DAMAGED
     save!
-    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_damaged)
+    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_damaged, self)
   end
 
   def normal!
     self.status = STATUS_NORMAL
     save!
-    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_repaired)
+    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_repaired, self)
   end
 
   def lost!
@@ -201,7 +201,7 @@ class Item < ActiveRecord::Base
   end
   
   def create_new_item_event_log
-    #EventLog.create_news_event_log(self.owner, nil,  self , EventType.add_item)
+    #EventLog.create_news_event_log(self.owner, nil,  self , EventType.add_item, self)
   end
 
   def create_new_item_activity_log

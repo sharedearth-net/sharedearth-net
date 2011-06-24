@@ -21,5 +21,6 @@
 <% end %>
 <% end %>
 
-
-<li><a href="#">comments(0)</a></li>
+<!-- ONLY ITEM REQUEST IS COMMENTABLE AT THE MOMENT -->
+<% comments = activity_log.related.comments.count if activity_log.related_type == "ItemRequest" %>
+<li><a href="#">comments(<%= comments ||= 0 %>)</a></li>

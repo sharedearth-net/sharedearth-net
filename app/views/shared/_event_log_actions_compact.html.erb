@@ -13,6 +13,7 @@
               <% end %>
               <% end %>
 							<li><a href="#">offer</a></li>
-							<li><a href="#">comments(0)</a></li>
+							<% comments = event_log.related.comments.count if event_log.related_type == "ItemRequest" %>
+							<li><a href="#">comments(<%= comments ||= 0 %>)</a></li>
 						</ul>
 </div>
