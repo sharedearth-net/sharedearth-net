@@ -1,4 +1,7 @@
-<div id="dashboard-page">
+<div id="dashboard-page" class="empty clearfix">
+<!-- class "empty" should only appear when a user has 0 people in their trusted network, and is not part of any village, community or project -->
+
+	<%= image_tag("bg-empty-village.png", :alt => "", :class => "empty-village")  %>
 	<div id="content">
 		<% unless @requests.count.zero? %>
 			<div class="content-box-holder">
@@ -86,5 +89,12 @@
 
 	<div id="sidebar">
 		<%= render :partial => "shared/news_feed_person", :locals => { :events => @events } %>
+		
+		
+		<!-- this should only appear when a user has 0 people in their trusted network, and is not part of any village, community or project -->
+			<!--<%= render :partial => "shared/news_feed_emty" %>-->
+		<!-- this should only appear when a user has 0 people in their trusted network, and is not part of any village, community or project -->
+		
+		
 	</div><!-- sidebar -->
 </div><!--	/dashboard -->

@@ -713,6 +713,10 @@ a.normal:visited {
 
 
 	/* dashboard - sidebar */
+	
+		#dashboard-page img.empty-village {
+			display: none;
+		}
 		
 		#dashboard-page #sidebar .inner-content {
 			padding-left: 0;
@@ -722,6 +726,20 @@ a.normal:visited {
 			#sidebar .with-action p img {
 			 	vertical-align: top;
 			}
+			
+			/* dashboard - sidebar - no village, community or project  */
+			
+			#dashboard-page.empty {
+				position: relative;
+			}
+
+				#dashboard-page.empty img.empty-village {
+					position: absolute;
+					right: -125px;
+					bottom: -145px;
+					display: block;
+				}
+
 			
 			
 			
