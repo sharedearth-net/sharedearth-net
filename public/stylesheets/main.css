@@ -2088,16 +2088,7 @@ a.normal:visited {
 			color: #838683;
 			font-size: 11px;
 		}
-		
-
-		/* Action shortcuts (43 minutes ago) under Event Sentences (for News Feed and Latest Activity) */ 
-		
-		.network-activity .action li,
-		.network-activity .ul.action-list li {
-			color: #81927b;
-			font-size: 11px;
-		}
-
+	
 	
 		/* Time since (e.g. 43 minutes ago) under Event Sentences (for News Feed and Latest Activity)*/ 
 	
@@ -2108,13 +2099,28 @@ a.normal:visited {
 		}
 	
 	
-	/* Action shortcuts (e.g. 'accept', 'reject') under Event Sentences (on dashboard and profile pages), and under an item listing */
+	/* Action shortcuts (e.g. 'accept', 'reject') under Event Sentences (for News Feed and Latest Activity) */
 
 	.action-list a:link,
 	.action-list a:visited,
 	.action a:link,
 	.action a:visited {
-		color: #5a776f;
+		color: #81927b;
+		font-size: 11px;
+	}
+	
+		
+	/* Action shortcuts (e.g. 'accept', 'reject') under Event Sentences (for Requests\Actions and Recent Activity) */ 
+		
+	#dashboard-page #content .action-list a:link,
+	#dashboard-page #content .action-list a:visited,
+	#dashboard-page #content .action a:link,
+	#dashboard-page #content .action a:visited,
+	.requests .action-list a:link,
+	.requests .action-list a:visited,
+	.requests .action a:link,
+	.requests .action a:visited {
+		color: #62775a;
 		font-size: 11px;
 	}
 	
