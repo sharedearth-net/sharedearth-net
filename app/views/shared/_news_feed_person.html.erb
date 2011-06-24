@@ -1,5 +1,5 @@
 <div class="network-activity">
-	<h2><%= title.nil? ? 'Your Network Activity' : title %></h2>
+	<h2><%= title ||= 'Your Network Activity' %></h2>
 		<ul>
 		  <% events.each do |event| %>
 		  <li class="sidebar-box clearfix">
