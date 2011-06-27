@@ -22,6 +22,7 @@ class SearchController < ApplicationController
             params[:type] = 'all'
           end
       end 
+      @people = @people - [current_user.person]
     else
       params[:type] = 'all'
     end
