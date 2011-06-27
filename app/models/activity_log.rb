@@ -128,6 +128,20 @@ class ActivityLog < ActiveRecord::Base
      )
    end
    
+   def self.create_person_join_activity_log(person)
+     event_code = ActivityLog.next_event_code
+
+     # create log for owner
+     ActivityLog.create!(
+       :event_code => event_code,
+       :primary => person,
+       :action_object => nil,
+       :action_object_type_readable => nil,
+       :related => nil,
+       :event_type_id => EventType.new_person_join
+     )
+   end
+   
   # More general method for saving activity logs
   # First param: item_request object from which activity log will be created
   # Second param: Type of the event for gifter
