@@ -25,6 +25,8 @@ class ItemRequestsController < ApplicationController
     @comments = @item_request.comments
     respond_to do |format|
       if @item_request.completed?
+        @commentable_object = EventLog.find_by_related_id_and_related_type(@item_request.id, "ItemRequest")
+        @public_comments = @commentable_object.comments
         format.html { render 'completed'}
         format.xml  { render :xml => @item }
       else
