@@ -1,4 +1,5 @@
 class EventLog < ActiveRecord::Base
+  acts_as_commentable
   # t.integer :primary_id - primary entity (e.g. person) for whom this ActivityLog is made
   # t.string  :primary_type
   # t.string  :primary_short_name
@@ -133,4 +134,10 @@ class EventLog < ActiveRecord::Base
     EventEntity.create!(:event_log => event_log, :entity => first_person, :user_only => true)
     EventEntity.create!(:event_log => event_log, :entity => second_person, :user_only => true)    
   end
+  
+  #METHODS CHECKING THE TYPE OF RELATED ACTION
+  def item_request?
+    self.related_type == "ItemRequest"
+  end
+  
 end
