@@ -23,6 +23,7 @@ class Person < ActiveRecord::Base
   validates_presence_of :user_id, :name
   
   after_create :create_entity_for_person
+  after_create :create_person_join_activity_log
 
   def belongs_to?(some_user)
     user == some_user
@@ -218,6 +219,10 @@ class Person < ActiveRecord::Base
   
   def same_as_person?(person)
     self.id == person.id
+  end
+    
+  def create_person_join_activity_log
+    ActivityLog.create_person_join_activity_log(self)
   end
   
 end
