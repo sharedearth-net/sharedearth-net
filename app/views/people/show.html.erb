@@ -101,10 +101,42 @@
 													<li>
 														<%= time_ago_in_words req.created_at %> ago
 													</li>
-													<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
+													<li>
+														<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
+													</li>
 												</ul>
 											</div>
+											
+											
 										</li>
+										
+										<!-- Static comments begin -->
+										
+										<li class="content-box clearfix">
+
+											<div>
+
+												<ul class="comment-list">
+													<li class="clearfix">									
+														<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
+														<p>
+															<a href="#">Peter Smith</a> says: Hi!
+															<span>2 minutes ago</span>
+														</p>
+													</li>
+													<li class="no-bg">
+														<div class="comment-box">
+															<textarea rows="1" cols="13">Comment</textarea>
+														</div>
+													</li>
+
+												</ul>
+
+											</div>
+										</li>
+										
+										<!-- Static comments end -->
+										
 									<% end %>
 								</ul>						
 							<% else %>

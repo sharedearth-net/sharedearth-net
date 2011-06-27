@@ -1,12 +1,14 @@
 <% @comments.each do |c| -%>
   <% person = c.user.person %>
-	<li>
-				<ul class="meta">
-					<li class=""><%= image_tag person.avatar(:square), :class => "thumb" %></li>
-					<li class="author"><%= link_to person.name, person_path(person) %></li>
-					<li class="date">posted on <%= time_ago_in_words(c.created_at) %></li>
-				</ul>
-				<div class="bodyc"><%= c.comment %></div>
+	<li class="clearfix">									
+		<%= image_tag person.avatar(:square), :class => "thumb" %>
+		<p>
+			<%= link_to person.name, person_path(person) %> says: 
+			<%= c.comment %>
+			<span><%= time_ago_in_words(c.created_at) %> ago</span>
+		</p>
 	</li>
-
+	
 <% end -%>
+
+

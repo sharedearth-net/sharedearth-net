@@ -6,7 +6,33 @@
 	<div class="action clearfix">
 		<ul>
 			<li><%= time_ago_in_words activity_log.created_at %> ago</li>
-			<%= render :partial => "shared/activity_log_actions_compact", :locals => { :activity_log => activity_log } %>
+			<li>
+				<%= render :partial => "shared/activity_log_actions_compact", :locals => { :activity_log => activity_log } %>
+			</li>
 		</ul>
 	</div>
 </div>
+
+<!-- Static comments begin -->
+<!--
+<div class="inner-content">
+	<ul class="comment-list">
+		<li class="clearfix">									
+			<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
+			<p>
+				<a href="#">Peter Smith</a> says: Hi!
+				<span>2 minutes ago</span>
+			</p>
+		</li>
+		<li class="no-bg">
+			<div class="comment-box">
+				<textarea rows="1" cols="13">Comment</textarea>
+			</div>
+		</li>
+	</ul>
+
+</div>-->
+
+
+<!-- Static comments end -->
+

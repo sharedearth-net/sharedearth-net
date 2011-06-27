@@ -488,8 +488,9 @@ a.normal:visited {
 				/*background: #ebf5da;*/
 				padding: 0 15px 12px 16px;
 				width: 425px;
-			}						
-							
+			}
+		
+
 	/* global -item list */				
 
 	.items-list {
@@ -626,48 +627,59 @@ a.normal:visited {
 			
 							
 		/* comments */
-
-		.inner-content ul.comment-list {
+		
+		ul.comment-list {
 			clear: both;
 		}
-
-			.inner-content ul.comment-list li {
+		
+			ul.comment-list li  {
 				width: 403px;
 				padding: 0 4px;
 				background: #f4f9eb;
 				margin-top: 5px;
-	                  margin-bottom: 0px;
+	            margin-bottom: 0px;
 			}
 
-			.inner-content ul.comment-list li p {
-				font-size: 11px;
-				padding-top: 3px;
-	                  padding-bottom: 3px;
-			}
-
-	              .inner-content ul.comment-list li a:link,
-	              .inner-content ul.comment-list li a:visited {
-	                  font-weight: normal;
-	              }
-
-				.inner-content ul.comment-list li p span {
-					display: block;
-	                      color: #62775a;
-	                      font-size: 10px;
+				ul.comment-list li.no-bg  {
+					background: #fff;
+					padding: 0;
 				}
+				
+					ul.comment-list li p {
+						font-size: 11px;
+						padding-top: 3px;
+		      			padding-bottom: 3px;
+					}
+					
+						ul.comment-list li p span {
+							display: block;
+							color: #62775a;
+							font-size: 10px;
+						}
+		
+					ul.comment-list .thumb {
+						float: left;
+						margin: 3px 7px 3px 0;
+						max-width: 27px;
+					}
 
-			.inner-content ul.comment-list li .comment-box {
-				padding: 2px 2px 1px 2px;
+			.comment-box {
+				padding: 2px 0 1px 0;
 			}
 
-				.inner-content ul.comment-list li .comment-box textarea {
+				.comment-box textarea {
 					height: 15px;
 					font-size: 9px;
 					color: #999;
 					border: 1px solid #8e948e;
 					padding: 2px 0 0 4px;
-					width: 393px;
+					width: 403px;
 					overflow:auto;
+				}
+				
+				
+				ul.comment-list input[type="submit"] {
+					display: none;
 				}
 
 
@@ -710,7 +722,12 @@ a.normal:visited {
 				#dashboard-page .inner-content .inner-content {
 					margin-left: 0px;
 				}
-
+	
+		/* dashboard - content - comments */
+				
+		#dashboard-page #content ul.comment-list li p span {
+			display: block;
+		}
 
 	/* dashboard - sidebar */
 	
@@ -726,6 +743,18 @@ a.normal:visited {
 			#sidebar .with-action p img {
 			 	vertical-align: top;
 			}
+			
+			
+			/* dashboard - sidebar - comments */
+			
+			#dashboard-page .comment-box {
+				padding: 0;
+			}
+			
+			#dashboard-page .comment-box textarea {
+				width: 405px;
+			}
+			
 			
 			/* dashboard - sidebar - no village, community or project  */
 			
@@ -772,6 +801,31 @@ a.normal:visited {
 		margin-bottom: 15px;
 		margin-top: -5px;
 	}
+	
+	
+		/* profile-page - content - comments */
+	
+		#profile-page #content ul.comment-list li {
+			color: #127E0E;
+		    float: none;
+		    font-size: 12px;
+			width: 401px;
+		}
+	
+			#profile-page #content ul.comment-list .thumb {
+				float: left;
+			    max-width: 27px;
+				width: auto;
+			}
+	
+				#profile-page #content ul li div ul.comment-list p {
+					clear: none;
+				}
+				
+				#profile-page #content .comment-box textarea {
+					width: 403px;
+				}
+	
 
 	/* profile - sidebar */	
 	
@@ -886,6 +940,21 @@ a.normal:visited {
 					margin-right: 17px;
 					font-size: 11px;
 				}
+				
+				
+				/* profile-page - sidebar - comments */
+				
+				#profile-page #sidebar ul.comment-list {
+
+				}
+				
+					#profile-page #sidebar ul.comment-list li {
+						width: 402px;
+					}
+					
+						#profile-page #sidebar .comment-box textarea {
+							width: 404px;
+						}
 
 
 						

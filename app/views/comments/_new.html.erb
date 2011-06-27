@@ -1,11 +1,10 @@
 <li class="no-bg">
-<%=form_for(Comment.new) do |f|%>
- <%=f.hidden_field :commentable_id, :value=> commentable.id %><br/>
- <%= f.hidden_field :commentable_type, :value => commentable.class.name %>
-<div class="comment-box">
-<%=f.text_area :comment, :rows => '1', :cols => '13' %>
-</div>
- <%=f.submit "Add comment"%>
-<%end%>
+	<%=form_for(Comment.new) do |f|%>
+		<%=f.hidden_field :commentable_id, :value=> commentable.id %>
+		<%= f.hidden_field :commentable_type, :value => commentable.class.name %>
+		<div class="comment-box">
+			<%=f.text_area :comment, :rows => '1', :cols => '13' %>
+		</div>
+ 		<%=f.submit "Add comment"%>
+	<%end%>
 </li>
-
