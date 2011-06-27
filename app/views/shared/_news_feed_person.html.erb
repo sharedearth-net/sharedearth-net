@@ -7,6 +7,26 @@
 						 render :partial => "shared/event_log_entry", :locals => { :event_log => event.event_log }
 					%>
 			</li>
+			    <% comments = event.event_log.comments%>				
+					<div class="inner-content">
+							
+						<ul class="comment-list">
+						<% comments.each do |c| -%>
+						  <% person = c.user.person %>
+						  <li>	
+								<%= image_tag person.avatar(:square), :class => "thumb" %>
+								<p>
+									<%= link_to person.name, person_path(person) %> says: <%= c.comment %>
+									<span><%= time_ago_in_words(c.created_at) %></span>
+								</p>
+							</li> 
+						<% end unless comments.empty? -%>
+							
+							<%= render :partial => 'comments/new', :locals => { :commentable => event.event_log } %>
+
+						</ul>
+
+					</div>
 			<% end unless @events.nil? %>		
 		</ul>
 		  <%= will_paginate @events, :page_links=>false unless @events.nil?%> 
