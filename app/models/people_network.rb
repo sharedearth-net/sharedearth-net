@@ -26,6 +26,6 @@ class PeopleNetwork < ActiveRecord::Base
     first_person.reputation_rating.increase_trusted_network_count
     second_person.reputation_rating.increase_trusted_network_count
     EventLog.create_trust_established_event_log(first_person, second_person)
-    ActivityLog.create_activity_log(first_person, second_person, nil, EventType.trust_established_initiator, EventType.trust_established_other_party)
+    ActivityLog.create_activity_log(first_person, second_person, nil, EventType.trust_established_other_party, EventType.trust_established_initiator)
   end
 end
