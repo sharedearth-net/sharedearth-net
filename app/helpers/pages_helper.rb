@@ -388,7 +388,7 @@ module PagesHelper
     
     #Check if sentence underneath are according to documentation, maybe they have changed  
     when 39
-      sentence =  person + " made a request to borrow your " + item  #this is duplicate of  - 2, not used at this moment, left for possible future use
+      sentence =  "You connected to sharedearth.net"
     when 40
       sentence =  "You made a request to borrow " + person_possesive + " " + item  #this is duplicate of - 3, not used at this moment, left for possible future use
     when 41
@@ -438,5 +438,18 @@ module PagesHelper
     
     sentence.html_safe
      
+  end
+  
+  def show_comments(log)
+    related = log.related
+    case related
+      when "ItemRequest"
+        s = link_to request_path(related)
+      else
+      #
+        
+    end
+    s.safe_html
+  
   end
 end
