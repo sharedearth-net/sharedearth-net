@@ -70,6 +70,33 @@
 		<div class="item-holder">
   		<%= image_tag @item_request.item.photo.url(:medium), :alt => "Item Completed Sample" if @item_request.item.has_photo? %>
 		</div>
+		
+		<% unless @comments.nil?%>
+		<div class="content-box-holder">
+			<ul>
+				<li class="content-box clearfix">
+						
+					<div class="inner-content">
+							
+						<ul class="comment-list">
+						<% @comments.each do |c| -%>
+						  <% person = c.user.person %>
+						  <li>	
+								<%= image_tag person.avatar(:square), :class => "thumb" %>
+								<p>
+									<%= link_to person.name, person_path(person) %> says: <%= c.comment %>
+									<span><%= time_ago_in_words(c.created_at) %></span>
+								</p>
+							</li> 
+						<% end -%>
+						</ul>
+
+					</div>
+				</li>
+			</ul>
+
+		</div>
+		<% end %>
    
 		<div class="messages-holder">
 		   
@@ -94,7 +121,7 @@
 		</div>
 	
 		
-		<% unless @comments.nil?%>
+		<% unless @public_comments.nil?%>
 		<div class="content-box-holder">
 			<ul>
 				<li class="content-box clearfix">
@@ -102,7 +129,7 @@
 					<div class="inner-content">
 							
 						<ul class="comment-list">
-						<% @comments.each do |c| -%>
+						<% @public_comments.each do |c| -%>
 						  <% person = c.user.person %>
 						  <li>	
 								<%= image_tag person.avatar(:square), :class => "thumb" %>
@@ -112,9 +139,6 @@
 								</p>
 							</li> 
 						<% end -%>
-							
-							<%= render :partial => 'comments/new', :locals => { :commentable => @item_request } %>
-
 						</ul>
 
 					</div>
@@ -123,6 +147,23 @@
 
 		</div>
 		<% end %>
+		<div class="content-box-holder">
+			<ul>
+				<li class="content-box clearfix">
+						
+					<div class="inner-content">
+							
+						<ul class="comment-list">
+						<%= render :partial => 'comments/new', :locals => { :commentable => @commentable_object } %>
+						</ul>
+
+					</div>
+				</li>
+			</ul>
+
+		</div>
+		
+		
 		
 		
 	
