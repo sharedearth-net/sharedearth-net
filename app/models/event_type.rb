@@ -405,12 +405,12 @@ class EventType < ActiveRecord::Base
   end
   
   #NEW EVENT TYPES, CHECK FOR DUPLICATES WITH PREVIOUS ONE  
-  def self.new_gift_item_request_gifter(return_only_id = true)
+  def self.new_person_join(return_only_id = true)
     return_only_id ? 39 : EventType.find(39)
   end
 
-  def new_gift_item_request_gifter?
-    self.id == EventType.new_item_request_gifter
+  def new_person_join?
+    self.id == EventType.new_person_join
   end
   
   def self.new_gift_item_request_requester(return_only_id = true)
