@@ -51,7 +51,7 @@ class Person < ActiveRecord::Base
   end
   
   def self.search(search)
-    search.empty? ? '' : Person.where("upper(name) LIKE upper(?) ", "%#{search}%")
+    search.empty? ? '' : Person.where("upper(name) LIKE upper(?) and authorised_account = (?)", "%#{search}%", true)
   end
   
   def searchable_core_of_friends
