@@ -23,16 +23,18 @@ relating to the other person in the transaction as well.
 	  <% person.public_events.each do |event_log| -%>
 	    <% sentence = event_log_sentence(event_log, person, EventDisplay::RECENT_ACTIVITY_FEED) %>  
 	    <% time = event_log.created_at %>
-	    <% feed.push({"value" => sentence, "time" => time })%>
+	    <% feed.push({"value" => sentence, "time" => time, "log" => event_log })%>
 	  <% end unless person.public_events.empty?-%>
 	  <% person.public_activities(current_user).each do |activity_log| -%>
 	    <% sentence = recent_activity_sentence(activity_log) %>
 	    <% time = activity_log.created_at %>
-	    <% feed.push({"value" => sentence, "time" => time })%>
+	    <% feed.push({"value" => sentence, "time" => time, "log" => activity_log })%>
 	  <% end unless person.public_activities(current_user).empty? -%>
-  
+
 	  <% feed = feed.sort_by { |feed| feed["time"] }.last(7).reverse%>
 	  <% feed.each do |sentence|%>
+	  <% log = sentence["log"] %>
+	  <% event = log.class.name == "EventLog" ? true : false -%>
 	  <li class="sidebar-box clearfix">
 			<div class="inner-content">
 				<p>
@@ -41,13 +43,28 @@ relating to the other person in the transaction as well.
 				<div class="action clearfix">
 					<ul>
 						<li><%= time_ago_in_words sentence["time"] %> ago</li>
-						<li><a href="#">comments(0)</a></li>
+						<% if event -%>
+						  <li><a href="#">comments(<%= log.comments.count %>)</a></li>
+						<% end -%>
+						
 					</ul>
 				</div>
 			</div>
 		</li>
-		
-		<!-- Static comments begin -->
+		<% if event -%>
+		<!-- comments begin -->
+		<div class="inner-content">
+			<ul class="comment-list">
+  			<% log.comments.each do |c| -%>
+					<%= render :partial => 'comments/comment', :locals => {:c => c} %>
+				<% end -%>
+				<%= render :partial => 'comments/new', :locals => { :commentable => log } %>
+			</ul>
+
+		</div>
+		<!-- comments end -->
+		<% end -%>
+		<!-- Static comments begin 
 		
 		<li class="sidebar-box clearfix">
 

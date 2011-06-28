@@ -68,6 +68,20 @@
 				</li>
 			</ul>
 		</div><!-- /content-box-holder  -->
+		
+		<% if (@item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)) && !@item_request.completed? %>
+    <!-- comments begin -->
+		<div class="inner-content">
+			<ul class="comment-list">
+  			<% @comments.each do |c| -%>
+					<%= render :partial => 'comments/comment', :locals => {:c => c} %>
+				<% end -%>
+				<%= render :partial => 'comments/new', :locals => { :commentable => @item_request } %>
+			</ul>
+
+		</div>
+		<!-- comments end -->
+		<% end %>
 	
 	</div><!-- /content -->
 
@@ -77,21 +91,6 @@
 	
 		<%= render :partial => "shared/latest_activity_person", :locals => { :person => (@item_request.gifter?(current_user.person) ? @item_request.requester : @item_request.gifter) } %>
 	
-		<% if (@item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)) && !@item_request.completed? %>
-
-
-
-		<!-- comments begin -->
-		<div class="inner-content">
-			<ul class="comment-list">
-				<%=render :partial => 'comments/comment',:locals => {:commentable=> @item_request, :comments => @comments}%>
-				<%= render :partial => 'comments/new', :locals => { :commentable => @item_request } %>
-				<% end %>
-			</ul>
-
-		</div>
-
-		<!-- comments end -->
 
 		
 	</div><!-- sidebar -->
