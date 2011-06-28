@@ -1,14 +1,9 @@
-<% @comments.each do |c| -%>
-  <% person = c.user.person %>
-	<li class="clearfix">									
-		<%= image_tag person.avatar(:square), :class => "thumb" %>
-		<p>
-			<%= link_to person.name, person_path(person) %> says: 
-			<%= c.comment %>
-			<span><%= time_ago_in_words(c.created_at) %> ago</span>
-		</p>
-	</li>
-	
-<% end -%>
-
+<% person = c.user.person %>
+						  <li>	
+								<%= image_tag person.avatar(:square), :class => "thumb" %>
+								<p>
+									<%= link_to person.name, person_path(person) %> says: <%= c.comment %>
+									<span><%= time_ago_in_words(c.created_at) %> ago</span>
+								</p>
+							</li> 
 
