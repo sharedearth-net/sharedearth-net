@@ -27,6 +27,7 @@ Given /^Person with name "(.*)" has completed request with "(.*)"$/ do |person1,
     person2 = Person.find_by_name("#{person2}")
     item = Factory(:item, :owner => person1) 
     @item_request = Factory(:item_request, :requester => person2, :gifter => person1, :item => item, :status => ItemRequest::STATUS_COMPLETED)
+    Factory(:event_log, :primary => person2, :secondary => person1, :action_object => item, :related => @item_request )
 end
 
 Given /^I am looking at last request page$/ do
