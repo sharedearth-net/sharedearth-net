@@ -15,7 +15,7 @@ Feature: Viewing someone else's trusted network and my own
     And I follow "view network"
     Then I should see "Your Network"
     Then I should see "Trusted Network"
-    Then I should see "Trusted Network Activity"
+    Then I should see "Your Network Activity"
     
     
   Scenario: I should see the my friends items
