@@ -296,7 +296,7 @@ module PagesHelper
 
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
-    if item.nil?
+    unless activity_log.secondary.nil?
       person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
       other_person        = link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive"
       person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
