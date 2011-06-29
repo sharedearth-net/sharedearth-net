@@ -1,5 +1,7 @@
 Sharedearthapp::Application.routes.draw do
 
+  resources :terms, :only => [:index, :create]
+
   get "reguested_invitations/create"
   
   resources :comments, :only => [:create]
