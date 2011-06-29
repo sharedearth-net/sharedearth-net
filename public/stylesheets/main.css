@@ -1554,7 +1554,7 @@ a.normal:visited {
 /*............Search Page............*/										
 	
 	#search-page #content {
-		width: 772px;
+		width: 837px;
 	}
 
 		#search-page .search-holder {
@@ -1611,8 +1611,8 @@ a.normal:visited {
 
 	#search-page #sidebar-left {
 		float: left;
-		width: 223px;
-		padding: 0 0 0 7px;
+		width: 150px;
+		padding: 0 15px 0 0;
 	}
 
 		#search-page #sidebar-left h2 {
@@ -1622,7 +1622,7 @@ a.normal:visited {
 		}
 
 		#search-page #sidebar-left ul {
-			width: 175px;
+			width: 150px;
 		}
 
 			#search-page #sidebar-left ul li {
@@ -1641,7 +1641,7 @@ a.normal:visited {
 
 				#search-page #sidebar-left ul li:hover,
 				#search-page #sidebar-left ul li.selected {
-					background: url('../images/community-list-hover.png') no-repeat 0 0;
+					background: url('../images/resources-list-hover.png') no-repeat 0 0;
 				}
 
 				#search-page #sidebar-left ul li.all a:link,
@@ -2010,7 +2010,7 @@ a.normal:visited {
 	}
 
 		#manage-resources-page #sidebar-left ul {
-			width: 175px;
+			width: 150px;
 		}
 
 			#manage-resources-page #sidebar-left ul li {

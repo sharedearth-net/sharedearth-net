@@ -109,10 +109,10 @@ ActiveRecord::Schema.define(:version => 20110627095017) do
   create_table "feedbacks", :force => true do |t|
     t.integer  "item_request_id"
     t.integer  "person_id"
+    t.integer  "feedback",        :limit => 255
     t.string   "feedback_note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "feedback"
   end
 
   create_table "invitations", :force => true do |t|
