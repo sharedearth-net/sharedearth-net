@@ -18,6 +18,7 @@ class Person < ActiveRecord::Base
   has_many :related_event_logs, :through => :event_entities, :source => :event_log
 
   has_many :feedbacks
+  has_many :invitations
   has_one :reputation_rating
 
   validates_presence_of :user_id, :name
@@ -40,6 +41,15 @@ class Person < ActiveRecord::Base
   def authorise!
     self.authorised_account = true
     save!
+  end
+  
+  def accept!
+    self.accepted_tc_and_pp = true
+    save!
+  end
+  
+  def accepted?
+    self.accepted_tc_and_pp == true
   end
   
   def create_entity_for_person
