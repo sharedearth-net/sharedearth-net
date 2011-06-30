@@ -34,6 +34,11 @@ Given /^I am looking at last request page$/ do
   visit request_path(@item_request)
 end
 
+Given /^invitation key exsists$/ do
+  me = Person.find_by_name("John")
+  Factory(:invitation, :inviter_person_id => me.id)
+end
+
 Given /^Person with name "(.*)" left (positive|negative|neutral) feedback for last request$/ do |person,feedback|
     case feedback
       when "positive"
