@@ -2061,7 +2061,165 @@ a.normal:visited {
 				#manage-resources-page #sidebar-left ul li.community a:visited {
 						background: url('../images/ic-community-community.png') no-repeat 1px 1px;
 				}
+				
+				
 
+/*............Terms and Conditions Page............*/
+
+#terms-conditions-page {
+
+}
+
+	#terms-conditions-page #content {
+		width: 100%;
+	}
+
+		#terms-conditions-page img.main-pic {
+			width: 351px;
+			margin: 0 auto;
+			display: block;
+		}
+
+		#terms-conditions-page #content h2 {
+			color: #127e0e;
+			text-align: center;
+			font-weight: bold;
+			font-size: 15px;
+			line-height: 39px;
+			margin-top: 12px;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+
+		#terms-conditions-page #content h3 {
+			color: #333;
+			line-height: 20px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 15px;
+			margin: 19px 0 31px 0;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+
+			#terms-conditions-page #content h3 span {
+				text-decoration: underline;
+			}
+
+		#terms-conditions-page #content h4 {
+			color: #5c5c5c;
+			font-size: 12px;
+			line-height: 16px;
+			margin: 19px 0 12px 0;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+
+		#terms-conditions-page #content h5 {
+			color: #5c5c5c;
+			font-size: 11px;
+			line-height: 15px;
+			margin-top: 13px;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+
+		#terms-conditions-page #content h5.bottom-separated {
+			margin-top: 0;
+			margin-bottom: 13px;
+		}
+
+		#terms-conditions-page #content h5.centered {
+			margin-top: 26px;
+			margin-bottom: 13px;
+			text-align: center;
+		}
+
+		#terms-conditions-page #content p {
+			color: #5c5c5c;
+			font-size: 11px;
+			line-height: 12px;
+			margin: 0;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+
+		#terms-conditions-page #content .buttons-holder {
+			width: 150px;
+			padding-top: 3px;
+			margin: 0 auto;
+		}
+
+
+		/* Terms and Conditions Page - Second Page */
+
+		#terms-conditions-page.second-page {
+
+		}
+
+		#terms-conditions-page.second-page #content h2,
+		#terms-conditions-page.second-page #content h3,
+		#terms-conditions-page.second-page #content h4,
+		#terms-conditions-page.second-page #content h5,
+		#terms-conditions-page.second-page #content p {
+			text-align: center;
+		}
+
+		#terms-conditions-page.second-page #content p.top-separated {
+			margin-top: 15px;
+		}
+
+		#terms-conditions-page.second-page #content h2 {
+			margin-bottom: 2px;
+		}
+
+			#terms-conditions-page.second-page #content h3 {
+				font-size: 13px;
+				color: #127e0e;
+				font-weight: normal;
+				margin: 0 0 13px 0;
+				line-height: 15px;
+			}
+
+			#terms-conditions-page.second-page #content h3.bottom-title {
+				margin-top: 27px;
+				font-size: 12px;
+
+			}
+
+
+		#terms-conditions-page.second-page #content .buttons-holder {
+			width: 167px;
+			margin: auto;
+		}
+
+			#terms-conditions-page.second-page .buttons-holder ul {
+
+			}
+
+				#terms-conditions-page.second-page .buttons-holder ul li {
+					width: 77px;
+					height: 24px;
+					display: block;
+					float: left;
+					margin-right: 13px;
+					text-indent: -1000em;
+				}
+
+				#terms-conditions-page.second-page .buttons-holder ul li.no {
+					margin-right: 0;
+				}
+
+					#terms-conditions-page.second-page .buttons-holder ul li a:link,
+					#terms-conditions-page.second-page .buttons-holder ul li a:visited {
+						display: block;
+						background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
+						width: 77px;
+						height: 24px;
+					}
+
+					#terms-conditions-page.second-page .buttons-holder ul li.no a:link,
+					#terms-conditions-page.second-page .buttons-holder ul li.no a:visited {
+						background: url('../images/bg-bt-no-tc.png') no-repeat top left;
+					}
+						
 						
 /* misc */
 
