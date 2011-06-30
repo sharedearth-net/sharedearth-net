@@ -28,7 +28,7 @@ end
 Factory.define :item do |i|
   i.item_type "Bike"
   i.name "Mountainbike"
-  i.description "Big beautifyl bike"
+  i.description "Big beautiful bike"
   i.association :owner, :factory => :person
   i.owner_id 1
   i.owner_type "Person"
@@ -62,7 +62,6 @@ Factory.define :event_log do |i|
   i.primary_full_name 'Shary Demo'  
 end
 
-
 Factory.define :activity_log do |i|
   i.event_code 1
   i.primary_id 1
@@ -77,4 +76,9 @@ Factory.define :activity_log do |i|
   i.related_id 1
   i.related_type "ItemRequest"
   i.event_type_id 1
+end
+
+Factory.define :invitation do |i|
+  i.inviter_person_id '1'
+  i.invitation_active true
 end
