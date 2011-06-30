@@ -27,10 +27,7 @@ def prepare_words(words, multiple)
   elsif multiple == "short date" || multiple == "short dates"
     words = words.map{ |d| Chronic.parse(d).to_date.to_s(:euro_date_part) }
   end
-
-  if multiple != "regex" && multiple != "regexes"
-    words = words.map{ |d| Regexp.escape(d) }
-  end
+  
   return words
 end
 
@@ -62,4 +59,9 @@ Then /^I (should|should not) see the (word|words|long date|long dates|short date
 
   end
 
+end
+
+Then /^I fill in active invitation$/ do
+  invitation = Invitation.find_by_invitation_active(true)
+  Then %{I fill in "key" with "#{invitation.invitation_unique_key}"}
 end
