@@ -81,7 +81,7 @@
 		<div class="buttons-holder">
 			<ul class="clearfix">
 				<li>
-					<%= link_to 'Connect', dashboard_path, :class => 'positive' %>
+					<%= link_to 'Connect', edit_person_path(current_user.person), :class => 'positive' %>
 				</li>
 				<li class="no">
 					<%= link_to 'No thanks', signout_path, :class => 'positive' %>
