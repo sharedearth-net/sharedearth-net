@@ -81,10 +81,10 @@
 		<div class="buttons-holder">
 			<ul class="clearfix">
 				<li>
-					<a href="#">Connect</a>
+					<%= link_to 'Connect', dashboard_path, :class => 'positive' %>
 				</li>
 				<li class="no">
-					<a href="#">No thanks</a>
+					<%= link_to 'No thanks', signout_path, :class => 'positive' %>
 				</li>
 			</ul>
 		</div>

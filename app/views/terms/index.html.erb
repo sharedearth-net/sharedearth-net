@@ -91,10 +91,10 @@
 		<div class="buttons-holder">
 			<ul class="action-buttons-list clearfix">
 				<li>
-					<a href="#" class="positive">Accept</a>
+					<%= link_to 'Accept', terms_accept_path, :method => 'put', :class => 'positive' %>
 				</li>
 				<li>
-					<a href="#">Reject</a>
+			  	<%= link_to 'Reject', terms_accept_path, :method => 'put', :class => 'positive' %>
 				</li>
 			</ul>
 		</div>
