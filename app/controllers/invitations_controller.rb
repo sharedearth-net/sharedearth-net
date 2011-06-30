@@ -22,7 +22,7 @@ class InvitationsController < ApplicationController
     else
       @invites = []
       invitations.times do |inv|
-        @invites += people.collect { |person| Invitation.new(:inviter_person_id => person.id) }
+        @invites += people.collect { |person| Invitation.new(:inviter_person_id => person.id, :invitation_active => true) }
       end
       if @invites.each(&:save!)
         redirect_to invitations_path, :notice => "Successfully created invitations."
@@ -36,11 +36,11 @@ class InvitationsController < ApplicationController
    key = params[:key]
    unless key.empty?
      invitation = Invitation.find_by_invitation_unique_key(key)
-     unless invitation.nil? || invitation.invitation_active
+     if !invitation.nil? && invitation.active?
         invitation.update_attributes(:invitee_person_id => current_user.person.id, :accepted_date => Time.now, :invitation_active => false)
         current_user.person.update_attributes(:authorised_account => true)
         current_user.inform_mutural_friends(session[:fb_token])
-        redirect_to dashboard_path and return
+        redirect_to terms_path and return
      end
    end 
    redirect_to root_path, :notice => "The code you have provided is invalid or inactive" 
