@@ -44,7 +44,11 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     session[:fb_token] = auth["credentials"]["token"] if auth['provider'] == 'facebook'
     if user.person.authorised?
-      redirect_to dashboard_path
+      if user.person.accepted?
+        redirect_to dashboard_path
+      else
+        redirect_to terms_path
+      end
     else
       redirect_to root_path
     end
