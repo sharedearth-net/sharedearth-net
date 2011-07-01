@@ -54,8 +54,8 @@ describe User do
     @user.should have(1).error_on(:uid)
   end
   
-  it "should require nickname" do
-    @user.should have(1).error_on(:nickname)
+  it "should not require nickname" do
+    @user.should have(0).error_on(:nickname)
   end
   
 end
