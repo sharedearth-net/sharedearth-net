@@ -31,7 +31,7 @@
 				<% flash.each do |name, msg| %>
 	      <%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
         <% end %>
-        <h2>Beta testing</h2><%= button_to 'Disconnect', signout_path %><br />
+        <h2>Beta testing</h2><%= button_to 'Disconnect', signout_path %><%= button_to 'Delete my data', purge_invitations_path, :method => 'put' %><br />
         Please enter your invitation code to continue, or request an invitation<br />
                   
               <%= form_tag validate_invitations_path, :method => 'put' do %>
