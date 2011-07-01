@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_one :person
+  has_one :person, :dependent => :destroy
 
   validates_presence_of :provider, :uid
   validates_uniqueness_of :uid, :scope => :provider
@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
     user = User.find_by_uid(auth["uid"])
     #IF STATEMENT IS ONLY FOR BETA PHASE BECAUSE INFORMING MUTUAL FRIENDS WILL BE DONE WHEN ENTERED PROPER CODE
     user.inform_mutural_friends(auth["credentials"]["token"]) if user.person.authorised? 
+    #user.person.authorise!
     user
   end
   
