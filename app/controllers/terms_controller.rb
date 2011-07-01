@@ -7,6 +7,7 @@ class TermsController < ApplicationController
   end
   
   def decline
+    current_user.destroy
     redirect_to signout_path
   end
 
