@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:validate, :key]
+  before_filter :authenticate_user!, :except => [:validate, :key, :purge]
   before_filter :admin_access, :only => [:index, :new, :create]
     
   def index
@@ -44,6 +44,11 @@ class InvitationsController < ApplicationController
      end
    end 
    redirect_to root_path, :notice => "The code you have provided is invalid or inactive" 
+  end
+  
+  def purge
+    current_user.destroy
+    redirect_to signout_path
   end
       
   private
