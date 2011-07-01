@@ -11,6 +11,7 @@ Sharedearthapp::Application.routes.draw do
   resources :invitations, :except => [:destroy, :edit, :show] do
     collection do
         put "validate"
+        put "purge"
     end
   end
 
@@ -24,7 +25,7 @@ Sharedearthapp::Application.routes.draw do
     end
   end
 
-  resources :people, :only => [:show, :edit, :update, :index] do
+  resources :people, :only => [:show, :edit, :update, :index, :destroy] do
     member do 
       get :network
       get :my_network
