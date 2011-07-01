@@ -37,3 +37,12 @@ Feature: Accepting terms
     Then I should see "Important Information about sharedearth.net"
     When I follow "No thanks"
     Then I should see the words "Welcome" and "Connect"
+    
+  Scenario: I should be able to accept terms and use
+    Then I fill in active invitation
+    And I press "Submit"
+    Then I should see the words "TERMS AND CONDITIONS"
+    When I follow "Accept"
+    Then I should see "Important Information about sharedearth.net"
+    And I follow "Connect"
+    Then I should see the words "Edit Profile"
