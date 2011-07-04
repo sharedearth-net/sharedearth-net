@@ -10,7 +10,7 @@
 		<div id="header">
 
 			<div class="header-lhs">
-				<%= link_to "sharedearth.net", root_path, :title => "sharedearth.net - trust. share. rewrite." %>
+				<%= link_to "sharedearth.net", dashboard_path, :title => "sharedearth.net - trust. share. rewrite." %>
 			</div>
 
 			<div class="header-rhs">
@@ -91,10 +91,7 @@
 					<div class="bar-holder-lhs">
 						<ul>
 							<li>
-								<%= link_to "share" %>
-							</li>
-							<li>
-								<%= link_to "ask" %>
+								<%= link_to "share", items_path %>
 							</li>
 							<li class="last">
 								<%= link_to "view network", my_network_person_path(current_user.person) unless current_user.nil?%>
