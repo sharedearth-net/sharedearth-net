@@ -38,18 +38,18 @@
 					<ul class="clearfix">
 						<% @items.each do |item| %>
 						<li class="item clearer">
-							<a href="/items/5">
+							<a href="/items/<%= item.id %>">
 								<%= image_tag item.photo.url(:square), :class => "thumb" %>
 							</a>
 					        <div>
 								<p>
-		  							<a href="/items/5" class="positive"><%= item.name %></a>&nbsp;|&nbsp;
+		  							<%= link_to item.name, item_path(item), :class => 'positive'  %>&nbsp;|&nbsp;
 									<a href="#"><%= item.item_type %></a>&nbsp;|
 									<%= item.purpose? %>		
 								</p>
 								<ul class="action-list">
 									<li>
-										<a href="/items/5"><%= link_to 'show', item %></a>
+										<%= link_to 'show', item %></a>
 									</li>
 									<% if item.normal? %>
 								    	<li><%= link_to 'edit', edit_item_path(item) %></li>
