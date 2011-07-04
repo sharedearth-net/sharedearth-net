@@ -66,27 +66,43 @@ class ItemRequestsController < ApplicationController
   
   def accept
     @item_request.accept!
-    redirect_to dashboard_path
+    respond_to do |format|
+      format.html { redirect_to(dashboard_path) }
+      format.json  { render :json => @item_request }
+    end
   end
   
   def reject
     @item_request.reject!
-    redirect_to dashboard_path
+    respond_to do |format|
+      format.html { redirect_to(dashboard_path) }
+      format.json  { render :json => @item_request }
+    end
   end
   
   def cancel
     @item_request.cancel!(current_user.person)
-    redirect_to dashboard_path
+    respond_to do |format|
+      format.html { redirect_to(dashboard_path) }
+      format.json  { render :json => @item_request }
+    end
   end
   
   def collected
     @item_request.collected!
-    redirect_to dashboard_path
+    respond_to do |format|
+      format.html { redirect_to(dashboard_path) }
+      format.json  { render :json => @item_request }
+    end
   end
   
   def complete
     @item_request.complete!(current_user.person)
-    redirect_to new_request_feedback_path(@item_request)
+    respond_to do |format|
+      format.html { redirect_to(dashboard_path) }
+      format.json  { render :json => @item_request }
+    end
+
   end
   
   private
