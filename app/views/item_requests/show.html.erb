@@ -19,17 +19,17 @@
 
 								<%= gifter_only(@item_request) do %>
 									<li>
-										<%= link_to "Accept", accept_request_path(@item_request), :id => "accept_button", :method => :put, :class => "positive" %>
+										<%= link_to "Accept", accept_request_path(@item_request, :json), :id => "accept_button", :method => :put, :class => "positive" %>
 									</li>
 									<li>
-										<%= link_to "Reject", reject_request_path(@item_request), :id => "reject_button", :method => :put %>
+										<%= link_to "Reject", reject_request_path(@item_request, :json), :id => "reject_button", :method => :put %>
 									</li>
 						
 								<% end %>
 
 								<%= requester_only(@item_request) do %>
 									<li>
-										<%= link_to "Cancel", cancel_request_path(@item_request), :id => "cancel_button", :method => :put %>
+										<%= link_to "Cancel", cancel_request_path(@item_request, :json), :id => "cancel_button", :method => :put %>
 									</li>
 								<% end %>
 
@@ -37,14 +37,14 @@
 
 								<%= requester_and_gifter_only(@item_request) do %>
 									<li>
-										<%= link_to "Cancel", cancel_request_path(@item_request), :id => "cancel_button", :method => :put %>
+										<%= link_to "Cancel", cancel_request_path(@item_request, :json), :id => "cancel_button", :method => :put %>
 									</li>
 									<li>
-										<%= link_to "Collected", collected_request_path(@item_request), :id => "collected_button", :method => :put, :class => "positive" %>
+										<%= link_to "Collected", collected_request_path(@item_request, :json), :id => "collected_button", :method => :put, :class => "positive" %>
 									</li>
 									<% if  @item_request.item.purpose != Item::PURPOSE_GIFT %>
 									<li>
-										<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive" %>
+										<%= link_to "Complete", complete_request_path(@item_request, :json), :id => "complete_button", :method => :put, :class => "positive" %>
 									</li>
 									<% end %>
 								<% end %>
@@ -53,7 +53,7 @@
 
 								<%= requester_and_gifter_only(@item_request) do %>
 									<li>
-										<%= link_to "Complete", complete_request_path(@item_request), :id => "complete_button", :method => :put, :class => "positive" %>
+										<%= link_to "Complete", complete_request_path(@item_request, :json), :id => "complete_button", :method => :put, :class => "positive" %>
 									</li>
 								<% end %>
 
