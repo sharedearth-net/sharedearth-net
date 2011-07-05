@@ -1127,10 +1127,39 @@ a.normal:visited {
 		    float: left;
 		}
 		
-		
 		#community-page .button-more {
 			float: left;
 		}
+		
+		#community-page #content .items-expanded ul li .thumb {
+			    float: left;
+			    margin-right: 10px;
+			    margin-top: 3px;
+			    max-height: 50px;
+		}
+		
+		#community-page #content .items-expanded ul li div {
+		    float: left;
+		    width: 392px;
+		}
+		
+		#community-page #content .items-expanded ul li.item {
+		    margin-bottom: 10px;
+		}
+		
+			#community-page #content .items-expanded ul li {
+			    color: #127E0E;
+			    display: block;
+			    float: left;
+			    font-size: 12px;
+			}
+			
+				#community-page #content .items-expanded ul li p {
+					clear: both;
+				    float: left;
+				    line-height: 14px;
+				    margin: 0 0 6px;
+				}
 	
 	
 	/* community page - sidebar */
@@ -1142,6 +1171,17 @@ a.normal:visited {
 	
 		#community-page #sidebar h2 {
 			padding-left: 16px;
+		}
+		
+		
+		/* community page - sidebar - comments */
+		
+		#community-page #sidebar ul.comment-list li {
+		    width: 316px;
+		}
+		
+		#community-page #sidebar .comment-box textarea {
+		    width: 318px;
 		}
 										
 
@@ -2262,7 +2302,8 @@ a.normal:visited {
 	#search-page #content h3.default-title, 
 	#manage-resources-page #content h3.default-title,
 	#dashboard-page #content h3,
-	#profile-page #content h3 {
+	#profile-page #content h3,
+	#community-page #content h3 {
 		font-size: 12px; 
 		color: #315859;
 	}
