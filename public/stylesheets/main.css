@@ -454,9 +454,9 @@ a.normal:visited {
 	/* global - sidebar */
 
 	#sidebar {
-		width: 456px;
+		width: 356px;
 		float: left;
-		margin-left: 22px;
+		margin-left: 122px;
 	}
 
 		#sidebar .sidebar-box {
@@ -465,7 +465,7 @@ a.normal:visited {
 
 			#sidebar .inner-content {
 			    margin-left: 0;
-			   	width: 440px;
+			   	width: 340px;
 				float: none;
 				padding-left: 16px;
 			}
@@ -485,9 +485,8 @@ a.normal:visited {
 
 
 			.trust-reputation-box {
-				/*background: #ebf5da;*/
 				padding: 0 15px 12px 16px;
-				width: 425px;
+				width: 325px;
 			}
 		
 
@@ -633,7 +632,7 @@ a.normal:visited {
 		}
 		
 			ul.comment-list li  {
-				width: 403px;
+				width: 348px;
 				padding: 0 4px;
 				background: #f4f9eb;
 				margin-top: 5px;
@@ -673,7 +672,7 @@ a.normal:visited {
 					color: #999;
 					border: 1px solid #8e948e;
 					padding: 2px 0 0 4px;
-					width: 403px;
+					width: 350px;
 					overflow:auto;
 				}
 				
@@ -738,8 +737,9 @@ a.normal:visited {
 		#dashboard-page #sidebar .inner-content {
 			padding-left: 0;
 			margin-left: 0;
+			width: 356px;
 		}
-		
+				
 			#sidebar .with-action p img {
 			 	vertical-align: top;
 			}
@@ -752,7 +752,7 @@ a.normal:visited {
 			}
 			
 			#dashboard-page .comment-box textarea {
-				width: 405px;
+				width: 350px;
 			}
 			
 			
@@ -949,11 +949,11 @@ a.normal:visited {
 				}
 				
 					#profile-page #sidebar ul.comment-list li {
-						width: 402px;
+						width: 332px;
 					}
 					
 						#profile-page #sidebar .comment-box textarea {
-							width: 404px;
+							width: 334px;
 						}
 
 
@@ -1137,6 +1137,7 @@ a.normal:visited {
 	
 	#community-page #sidebar {
 	    width: 340px;
+		margin-left: 22px;
 	}
 	
 		#community-page #sidebar h2 {
@@ -1163,7 +1164,7 @@ a.normal:visited {
 	
 
 	/* request - sidebar */	
-
+	
 	#request-page #sidebar h2 {
 		padding-left: 16px;
 	}
@@ -1182,7 +1183,17 @@ a.normal:visited {
 			text-align: right;
 			font-size: 14px;
 		}
+		
+		
+			/* request - sidebar - comments*/
 			
+			#request-page #sidebar ul.comment-list li {
+			    width: 332px;
+			}
+			
+				#request-page #sidebar .comment-box textarea {
+				    width: 334px;
+				}
 			
 			
 			
