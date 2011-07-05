@@ -65,9 +65,9 @@ class ItemRequestsController < ApplicationController
   end  
   
   def accept
-    @item_request.accept!
+    #@item_request.accept!
     respond_to do |format|
-      format.html { redirect_to(dashboard_path) }
+      format.html { redirect_to_back }
       format.json  { render :json => @item_request }
     end
   end
@@ -75,7 +75,7 @@ class ItemRequestsController < ApplicationController
   def reject
     @item_request.reject!
     respond_to do |format|
-      format.html { redirect_to(dashboard_path) }
+      format.html { redirect_to_back }
       format.json  { render :json => @item_request }
     end
   end
@@ -83,7 +83,7 @@ class ItemRequestsController < ApplicationController
   def cancel
     @item_request.cancel!(current_user.person)
     respond_to do |format|
-      format.html { redirect_to(dashboard_path) }
+      format.html { redirect_to_back }
       format.json  { render :json => @item_request }
     end
   end
@@ -91,7 +91,7 @@ class ItemRequestsController < ApplicationController
   def collected
     @item_request.collected!
     respond_to do |format|
-      format.html { redirect_to(dashboard_path) }
+      format.html { redirect_to_back }
       format.json  { render :json => @item_request }
     end
   end
@@ -99,7 +99,7 @@ class ItemRequestsController < ApplicationController
   def complete
     @item_request.complete!(current_user.person)
     respond_to do |format|
-      format.html { redirect_to(dashboard_path) }
+      format.html { redirect_to_back }
       format.json  { render :json => @item_request }
     end
 
