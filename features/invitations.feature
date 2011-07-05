@@ -5,7 +5,7 @@ Feature: Sending invitations
   In order to ivite and enable new users
   
   Background:
-    Given the user is logged in
+    Given the unauthorised user is logged in
     Given invitation key exsists
     
   Scenario: I should see enter invitation code page
@@ -26,5 +26,5 @@ Feature: Sending invitations
     Then I should see "TERMS AND CONDITIONS"
 
   Scenario: Regular user shouldn't have access to invitations list
-    Given I am on invitations page
+    Given I am on the invitations page
     And I should not see "New Invitations"

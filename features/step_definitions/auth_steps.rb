@@ -13,7 +13,22 @@ Given /^I am signed in with provider "([^"]*)"$/ do |provider|
 end
 
 Given /^the user is logged in$/ do
+  person = Factory(:person)
+  person.authorise!
+  person.accept!
+  omniauth_mock_facebook_with_uid(person.user.uid)
+  visit "/auth/facebook"
+end
+
+Given /^the unauthorised user is logged in$/ do
   omniauth_mock_facebook
+  visit "/auth/facebook"
+end
+
+Given /^the unaccepted user is logged in$/ do
+  person = Factory(:person)
+  person.authorise!
+  omniauth_mock_facebook_with_uid(person.user.uid)
   visit "/auth/facebook"
 end
 

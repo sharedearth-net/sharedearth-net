@@ -4,14 +4,6 @@ Feature: Welcome page
   I want see if welcome page is showing
   In order So I can connect to my profile
   
-@omniauth_test
-  Scenario: Load welcome page
-   Given I am signed in with provider "Facebook"
-   Then I should see "disconnect"
-   Then I follow "John"
-   Then I should see "edit"
-  
-
   Scenario: Sign in thru Facebook
     Given the user is logged in
     Then I should see "disconnect"

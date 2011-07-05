@@ -5,7 +5,7 @@ Feature: Accepting terms
   In order to enter the website
   
   Background:
-    Given the user is logged in
+    Given the unauthorised user is logged in
     Given invitation key exsists
     
   Scenario: I should see enter invitation code page
