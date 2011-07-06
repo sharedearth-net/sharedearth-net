@@ -22,7 +22,7 @@ class PeopleNetworkRequestsController < ApplicationController
   
   def confirm
     @people_network_request.confirm!
-    redirect_to @people_network_request.trusted_person
+    redirect_to @people_network_request.person
   end
 
   # used destroy for trusted_person too
