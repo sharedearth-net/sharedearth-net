@@ -21,6 +21,25 @@
 											<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
 										</ul>
 									</div>
+																<% comments = req.comments%>				
+			        <div class="inner-content">
+
+				        <ul class="comment-list">
+				        <% comments.each do |c| -%>
+				          <% person = c.user.person %>
+				          <li class="clearfix">	
+						        <%= image_tag person.avatar(:square), :class => "thumb" %>
+						        <p>
+							        <%= link_to person.name, person_path(person) %> says: <%= c.comment %>
+							        <span><%= time_ago_in_words(c.created_at) %> ago</span>
+						        </p>
+					        </li> 
+				        <% end unless comments.empty? -%>
+
+					        <%= render :partial => 'comments/new', :locals => { :commentable => req } %>
+
+				        </ul>
+			        </div><!-- /inner-content -->	
 								</div>
 							</li>
 						<% elsif req.is_a? PeopleNetworkRequest %>
