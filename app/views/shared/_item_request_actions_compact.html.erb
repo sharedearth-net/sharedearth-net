@@ -56,3 +56,5 @@
 	<% end %>
 
 <% end %>
+<% comments = req.comments.count %>
+<li><a href="#">comments(<%= comments ||= 0 %>)</a></li>
