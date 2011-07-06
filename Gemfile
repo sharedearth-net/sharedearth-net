@@ -6,7 +6,7 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'omniauth'
+gem 'omniauth', "~> 0.2.6"
 gem "aws-s3"
 gem "paperclip", "~> 2.3"
 
@@ -18,7 +18,7 @@ gem "fb_graph"
 
 gem "will_paginate", "~> 3.0.pre2"
 
-gem 'rake', '0.8.7'
+gem 'rake', '0.9.2'
 
 gem "acts_as_commentable"
 
@@ -61,6 +61,10 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'pickle'
   gem 'ruby-debug'
+  gem "rb-inotify", "~> 0.8.5"
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'libnotify'
 end
 gem "simplecov", :require => false, :group => :test
 
