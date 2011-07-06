@@ -14,7 +14,9 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate_user!
-    if current_user.nil? || !current_user.person.authorised? || !current_user.person.accepted?
+    if current_user.nil?
+      redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
+    elsif !current_user.person.authorised? || !current_user.person.accepted?
       if !current_user.person.accepted?
         redirect_to terms_path, :alert => "You must agree to terms first, before you use this application."
       else
