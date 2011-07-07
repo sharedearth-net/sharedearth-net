@@ -21,31 +21,82 @@
 </head>
 <body>
 
-	<div id="container">
+	<div id="container" class="invitation-page">
 
 		<h1 title="sharedearth.net - from ego to wego">
 			sharedearth.net - from ego to wego
 		</h1>
 
+
+		<!--  -->
 		<div id="content" class="clearfix">
+			<% flash.each do |name, msg| %>
+			  <%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
+			<% end %>
+			<h2>Welcome</h2>
+		
+			<p>	
+				sharedearth.net is now in private beta.
+			</p>
+		
+		
+		
+			<div class="form-holder">
+				<%= form_tag validate_invitations_path, :method => 'put' do %>
+				<%= label_tag 'Enter your invitation code to continue' %>
+				<%= text_field_tag :key, params[:key] %>
+
+				<div class="clearfix">
+					<div class="button-holder-request">
+						<h2>
+							<%= link_to 'request invitation', reguested_invitations_create_path, :method => 'get', :title => "request invitation" %>
+						</h2>
+					</div>
+			
+
+					<div class="button-holder-submit">
+						<h2>
+							<%= submit_tag 'Submit' %>
+						</h2>
+					</div>
+						 <% end %>
+					<p>
+						<%= link_to 'remove account', purge_invitations_path, :method => 'put' %> or <%= link_to 'disconnect', signout_path %>
+					</p>
+				</div>
+				
+			</div>
+			
+		</div><!-- /content -->
+		
+		
+		
+		<!-- OLD CODE BEGIN  -->
+		
+		
+		<!-- <div id="content" class="clearfix">
 				<% flash.each do |name, msg| %>
 	      <%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
-        <% end %>
-        <h2>Beta testing</h2><%= button_to 'Disconnect', signout_path %><%= button_to 'Delete my data', purge_invitations_path, :method => 'put' %><br />
-        Please enter your invitation code to continue, or request an invitation<br />
-                  
-              <%= form_tag validate_invitations_path, :method => 'put' do %>
-	              <p>
-                  <%= label_tag 'Enter your invitation code' %>
-                  <%= text_field_tag :key, params[:key] %>
-                    <%= submit_tag 'Submit' %>
-                </p>
-              <% end %>
-              <%= button_to 'Request invitation', reguested_invitations_create_path, :method => 'get' %>
-              
-			</div>
+        <% end %> -->
 
-		</div>
+
+        <!-- <h2>Beta testing</h2> --><!-- <%= button_to 'Disconnect', signout_path %> --><!-- <%= button_to 'Delete my data', purge_invitations_path, :method => 'put' %> -->
+        <!-- Please enter your invitation code to continue, or request an invitation -->
+                  
+              <!-- <%= form_tag validate_invitations_path, :method => 'put' do %> -->
+	              <!-- <p> -->
+                  <!-- <%= label_tag 'Enter your invitation code' %> -->
+                  <!-- <%= text_field_tag :key, params[:key] %> -->
+                    <!-- <%= submit_tag 'Submit' %> -->
+                <!-- </p> -->
+              <!-- <% end %> -->
+              <!-- <%= button_to 'Request invitation', reguested_invitations_create_path, :method => 'get' %> -->
+              
+			<!-- </div>
+
+				</div> -->
+		
+		<!-- OLD CODE END  -->
 
 
 		<div id="footer">

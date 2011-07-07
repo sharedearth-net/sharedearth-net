@@ -724,6 +724,11 @@ a.normal:visited {
 	
 		/* dashboard - content - comments */
 				
+		#dashboard-page #content ul.comment-list li.no-bg  {
+			background: transparent;
+			padding: 0;
+		}		
+		
 		#dashboard-page #content ul.comment-list li p span {
 			display: block;
 		}
@@ -2431,6 +2436,14 @@ a.normal:visited {
 		color: #62775a;
 		font-size: 16px;
 	}
+	
+	#edit-profile-page #content h2,
+	#completed-request-page #content h2,
+	#items-page #content h2,
+	#request-page #content h2,
+	#profile-page #content h2 {
+		margin-top: 7px;
+	}
 
 
 		/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
@@ -2522,6 +2535,7 @@ a.normal:visited {
 	#search-page #content h2 {
 		color: #127e0e;
 		font-size: 16px;
+		margin-top: 7px;
 	}
 	
 
