@@ -61,10 +61,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'pickle'
   gem 'ruby-debug'
-  gem "rb-inotify", "~> 0.8.5"
-  gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'libnotify'
 end
 gem "simplecov", :require => false, :group => :test
 
