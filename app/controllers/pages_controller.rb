@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_filter :authenticate_user!, :only => [ :dashboard ]
 
   def index
-    redirect_to dashboard_path unless current_user.nil?
+    redirect_to dashboard_path unless current_user.nil? || !current_user.person.authorised?
   end
 
   def dashboard
