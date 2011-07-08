@@ -1,7 +1,11 @@
 <div id="community-page" class="clearfix">
 			
 	<div id="sidebar-left">
-		
+		 <% if params[:type].nil? -%>
+		    <%= image_tag("your_network.png", :class => "thumb", :alt => "Your Network")  %> <!-- Your Network image -->
+		  <% elsif trusted_network-%>
+		  <%= image_tag("trusted_icon_yourself.png", :class => "thumb", :alt => "Trusted Network")  %> <!-- Trusted Network picture -->
+		  <% end -%>
 		<ul>
 			<li class="all <%= 'selected' if params[:type].nil? %>">
 				<%= link_to 'Your Network', my_network_person_path(current_user.person) %>
@@ -39,11 +43,7 @@
 		<div class="content-box-holder no-bg">
 			<ul>
 				<li class="content-box clearfix">
-				  <% if params[:type].nil? -%>
-				    <%= image_tag("your_network.png", :class => "thumb", :alt => "Your Network")  %> <!-- Your Network image -->
-				  <% elsif trusted_network-%>
-  				  <%= image_tag("trusted_icon_yourself.png", :class => "thumb", :alt => "Trusted Network")  %> <!-- Trusted Network picture -->
-				  <% end -%>
+				 
 					<div class="inner-content">
 						<h2>
 							<%#= image_tag("ic-village-community.png", :class => "", :alt => "")  %>

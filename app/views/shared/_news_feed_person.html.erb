@@ -16,7 +16,7 @@
 				  <li class="clearfix">	
 						<%= image_tag person.avatar(:square), :class => "thumb" %>
 						<p>
-							<%= link_to person.name, person_path(person) %> says: <%= c.comment %>
+							<strong><%= link_to person.name, person_path(person) %></strong>: <%= c.comment %>
 							<span><%= time_ago_in_words(c.created_at) %> ago</span>
 						</p>
 					</li> 
