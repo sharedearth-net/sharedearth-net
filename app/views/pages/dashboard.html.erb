@@ -8,24 +8,12 @@
 						<% if req.is_a? ItemRequest %>
 							<li class="content-box clearfix">
 								<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
-								<div class="inner-content">
-									<p>
-										<%= render :partial => "shared/item_request_sentence", :locals => { :req => req, :dashboard => true } %>
-									</p>
-					
-									<div class="action clearfix">
-										<ul>
-											<li>
-												<%= time_ago_in_words req.created_at %> ago
-											</li>
-											<%= render :partial => "shared/item_request_actions_compact", :locals => { :req => req } %>
-										</ul>
-									</div>
-																<% comments = req.comments%>				
+                <%= render :partial => "shared/item_request_box", :locals => {:req => req} %>			
+								<% comments = req.comments%>				
 			        <div class="inner-content">
 
 				        <ul class="comment-list">
-				        <% comments.each do |c| -%>
+				        <%  req.comments.each do |c| -%>
 				          <% person = c.user.person %>
 				          <li class="clearfix">	
 						        <%= image_tag person.avatar(:square), :class => "thumb" %>
