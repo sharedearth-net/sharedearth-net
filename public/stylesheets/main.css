@@ -1102,8 +1102,8 @@ a.normal:visited {
 			background: url('../images/ic-extended-network-user.png') no-repeat 8px 4px;
 	}
 
-	#user-trusted-page #sidebar-left ul li.people a:link,
-	#user-trusted-page #sidebar-left ul li.people a:visited {
+	#community-page #sidebar-left ul li.people a:link,
+	#community-page #sidebar-left ul li.people a:visited {
 			background: url('../images/ic-people-community.png') no-repeat 8px 3px;
 	}
 
@@ -1839,6 +1839,32 @@ a.normal:visited {
 			    font-size: 11px;
 			    padding-top: 11px;
 			}
+			
+			.network-holder {
+				width: 537px;
+				border-top: 1px solid #ccc;
+				padding: 15px 0;
+			}
+			
+				#user-trusted-page .lhs {
+					width: 235px;
+					float: left;
+				}
+			
+				#user-trusted-page .rhs {
+					width: 301px;
+					float: left;
+				}
+			
+					#user-trusted-page .rhs	h4 {
+						color: #98abac;
+						font-size: 18px;
+						text-transform: uppercase;
+						font-weight: bold;
+						font-family: verdana, tahoma, arial, sans-serif;
+						line-height: 68%;
+						margin-bottom: 7px;
+					}
 
 	/* user trusted page - sidebar-left */
 

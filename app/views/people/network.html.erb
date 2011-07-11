@@ -32,31 +32,43 @@
 					<%= in_network?(current_user.person, @person )%>
 				</li>
 			</ul>
-			<% if !@mutual_friends.empty? %>
-			<h3 class="default-title">In your mutual network</h3>
 			
-			<ul>
-				<% @mutual_friends.each do |p| -%>
-				<li class="people-holder clearfix">
-					<%= image_tag p.avatar(:small), :class => "thumb" %>
-					<p>
-						<%= link_to p.name, person_path(p)  %>
-					</p>
-				</li>
-				<% end-%>
-				<li class="clearfix">
-					<%= image_tag("ic-trusted-net-others-green.png", :class => "icons", :alt => "Trusted Profile")  %>
+			
+			<% if !@mutual_friends.empty? %>
+
+			<div class="network-holder clearfix">	
+			
+				<div class="lhs">
+					<ul>
+						<% @mutual_friends.each do |p| -%>
+						<li class="people-holder clearfix">
+							<%= image_tag p.avatar(:small), :class => "thumb" %>
+							<p>
+								<%= link_to p.name, person_path(p)  %>
+							</p>
+						</li>
+						<% end-%>
+					</ul>
+				</div>
+			
+				<div class="rhs clearfix">
+					
+					<%= image_tag("ic-trusted-net-others-green-large.png", :class => "icons", :alt => "Trusted Profile")  %>
+					<h4>mutual networks</h4>
 					<p>
 						<a href="#">
 							<%= trusted_network = @person.mutural_friends_count(current_user.person) %>
 						</a>
 						<%= (trusted_network == 1) ? " person " : " people " %> in your mutual network
 					</p>
-				</li>
-			</ul>
+				</div>
+				
+			</div><!-- /network-holder -->
+
 			<% elsif mutual_friends %>
-			   <h3>This user has no mutual friends with you</h3>
+			   <h3 class="default-title">This user has no mutual friends with you</h3>
 			<% end %>
+			
 			<!--
 			<% unless @extended_network.empty? %>
 			<h3 class="default-title">In <%= current_user.person == @person ? 'your' : 'their' %> extended network</h3>
@@ -83,54 +95,42 @@
 			<% end %>
 			-->
 			<% if !@other.empty? %>
-			<h3 class="default-title">Others</h3>
 			
-			<ul>
-				<% @other.each do |p| -%>
-				<li class="people-holder clearfix">
-					<%= image_tag p.avatar(:small), :class => "thumb" %>
+			<div class="network-holder clearfix">	
+			
+				<div class="lhs">
+					<ul>
+						<% @other.each do |p| -%>
+						<li class="people-holder clearfix">
+							<%= image_tag p.avatar(:small), :class => "thumb" %>
+							<p>
+								<%= link_to p.name, person_path(p)  %>
+							</p>
+						</li>
+						<% end-%>
+					</ul>
+				</div>
+			
+				<div class="rhs clearfix">
+					<%= image_tag("ic-others-large.png", :class => "icons", :alt => "Others")  %>
+					<h4>Others</h4>
 					<p>
-						<%= link_to p.name, person_path(p)  %>
-					</p>
-				</li>
-				<% end-%>
-				<li class="clearfix">
-					<%= image_tag("ic-people.png", :class => "icons", :alt => "Extended Network")  %>
-					<p>
-				  	<a href="#">
+						<a href="#">
 							<%= other_count = @other.count %>
 						</a>
 						<%= (other_count == 1) ? " other " : " others " %>
 					</p>
-				</li>
-			</ul>
-			<% elsif other_friends %>
-			   <h3>This user has no other friends in network</h3>
-			<% end %>
-		<!--	
-			<h3 class="default-title">Others</h3>
+				</div>
+				
+			</div><!-- /network-holder -->
 			
-			<ul>
-				<li class="people-holder clearfix">
-					<%= image_tag("thumb-trusted-net-1.png", :class => "thumb", :alt => "")  %>
-					<p>
-						<a href="#">John Shearer</a>
-					</p>
-				</li>
-				<li class="people-holder clearfix">
-					<%= image_tag("thumb-trusted-net-2.png", :class => "thumb", :alt => "")  %>
-					<p>
-						<a href="#">Allen Nicholson</a>
-					</p>
-				</li>
-				<li class="clearfix">
-					<%= image_tag("ic-people.png", :class => "icons", :alt => "Others")  %>
-					<p>
-						<a href="#">2</a> others
-					</p>
-				</li>
-			</ul>
-			-->
+			
+			<% elsif other_friends %>
+			   <h3 class="default-title">This user has no other friends in network</h3>
+			<% end %>
+			
+			
+			
 			<% if params[:type].nil? %>
 			<ul>
 				<li class="clearfix">
