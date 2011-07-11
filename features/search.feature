@@ -56,7 +56,7 @@ Feature: Searching for items and people
     And I should see "Marine soldier"
     Then I should see "view item"
     Then I should see "Maria" 2 times
-    Then I follow "All results"
+    Then I follow "All Results"
     And I should see "Marine soldier"
     Then I should see "view item"
        #One time is for item result, 2nd for search term, and 3rd for people result

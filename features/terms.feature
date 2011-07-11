@@ -9,7 +9,7 @@ Feature: Accepting terms
     Given invitation key exsists
     
   Scenario: I should see enter invitation code page
-    Then I should see the words "Beta testing" and "Please enter your invitation code to continue, or request an invitation"
+    Then I should see the words "Welcome", "Enter your invitation code to continue" and "sharedearth.net is now in private beta"
     
   Scenario: I should be lead to terms page when I enter the invitation
     Then I fill in active invitation

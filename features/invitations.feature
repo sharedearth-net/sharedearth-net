@@ -9,7 +9,7 @@ Feature: Sending invitations
     Given invitation key exsists
     
   Scenario: I should see enter invitation code page
-    Then I should see the words "Beta testing" and "Please enter your invitation code to continue, or request an invitation"
+    Then I should see the words "Welcome", "Enter your invitation code to continue" and "sharedearth.net is now in private beta"
     
   Scenario: I should enter wrong invitation key
     Then I fill in "key" with "888999"
@@ -17,7 +17,7 @@ Feature: Sending invitations
     Then I should see the words "The code you have provided is invalid or inactive"
     
   Scenario: When user requests invitation
-    And I press "Request invitation"
+    And I follow "request invitation"
     Then I should see the words "Your request for invitation has been received"
 
   Scenario: I should be lead to terms page when I enter the invitation
