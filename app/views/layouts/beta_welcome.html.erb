@@ -28,9 +28,7 @@
 		</h1>
 
 		<div id="content" class="clearfix">
-			<% flash.each do |name, msg| %>
-			  <%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
-			<% end %>
+			
 			<h2>Welcome</h2>
 		
 			<p>	
@@ -38,7 +36,9 @@
 			</p>
 		
 		
-		
+			<% flash.each do |name, msg| %>
+			  <%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
+			<% end %>
 			<div class="form-holder">
 				<%= form_tag validate_invitations_path, :method => 'put' do %>
 				<%= label_tag 'Enter your invitation code to continue' %>

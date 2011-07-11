@@ -633,6 +633,7 @@ a.normal:visited {
 		
 		ul.comment-list {
 			clear: both;
+			margin-top: 7px;
 		}
 		
 			ul.comment-list li  {
@@ -652,6 +653,8 @@ a.normal:visited {
 						font-size: 11px;
 						padding-top: 3px;
 		      			padding-bottom: 3px;
+						float: left;
+						width: 300px;
 					}
 					
 						ul.comment-list li p span {
@@ -777,13 +780,12 @@ a.normal:visited {
 					bottom: -145px;
 					display: block;
 				}
-
 			
 			
 			
 /*............Profile Page............*/				
 				
-	
+
 	/* profile - content */	
 	
 	#profile-page #content h2 {
@@ -1179,12 +1181,17 @@ a.normal:visited {
 	/* community page - sidebar */
 	
 	#community-page #sidebar {
-	    width: 340px;
-		margin-left: 22px;
+	    float: left;
+		margin-left: 29px;
+		width: 356px;
 	}
 	
 		#community-page #sidebar h2 {
-			padding-left: 16px;
+			
+		}
+		
+		#community-page #sidebar .inner-content {
+			padding-left: 0;
 		}
 		
 		#community-page #sidebar .button-more {
@@ -1195,12 +1202,25 @@ a.normal:visited {
 		/* community page - sidebar - comments */
 		
 		#community-page #sidebar ul.comment-list li {
-		    width: 316px;
+		    width: 348px;
 		}
 		
-		#community-page #sidebar .comment-box textarea {
-		    width: 318px;
+		#community-page #sidebar ul.comment-list li.no-bg {
+			margin-top: 0px;
+			margin-bottom: 0;
 		}
+		
+		#community-page #sidebar .comment-box {
+			padding-bottom: 0;
+		}
+		
+			#community-page #sidebar .comment-box textarea {
+			    width: 350px;
+			    font-size: 9px;
+			    height: 15px;
+			    overflow: auto;
+			    padding: 2px 0 0 4px;
+			}
 										
 
 /*............Request Page............*/
@@ -1629,6 +1649,7 @@ a.normal:visited {
 		#search-page .search-holder {
 			width: 484px;
 			float: none;
+			margin-bottom: 20px;
 		}
 		
 			#search-page .search-holder input[type="text"] {
@@ -2599,6 +2620,12 @@ a.normal:visited {
 			color: #333;
 			text-transform: lowercase;
 		}
+		
+		/* for an item listing - for the item purpose  - search-page */
+		
+		#search-page #content .items-list ul li div p {
+			color: #838683;
+		}
 	
 		
 		/* for an item listing - for the person name underneath: 12 #333 (unless name of person is in trusted network, then #127e0e) */
@@ -2630,6 +2657,13 @@ a.normal:visited {
 
 	#content .unanswered-requests p {
 		font-size: 12px;
+	}
+	
+	
+	/* comments */
+	
+	#sidebar ul.comment-list li p {
+		font-size: 11px;
 	}
 
 	
