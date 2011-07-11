@@ -1,4 +1,4 @@
-<div id="dashboard-page">
+<div id="dashboard-page" class="clearfix">
 	<div id="content">
 		<% unless @requests.count.zero? %>
 			<div class="content-box-holder">
@@ -18,7 +18,7 @@
 				          <li class="clearfix">	
 						        <%= image_tag person.avatar(:square), :class => "thumb" %>
 						        <p>
-							        <%= link_to person.name, person_path(person) %> says: <%= c.comment %>
+							        <strong><%= link_to person.name, person_path(person) %></strong> <%= c.comment %>
 							        <span><%= time_ago_in_words(c.created_at) %> ago</span>
 						        </p>
 					        </li> 
@@ -93,5 +93,6 @@
 
 	<div id="sidebar">
 		<%= render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => 'News feed' } %>
+		<%= image_tag("bg-empty-village.png", :alt => "", :class => "empty-village")  %>
 	</div><!-- /sidebar -->
 </div><!--	/dashboard -->

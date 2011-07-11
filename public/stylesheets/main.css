@@ -19,6 +19,10 @@ body {
 	margin: 0; 
 	}
 
+strong {
+	font-weight: bold;
+}
+
 a:link,
 a:visited {
 	text-decoration: none;
@@ -255,14 +259,14 @@ a.normal:visited {
 								color: #fff;
 								display: block;
 								padding: 4px 20px 0 5px;
-								background:  url('../images/arrow-down.png') no-repeat right 9px;
+								/*background:  url('../images/arrow-down.png') no-repeat right 9px;*/
 								height: 20px;
                                 text-decoration: none;
 							}
 							
 							.bar-holder-lhs ul li a:hover {
 								color: #fff;
-								background: #6ea801 url('../images/arrow-up.png') no-repeat right 9px;
+								/*background: #6ea801 url('../images/arrow-up.png') no-repeat right 9px;*/
 							}
 							
 							.bar-holder-lhs ul li.last a:link,
@@ -629,13 +633,14 @@ a.normal:visited {
 		
 		ul.comment-list {
 			clear: both;
+			margin-top: 7px;
 		}
 		
 			ul.comment-list li  {
 				width: 348px;
 				padding: 0 4px;
 				background: #f4f9eb;
-				margin-top: 5px;
+				margin-top: 2px;
 	            margin-bottom: 0px;
 			}
 
@@ -648,6 +653,8 @@ a.normal:visited {
 						font-size: 11px;
 						padding-top: 3px;
 		      			padding-bottom: 3px;
+						float: left;
+						width: 300px;
 					}
 					
 						ul.comment-list li p span {
@@ -773,13 +780,12 @@ a.normal:visited {
 					bottom: -145px;
 					display: block;
 				}
-
 			
 			
 			
 /*............Profile Page............*/				
 				
-	
+
 	/* profile - content */	
 	
 	#profile-page #content h2 {
@@ -1050,18 +1056,22 @@ a.normal:visited {
 
 #community-page #sidebar-left {
 	padding: 0 15px 0 0;
-	width: 173px;
+	width: 150px;
 }
+
+	#community-page #sidebar-left .thumb {
+		width: 150px;
+	}
 
 	#community-page #sidebar-left ul {
 	    margin-top: 11px;
-	    width: 175px;
+	    width: 150px;
 	}
 	
 	#community-page #sidebar-left ul li a:link,
 	#community-page #sidebar-left ul li a:visited {
 		display: block;
-		padding: 4px 0px 1px 29px;
+		padding: 7px 0px 6px 35px;
 		height: 20px;
         text-decoration: none;
 		margin-bottom: 5px;
@@ -1069,7 +1079,7 @@ a.normal:visited {
 	
 	#community-page #sidebar-left ul li:hover,
 	#community-page #sidebar-left ul li.selected {
-		background: url('../images/my-community-list-hover.png') no-repeat 0 0;
+		background: url("../images/resources-list-hover.png") no-repeat 0 0 transparent;
 	}
 	
 	#community-page #sidebar-left ul li.separator {
@@ -1084,37 +1094,37 @@ a.normal:visited {
 
 	#community-page #sidebar-left ul li.all a:link,
 	#community-page #sidebar-left ul li.all a:visited {
-			background: url('../images/ic-trusted-network-user.png') no-repeat 1px 2px;
+			background: url('../images/ic-trusted-network-user.png') no-repeat 8px 4px;
 	}
 
 	#community-page #sidebar-left ul li.extended a:link,
 	#community-page #sidebar-left ul li.extended a:visited {
-			background: url('../images/ic-extended-network-user.png') no-repeat 1px 1px;
+			background: url('../images/ic-extended-network-user.png') no-repeat 8px 4px;
 	}
 
-	#user-trusted-page #sidebar-left ul li.people a:link,
-	#user-trusted-page #sidebar-left ul li.people a:visited {
-			background: url('../images/ic-people-community.png') no-repeat 1px 1px;
+	#community-page #sidebar-left ul li.people a:link,
+	#community-page #sidebar-left ul li.people a:visited {
+			background: url('../images/ic-people-community.png') no-repeat 8px 3px;
 	}
 
 	#community-page #sidebar-left ul li.trusted a:link,
 	#community-page #sidebar-left ul li.trusted a:visited {
-			background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
+			background: url('../images/ic-trusted-community.png') no-repeat 8px 3px;
 	}
 
 	#community-page #sidebar-left ul li.extend a:link,
 	#community-page #sidebar-left ul li.extend a:visited {
-			background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
+			background: url('../images/ic-extend-networks-community.png') no-repeat 8px 3px;
 	}
 
 	#community-page #sidebar-left ul li.community a:link,
 	#community-page #sidebar-left ul li.community a:visited {
-			background: url('../images/ic-community-community.png') no-repeat 1px 1px;
+			background: url('../images/ic-community-community.png') no-repeat 8px 3px;
 	}
 	
 	#community-page #sidebar-left ul li.village a:link,
 	#community-page #sidebar-left ul li.village a:visited {
-			background: url('../images/ic-village.png') no-repeat 1px 4px;
+			background: url('../images/ic-village.png') no-repeat 8px 4px;
 	}
 	
 	
@@ -1126,6 +1136,7 @@ a.normal:visited {
 	
 		#community-page .inner-content {
 			width: 295px;
+			margin-left: 0;
 		}
 	
 		#community-page #content h2 img {
@@ -1170,24 +1181,46 @@ a.normal:visited {
 	/* community page - sidebar */
 	
 	#community-page #sidebar {
-	    width: 340px;
-		margin-left: 22px;
+	    float: left;
+		margin-left: 29px;
+		width: 356px;
 	}
 	
 		#community-page #sidebar h2 {
-			padding-left: 16px;
+			
+		}
+		
+		#community-page #sidebar .inner-content {
+			padding-left: 0;
+		}
+		
+		#community-page #sidebar .button-more {
+			float: right;
 		}
 		
 		
 		/* community page - sidebar - comments */
 		
 		#community-page #sidebar ul.comment-list li {
-		    width: 316px;
+		    width: 348px;
 		}
 		
-		#community-page #sidebar .comment-box textarea {
-		    width: 318px;
+		#community-page #sidebar ul.comment-list li.no-bg {
+			margin-top: 0px;
+			margin-bottom: 0;
 		}
+		
+		#community-page #sidebar .comment-box {
+			padding-bottom: 0;
+		}
+		
+			#community-page #sidebar .comment-box textarea {
+			    width: 350px;
+			    font-size: 9px;
+			    height: 15px;
+			    overflow: auto;
+			    padding: 2px 0 0 4px;
+			}
 										
 
 /*............Request Page............*/
@@ -1230,7 +1263,7 @@ a.normal:visited {
 		}
 		
 		
-			/* request - sidebar - comments*/
+			/* request - sidebar - comments */
 			
 			#request-page #sidebar ul.comment-list li {
 			    width: 332px;
@@ -1606,7 +1639,7 @@ a.normal:visited {
 			}					
 			
 
-	
+
 /*............Search Page............*/										
 	
 	#search-page #content {
@@ -1615,11 +1648,24 @@ a.normal:visited {
 
 		#search-page .search-holder {
 			width: 484px;
+			float: none;
+			margin-bottom: 20px;
 		}
 		
 			#search-page .search-holder input[type="text"] {
 				height: 12px;
-				width: 460px;
+				width: 268px;
+				border: 1px solid #8e948e;
+				border-right: none;
+				font-size: 13px;
+			    height: 15px;
+			    overflow: auto;
+			    padding: 2px 0 0 4px;
+			}
+			
+			#search-page .search-holder button {
+				background: url('../images/bg-search-submit-page.png') no-repeat top left;
+				height: 19px;
 			}
 
 		#search-page #content h2 {
@@ -1638,6 +1684,8 @@ a.normal:visited {
 
 		#search-page .items-list {
 			padding-top: 2px;
+			padding-left: 0;
+			clear: both;
 		}
 
 			#search-page .items-list ul li.item {
@@ -1688,8 +1736,8 @@ a.normal:visited {
 				#search-page #sidebar-left ul li a:link,
 				#search-page #sidebar-left ul li a:visited {
 					display: block;
-					padding: 4px 0px 1px 29px;
-					background:  url('../images/ic-village.png') no-repeat 3px 4px;
+					padding: 7px 0px 6px 35px;
+					background:  url('../images/ic-village.png') no-repeat 10px 6px;
 					height: 20px;
                     text-decoration: none;
 					margin-bottom: 5px;
@@ -1702,32 +1750,32 @@ a.normal:visited {
 
 				#search-page #sidebar-left ul li.all a:link,
 				#search-page #sidebar-left ul li.all a:visited {
-						background: url('../images/ic-all-networks-community.png') no-repeat 1px 2px;
+						background: url('../images/ic-all-networks-community.png') no-repeat 8px 4px;
 				}
 
 				#search-page #sidebar-left ul li.items a:link,
 				#search-page #sidebar-left ul li.items a:visited {
-						background: url('../images/ic-items-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-items-community.png') no-repeat 8px 3px;
 				}
 
 				#search-page #sidebar-left ul li.people a:link,
 				#search-page #sidebar-left ul li.people a:visited {
-						background: url('../images/ic-people-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-people-community.png') no-repeat 8px 3px;
 					}
 
 				#search-page #sidebar-left ul li.trusted a:link,
 				#search-page #sidebar-left ul li.trusted a:visited {
-						background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-trusted-community.png') no-repeat 8px 3px;
 					}
 
 				#search-page #sidebar-left ul li.extend a:link,
 				#search-page #sidebar-left ul li.extend a:visited {
-						background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-extend-networks-community.png') no-repeat 8px 3px;
 					}
 
 				#search-page #sidebar-left ul li.community a:link,
 				#search-page #sidebar-left ul li.community a:visited {
-						background: url('../images/ic-community-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-community-community.png') no-repeat 8px 3px;
 					}							
 
 			#search-page #sidebar-left ul li.separator {
@@ -1765,11 +1813,11 @@ a.normal:visited {
 	}
 
 	#user-trusted-page #content ul {
-		padding-bottom: 23px;
+		
 	}
 
 		#user-trusted-page #content ul li {
-			margin-top: 7px;
+			margin-bottom: 7px;
 		}
 
 		#user-trusted-page #content ul li.people-holder {
@@ -1791,6 +1839,32 @@ a.normal:visited {
 			    font-size: 11px;
 			    padding-top: 11px;
 			}
+			
+			.network-holder {
+				width: 537px;
+				border-top: 1px solid #ccc;
+				padding: 15px 0;
+			}
+			
+				#user-trusted-page .lhs {
+					width: 235px;
+					float: left;
+				}
+			
+				#user-trusted-page .rhs {
+					width: 301px;
+					float: left;
+				}
+			
+					#user-trusted-page .rhs	h4 {
+						color: #98abac;
+						font-size: 18px;
+						text-transform: uppercase;
+						font-weight: bold;
+						font-family: verdana, tahoma, arial, sans-serif;
+						line-height: 68%;
+						margin-bottom: 7px;
+					}
 
 	/* user trusted page - sidebar-left */
 
@@ -1817,7 +1891,7 @@ a.normal:visited {
 				#user-trusted-page #sidebar-left ul li a:link,
 				#user-trusted-page #sidebar-left ul li a:visited {
 					display: block;
-					padding: 4px 0px 1px 29px;
+					padding: 7px 0px 6px 35px;
 					height: 20px;
 	                text-decoration: none;
 					margin-bottom: 5px;
@@ -1830,32 +1904,32 @@ a.normal:visited {
 
 				#user-trusted-page #sidebar-left ul li.all a:link,
 				#user-trusted-page #sidebar-left ul li.all a:visited {
-						background: url('../images/ic-trusted-network-user.png') no-repeat 1px 2px;
+						background: url('../images/ic-trusted-network-user.png') no-repeat 8px 4px;
 				}
 
 				#user-trusted-page #sidebar-left ul li.extended a:link,
 				#user-trusted-page #sidebar-left ul li.extended a:visited {
-						background: url('../images/ic-extended-network-user.png') no-repeat 1px 1px;
+						background: url('../images/ic-extended-network-user.png') no-repeat 8px 3px;
 				}
 
 				#user-trusted-page #sidebar-left ul li.people a:link,
 				#user-trusted-page #sidebar-left ul li.people a:visited {
-						background: url('../images/ic-people-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-people-community.png') no-repeat 8px 3px;
 					}
 
 				#user-trusted-page #sidebar-left ul li.trusted a:link,
 				#user-trusted-page #sidebar-left ul li.trusted a:visited {
-						background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-trusted-community.png') no-repeat 8px 3px;
 					}
 
 				#user-trusted-page #sidebar-left ul li.extend a:link,
 				#user-trusted-page #sidebar-left ul li.extend a:visited {
-						background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-extend-networks-community.png') no-repeat 8px 3px;
 					}
 
 				#user-trusted-page #sidebar-left ul li.community a:link,
 				#user-trusted-page #sidebar-left ul li.community a:visited {
-						background: url('../images/ic-community-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-community-community.png') no-repeat 8px 3px;
 					}
 
 
@@ -2068,7 +2142,7 @@ a.normal:visited {
 		#manage-resources-page #sidebar-left ul {
 			width: 150px;
 		}
-
+		
 			#manage-resources-page #sidebar-left ul li {
 
 			}
@@ -2076,7 +2150,7 @@ a.normal:visited {
 				#manage-resources-page #sidebar-left ul li a:link,
 				#manage-resources-page #sidebar-left ul li a:visited {
 					display: block;
-					padding: 4px 0px 1px 29px;
+					padding: 7px 0px 6px 35px;
 					background:  url('../images/ic-village.png') no-repeat 3px 4px;
 					height: 20px;
 	                text-decoration: none;
@@ -2090,32 +2164,32 @@ a.normal:visited {
 
 				#manage-resources-page #sidebar-left ul li.all a:link,
 				#manage-resources-page #sidebar-left ul li.all a:visited {
-						background: url('../images/ic-all-networks-community.png') no-repeat 1px 2px;
+						background: url('../images/ic-all-networks-community.png') no-repeat 8px 4px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.items a:link,
 				#manage-resources-page #sidebar-left ul li.items a:visited {
-						background: url('../images/ic-items-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-items-community.png') no-repeat 8px 3px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.people a:link,
 				#manage-resources-page #sidebar-left ul li.people a:visited {
-						background: url('../images/ic-people-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-people-community.png') no-repeat 8px 3px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.trusted a:link,
 				#manage-resources-page #sidebar-left ul li.trusted a:visited {
-						background: url('../images/ic-trusted-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-trusted-community.png') no-repeat 8px 3px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.extend a:link,
 				#manage-resources-page #sidebar-left ul li.extend a:visited {
-						background: url('../images/ic-extend-networks-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-extend-networks-community.png') no-repeat 8px 3px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.community a:link,
 				#manage-resources-page #sidebar-left ul li.community a:visited {
-						background: url('../images/ic-community-community.png') no-repeat 1px 1px;
+						background: url('../images/ic-community-community.png') no-repeat 8px 3px;
 				}
 				
 				
@@ -2364,6 +2438,11 @@ a.normal:visited {
 		font-size: 11px;
 	}
 	
+		ul.action-list li.person-name a:link,
+		ul.action-list li.person-name a:visited {
+			font-size: 12px;
+		}
+	
 	
 		/* Time since (e.g. 43 minutes ago) under Event Sentences (for Requests\Actions and Recent Activity) */ 
 	
@@ -2532,7 +2611,9 @@ a.normal:visited {
 	#community-page #content h2,
 	#user-trusted-page #content h2,
 	#manage-resources-page #content h2,
-	#search-page #content h2 {
+	#search-page #content h2,
+	#search-page #content h2 a:link,
+	#search-page #content h2 a:visited {
 		color: #127e0e;
 		font-size: 16px;
 		margin-top: 7px;
@@ -2541,20 +2622,35 @@ a.normal:visited {
 
 	/* for an item listing - for the item use (i.e. share\gift), and the item type (e.g. bike) */
 	
+	
+	#content .items-expanded ul p,
+	#content .items-expanded ul p a:link,
+	#content .items-expanded ul p a:visited,
 	#content .items-list ul p,
 	#content .items-list ul p a:link,
 	#content .items-list ul p a:visited {
 		font-size: 12px;
 		color: #62775a;
+		text-transform: lowercase;
 	}
 	
 	
 		/* for an item listing - for the item name  */
 		
+		
+		#content .items-expanded ul p a.positive:link,
+		#content .items-expanded ul p a.positive:visited,
 		#content .items-list ul p a.positive:link,
 		#content .items-list ul p a.positive:visited {
 			font-size: 12px;
 			color: #333;
+			text-transform: lowercase;
+		}
+		
+		/* for an item listing - for the item purpose  - search-page */
+		
+		#search-page #content .items-list ul li div p {
+			color: #838683;
 		}
 	
 		
@@ -2587,6 +2683,13 @@ a.normal:visited {
 
 	#content .unanswered-requests p {
 		font-size: 12px;
+	}
+	
+	
+	/* comments */
+	
+	#sidebar ul.comment-list li p {
+		font-size: 11px;
 	}
 
 	

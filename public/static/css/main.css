@@ -277,4 +277,10 @@ h1 {
 					cursor: pointer;
 				}
 			
+			
+		/* message */
+		
+		#container.invitation-page .message-holder {
+			color: #62775a !important;
+		}
 
