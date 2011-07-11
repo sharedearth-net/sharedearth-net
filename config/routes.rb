@@ -8,12 +8,10 @@ Sharedearthapp::Application.routes.draw do
   
   resources :comments, :only => [:create]
 
-  resources :invitations, :except => [:destroy, :edit, :show] do
-    collection do
-        put "validate"
-        put "purge"
-    end
-  end
+  resources :invitations, :except => [:destroy, :edit, :show]
+  
+  get "invitations/validate"
+  get "invitations/purge"
 
   get "search/index"
 
