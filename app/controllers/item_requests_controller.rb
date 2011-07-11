@@ -65,18 +65,26 @@ class ItemRequestsController < ApplicationController
   end  
   
   def accept
-    #@item_request.accept!
+    @item_request.accept!
     respond_to do |format|
       format.html { redirect_to_back }
-      format.json  { render :json => @item_request }
+      format.json do
+        @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
+        render :json => { :success => true, :user_html => @user_html  }
+      end
     end
+    
+    
   end
   
   def reject
     @item_request.reject!
     respond_to do |format|
       format.html { redirect_to_back }
-      format.json  { render :json => @item_request }
+      format.json do
+        @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
+        render :json => { :success => true, :user_html => @user_html  }
+      end
     end
   end
   
@@ -84,7 +92,10 @@ class ItemRequestsController < ApplicationController
     @item_request.cancel!(current_user.person)
     respond_to do |format|
       format.html { redirect_to_back }
-      format.json  { render :json => @item_request }
+      format.json do
+        @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
+        render :json => { :success => true, :user_html => @user_html  }
+      end
     end
   end
   
@@ -92,7 +103,10 @@ class ItemRequestsController < ApplicationController
     @item_request.collected!
     respond_to do |format|
       format.html { redirect_to_back }
-      format.json  { render :json => @item_request }
+      format.json do
+        @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
+        render :json => { :success => true, :user_html => @user_html  }
+      end
     end
   end
   
@@ -100,7 +114,11 @@ class ItemRequestsController < ApplicationController
     @item_request.complete!(current_user.person)
     respond_to do |format|
       format.html { redirect_to_back }
-      format.json  { render :json => @item_request }
+      format.json do
+        render :json => { :success => true, :people_helped => current_user.person.reputation_rating.distinct_people_count.to_s, 
+                          :gift_actions => current_user.person.reputation_rating.gift_actions_count.to_s, 
+                          :activity_level => current_user.person.reputation_rating.activity_level_count.to_s  }
+      end
     end
 
   end
