@@ -235,4 +235,13 @@ class Person < ActiveRecord::Base
     ActivityLog.create_person_join_activity_log(self)
   end
   
+  #Number of vilages
+  def vilages?
+    0
+  end
+  
+  def communities?
+    0
+  end
+  
 end
