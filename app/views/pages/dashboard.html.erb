@@ -1,4 +1,10 @@
-<div id="dashboard-page" class="clearfix">
+<% if current_user.person.trusted_network_size == 0 && (current_user.person.vilages? == 0 || current_user.person.communies? == 0) -%>
+  <% dashboard_class = "empty" %>
+<% else -%>
+  <% dashboard_class = "clearfix" %>
+<% end -%>
+
+<div id="dashboard-page" class="<%= dashboard_class %>">
 	<div id="content">
 		<% unless @requests.count.zero? %>
 			<div class="content-box-holder">
@@ -67,14 +73,7 @@
 				</li>
 			
 				<% @recent_activity_logs.each do |activity_log| %>
-
-					<li class="content-box clearfix">
-						<%= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb" %>
-
-						<div class="inner-content">
-							<%= render :partial => "shared/activity_log_entry", :locals => { :activity_log => activity_log } %>
-						</div>
-					</li>
+          <%= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log } %>
 				<% end unless @recent_activity_logs.nil?%>
 				<!-- Nebojsa-todo - button-more is static  -->
 				<li class="content-box clearfix">
