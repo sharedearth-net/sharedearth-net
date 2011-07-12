@@ -6,20 +6,11 @@ class CommentsController < ApplicationController
   
   respond_to do |format|
       format.html { redirection_rules(model_name) }
-      format.json  { render :json => @comment }
+      format.json do
+        @comment_html = render_to_string( :partial => 'comments/comment.html.erb', :locals => {:c => @comment } )
+        render :json => { :success => true, :comment_html => @user_html  }
+      end
   end
-=begin
-  case model_name
-    when "ItemRequest"
-      redirect_to request_path(record_commentable)
-    when "Item"
-      redirect_to item_path(record_commentable)
-    when "EventLog"
-      redirect_to dashboard_path
-    else
-     #  
-  end
-=end
  end
  
  private
