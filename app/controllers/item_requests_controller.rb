@@ -70,7 +70,11 @@ class ItemRequestsController < ApplicationController
       format.html { redirect_to_back }
       format.json do
         @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
-        render :json => { :success => true, :user_html => @user_html  }
+        acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
+        acttivity.each do |activity_log|
+          @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
+        end
+        render :json => { :success => true, :request_html => @user_html, :activity_html => @recent_activity  }
       end
     end
     
@@ -83,7 +87,11 @@ class ItemRequestsController < ApplicationController
       format.html { redirect_to_back }
       format.json do
         @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
-        render :json => { :success => true, :user_html => @user_html  }
+        acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
+        acttivity.each do |activity_log|
+          @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
+        end
+        render :json => { :success => true, :request_html => @user_html, :activity_html => @recent_activity  }
       end
     end
   end
@@ -94,7 +102,11 @@ class ItemRequestsController < ApplicationController
       format.html { redirect_to_back }
       format.json do
         @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
-        render :json => { :success => true, :user_html => @user_html  }
+        acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
+        acttivity.each do |activity_log|
+          @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
+        end
+        render :json => { :success => true, :request_html => @user_html, :activity_html => @recent_activity  }
       end
     end
   end
@@ -105,7 +117,11 @@ class ItemRequestsController < ApplicationController
       format.html { redirect_to_back }
       format.json do
         @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
-        render :json => { :success => true, :user_html => @user_html  }
+        acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
+        acttivity.each do |activity_log|
+          @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
+        end
+        render :json => { :success => true, :request_html => @user_html, :activity_html => @recent_activity  }
       end
     end
   end
@@ -115,9 +131,14 @@ class ItemRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to_back }
       format.json do
+        acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
+        acttivity.each do |activity_log|
+          @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
+        end
         render :json => { :success => true, :people_helped => current_user.person.reputation_rating.distinct_people_count.to_s, 
                           :gift_actions => current_user.person.reputation_rating.gift_actions_count.to_s, 
-                          :activity_level => current_user.person.reputation_rating.activity_level_count.to_s  }
+                          :activity_level => current_user.person.reputation_rating.activity_level_count.to_s,  
+                          :request_html => @user_html, :activity_html => @recent_activity }
       end
     end
 
