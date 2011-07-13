@@ -38,7 +38,7 @@ class InvitationsController < ApplicationController
      invitation = Invitation.find_by_invitation_unique_key(key)
      if !invitation.nil? && invitation.active?
         invitation.update_attributes(:invitee_person_id => current_user.person.id, :accepted_date => Time.now, :invitation_active => false)
-        current_user.person.update_attributes(:authorised_account => true)
+        current_user.person.authorise!
         current_user.inform_mutural_friends(session[:fb_token])
         redirect_to terms_path and return
      end
@@ -48,7 +48,8 @@ class InvitationsController < ApplicationController
   
   def purge
     current_user.destroy
-    redirect_to signout_path
+    session[:user_id] = nil
+    redirect_to root_path
   end
       
   private
