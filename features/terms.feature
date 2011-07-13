@@ -21,6 +21,7 @@ Feature: Accepting terms
     And I press "Submit"
     Then I should see the words "TERMS AND CONDITIONS"
     Then I follow "Reject"
+    Then I should see the words "Welcome" and "Connect"
 
   Scenario: I should be able to accept terms
     Then I fill in active invitation
@@ -29,7 +30,7 @@ Feature: Accepting terms
     When I follow "Accept"
     Then I should see "Important Information about sharedearth.net"
     
-  Scenario: I should be able to decline terms of use
+  Scenario: I should be able to decline principles 
     Then I fill in active invitation
     And I press "Submit"
     Then I should see the words "TERMS AND CONDITIONS"
@@ -38,7 +39,7 @@ Feature: Accepting terms
     When I follow "No thanks"
     Then I should see the words "Welcome" and "Connect"
     
-  Scenario: I should be able to accept terms and use
+  Scenario: I should be able to accept principles and use
     Then I fill in active invitation
     And I press "Submit"
     Then I should see the words "TERMS AND CONDITIONS"
@@ -46,3 +47,12 @@ Feature: Accepting terms
     Then I should see "Important Information about sharedearth.net"
     And I follow "Connect"
     Then I should see the words "Edit Profile"
+    
+  Scenario: I should be able to decline terms, and get beck to same page
+    Then I fill in active invitation
+    And I press "Submit"
+    Then I should see the words "TERMS AND CONDITIONS"
+    Then I follow "Reject"
+    Then I should see the words "Welcome" and "Connect"
+    
+    
