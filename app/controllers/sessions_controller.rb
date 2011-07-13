@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  
   ##
   # Sample of a omniauth.auth hash:
   # --- 
@@ -44,10 +43,14 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     session[:fb_token] = auth["credentials"]["token"] if auth['provider'] == 'facebook'
     if user.person.authorised?
-      if user.person.accepted?
+      if user.person.accepted_tc? && user.person.accepted_pp?
         redirect_to dashboard_path
-      else
+      elsif !user.person.accepted_tc?
         redirect_to terms_path
+      elsif !user.person.accepted_pp?
+        redirect_to principles_terms_path
+      else 
+        redirect_to root_path
       end
     else
       redirect_to root_path
@@ -55,11 +58,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    split_token = session[:fb_token].split("|")
-    fb_api_key = split_token[0]
-    fb_session_key = split_token[1]
-    session[:fb_token] = nil
-    session[:user_id] = nil
-    redirect_to "http://www.facebook.com/logout.php?api_key=#{fb_api_key}&session_key=#{fb_session_key}&confirm=1&next=#{root_url}";
+    if session[:user_id].nil? || session[:fb_token].nil? 
+      redirect_to root_path
+    else
+      split_token = session[:fb_token].split("|")
+      fb_api_key = split_token[0]
+      fb_session_key = split_token[1]
+      session[:fb_token] = nil
+      session[:user_id] = nil
+      redirect_to "http://www.facebook.com/logout.php?api_key=#{fb_api_key}&session_key=#{fb_session_key}&confirm=1&next=#{root_url}";
+    end
   end
 end
