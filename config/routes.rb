@@ -1,10 +1,14 @@
 Sharedearthapp::Application.routes.draw do
 
-  resources :terms, :only => [:index]
-
   get "reguested_invitations/create"
-  put "terms/accept"
-  put "terms/decline"
+  
+  resources :terms, :only => [:index] do
+    collection do
+      put 'accept_tc'
+      put 'accept_pp'
+      get 'principles'
+    end
+  end
   
   resources :comments, :only => [:create]
 
