@@ -43,13 +43,22 @@ class Person < ActiveRecord::Base
     save!
   end
   
-  def accept!
-    self.accepted_tc_and_pp = true
+  def accept_tc!
+    self.accepted_tc = true
     save!
   end
   
-  def accepted?
-    self.accepted_tc_and_pp == true
+  def accepted_tc?
+    self.accepted_tc == true
+  end
+  
+  def accept_pp!
+    self.accepted_pp = true
+    save!
+  end
+  
+  def accepted_pp?
+    self.accepted_pp == true
   end
   
   def create_entity_for_person
