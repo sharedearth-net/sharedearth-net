@@ -469,7 +469,7 @@ a.normal:visited {
 
 			#sidebar .inner-content {
 			    margin-left: 0;
-			   	width: 340px;
+			   	width: 356px;
 				float: none;
 				padding-left: 16px;
 			}
@@ -1134,7 +1134,7 @@ a.normal:visited {
 	    width: 452px;
 	}
 	
-		#community-page .inner-content {
+		#community-page #content .inner-content {
 			width: 295px;
 			margin-left: 0;
 		}
@@ -2624,9 +2624,13 @@ a.normal:visited {
 	
 	
 	#content .items-expanded ul p,
+	#content .items-list ul p {
+		font-size: 12px;
+		color: #838683;
+	}
+	
 	#content .items-expanded ul p a:link,
 	#content .items-expanded ul p a:visited,
-	#content .items-list ul p,
 	#content .items-list ul p a:link,
 	#content .items-list ul p a:visited {
 		font-size: 12px;
