@@ -8,7 +8,7 @@ gem 'rails', '3.0.7'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'omniauth', "~> 0.2.6"
 gem "aws-s3"
-gem "paperclip", "~> 2.3"
+gem "paperclip"
 
 # https://github.com/bclubb/possessive
 gem "possessive"
