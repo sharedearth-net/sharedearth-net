@@ -779,6 +779,7 @@ a.normal:visited {
 					right: -125px;
 					bottom: -145px;
 					display: block;
+					z-index: -1000;
 				}
 			
 			
@@ -1832,12 +1833,19 @@ a.normal:visited {
 				float: left;
 				display: block;
 				margin-right: 8px;
+				width: 50px;
+				height: 50px;
 			}
 
 			#user-trusted-page #content ul li p {
 			    color: #62775A;
 			    font-size: 11px;
 			    padding-top: 11px;
+			}
+			
+			#user-trusted-page #content ul li p a:link,
+			#user-trusted-page #content ul li p a:visited {
+			    color: #62775a;
 			}
 			
 			.network-holder {
@@ -2627,7 +2635,7 @@ a.normal:visited {
 	#content .items-list ul p {
 		font-size: 12px;
 		color: #838683;
-	}
+	} 
 	
 	#content .items-expanded ul p a:link,
 	#content .items-expanded ul p a:visited,
