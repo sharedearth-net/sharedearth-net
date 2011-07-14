@@ -17,4 +17,12 @@ class Invitation < ActiveRecord::Base
   def inactive?
     !self.invitation_active
   end
+  
+  def inviter 
+    Person.find_by_id(self.inviter_person_id)
+  end
+  
+  def invitee
+    Person.find_by_id(self.invitee_person_id)
+  end
 end

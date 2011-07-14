@@ -1,33 +1,34 @@
 class InvitationsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:validate, :key, :purge]
-  before_filter :admin_access, :only => [:index, :new, :create]
+  #before_filter :authenticate_user!, :except => [:validate, :key, :purge]
     
-  def index
-    @invitations = Invitation.all
-  end
-
-  def new
-  end
-
-  def create      
+  def create    
     invitations = params[:invitations].to_i
     items = params[:items].to_i
     
-    redirect_to new_invitation_path, :notice => "Please enter correct data in fields" and return if (invitations <= 0  || items < 0)
+    redirect_to new_admin_invitation_path, :notice => "Please enter correct data in fields" and return if (invitations <= 0  || items < 0)
     people = Person.with_items_more_than(items)
-    @people_count = people.count
-    @invitation_count = invitations * @people_count
-    if params[:preview_button]
-      render :action => 'new'
-    else
       @invites = []
       invitations.times do |inv|
         @invites += people.collect { |person| Invitation.new(:inviter_person_id => person.id, :invitation_active => true) }
       end
       if @invites.each(&:save!)
-        redirect_to invitations_path, :notice => "Successfully created invitations."
+        redirect_to admin_invitations_path, :notice => "Successfully created invitations."
       else
-        render :action => 'new'
+        redirect_to new_admin_invitation_path
+      end
+  end
+  
+  def preview
+    invitations = params[:invitations].to_i
+    items = params[:items].to_i
+    people = Person.with_items_more_than(items)
+    people_count = people.count
+    invitation_count = invitations * people_count
+   respond_to do |format|
+      format.html { redirection_rules(model_name) }
+      format.json do
+      
+        render :json => { :success => true, :invites => invitation_count  }
       end
     end
   end
@@ -50,16 +51,6 @@ class InvitationsController < ApplicationController
     current_user.destroy
     session[:user_id] = nil
     redirect_to root_path
-  end
-      
-  private
-  
-  def administrator?
-    current_user.uid == '632021541' || current_user.uid == '1221401527'
-  end
-  
-  def admin_access
-    redirect_to dashboard_path, :notice => "Wrong url" if !administrator?
   end
   
 end
