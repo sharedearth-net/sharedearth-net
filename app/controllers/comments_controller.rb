@@ -8,7 +8,6 @@ class CommentsController < ApplicationController
       format.html { redirection_rules(model_name) }
       format.json do
         @comment_html = render_to_string( :partial => 'comments/comment.html.erb', :locals => {:c => @comment } )
-        debugger
         render :json => { :success => true, :comment_html => @comment_html  }
       end
   end
