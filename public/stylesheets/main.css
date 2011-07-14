@@ -645,7 +645,7 @@ a.normal:visited {
 			}
 
 				ul.comment-list li.no-bg  {
-					background: #fff;
+					background: transparent;
 					padding: 0;
 				}
 				
@@ -732,9 +732,14 @@ a.normal:visited {
 		/* dashboard - content - comments */
 				
 		#dashboard-page #content ul.comment-list li.no-bg  {
-			background: transparent;
 			padding: 0;
+			width: 356px;
 		}		
+		
+		#dashboard-page #content ul.comment-list li p {
+			font-size: 11px;
+			width: 314px;
+		}
 		
 		#dashboard-page #content ul.comment-list li p span {
 			display: block;
@@ -1209,6 +1214,7 @@ a.normal:visited {
 		#community-page #sidebar ul.comment-list li.no-bg {
 			margin-top: 0px;
 			margin-bottom: 0;
+			width: 356px;
 		}
 		
 		#community-page #sidebar .comment-box {
@@ -1240,6 +1246,11 @@ a.normal:visited {
 		#request-page #content h2 span {
 
 		}
+		
+		#request-page #content .comments-holder {
+			width: 356px;
+			margin-left: 0;
+		}
 	
 
 	/* request - sidebar */	
@@ -1264,11 +1275,24 @@ a.normal:visited {
 		}
 		
 		
+		#request-page #sidebar .inner-content {
+			width: 340px;
+		}
+		
+		
 			/* request - sidebar - comments */
 			
 			#request-page #sidebar ul.comment-list li {
 			    width: 332px;
 			}
+			
+			#request-page #sidebar ul.comment-list li.no-bg {
+				width: 340px;
+			}
+			
+				#request-page #sidebar ul.comment-list li p {
+					width: 298px;
+				}
 			
 				#request-page #sidebar .comment-box textarea {
 				    width: 334px;
@@ -1419,9 +1443,10 @@ a.normal:visited {
 			}
 
 			#completed-request-page #content p {
-				font-size: 12px;
+				font-size: 11px;
 				color: #333;
 				margin-bottom: 10px;
+				width: 294px;
 			}
 
 				#completed-request-page #content p a:link,
@@ -1459,7 +1484,6 @@ a.normal:visited {
 				width: 336px;
 				margin: 0 auto;
 				padding: 0;
-				background: #fff;
 			}
 
 				#completed-request-page .thumb {
@@ -1479,8 +1503,8 @@ a.normal:visited {
 				}
 
 				#completed-request-page ul.comment-list li.no-bg  {
-					background: #fff;
 					padding: 0;
+					width: 336px;
 				}
 
 					#completed-request-page .comment-box {

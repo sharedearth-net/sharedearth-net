@@ -71,7 +71,7 @@
 		
 		<% if (@item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)) && !@item_request.completed? %>
     <!-- comments begin -->
-		<div class="inner-content">
+		<div class="inner-content comments-holder">
 			<ul class="comment-list">
   			<% @comments.each do |c| -%>
 					<%= render :partial => 'comments/comment', :locals => {:c => c} %>
