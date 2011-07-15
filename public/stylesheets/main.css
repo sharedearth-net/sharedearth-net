@@ -654,7 +654,6 @@ a.normal:visited {
 						padding-top: 3px;
 		      			padding-bottom: 3px;
 						float: left;
-						width: 300px;
 					}
 					
 						ul.comment-list li p span {
@@ -695,6 +694,10 @@ a.normal:visited {
 				
 	/* dashboard - content */
 	
+	#dashboard-page #content {
+		width: 616px;
+	}
+	
 	#dashboard-page #content p {
 		margin-bottom: 0;
 	}
@@ -712,7 +715,7 @@ a.normal:visited {
 	#dashboard-page .content-box {
 		background: #ebf5da;
 		padding: 0 15px 12px 15px;
-		width: 481px;
+		width: 586px;
 	}
 	
 		#dashboard-page .content-box .thumb {
@@ -747,6 +750,10 @@ a.normal:visited {
 
 	/* dashboard - sidebar */
 	
+	#dashboard-page #sidebar {
+		margin-left: 30px;
+	}
+	
 		#dashboard-page img.empty-village {
 			display: none;
 		}
@@ -764,12 +771,16 @@ a.normal:visited {
 			
 			/* dashboard - sidebar - comments */
 			
-			#dashboard-page .comment-box {
+			#dashboard-page #sidebar .comment-box {
 				padding: 0;
 			}
 			
-			#dashboard-page .comment-box textarea {
+			#dashboard-page #sidebar .comment-box textarea {
 				width: 350px;
+			}
+			
+			#dashboard-page #sidebar ul.comment-list li p {
+				width: 314px;
 			}
 			
 			
@@ -781,7 +792,7 @@ a.normal:visited {
 
 				#dashboard-page.empty img.empty-village {
 					position: absolute;
-					right: -125px;
+					right: -135px;
 					bottom: -145px;
 					display: block;
 					z-index: -1000;
@@ -800,7 +811,8 @@ a.normal:visited {
 	
 		#profile-page #content h2 span {
 				float: right;
-				margin-top: 3px;
+				margin-top: 4px;
+				margin-right: 44px;
 			}
 	
 	#profile-page #content h3 {
@@ -819,6 +831,18 @@ a.normal:visited {
 		margin-top: -5px;
 	}
 	
+		/* profile-page - content - requests */
+		
+		#profile-page #content .requests ul.action-list {
+			clear: both;
+			margin-top: 0;
+		}
+		
+		#profile-page  #content .items-list .requests ul li div p {
+			margin-bottom: 0;
+			text-transform: lowercase;
+		}
+	
 	
 		/* profile-page - content - comments */
 	
@@ -827,16 +851,38 @@ a.normal:visited {
 		    float: none;
 		    font-size: 12px;
 			width: 401px;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+		
+		#profile-page #content ul.comment-list li.even {
+			background: transparent;
+		}
+		
+		#profile-page #content ul.comment-list li a:link,
+		#profile-page #content ul.comment-list li a:visited {
+			color: #127E0E;
 		}
 	
-			#profile-page #content ul.comment-list .thumb {
-				float: left;
-			    max-width: 27px;
-				width: auto;
+			#profile-page #content ul.comment-list .time-ago {
+				float: right;
+			    width: 120px;
+				color: #9C9E9C;
+				font-size: 10px;
+				font-family: verdana, tahoma, arial, sans-serif;
+				margin-top: 18px;
 			}
 	
 				#profile-page #content ul li div ul.comment-list p {
 					clear: none;
+					padding-top: 4px;
+					width: 230px;
+				}
+				
+				#profile-page #content ul.comment-list .thumb {
+					float: left;
+				    max-width: 32px;
+					width: auto;
+					margin: 7px 4px 3px 4px;
 				}
 				
 				#profile-page #content .comment-box textarea {
@@ -882,7 +928,7 @@ a.normal:visited {
 		}
 		
 			.trust-reputation-box ul li {
-				margin-top: 4px;
+				margin-top: 10px;
 			}
 
 			.trust-reputation-box ul li.no-icon {
@@ -921,8 +967,9 @@ a.normal:visited {
 				
 				.trust-reputation-box ul.action-list li {
 					font-size: 11px;
-					margin-right: 7px;
+					margin-right: 20px;
 				}
+
 				
 				.trust-reputation-box a.giftactions:link,
 				.trust-reputation-box a.giftactions:visited {
@@ -2580,7 +2627,7 @@ a.normal:visited {
 		.trust-reputation-box h2 a:link,
 		.trust-reputation-box h2 a:visited {
 			color: #62775a;
-			font-size: 14px;
+			font-size: 13px;
 		}
 
 
@@ -2717,7 +2764,8 @@ a.normal:visited {
 
 	/* Event sentences on Dashboard - 'unanswered-requests' */
 
-	#content .unanswered-requests p {
+	#content p.event-sentences  {
+		color: #5c5c5c;
 		font-size: 12px;
 	}
 	
