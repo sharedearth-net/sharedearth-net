@@ -654,7 +654,6 @@ a.normal:visited {
 						padding-top: 3px;
 		      			padding-bottom: 3px;
 						float: left;
-						width: 300px;
 					}
 					
 						ul.comment-list li p span {
@@ -827,16 +826,38 @@ a.normal:visited {
 		    float: none;
 		    font-size: 12px;
 			width: 401px;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+		
+		#profile-page #content ul.comment-list li.even {
+			background: transparent;
+		}
+		
+		#profile-page #content ul.comment-list li a:link,
+		#profile-page #content ul.comment-list li a:visited {
+			color: #127E0E;
 		}
 	
-			#profile-page #content ul.comment-list .thumb {
-				float: left;
-			    max-width: 27px;
-				width: auto;
+			#profile-page #content ul.comment-list .time-ago {
+				float: right;
+			    width: 120px;
+				color: #9C9E9C;
+				font-size: 10px;
+				font-family: verdana, tahoma, arial, sans-serif;
+				margin-top: 18px;
 			}
 	
 				#profile-page #content ul li div ul.comment-list p {
 					clear: none;
+					padding-top: 4px;
+					width: 230px;
+				}
+				
+				#profile-page #content ul.comment-list .thumb {
+					float: left;
+				    max-width: 32px;
+					width: auto;
+					margin: 7px 4px 3px 4px;
 				}
 				
 				#profile-page #content .comment-box textarea {
