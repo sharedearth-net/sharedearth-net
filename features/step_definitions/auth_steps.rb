@@ -15,7 +15,8 @@ end
 Given /^the user is logged in$/ do
   person = Factory(:person)
   person.authorise!
-  person.accept!
+  person.accept_tc!
+  person.accept_pp!
   omniauth_mock_facebook_with_uid(person.user.uid)
   visit "/auth/facebook"
 end
