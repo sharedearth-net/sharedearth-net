@@ -391,7 +391,7 @@ module PagesHelper
     when 39
       sentence =  "You connected to sharedearth.net"
     when 40
-      sentence =  "you made a request to borrow " + person_possesive + " " + item  #this is duplicate of - 3, not used at this moment, left for possible future use
+      sentence =  "You made a request to borrow " + person_possesive + " " + item  #this is duplicate of - 3, not used at this moment, left for possible future use
     when 41
       sentence =  person + " confirmed you have a trusted relationship with them"
     when 42
