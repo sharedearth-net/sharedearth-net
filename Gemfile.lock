@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/100hz/rails-settings.git
+  revision: a85f9121f503d3ae9761bae651d52b2fa94ae7cc
+  specs:
+    rails-settings (0.1.1)
+      rails (>= 3.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -16,6 +23,14 @@ GEM
       rack-mount (~> 0.6.14)
       rack-test (~> 0.5.7)
       tzinfo (~> 0.3.23)
+    activeadmin (0.2.2)
+      devise (>= 1.1.2)
+      formtastic (>= 1.1.0)
+      inherited_views
+      meta_search (>= 0.9.2)
+      rails (>= 3.0.0)
+      sass (>= 3.1.0)
+      will_paginate (>= 3.0.pre2)
     activemodel (3.0.7)
       activesupport (= 3.0.7)
       builder (~> 2.1.2)
@@ -39,6 +54,7 @@ GEM
       builder
       mime-types
       xml-simple
+    bcrypt-ruby (2.1.4)
     builder (2.1.2)
     capybara (1.0.0)
       mime-types (>= 1.16)
@@ -62,6 +78,10 @@ GEM
       cucumber (~> 1.0.0)
       nokogiri (>= 1.4.6)
     database_cleaner (0.6.7)
+    devise (1.4.2)
+      bcrypt-ruby (~> 2.1.2)
+      orm_adapter (~> 0.0.3)
+      warden (~> 1.0.3)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -78,10 +98,22 @@ GEM
       rack-oauth2 (>= 0.8.0)
     ffaker (1.8.0)
     ffi (1.0.9)
+    formtastic (1.2.4)
+      actionpack (>= 2.3.7)
+      activesupport (>= 2.3.7)
+      i18n (~> 0.4)
     gherkin (2.4.5)
       json (>= 1.4.6)
+    has_scope (0.5.0)
     httpclient (2.2.1)
     i18n (0.5.0)
+    inherited_resources (1.2.2)
+      has_scope (~> 0.5.0)
+      responders (~> 0.6.0)
+    inherited_views (0.0.2)
+      formtastic (>= 0.9.8)
+      inherited_resources (>= 1.0.6)
+      will_paginate (>= 2.3.12)
     json (1.5.3)
     json_pure (1.5.3)
     linecache (0.46)
@@ -91,6 +123,11 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta_search (1.0.6)
+      actionpack (~> 3.0.2)
+      activerecord (~> 3.0.2)
+      activesupport (~> 3.0.2)
+      arel (~> 2.0.2)
     mime-types (1.16)
     multi_json (1.0.3)
     multi_xml (0.2.2)
@@ -134,6 +171,7 @@ GEM
       oa-more (= 0.2.6)
       oa-oauth (= 0.2.6)
       oa-openid (= 0.2.6)
+    orm_adapter (0.0.5)
     paperclip (2.3.15)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
@@ -176,6 +214,7 @@ GEM
     rake (0.9.2)
     rbx-require-relative (0.0.5)
     rcov (0.9.9)
+    responders (0.6.4)
     rest-client (1.6.3)
       mime-types (>= 1.16)
     rspec (2.6.0)
@@ -201,6 +240,7 @@ GEM
       ruby-openid (>= 2.1.7)
     rubyntlm (0.1.1)
     rubyzip (0.9.4)
+    sass (3.1.4)
     selenium-webdriver (0.2.2)
       childprocess (>= 0.1.9)
       ffi (>= 1.0.7)
@@ -219,6 +259,8 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.29)
+    warden (1.0.4)
+      rack (>= 1.0)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -232,6 +274,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeadmin
   acts_as_commentable
   autotest
   aws-s3
@@ -247,6 +290,7 @@ DEPENDENCIES
   pickle
   possessive
   rails (= 3.0.7)
+  rails-settings!
   rake (= 0.9.2)
   rcov
   rspec-rails (~> 2.5)
