@@ -1,8 +1,8 @@
 Sharedearthapp::Application.routes.draw do
 
-  #ActiveAdmin.routes(self)
+  ActiveAdmin.routes(self)
 
-  #devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :admin_users, ActiveAdmin::Devise.config
 
   get "reguested_invitations/create"
   
@@ -21,6 +21,7 @@ Sharedearthapp::Application.routes.draw do
   get "invitations/validate"
   get "invitations/purge"
   get "invitations/preview"
+  get "invitations/switch"
 
   get "search/index"
 
