@@ -1,0 +1,14 @@
+<%= form_tag (invitations_path, :method => 'post', :multipart => true) do %>
+	<p>
+    <%= label_tag 'Number of invitations' %><br />
+    <%= text_field_tag 'invitations' %>
+  </p>
+  <p>
+    <%= label_tag 'Number of items person have' %><br />
+    <%= text_field_tag 'items' %>
+  </p>
+	          
+  <button type="submit" title="Generate">Generate</button>
+  <%= link_to "Preview",  invitations_preview_path(:json), :id => "preview", :method => :get %>
+<% end %>
+
