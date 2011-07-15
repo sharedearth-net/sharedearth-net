@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     if current_user.nil?
       redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
-    elsif !current_user.person.authorised?
+    elsif !current_user.person.authorised? && Settings.invitations == 'true'
       redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
     elsif !current_user.person.accepted_tc?
       redirect_to terms_path, :alert => "You must agree to terms first, before you use this application."
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   def dynamic_layout
     if current_user.nil?
       'welcome'
-    elsif !current_user.person.authorised?
+    elsif !current_user.person.authorised? && Settings.invitations == 'true'
       'beta_welcome'
     else
       'application'

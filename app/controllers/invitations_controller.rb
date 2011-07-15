@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  #before_filter :authenticate_user!, :except => [:validate, :key, :purge]
+  before_filter :authenticate_user!, :only => [:purge]
     
   def create    
     invitations = params[:invitations].to_i
@@ -31,6 +31,15 @@ class InvitationsController < ApplicationController
         render :json => { :success => true, :invites => invitation_count  }
       end
     end
+  end
+  
+  def switch
+    if Settings.invitations == 'false'
+       Settings.invitations = 'true'
+    else 
+       Settings.invitations = 'false'
+    end
+    redirect_to admin_dashboard_path
   end
   
   def validate
