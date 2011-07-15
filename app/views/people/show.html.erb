@@ -24,9 +24,6 @@
 						<p class="description">
 						  <%= @person.description %>
 						</p>
-										
-					
-					
 					</div>
 				</li>
 			
@@ -34,7 +31,7 @@
 					<div class="items-list clearfix">
 						<h3>Items</h3>
 						<% unless @items.size.zero? %>
-							<ul>
+							<ul class="clearfix">
 								<% @items.each do |item| %>
 									<li class="item clearer">
 										<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
@@ -67,7 +64,7 @@
 								<% end %>
 							</ul>
 						<% else %>
-							<p>No items are currently being shared.</p>
+							<p class="event-sentences">No items are currently being shared</p>
 						<% end %>
 					</div>
 				</li>
@@ -76,7 +73,7 @@
 						<div class="requests">
 							<h3>Requests</h3>
 							<% unless @unanswered_requests.size.zero? %>
-								<ul>
+								<ul class="clearfix">
 									<% @unanswered_requests.each do |req| %>
 										<li class="item clearer">
 											<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
@@ -94,7 +91,7 @@
 													</li>
 												</ul>
 										
-												<ul class="action-list">
+												<ul class="action-list clearfix">
 													<li>
 														<%= time_ago_in_words req.created_at %> ago
 													</li>
@@ -107,37 +104,10 @@
 											
 										</li>
 										
-										<!-- Static comments begin 
-										
-										<li class="content-box clearfix">
-
-											<div>
-
-												<ul class="comment-list">
-													<li class="clearfix">									
-														<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
-														<p>
-															<a href="#">Peter Smith</a> says: Hi!
-															<span>2 minutes ago</span>
-														</p>
-													</li>
-													<li class="no-bg">
-														<div class="comment-box">
-															<textarea rows="1" cols="13">Comment</textarea>
-														</div>
-													</li>
-
-												</ul>
-
-											</div>
-										</li>
-										
-										Static comments end -->
-										
 									<% end %>
 								</ul>						
 							<% else %>
-								<p>There are no unanswered requests.</p>
+								<p class="event-sentences">There are no unanswered requests</p>
 							<% end %>
 						</div><!-- /requests -->
 					</div>

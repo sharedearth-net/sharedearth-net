@@ -799,7 +799,8 @@ a.normal:visited {
 	
 		#profile-page #content h2 span {
 				float: right;
-				margin-top: 3px;
+				margin-top: 4px;
+				margin-right: 44px;
 			}
 	
 	#profile-page #content h3 {
@@ -817,6 +818,18 @@ a.normal:visited {
 		margin-bottom: 15px;
 		margin-top: -5px;
 	}
+	
+		/* profile-page - content - requests */
+		
+		#profile-page #content .requests ul.action-list {
+			clear: both;
+			margin-top: 0;
+		}
+		
+		#profile-page  #content .items-list .requests ul li div p {
+			margin-bottom: 0;
+			text-transform: lowercase;
+		}
 	
 	
 		/* profile-page - content - comments */
@@ -2601,7 +2614,7 @@ a.normal:visited {
 		.trust-reputation-box h2 a:link,
 		.trust-reputation-box h2 a:visited {
 			color: #62775a;
-			font-size: 14px;
+			font-size: 13px;
 		}
 
 
@@ -2738,7 +2751,8 @@ a.normal:visited {
 
 	/* Event sentences on Dashboard - 'unanswered-requests' */
 
-	#content .unanswered-requests p {
+	#content p.event-sentences  {
+		color: #5c5c5c;
 		font-size: 12px;
 	}
 	

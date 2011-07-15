@@ -66,7 +66,7 @@ describe PagesHelper, "When printing activity log sentances" do
   it "should generate sentace for NEW ITEM REQUEST REQUESTER event type" do
     @activity_log.event_type_id = 3  
     html = recent_activity_sentence(@activity_log)
-    html.should == "You made a request to borrow #{@person_possesive_link} #{@item_link}"
+    html.should == "you made a request to borrow #{@person_possesive_link} #{@item_link}"
   end
   
   it "should generate sentace for ACCEPT RESPONSE GIFTER event type" do
@@ -307,7 +307,7 @@ describe PagesHelper, "When printing activity log sentances" do
   it "should generate sentace for NEW ITEM REQUEST REQUESTOR event type" do
     @activity_log.event_type_id = 40  
     html = recent_activity_sentence(@activity_log)
-    html.should == "You made a request to borrow #{@person_possesive_link} #{@item_link}"
+    html.should == "you made a request to borrow #{@person_possesive_link} #{@item_link}"
   end
   
   it "should generate sentace for TRUST ESTABLISHED INITIATOR event type" do
