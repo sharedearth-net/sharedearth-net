@@ -771,12 +771,16 @@ a.normal:visited {
 			
 			/* dashboard - sidebar - comments */
 			
-			#dashboard-page .comment-box {
+			#dashboard-page #sidebar .comment-box {
 				padding: 0;
 			}
 			
-			#dashboard-page .comment-box textarea {
+			#dashboard-page #sidebar .comment-box textarea {
 				width: 350px;
+			}
+			
+			#dashboard-page #sidebar ul.comment-list li p {
+				width: 314px;
 			}
 			
 			
