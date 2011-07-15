@@ -1,8 +1,8 @@
 Sharedearthapp::Application.routes.draw do
 
-  ActiveAdmin.routes(self)
+  #ActiveAdmin.routes(self)
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  #devise_for :admin_users, ActiveAdmin::Devise.config
 
   get "reguested_invitations/create"
   
