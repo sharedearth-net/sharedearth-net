@@ -87,7 +87,8 @@ class ItemRequest < ActiveRecord::Base
     self.status = STATUS_ACCEPTED
     save!
     self.item.share? ? create_item_request_accepted_activity_log : create_gift_request_accepted_activity_log
-    self.item.in_use!
+    item = self.item
+    item.in_use!
     self.item.owner.reputation_rating.increase_requests_answered_count
   end
 
@@ -111,7 +112,8 @@ class ItemRequest < ActiveRecord::Base
   end
 
   def collected!
-    self.item.gift? ? self.item.available! : self.item.in_use!
+    item = self.item
+    self.item.gift? ? item.available! : item.in_use!
     self.update_reputation_for_parties_involved if self.item.gift?
     item_type_based_status
   end
