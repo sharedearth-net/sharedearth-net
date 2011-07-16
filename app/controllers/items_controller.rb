@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_item, :only => [:show, :edit, :update, :destroy, :mark_as_normal, :mark_as_lost, :mark_as_damaged]
   before_filter :only_owner!, :only => [:edit, :update, :destroy, :mark_as_normal, :mark_as_lost, :mark_as_damaged]
+  before_filter :actions_completed?, :only => [:mark_as_lost, :mark_as_damaged]
 
   # GET /items
   # GET /items.xml
@@ -109,6 +110,10 @@ class ItemsController < ApplicationController
   
   def only_owner!
     redirect_to(root_path, :alert => I18n.t('messages.only_owner_can_access')) and return unless @item.is_owner?(current_user.person)
+  end
+  
+  def actions_completed?
+    redirect_to item_path(@item), :notice => "Can't do that. Item is currently in use." unless @item.available?
   end
   
 end
