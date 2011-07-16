@@ -25,6 +25,8 @@ class Person < ActiveRecord::Base
   
   after_create :create_entity_for_person
   after_create :create_person_join_activity_log
+  
+   scope :authorized, where("authorised_account = true")
 
   def belongs_to?(some_user)
     user == some_user
