@@ -10,7 +10,7 @@ class CreateSettings < ActiveRecord::Migration
     
     add_index :settings, [ :thing_type, :thing_id, :var ], :unique => true
     
-    Settings.invitations = 'true'
+    Settings.invitations = 'false'
   end
 
   def self.down
