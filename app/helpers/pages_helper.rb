@@ -31,12 +31,14 @@ module PagesHelper
       trust_established_sentence(event_log, person)
     when 23
       trust_withdrawn_sentence(event_log, person)
-    when 24
+    when 24, 51
       item_damaged_sentence(event_log, person)
-    when 25
+    when 25, 52
       item_repaired_sentence(event_log, person)
     when 26
       fb_friend_join_sentence(event_log, person)
+    when 49
+      
     else
       #
     end
@@ -265,10 +267,52 @@ module PagesHelper
       person
     when 38
       current_person
+    when 39
+      current_person
+    when 40
+      current_person
+    when 41
+      person
+    when 42
+      current_person
+    when 43
+      person
+    when 44
+      current_person
+    when 45
+      current_person
+    when 46
+      person
+    when 47
+      current_person
+    when 48
+      person
+    when 49
+      current_person
+    when 51
+      current_person
+    when 52
+      current_person
+    when 53
+      current_person
+    when 54
+      current_person
+    when 55
+      person
+    when 56
+      person
+    when 57
+      person
+    when 58
+      person
+    when 59
+      person
+    when 60
+      person
     else
       current_person
     end
-    
+   
   end
 
   def recent_activity_sentence(activity_log)
