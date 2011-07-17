@@ -36,6 +36,8 @@ class InvitationsController < ApplicationController
   def switch
     if Settings.invitations == 'false'
        Settings.invitations = 'true'
+       authorised = Person.all
+       authorised.each { |person| person.authorise! }
     else 
        Settings.invitations = 'false'
     end

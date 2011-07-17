@@ -500,7 +500,7 @@ class EventType < ActiveRecord::Base
   def item_found?
     self.id == EventType.item_found
   end
-  
+=begin  
   def self.item_damaged(return_only_id = true)
     return_only_id ? 51 : EventType.find(51)
   end
@@ -516,6 +516,7 @@ class EventType < ActiveRecord::Base
   def item_repaired?
     self.id == EventType.item_repaired
   end
+=end
   
   def self.item_removed(return_only_id = true)
     return_only_id ? 53 : EventType.find(53)
