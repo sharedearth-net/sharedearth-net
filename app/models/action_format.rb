@@ -1,3 +1,3 @@
 class ActionFormat
-  FORMAT = 'html'
+  FORMAT = 'json'
 end
