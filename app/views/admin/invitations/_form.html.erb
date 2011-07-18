@@ -9,6 +9,6 @@
   </p>
 	          
   <button type="submit" title="Generate">Generate</button>
-  <%= link_to "Preview",  invitations_preview_path(:json), :id => "preview", :method => :get %>
+  <%= link_to "Preview",  invitations_preview_path(ActionFormat::FORMAT), :id => "preview", :method => :get %>
 <% end %>
 
