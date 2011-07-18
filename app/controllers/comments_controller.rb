@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   @comment = record_commentable.comments.create(:commentable => record_commentable, :user_id => current_user.id, :comment => params[:comment][:comment] )
   
   respond_to do |format|
-      format.html { redirection_rules(model_name) }
+      format.html { redirection_rules(model_name, record_commentable) }
       format.json do
         @comment_html = render_to_string( :partial => 'comments/comment.html.erb', :locals => {:c => @comment } )
         render :json => { :success => true, :comment_html => @comment_html  }
@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
  end
  
  private
- def redirection_rules(model_name)
+ def redirection_rules(model_name, record_commentable)
    case model_name
     when "ItemRequest"
       redirect_to request_path(record_commentable)

@@ -129,7 +129,7 @@ class ItemRequestsController < ApplicationController
   def complete
     @item_request.complete!(current_user.person)
     respond_to do |format|
-      format.html { redirect_to_back }
+      format.html { redirect_to new_request_feedback_path(@item_request) }
       format.json do
         acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
         acttivity.each do |activity_log|
