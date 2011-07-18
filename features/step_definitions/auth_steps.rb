@@ -33,3 +33,7 @@ Given /^the unaccepted user is logged in$/ do
   visit "/auth/facebook"
 end
 
+Given /^the invitation system is on$/ do
+  Settings.invitations = 'true'
+end
+

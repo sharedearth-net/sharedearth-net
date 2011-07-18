@@ -17,7 +17,7 @@ Feature: Leaving feedback affects reputation
     When "Maria" requested item with name "Mobile" from "John"
     And Looking at person page with name "John"
     And I follow "accept"
-    And I should see the words "accepted", "collect", "complete"
+    And I am on the dashboard page
     And I follow "complete"
     Then I choose "negative"
     When I fill in the following:
@@ -74,7 +74,7 @@ Feature: Leaving feedback affects reputation
     Given "Maria" requested item with name "Mobile" from "John"
     And Looking at my person page
     And I follow "accept"
-    And I should see the words "accepted", "collect", "complete"
+    And I am on the dashboard page
     And I follow "complete"
     And I follow "Later"
     Then Looking at my person page

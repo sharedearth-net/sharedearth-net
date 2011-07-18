@@ -14,6 +14,9 @@ module NavigationHelpers
       new_item_path
     when /the invitations page/
       invitations_path  
+    when /the dashboard page/
+      dashboard_path
+    
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

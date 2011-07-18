@@ -12,7 +12,7 @@ Feature: Leaving feedback
     
   Scenario: I leave positive feedback
     Given "Maria" requested item with name "Mobile" from "John"
-    Then Looking at my person page
+    Then I am on the dashboard page
     And I follow "accept"
     Then I should see the words "accepted", "collect", "complete"
     And I follow "complete"
@@ -22,7 +22,7 @@ Feature: Leaving feedback
     
   Scenario: I leave neutral feedback
     Given "Maria" requested item with name "Mobile" from "John"
-    Then Looking at my person page
+    Then I am on the dashboard page
     And I follow "accept"
     Then I should see the words "accepted", "collect", "complete"
     And I follow "complete"
@@ -35,7 +35,7 @@ Feature: Leaving feedback
     
   Scenario: I leave negative feedback
     Given "Maria" requested item with name "Mobile" from "John"
-    Then Looking at my person page
+    Then I am on the dashboard page
     And I follow "accept"
     Then I should see the words "accepted", "collect", "complete"
     And I follow "complete"

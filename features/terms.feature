@@ -5,6 +5,7 @@ Feature: Accepting terms
   In order to enter the website
   
   Background:
+    Given the invitation system is on
     Given the unauthorised user is logged in
     Given invitation key exsists
     

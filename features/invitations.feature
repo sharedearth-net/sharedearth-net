@@ -5,6 +5,7 @@ Feature: Sending invitations
   In order to ivite and enable new users
   
   Background:
+    Given the invitation system is on
     Given the unauthorised user is logged in
     Given invitation key exsists
     
@@ -24,7 +25,3 @@ Feature: Sending invitations
     Then I fill in active invitation
     And I press "Submit"
     Then I should see "TERMS AND CONDITIONS"
-
-  Scenario: Regular user shouldn't have access to invitations list
-    Given I am on the invitations page
-    And I should not see "New Invitations"

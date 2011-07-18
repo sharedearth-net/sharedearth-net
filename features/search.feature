@@ -62,4 +62,10 @@ Feature: Searching for items and people
        #One time is for item result, 2nd for search term, and 3rd for people result
     Then I should see "Maria" 3 times
     
+  Scenario: Two users, who are not in a relationship search for each other
+    When I fill in "search" with "aria"
+    Then I press "Search" 
+    And I should see "From your trusted network"
+    And I should see "Maria"
+    
     

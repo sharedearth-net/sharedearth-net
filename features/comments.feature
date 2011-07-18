@@ -24,11 +24,15 @@ Feature: Leaving comment to everything
     
   Scenario: Commenting event log
     And Looking at my person page
+    And I should see "accept"
     And I follow "accept"
-    And I should see the words "accepted", "collect", "complete"
+    And I should see "There are no unanswered requests"
+    Then I am on the dashboard page
     And I follow "complete"
+    And I should see "Later"
     And I follow "Later"
     And I follow "home"
+    And I should see "comments(0)"
     When I fill in the following:
      | comment   | My comment opinion |
      And press "Add comment"
@@ -43,7 +47,8 @@ Feature: Leaving comment to everything
     Then I should see "My request opinion"
     And Looking at my person page
     And I follow "accept"
-    And I should see the words "accepted", "collect", "complete"
+    And I should see "There are no unanswered requests"
+    Then I am on the dashboard page
     And I follow "complete"
     And I follow "Later"
     And I follow "home"
