@@ -8,6 +8,12 @@ $(document).ready(function() {
 	}, function(){
 		$('#sidebar-left ul li.selected-leave').addClass('selected');
 	});
-	
-
 })
+
+//dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
+dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
+dojo.require("sen.app");
+
+dojo.ready(function() {
+	sen.app.init();	
+});

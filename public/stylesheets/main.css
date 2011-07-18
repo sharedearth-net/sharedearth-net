@@ -636,6 +636,10 @@ a.normal:visited {
 			margin-top: 7px;
 		}
 		
+		ul.comment-list-hidden {
+			display: none;
+		}
+		
 			ul.comment-list li  {
 				width: 348px;
 				padding: 0 4px;

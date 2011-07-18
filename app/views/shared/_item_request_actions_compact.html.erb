@@ -17,10 +17,10 @@
 
 	<%= gifter_only(req) do %>
 		<li>
-			<%= link_to "accept", accept_request_path(req, ActionFormat::FORMAT), :id => "accept_button", :method => :put %>
+			<%= link_to "accept", accept_request_path(req, :json), :id => "accept_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
 		<li>
-			<%= link_to "reject", reject_request_path(req, ActionFormat::FORMAT), :id => "reject_button", :method => :put %>
+			<%= link_to "reject", reject_request_path(req, :json), :id => "reject_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
 		
 		
@@ -28,7 +28,7 @@
 	
 	<%= requester_only(req) do %>
 		<li>
-			<%= link_to "cancel", cancel_request_path(req, ActionFormat::FORMAT), :id => "cancel_button", :method => :put %>
+			<%= link_to "cancel", cancel_request_path(req, :json), :id => "cancel_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
 	<% end %>
 
@@ -36,13 +36,13 @@
 
 	<%= requester_and_gifter_only(req) do %>
 		<li>
-			<%= link_to "cancel", cancel_request_path(req, ActionFormat::FORMAT), :id => "cancel_button", :method => :put %>
+			<%= link_to "cancel", cancel_request_path(req, :json), :id => "cancel_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
 		<li>	
-			<%= link_to "collected", collected_request_path(req, ActionFormat::FORMAT), :id => "collected_button", :method => :put %>
+			<%= link_to "collected", collected_request_path(req, :json), :id => "collected_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
 		<li>
-			<%= link_to "complete", complete_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :method => :put %>
+			<%= link_to "complete", complete_request_path(req, :json), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
 		
 	<% end %>
@@ -51,10 +51,10 @@
 
 	<%= requester_and_gifter_only(req) do %>
 		<li>
-			<%= link_to "complete", complete_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :method => :put %>
+			<%= link_to "complete", complete_request_path(req, :json), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
 		<li>
 	<% end %>
 
 <% end %>
 <% comments = req.comments.count %>
-<li><a href="#">comments(<%= comments ||= 0 %>)</a></li>
+<li><a href="#" class="action-comments-show-hide">comments(<%= comments ||= 0 %>)</a></li>
