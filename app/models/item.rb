@@ -57,6 +57,7 @@ class Item < ActiveRecord::Base
   
   after_create :create_entity_for_item
   after_create :add_to_resource_network
+  after_create :item_event_log
   
   # validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 1.megabyte
@@ -70,6 +71,10 @@ class Item < ActiveRecord::Base
 
   def is_owner?(entity)
     self.owner == entity
+  end
+  
+  def item_event_log
+    EventLog.create_news_event_log(self.owner, nil,  self , EventType.add_item, self)
   end
   
   def has_photo?
