@@ -91,7 +91,10 @@
 					<div class="bar-holder-lhs">
 						<ul>
 							<li>
-								<%= link_to "share", items_path %>
+								<%= link_to "manage", items_path %>
+							</li>
+							<li>
+								<%= link_to "share", new_item_path %>
 							</li>
 							<li class="last">
 								<%= link_to "view network", my_network_person_path(current_user.person) unless current_user.nil?%>
