@@ -18,7 +18,7 @@ body {
 	font-family: "lucida grande", verdana, tahoma, arial, sans-serif;
 	margin: 0; 
 	}
-
+ 
 strong {
 	font-weight: bold;
 }
@@ -1284,7 +1284,7 @@ a.normal:visited {
 /*............Request Page............*/
 		
 
-	/* request - content */
+	/* request-page - content */
 		
 	#request-page #content .inner-content {
 		width: 300px;
@@ -1302,6 +1302,67 @@ a.normal:visited {
 			width: 356px;
 			margin-left: 0;
 		}
+		
+		
+		/* request-page - content - comments */
+	
+		#request-page #content ul.comment-list li {
+			color: #127E0E;
+		    float: none;
+		    font-size: 12px;
+			width: 401px;
+			background: transparent;
+		}
+		
+		#request-page #content ul.comment-list li.even {
+			background: #f4f9eb;
+		}
+		
+			#request-page #content ul.comment-list li a:link,
+			#request-page #content ul.comment-list li a:visited {
+				color: #127E0E;
+			}
+	
+			#request-page #content ul.comment-list .time-ago {
+				float: right;
+			    width: 127px;
+				color: #838683;
+				font-size: 11px;
+				margin-top: 18px;
+			}
+	
+				#request-page #content ul.comment-list p {
+					clear: none;
+					padding-top: 4px;
+					padding-right: 4px;
+					width: 230px;
+					color: #333;
+					font-size: 12px;
+				}
+				
+					#request-page #content ul.comment-list p a:link,
+					#request-page #content ul.comment-list p a:visited {
+						display: block;
+						margin-bottom: 1px;
+					}
+				
+				#request-page #content ul.comment-list .thumb {
+					float: left;
+				    max-width: 32px;
+					width: auto;
+					margin: 7px 4px 3px 4px;
+				}
+				
+				#request-page #content .comment-box textarea {
+					width: 403px;
+					color: #838683;
+					font-size: 11px;
+				}
+				
+				#request-page #content .comment-box textarea.active {
+					color: #333;
+					font-size: 12px;
+				}
 	
 
 	/* request - sidebar */	
