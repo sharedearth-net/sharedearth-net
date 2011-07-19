@@ -1289,6 +1289,18 @@ a.normal:visited {
 	#request-page #content .inner-content {
 		width: 300px;
 	}
+	
+		#request-page #content .inner-content {
+  		overflow: hidden;
+		}
+		
+		#request-page #content .action-buttons-list {
+  		list-style: none; position: relative; float: left; display: block; left: 50%;
+		}
+		
+		#request-page #content .action-buttons-list li{
+  		position: relative; float: left; display: block; right: 50%;
+		}
 			
 	#request-page #content h2 {
 		text-align: center;
