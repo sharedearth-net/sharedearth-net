@@ -497,4 +497,32 @@ module PagesHelper
     s.safe_html
   
   end
+  
+  def event_actions(log)
+    comments = log.comments.count
+    case log.event_type.name
+      when 'SHARING'
+        res = "<li>#{link_to "view action", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+      when 'ADD ITEM'
+        res = "<li>#{link_to "view item", item_path(log.action_object_id)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+      when 'NEGATIVE FEEDBACK'
+        res = "<li>#{link_to "view feedback", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+      when 'GIFTING'
+        res = "<li>#{link_to "view action", request_path(log.related)}</li>"
+      when 'TRUST ESTABLISHED'
+        res = "<li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+      when 'TRUST WITHDRAWN'
+        res = "<li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+      when 'ITEM DAMAGED'
+        res = "<li>#{link_to "view item", item_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"  
+      when 'ITEM REPAIRED'
+        res = "<li>#{link_to "view item", item_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"  
+      when 'FB FRIEND JOIN'
+        res = "<li>#{link_to "view profile", person_path(log.secondary)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"  
+      else
+        res = ""
+    end
+    res.html_safe
+    
+  end
 end
