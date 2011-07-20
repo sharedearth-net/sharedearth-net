@@ -77,17 +77,21 @@
 		<h3 class="bottom-title">
 			<strong>sharedearth.net is designed with love, for a world that is shared.</strong>
 		</h3>
-		
-		<div class="buttons-holder">
-			<ul class="clearfix">
-				<li>
-					<%= link_to 'Connect', accept_pp_terms_path, :method => 'put', :class => 'positive' %>
-				</li>
-				<li class="no">
-					<%= link_to 'No thanks', signout_path, :class => 'positive' %>
-				</li>
-			</ul>
-		</div>
+		<% if !current_user.nil? -%>
+ 		  <% if !current_user.person.accepted_tc? -%>
+		    <div class="buttons-holder">
+			    <ul class="clearfix">
+				    <li>
+					    <%= link_to 'Connect', accept_pp_terms_path, :method => 'put', :class => 'positive' %>
+				    </li>
+				    <li class="no">
+					    <%= link_to 'No thanks', signout_path, :class => 'positive' %>
+				    </li>
+			    </ul>
+		    </div>
+  		<% end -%>
+		<% end -%>
+
 		
 	</div><!--	/content -->
 	

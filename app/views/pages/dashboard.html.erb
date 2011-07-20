@@ -1,4 +1,4 @@
-<% if current_user.person.trusted_network_size == 0 && (current_user.person.vilages? == 0 || current_user.person.communies? == 0) -%>
+<% if current_user.person.trusted_network_size == 0 -%>
   <% dashboard_class = "empty clearfix" %>
 <% else -%>
   <% dashboard_class = "clearfix" %>
@@ -91,7 +91,11 @@
 	</div><!-- /content  -->
 
 	<div id="sidebar">
-		<%= render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } %>
+	<% if current_user.person.trusted_network_size == 0 -%>
+    <%= render :partial => 'shared/news_feed_empty' %>
+  <% else -%>
+    <%= render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } %>
+  <% end -%>
 		<%= image_tag("bg-empty-village.png", :alt => "", :class => "empty-village")  %>
 	</div><!-- /sidebar -->
 </div><!--	/dashboard -->

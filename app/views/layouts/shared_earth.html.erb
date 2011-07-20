@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>sharedearth.net</title>
+  <%= render :partial => "layouts/meta_header" %>
+</head>
+<body>
+
+	<div id="container">
+<div id="header">
+
+			<div class="header-lhs">
+				<%= link_to "sharedearth.net", dashboard_path, :title => "sharedearth.net - trust. share. connect." %>
+			</div>
+
+			<div class="header-rhs">
+
+				<div class="clearfix">
+
+					<div class="status-holder">
+						<ul>
+							
+						</ul>
+					</div>
+					<div class="logo-type-holder">
+						<%= link_to "sharedearth.net", root_path, :title => "sharedearth.net - trust. share. connect." %>
+					</div>
+
+				</div>
+
+				<div class="bar-holder">
+
+
+					<div class="bar-holder-rhs">
+						<ul>
+							<li>
+							</li>
+
+						</ul>
+					</div>
+
+					<div class="bar-holder-home">
+						<ul>				
+	                        <li>
+							</li>
+	                    </ul>
+					</div>
+
+					<div class="bar-holder-lhs">
+						<ul>
+							<li>
+							
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		<!-- #header -->
+
+
+<div id="wrapper" class="clearfix">
+	
+	<%= yield %>
+
+</div>
+
+<div id="footer" class="clearfix">
+	<ul>
+		<li>
+		</li>
+	</ul>
+	
+</div>
+<!-- #footer -->
+
+</div>
+<!-- #container -->
+
+</body>
+</html>

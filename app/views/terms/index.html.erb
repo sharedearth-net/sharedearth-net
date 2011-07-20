@@ -87,17 +87,21 @@
 		<h5 class="centered">
 			Continued use of the site will be taken as conclusive evidence of your acceptance of the Terms and Conditions and Privacy Policy.
 		</h5>
+		<% if !current_user.nil? -%>
+		  <% if !current_user.person.accepted_tc? -%>
+		    <div class="buttons-holder">
+			    <ul class="action-buttons-list clearfix">
+				    <li>
+					    <%= link_to 'Accept', accept_tc_terms_path, :method => 'put', :class => 'positive' %>
+				    </li>
+				    <li>
+			      	<%= link_to 'Reject', signout_path, :class => 'positive' %>
+				    </li>
+			    </ul>
+		    </div>
+		  <% end -%>
+		<% end -%>
 		
-		<div class="buttons-holder">
-			<ul class="action-buttons-list clearfix">
-				<li>
-					<%= link_to 'Accept', accept_tc_terms_path, :method => 'put', :class => 'positive' %>
-				</li>
-				<li>
-			  	<%= link_to 'Reject', signout_path, :class => 'positive' %>
-				</li>
-			</ul>
-		</div>
 		
 	</div><!--	/content -->
 	

@@ -71,96 +71,7 @@
 		
 		<% if (@item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)) && !@item_request.completed? %>
  		
-
-		<!-- Static discussion begin -->
-		<li class="content-box clearfix">
-
-			<div>
-
-				<ul class="comment-list">
-					<li class="no-bg">
-						<div class="comment-box">
-							<textarea rows="1" cols="13">Discuss</textarea>
-						</div>
-					</li>
-					<li class="clearfix">
-						<div class="time-ago">
-							2 minutes ago
-							<br />
-							24/06/2011&nbsp;11:05 PM
-						</div>			
-						<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
-						<p>
-							<a href="#">
-								<strong>Peter Smith</strong>
-							</a>
-							Andrea are you around?
-							<br />
-							I tried to call but you didn’t pickup? I tried to call but you didn’t pickup?
-							<br />
-							I tried to call but you didn’t pickup?
-							<br />
-							I tried to call but you didn’t pickup?
-							<br />
-							I tried to call but you didn’t pickup?
-							<br />
-							I tried to call but you didn’t pickup?
-							<br />
-							I tried to call but you didn’t pickup?
-							<br />
-							I tried to call but you didn’t pickup?
-						</p>
-					</li>
-					<li class="even clearfix">
-						<div class="time-ago">
-							2 minutes ago
-							<br />
-							24/06/2011&nbsp;11:05 PM
-						</div>			
-						<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
-						<p>
-							<a href="#">
-								<strong>Peter Smith</strong>
-							</a>
-							I tried to call but you didn’t pickup? 
-						</p>
-					</li>
-					<li class="clearfix">
-						<div class="time-ago">
-							2 minutes ago
-							<br />
-							24/06/2011&nbsp;11:05 PM
-						</div>			
-						<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
-						<p>
-							<a href="#">
-								<strong>Peter Smith</strong>
-							</a>
-							I tried to call but you didn’t pickup? 
-						</p>
-					</li>
-					<li class="even clearfix">
-						<div class="time-ago">
-							2 minutes ago
-							<br />
-							24/06/2011&nbsp;11:05 PM
-						</div>			
-						<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
-						<p>
-							<a href="#">
-								<strong>Peter Smith</strong>
-							</a>
-							I tried to call but you didn’t pickup? 
-						</p>
-					</li>
-				</ul>
-
-			</div>
-		</li>
-		
-		<!-- Static discussion end -->
-
-
+<!-- MAKE THIS MORE BEAUTIFUL and CLEAN -->
    <!-- comments begin -->
 		<!--
 		<div class="inner-content comments-holder">
@@ -175,6 +86,51 @@
 		
 		<!-- comments end -->
 		<!-- <% end %> -->
+
+		<!-- Static discussion begin -->
+		<li class="content-box clearfix">
+
+			<div>
+
+				<ul class="comment-list">
+					<li class="no-bg">
+						<div class="comment-box">
+							<%commentable = @item_request%>
+							<%=form_for(Comment.new, :format => ActionFormat::FORMAT) do |f|%>
+		              <%=f.hidden_field :commentable_id, :value=> commentable.id, :class => 'new-comment-commentable-id' %>
+		              <%= f.hidden_field :commentable_type, :value => commentable.class.name, :class => 'new-comment-commentable-type' %>
+		              <div class="comment-box">
+			              <%=f.text_area :comment, :rows => '1', :value => 'Discuss', :cols => '13', :id => :comment, :class => 'new-comment-text' %>
+		              </div>
+               		<%=f.submit "Add comment"%>
+	             <%end%>
+						</div>
+					</li>
+					<% @comments.each do |c| -%>
+					<% person = c.user.person %>
+							<li class="<%= cycle :even, '' %> clearfix">
+						<div class="time-ago">
+							<%= time_ago_in_words(c.created_at) %> ago
+							<br />
+							<%= c.created_at.to_date %>
+						</div>			
+						<%= image_tag person.avatar(:square), :class => "thumb" %>
+						<p>
+							<a href="#">
+								<strong><%= link_to person.name, person_path(person) %></strong>
+							</a>
+							<%= c.comment %>
+						</p>
+					</li>
+						<% end -%>
+					
+				</ul>
+
+			</div>
+		</li>
+		
+		<!-- Static discussion end -->
+
 	
 	</div><!-- /content -->
 
