@@ -45,6 +45,7 @@ class InvitationsController < ApplicationController
   end
   
   def validate
+   redirect_to root_path, :notice => "Your account has been locked. Try again in 24 hours" and return if current_user.locked?
    key = params[:key]
    unless key.empty?
      invitation = Invitation.find_by_invitation_unique_key(key)
@@ -55,13 +56,23 @@ class InvitationsController < ApplicationController
         redirect_to terms_path and return
      end
    end 
-   redirect_to root_path, :notice => "The code you have provided is invalid or inactive" 
+   current_user.validation_failed!
+   if current_user.locked?
+     redirect_to root_path, :notice => "Your account has been locked. Try again in 24 hours" 
+   else
+     redirect_to root_path, :notice => "The code you have provided is invalid or inactive" 
+   end
+   
   end
   
   def purge
-    current_user.destroy
-    session[:user_id] = nil
-    redirect_to root_path
+    if !current_user.locked?
+      current_user.destroy
+      session[:user_id] = nil
+      redirect_to root_path
+    else
+      redirect_to root_path, :notice => "Your account has been locked. Try again in 24 hours" 
+    end
   end
   
 end
