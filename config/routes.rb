@@ -1,5 +1,7 @@
 Sharedearthapp::Application.routes.draw do
 
+  resources :transparency, :only => [:index]
+
   ActiveAdmin.routes(self)
   
 
@@ -69,6 +71,7 @@ end
   match "/signout" => "sessions#destroy", :as => :signout
 
   match "/dashboard", :to => "pages#dashboard"
+  match "/principles", :to => "terms#principles"
 
   root :to => "pages#index"
 
