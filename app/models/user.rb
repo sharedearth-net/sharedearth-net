@@ -45,4 +45,32 @@ class User < ActiveRecord::Base
     avatar_size = :large if avatar_size == :medium # simulate medium size
     "http://graph.facebook.com/#{uid}/picture/"+(!avatar_size.blank? ? "?type=#{avatar_size}" : "")
   end
+  
+  def validation_failed!
+    self.validations_failed += 1
+    save!  
+    self.lock! if self.validations_failed == 3
+  end
+  
+  def locked?
+    if self.lockout.nil?
+      false
+    elsif (Time.now - self.lockout > 86400)
+      self.unlock!
+      false
+    else
+      true  
+    end
+  end
+  
+  def unlock!
+    self.lockout = nil
+    self.validations_failed = 0
+    save!    
+  end
+    
+  def lock!
+    self.lockout = Time.now
+    save!
+  end
 end
