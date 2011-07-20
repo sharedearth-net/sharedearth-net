@@ -70,18 +70,111 @@
 		</div><!-- /content-box-holder  -->
 		
 		<% if (@item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)) && !@item_request.completed? %>
-    <!-- comments begin -->
-		<div class="inner-content comments-holder">
-			<ul class="comment-list">
-  			<% @comments.each do |c| -%>
-					<%= render :partial => 'comments/comment', :locals => {:c => c} %>
-				<% end -%>
-				<%= render :partial => 'comments/new', :locals => { :commentable => @item_request } %>
-			</ul>
+ 		
 
-		</div>
+		<!-- Static discussion begin -->
+		<li class="content-box clearfix">
+
+			<div>
+
+				<ul class="comment-list">
+					<li class="no-bg">
+						<div class="comment-box">
+							<textarea rows="1" cols="13">Discuss</textarea>
+						</div>
+					</li>
+					<li class="clearfix">
+						<div class="time-ago">
+							2 minutes ago
+							<br />
+							24/06/2011&nbsp;11:05 PM
+						</div>			
+						<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
+						<p>
+							<a href="#">
+								<strong>Peter Smith</strong>
+							</a>
+							Andrea are you around?
+							<br />
+							I tried to call but you didn’t pickup? I tried to call but you didn’t pickup?
+							<br />
+							I tried to call but you didn’t pickup?
+							<br />
+							I tried to call but you didn’t pickup?
+							<br />
+							I tried to call but you didn’t pickup?
+							<br />
+							I tried to call but you didn’t pickup?
+							<br />
+							I tried to call but you didn’t pickup?
+							<br />
+							I tried to call but you didn’t pickup?
+						</p>
+					</li>
+					<li class="even clearfix">
+						<div class="time-ago">
+							2 minutes ago
+							<br />
+							24/06/2011&nbsp;11:05 PM
+						</div>			
+						<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
+						<p>
+							<a href="#">
+								<strong>Peter Smith</strong>
+							</a>
+							I tried to call but you didn’t pickup? 
+						</p>
+					</li>
+					<li class="clearfix">
+						<div class="time-ago">
+							2 minutes ago
+							<br />
+							24/06/2011&nbsp;11:05 PM
+						</div>			
+						<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
+						<p>
+							<a href="#">
+								<strong>Peter Smith</strong>
+							</a>
+							I tried to call but you didn’t pickup? 
+						</p>
+					</li>
+					<li class="even clearfix">
+						<div class="time-ago">
+							2 minutes ago
+							<br />
+							24/06/2011&nbsp;11:05 PM
+						</div>			
+						<img class="thumb" src="http://graph.facebook.com/100002086303869/picture/?type=square" alt="Sample thumb" title="Sample thumb" />
+						<p>
+							<a href="#">
+								<strong>Peter Smith</strong>
+							</a>
+							I tried to call but you didn’t pickup? 
+						</p>
+					</li>
+				</ul>
+
+			</div>
+		</li>
+		
+		<!-- Static discussion end -->
+
+
+   <!-- comments begin -->
+		<!--
+		<div class="inner-content comments-holder">
+					<ul class="comment-list">
+		  			<% @comments.each do |c| -%>
+							<%= render :partial => 'comments/comment', :locals => {:c => c} %>
+						<% end -%>
+						<%= render :partial => 'comments/new', :locals => { :commentable => @item_request } %>
+					</ul>
+
+				</div>-->
+		
 		<!-- comments end -->
-		<% end %>
+		<!-- <% end %> -->
 	
 	</div><!-- /content -->
 

@@ -170,9 +170,10 @@ class Item < ActiveRecord::Base
   end
 
   def normal!
+    status = self.status
     self.status = STATUS_NORMAL
     save!
-    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_repaired, self)
+    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_repaired, self) if status == STATUS_DAMAGED
   end
 
   def lost!

@@ -41,19 +41,13 @@ ActiveAdmin::Dashboards.build do
   
   section "New 10 Users" do
        ul do
-         'Feature comming soon'
+         'Feature coming soon'
        end
   end
   
   section "Top 10 by activity" do
        ul do
-         'Feature comming soon'
-       end
-  end
-  
-  section "Winners of SEN T-Shirt" do
-       ul do
-         'List of lucky ones :)'
+         'Feature coming soon'
        end
   end
 

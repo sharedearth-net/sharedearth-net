@@ -140,7 +140,8 @@
 
 		</div>
 		<% end %>
-		<div class="content-box-holder">
+		<% unless @commentable_object.nil? -%>
+		  <div class="content-box-holder">
 			<ul>
 				<li class="content-box clearfix">
 						
@@ -155,6 +156,8 @@
 			</ul>
 
 		</div>
+		<% end -%>
+		
 		
 		
 		

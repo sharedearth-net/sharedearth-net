@@ -8,7 +8,19 @@ $(document).ready(function() {
 	}, function(){
 		$('#sidebar-left ul li.selected-leave').addClass('selected');
 	});
-})
+});
+
+
+/* textbox class on request-page */
+
+$(document).ready(function() {
+	$('textarea').click(function() {
+		$(this).addClass('active');
+		$(this).val('');
+	});	
+});
+
+
 
 //dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
 dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
