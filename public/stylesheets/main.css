@@ -684,6 +684,12 @@ a.normal:visited {
 					padding: 2px 0 0 4px;
 					width: 350px;
 					overflow:auto;
+					resize: none;
+				}
+				
+				.comment-box textarea.active-comment-box {
+					font-size: 12px;
+					color: #333333;
 				}
 				
 				
@@ -2780,5 +2786,10 @@ a.normal:visited {
 		font-size: 11px;
 	}
 
-	
+	div.loader {
+		background: url('../images/ajax-loader.gif') no-repeat top left;
+		height: 11px;
+		margin: 0 auto;
+		width: 43px;
+	}
 
