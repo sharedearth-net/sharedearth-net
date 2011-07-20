@@ -3,7 +3,7 @@
 		<%=f.hidden_field :commentable_id, :value=> commentable.id, :class => 'new-comment-commentable-id' %>
 		<%= f.hidden_field :commentable_type, :value => commentable.class.name, :class => 'new-comment-commentable-type' %>
 		<div class="comment-box">
-			<%=f.text_area :comment, :rows => '1', :value => 'Discuss', :cols => '13', :id => :comment, :class => 'new-comment-text' %>
+			<%=f.text_area :comment, :rows => '1', :cols => '13', :id => :comment, :class => 'new-comment-text', :value => 'Write a comment...' %>
 		</div>
  		<%=f.submit "Add comment"%>
 	<%end%>
