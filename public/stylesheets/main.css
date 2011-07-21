@@ -803,7 +803,7 @@ a.normal:visited {
 				#dashboard-page.empty img.empty-village {
 					position: absolute;
 					right: -135px;
-					bottom: -145px;
+					top: 122px;
 					display: block;
 					z-index: -1000;
 				}
@@ -1329,11 +1329,17 @@ a.normal:visited {
 		    float: none;
 		    font-size: 12px;
 			width: 401px;
+			background: #f4f9eb;
+		}
+		
+		#request-page #content ul.comment-list li.no-bg {
+			width: 409px;
 			background: transparent;
 		}
 		
+		
 		#request-page #content ul.comment-list li.even {
-			background: #f4f9eb;
+			background: transparent;
 		}
 		
 			#request-page #content ul.comment-list li a:link,
@@ -2131,7 +2137,7 @@ a.normal:visited {
 	}
 	
 		#item-edit-page ul.form-holder {
-
+			
 		}
 		
 			#item-edit-page ul.form-holder li {
@@ -2151,6 +2157,7 @@ a.normal:visited {
 			width: 210px;
 			float: left;
 			margin-right: 30px;
+			background: transparent url('../images/bg-upload-img.png') no-repeat top left;
 		}
 		
 			#item-edit-page .lhs ul {
@@ -2158,7 +2165,8 @@ a.normal:visited {
 			}
 		
 				#item-edit-page .lhs ul li {
-				
+					text-align: center;
+					height: 188px;
 				}
 		
 					#item-edit-page ul.form-holder li.button-holder {
@@ -2174,20 +2182,26 @@ a.normal:visited {
 						}
 						
 						#item-edit-page ul.form-holder li img.item-pic {
-							max-width: 206px;
-							border: 1px solid #8e948d;
+							max-height: 76px;
+							vertical-align: middle;		
+							display: block;
+							margin: 56px auto 0 auto;
 						}
 						
 						#item-edit-page ul.form-holder li input[type="file"] {
 							display: block;
 							position: absolute;
 							top: 2px;
-							left: -100px;
+							left: -162px;
 							opacity: 0;
 							-moz-opacity: 0;
 							filter: alpha(opacity:0) ;
 							z-index: 0;
-							width: 173px;
+							width: 85px;
+							cursor: pointer;
+						}
+						
+						#item_photo {
 							cursor: pointer;
 						}
 		
@@ -2195,32 +2209,95 @@ a.normal:visited {
 		/* right hand side */
 		
 		#item-edit-page .rhs {
-			width: 360px;
+			width: 370px;
 			float: left;
 		}
 		
-			#item-edit-page .rhs ul {
+		#item-edit-page .rhs h2.new {
+			display: none;
+		}
 		
+		#item-edit-page.new .rhs h2.new {
+			display: block;
+		}
+		
+		#item-edit-page.new .rhs h2.edit {
+			display: none;
+		}
+		
+		#item-edit-page .rhs h2.edit {
+			display: block;
+		}
+		
+		#item-edit-page label {
+			font-family: "Lucida Grande", verdana, tahoma, arial, sans-serif;
+			color: #62775a;
+			font-size: 10px;
+			font-weight: bold;
+		}
+		
+			#item-edit-page .rhs ul {
+				margin-top: 16px;
 			}
 	
 				#item-edit-page .rhs ul li {
 			
 				}						
 				
+				#item-edit-page .rhs ul li p.description {
+				    color: #9c9e9c;
+				    font-size: 11px;
+					margin-left: 87px;
+				}
+				
+				#item-edit-page .rhs ul li p.under-radio {
+					font-size: 9px;
+					text-align: right;
+					margin-right: 27px;
+				}
+				
+					#item-edit-page .rhs ul li p.under-radio a:link,
+					#item-edit-page .rhs ul li p.under-radio a:visited {
+						margin-left: 23px;
+						color: #9c9e9c;
+					}
+				
 				#item-edit-page .rhs ul.form-holder li label {
-					width: 77px;
+					width: 87px;
+					font-size: 12px;
 				}
 				
 				#item-edit-page ul.form-holder li label.radio-labels-holder {
 					float: none;
 					display: inline;
-					font-weight: normal;
+					font-weight: bold;
+					color: #333;
 				}
 				
-				#item-edit-page ul.form-holder li input[type="text"],
-				#item-edit-page ul.form-holder li textarea {
+				#item-edit-page ul.form-holder li input[type="text"] {
 					width: 268px;
-					color: #62775a;
+					color: #333;
+					font-size: 12px;
+				}
+				
+				#item-edit-page ul.form-holder li textarea {
+					color: #9C9E9C;
+				    font-size: 11px;
+					width: 268px;
+				}
+				
+				#item-edit-page ul.form-holder li textarea.active {
+					color: #333;
+					font-size: 12px;
+				}
+				
+				#item-edit-page ul.form-holder li label.active {
+					color: #127e0e;
+					font-weight: bold;
+				}
+				
+				#item-edit-page .rhs ul.form-holder li input[type="submit"] {
+					width: 58px;
 				}
 				
 
@@ -2228,7 +2305,7 @@ a.normal:visited {
 		/* edit item - action buttons */
 									
 		#item-edit-page ul.action-buttons-list {
-			margin-left: 77px;
+			margin-left: 149px;
 			clear: both;
 		}
 
@@ -2547,6 +2624,7 @@ a.normal:visited {
 	#community-page #content h3 {
 		font-size: 12px; 
 		color: #315859;
+		
 	}
 	
 	
@@ -2673,7 +2751,8 @@ a.normal:visited {
 	#request-page #content h2 a:link,
 	#request-page #content h2 a:visited,
 	#items-page #content h2 a:link,
-	#items-page #content h2 a:visited {
+	#items-page #content h2 a:visited,
+	#item-edit-page h2 {
 		color: #62775a;
 		font-size: 16px;
 	}
@@ -2682,7 +2761,8 @@ a.normal:visited {
 	#completed-request-page #content h2,
 	#items-page #content h2,
 	#request-page #content h2,
-	#profile-page #content h2 {
+	#profile-page #content h2,
+	#item-edit-page h2 {
 		margin-top: 7px;
 	}
 
@@ -2698,7 +2778,8 @@ a.normal:visited {
 		#profile-page #content h2.trusted a:visited,
 		#request-page #content h2.trusted,
 		#request-page #content .no-bg h2.trusted a:link,
-		#request-page #content .no-bg h2.trusted a:visited {
+		#request-page #content .no-bg h2.trusted a:visited,
+		#item-edit-page h2 {
 			color: #127e0e;
 		}
 			
@@ -2728,8 +2809,7 @@ a.normal:visited {
 
 		.trust-reputation-box h3,
 		.trust-reputation-box h3 a:link,
-		.trust-reputation-box h3 a:visited,
-		#item-edit-page label {
+		.trust-reputation-box h3 a:visited {
 			font-family: verdana, tahoma, arial, sans-serif;
 			color: #315859;
 			font-size: 10px;
