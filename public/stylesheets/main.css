@@ -803,7 +803,7 @@ a.normal:visited {
 				#dashboard-page.empty img.empty-village {
 					position: absolute;
 					right: -135px;
-					bottom: -145px;
+					top: 122px;
 					display: block;
 					z-index: -1000;
 				}
@@ -2137,7 +2137,7 @@ a.normal:visited {
 	}
 	
 		#item-edit-page ul.form-holder {
-
+			
 		}
 		
 			#item-edit-page ul.form-holder li {
@@ -2229,8 +2229,15 @@ a.normal:visited {
 			display: block;
 		}
 		
-			#item-edit-page .rhs ul {
+		#item-edit-page label {
+			font-family: verdana, tahoma, arial, sans-serif;
+			color: #62775a;
+			font-size: 10px;
+			font-weight: bold;
+		}
 		
+			#item-edit-page .rhs ul {
+				margin-top: 16px;
 			}
 	
 				#item-edit-page .rhs ul li {
@@ -2246,12 +2253,12 @@ a.normal:visited {
 				#item-edit-page .rhs ul li p.under-radio {
 					font-size: 9px;
 					text-align: right;
-					margin-right: 47px;
+					margin-right: 35px;
 				}
 				
 					#item-edit-page .rhs ul li p.under-radio a:link,
 					#item-edit-page .rhs ul li p.under-radio a:visited {
-						margin-left: 12px;
+						margin-left: 18px;
 						color: #9c9e9c;
 					}
 				
@@ -2262,7 +2269,8 @@ a.normal:visited {
 				#item-edit-page ul.form-holder li label.radio-labels-holder {
 					float: none;
 					display: inline;
-					font-weight: normal;
+					font-weight: bold;
+					color: #333;
 				}
 				
 				#item-edit-page ul.form-holder li input[type="text"] {
@@ -2285,6 +2293,10 @@ a.normal:visited {
 				#item-edit-page ul.form-holder li label.active {
 					color: #127e0e;
 					font-weight: bold;
+				}
+				
+				#item-edit-page .rhs ul.form-holder li input[type="submit"] {
+					width: 57px;
 				}
 				
 
@@ -2796,8 +2808,7 @@ a.normal:visited {
 
 		.trust-reputation-box h3,
 		.trust-reputation-box h3 a:link,
-		.trust-reputation-box h3 a:visited,
-		#item-edit-page label {
+		.trust-reputation-box h3 a:visited {
 			font-family: verdana, tahoma, arial, sans-serif;
 			color: #315859;
 			font-size: 10px;
