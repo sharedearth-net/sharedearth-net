@@ -20,6 +20,13 @@ $(document).ready(function() {
 	});	
 });
 
+$(document).ready(function() {
+	$('input[type="radio"]').click(function() {
+		$('label.active').removeClass('active');
+		$(this).next().addClass('active');
+	});	
+});
+
 
 
 //dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
