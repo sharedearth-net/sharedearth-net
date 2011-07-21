@@ -2253,12 +2253,12 @@ a.normal:visited {
 				#item-edit-page .rhs ul li p.under-radio {
 					font-size: 9px;
 					text-align: right;
-					margin-right: 35px;
+					margin-right: 27px;
 				}
 				
 					#item-edit-page .rhs ul li p.under-radio a:link,
 					#item-edit-page .rhs ul li p.under-radio a:visited {
-						margin-left: 18px;
+						margin-left: 23px;
 						color: #9c9e9c;
 					}
 				
@@ -2272,7 +2272,6 @@ a.normal:visited {
 					display: inline;
 					font-weight: bold;
 					color: #333;
-					font-size: 11px;
 				}
 				
 				#item-edit-page ul.form-holder li input[type="text"] {
