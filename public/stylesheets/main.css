@@ -2209,7 +2209,7 @@ a.normal:visited {
 		/* right hand side */
 		
 		#item-edit-page .rhs {
-			width: 360px;
+			width: 370px;
 			float: left;
 		}
 		
@@ -2230,7 +2230,7 @@ a.normal:visited {
 		}
 		
 		#item-edit-page label {
-			font-family: verdana, tahoma, arial, sans-serif;
+			font-family: "Lucida Grande", verdana, tahoma, arial, sans-serif;
 			color: #62775a;
 			font-size: 10px;
 			font-weight: bold;
@@ -2247,7 +2247,7 @@ a.normal:visited {
 				#item-edit-page .rhs ul li p.description {
 				    color: #9c9e9c;
 				    font-size: 11px;
-					margin-left: 77px;
+					margin-left: 87px;
 				}
 				
 				#item-edit-page .rhs ul li p.under-radio {
@@ -2263,7 +2263,8 @@ a.normal:visited {
 					}
 				
 				#item-edit-page .rhs ul.form-holder li label {
-					width: 77px;
+					width: 87px;
+					font-size: 12px;
 				}
 				
 				#item-edit-page ul.form-holder li label.radio-labels-holder {
@@ -2271,6 +2272,7 @@ a.normal:visited {
 					display: inline;
 					font-weight: bold;
 					color: #333;
+					font-size: 11px;
 				}
 				
 				#item-edit-page ul.form-holder li input[type="text"] {
@@ -2296,7 +2298,7 @@ a.normal:visited {
 				}
 				
 				#item-edit-page .rhs ul.form-holder li input[type="submit"] {
-					width: 57px;
+					width: 58px;
 				}
 				
 
