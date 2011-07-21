@@ -2213,6 +2213,22 @@ a.normal:visited {
 			float: left;
 		}
 		
+		#item-edit-page .rhs h2.new {
+			display: none;
+		}
+		
+		#item-edit-page.new .rhs h2.new {
+			display: block;
+		}
+		
+		#item-edit-page.new .rhs h2.edit {
+			display: none;
+		}
+		
+		#item-edit-page .rhs h2.edit {
+			display: block;
+		}
+		
 			#item-edit-page .rhs ul {
 		
 			}

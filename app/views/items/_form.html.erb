@@ -3,11 +3,11 @@
 
 	<div class="lhs">
 		<ul class="form-holder">
-		<% if @item.photo? %>
 			<li class="clearfix">
-		   		<!-- <%= image_tag @item.photo.url(:small), :class => "item-pic" %> -->
+				<% if @item.photo? %>
+					<!-- <%= image_tag @item.photo.url(:small), :class => "item-pic" %> -->
+				<% end %>
 			</li>
-		<% end %>
 			<li class="button-holder">
 				<%= image_tag("bt-upload-image.png", :alt => "Upload Image")  %>
 	    		<%= f.file_field :photo, :class => 'realupload' %>
@@ -16,7 +16,8 @@
 	</div>
 		
   <div class="rhs">
-	<h2>Edit item</h2>
+	<h2 class="edit">Edit item</h2>
+	<h2 class="new">New item</h2>
 	<ul class="form-holder">
 		<li class="clearfix">
 			<%= f.label :Purpose %>
