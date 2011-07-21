@@ -502,13 +502,13 @@ module PagesHelper
     comments = log.comments.count
     case log.event_type.name
       when 'SHARING'
-        res = "<li>#{link_to "view action", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+        res = ""#"<li>#{link_to "view action", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
       when 'ADD ITEM'
         res = "<li>#{link_to "view item", item_path(log.action_object_id)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
       when 'NEGATIVE FEEDBACK'
-        res = "<li>#{link_to "view feedback", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+        res = ""#"<li>#{link_to "view feedback", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
       when 'GIFTING'
-        res = "<li>#{link_to "view action", request_path(log.related)}</li>"
+        res = ""#"<li>#{link_to "view action", request_path(log.related)}</li>"
       when 'TRUST ESTABLISHED'
         res = "<li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
       when 'TRUST WITHDRAWN'
