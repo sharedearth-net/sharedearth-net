@@ -2298,6 +2298,8 @@ a.normal:visited {
 				
 				#item-edit-page .rhs ul.form-holder li input[type="submit"] {
 					width: 58px;
+					height: 24px;
+					background-color: #cce5a0;
 				}
 				
 
@@ -2319,13 +2321,13 @@ a.normal:visited {
 
 				#item-edit-page ul.action-buttons-list li a:link,
 				#item-edit-page ul.action-buttons-list li a:visited {
-					background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
-					padding: 0 7px;
+					background: #cce5a0 url('../images/bg-bt-request-list.png') repeat-x 0 0;
+					padding: 3px 7px 0 7px;
 					color: #234d4d;
 					display: block;
 					border: 1px solid #aab1a9;
 					line-height: 15px;
-					height: 18px;
+					height: 19px;
 					text-transform: capitalize;
 				}
 
