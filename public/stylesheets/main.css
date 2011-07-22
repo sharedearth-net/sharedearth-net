@@ -2298,6 +2298,8 @@ a.normal:visited {
 				
 				#item-edit-page .rhs ul.form-holder li input[type="submit"] {
 					width: 58px;
+					height: 24px;
+					background-color: #cce5a0;
 				}
 				
 
@@ -2319,13 +2321,13 @@ a.normal:visited {
 
 				#item-edit-page ul.action-buttons-list li a:link,
 				#item-edit-page ul.action-buttons-list li a:visited {
-					background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
-					padding: 0 7px;
+					background: #cce5a0 url('../images/bg-bt-request-list.png') repeat-x 0 0;
+					padding: 3px 7px 0 7px;
 					color: #234d4d;
 					display: block;
 					border: 1px solid #aab1a9;
 					line-height: 15px;
-					height: 18px;
+					height: 19px;
 					text-transform: capitalize;
 				}
 
@@ -2531,6 +2533,11 @@ a.normal:visited {
 			text-align: center;
 		}
 
+		#terms-conditions-page.second-page #content p {
+			font-size: 13px;
+			line-height: 19px;
+		}
+		
 		#terms-conditions-page.second-page #content p.top-separated {
 			margin-top: 15px;
 		}
@@ -2552,6 +2559,15 @@ a.normal:visited {
 				font-size: 12px;
 
 			}
+			
+			#terms-conditions-page.second-page #content h4 {
+				font-size: 15px;
+			}
+			
+			#terms-conditions-page.second-page #content h5 {
+				font-size: 14px;
+				margin-bottom: 10px;
+			}
 
 
 		#terms-conditions-page.second-page #content .buttons-holder {
@@ -2560,7 +2576,7 @@ a.normal:visited {
 		}
 
 			#terms-conditions-page.second-page .buttons-holder ul {
-
+				
 			}
 
 				#terms-conditions-page.second-page .buttons-holder ul li {
@@ -2778,8 +2794,7 @@ a.normal:visited {
 		#profile-page #content h2.trusted a:visited,
 		#request-page #content h2.trusted,
 		#request-page #content .no-bg h2.trusted a:link,
-		#request-page #content .no-bg h2.trusted a:visited,
-		#item-edit-page h2 {
+		#request-page #content .no-bg h2.trusted a:visited {
 			color: #127e0e;
 		}
 			
