@@ -2778,8 +2778,7 @@ a.normal:visited {
 		#profile-page #content h2.trusted a:visited,
 		#request-page #content h2.trusted,
 		#request-page #content .no-bg h2.trusted a:link,
-		#request-page #content .no-bg h2.trusted a:visited,
-		#item-edit-page h2 {
+		#request-page #content .no-bg h2.trusted a:visited {
 			color: #127e0e;
 		}
 			
