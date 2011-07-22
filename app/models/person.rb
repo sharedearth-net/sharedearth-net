@@ -255,4 +255,8 @@ class Person < ActiveRecord::Base
     0
   end
   
+  def never_requested?
+    ItemRequest.find_by_requester_id(self.id).nil?
+  end
+  
 end
