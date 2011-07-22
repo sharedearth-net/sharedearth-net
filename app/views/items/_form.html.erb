@@ -26,9 +26,9 @@
     		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift %> <%= f.label :Gift, "Gift", :class => "radio-labels-holder" %>
 
 <!-- these buttons are not functional (shareage, communal) -->
-		    	<%= f.radio_button :purpose, :checked => @item.share?, :id => :share %> <%= f.label :Share, "Shareage", :class => "radio-labels-holder" %>
+		    	<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :id => :share %> <%= f.label :Share, "Shareage", :class => "radio-labels-holder" %>
 				
-        		<%= f.radio_button :purpose,  :checked => @item.gift?, :id => :gift %> <%= f.label :Gift, "Communal", :class => "radio-labels-holder" %>
+        		<%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift %> <%= f.label :Gift, "Communal", :class => "radio-labels-holder" %>
 
 
 				<p class="description under-radio">
