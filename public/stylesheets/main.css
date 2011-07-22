@@ -2533,6 +2533,11 @@ a.normal:visited {
 			text-align: center;
 		}
 
+		#terms-conditions-page.second-page #content p {
+			font-size: 13px;
+			line-height: 19px;
+		}
+		
 		#terms-conditions-page.second-page #content p.top-separated {
 			margin-top: 15px;
 		}
@@ -2554,6 +2559,15 @@ a.normal:visited {
 				font-size: 12px;
 
 			}
+			
+			#terms-conditions-page.second-page #content h4 {
+				font-size: 15px;
+			}
+			
+			#terms-conditions-page.second-page #content h5 {
+				font-size: 14px;
+				margin-bottom: 10px;
+			}
 
 
 		#terms-conditions-page.second-page #content .buttons-holder {
@@ -2562,7 +2576,7 @@ a.normal:visited {
 		}
 
 			#terms-conditions-page.second-page .buttons-holder ul {
-
+				
 			}
 
 				#terms-conditions-page.second-page .buttons-holder ul li {
