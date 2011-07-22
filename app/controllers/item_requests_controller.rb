@@ -69,7 +69,7 @@ class ItemRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to_back }
       format.json do
-        @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
+        @user_html = render_to_string( :partial => 'shared/item_request_content_box.html.erb', :locals => {:req => @item_request } )
         acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
         acttivity.each do |activity_log|
           @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
@@ -86,7 +86,7 @@ class ItemRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to_back }
       format.json do
-        @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
+        @user_html = render_to_string( :partial => 'shared/item_request_content_box.html.erb', :locals => {:req => @item_request } )
         acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
         acttivity.each do |activity_log|
           @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
@@ -101,7 +101,7 @@ class ItemRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to dashboard_path }
       format.json do
-        @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
+        @user_html = render_to_string( :partial => 'shared/item_request_content_box.html.erb', :locals => {:req => @item_request } )
         acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
         acttivity.each do |activity_log|
           @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
@@ -116,7 +116,7 @@ class ItemRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to_back }
       format.json do
-        @user_html = render_to_string( :partial => 'shared/item_request_box.html.erb', :locals => {:req => @item_request } )
+        @user_html = render_to_string( :partial => 'shared/item_request_content_box.html.erb', :locals => {:req => @item_request } )
         acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
         acttivity.each do |activity_log|
           @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
@@ -132,6 +132,7 @@ class ItemRequestsController < ApplicationController
       format.html { redirect_to new_request_feedback_path(@item_request) }
       format.json do
         acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
+        @user_html = ""
         acttivity.each do |activity_log|
           @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
         end
