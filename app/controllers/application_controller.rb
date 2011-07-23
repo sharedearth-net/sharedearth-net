@@ -4,6 +4,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :redirect_to_back
   
   layout :dynamic_layout
+  
+  # Render 404's
+  rescue_from ActiveRecord::RecordNotFound, :with => :missing_record_error
+
+  # Render 501's
+  rescue_from ActiveRecord::StatementInvalid, :with => :generic_error
+  rescue_from RuntimeError, :with => :generic_error
+  rescue_from NoMethodError, :with => :no_method_error
+  rescue_from NameError, :with => :generic_error
+  rescue_from ActionView::TemplateError, :with => :generic_error
 
   private
 
@@ -47,5 +57,43 @@ class ApplicationController < ActionController::Base
   
   def has_referer?
     !request.env["HTTP_REFERER"].blank? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+  end
+  
+  #Error pages
+  #Error 401
+  def missing_record_error(exception)
+    respond_to do |format|
+      format.html {render_404}
+      format.any(:xml, :json) do
+        render extension => {:error => exception.message}, :status => 'NO'
+      end
+    end
+  end
+  
+  def missing_page(exception = nil)
+    respond_to do |format|
+      format.html {render_404}
+    end
+  end
+  #Error 501
+  def generic_error(exception, message = "OK that didn't work. Try something else.")
+    respond_to do |format|
+      format.html {render_501}
+      format.any(:xml, :json) do
+        render extension => {:error => message}, :status => 'NO'
+      end
+    end
+  end
+  
+  def no_method_error(exception)
+    generic_error(exception, "A potential syntax error in the making!")
+  end
+  
+  def render_404
+    render :template => 'static_pages/404', :status => :not_found
+  end
+
+  def render_501
+    render :template => 'static_pages/501', :status => :not_implemented
   end
 end
