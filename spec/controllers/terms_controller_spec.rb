@@ -11,7 +11,7 @@ describe TermsController do
 
   describe "GET 'create'" do
     it "should be successful" do
-      get 'create'
+      get 'principles'
       response.should be_success
     end
   end

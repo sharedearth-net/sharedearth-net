@@ -12,7 +12,7 @@ module UserMocks
   end
   
   def mock_person(stubs = {})
-    defaults = {}
+    defaults = {:authorised_account => true, :accepted_tc => true, :accepted_pp => true}
     mock_model(Person, defaults.merge(stubs))
   end
 end

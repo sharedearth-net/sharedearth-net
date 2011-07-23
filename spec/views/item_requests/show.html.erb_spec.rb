@@ -13,9 +13,9 @@ describe "item_requests/show.html.erb" do
 
     buttons.each do |button_id, button_url|
       if required_buttons.include?(button_id)
-        rendered.should have_selector("a##{button_id}", :href => button_url)
+        rendered.should have_selector("a", :href => button_url)
       else
-        rendered.should_not have_selector("a##{button_id}", :href => button_url)
+        rendered.should_not have_selector("a", :href => button_url)
       end
     end
   end

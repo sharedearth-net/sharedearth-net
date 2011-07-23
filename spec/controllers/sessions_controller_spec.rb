@@ -9,7 +9,7 @@ describe SessionsController do
     
     it "should set flash notice and redirect user to root url" do
       do_get
-      flash[:notice].should eql(I18n.t('messages.signed_out'))
+      flash[:notice].should eql(nil)
       response.should redirect_to(root_path)
     end
 
@@ -51,7 +51,7 @@ describe SessionsController do
 
     it "should set flash notice redirect user to root url" do
       do_get
-      flash[:notice].should eql(I18n.t('messages.signed_in'))
+      flash[:notice].should eql(nil)
       response.should redirect_to(dashboard_path)
     end
   end

@@ -198,7 +198,7 @@ describe ItemRequestsController do
 
       it "should redirect to dashboard page" do
         put :accept, :id => "42"
-        flash[:notice].should eql(I18n.t('messages.item_requests.request_accepted'))
+        flash[:notice].should eql(nil)
         response.should redirect_to(dashboard_path)
       end
 
@@ -249,7 +249,7 @@ describe ItemRequestsController do
 
       it "should redirect to dashboard page" do
         put :reject, :id => "42"
-        flash[:notice].should eql(I18n.t('messages.item_requests.request_rejected'))
+        flash[:notice].should eql(nil)
         response.should redirect_to(dashboard_path)
       end
 
@@ -300,7 +300,7 @@ describe ItemRequestsController do
 
       it "should redirect to dashboard page" do
         put :cancel, :id => "42"
-        flash[:notice].should eql(I18n.t('messages.item_requests.request_canceled'))
+        flash[:notice].should eql(nil)
         response.should redirect_to(dashboard_path)
       end
 
@@ -351,7 +351,7 @@ describe ItemRequestsController do
 
       it "should redirect to dashboard page" do
         put :collected, :id => "42"
-        flash[:notice].should eql(I18n.t('messages.item_requests.request_collected'))
+        flash[:notice].should eql(nil)
         response.should redirect_to(dashboard_path)
       end
 
@@ -402,7 +402,7 @@ describe ItemRequestsController do
 
       it "should redirect to request page" do
         put :complete, :id => "42"
-        flash[:notice].should eql(I18n.t('messages.item_requests.request_completed'))
+        flash[:notice].should eql(nil)
         response.should redirect_to(new_request_feedback_path(mock_item_request))
       end
 

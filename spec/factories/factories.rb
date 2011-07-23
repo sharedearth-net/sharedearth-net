@@ -2,7 +2,6 @@ Factory.define :user do |u|
   u.provider "Facebook"
   u.sequence(:uid) { |n|  Time.now.to_i.to_s + "#{n}" }
   u.token '111'
-  u.nickname "Shary"
 end
 
 Factory.define :person do |p|

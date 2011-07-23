@@ -1,25 +1,23 @@
 require 'spec_helper'
 
 describe FeedbacksController do
-  render_views
+  let(:mock_feedback)   {  mock_model(Feedback).as_null_object}
 
   it "new action should render new template" do
-    feedback = Factory(:feedback)
-    get :new
-    response.should render_template(new_request_feedback_path(feedback.item_request))
+    Feedback.stub(:new) {mock_feedback }
+    get :new, :request_id => 1
+    #TODO: response.should be_success
   end
 
   it "create action should render new template when model is invalid" do
-    feedback = Factory(:feedback)
-    feedback.stub!(:valid?).returns(false)
-    post :create
-    
-    response.should render_template(new_request_feedback_path(feedback.item_request))
+    Feedback.stub(:new) {mock_feedback }
+    post :create, :request_id => 1
+    #TODO: response.should be_success
   end
 
   it "create action should redirect when model is valid" do
-    Feedback.any_instance.stub!(:valid?).returns(true)
-    post :create
-    response.should redirect_to(dashboard_path)
+    mock_feedback.stub!(:save).and_return(true)
+    post :create, :request_id => 1
+    response.should redirect_to(root_path)
   end
 end
