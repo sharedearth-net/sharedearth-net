@@ -70,24 +70,7 @@
 		</div><!-- /content-box-holder  -->
 		
 		<% if (@item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)) && !@item_request.completed? %>
- 		
-<!-- MAKE THIS MORE BEAUTIFUL and CLEAN -->
-   <!-- comments begin -->
-		<!--
-		<div class="inner-content comments-holder">
-					<ul class="comment-list">
-		  			<% @comments.each do |c| -%>
-							<%= render :partial => 'comments/comment', :locals => {:c => c} %>
-						<% end -%>
-						<%= render :partial => 'comments/new', :locals => { :commentable => @item_request } %>
-					</ul>
-
-				</div>-->
 		
-		<!-- comments end -->
-		<!-- <% end %> -->
-
-		<!-- Static discussion begin -->
 		<li class="content-box clearfix">
 
 			<div>
@@ -122,7 +105,7 @@
 							<%= c.comment %>
 						</p>
 					</li>
-						<% end -%>
+						<% end unless @comments.nil?-%>
 					
 				</ul>
 
@@ -130,6 +113,7 @@
 		</li>
 		
 		<!-- Static discussion end -->
+		<% end %>
 
 	
 	</div><!-- /content -->
