@@ -50,6 +50,7 @@ group :development, :test do
 	gem "shoulda", "~> 2.11"
   gem "rspec-rails", "~> 2.5"
 	gem "autotest"
+	gem "guard-rspec"
 	gem "webrat"
 	gem "rcov"
 	gem 'factory_girl_rails'
