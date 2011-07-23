@@ -61,6 +61,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'pickle'
   gem 'ruby-debug'
+  gem 'heroku_san'
 end
 gem "simplecov", :require => false, :group => :test
 gem 'activeadmin'

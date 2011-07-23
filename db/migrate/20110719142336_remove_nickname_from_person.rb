@@ -1,6 +1,6 @@
 class RemoveNicknameFromPerson < ActiveRecord::Migration
   def self.up
-    remove_column :people, :nickname
+    remove_column :users, :nickname
   end
 
   def self.down
