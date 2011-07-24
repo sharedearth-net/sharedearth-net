@@ -5,4 +5,4 @@
 */
 
 
-if(!dojo._hasResource["sen.app"]){dojo._hasResource["sen.app"]=true;dojo.provide("sen.app");sen.app={init:function(){var _1=this.getModuleName();this.loadModule(_1);},getModuleName:function(){var _2=window.location.pathname;stub=_2.replace(/^\//,"");return "sen.pages."+stub;},loadModule:function(_3){if(_3===undefined){return;}dojo["require"](_3,true);dojo.ready(function(){var _4=dojo.getObject(_3);if(_4){var _5=new _4();_5.init();dojo.addOnUnload(function(){_5.unload();});}});}};}
+if(!dojo._hasResource["sen.app"]){dojo._hasResource["sen.app"]=true;dojo.provide("sen.app");sen.app={init:function(){var _1=this.getModuleName();this.loadModule(_1);},getModuleName:function(){var _2=window.location.pathname,_3=_2.match(/^\/([A-Za-z]+)(\/)*([?]*)/),_4=_3[1];return "sen.pages."+_4;},loadModule:function(_5){if(_5===undefined){return;}dojo["require"](_5,true);dojo.ready(function(){var _6=dojo.getObject(_5);if(_6){var _7=new _6();_7.init();dojo.addOnUnload(function(){_7.unload();});}});}};}

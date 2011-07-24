@@ -44,7 +44,7 @@ relating to the other person in the transaction as well.
 					<ul>
 						<li><%= time_ago_in_words sentence["time"] %> ago</li>
 						<% if event -%>
-						  <li><a href="#">comments(<%= log.comments.count %>)</a></li>
+						  <li><a href="#" class="comments-show-hide">comments(<%= log.comments.count %>)</a></li>
 						<% end -%>
 						
 					</ul>
