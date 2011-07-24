@@ -2468,8 +2468,7 @@ a.normal:visited {
 			font-weight: bold;
 			font-size: 15px;
 			margin: 19px 0 31px 0;
-			font-family: verdana, tahoma, arial, sans-serif;
-		}
+        }
 
 			#terms-conditions-page #content h3 span {
 				text-decoration: underline;
@@ -2547,7 +2546,7 @@ a.normal:visited {
 		}
 
 			#terms-conditions-page.second-page #content h3 {
-				font-size: 13px;
+				font-size: 14px;
 				color: #127e0e;
 				font-weight: normal;
 				margin: 0 0 13px 0;
@@ -2556,7 +2555,7 @@ a.normal:visited {
 
 			#terms-conditions-page.second-page #content h3.bottom-title {
 				margin-top: 27px;
-				font-size: 12px;
+				font-size: 14px;
 
 			}
 			
