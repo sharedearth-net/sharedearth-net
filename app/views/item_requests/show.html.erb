@@ -76,7 +76,8 @@
 			<div>
 
 				<ul class="comment-list">
-					<li class="<%= cycle :even, '' %> clearfix">
+					
+					<li class="<%= cycle :even, ''  %> clearfix">
 						<div class="comment-box">
 							<%commentable = @item_request%>
 							<%=form_for(Comment.new, :format => :json) do |f|%>
