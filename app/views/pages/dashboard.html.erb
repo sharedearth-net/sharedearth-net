@@ -8,7 +8,7 @@
 	<div id="content">
 		<% unless @requests.count.zero? %>
 			<div class="content-box-holder">
-				<%= image_tag("curve-top-content-box-wide.png", :alt => "")  %>
+				<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 				<ul>
 				  <%= render :partial => 'people/new_person' if current_user.person.reputation_rating.activity_level_count.zero? && current_user.person.gift_act_rating.zero? && current_user.person.ever_requester?%>
 					<% @requests.each do |req| %>
@@ -37,14 +37,14 @@
 					
 				</ul>
 
-			<%= image_tag("curve-bottom-content-box-wide.png", :alt => "")  %>
+			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
 			</div>
 			<!-- /content-box-holder  -->
 		<% end %>
 	
 	
 		<div class="content-box-holder">
-			<%= image_tag("curve-top-content-box-wide.png", :alt => "")  %>
+			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 		
 			<ul class="dashboard-recent-activity">
 				<li class="content-box clearfix">
@@ -62,7 +62,7 @@
 				</li>
 			
 			</ul>
-			<%= image_tag("curve-bottom-content-box-wide.png", :alt => "")  %>
+			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
 		</div>
 		<!-- /content-box-holder  -->
 	
