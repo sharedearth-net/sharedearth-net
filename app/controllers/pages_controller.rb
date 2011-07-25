@@ -17,4 +17,6 @@ class PagesController < ApplicationController
                                                                              :order => 'created_at DESC', :include => [:event_log])
    end
 
+   def about
+   end
 end
