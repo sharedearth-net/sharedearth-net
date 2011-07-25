@@ -19,6 +19,25 @@ describe PagesController do
       get :about
       response.should render_template :about
     end
+
+    context "When the user is not logged in" do
+      it "should render the right layout" do
+        get :about
+        response.should render_template 'layouts/shared_earth'
+      end
+    end
+
+    context "When the user is logged in" do
+      before do
+        signedin_user.stub(:person).and_return(mock_person)
+        sign_in_as_user(signedin_user)
+      end
+
+      it "should render the right layout" do
+        get :about
+        response.should render_template 'layouts/application'
+      end
+    end
   end
 
   describe "GET 'index'" do

@@ -18,6 +18,7 @@ class PagesController < ApplicationController
    end
 
   def about
-    render :layout => 'shared_earth'
+    about_layout = (current_user.nil? ? 'shared_earth' : 'application')
+    render :layout => about_layout
   end
 end
