@@ -95,8 +95,6 @@
 							<li class="<%= cycle :even, '' %> clearfix">
 						<div class="time-ago">
 							<%= time_ago_in_words(c.created_at) %> ago
-							<br />
-							<%= c.created_at.to_date %>
 						</div>			
 						<%= image_tag person.avatar(:square), :class => "thumb" %>
 						<p>
