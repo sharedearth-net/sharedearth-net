@@ -2166,11 +2166,13 @@ a.normal:visited {
 		
 				#item-edit-page .lhs ul li {
 					text-align: center;
-					height: 188px;
+					height: 144px;
+					padding-top: 44px;
 				}
 		
 					#item-edit-page ul.form-holder li.button-holder {
 						position: relative;
+						padding-top: 0;
 					}
 			
 						#item-edit-page ul.form-holder li.button-holder label {
@@ -2182,23 +2184,23 @@ a.normal:visited {
 						}
 						
 						#item-edit-page ul.form-holder li img.item-pic {
-							max-height: 76px;
 							vertical-align: middle;		
 							display: block;
-							margin: 56px auto 0 auto;
+							margin: 0 auto;
 						}
 						
 						#item-edit-page ul.form-holder li input[type="file"] {
 							display: block;
 							position: absolute;
-							top: 2px;
-							left: -162px;
+							top: 4px;
+							left: 65px;
 							opacity: 0;
 							-moz-opacity: 0;
 							filter: alpha(opacity:0) ;
-							z-index: 0;
+							z-index: 0;*/
 							width: 85px;
 							cursor: pointer;
+							font-size: 6px;
 						}
 						
 						#item_photo {
