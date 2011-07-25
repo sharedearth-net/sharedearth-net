@@ -290,3 +290,18 @@ h1 {
 		
 		}
 
+#terms-conditions-page #content p {
+    color: #9C9C9C;
+
+}
+
+#terms-conditions-page.second-page #content h3.bottom-title {
+    font-size: 14px;
+
+}
+
+#terms-conditions-page.second-page #content h3 {
+    font-size: 14px;
+
+}
+
