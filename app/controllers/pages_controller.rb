@@ -17,6 +17,7 @@ class PagesController < ApplicationController
                                                                              :order => 'created_at DESC', :include => [:event_log])
    end
 
-   def about
-   end
+  def about
+    render :layout => 'shared_earth'
+  end
 end
