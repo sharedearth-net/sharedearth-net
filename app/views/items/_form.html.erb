@@ -7,7 +7,7 @@
 			
 			<% if @item.photo? %>
 				<li class="clearfix">
-					<%= image_tag @item.photo.url(:small), :class => "item-pic" %>
+					<%= image_tag @item.photo.url(:medium), :class => "item-pic" %>
 				</li>
 			<% else %>
 				<li class="no-image-uploaded clearfix">
