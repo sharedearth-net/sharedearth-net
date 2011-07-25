@@ -725,7 +725,7 @@ a.normal:visited {
 	#dashboard-page .content-box {
 		background: #ebf5da;
 		padding: 0 15px 12px 15px;
-		width: 586px;
+		width: 481px;
 	}
 	
 		#dashboard-page .content-box .thumb {
@@ -822,7 +822,6 @@ a.normal:visited {
 		#profile-page #content h2 span {
 				float: right;
 				margin-top: 4px;
-				margin-right: 44px;
 			}
 	
 	#profile-page #content h3 {
@@ -833,6 +832,18 @@ a.normal:visited {
 	#profile-page .items-list {
 		padding-left: 0;
 	}
+	
+			#profile-page .items-list ul {
+				
+			}
+			
+				#profile-page .items-list ul li {
+
+				}
+	
+			#profile-page .items-list ul li.item {
+				height: 50px;
+			}
 	
 	#content p.status-holder-profile {
 		font-size: 11px;
@@ -850,7 +861,6 @@ a.normal:visited {
 		
 		#profile-page  #content .items-list .requests ul li div p {
 			margin-bottom: 0;
-			text-transform: lowercase;
 		}
 	
 	
