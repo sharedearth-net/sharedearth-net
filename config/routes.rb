@@ -72,6 +72,7 @@ end
 
   match "/dashboard", :to => "pages#dashboard"
   match "/principles", :to => "terms#principles"
+  match '/about' => 'pages#about'
 
   root :to => "pages#index"
 

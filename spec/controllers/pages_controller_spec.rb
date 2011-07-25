@@ -1,12 +1,25 @@
 require 'spec_helper'
 
 describe PagesController do
+  render_views
 
   let(:mock_item_request) { mock_model(ItemRequest).as_null_object }
   let(:mock_person) { mock_model(Person).as_null_object }
   let(:signedin_user) { generate_mock_user_with_person }
 
   it_should_require_signed_in_user_for_actions :dashboard
+
+  describe "GET 'about'" do
+    it "should be succesful" do
+      get :about
+      response.should be_success
+    end
+
+    it "should render the right template" do
+      get :about
+      response.should render_template :about
+    end
+  end
 
   describe "GET 'index'" do
     it "should be successful" do
