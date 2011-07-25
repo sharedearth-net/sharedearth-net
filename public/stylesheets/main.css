@@ -833,6 +833,18 @@ a.normal:visited {
 		padding-left: 0;
 	}
 	
+			#profile-page .items-list ul {
+				
+			}
+			
+				#profile-page .items-list ul li {
+
+				}
+	
+			#profile-page .items-list ul li.item {
+				height: 50px;
+			}
+	
 	#content p.status-holder-profile {
 		font-size: 11px;
 		line-height: 14px;
