@@ -3,11 +3,19 @@
 
 	<div class="lhs">
 		<ul class="form-holder">
-			<li class="clearfix">
-				<% if @item.photo? %>
+			
+			
+			<% if @item.photo? %>
+				<li class="clearfix">
 					<%= image_tag @item.photo.url(:small), :class => "item-pic" %>
-				<% end %>
-			</li>
+				</li>
+			<% else %>
+				<li class="no-image-uploaded clearfix">
+
+				</li>
+			<% end %>
+				
+			
 			<li class="button-holder">
 				<%= image_tag("bt-upload-image.png", :alt => "Upload Image")  %>
 	    		<%= f.file_field :photo, :class => 'realupload' %>

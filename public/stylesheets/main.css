@@ -2157,7 +2157,6 @@ a.normal:visited {
 			width: 210px;
 			float: left;
 			margin-right: 30px;
-			background: transparent url('../images/bg-upload-img.png') no-repeat top left;
 		}
 		
 			#item-edit-page .lhs ul {
@@ -2173,6 +2172,10 @@ a.normal:visited {
 					#item-edit-page ul.form-holder li.button-holder {
 						position: relative;
 						padding-top: 0;
+					}
+					
+					#item-edit-page ul.form-holder li.no-image-uploaded {
+						background: transparent url('../images/bg-upload-img.png') no-repeat top left;
 					}
 			
 						#item-edit-page ul.form-holder li.button-holder label {
@@ -2371,6 +2374,7 @@ a.normal:visited {
 		#manage-resources-page .items-list ul li.item {
 			margin-top: 12px;
 			margin-bottom: 4px;
+			height: 40px;
 		}
 
 
