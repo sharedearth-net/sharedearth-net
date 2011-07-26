@@ -15,7 +15,7 @@ Feature: Items management page
      | Name        | Samsung             |
      | Description | Nice mobile phone   |
     And I choose "share"
-    Then I press "OK"
+    Then I press "Save"
     And I should see "Samsung"
     And I should see "Nice mobile phone"
     And I should see "phone"
@@ -28,7 +28,7 @@ Feature: Items management page
      | Name        | Samsung             |
      | Description | Nice mobile phone   |
     And I choose "share"
-    Then I press "OK"
+    Then I press "Save"
     And I should see "Samsung"
     And I should see "Nice mobile phone"
     And I should see "phone"
@@ -40,7 +40,7 @@ Feature: Items management page
      | Name        | Samsung             |
      | Description | Nice mobile phone   |
     And I choose "share"
-    Then I press "OK"
+    Then I press "Save"
     And I should see "Samsung"
     And I should see "Nice mobile phone"
     And I should see "phone"
