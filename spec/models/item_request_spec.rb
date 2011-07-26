@@ -128,7 +128,7 @@ describe ItemRequest, ".accept!" do
     expect { @item_request.accept! }.to raise_error
   end
   after(:all) do
-    delete_item_request_helper_environment
+    #delete_item_request_helper_environment
   end
 end
 

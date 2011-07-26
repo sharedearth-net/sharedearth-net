@@ -24,11 +24,6 @@ describe "people/show.html.erb" do
     assign(:unanswered_requests, [])
   end
   
-  after :all do
-    @person.delete
-    @item1.delete
-    @item2.delete
-  end
 
   it "renders person name" do
     render

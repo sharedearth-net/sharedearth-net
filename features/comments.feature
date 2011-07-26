@@ -21,7 +21,7 @@ Feature: Leaving comment to everything
      | comment   | My comment opinion |
      And press "Add comment"
     Then I should see "My comment opinion"
-    
+    @javascript
   Scenario: Commenting event log
     And Looking at my person page
     And I should see "accept"
@@ -38,7 +38,7 @@ Feature: Leaving comment to everything
      And press "Add comment"
     Then I should see "My comment opinion"
     And I should see "comments(1)"
-    
+    @javascript
   Scenario: Commenting event with public comment
     Then I follow "view request"
     When I fill in the following:
