@@ -2132,6 +2132,7 @@ a.normal:visited {
 				#items-page #content h2 span.item-type-purpose {
 					font-size: 14px;
 					text-transform: lowercase;
+					color: #838683;
 				}
 			
 				#items-page #content p span.description {
@@ -2982,8 +2983,10 @@ a.normal:visited {
 			text-transform: lowercase;
 		}
 		
-		/* for an item listing - for the item purpose  - search-page */
+		/* for an item listing - for the item purpose  - search-page, view item page */
 		
+		
+		#items-page #content h2 span.item-type-purpose,
 		#search-page #content .items-list ul li div p {
 			color: #838683;
 		}
