@@ -6,46 +6,48 @@
 				<li class="content-box clearfix">
 					<%= image_tag @item.photo.url(:medium), :class => "thumb" %>
 					<div class="inner-content">
-						<h2>Item: <%= @item.name %></h2>
-					
-						<p class="descriptione">
-							<span>
-								Type:
+						<h2>
+							<%= @item.name %>
+							<br />
+							<span class="item-type">
 								<%= @item.item_type %>
 							</span>
-							<span>
-								Name:
-								<%= @item.name %>
+							&nbsp;&nbsp;&nbsp;
+							<span class="item-purpose">
+								<%= @item.purpose? %>
 							</span>
-							<span>
-								Description:
+						</h2>
+					
+						<p class="description">
+							<span class="description">
 								<%= @item.description %>
 							</span>
 							<span>
 							   <%= link_to "Request this item", requests_path(:item_id => @item.id), :method => :post unless @item.is_owner?(current_user.person)%>
 							</span>
 						</p>
+						<%= owner_only(@item) do %>
+							<ul class="action-buttons-list clearfix">
+								<% if @item.normal? %>
+									<li><%= link_to 'Edit', edit_item_path(@item) %></li>
+									<li><%= link_to 'Lost', mark_as_lost_item_path(@item), :method => :put %></li>
+									<li><%= link_to 'Damaged', mark_as_damaged_item_path(@item), :method => :put %></li>
+								<% elsif @item.lost? %>
+									<li><%= link_to 'Found', mark_as_normal_item_path(@item), :method => :put %></li>
+								<% elsif @item.damaged? %>
+									<li><%= link_to 'Repaired', mark_as_normal_item_path(@item), :method => :put %></li>
+								<% end %>
+						    <% if @item.available? -%>
+		  				    	<li class="plain-link">
+									<%= link_to 'delete', @item, :confirm => 'Are you sure?', :method => :delete %>
+								</li>
+						    <% end -%>  						
+							</ul>
+						<% end %>
 					</div>
 				</li>
 			
-				<li class="content-box">
-					<%= owner_only(@item) do %>
-						<ul class="action-buttons-list">
-							<% if @item.normal? %>
-								<li><%= link_to 'Edit', edit_item_path(@item) %></li>
-								<li><%= link_to 'Mark as lost', mark_as_lost_item_path(@item), :method => :put %></li>
-								<li><%= link_to 'Mark as damaged', mark_as_damaged_item_path(@item), :method => :put %></li>
-							<% elsif @item.lost? %>
-								<li><%= link_to 'Mark as found', mark_as_normal_item_path(@item), :method => :put %></li>
-							<% elsif @item.damaged? %>
-								<li><%= link_to 'Mark as repaired', mark_as_normal_item_path(@item), :method => :put %></li>
-							<% end %>
-					    <% if @item.available? -%>
-	  				    <li><%= link_to 'Delete', @item, :confirm => 'Are you sure?', :method => :delete %></li>
-					    <% end -%>  						
-						</ul>
-					<% end %>
-				</li>
+				
 			</ul>
 		</div>
 
