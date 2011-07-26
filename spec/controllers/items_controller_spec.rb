@@ -3,6 +3,7 @@ require 'spec_helper'
 describe ItemsController do
   
   let(:signedin_user) { generate_mock_user_with_person }
+    let(:mock_items)    { [ mock_model(Item, :name => "Item1", :owner => signedin_user.person).as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
   
   it_should_require_signed_in_user_for_actions :show, :edit, :update, :destroy, :mark_as_normal, :mark_as_lost, :mark_as_damaged
 
@@ -15,7 +16,7 @@ describe ItemsController do
   describe "for signed in member" do
     before do
       sign_in_as_user(signedin_user)
-      signedin_user.person.stub_chain(:authorised?).and_return(true)
+      signedin_user.person.stub(:authorised?).and_return(true)
     end
 
     describe "GET index" do

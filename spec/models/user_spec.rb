@@ -5,8 +5,7 @@ module UserSpecHelper
   def valid_user_attributes
     {
       :provider => 'facebook',
-      :uid => '111111111',
-      :nickname => 'basti'
+      :uid => '111111111'
     }
   end
 
@@ -20,6 +19,9 @@ module UserSpecHelper
       },
       "credentials" => {
         "token" => "111111111"
+      },
+      "extra" => {
+        "email" => "testing@test.net"
       }
     }
   end
