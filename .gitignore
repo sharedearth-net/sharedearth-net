@@ -28,3 +28,5 @@ capybara-*.html
 # config/*.yml
 rerun.txt
 /.idea/
+.rvmrc
+*.swp
