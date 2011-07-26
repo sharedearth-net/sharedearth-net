@@ -7,16 +7,19 @@
 					<%= image_tag @item.photo.url(:medium), :class => "thumb" %>
 					<div class="inner-content">
 						<h2>
-							Item: <%= @item.name %>
+							<%= @item.name %>
 							<br />
-							<span class="item-type-purpose">
-								<%= @item.item_type %>&nbsp;&nbsp;&nbsp;<%= @item.purpose? %>
+							<span class="item-type">
+								<%= @item.item_type %>
+							</span>
+							&nbsp;&nbsp;&nbsp;
+							<span class="item-purpose">
+								<%= @item.purpose? %>
 							</span>
 						</h2>
 					
 						<p class="description">
 							<span class="description">
-								Description:
 								<%= @item.description %>
 							</span>
 							<span>

@@ -705,7 +705,7 @@ a.normal:visited {
 	/* dashboard - content */
 	
 	#dashboard-page #content {
-		width: 616px;
+		width: 516px;
 	}
 	
 	#dashboard-page #content p {
@@ -762,6 +762,7 @@ a.normal:visited {
 	
 	#dashboard-page #sidebar {
 		margin-left: 30px;
+		width: 456px;
 	}
 	
 		#dashboard-page img.empty-village {
@@ -771,7 +772,7 @@ a.normal:visited {
 		#dashboard-page #sidebar .inner-content {
 			padding-left: 0;
 			margin-left: 0;
-			width: 356px;
+			width: 456px;
 		}
 				
 			#sidebar .with-action p img {
@@ -814,6 +815,18 @@ a.normal:visited {
 				
 
 	/* profile - content */	
+	
+	#profile-page #content {
+		width: 616px;
+	}
+	
+		#profile-page #content .content-box {
+		    width: 616px;
+		}
+	
+		#profile-page #content .inner-content {
+		    width: 451px;
+		}
 	
 	#profile-page #content h2 {
 			margin-top: 7px;
@@ -911,6 +924,10 @@ a.normal:visited {
 	
 
 	/* profile - sidebar */	
+	
+	#profile-page #sidebar {
+		margin-left: 30px;
+	}
 	
 		#profile-page #sidebar h2 {
 			padding-left: 16px;
@@ -2129,9 +2146,16 @@ a.normal:visited {
 				
 			}
 			
-				#items-page #content h2 span.item-type-purpose {
+				#items-page #content h2 span.item-type {
 					font-size: 14px;
 					text-transform: lowercase;
+					color: #62775a;
+				}
+			
+				#items-page #content h2 span.item-purpose {
+					font-size: 14px;
+					text-transform: lowercase;
+					color: #838683;
 				}
 			
 				#items-page #content p span.description {
@@ -2969,6 +2993,13 @@ a.normal:visited {
 		text-transform: lowercase;
 	}
 	
+	/* for an item request sentence */
+	
+	#content .items-expanded .requests ul p,
+	#content .items-list .requests ul p {
+		color: #333;
+	}
+	
 	
 		/* for an item listing - for the item name  */
 		
@@ -2982,8 +3013,10 @@ a.normal:visited {
 			text-transform: lowercase;
 		}
 		
-		/* for an item listing - for the item purpose  - search-page */
+		/* for an item listing - for the item purpose  - search-page, view item page */
 		
+		
+		#items-page #content h2 span.item-type-purpose,
 		#search-page #content .items-list ul li div p {
 			color: #838683;
 		}
