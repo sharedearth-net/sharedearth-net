@@ -2986,6 +2986,13 @@ a.normal:visited {
 		text-transform: lowercase;
 	}
 	
+	/* for an item request sentence */
+	
+	#content .items-expanded .requests ul p,
+	#content .items-list .requests ul p {
+		color: #333;
+	}
+	
 	
 		/* for an item listing - for the item name  */
 		
