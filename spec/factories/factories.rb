@@ -84,3 +84,6 @@ Factory.define :invitation do |i|
   i.inviter_person_id '1'
   i.invitation_active true
 end
+
+Factory.define :comment do |comment|
+end
