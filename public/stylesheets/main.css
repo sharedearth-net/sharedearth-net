@@ -2146,7 +2146,13 @@ a.normal:visited {
 				
 			}
 			
-				#items-page #content h2 span.item-type-purpose {
+				#items-page #content h2 span.item-type {
+					font-size: 14px;
+					text-transform: lowercase;
+					color: #62775a;
+				}
+			
+				#items-page #content h2 span.item-purpose {
 					font-size: 14px;
 					text-transform: lowercase;
 					color: #838683;
