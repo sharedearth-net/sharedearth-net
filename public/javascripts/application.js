@@ -27,7 +27,11 @@ $(document).ready(function() {
 	});	
 });
 
-
+$(document).ready(function() {
+  $('#item_description').focus(function() {
+    $(this).val('');
+  });
+});
 
 //dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
 dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
