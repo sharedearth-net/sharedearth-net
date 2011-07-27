@@ -492,6 +492,82 @@ a.normal:visited {
 				padding: 0 15px 12px 16px;
 				width: 325px;
 			}
+			
+			
+			.trust-reputation-box ul {
+
+			}
+
+				.trust-reputation-box ul li {
+					height: 40px;
+					margin-top: 9px;
+				}
+
+				.trust-reputation-box ul li.no-icon {
+					padding-left: 54px;
+				}
+
+					.trust-reputation-box ul li p {
+						font-size: 11px;
+						padding-top: 11px;
+						color: #62775a;
+					}
+					
+						.trust-reputation-box ul li img.icons {
+							float: left;
+							width: 40px;
+							margin-right: 14px;
+						}
+
+							.trust-reputation-box ul li.second img.icons {
+								padding-top: 3px;
+							}
+
+						.trust-reputation-box ul li p span {
+							color: #badb80;
+							font-size: 9px;
+						}
+
+							.trust-reputation-box ul li p span img {
+								float: left;
+							}
+
+							.trust-reputation-box ul li p span a:link,
+							.trust-reputation-box ul li p span a:visited {
+								    color: #badb80;
+									font-weight: normal;
+								}
+
+				.trust-reputation-box ul.action-list li {
+					font-size: 11px;
+					margin-top: 10px;
+					margin-right: 20px;
+					height: auto;
+				}
+
+					.trust-reputation-box a.giftactions:link,
+					.trust-reputation-box a.giftactions:visited {
+						background: url('../images/ic-giftactions.png') no-repeat top left;
+					    padding: 4px 0 0 21px;
+						margin: 0 0 0 2px;
+						font-weight: normal;
+					}
+
+					.trust-reputation-box a.people-helped:link,
+					.trust-reputation-box a.people-helped:visited {
+						background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
+						padding: 2px 0 0 23px;
+						font-weight: normal;
+					}
+
+					.trust-reputation-box a.feedback-rating:link,
+					.trust-reputation-box a.feedback-rating:visited {
+						background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
+						padding: 6px 0 3px 22px;
+						font-weight: normal;
+					}
+					
+				
 		
 
 	/* global -item list */				
@@ -532,7 +608,6 @@ a.normal:visited {
 						text-transform: lowercase;
 					}
 
-
 					ul.action-list {
 						clear: both;
 						margin-top: 5px;
@@ -544,7 +619,7 @@ a.normal:visited {
 						margin-right: 17px;
 						font-size: 11px;
 					}
-
+					
 						#content .items-list ul li div p {
 							clear: both;
 						    float: left;
@@ -960,75 +1035,6 @@ a.normal:visited {
 			margin-top: 10px;
 		}
 		
-		.trust-reputation-box ul {
-			
-		}
-		
-			.trust-reputation-box ul li {
-				margin-top: 10px;
-			}
-
-			.trust-reputation-box ul li.no-icon {
-				padding-left: 54px;
-			}
-	
-				.trust-reputation-box ul li p {
-					font-size: 11px;
-					padding-top: 11px;
-					color: #62775a;
-				}
-				
-					.trust-reputation-box ul li p span {
-						color: #badb80;
-						font-size: 9px;
-					}
-					
-						.trust-reputation-box ul li p span img {
-							float: left;
-						}
-					
-						.trust-reputation-box ul li p span a:link,
-						.trust-reputation-box ul li p span a:visited {
-							    color: #badb80;
-								font-weight: normal;
-							}
-			
-				.trust-reputation-box ul li img.icons {
-					float: left;
-					width: 40px;
-					margin-right: 14px;
-				}
-				
-				
-				/* profile - trust box action */
-				
-				.trust-reputation-box ul.action-list li {
-					font-size: 11px;
-					margin-right: 20px;
-				}
-
-				
-				.trust-reputation-box a.giftactions:link,
-				.trust-reputation-box a.giftactions:visited {
-					background: url('../images/ic-giftactions.png') no-repeat top left;
-				    padding: 4px 0 0 21px;
-					margin: 0 0 0 2px;
-					font-weight: normal;
-				}
-
-				.trust-reputation-box a.people-helped:link,
-				.trust-reputation-box a.people-helped:visited {
-					background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
-					padding: 2px 0 0 23px;
-					font-weight: normal;
-				}
-
-				.trust-reputation-box a.feedback-rating:link,
-				.trust-reputation-box a.feedback-rating:visited {
-					background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
-					padding: 6px 0 3px 22px;
-					font-weight: normal;
-				}
 				
 				ul.action-list {
 					clear: both;
@@ -1523,6 +1529,7 @@ a.normal:visited {
 						float: left;
 						display: block;
 						margin-right: 10px;
+						height: auto;
 					}
 
 						#completed-request-page ul.trust-list li.no-icon {
