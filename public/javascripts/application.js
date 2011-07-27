@@ -27,7 +27,20 @@ $(document).ready(function() {
 	});	
 });
 
+$(document).ready(function() {
+  $('#item_description').focus(function() {
+    $(this).text('');
+    $(this).addClass('value-added');
+  });
 
+  $('form#new_item').submit(function() {
+    var itemDescriptionElement = $('#item_description');
+    if (!itemDescriptionElement.hasClass('value-added')) {
+      itemDescriptionElement.val(' ');
+    }
+    return true
+  });
+});
 
 //dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
 dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
