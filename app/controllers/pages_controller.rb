@@ -14,8 +14,12 @@ class PagesController < ApplicationController
     @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30) unless current_user.person.activity_logs.empty?
     event_logs = current_user.person.news_feed
 
-    trusted_persons_ids = "#{current_user.person.id}, "
-    trusted_persons_ids << current_user.person.trusted_friends.map(&:id).join(', ')
+    trusted_persons_ids = "#{current_user.person.id}"
+    if (current_user.person.trusted_friends.size >= 1)
+      trusted_persons_ids << ', '
+      trusted_persons_ids << current_user.person.trusted_friends.map(&:id).join(', ')
+    end
+
     @events = EventDisplay.paginate(:page => params[:page], 
                                     :per_page => 25, 
                                     :conditions => [ "person_id IN (#{trusted_persons_ids})" ], 
