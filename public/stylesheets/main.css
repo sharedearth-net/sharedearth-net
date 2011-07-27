@@ -2709,6 +2709,108 @@ a.normal:visited {
 					#terms-conditions-page.second-page .buttons-holder ul li.no a:visited {
 						background: url('../images/bg-bt-no-tc.png') no-repeat top left;
 					}
+					
+
+
+/*............Transparency/Privacy Policy Page............*/				
+	
+#transparency-policy-page {
+
+}
+
+	#transparency-policy-page #content {
+		width: 100%;
+	}
+
+		#transparency-policy-page img.main-pic {
+			width: 351px;
+			margin: 0 auto;
+			display: block;
+		}
+
+		#transparency-policy-page #content h2 {
+			color: #127e0e;
+			text-align: center;
+			font-weight: bold;
+			font-size: 15px;
+			line-height: 39px;
+			margin-top: 12px;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+
+		#transparency-policy-page #content h3 {
+			color: #333;
+			line-height: 20px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 15px;
+			margin: 19px 0 31px 0;
+        }
+
+			#transparency-policy-page #content h3 span {
+				text-decoration: underline;
+			}
+
+		#transparency-policy-page #content h4 {
+			color: #5c5c5c;
+			font-size: 12px;
+			line-height: 16px;
+			margin: 19px 0 12px 0;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+
+		#transparency-policy-page #content h5 {
+			color: #5c5c5c;
+			font-size: 11px;
+			line-height: 15px;
+			margin-top: 13px;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+
+		#transparency-policy-page #content h5.bottom-separated {
+			margin-top: 0;
+			margin-bottom: 13px;
+		}
+
+		#transparency-policy-page #content h5.centered {
+			margin-top: 26px;
+			margin-bottom: 13px;
+			text-align: center;
+		}
+
+		#transparency-policy-page #content p {
+			color: #9C9C9C;
+			font-size: 11px;
+			line-height: 12px;
+			margin: 0;
+			font-family: verdana, tahoma, arial, sans-serif;
+		}
+		
+		#transparency-policy-page #content a:link,
+		#transparency-policy-page #content a:visited {
+			color: #9C9C9C;
+		}
+		
+		#transparency-policy-page #content ul {
+			padding-left: 20px;
+		}
+		
+			#transparency-policy-page #content ul li {
+				color: #9C9C9C;
+				font-size: 11px;
+				line-height: 12px;
+				margin: 5px 0;
+				font-family: verdana, tahoma, arial, sans-serif;
+				list-style: disc;
+			}
+
+		#transparency-policy-page #content .buttons-holder {
+			width: 150px;
+			padding-top: 3px;
+			margin: 0 auto;
+		}
 						
 						
 /* misc */
