@@ -11,5 +11,5 @@ class Comment < ActiveRecord::Base
   # NOTE: Comments belong to a user
   belongs_to :user
 
-  default_scope :order => 'created_at DESC'
+  default_scope :order => 'created_at ASC'
 end

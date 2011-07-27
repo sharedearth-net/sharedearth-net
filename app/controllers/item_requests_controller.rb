@@ -22,7 +22,7 @@ class ItemRequestsController < ApplicationController
   end
 
   def show
-    @comments = @item_request.comments
+    @comments = @item_request.comments.sort { |a, b| b.created_at <=> a.created_at }
 
     respond_to do |format|
       if @item_request.completed?
