@@ -71,7 +71,25 @@
   		<%= image_tag @item_request.item.photo.url(:medium), :alt => "Item Completed Sample" if @item_request.item.has_photo? %>
 		</div>
 
-		<% unless @public_comments.nil?%>
+		<% unless @commentable_object.nil? -%>
+		  <div class="content-box-holder">
+			<ul>
+				<li class="content-box clearfix">
+						
+					<div class="inner-content">
+							
+						<ul class="comment-list">
+						<%= render :partial => 'comments/new', :locals => { :commentable => @commentable_object } %>
+						</ul>
+
+					</div>
+				</li>
+			</ul>
+
+		</div>
+		<% end -%>
+
+    <% unless @public_comments.nil?%>
 		<div class="content-box-holder">
 			<ul>
 				<li class="content-box clearfix">
@@ -139,29 +157,6 @@
 
 		</div>
 		<% end %>
-	
-		<% unless @commentable_object.nil? -%>
-		  <div class="content-box-holder">
-			<ul>
-				<li class="content-box clearfix">
-						
-					<div class="inner-content">
-							
-						<ul class="comment-list">
-						<%= render :partial => 'comments/new', :locals => { :commentable => @commentable_object } %>
-						</ul>
-
-					</div>
-				</li>
-			</ul>
-
-		</div>
-		<% end -%>
-		
-		
-		
-		
-		
 	
 		<!-- /.content-box-holder  --> 
 	
