@@ -12,4 +12,8 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   default_scope :order => 'created_at ASC'
+
+  def self.ordered_by_creation_desc
+    unscoped.order('created_at DESC')
+  end
 end

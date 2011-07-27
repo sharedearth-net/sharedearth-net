@@ -22,7 +22,7 @@ class ItemRequestsController < ApplicationController
   end
 
   def show
-    @comments = @item_request.comments
+    @comments = @item_request.comments.ordered_by_creation_desc
 
     respond_to do |format|
       if @item_request.completed?
