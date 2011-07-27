@@ -45,10 +45,10 @@
 		<%= image_tag("devider-trust-profile.png", :class => "devider", :alt => "")  %>
 		<h3><%= link_to 'Trust Profile', (network_person_path(person))%></h3>
 		<ul>
-			<li class="clearfix">
+			<li class="first clearfix">
 			  <%= in_network?(current_user.person, person )%>
 			</li>
-			<li class="clearfix">
+			<li class="second clearfix">
 				<!--
 				 	this image shoulde be active if the number is = 0
 					<%#= image_tag("ic-trusted-net-others-orange.png", :class => "icons", :alt => "Trusted Profile")  %>	
@@ -64,7 +64,7 @@
 				  <%= link_to network, (network_person_path(person, :type => 'mutual'))%>					
 				</p>
 			</li>			
-			<li class="clearfix">
+			<li class="last clearfix">
 			  <% trusted_count = person.trusts_me_count %>
 				<%= image_tag("trusted_network_icon_others_all.png", :class => "icons", :alt => "Trusted Profile")  %>
 			
