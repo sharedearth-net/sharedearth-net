@@ -29,7 +29,16 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('#item_description').focus(function() {
-    $(this).val('');
+    $(this).text('');
+    $(this).addClass('value-added');
+  });
+
+  $('form#new_item').submit(function() {
+    var itemDescriptionElement = $('#item_description');
+    if (!itemDescriptionElement.hasClass('value-added')) {
+      itemDescriptionElement.val(' ');
+    }
+    return true
   });
 });
 
