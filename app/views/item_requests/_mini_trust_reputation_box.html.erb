@@ -1,0 +1,63 @@
+<div class="trust-box-holder">
+
+  <%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
+
+  <div class="trust-reputation-box">
+    <h2><%= link_to person.name, person_path(person) %></h2>
+
+    <%= image_tag('devider-small.png', :class =>"devider", :alt => "") %>
+    
+    <h3>Reputation</h3>
+
+    <ul class="action-list clearfix">
+      <li>
+        <%= link_to person.reputation_rating.gift_actions_count.to_s, "#", 
+                    :class => "giftactions", :title => "Gift Actions" %>
+      </li>
+
+      <li>
+        <%= link_to person.reputation_rating.distinct_people_count.to_s, "#", 
+                    :class => "people-helped", :title => "People Helped" %>
+      </li>
+      <li>
+        <% feedback_rating = person.reputation_rating.feedback_rating? %>
+		  <%= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", 
+                    :class => "feedback-rating", :title => "Positive Feedback Rating" %>
+      </li>
+    </ul>
+
+    <%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
+
+    <h3>Trust Profile</h3>
+			
+      <ul class="trust-list clearfix">
+        <li class="clearfix">
+          <% if person.trusts?(current_user.person)%>
+              <a href="#" class="trusted" title="Trusted Profile"></a>
+          <% else %>
+              <a href="#" class="untrusted" title="Untrusted Profile"></a>
+          <% end %>
+        </li>
+            
+        <% trusted_network_size = 
+              current_user.person.mutural_friends(person).count %>	
+        <% in_trusted_network_class = trusted_network_size > 0 ?
+                '' : 'not-in-trusted-network' %> 
+        <li class="clearfix">
+          <%= link_to trusted_network_size, 
+                      network_person_path(person, :type => 'mutual'),
+                      :class => "extended #{in_trusted_network_class}",
+                      :title => 'Extended Network' %>					
+        </li>														
+        
+        <% trusted_count = person.trusts_me_count %>
+        <li>
+          <%= link_to trusted_count, network_person_path(person), 
+                      :class => 'extended trusted-others', 
+                      :title => 'Trusted by Others' %>
+        </li>
+    </ul>
+  </div>
+
+  <%= image_tag('curve-bottom-sidebar-box-small.png', :alt => "")  %>
+</div>

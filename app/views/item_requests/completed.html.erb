@@ -11,70 +11,8 @@
 			<% end -%>			
 		</div>
 	
-	
-		<div class="trust-box-holder">
-			
-			<%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
-		
-			<div class="trust-reputation-box">
-			
-				<h2>
-              <%= link_to @item_request.gifter.name, person_path(@item_request.gifter) %>
-            </h2>
-		
-				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
-			
-				<h3>Reputation</h3>
-				<ul class="action-list clearfix">
-				  <li>
-				    <%= link_to @item_request.gifter.reputation_rating.gift_actions_count.to_s, "#", :class => "giftactions", :title => "Gift Actions" %>
-			    </li>
-			    <li>
-				    <%= link_to @item_request.gifter.reputation_rating.distinct_people_count.to_s, "#", :class => "people-helped", :title => "People Helped" %>
-			    </li>
-			    <li>
-			      <% feedback_rating = @item_request.gifter.reputation_rating.feedback_rating?%>
-				    <%= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", :class => "feedback-rating", :title => "Positive Feedback Rating" %>
-			    </li>
-				</ul>
-				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
-				<h3>Trust Profile</h3>
-			
-				<ul class="trust-list clearfix">
-				  <% if @item_request.gifter.trusted_network_size == 0%>
+      <%= render 'mini_trust_reputation_box', :person => @item_request.gifter %>	
 
-					<li class="clearfix">
-						<a href="#" class="untrusted" title="Untrusted Profile"></a>
-					</li>
-					<% else %>
-          <li class="clearfix">
-						<a href="#" class="trusted" title="Trusted Profile"></a>
-					</li>
-					<% end %>
-            
-            <% gifter = @item_request.gifter %>
-				<% gifter_in_trusted_network_size = 
-              current_user.person.mutural_friends(gifter).count %>	
-            <li class="clearfix">
-				  <%= link_to gifter_in_trusted_network_size, 
-                          network_person_path(gifter, :type => 'mutual'),
-                          :class => 'extended',
-                          :title => 'Extended Network' %>					
-				 </li>														
-
-               <% gifter_trusted_count = gifter.trusts_me_count %>
-               <li>
-					 <%= link_to gifter_trusted_count, network_person_path(gifter), 
-                            :class => 'extended trusted-others', 
-                            :title => 'Trusted by Others' %>
-					</li>
-				</ul>
-			
-			
-			</div>
-			<%= image_tag('curve-bottom-sidebar-box-small.png', :alt => "")  %>
-		</div>
-	
 	</div><!--	/sidebar-left	-->
 
 	<div id="content">
@@ -178,7 +116,6 @@
 
 	<div id="sidebar">
 	
-	
 		<div class="feedback-holder">
 		  <%= image_tag @item_request.requester.avatar(:large), :alt => "" %>
 			<%#= image_tag('profile-narrow-2.png', :alt => "")  %>
@@ -189,73 +126,7 @@
 			<% end -%>		
 		</div>
 	
+    <%= render 'mini_trust_reputation_box', :person => @item_request.requester %>	
 	
-	
-		<div class="trust-box-holder">
-			<%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
-			<div class="trust-reputation-box">
-					
-				<h2>
-              <%= link_to @item_request.requester.name, person_path(@item_request.requester) %>
-            </h2>
-				
-				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
-				
-			
-				<h3>Reputation</h3>
-				<ul class="action-list clearfix">
-					<li>
-				    <%= link_to @item_request.requester.reputation_rating.gift_actions_count.to_s, "#", :class => "giftactions", :title => "Gift Actions" %>
-			    </li>
-			    <li>
-				    <%= link_to @item_request.requester.reputation_rating.distinct_people_count.to_s, "#", :class => "people-helped", :title => "People Helped" %>
-			    </li>
-			    <li>
-			      <% feedback_rating = @item_request.requester.reputation_rating.feedback_rating?%>
-				    <%= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", :class => "feedback-rating ", :title => "Positive Feedback Rating" %>
-			    </li>
-				</ul>
-				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
-				<h3>Trust Profile</h3>
-			
-				<ul class="trust-list clearfix">
-				  <% if @item_request.gifter.trusted_network_size == 0%>
-					<li class="clearfix">
-						<a href="#" class="untrusted" title="Untrusted Profile"></a>
-					</li>
-					<% else %>
-              <li class="clearfix">
-						<a href="#" class="trusted" title="Trusted Profile"></a>
-					</li>
-					<% end %>
-
-            <% requester = @item_request.requester %>
-				<% requester_in_trusted_network_size = 
-              current_user.person.mutural_friends(requester).count %>	
-            <% in_trusted_network_class = requester_in_trusted_network_size > 0 ?
-                '' : 'not-in-trusted-network' %> 
-            <li class="clearfix">
-				  <%= link_to requester_in_trusted_network_size,
-                          network_person_path(requester, :type => 'mutual'),
-                          :class => "extended #{in_trusted_network_class}",
-                          :title => 'Extended Network' %>					
-				</li>								
-               
-               <% requester_trusted_count = requester.trusts_me_count %>
-               <li>
-					 <%= link_to requester_trusted_count, network_person_path(requester), 
-                            :class => 'extended trusted-others', 
-                            :title => 'Trusted by Others' %>
-					</li>
-				</ul>
-			
-			
-			</div>
-			<%= image_tag('curve-bottom-sidebar-box-small.png', :alt => "")  %>
-		</div>
-	
-	
-	</div><!--	/sidebar  -->
-
+  </div><!--	/sidebar  -->
 </div><!--	/completed-request-page  -->
-
