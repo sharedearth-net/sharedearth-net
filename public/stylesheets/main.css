@@ -1573,12 +1573,13 @@ a.normal:visited {
 							ul.trust-list li a.untrusted:link,
 							ul.trust-list li a.untrusted:visited {
 								background: url('../images/ic-untrusted-profile-small.png') no-repeat 1px 0;
-								padding-top: 10px;
+								padding-top: 14px;
 							}
 
 							ul.trust-list li a.trusted:link,
 							ul.trust-list li a.trusted:visited {
 								background: url('../images/ic-trusted-profile-small.png') no-repeat 1px 0;
+								padding-top: 14px;
 							}
 
 							ul.trust-list li a.extended:link,
