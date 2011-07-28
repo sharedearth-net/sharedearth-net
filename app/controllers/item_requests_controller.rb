@@ -28,7 +28,7 @@ class ItemRequestsController < ApplicationController
       if @item_request.completed?
         @commentable_object = EventLog.find_by_related_id_and_related_type(@item_request.id, "ItemRequest")
         @public_comments = @commentable_object.nil? ? [] : 
-                           @commentable_object.comments
+                           @commentable_object.comments.sort { |a, b| b.created_at <=> a.created_at }
         format.html { render 'completed'}
         format.xml  { render :xml => @item }
       else
