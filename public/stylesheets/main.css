@@ -918,11 +918,13 @@ a.normal:visited {
 	}
 
 	#profile-page .items-list {
-		padding-left: 0;
+		padding-left: 165px;
+		width: 451px;
+		padding-right: 0;
 	}
 	
 			#profile-page .items-list ul {
-				
+
 			}
 			
 				#profile-page .items-list ul li {
@@ -932,6 +934,10 @@ a.normal:visited {
 			#profile-page .items-list ul li.item {
 				height: 50px;
 			}
+			
+				#profile-page .items-list ul li div {
+					width: 391px;
+				}
 	
 	#content p.status-holder-profile {
 		font-size: 11px;
@@ -2196,8 +2202,7 @@ a.normal:visited {
 				float: left;
 				display: block;
 				left: 50%;
-			}
-		
+			}		
 		
 				#items-page #content ul.action-buttons-list li {
 					font-family: "Lucida Grande", verdana, tahoma, arial, sans-serif;
