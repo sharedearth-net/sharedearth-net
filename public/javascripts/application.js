@@ -29,8 +29,18 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('#item_description').focus(function() {
-    $(this).text('');
+    itemDescriptionDefaultText = $(this).val();
+    $(this).val('');
     $(this).addClass('value-added');
+  });
+
+  $('#item_description').focusout(function() {
+    var itemDescription = $(this).val();
+
+    if (itemDescription == '') {
+     $(this).val(itemDescriptionDefaultText);
+     $(this).removeClass('value-added');
+    }
   });
 
   $('form#new_item').submit(function() {
