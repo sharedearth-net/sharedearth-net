@@ -18,7 +18,9 @@
 		
 			<div class="trust-reputation-box">
 			
-				<h2><%= @item_request.gifter.name%></h2>
+				<h2>
+              <%= link_to @item_request.gifter.name, person_path(@item_request.gifter) %>
+            </h2>
 		
 				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
 			
@@ -180,8 +182,10 @@
 		<div class="trust-box-holder">
 			<%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
 			<div class="trust-reputation-box">
-			
-				<h2><%= @item_request.requester.name%></h2>
+					
+				<h2>
+              <%= link_to @item_request.requester.name, person_path(@item_request.requester) %>
+            </h2>
 				
 				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
 				
