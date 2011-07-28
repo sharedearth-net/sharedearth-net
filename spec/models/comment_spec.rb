@@ -12,7 +12,7 @@ describe Comment do
       
       it "should return a list of comments ordered by creation date" do
         comments = Comment.all
-        comments.should == [@second_comment, @first_comment]
+        comments.should == [@first_comment, @second_comment]
       end
     end
   end
