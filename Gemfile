@@ -9,6 +9,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'omniauth', "~> 0.2.6"
 gem "aws-s3"
 gem "paperclip"
+gem "mysql2"
 
 # https://github.com/bclubb/possessive
 gem "possessive"
