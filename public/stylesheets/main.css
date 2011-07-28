@@ -1325,34 +1325,50 @@ a.normal:visited {
 
 	/* request-page - content */
 		
-	#request-page #content .inner-content {
-		width: 300px;
+	#request-page #content {
 	}
-	
-		#request-page #content .inner-content {
-  		overflow: hidden;
-		}
 		
-		#request-page #content .action-buttons-list {
-  		list-style: none; position: relative; float: left; display: block; left: 50%;
-		}
-		
-		#request-page #content .action-buttons-list li{
-  		position: relative; float: left; display: block; right: 50%;
-		}
+		#request-page #content .content-box-holder {
 			
-	#request-page #content h2 {
-		text-align: center;
-	}
+		}
 		
-		#request-page #content h2 span {
+			#request-page #content .content-box {
+				width: 524px;
+			}
+		
+				#request-page #content .inner-content {
+		  			overflow: hidden;
+					width: 359px;
+				}
+		
+					#request-page #content .action-buttons-list {
+			  			list-style: none;
+						position: relative;
+						float: left;
+						display: block;
+						left: 50%;
+					}
+		
+						#request-page #content .action-buttons-list li {
+				  			position: relative;
+							float: left;
+							display: block;
+							right: 50%;
+						}
+			
+		#request-page #content h2 {
+			text-align: center;
+		}
+		
+			#request-page #content h2 span {
 
-		}
+			}
 		
-		#request-page #content .comments-holder {
-			width: 356px;
-			margin-left: 0;
-		}
+			#request-page #content .discussion-holder {
+				width: 359px;
+				margin: 0 0 0 165px;
+				overflow: hidden;
+			}
 		
 		
 		/* request-page - content - comments */
@@ -1361,12 +1377,12 @@ a.normal:visited {
 			color: #127E0E;
 		    float: none;
 		    font-size: 12px;
-			width: 401px;
+			width: 351px;
 			background: #f4f9eb;
 		}
 		
 		#request-page #content ul.comment-list li.no-bg {
-			width: 409px;
+			width: 359px;
 			background: transparent;
 		}
 		
@@ -1382,7 +1398,7 @@ a.normal:visited {
 	
 			#request-page #content ul.comment-list .time-ago {
 				float: right;
-			    width: 127px;
+			    width: 80px;
 				color: #838683;
 				font-size: 11px;
 				margin-top: 18px;
@@ -1392,7 +1408,7 @@ a.normal:visited {
 					clear: none;
 					padding-top: 4px;
 					padding-right: 4px;
-					width: 230px;
+					width: 227px;
 					color: #333;
 					font-size: 12px;
 				}
@@ -1411,7 +1427,7 @@ a.normal:visited {
 				}
 				
 				#request-page #content .comment-box textarea {
-					width: 403px;
+					width: 349px;
 					color: #838683;
 					font-size: 11px;
 				}
