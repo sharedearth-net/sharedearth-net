@@ -1583,7 +1583,12 @@ a.normal:visited {
 
 							ul.trust-list li a.extended:link,
 							ul.trust-list li a.extended:visited {
-								background: url('../images/ic-mutual-users-network-small.png') no-repeat 1px 0;
+								background: url('../images/ic-network-others-green-small.png') no-repeat 1px 0;
+							}
+
+							ul.trust-list li a.not-in-trusted-network:link,
+							ul.trust-list li a.not-in-trusted-network:visited {
+								background: url('../images/ic-network-others-orange-small.png') no-repeat 1px 0;
 							}
 
                      ul.trust-list li a.trusted-others:link,

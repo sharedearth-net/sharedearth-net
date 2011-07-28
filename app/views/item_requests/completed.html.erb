@@ -42,19 +42,31 @@
 			
 				<ul class="trust-list clearfix">
 				  <% if @item_request.gifter.trusted_network_size == 0%>
+
 					<li class="clearfix">
 						<a href="#" class="untrusted" title="Untrusted Profile"></a>
 					</li>
 					<% else %>
           <li class="clearfix">
-						<a href="#" class="trusted" title="Trusted Profile"><%= @item_request.gifter.trusted_network_size %></a>
+						<a href="#" class="trusted" title="Trusted Profile"></a>
 					</li>
 					<% end %>
-					<li class="clearfix">
-						<a href="#" class="extended" title="Extended Network"><%= @item_request.gifter.extended_network_size %></a>
-					</li>														
-					<li class="clearfix">
-				      <a href="#" class="extended trusted-others" title="Trusted by Others">3</a>
+            
+            <% gifter = @item_request.gifter %>
+				<% gifter_in_trusted_network_size = 
+              current_user.person.mutural_friends(gifter).count %>	
+            <li class="clearfix">
+				  <%= link_to gifter_in_trusted_network_size, 
+                          network_person_path(gifter, :type => 'mutual'),
+                          :class => 'extended',
+                          :title => 'Extended Network' %>					
+				 </li>														
+
+               <% gifter_trusted_count = gifter.trusts_me_count %>
+               <li>
+					 <%= link_to gifter_trusted_count, network_person_path(gifter), 
+                            :class => 'extended trusted-others', 
+                            :title => 'Trusted by Others' %>
 					</li>
 				</ul>
 			
@@ -212,15 +224,28 @@
 						<a href="#" class="untrusted" title="Untrusted Profile"></a>
 					</li>
 					<% else %>
-          <li class="clearfix">
-						<a href="#" class="trusted" title="Trusted Profile"><%= @item_request.requester.trusted_network_size %></a>
+              <li class="clearfix">
+						<a href="#" class="trusted" title="Trusted Profile"></a>
 					</li>
 					<% end %>
-					<li class="clearfix">
-						<a href="#" class="extended" title="Extended Network"><%= @item_request.requester.extended_network_size %></a>
-					</li>								
-					<li class="clearfix">
-				      <a href="#" class="extended trusted-others" title="Trusted by Others">3</a>
+
+            <% requester = @item_request.requester %>
+				<% requester_in_trusted_network_size = 
+              current_user.person.mutural_friends(requester).count %>	
+            <% in_trusted_network_class = requester_in_trusted_network_size > 0 ?
+                '' : 'not-in-trusted-network' %> 
+            <li class="clearfix">
+				  <%= link_to requester_in_trusted_network_size,
+                          network_person_path(requester, :type => 'mutual'),
+                          :class => "extended #{in_trusted_network_class}",
+                          :title => 'Extended Network' %>					
+				</li>								
+               
+               <% requester_trusted_count = requester.trusts_me_count %>
+               <li>
+					 <%= link_to requester_trusted_count, network_person_path(requester), 
+                            :class => 'extended trusted-others', 
+                            :title => 'Trusted by Others' %>
 					</li>
 				</ul>
 			
