@@ -70,18 +70,16 @@
 		<div class="item-holder">
   		<%= image_tag @item_request.item.photo.url(:medium), :alt => "Item Completed Sample" if @item_request.item.has_photo? %>
 		</div>
-		
-		<% unless @comments.nil?%>
-		<div class="content-box-holder">
+
+		<% unless @commentable_object.nil? -%>
+		  <div class="content-box-holder">
 			<ul>
 				<li class="content-box clearfix">
 						
 					<div class="inner-content">
 							
 						<ul class="comment-list">
-						<% @comments.each do |c| -%>
-							<%= render :partial => 'comments/comment', :locals => {:c => c} %>
-						<% end -%>
+						<%= render :partial => 'comments/new', :locals => { :commentable => @commentable_object } %>
 						</ul>
 
 					</div>
@@ -89,32 +87,9 @@
 			</ul>
 
 		</div>
-		<% end %>
-   
-		<div class="messages-holder">
-		   
-      <% if @item_request.both_parties_left_feedback? -%>
-        <% @item_request.feedbacks.each do |feedback|%>
-          <% if feedback.neutral_or_negative? %>
-          <% person = Person.find_by_id(feedback.person_id)%>
-				<p class="message bad">
-				    <span><%= person.name %>:</span> <%= feedback.feedback_note %>
-				</p>
-          <% end %>
-        <% end %> 
-	    <% end -%>
-	
-			<!--
-			<p>
-				<a href="#">Dan Gooden</a> would like to borrow your 24 speed Giant 
-				mountain bike on the 30th October
-			</p>
-			-->
-			
-		</div>
-	
-		
-		<% unless @public_comments.nil?%>
+		<% end -%>
+
+    <% unless @public_comments.nil?%>
 		<div class="content-box-holder">
 			<ul>
 				<li class="content-box clearfix">
@@ -139,16 +114,41 @@
 			</ul>
 
 		</div>
-		<% end %>
-		<% unless @commentable_object.nil? -%>
-		  <div class="content-box-holder">
+		<% end %>	   
+
+		<div class="messages-holder">
+		   
+      <% if @item_request.both_parties_left_feedback? -%>
+        <% @item_request.feedbacks.each do |feedback|%>
+          <% if feedback.neutral_or_negative? %>
+          <% person = Person.find_by_id(feedback.person_id)%>
+				<p class="message bad">
+				    <span><%= person.name %>:</span> <%= feedback.feedback_note %>
+				</p>
+          <% end %>
+        <% end %> 
+	    <% end -%>
+	
+			<!--
+			<p>
+				<a href="#">Dan Gooden</a> would like to borrow your 24 speed Giant 
+				mountain bike on the 30th October
+			</p>
+			-->
+			
+		</div>
+	
+		<% unless @comments.nil?%>
+		<div class="content-box-holder">
 			<ul>
 				<li class="content-box clearfix">
 						
 					<div class="inner-content">
 							
 						<ul class="comment-list">
-						<%= render :partial => 'comments/new', :locals => { :commentable => @commentable_object } %>
+						<% @comments.each do |c| -%>
+							<%= render :partial => 'comments/comment', :locals => {:c => c} %>
+						<% end -%>
 						</ul>
 
 					</div>
@@ -156,12 +156,7 @@
 			</ul>
 
 		</div>
-		<% end -%>
-		
-		
-		
-		
-		
+		<% end %>
 	
 		<!-- /.content-box-holder  --> 
 	
