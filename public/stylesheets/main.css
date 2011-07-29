@@ -816,6 +816,26 @@ a.normal:visited {
 				#dashboard-page .inner-content .inner-content {
 					margin-left: 0px;
 				}
+		
+		
+		/* dashboard - content - welcome message */
+		
+		 #dashboard-page .welcome-message {
+			
+		}
+		
+			#dashboard-page .welcome-message .inner-content {
+				margin-top: 10px;
+			}
+			
+				#dashboard-page .welcome-message .inner-content p span {
+					margin-top: 10px;
+				}
+			
+				#dashboard-page .welcome-message .inner-content p span {
+					color: #127e0e;
+				}
+				
 	
 		/* dashboard - content - comments */
 				
