@@ -101,6 +101,7 @@ class ItemRequest < ActiveRecord::Base
   end
 
   def cancel!(person_initiator)
+    return if ACTIVE_STATUSES.include? self.status
     @person_initiator = person_initiator.id   
     if self.accepted? && (self.requester.id == @person_initiator)
       self.update_reputation_for_parties_involved
