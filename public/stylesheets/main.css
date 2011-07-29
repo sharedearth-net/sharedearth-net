@@ -1077,69 +1077,178 @@ a.normal:visited {
 
 }
 
-	ul.form-holder {
-
+	#edit-profile-page #content {
+		width: 535px;
 	}
 
-		ul.form-holder li {
-			display: block;
-			margin: 3px 0;
+		#edit-profile-page .content-box {
+			width: 535px;
 		}
-		
-			ul.form-holder li ul.action-buttons-list {
-				margin-left: 0px;
+
+			ul.form-holder {
+
 			}
+
+				ul.form-holder li {
+					display: block;
+					margin: 3px 0;
+				}
 		
-				ul.form-holder li ul.action-buttons-list li {
-					margin-right: 13px;
+					ul.form-holder li ul.action-buttons-list {
+						margin-left: 0px;
+					}
+		
+						ul.form-holder li ul.action-buttons-list li {
+							margin-right: 13px;
+						}
+
+					ul.form-holder li label {
+						font-size: 12px;
+					}
+
+					ul.form-holder li input[type="text"] {
+						border: 1px solid #8E948E;
+					    color: #999999;
+					    font-size: 13px;
+					    height: 15px;
+					    overflow: auto;
+					    padding: 2px 0 0 4px;
+					    width: 264px;
+					}
+
+					ul.form-holder li textarea {
+						border: 1px solid #8E948E;
+					    color: #999999;
+					    font-size: 13px;
+					    height: 115px;
+					    overflow: auto;
+					    padding: 2px 0 0 4px;
+					    width: 393px;
+					}
+
+					ul.form-holder li input[type="submit"] {
+						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+						padding: 0 7px;
+						color: #127e0e;
+						display: block;
+						border: 1px solid #aab1a9;
+						line-height: 15px;
+						text-transform: capitalize;
+						cursor: pointer;
+					}
+
+					ul.form-holder li input[type="file"] {
+						margin-bottom: 10px;
+					}
+			
+			/* right hand side */
+
+			#edit-profile-page .rhs {
+				width: 370px;
+				float: left;
+			}
+
+				#edit-profile-page label {
+					font-family: "Lucida Grande", verdana, tahoma, arial, sans-serif;
+					color: #62775a;
+					font-size: 10px;
+					font-weight: bold;
 				}
 
-			ul.form-holder li label {
-				font-size: 12px;
-			}
+				#edit-profile-page .rhs ul {
+					margin-top: 16px;
+				}
 
-			ul.form-holder li input[type="text"] {
-				border: 1px solid #8E948E;
-			    color: #999999;
-			    font-size: 13px;
-			    height: 15px;
-			    overflow: auto;
-			    padding: 2px 0 0 4px;
-			    width: 264px;
-			}
+					#edit-profile-page .rhs ul li {
 
-			ul.form-holder li textarea {
-				border: 1px solid #8E948E;
-			    color: #999999;
-			    font-size: 13px;
-			    height: 115px;
-			    overflow: auto;
-			    padding: 2px 0 0 4px;
-			    width: 393px;
-			}
+					}						
 
-			ul.form-holder li input[type="submit"] {
-				background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
-				padding: 0 7px;
-				color: #127e0e;
-				display: block;
-				border: 1px solid #aab1a9;
-				line-height: 15px;
-				text-transform: capitalize;
-				cursor: pointer;
-			}
+						#edit-profile-page .rhs ul li p.description {
+						    color: #9c9e9c;
+						    font-size: 11px;
+							margin-left: 87px;
+						}
 
-			ul.form-holder li input[type="file"] {
-				margin-bottom: 10px;
-			}
-			
-			
+						#edit-profile-page .rhs ul li p.under-radio {
+							font-size: 9px;
+							text-align: right;
+							margin-right: 27px;
+						}
+
+							#edit-profile-page .rhs ul li p.under-radio a:link,
+						 	#edit-profile-page .rhs ul li p.under-radio a:visited {
+								margin-left: 23px;
+								color: #9c9e9c;
+							}
+						
+					#edit-profile-page .rhs ul.form-holder li {
+						margin-bottom: 23px;
+					}	
+						
+					#edit-profile-page .rhs ul.form-holder li label {
+						width: 87px;
+						font-size: 12px;
+						display: block;
+						float: left;
+					}
+
+					#edit-profile-page ul.form-holder li input[type="text"] {
+						width: 268px;
+						color: #333;
+						font-size: 12px;
+					}
+
+					#edit-profile-page ul.form-holder li textarea {
+						color: #9C9E9C;
+					    font-size: 11px;
+						width: 268px;
+					}
+
+					#edit-profile-page ul.form-holder li textarea.active {
+						color: #333;
+						font-size: 12px;
+					}
+
+					#edit-profile-page ul.form-holder li label.active {
+						color: #127e0e;
+						font-weight: bold;
+					}
+					
+					#edit-profile-page ul.action-buttons-list {
+					    clear: both;
+					    margin-left: 149px;
+					}
+					
+						#edit-profile-page ul.action-buttons-list li {
+							
+						}
+					
+							#edit-profile-page ul.action-buttons-list li a:link,
+							#edit-profile-page ul.action-buttons-list li a:visited {
+							    background: url("../images/bg-bt-request-list.png") repeat-x scroll 0 0 #CCE5A0;							 
+							    height: 19px;
+							    line-height: 15px;
+							    padding: 3px 7px 0;
+							}
+					
+					#edit-profile-page ul.action-buttons-list li input[type="submit"] {
+						width: 58px;
+						height: 24px;
+						background-color: #cce5a0;
+					}
+					
+					
 	/* edit profile - sidebar */
 				
 	#edit-profile-page #sidebar {
-		
+		margin-left: 111px;
+		width: 356px;
 	}
-				
+	
+		#edit-profile-page #sidebar .inner-content {
+		    width: 340px;
+		}
+		
 		#edit-profile-page #sidebar h2 {
 			padding-left: 16px;
 		}
@@ -1151,6 +1260,22 @@ a.normal:visited {
 			height: 17px;
 			margin-top: 9px;
 		}
+		
+		
+		/* edit profile - comments */
+		
+		#edit-profile-page #sidebar ul.comment-list li {
+		    width: 332px;
+		}
+		
+		
+			#edit-profile-page #sidebar .comment-box {
+				width: 340px;
+			}
+		
+				#edit-profile-page #sidebar .comment-box textarea {
+					width: 334px;
+				}
 										
 
 
@@ -1939,7 +2064,7 @@ a.normal:visited {
 				}
 
 
-	/* search page - sidebar-left */
+	/* Search Page - sidebar-left */
 
 	#search-page #sidebar-left {
 		float: left;
@@ -3017,7 +3142,8 @@ a.normal:visited {
 	#request-page #content h2 a:visited,
 	#items-page #content h2 a:link,
 	#items-page #content h2 a:visited,
-	#item-edit-page h2 {
+	#item-edit-page h2,
+	#edit-profile-page #content h2 {
 		color: #62775a;
 		font-size: 16px;
 	}
@@ -3034,7 +3160,6 @@ a.normal:visited {
 
 		/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
 		
-		#edit-profile-page #content h2,
 		#completed-request-page #content h2.trusted,
 		#completed-request-page #content h2.trusted a:link,
 		#completed-request-page #content h2.trusted a:visited,

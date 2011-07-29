@@ -8,29 +8,29 @@
 				
 					<%= image_tag @person.avatar(:large), :class => "thumb" %>
 				
-					<div class="inner-content">
+					<div class="inner-content rhs">
 						<h2>Edit Profile</h2>
 						<%= form_for(@person, :html => { :multipart => true }) do |f| %>
 							<%= render :partial => "shared/error_messages", :locals => { :model => @person } %>
 
 						  <div class="field">
 							<ul class="form-holder">
-								<li>
-									<%= f.label "Visible Name"  %>
+								<li class="clearfix">
+									<%= f.label "Your Name"  %>
 									
 						    		<%= f.text_field :name %>
 								</li>
-								<li>
+								<li class="clearfix">
 									<%= f.label "Location"  %>
 									
 						    		<%= f.text_field :location, {:class=>"text-input", :maxlength=>"50"} %>
 								</li>
-								<li>
-									<%= f.label "Visible Description"  %>
+								<li class="clearfix">
+									<%= f.label "About me"  %>
 									
 						    		<%= f.text_area :description, {:class=>"text-input", :rows=>"5", :maxlength=>"120"} %>
 								</li>
-								<li>
+								<li class="clearfix">
 									<div class="actions">
 										<ul class="action-buttons-list">
 											<li>
@@ -45,19 +45,6 @@
 							</ul>
 						  </div>
 					 <% end %>
-		<!-- OLD STATIC CODE
-						<p class="status-holder-profile">
-							<span>
-								Sydney, Australia
-							</span>
-						</p>
-						<p class="description">
-							Previous experience working in IT (data 
-							warehousing and business intelligence), but I 
-							guess my heart lies with evolutionary activism 
-							in the cultural and social space.
-						</p>
-			-->
 					
 					</div><!--	/inner-content	-->
 				</li>
