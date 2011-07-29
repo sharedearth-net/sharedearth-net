@@ -19,7 +19,7 @@ class Invitation < ActiveRecord::Base
   end
   
   def inviter 
-    Person.find_by_id(self.inviter_person_id)
+    Person.find_by_id(self.inviter_person_id) || 'Admin'
   end
   
   def invitee

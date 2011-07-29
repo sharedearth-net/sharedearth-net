@@ -84,6 +84,7 @@ class ItemRequest < ActiveRecord::Base
   end
   
   def accept!
+    return if !(self.status == STATUS_REQUESTED)
     self.status = STATUS_ACCEPTED
     save!
     self.item.share? ? create_item_request_accepted_activity_log : create_gift_request_accepted_activity_log
@@ -93,6 +94,7 @@ class ItemRequest < ActiveRecord::Base
   end
 
   def reject!
+    return if !(self.status == STATUS_REQUESTED)
     self.status = STATUS_REJECTED
     save!
     self.item.share? ? create_item_request_rejected_activity_log : create_gift_request_rejected_activity_log
@@ -101,6 +103,7 @@ class ItemRequest < ActiveRecord::Base
   end
 
   def cancel!(person_initiator)
+    return unless ACTIVE_STATUSES.include? self.status
     @person_initiator = person_initiator.id   
     if self.accepted? && (self.requester.id == @person_initiator)
       self.update_reputation_for_parties_involved
@@ -112,6 +115,7 @@ class ItemRequest < ActiveRecord::Base
   end
 
   def collected!
+    return if !(self.status == STATUS_ACCEPTED)
     item = self.item
     self.item.gift? ? item.available! : item.in_use!
     self.update_reputation_for_parties_involved if self.item.gift?
@@ -119,6 +123,7 @@ class ItemRequest < ActiveRecord::Base
   end
 
   def complete!(person_initiator)
+    return if !(self.status == STATUS_ACCEPTED || self.status == STATUS_COLLECTED )
     @person_initiator = person_initiator.id
     self.item.available! 
     self.update_reputation_for_parties_involved
