@@ -57,6 +57,10 @@
 									</li>
 								<% end %>
 
+							<% elsif @item_request.status == ItemRequest::STATUS_CANCELED %>
+									<li>
+										This request has been canceled
+									</li>
 							<% end %>
 						</ul>
 				
