@@ -11,56 +11,8 @@
 			<% end -%>			
 		</div>
 	
-	
-		<div class="trust-box-holder">
-			
-			<%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
-		
-			<div class="trust-reputation-box">
-			
-				<h2><%= @item_request.gifter.name%></h2>
-		
-				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
-			
-				<h3>Reputation</h3>
-				<ul class="action-list clearfix">
-				  <li>
-				    <%= link_to @item_request.gifter.reputation_rating.gift_actions_count.to_s, "#", :class => "giftactions", :title => "Gift Actions" %>
-			    </li>
-			    <li>
-				    <%= link_to @item_request.gifter.reputation_rating.distinct_people_count.to_s, "#", :class => "people-helped", :title => "People Helped" %>
-			    </li>
-			    <li>
-			      <% feedback_rating = @item_request.gifter.reputation_rating.feedback_rating?%>
-				    <%= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", :class => "feedback-rating", :title => "Positive Feedback Rating" %>
-			    </li>
-				</ul>
-				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
-				<h3>Trust Profile</h3>
-			
-				<ul class="trust-list clearfix">
-				  <% if @item_request.gifter.trusted_network_size == 0%>
-					<li class="clearfix">
-						<a href="#" class="untrusted" title="Untrusted Profile"></a>
-					</li>
-					<% else %>
-          <li class="clearfix">
-						<a href="#" class="trusted" title="Trusted Profile"><%= @item_request.gifter.trusted_network_size %></a>
-					</li>
-					<% end %>
-					<li class="clearfix">
-						<a href="#" class="extended" title="Extended Network"><%= @item_request.gifter.extended_network_size %></a>
-					</li>														
-					<li class="no-icon clearfix">
-						<a href="#">43</a>
-					</li>
-				</ul>
-			
-			
-			</div>
-			<%= image_tag('curve-bottom-sidebar-box-small.png', :alt => "")  %>
-		</div>
-	
+      <%= render 'mini_trust_reputation_box', :person => @item_request.gifter %>	
+
 	</div><!--	/sidebar-left	-->
 
 	<div id="content">
@@ -164,7 +116,6 @@
 
 	<div id="sidebar">
 	
-	
 		<div class="feedback-holder">
 		  <%= image_tag @item_request.requester.avatar(:large), :alt => "" %>
 			<%#= image_tag('profile-narrow-2.png', :alt => "")  %>
@@ -175,58 +126,7 @@
 			<% end -%>		
 		</div>
 	
+    <%= render 'mini_trust_reputation_box', :person => @item_request.requester %>	
 	
-	
-		<div class="trust-box-holder">
-			<%= image_tag('curve-top-sidebar-box-small.png', :alt => "")  %>
-			<div class="trust-reputation-box">
-			
-				<h2><%= @item_request.requester.name%></h2>
-				
-				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
-				
-			
-				<h3>Reputation</h3>
-				<ul class="action-list clearfix">
-					<li>
-				    <%= link_to @item_request.requester.reputation_rating.gift_actions_count.to_s, "#", :class => "giftactions", :title => "Gift Actions" %>
-			    </li>
-			    <li>
-				    <%= link_to @item_request.requester.reputation_rating.distinct_people_count.to_s, "#", :class => "people-helped", :title => "People Helped" %>
-			    </li>
-			    <li>
-			      <% feedback_rating = @item_request.requester.reputation_rating.feedback_rating?%>
-				    <%= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", :class => "feedback-rating ", :title => "Positive Feedback Rating" %>
-			    </li>
-				</ul>
-				<%= image_tag('devider-small.png', :class =>"devider", :alt => "")  %>
-				<h3>Trust Profile</h3>
-			
-				<ul class="trust-list clearfix">
-				  <% if @item_request.gifter.trusted_network_size == 0%>
-					<li class="clearfix">
-						<a href="#" class="untrusted" title="Untrusted Profile"></a>
-					</li>
-					<% else %>
-          <li class="clearfix">
-						<a href="#" class="trusted" title="Trusted Profile"><%= @item_request.requester.trusted_network_size %></a>
-					</li>
-					<% end %>
-					<li class="clearfix">
-						<a href="#" class="extended" title="Extended Network"><%= @item_request.requester.extended_network_size %></a>
-					</li>								
-					<li class="no-icon clearfix">
-						<a href="#">43</a>
-					</li>
-				</ul>
-			
-			
-			</div>
-			<%= image_tag('curve-bottom-sidebar-box-small.png', :alt => "")  %>
-		</div>
-	
-	
-	</div><!--	/sidebar  -->
-
+  </div><!--	/sidebar  -->
 </div><!--	/completed-request-page  -->
-
