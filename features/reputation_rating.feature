@@ -12,7 +12,7 @@ Feature: Leaving feedback affects reputation
     
   Scenario: Showing n/a repuation
     Then I should see the words "n/a", "0"
-    
+  @javascript
   Scenario: Reputation is not affected if only one party posted feedback
     When "Maria" requested item with name "Mobile" from "John"
     And Looking at person page with name "John"
@@ -69,7 +69,7 @@ Feature: Leaving feedback affects reputation
     And Looking at person page with name "Maria"
     Then I should see "0%" in css class "trust-box-holder"
     Then I should not see "n/a" in css class "trust-box-holder"
-    
+  @javascript  
   Scenario: Number of distinct people increase
     Given "Maria" requested item with name "Mobile" from "John"
     And Looking at my person page

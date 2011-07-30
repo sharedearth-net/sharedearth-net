@@ -9,7 +9,7 @@ Feature: Leaving feedback
     Given a person exists with name: "Maria"
     Given I am the owner of item with name "Mobile"
     And "Maria" is the owner of item with name "Bike"
-    
+  @javascript    
   Scenario: I leave positive feedback
     Given "Maria" requested item with name "Mobile" from "John"
     Then I am on the dashboard page
@@ -19,7 +19,7 @@ Feature: Leaving feedback
     Then I choose "positive"
     And press "Submit"
     Then I should see "show feedback"
-    
+  @javascript  
   Scenario: I leave neutral feedback
     Given "Maria" requested item with name "Mobile" from "John"
     Then I am on the dashboard page
@@ -32,7 +32,7 @@ Feature: Leaving feedback
      | note   | My neutral opinion |
     And press "Submit"
     Then I should see "show feedback"
-    
+  @javascript  
   Scenario: I leave negative feedback
     Given "Maria" requested item with name "Mobile" from "John"
     Then I am on the dashboard page
@@ -45,7 +45,4 @@ Feature: Leaving feedback
      | note   | My negative opinion |
     And press "Submit"
     Then I should see "show feedback"
-    
-    
-    
     
