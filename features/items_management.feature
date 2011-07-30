@@ -1,8 +1,7 @@
-Feature: Items management page
-
-  As a As user who loads web page for first time
-  I want to see if item can be manipulated
-  In order So I can manipulate my items
+Feature: Manage Items
+   In order to share my belongings
+   As a logged user
+   I want to create and manage items
   
   Background:
     Given the user is logged in
@@ -84,7 +83,12 @@ Feature: Items management page
     When I fill in "search" with "Bike"
     Then I press "Search" 
     Then I should see "Search term not found"
-    
-   
-      
-    
+
+   @last_test
+   Scenario: Creating an Item without a purpose
+      Given I am on the new item page
+      When I fill in "Name" with "Chuchu"
+      And I fill in "Item type" with "Train"
+      And I press "Save"
+      Then I should not have a new Item
+      And I should see "1 error prohibited this item from being saved"
