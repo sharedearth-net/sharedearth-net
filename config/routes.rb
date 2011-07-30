@@ -1,6 +1,10 @@
 Sharedearthapp::Application.routes.draw do
 
-  resources :transparency, :only => [:index]
+  resources :transparency, :only => [:index] do
+    collection do
+      put 'accept_tr'
+    end
+  end
 
   ActiveAdmin.routes(self)
   
