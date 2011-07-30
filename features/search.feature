@@ -16,7 +16,7 @@ Feature: Searching for items and people
     Then I press "Search" 
     And I should see "Plane"
     Then I should see "view item"
-    And I should see "In the network"
+    And I should see "From your trusted network"
     
   Scenario: Person is searched and found, but no item is showed
     Given "Maria" has trusted relationship with "John"
@@ -41,7 +41,7 @@ Feature: Searching for items and people
     And "Maria" is the owner of item with name "Marine soldier"
     When I fill in "search" with "Mari"
     Then I press "Search" 
-    And I should see "In the network"
+    And I should see "From your trusted network"
     And I should see "Marine soldier"
     Then I should see "view item"
           #One time is for result and other for search term
@@ -52,7 +52,7 @@ Feature: Searching for items and people
     And "Maria" is the owner of item with name "Marine soldier"
     When I fill in "search" with "Mari"
     Then I press "Search" 
-    And I should see "In the network"
+    And I should see "From your trusted network"
     And I should see "Marine soldier"
     Then I should see "view item"
     Then I should see "Maria" 2 times
