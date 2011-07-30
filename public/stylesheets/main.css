@@ -2609,17 +2609,31 @@ a.normal:visited {
 		}
 
 		#terms-conditions-page #content h3 {
-			color: #333;
+			color: #5c5c5c;
+			font-size: 15px;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
 			line-height: 20px;
 			text-align: center;
-			font-weight: bold;
-			font-size: 15px;
 			margin: 19px 0 31px 0;
         }
 
 			#terms-conditions-page #content h3 span {
 				text-decoration: underline;
 			}
+
+        #terms-conditions-page #content h3.bottom-title {
+                font-size: 14px;
+                color: #5c5c5c;
+                font-weight: bold;
+                margin: 0 0 13px 0;
+                line-height: 15px;
+                text-align: center;
+                font-family: verdana, tahoma, arial, sans-serif;
+                margin-top: 27px;
+
+        }
+
 
 		#terms-conditions-page #content h4 {
 			color: #5c5c5c;
@@ -2665,67 +2679,112 @@ a.normal:visited {
 		}
 
 
-		/* Terms and Conditions Page - Second Page */
+/*............Site Information Pages (e.g. About, Transparency, Principles)............*/
+	
+#site-information-pages {
 
-		#terms-conditions-page.second-page {
+}
 
+	#site-information-pages #content {
+		width: 80%;
+        margin-left: 100px;
+	}
+
+		#site-information-pages img.main-pic {
+			width: 351px;
+			margin: 0 auto;
+			display: block;
 		}
 
-		#terms-conditions-page.second-page #content h2,
-		#terms-conditions-page.second-page #content h3,
-		#terms-conditions-page.second-page #content h4,
-		#terms-conditions-page.second-page #content h5,
-		#terms-conditions-page.second-page #content p {
+		#site-information-pages #content h2 {
+			color: #127e0e;
 			text-align: center;
+			font-weight: bold;
+			font-size: 15px;
+			line-height: 39px;
+			margin-top: 12px;
+            margin-bottom: 2px;
+			font-family: verdana, tahoma, arial, sans-serif;
 		}
 
-		#terms-conditions-page.second-page #content p {
-			font-size: 13px;
-			line-height: 19px;
-		}
-		
-		#terms-conditions-page.second-page #content p.top-separated {
-			margin-top: 15px;
-		}
-
-		#terms-conditions-page.second-page #content h2 {
-			margin-bottom: 2px;
-		}
-
-			#terms-conditions-page.second-page #content h3 {
+		#site-information-pages #content h3 {
 				font-size: 14px;
 				color: #127e0e;
 				font-weight: normal;
 				margin: 0 0 13px 0;
 				line-height: 15px;
+                text-align: center;
+		}
+
+			#site-information-pages #content h3 span {
+				text-decoration: underline;
 			}
 
-			#terms-conditions-page.second-page #content h3.bottom-title {
+			#site-information-pages #content h3.bottom-title {
 				margin-top: 27px;
 				font-size: 14px;
+                font-weight: bold;
+                font-family: verdana, tahoma, arial, sans-serif;
 
 			}
-			
-			#terms-conditions-page.second-page #content h4 {
-				font-size: 15px;
-			}
-			
-			#terms-conditions-page.second-page #content h5 {
-				font-size: 14px;
-				margin-bottom: 10px;
-			}
+
+		#site-information-pages #content h4 {
+			color: #5c5c5c;
+			font-size: 15px;
+			line-height: 16px;
+			margin: 19px 0 12px 0;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
+            text-align: center;
+		}
+
+		#site-information-pages #content h5 {
+			color: #5c5c5c;
+			font-size: 14px;
+			margin-bottom: 10px;
+			line-height: 15px;
+			margin-top: 13px;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
+            text-align: center;
+		}
+
+		#site-information-pages #content h5.bottom-separated {
+			margin-top: 0;
+			margin-bottom: 13px;
+		}
+
+		#site-information-pages #content h5.centered {
+			margin-top: 26px;
+			margin-bottom: 13px;
+			text-align: center;
+		}
+
+		#site-information-pages #content p {
+			color: #9C9C9C;
+			font-size: 13px;
+			line-height: 19px;
+			margin: 0;
+			font-family: verdana, tahoma, arial, sans-serif;
+            margin-top: 10px;
+            text-align: center;
+		}
+
+		#site-information-pages #content p.top-separated {
+			margin-top: 15px;
+		}
 
 
-		#terms-conditions-page.second-page #content .buttons-holder {
+		#site-information-pages #content .buttons-holder {
 			width: 167px;
 			margin: auto;
 		}
 
-			#terms-conditions-page.second-page .buttons-holder ul {
-				
+			#site-information-pages .buttons-holder ul {
+
 			}
 
-				#terms-conditions-page.second-page .buttons-holder ul li {
+				#site-information-pages .buttons-holder ul li {
 					width: 77px;
 					height: 24px;
 					display: block;
@@ -2734,125 +2793,42 @@ a.normal:visited {
 					text-indent: -1000em;
 				}
 
-				#terms-conditions-page.second-page .buttons-holder ul li.no {
+				#site-information-pages .buttons-holder ul li.no {
 					margin-right: 0;
 				}
 
-					#terms-conditions-page.second-page .buttons-holder ul li a:link,
-					#terms-conditions-page.second-page .buttons-holder ul li a:visited {
+					#site-information-pages .buttons-holder ul li a:link,
+					#site-information-pages .buttons-holder ul li a:visited {
 						display: block;
 						background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
 						width: 77px;
 						height: 24px;
 					}
 
-					#terms-conditions-page.second-page .buttons-holder ul li.no a:link,
-					#terms-conditions-page.second-page .buttons-holder ul li.no a:visited {
+					#site-information-pages .buttons-holder ul li.no a:link,
+					#site-information-pages .buttons-holder ul li.no a:visited {
 						background: url('../images/bg-bt-no-tc.png') no-repeat top left;
 					}
-					
 
+        /* Transparency Page */
 
-/*............Transparency/Privacy Policy Page............*/				
-	
-#transparency-policy-page {
-
-}
-
-	#transparency-policy-page #content {
-		width: 100%;
-	}
-
-		#transparency-policy-page img.main-pic {
-			width: 351px;
-			margin: 0 auto;
-			display: block;
-		}
-
-		#transparency-policy-page #content h2 {
-			color: #127e0e;
-			text-align: center;
-			font-weight: bold;
-			font-size: 15px;
-			line-height: 39px;
-			margin-top: 12px;
-			font-family: verdana, tahoma, arial, sans-serif;
-		}
-
-		#transparency-policy-page #content h3 {
-			color: #333;
-			line-height: 20px;
-			text-align: center;
-			font-weight: bold;
-			font-size: 15px;
-			margin: 19px 0 31px 0;
+        #site-information-pages.transparency #content h5 {
+            font-size: 13px;
         }
 
-			#transparency-policy-page #content h3 span {
-				text-decoration: underline;
-			}
-
-		#transparency-policy-page #content h4 {
-			color: #5c5c5c;
-			font-size: 12px;
-			line-height: 16px;
-			margin: 19px 0 12px 0;
-			font-weight: bold;
-			font-family: verdana, tahoma, arial, sans-serif;
+		#site-information-pages.transparency #content h3.bottom-title {
+				color: #5c5c5c;
 		}
 
-		#transparency-policy-page #content h5 {
-			color: #5c5c5c;
-			font-size: 11px;
-			line-height: 15px;
-			margin-top: 13px;
-			font-weight: bold;
-			font-family: verdana, tahoma, arial, sans-serif;
-		}
+        /* Principles Page */
+        #site-information-pages.principles #content {
+            width: 100%;
+            margin-left: 0px;
+        }
 
-		#transparency-policy-page #content h5.bottom-separated {
-			margin-top: 0;
-			margin-bottom: 13px;
-		}
 
-		#transparency-policy-page #content h5.centered {
-			margin-top: 26px;
-			margin-bottom: 13px;
-			text-align: center;
-		}
 
-		#transparency-policy-page #content p {
-			color: #9C9C9C;
-			font-size: 11px;
-			line-height: 12px;
-			margin: 0;
-			font-family: verdana, tahoma, arial, sans-serif;
-		}
-		
-		#transparency-policy-page #content a:link,
-		#transparency-policy-page #content a:visited {
-			color: #9C9C9C;
-		}
-		
-		#transparency-policy-page #content ul {
-			padding-left: 20px;
-		}
-		
-			#transparency-policy-page #content ul li {
-				color: #9C9C9C;
-				font-size: 11px;
-				line-height: 12px;
-				margin: 5px 0;
-				font-family: verdana, tahoma, arial, sans-serif;
-				list-style: disc;
-			}
 
-		#transparency-policy-page #content .buttons-holder {
-			width: 150px;
-			padding-top: 3px;
-			margin: 0 auto;
-		}
-						
 						
 /* misc */
 
