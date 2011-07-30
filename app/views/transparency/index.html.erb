@@ -227,11 +227,11 @@
 			Continued use of the site will be taken as conclusive evidence of your acceptance of the Transparency Policy.
 		</h3>
 		<% if !current_user.nil? -%>
-		  <% if !current_user.person.accepted_tc? -%>
+		  <% if !current_user.person.accepted_tr? -%>
 		    <div class="buttons-holder">
 			    <ul class="action-buttons-list clearfix">
 				    <li>
-					    <%= link_to 'Accept', accept_tc_terms_path, :method => 'put', :class => 'positive' %>
+					    <%= link_to 'Accept', accept_tr_transparency_index_path, :method => 'put', :class => 'positive' %>
 				    </li>
 				    <li>
 			      	<%= link_to 'Reject', signout_path, :class => 'positive' %>

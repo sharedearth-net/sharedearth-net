@@ -54,6 +54,15 @@ class Person < ActiveRecord::Base
     self.accepted_tc == true
   end
   
+  def accept_tr!
+    self.accepted_tr = true
+    save!
+  end
+  
+  def accepted_tr?
+    self.accepted_tr == true
+  end
+  
   def accept_pp!
     self.accepted_pp = true
     save!

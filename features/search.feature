@@ -24,7 +24,7 @@ Feature: Searching for items and people
     Then I should see "disconnect"
     When I fill in "search" with "Maria"
     Then I press "Search" 
-    And I should see "From your trusted network"
+    And I should see "In the network"
     And I should see "Maria"
     And I should not see "Plane"
     Then I should not see "view item"
@@ -65,7 +65,7 @@ Feature: Searching for items and people
   Scenario: Two users, who are not in a relationship search for each other
     When I fill in "search" with "aria"
     Then I press "Search" 
-    And I should see "From your trusted network"
+    And I should see "In the network"
     And I should see "Maria"
     
     

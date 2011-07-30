@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110720143450) do
+ActiveRecord::Schema.define(:version => 20110730174713) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20110720143450) do
     t.text     "description"
     t.boolean  "accepted_pp",        :default => false
     t.string   "email"
+    t.boolean  "accepted_tr",        :default => false
   end
 
   create_table "people_network_requests", :force => true do |t|

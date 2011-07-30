@@ -29,23 +29,45 @@ Feature: Accepting terms
     And I press "Submit"
     Then I should see the words "TERMS AND CONDITIONS"
     When I follow "Accept"
-    Then I should see "Important Information about sharedearth.net"
+    Then I should see "Transparency Policy"
     
   Scenario: I should be able to decline principles 
     Then I fill in active invitation
     And I press "Submit"
     Then I should see the words "TERMS AND CONDITIONS"
     When I follow "Accept"
-    Then I should see "Important Information about sharedearth.net"
+    Then I should see "Transparency Policy"
+    And I follow "Accept"
+    Then I should see "DESIGN PRINCIPLES"
     When I follow "No thanks"
     Then I should see the words "Welcome" and "Connect"
+    
+  Scenario: I should be able to decline transparency 
+    Then I fill in active invitation
+    And I press "Submit"
+    Then I should see the words "TERMS AND CONDITIONS"
+    When I follow "Accept"
+    Then I should see "Transparency Policy"
+    When I follow "No thanks"
+    Then I should see the words "Welcome" and "Connect"
+  
+  Scenario: I should be able to accept transparency
+    Then I fill in active invitation
+    And I press "Submit"
+    Then I should see the words "TERMS AND CONDITIONS"
+    When I follow "Accept"
+    Then I should see "Transparency Policy"
+    And I follow "Accept"
+    Then I should see "DESIGN PRINCIPLES"
     
   Scenario: I should be able to accept principles and use
     Then I fill in active invitation
     And I press "Submit"
     Then I should see the words "TERMS AND CONDITIONS"
     When I follow "Accept"
-    Then I should see "Important Information about sharedearth.net"
+    Then I should see "Transparency Policy"
+    And I follow "Accept"
+    Then I should see "DESIGN PRINCIPLES"
     And I follow "Connect"
     Then I should see the words "Edit Profile"
     
