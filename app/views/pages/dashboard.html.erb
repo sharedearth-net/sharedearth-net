@@ -6,11 +6,12 @@
 
 <div id="dashboard-page" class="<%= dashboard_class %>">
 	<div id="content">
+		<%= render :partial => 'people/new_person' if current_user.person.reputation_rating.activity_level_count.zero? || current_user.person.gift_act_rating.zero? || current_user.person.ever_requester?%><br />
 		<% unless @requests.count.zero? %>
 			<div class="content-box-holder">
 				<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 				<ul>
-				  <%= render :partial => 'people/new_person' if current_user.person.reputation_rating.activity_level_count.zero? && current_user.person.gift_act_rating.zero? && current_user.person.ever_requester?%>
+
 					<% @requests.each do |req| %>
 						<% if req.is_a? ItemRequest %>
               <%= render :partial => "shared/item_request_content_box", :locals => { :req => req } %>
