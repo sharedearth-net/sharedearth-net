@@ -40,26 +40,13 @@ class Item < ActiveRecord::Base
                   },
                  :default_url => "/images/noimage-:style.png"
 
-  # has_attached_file :photo,
-  #                   :styles => {
-  #                     :large => "600x600>",
-  #                     :medium => "300x300>",
-  #                     :small => "100x100>",
-  #                     :square => "50x50#"
-  #                    },
-  #                   :storage => :s3,
-  #                   :s3_credentials => S3_CREDENTIALS,
-  #                   :path => "item-photos/:id-:basename-:style.:extension",
-  #                   :default_url => "/images/noimage-:style.png"                    
-
-  validates_presence_of :item_type, :name, :owner_id, :owner_type, :status
+  validates_presence_of :purpose,:item_type, :name, :owner_id, :owner_type, :status
   validates_inclusion_of :status, :in => STATUSES.keys, :message => " must be in #{STATUSES.values.join ', '}"
   
   after_create :create_entity_for_item
   after_create :add_to_resource_network
   after_create :item_event_log
   
-  # validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 1.megabyte
   validates_attachment_content_type :photo, :content_type => /image\//
   
