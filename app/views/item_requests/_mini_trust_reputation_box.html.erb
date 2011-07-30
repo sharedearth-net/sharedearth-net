@@ -33,10 +33,15 @@
       <ul class="trust-list clearfix">
         <li class="clearfix">
           <% if person.trusts?(current_user.person)%>
-              <a href="#" class="trusted" title="Trusted Profile"></a>
+              <% trusts_class = 'trusted' %>
+              <% trusts_title = 'Trusted Profile' %>
           <% else %>
-              <a href="#" class="untrusted" title="Untrusted Profile"></a>
+              <% trusts_class = 'untrusted' %>
+              <% trusts_title = 'Untrusted Profile' %>
           <% end %>
+          <%= link_to '', network_person_path(person),
+                      :class => "#{trusts_class}",
+                      :title => "#{trusts_title}" %>					
         </li>
             
         <% trusted_network_size = 
