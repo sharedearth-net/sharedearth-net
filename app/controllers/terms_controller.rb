@@ -9,7 +9,7 @@ class TermsController < ApplicationController
 
   def accept_tc
     current_user.person.accept_tc!
-    redirect_to principles_terms_path
+    redirect_to transparency_index_path
   end
   
   def accept_pp

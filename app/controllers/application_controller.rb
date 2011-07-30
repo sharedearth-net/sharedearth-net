@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
     elsif !current_user.person.accepted_tc?
       redirect_to terms_path
+    elsif !current_user.person.accepted_tr?
+      redirect_to transparency_index_path
     elsif !current_user.person.accepted_pp?
       redirect_to principles_terms_path
     end
@@ -64,8 +66,8 @@ class ApplicationController < ActionController::Base
   def missing_record_error(exception)
     respond_to do |format|
       format.html {render_404}
-      format.any(:xml, :json) do
-        render extension => {:error => exception.message}, :status => 'NO'
+      format.json do  
+        render :json => {:error => message }
       end
     end
   end
@@ -79,8 +81,8 @@ class ApplicationController < ActionController::Base
   def generic_error(exception, message = "OK that didn't work. Try something else.")
     respond_to do |format|
       format.html {render_501}
-      format.any(:xml, :json) do
-        render extension => {:error => message}, :status => 'NO'
+      format.json do  
+        render :json => {:error => message}
       end
     end
   end

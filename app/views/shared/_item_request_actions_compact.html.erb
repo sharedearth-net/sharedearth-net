@@ -35,12 +35,19 @@
 <% elsif req.status == ItemRequest::STATUS_ACCEPTED %>
 
 	<%= requester_and_gifter_only(req) do %>
+		<% if req.item.purpose == Item::PURPOSE_GIFT %>
+		<li>	
+		  <%= link_to "cancel", cancel_request_path(req, ActionFormat::FORMAT), :id => "cancel_button", :class => "dashboard-action-link", :method => :put %>
+		</li>
+		<% end %>
 		<li>	
 			<%= link_to "collected", collected_request_path(req, ActionFormat::FORMAT), :id => "collected_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
+		<% if req.item.purpose != Item::PURPOSE_GIFT %>
 		<li>
 			<%= link_to "complete", complete_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
+  	<% end %>
 		
 	<% end %>
 

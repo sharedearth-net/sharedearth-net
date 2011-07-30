@@ -205,6 +205,8 @@ class ItemRequest < ActiveRecord::Base
     self.item.owner_id = self.requester_id
     self.item.owner_type = self.requester_type
     self.item.save!  
+    resource = ResourceNetwork.item(self.item).first
+    resource.update_attributes(:entity_id => self.requester_id)
   end
   
   def create_sharing_event_log
