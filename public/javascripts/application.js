@@ -52,8 +52,8 @@ $(document).ready(function() {
   });
 });
 
-dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
-//dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
+//dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
+dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
 dojo.require("sen.app");
 
 dojo.ready(function() {
