@@ -104,7 +104,7 @@ class ItemRequestsController < ApplicationController
   def cancel
     @item_request.cancel!(current_user.person)
     respond_to do |format|
-      format.html { redirect_to_back }
+      format.html { redirect_to dashboard_path }
       format.json do
         @user_html = render_to_string( :partial => 'shared/item_request_content_box.html.erb', :locals => {:req => @item_request } )
         acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
@@ -119,15 +119,31 @@ class ItemRequestsController < ApplicationController
   def collected
     @item_request.collected!
     respond_to do |format|
-      format.html { redirect_to_back }
-      format.json do
-        @user_html = render_to_string( :partial => 'shared/item_request_content_box.html.erb', :locals => {:req => @item_request } )
-        acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
-        acttivity.each do |activity_log|
-          @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
+      if @item_request.item.purpose != Item::PURPOSE_GIFT 
+        format.html { redirect_to_back }
+        format.json do
+          @user_html = render_to_string( :partial => 'shared/item_request_content_box.html.erb', :locals => {:req => @item_request } )
+          acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
+          acttivity.each do |activity_log|
+            @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
+          end
+          render :json => { :success => true, :request_html => @user_html, :activity_html => @recent_activity, :share => 'true'  }
         end
-        render :json => { :success => true, :request_html => @user_html, :activity_html => @recent_activity  }
+      else
+        format.html {redirect_to new_request_feedback_path(@item_request)}
+        format.json do
+            acttivity = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(1)
+            @user_html = ""
+            acttivity.each do |activity_log|
+              @recent_activity = render_to_string( :partial => 'shared/activity_log_box.html.erb', :locals => { :activity_log => activity_log } )
+            end
+            render :json => { :success => true, :people_helped => current_user.person.reputation_rating.distinct_people_count.to_s, 
+                              :gift_actions => current_user.person.reputation_rating.gift_actions_count.to_s, 
+                              :activity_level => current_user.person.reputation_rating.activity_level_count.to_s,  
+                              :request_html => @user_html, :activity_html => @recent_activity, :share => 'false' }
+        end
       end
+      
     end
   end
   

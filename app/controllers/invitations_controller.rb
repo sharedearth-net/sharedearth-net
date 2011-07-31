@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:purge]
+  #before_filter :authenticate_user!, :only => [:purge]
     
   def create    
     invitations = params[:invitations].to_i
@@ -9,7 +9,11 @@ class InvitationsController < ApplicationController
     people = Person.with_items_more_than(items)
       @invites = []
       invitations.times do |inv|
-        @invites += people.collect { |person| Invitation.new(:inviter_person_id => person.id, :invitation_active => true) }
+        unless people.empty?
+          @invites += people.collect { |person| Invitation.new(:inviter_person_id => person.id, :invitation_active => true) }
+        else
+          @invites.push(Invitation.new(:inviter_person_id => nil, :invitation_active => true))
+        end
       end
       if @invites.each(&:save!)
         redirect_to admin_invitations_path, :notice => "Successfully created invitations."

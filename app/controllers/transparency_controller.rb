@@ -11,5 +11,10 @@ class TransparencyController < ApplicationController
 
   def index
   end
+  
+  def accept_tr
+    current_user.person.accept_tr!
+    redirect_to principles_terms_path
+  end
 
 end
