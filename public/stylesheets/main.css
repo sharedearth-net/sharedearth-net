@@ -816,6 +816,26 @@ a.normal:visited {
 				#dashboard-page .inner-content .inner-content {
 					margin-left: 0px;
 				}
+		
+		
+		/* dashboard - content - welcome message */
+		
+		 #dashboard-page .welcome-message {
+			
+		}
+		
+			#dashboard-page .welcome-message .inner-content {
+				margin-top: 10px;
+			}
+			
+				#dashboard-page .welcome-message .inner-content p span {
+					margin-top: 10px;
+				}
+			
+				#dashboard-page .welcome-message .inner-content p span {
+					color: #127e0e;
+				}
+				
 	
 		/* dashboard - content - comments */
 				
@@ -1077,69 +1097,178 @@ a.normal:visited {
 
 }
 
-	ul.form-holder {
-
+	#edit-profile-page #content {
+		width: 535px;
 	}
 
-		ul.form-holder li {
-			display: block;
-			margin: 3px 0;
+		#edit-profile-page .content-box {
+			width: 535px;
 		}
-		
-			ul.form-holder li ul.action-buttons-list {
-				margin-left: 0px;
+
+			ul.form-holder {
+
 			}
+
+				ul.form-holder li {
+					display: block;
+					margin: 3px 0;
+				}
 		
-				ul.form-holder li ul.action-buttons-list li {
-					margin-right: 13px;
+					ul.form-holder li ul.action-buttons-list {
+						margin-left: 0px;
+					}
+		
+						ul.form-holder li ul.action-buttons-list li {
+							margin-right: 13px;
+						}
+
+					ul.form-holder li label {
+						font-size: 12px;
+					}
+
+					ul.form-holder li input[type="text"] {
+						border: 1px solid #8E948E;
+					    color: #999999;
+					    font-size: 13px;
+					    height: 15px;
+					    overflow: auto;
+					    padding: 2px 0 0 4px;
+					    width: 264px;
+					}
+
+					ul.form-holder li textarea {
+						border: 1px solid #8E948E;
+					    color: #999999;
+					    font-size: 13px;
+					    height: 115px;
+					    overflow: auto;
+					    padding: 2px 0 0 4px;
+					    width: 393px;
+					}
+
+					ul.form-holder li input[type="submit"] {
+						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+						padding: 0 7px;
+						color: #127e0e;
+						display: block;
+						border: 1px solid #aab1a9;
+						line-height: 15px;
+						text-transform: capitalize;
+						cursor: pointer;
+					}
+
+					ul.form-holder li input[type="file"] {
+						margin-bottom: 10px;
+					}
+			
+			/* right hand side */
+
+			#edit-profile-page .rhs {
+				width: 370px;
+				float: left;
+			}
+
+				#edit-profile-page label {
+					font-family: "Lucida Grande", verdana, tahoma, arial, sans-serif;
+					color: #62775a;
+					font-size: 10px;
+					font-weight: bold;
 				}
 
-			ul.form-holder li label {
-				font-size: 12px;
-			}
+				#edit-profile-page .rhs ul {
+					margin-top: 16px;
+				}
 
-			ul.form-holder li input[type="text"] {
-				border: 1px solid #8E948E;
-			    color: #999999;
-			    font-size: 13px;
-			    height: 15px;
-			    overflow: auto;
-			    padding: 2px 0 0 4px;
-			    width: 264px;
-			}
+					#edit-profile-page .rhs ul li {
 
-			ul.form-holder li textarea {
-				border: 1px solid #8E948E;
-			    color: #999999;
-			    font-size: 13px;
-			    height: 115px;
-			    overflow: auto;
-			    padding: 2px 0 0 4px;
-			    width: 393px;
-			}
+					}						
 
-			ul.form-holder li input[type="submit"] {
-				background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
-				padding: 0 7px;
-				color: #127e0e;
-				display: block;
-				border: 1px solid #aab1a9;
-				line-height: 15px;
-				text-transform: capitalize;
-				cursor: pointer;
-			}
+						#edit-profile-page .rhs ul li p.description {
+						    color: #9c9e9c;
+						    font-size: 11px;
+							margin-left: 87px;
+						}
 
-			ul.form-holder li input[type="file"] {
-				margin-bottom: 10px;
-			}
-			
-			
+						#edit-profile-page .rhs ul li p.under-radio {
+							font-size: 9px;
+							text-align: right;
+							margin-right: 27px;
+						}
+
+							#edit-profile-page .rhs ul li p.under-radio a:link,
+						 	#edit-profile-page .rhs ul li p.under-radio a:visited {
+								margin-left: 23px;
+								color: #9c9e9c;
+							}
+						
+					#edit-profile-page .rhs ul.form-holder li {
+						margin-bottom: 23px;
+					}	
+						
+					#edit-profile-page .rhs ul.form-holder li label {
+						width: 87px;
+						font-size: 12px;
+						display: block;
+						float: left;
+					}
+
+					#edit-profile-page ul.form-holder li input[type="text"] {
+						width: 268px;
+						color: #333;
+						font-size: 12px;
+					}
+
+					#edit-profile-page ul.form-holder li textarea {
+						color: #9C9E9C;
+					    font-size: 11px;
+						width: 268px;
+					}
+
+					#edit-profile-page ul.form-holder li textarea.active {
+						color: #333;
+						font-size: 12px;
+					}
+
+					#edit-profile-page ul.form-holder li label.active {
+						color: #127e0e;
+						font-weight: bold;
+					}
+					
+					#edit-profile-page ul.action-buttons-list {
+					    clear: both;
+					    margin-left: 149px;
+					}
+					
+						#edit-profile-page ul.action-buttons-list li {
+							
+						}
+					
+							#edit-profile-page ul.action-buttons-list li a:link,
+							#edit-profile-page ul.action-buttons-list li a:visited {
+							    background: url("../images/bg-bt-request-list.png") repeat-x scroll 0 0 #CCE5A0;							 
+							    height: 19px;
+							    line-height: 15px;
+							    padding: 3px 7px 0;
+							}
+					
+					#edit-profile-page ul.action-buttons-list li input[type="submit"] {
+						width: 58px;
+						height: 24px;
+						background-color: #cce5a0;
+					}
+					
+					
 	/* edit profile - sidebar */
 				
 	#edit-profile-page #sidebar {
-		
+		margin-left: 111px;
+		width: 356px;
 	}
-				
+	
+		#edit-profile-page #sidebar .inner-content {
+		    width: 340px;
+		}
+		
 		#edit-profile-page #sidebar h2 {
 			padding-left: 16px;
 		}
@@ -1151,6 +1280,22 @@ a.normal:visited {
 			height: 17px;
 			margin-top: 9px;
 		}
+		
+		
+		/* edit profile - comments */
+		
+		#edit-profile-page #sidebar ul.comment-list li {
+		    width: 332px;
+		}
+		
+		
+			#edit-profile-page #sidebar .comment-box {
+				width: 340px;
+			}
+		
+				#edit-profile-page #sidebar .comment-box textarea {
+					width: 334px;
+				}
 										
 
 
@@ -1939,7 +2084,7 @@ a.normal:visited {
 				}
 
 
-	/* search page - sidebar-left */
+	/* Search Page - sidebar-left */
 
 	#search-page #sidebar-left {
 		float: left;
@@ -2610,17 +2755,31 @@ a.normal:visited {
 		}
 
 		#terms-conditions-page #content h3 {
-			color: #333;
+			color: #5c5c5c;
+			font-size: 15px;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
 			line-height: 20px;
 			text-align: center;
-			font-weight: bold;
-			font-size: 15px;
 			margin: 19px 0 31px 0;
         }
 
 			#terms-conditions-page #content h3 span {
 				text-decoration: underline;
 			}
+
+        #terms-conditions-page #content h3.bottom-title {
+                font-size: 14px;
+                color: #5c5c5c;
+                font-weight: bold;
+                margin: 0 0 13px 0;
+                line-height: 15px;
+                text-align: center;
+                font-family: verdana, tahoma, arial, sans-serif;
+                margin-top: 27px;
+
+        }
+
 
 		#terms-conditions-page #content h4 {
 			color: #5c5c5c;
@@ -2666,67 +2825,112 @@ a.normal:visited {
 		}
 
 
-		/* Terms and Conditions Page - Second Page */
+/*............Site Information Pages (e.g. About, Transparency, Principles)............*/
+	
+#site-information-pages {
 
-		#terms-conditions-page.second-page {
+}
 
+	#site-information-pages #content {
+		width: 80%;
+        margin-left: 100px;
+	}
+
+		#site-information-pages img.main-pic {
+			width: 351px;
+			margin: 0 auto;
+			display: block;
 		}
 
-		#terms-conditions-page.second-page #content h2,
-		#terms-conditions-page.second-page #content h3,
-		#terms-conditions-page.second-page #content h4,
-		#terms-conditions-page.second-page #content h5,
-		#terms-conditions-page.second-page #content p {
+		#site-information-pages #content h2 {
+			color: #127e0e;
 			text-align: center;
+			font-weight: bold;
+			font-size: 15px;
+			line-height: 39px;
+			margin-top: 12px;
+            margin-bottom: 2px;
+			font-family: verdana, tahoma, arial, sans-serif;
 		}
 
-		#terms-conditions-page.second-page #content p {
-			font-size: 13px;
-			line-height: 19px;
-		}
-		
-		#terms-conditions-page.second-page #content p.top-separated {
-			margin-top: 15px;
-		}
-
-		#terms-conditions-page.second-page #content h2 {
-			margin-bottom: 2px;
-		}
-
-			#terms-conditions-page.second-page #content h3 {
+		#site-information-pages #content h3 {
 				font-size: 14px;
 				color: #127e0e;
 				font-weight: normal;
 				margin: 0 0 13px 0;
 				line-height: 15px;
+                text-align: center;
+		}
+
+			#site-information-pages #content h3 span {
+				text-decoration: underline;
 			}
 
-			#terms-conditions-page.second-page #content h3.bottom-title {
+			#site-information-pages #content h3.bottom-title {
 				margin-top: 27px;
 				font-size: 14px;
+                font-weight: bold;
+                font-family: verdana, tahoma, arial, sans-serif;
 
 			}
-			
-			#terms-conditions-page.second-page #content h4 {
-				font-size: 15px;
-			}
-			
-			#terms-conditions-page.second-page #content h5 {
-				font-size: 14px;
-				margin-bottom: 10px;
-			}
+
+		#site-information-pages #content h4 {
+			color: #5c5c5c;
+			font-size: 15px;
+			line-height: 16px;
+			margin: 19px 0 12px 0;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
+            text-align: center;
+		}
+
+		#site-information-pages #content h5 {
+			color: #5c5c5c;
+			font-size: 14px;
+			margin-bottom: 10px;
+			line-height: 15px;
+			margin-top: 13px;
+			font-weight: bold;
+			font-family: verdana, tahoma, arial, sans-serif;
+            text-align: center;
+		}
+
+		#site-information-pages #content h5.bottom-separated {
+			margin-top: 0;
+			margin-bottom: 13px;
+		}
+
+		#site-information-pages #content h5.centered {
+			margin-top: 26px;
+			margin-bottom: 13px;
+			text-align: center;
+		}
+
+		#site-information-pages #content p {
+			color: #9C9C9C;
+			font-size: 13px;
+			line-height: 19px;
+			margin: 0;
+			font-family: verdana, tahoma, arial, sans-serif;
+            margin-top: 10px;
+            text-align: center;
+		}
+
+		#site-information-pages #content p.top-separated {
+			margin-top: 15px;
+		}
 
 
-		#terms-conditions-page.second-page #content .buttons-holder {
+		#site-information-pages #content .buttons-holder {
 			width: 167px;
 			margin: auto;
 		}
 
-			#terms-conditions-page.second-page .buttons-holder ul {
-				
+			#site-information-pages .buttons-holder ul {
+
 			}
 
-				#terms-conditions-page.second-page .buttons-holder ul li {
+				#site-information-pages .buttons-holder ul li {
 					width: 77px;
 					height: 24px;
 					display: block;
@@ -2735,125 +2939,42 @@ a.normal:visited {
 					text-indent: -1000em;
 				}
 
-				#terms-conditions-page.second-page .buttons-holder ul li.no {
+				#site-information-pages .buttons-holder ul li.no {
 					margin-right: 0;
 				}
 
-					#terms-conditions-page.second-page .buttons-holder ul li a:link,
-					#terms-conditions-page.second-page .buttons-holder ul li a:visited {
+					#site-information-pages .buttons-holder ul li a:link,
+					#site-information-pages .buttons-holder ul li a:visited {
 						display: block;
 						background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
 						width: 77px;
 						height: 24px;
 					}
 
-					#terms-conditions-page.second-page .buttons-holder ul li.no a:link,
-					#terms-conditions-page.second-page .buttons-holder ul li.no a:visited {
+					#site-information-pages .buttons-holder ul li.no a:link,
+					#site-information-pages .buttons-holder ul li.no a:visited {
 						background: url('../images/bg-bt-no-tc.png') no-repeat top left;
 					}
-					
 
+        /* Transparency Page */
 
-/*............Transparency/Privacy Policy Page............*/				
-	
-#transparency-policy-page {
-
-}
-
-	#transparency-policy-page #content {
-		width: 100%;
-	}
-
-		#transparency-policy-page img.main-pic {
-			width: 351px;
-			margin: 0 auto;
-			display: block;
-		}
-
-		#transparency-policy-page #content h2 {
-			color: #127e0e;
-			text-align: center;
-			font-weight: bold;
-			font-size: 15px;
-			line-height: 39px;
-			margin-top: 12px;
-			font-family: verdana, tahoma, arial, sans-serif;
-		}
-
-		#transparency-policy-page #content h3 {
-			color: #333;
-			line-height: 20px;
-			text-align: center;
-			font-weight: bold;
-			font-size: 15px;
-			margin: 19px 0 31px 0;
+        #site-information-pages.transparency #content h5 {
+            font-size: 13px;
         }
 
-			#transparency-policy-page #content h3 span {
-				text-decoration: underline;
-			}
-
-		#transparency-policy-page #content h4 {
-			color: #5c5c5c;
-			font-size: 12px;
-			line-height: 16px;
-			margin: 19px 0 12px 0;
-			font-weight: bold;
-			font-family: verdana, tahoma, arial, sans-serif;
+		#site-information-pages.transparency #content h3.bottom-title {
+				color: #5c5c5c;
 		}
 
-		#transparency-policy-page #content h5 {
-			color: #5c5c5c;
-			font-size: 11px;
-			line-height: 15px;
-			margin-top: 13px;
-			font-weight: bold;
-			font-family: verdana, tahoma, arial, sans-serif;
-		}
+        /* Principles Page */
+        #site-information-pages.principles #content {
+            width: 100%;
+            margin-left: 0px;
+        }
 
-		#transparency-policy-page #content h5.bottom-separated {
-			margin-top: 0;
-			margin-bottom: 13px;
-		}
 
-		#transparency-policy-page #content h5.centered {
-			margin-top: 26px;
-			margin-bottom: 13px;
-			text-align: center;
-		}
 
-		#transparency-policy-page #content p {
-			color: #9C9C9C;
-			font-size: 11px;
-			line-height: 12px;
-			margin: 0;
-			font-family: verdana, tahoma, arial, sans-serif;
-		}
-		
-		#transparency-policy-page #content a:link,
-		#transparency-policy-page #content a:visited {
-			color: #9C9C9C;
-		}
-		
-		#transparency-policy-page #content ul {
-			padding-left: 20px;
-		}
-		
-			#transparency-policy-page #content ul li {
-				color: #9C9C9C;
-				font-size: 11px;
-				line-height: 12px;
-				margin: 5px 0;
-				font-family: verdana, tahoma, arial, sans-serif;
-				list-style: disc;
-			}
 
-		#transparency-policy-page #content .buttons-holder {
-			width: 150px;
-			padding-top: 3px;
-			margin: 0 auto;
-		}
-						
 						
 /* misc */
 
@@ -3017,7 +3138,8 @@ a.normal:visited {
 	#request-page #content h2 a:visited,
 	#items-page #content h2 a:link,
 	#items-page #content h2 a:visited,
-	#item-edit-page h2 {
+	#item-edit-page h2,
+	#edit-profile-page #content h2 {
 		color: #62775a;
 		font-size: 16px;
 	}
@@ -3034,7 +3156,6 @@ a.normal:visited {
 
 		/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
 		
-		#edit-profile-page #content h2,
 		#completed-request-page #content h2.trusted,
 		#completed-request-page #content h2.trusted a:link,
 		#completed-request-page #content h2.trusted a:visited,
