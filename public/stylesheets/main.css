@@ -2927,6 +2927,17 @@ a.normal:visited {
 		}
 
 
+        /* About Page */
+
+		#site-information-pages #content h3.about {
+			color: #9c9c9c;
+		}
+
+		#site-information-pages #content h5.about {
+			font-size: 15px;
+		}
+
+
 
         /* Transparency Page */
 
