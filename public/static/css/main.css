@@ -55,6 +55,15 @@ a:visited {
 	color: #949479;
 }
 
+
+a.learn-more:link,
+a.learn-more:visited {
+	text-decoration: underline;
+	color: #495943;
+}
+
+
+
 a:hover {
 	text-decoration: underline;
 }
@@ -160,16 +169,17 @@ h1 {
 		
 		#footer {
 			clear: both;
-			text-align: right;
+			text-align: left;
 			padding-top: 205px;
 		}
 		
 			#footer p {
-				font-size: 10px;
+				font-size: 12px;
 				color: #949479;
 				font-family: verdana, arial, sans-serif;
-				margin-right: 2px;
+				margin-left: 2px;
 			}
+
 			
 /* invitation page */
 
