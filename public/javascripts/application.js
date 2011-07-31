@@ -13,12 +13,12 @@ $(document).ready(function() {
 
 /* textbox class on request-page */
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 	$('textarea').click(function() {
 		$(this).addClass('active');
 		$(this).val('');
 	});	
-});
+});*/
 
 $(document).ready(function() {
 	$('input[type="radio"]').click(function() {
@@ -28,7 +28,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $('#item_description').focus(function() {
+  /*$('#item_description').focus(function() {
     itemDescriptionDefaultText = $(this).val();
     $(this).val('');
     $(this).addClass('value-added');
@@ -41,7 +41,7 @@ $(document).ready(function() {
      $(this).val(itemDescriptionDefaultText);
      $(this).removeClass('value-added');
     }
-  });
+  });*/
 
   $('form#new_item').submit(function() {
     var itemDescriptionElement = $('#item_description');
@@ -52,10 +52,43 @@ $(document).ready(function() {
   });
 });
 
-//dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
-dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
+dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
+//dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
 dojo.require("sen.app");
 
 dojo.ready(function() {
-	sen.app.init();	
+	sen.app.init();
+    
+    dojo.query("#item_description").forEach(function(node) {
+        var text = dojo.attr(node, "value");
+        
+        dojo.connect(node, "onfocus", function(e) {
+            dojo.addClass(e.target, "active");
+            if (dojo.attr(e.target, "value") == text) {
+                dojo.attr(e.target, "value", "");
+            }
+        });
+        
+        dojo.connect(node, "onblur", function(e) {
+            if (dojo.attr(e.target, "value") == "") {
+                dojo.attr(e.target, "value", text);
+                dojo.removeClass(e.target, "active");
+            }
+        })
+    });
+    
+    /*dojo.query("textarea").forEach(function(node) {
+        var text = dojo.attr(node, "value");
+        
+        dojo.connect(node, "onfocus", function(e) {
+            dojo.addClass(e.target, "active");
+        });
+        
+        dojo.connect(node, "onblur", function(e) {
+            if (dojo.attr(e.target, "value") == "") {
+                dojo.attr(e.target, "value", text);
+                dojo.removeClass(e.target, "value");
+            }
+        })
+    });*/
 });
