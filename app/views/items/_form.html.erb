@@ -40,14 +40,12 @@
 <!-- these buttons are not functional (shareage, communal) -->
 		    	<%= f.radio_button :purpose, 
                                Item::PURPOSE_SHAREAGE, 
-                               :checked => @item.share?, 
                                :id => :shareage,
                                :disabled => true %> 
             <%= f.label :Share, "Shareage", :class => "radio-labels-holder" %>
 				
         		<%= f.radio_button :purpose, 
                                Item::PURPOSE_COMMUNAL, 
-                               :checked => @item.gift?, 
                                :id => :communal,
                                :disabled => true %> 
            <%= f.label :Gift, "Communal", :class => "radio-labels-holder" %>
