@@ -5,8 +5,10 @@ class Item < ActiveRecord::Base
   STATUS_LOST    = 20.freeze
   STATUS_DAMAGED = 30.freeze
   
-  PURPOSE_SHARE = 10.freeze
-  PURPOSE_GIFT  = 20.freeze
+  PURPOSE_SHARE     = 10.freeze
+  PURPOSE_GIFT      = 20.freeze
+  PURPOSE_SHAREAGE  = 30.freeze
+  PURPOSE_COMMUNAL  = 40.freeze
   
   PURPOSES = {
     PURPOSE_SHARE => 'share',
@@ -40,8 +42,11 @@ class Item < ActiveRecord::Base
                   },
                  :default_url => "/images/noimage-:style.png"
 
-  validates_presence_of :purpose,:item_type, :name, :owner_id, :owner_type, :status
-  validates_inclusion_of :status, :in => STATUSES.keys, :message => " must be in #{STATUSES.values.join ', '}"
+  validates_inclusion_of :purpose, :in => [PURPOSE_SHARE, PURPOSE_GIFT],
+                         :message => " must be in #{PURPOSES.values.join ', '}"
+  validates_presence_of :purpose, :item_type, :name, :owner_id, :owner_type, :status
+  validates_inclusion_of :status, :in => STATUSES.keys, 
+                         :message => " must be in #{STATUSES.values.join ', '}"
   
   after_create :create_entity_for_item
   after_create :add_to_resource_network

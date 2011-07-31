@@ -84,11 +84,28 @@ Feature: Manage Items
     Then I press "Search" 
     Then I should see "Search term not found"
 
-   @last_test
    Scenario: Creating an Item without a purpose
       Given I am on the new item page
       When I fill in "Name" with "Chuchu"
       And I fill in "Item type" with "Train"
       And I press "Save"
       Then I should not have a new Item
-      And I should see "1 error prohibited this item from being saved"
+      And I should see "prohibited this item from being saved"
+
+   Scenario: Creating an Item with a 'Communal' purpose
+      Given I am on the new item page
+      When I fill in "Name" with "A nice ride"
+      And I fill in "Item type" with "Bmw"
+      And I choose "communal"
+      And I press "Save"
+      Then I should not have a new Item
+      And I should see "prohibited this item from being saved"
+
+   Scenario: Creating an Item with a 'Shareage' purpose
+      Given I am on the new item page
+      When I fill in "Name" with "A nice ride"
+      And I fill in "Item type" with "Bmw"
+      And I choose "shareage"
+      And I press "Save"
+      Then I should not have a new Item
+      And I should see "prohibited this item from being saved"

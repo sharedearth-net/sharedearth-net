@@ -3,8 +3,6 @@
 
 	<div class="lhs">
 		<ul class="form-holder">
-			
-			
 			<% if @item.photo? %>
 				<li class="clearfix">
 					<%= image_tag @item.photo.url(:medium), :class => "item-pic" %>
@@ -14,8 +12,6 @@
 
 				</li>
 			<% end %>
-				
-			
 			<li class="button-holder">
 				<%= image_tag("bt-upload-image.png", :alt => "Upload Image")  %>
 	    		<%= f.file_field :photo, :class => 'realupload' %>
@@ -30,13 +26,31 @@
 		<li class="clearfix">
 			<%= f.label :Purpose %>
 		    <% if @item.purpose_update_available? || @item.new_record? %>
-    		  <%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :id => :share %> <%= f.label :Share, "Share", :class => "radio-labels-holder" %>
-    		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift %> <%= f.label :Gift, "Gift", :class => "radio-labels-holder" %>
+    		  <%= f.radio_button :purpose, 
+                              Item::PURPOSE_SHARE, 
+                              :checked => @item.share?, 
+                              :id => :share %> 
+           <%= f.label :Share, "Share", :class => "radio-labels-holder" %>
+    		  <%= f.radio_button :purpose, 
+                              Item::PURPOSE_GIFT, 
+                              :checked => @item.gift?, 
+                              :id => :gift %> 
+            <%= f.label :Gift, "Gift", :class => "radio-labels-holder" %>
 
 <!-- these buttons are not functional (shareage, communal) -->
-		    	<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :id => :share %> <%= f.label :Share, "Shareage", :class => "radio-labels-holder" %>
+		    	<%= f.radio_button :purpose, 
+                               Item::PURPOSE_SHAREAGE, 
+                               :checked => @item.share?, 
+                               :id => :shareage,
+                               :disabled => true %> 
+            <%= f.label :Share, "Shareage", :class => "radio-labels-holder" %>
 				
-        		<%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift %> <%= f.label :Gift, "Communal", :class => "radio-labels-holder" %>
+        		<%= f.radio_button :purpose, 
+                               Item::PURPOSE_COMMUNAL, 
+                               :checked => @item.gift?, 
+                               :id => :communal,
+                               :disabled => true %> 
+           <%= f.label :Gift, "Communal", :class => "radio-labels-holder" %>
 
 
 				<p class="description under-radio">

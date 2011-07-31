@@ -14,6 +14,8 @@ describe Item do
   it { should validate_presence_of(:status) }
   it { should validate_presence_of(:owner_id) }
   it { should validate_presence_of(:owner_type) }
+  it { should_not allow_value(Item::PURPOSE_SHAREAGE).for(:purpose) }
+  it { should_not allow_value(Item::PURPOSE_COMMUNAL).for(:purpose) }
   
   it "should verify owner" do
     item = Item.new(:owner => person)
