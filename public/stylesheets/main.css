@@ -365,7 +365,7 @@ a.normal:visited {
 	/* footer */
 
 	#footer {
-		border-top: 1px solid #858f7c;
+
 		margin-top: 40px;
 	}
 
@@ -821,11 +821,17 @@ a.normal:visited {
 		/* dashboard - content - welcome message */
 		
 		 #dashboard-page .welcome-message {
+            padding: 0 15px 12px 15px;
+		    width: 481px;
 			
+		}
+
+		#dashboard-page .welcome-message .thumb {
+			width: 50px;
 		}
 		
 			#dashboard-page .welcome-message .inner-content {
-				margin-top: 10px;
+				margin-top: 5px;
 			}
 			
 				#dashboard-page .welcome-message .inner-content p span {
@@ -2921,40 +2927,6 @@ a.normal:visited {
 		}
 
 
-		#site-information-pages #content .buttons-holder {
-			width: 167px;
-			margin: auto;
-		}
-
-			#site-information-pages .buttons-holder ul {
-
-			}
-
-				#site-information-pages .buttons-holder ul li {
-					width: 77px;
-					height: 24px;
-					display: block;
-					float: left;
-					margin-right: 13px;
-					text-indent: -1000em;
-				}
-
-				#site-information-pages .buttons-holder ul li.no {
-					margin-right: 0;
-				}
-
-					#site-information-pages .buttons-holder ul li a:link,
-					#site-information-pages .buttons-holder ul li a:visited {
-						display: block;
-						background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
-						width: 77px;
-						height: 24px;
-					}
-
-					#site-information-pages .buttons-holder ul li.no a:link,
-					#site-information-pages .buttons-holder ul li.no a:visited {
-						background: url('../images/bg-bt-no-tc.png') no-repeat top left;
-					}
 
         /* Transparency Page */
 
@@ -2966,11 +2938,58 @@ a.normal:visited {
 				color: #5c5c5c;
 		}
 
+
+		#site-information-pages.transparency #content .buttons-holder {
+			width: 150px;
+			padding-top: 3px;
+			margin: 0 auto;
+		}
+
+
+
         /* Principles Page */
         #site-information-pages.principles #content {
             width: 100%;
             margin-left: 0px;
         }
+
+
+
+        #site-information-pages.principles #content .buttons-holder {
+            width: 167px;
+            margin: auto;
+        }
+
+        #site-information-pages.principles .buttons-holder ul {
+
+        }
+
+            #site-information-pages.principles .buttons-holder ul li {
+                width: 77px;
+                height: 24px;
+                display: block;
+                float: left;
+                margin-right: 13px;
+                text-indent: -1000em;
+            }
+
+            #site-information-pages.principles .buttons-holder ul li.no {
+                margin-right: 0;
+            }
+
+                #site-information-pages.principles .buttons-holder ul li a:link,
+                #site-information-pages.principles .buttons-holder ul li a:visited {
+                    display: block;
+                    background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
+                    width: 77px;
+                    height: 24px;
+                }
+
+                #site-information-pages.principles .buttons-holder ul li.no a:link,
+                #site-information-pages.principles .buttons-holder ul li.no a:visited {
+                    background: url('../images/bg-bt-no-tc.png') no-repeat top left;
+                }
+
 
 
 
