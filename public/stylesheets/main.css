@@ -2548,12 +2548,13 @@ a.normal:visited {
 					margin-right: 27px;
 				}
 				
-					#item-edit-page .rhs ul li p.under-radio a:link,
-					#item-edit-page .rhs ul li p.under-radio a:visited {
-						margin-left: 23px;
-						color: #9c9e9c;
-					}
-				
+			   #item-edit-page .rhs ul li p.under-radio a:link,
+			   #item-edit-page .rhs ul li p.under-radio a:visited,
+            #item-edit-page .rhs ul li p.under-radio span {
+			   	margin-left: 23px;
+					color: #9c9e9c;
+				}
+
 				#item-edit-page .rhs ul.form-holder li label {
 					width: 87px;
 					font-size: 12px;
