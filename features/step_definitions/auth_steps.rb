@@ -13,7 +13,7 @@ Given /^I am signed in with provider "([^"]*)"$/ do |provider|
 end
 
 Given /^the user is logged in$/ do
-  person = Factory(:person)
+  person = Factory(:person, :name => "logged person")
   person.authorise!
   person.accept_tc!
   person.accept_tr!
