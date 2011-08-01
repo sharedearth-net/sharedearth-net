@@ -763,6 +763,7 @@ a.normal:visited {
 				}
 				
 				.comment-box textarea.active-comment-box,
+				#edit-profile-page ul.form-holder textarea.active-comment-box,
 				#request-page #content .comment-box textarea.active-comment-box,
 				#sidebar .comment-box textarea.active-comment-box,
 				#community-page #sidebar .comment-box textarea.active-comment-box{
