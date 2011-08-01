@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.create_person(:name => auth["user_info"]["name"], :email => auth["extra"]["email"])
+      user.create_person(:name => auth["user_info"]["name"], :email => auth["user_info"]["email"])
       user.person.create_reputation_rating(:gift_actions => 0,:distinct_people => 0, 
                               :total_actions => 0, :positive_feedback => 0, :negative_feedback => 0, :neutral_feedback => 0,
                               :requests_received => 0,  :requests_answered => 0, :trusted_network_count => 0,  :activity_level => 0)
