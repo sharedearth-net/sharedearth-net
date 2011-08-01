@@ -762,7 +762,10 @@ a.normal:visited {
 					resize: none;
 				}
 				
-				.comment-box textarea.active-comment-box {
+				.comment-box textarea.active-comment-box,
+				#request-page #content .comment-box textarea.active-comment-box,
+				#sidebar .comment-box textarea.active-comment-box,
+				#community-page #sidebar .comment-box textarea.active-comment-box{
 					font-size: 12px;
 					color: #333333;
 				}
