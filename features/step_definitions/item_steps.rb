@@ -3,7 +3,8 @@ Then /^I should not have a new Item$/ do
 end
 
 Given /^the logged person is the owner$/ do
-  person = Person.find_by_name!("logged person")
+  # This is very smelly, but for the time being, it works
+  person = Person.find!(1)
   last_item = model('that item')
   last_item.owner = person
   last_item.save!
