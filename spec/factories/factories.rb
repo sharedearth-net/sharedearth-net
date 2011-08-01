@@ -32,8 +32,6 @@ Factory.define :item do |i|
   i.name "Mountainbike"
   i.description "Big beautiful bike"
   i.association :owner, :factory => :person
-  i.owner_id 1
-  i.owner_type "Person"
   i.status Item::STATUS_NORMAL
   i.purpose Item::PURPOSE_SHARE
 end

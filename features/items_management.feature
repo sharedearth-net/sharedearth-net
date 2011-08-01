@@ -109,3 +109,18 @@ Feature: Manage Items
       And I press "Save"
       Then I should not have a new Item
       And I should see "prohibited this item from being saved"
+
+   Scenario: Create Item without description
+      Given I am on the new item page
+      When I fill in "Name" with "some name"
+      And I fill in "Item type" with "some type"
+      And I choose "share"
+      And I press "Save"
+      Then a item should exist with description: ""
+
+   Scenario: Edit item without changing it's description
+      Given an item exist with description: "some description"
+      And the logged person is the owner
+      When I am on the edit page of that item
+      And I press "Save"
+      Then the item description should be "some description"

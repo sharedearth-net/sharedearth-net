@@ -83,7 +83,12 @@
 		</li>
     	<li class="clearfix">
     		<%= f.label :description %>
-    		<%= f.text_area :description, :value => "A description of the item, and your expectations, e.g. My spare bike is available to those in-between bikes, or new to the area. I do use it occasionally and like to share it around, so would prefer short-term sharing or daily loans"%>
+    		<%= f.text_area :description,
+                         :default_description =>  "A description of the item, and your \ 
+                         expectations, e.g. My spare bike is available to those \ 
+                         in-between bikes, or new to the area. I do use it occasionally \ 
+                         and like to share it around, so would prefer short-term sharing \
+                         or daily loans" %>
 		</li>
 	
 		<li class="clearfix">

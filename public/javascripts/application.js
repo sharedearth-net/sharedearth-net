@@ -13,43 +13,11 @@ $(document).ready(function() {
 
 /* textbox class on request-page */
 
-/*$(document).ready(function() {
-	$('textarea').click(function() {
-		$(this).addClass('active');
-		$(this).val('');
-	});	
-});*/
-
 $(document).ready(function() {
 	$('input[type="radio"]').click(function() {
 		$('label.active').removeClass('active');
 		$(this).next().addClass('active');
 	});	
-});
-
-$(document).ready(function() {
-  /*$('#item_description').focus(function() {
-    itemDescriptionDefaultText = $(this).val();
-    $(this).val('');
-    $(this).addClass('value-added');
-  });
-
-  $('#item_description').focusout(function() {
-    var itemDescription = $(this).val();
-
-    if (itemDescription == '') {
-     $(this).val(itemDescriptionDefaultText);
-     $(this).removeClass('value-added');
-    }
-  });*/
-
-  $('form#new_item').submit(function() {
-    var itemDescriptionElement = $('#item_description');
-    if (!itemDescriptionElement.hasClass('value-added')) {
-      itemDescriptionElement.val(' ');
-    }
-    return true
-  });
 });
 
 //dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
