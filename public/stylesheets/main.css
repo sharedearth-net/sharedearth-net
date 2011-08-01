@@ -762,7 +762,11 @@ a.normal:visited {
 					resize: none;
 				}
 				
-				.comment-box textarea.active-comment-box {
+				.comment-box textarea.active-comment-box,
+				#edit-profile-page ul.form-holder textarea.active-comment-box,
+				#request-page #content .comment-box textarea.active-comment-box,
+				#sidebar .comment-box textarea.active-comment-box,
+				#community-page #sidebar .comment-box textarea.active-comment-box{
 					font-size: 12px;
 					color: #333333;
 				}
@@ -2925,6 +2929,17 @@ a.normal:visited {
 
 		#site-information-pages #content p.top-separated {
 			margin-top: 15px;
+		}
+
+
+        /* About Page */
+
+		#site-information-pages #content h3.about {
+			color: #9c9c9c;
+		}
+
+		#site-information-pages #content h5.about {
+			font-size: 15px;
 		}
 
 
