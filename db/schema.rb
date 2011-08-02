@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110730174713) do
+ActiveRecord::Schema.define(:version => 20110801230311) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -193,15 +193,16 @@ ActiveRecord::Schema.define(:version => 20110730174713) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "authorised_account", :default => false
-    t.boolean  "accepted_tc",        :default => false
-    t.decimal  "tc_version",         :default => 1.0
-    t.decimal  "pp_version",         :default => 1.0
+    t.boolean  "authorised_account",   :default => false
+    t.boolean  "accepted_tc",          :default => false
+    t.decimal  "tc_version",           :default => 1.0
+    t.decimal  "pp_version",           :default => 1.0
     t.string   "location"
     t.text     "description"
-    t.boolean  "accepted_pp",        :default => false
+    t.boolean  "accepted_pp",          :default => false
     t.string   "email"
-    t.boolean  "accepted_tr",        :default => false
+    t.boolean  "accepted_tr",          :default => false
+    t.boolean  "has_reviewed_profile", :default => false
   end
 
   create_table "people_network_requests", :force => true do |t|

@@ -34,6 +34,8 @@ end
   get "invitations/preview"
   get "invitations/switch"
 
+  get "people/cancel/:id" => "people#cancel"
+
   get "search/index"
 
   resources :items do

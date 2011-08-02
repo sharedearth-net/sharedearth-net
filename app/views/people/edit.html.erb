@@ -37,7 +37,10 @@
 												<%= f.submit 'Save' %>
 											</li>
 											<li>
-												<%= link_to 'cancel', @person %>
+												<%= link_to 'cancel', 
+                                      { :controller => "people", 
+                                        :action => "cancel",
+                                        :id => @person.id } %> 
 											</li>	
 										</ul>
 									</div>

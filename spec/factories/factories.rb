@@ -11,6 +11,16 @@ Factory.define :person do |p|
   p.authorised_account true
   p.accepted_tc true
   p.accepted_pp true
+  p.accepted_tr true 
+end
+
+Factory.define :new_person, :class => Person do |p|
+  p.name "John"
+  p.association :user, :factory => :user
+  p.association :reputation_rating, :factory => :reputation_rating
+  p.authorised_account false
+  p.accepted_tc false
+  p.accepted_pp false
 end
 
 Factory.define :reputation_rating do |r|
