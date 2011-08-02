@@ -27,6 +27,10 @@ describe Person do
     person.belongs_to?(some_other_user).should be_false
   end
 
+  it "should have a 'has_reviewed_profile' flag with false as default" do
+    person = Factory(:person)
+    person.has_reviewed_profile.should be_false
+  end
 end
 
 describe Person, ".all_item_requests" do

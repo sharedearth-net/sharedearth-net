@@ -7,11 +7,37 @@ describe PeopleController do
   let(:mock_items)    { [ mock_model(Item, :name => "Item1").as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
   let(:mock_item_requests)    { [ mock_model(ItemRequest).as_null_object, mock_model(ItemRequest).as_null_object ] }
   
-  it_should_require_signed_in_user_for_actions :show, :edit, :update
+  it_should_require_signed_in_user_for_actions :show, :edit, :update, :cancel
   
   describe "for signed in member" do
     before do
       sign_in_as_user(signedin_user)
+    end
+
+    describe "GET 'cancel'" do
+
+      before do
+        mock_person.stub(:items).and_return(mock_items)
+        mock_person.stub(:belongs_to?).and_return(true)
+        Person.stub(:find).with("37") { mock_person }
+      end
+
+      it "should set the 'has_reviewed_profile' flag to true" do
+        get :cancel, :id => "37"
+        mock_person.has_reviewed_profile.should be_true
+      end
+
+      it "should redirect to dashboard if user is reviewing its profile for the first time" do
+        mock_person.stub(:has_reviewed_profile?).and_return(false)
+        get :cancel, :id => "37"
+        response.should redirect_to root_path
+      end
+
+      it "should redirect to the user profile if the user has reviewed its profile" do
+        mock_person.stub(:has_reviewed_profile?).and_return(true)
+        get :cancel, :id => "37"
+        response.should redirect_to person_path(mock_person)
+      end
     end
 
     describe "GET show" do
@@ -72,6 +98,7 @@ describe PeopleController do
         flash[:alert].should eql(I18n.t('messages.you_cannot_edit_others'))
         response.should redirect_to(root_path)
       end
+
     end
 
     describe "PUT update" do
@@ -96,6 +123,7 @@ describe PeopleController do
 
         it "redirects to the person page (profile)" do
           mock_person.stub(:update_attributes).and_return(true)
+          mock_person.stub(:show_review_profile?).and_return(false)
           put :update, :id => "37"
           response.should redirect_to(person_path(mock_person))
         end
@@ -114,7 +142,35 @@ describe PeopleController do
           flash[:alert].should eql(I18n.t('messages.you_cannot_edit_others'))
           response.should redirect_to(root_path)
         end
-      
+     
+        context "When the user has reviewed its profile" do
+          before :each do
+            mock_person.stub!(:has_reviewed_profile?).and_return(true)
+            mock_person.stub(:update_attributes).and_return(true)
+          end
+
+          it "should redirect to the user's profile page" do
+            put :update, :id => "37"
+            response.should redirect_to person_path(mock_person)
+          end
+        end
+
+        context "When the user has not reviewed its profile" do
+          before :each do
+            mock_person.stub!(:has_reviewed_profile?).and_return(false)
+            mock_person.stub(:update_attributes).and_return(true)
+          end
+
+          it "should redirect to the dashboard" do
+            put :update, :id => "37"
+            response.should redirect_to root_path
+          end
+        end
+
+        it "should update the 'has_reviewed_profile' on the logged person" do
+          put :update, :id => "37"
+          mock_person.has_reviewed_profile.should be_true
+        end
       end
       
       describe "with invalid params" do
@@ -130,11 +186,8 @@ describe PeopleController do
           put :update, :id => "37"
           response.should render_template("edit")
         end
-      
       end
-
     end
 
   end
-
 end

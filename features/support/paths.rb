@@ -17,7 +17,9 @@ module NavigationHelpers
     when /the dashboard page/
       dashboard_path
     when /the edit page of (.+)/    
-      edit_polymorphic_url(model($1))
+      edit_polymorphic_path(model($1))
+    when /the show page of (.+)/    
+      polymorphic_path(model($1))
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

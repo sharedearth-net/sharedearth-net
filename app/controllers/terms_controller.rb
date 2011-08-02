@@ -16,7 +16,6 @@ class TermsController < ApplicationController
     current_user.person.accept_pp!
     redirect_to edit_person_path(current_user.person)
   end
-  
     
   def dynamic_layout
     if current_user.nil?

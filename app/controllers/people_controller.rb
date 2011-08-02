@@ -77,9 +77,12 @@ class PeopleController < ApplicationController
   end
 
   def update
+    redirect_path = @person.has_reviewed_profile? ? person_path(@person) : root_path
+    @person.update_attributes(:has_reviewed_profile => true)
+
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        format.html { redirect_to @person }
+        format.html { redirect_to redirect_path }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -87,8 +90,15 @@ class PeopleController < ApplicationController
       end
     end
   end
-  
+
+  def cancel
+    redirect_path = @person.has_reviewed_profile? ? person_path(@person) : root_path
+    @person.update_attributes(:has_reviewed_profile => true)
+    redirect_to redirect_path
+  end
+
   private
+
   def get_person
     @person = Person.find(params[:id])
   end
