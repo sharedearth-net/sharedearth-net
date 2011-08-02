@@ -6,4 +6,6 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-AdminUser.create!(:email => 'admin-sen@sharedearth.net', :password => 'dJa#321L', :password_confirmation => 'dJa#321L')
+AdminUser.create!(:email    => 'admin@senlocal.heroku.net', 
+                  :password => 'password', 
+                  :password_confirmation => 'password')
