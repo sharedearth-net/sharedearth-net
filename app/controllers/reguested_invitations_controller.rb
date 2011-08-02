@@ -6,9 +6,9 @@ class ReguestedInvitationsController < ApplicationController
 
     if request.nil?
       RequestedInvitation.create!(:user_id => current_user.id, :invitation_sent_date => Time.now)
-      redirect_to root_url, :notice => "Your request for invitation has been received"
+      redirect_to root_url, :notice => "Your request has been received. The site is currently at capacity. Your invite will be dispatched as soon as possible."
     else
-      redirect_to root_url, :notice => "Your already requested invition, we will get back to you soon."
+      redirect_to root_url, :notice => "You have already requested an invitation. It will be dispatched as soon as possible."
     end
   end
   
