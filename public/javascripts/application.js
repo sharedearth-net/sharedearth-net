@@ -20,6 +20,37 @@ $(document).ready(function() {
 	});	
 });
 
+/* Code for showing the preview when creating a new item */
+$(document).ready(function() {
+  $("#item_photo").change(function() {
+
+    var fileInputElem = $(this)[0]; 
+    var photoFile = fileInputElem.files[0];
+
+    //Remove prev item picture, if any
+    $('.item-pic').remove();
+
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+
+      //Create image element with the right stuff
+      var photoPreview = $('<img />');
+      photoPreview.attr('src', evt.target.result);
+      photoPreview.attr('with', '150px');
+      photoPreview.attr('height', '150px');
+      photoPreview.attr('src', evt.target.result);
+      photoPreview.addClass('item-pic');
+
+      // Add new created picture to the right container
+      var photoContainer = $('#item-pic-holder');
+      photoContainer.removeClass('no-image-uploaded');
+      photoContainer.append(photoPreview);
+    };
+
+    reader.readAsDataURL(photoFile);
+  });
+});
+
 //dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
 dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
 dojo.require("sen.app");

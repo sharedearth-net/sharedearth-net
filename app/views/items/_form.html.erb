@@ -4,12 +4,11 @@
 	<div class="lhs">
 		<ul class="form-holder">
 			<% if @item.photo? %>
-				<li class="clearfix">
+				<li id="item-pic-holder" class="clearfix">
 					<%= image_tag @item.photo.url(:medium), :class => "item-pic" %>
 				</li>
 			<% else %>
-				<li class="no-image-uploaded clearfix">
-
+				<li id="item-pic-holder" class="no-image-uploaded clearfix">
 				</li>
 			<% end %>
 			<li class="button-holder">
