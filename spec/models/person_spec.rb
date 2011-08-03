@@ -3,18 +3,18 @@ require 'spec_helper'
 describe Person do
 
   let(:user) { mock_model(User) }
+  let(:short_name) { 'some normal name' }
+  let(:long_name) { 'juan' * 20 }
 
   it { should belong_to(:user) }
-  
-  it { should validate_presence_of(:user_id) }
-
   it { should have_many(:items) }
-
   it { should have_many(:item_requests) }
-
   it { should have_many(:item_gifts) }
   
+  it { should validate_presence_of(:user_id) }
   it { should validate_presence_of(:name) }
+  it { should allow_value(short_name).for(:name) }
+  it { should_not allow_value(long_name).for(:name) }
 
   it "should check if it belongs to user" do
     person = Person.new(:user => user)

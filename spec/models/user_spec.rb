@@ -77,6 +77,11 @@ describe User, ".create_with_omniauth" do
     }.should change(Person, :count).by(1) 
   end
 
+  it "should take only the first 20 chars from the provided name" do
+    truncated_name = valid_omniauth_hash["user_info"]["name"].slice(0..20)
+    new_user = User.create_with_omniauth(valid_omniauth_hash)
+    new_user.person.name.should match truncated_name
+  end
 end
 
 describe User, ".avatar" do
