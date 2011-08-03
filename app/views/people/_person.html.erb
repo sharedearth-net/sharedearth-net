@@ -1,8 +1,8 @@
-<li class="item clearer">
-						<%= image_tag person.avatar(:square), :class => "thumb" %>
-						<div>
-							<p>
-								<%= link_to person.name, person_path(person) %>
-							</p>
-						</div>
+<li class="people-holder clearfix">
+	<%= image_tag person.avatar(:square), :class => "thumb" %>
+	<div>
+		<p>
+			<%= link_to person.name, person_path(person) %>
+		</p>
+	</div>
 </li>

@@ -365,7 +365,6 @@ a.normal:visited {
 	/* footer */
 
 	#footer {
-
 		margin-top: 40px;
 	}
 
@@ -2025,6 +2024,9 @@ a.normal:visited {
 
 /*............Search Page............*/										
 	
+	
+	/* Search Page - content */
+	
 	#search-page #content {
 		width: 837px;
 	}
@@ -2092,6 +2094,31 @@ a.normal:visited {
 				    margin: 0 0 0 2px;
 				    padding: 5px 0 0 28px;
 				}
+		
+				
+		/* Search Page - content - people listings */
+		
+		#search-page #content ul li {
+		    margin-bottom: 7px;
+		}
+		
+			#search-page #content ul li.people-holder .thumb {
+			    display: block;
+			    float: left;
+			    height: 50px;
+			    margin-right: 8px;
+			    width: 50px;
+			}
+			
+			#search-page #content ul li p {
+			    color: #62775A;
+			    font-size: 11px;
+			    padding-top: 11px;
+			}
+
+			#search-page #content ul li.people-holder p {
+			    padding-top: 17px;
+			}
 
 
 	/* Search Page - sidebar-left */
