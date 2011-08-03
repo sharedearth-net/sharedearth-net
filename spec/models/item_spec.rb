@@ -16,6 +16,16 @@ describe Item do
   it { should validate_presence_of(:owner_type) }
   it { should_not allow_value(Item::PURPOSE_SHAREAGE).for(:purpose) }
   it { should_not allow_value(Item::PURPOSE_COMMUNAL).for(:purpose) }
+
+  it "should have a 'deleted' flag" do
+    item = Factory(:item)
+    item.should respond_to(:deleted)
+  end
+
+  it "should have the 'deleted' flag default to false" do
+    item = Factory(:item)
+    item.should_not be_deleted
+  end
   
   it "should verify owner" do
     item = Item.new(:owner => person)
@@ -45,9 +55,50 @@ describe Item do
   # (it should work correctly under Ruby 1.9.2+). For now we'll just comment it out.
   # it { should validate_attachment_size(:photo).less_than(1.megabyte) }
 
-  pending "should respond do deleted?" # test deleted? method
-  pending "should be soft-deleted (delete)" # test delete method
-  pending "should be able to get restored" # test restore method
+  describe "#delete" do
+    let(:item) { Factory(:item) }
 
+    it "should set the 'deleted' flag to true" do
+      item.delete
+      item.should be_deleted  
+    end
 
+    it "should delete all the Activity Log concerning the item creation" do
+      item.create_new_item_activity_log
+      activity_log = item.activity_logs.where(:event_type_id => EventType.add_item).first
+      item.delete
+      
+      expect {
+        activity_log.reload
+      }.to raise_exception
+    end
+
+    it "should delete all the Event Logs concerning the item creation" do
+      EventLog.create_news_event_log(item.owner, nil,  item , EventType.add_item, item)
+      event_log = item.event_logs.where(:event_type_id => EventType.add_item).first
+      item.delete
+
+      expect {
+        event_log.reload
+      }.to raise_error
+    end
+
+    it "should set the item name 'This item has been removed'" do
+      item.delete
+      item.reload
+      item.name.should match 'This item has been removed'
+    end
+
+    it "should clear the item's description" do
+      item.delete
+      item.reload
+      item.description.should be_empty
+    end
+
+    it "should remove the item's photo" do
+      item.delete
+      item.reload
+      item.photo.should_not be_present
+    end
+  end
 end

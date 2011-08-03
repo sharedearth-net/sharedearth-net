@@ -60,3 +60,7 @@ Given /^"(.*)" has trusted relationship with "(.*)"$/ do |person1, person2|
     Factory(:people_network, :person_id => person1.id, :trusted_person_id => person2.id, :entity_id => person2.id)
     Factory(:people_network, :person_id => person2.id, :trusted_person_id => person1.id, :entity_id => person1.id)
 end
+
+Given /^I delete (.+)$/ do |model_name|
+  model(model_name).delete
+end

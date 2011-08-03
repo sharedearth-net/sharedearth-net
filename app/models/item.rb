@@ -116,18 +116,12 @@ class Item < ActiveRecord::Base
   def purpose?
     PURPOSES[self.purpose]
   end
-  
-  def deleted?
-    !deleted_at.nil?
-  end
-  
-  def delete
-    self.deleted_at = Time.zone.now
-    save!
-  end
+
+
 
   def restore
     self.deleted_at = nil
+    self.deleted = false
     save!
   end
 
@@ -150,11 +144,7 @@ class Item < ActiveRecord::Base
   def damaged?
     self.status == STATUS_DAMAGED
   end
-  
-  def deleted?
-    self.deleted_at != nil
-  end
-  
+ 
   def damaged!
     self.status = STATUS_DAMAGED
     save!
@@ -231,5 +221,35 @@ class Item < ActiveRecord::Base
   def public_activities
      ActivityLog.item_public_activities(self).order("created_at desc").take(7)
   end   
+
+  def delete
+    set_attrs_before_deleting
+    delete_new_item_activity_log
+    delete_new_item_event_log
+    save!
+  end 
+
+  def deleted?
+    !deleted_at.nil?  or deleted
+  end
+
+  private
+
+  def set_attrs_before_deleting
+    self.deleted_at = Time.zone.now
+    self.deleted = true
+    self.name = 'This item has been removed'
+    self.description = ''
+    self.photo = nil
+  end
+
+  def delete_new_item_activity_log
+    new_item_act_log = activity_logs.where(:event_type_id => EventType.add_item).first
+    new_item_act_log.destroy unless new_item_act_log.nil?
+  end
   
+  def delete_new_item_event_log
+    new_item_event_log = event_logs.where(:event_type_id => EventType.add_item).first
+    new_item_event_log.destroy unless new_item_event_log.nil?
+  end
 end

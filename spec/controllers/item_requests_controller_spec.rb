@@ -28,6 +28,8 @@ describe ItemRequestsController do
 
     before do
       sign_in_as_user(signedin_user)
+
+      mock_item.stub(:deleted?).and_return(false)
     end
 
     describe "GET new" do
@@ -62,7 +64,8 @@ describe ItemRequestsController do
 
       it "should set requester for a newly created request" do
         ItemRequest.stub(:new) { mock_item_request }
-        mock_item_request.should_receive(:requester=).with(signedin_user.person) # current_user is stubbed with signedin_user
+        # current_user is stubbed with signedin_user
+        mock_item_request.should_receive(:requester=).with(signedin_user.person)
         get :new, :item_id => "42"
       end
       
@@ -76,6 +79,15 @@ describe ItemRequestsController do
         get :new, :item_id => "42"
       end
 
+      context "When the requested item is deleted" do
+
+        before :each do
+          mock_item.stub(:deleted?).and_return(true)
+          get :new, :item_id => "42"
+        end
+      
+        it_should_behave_like "requesting a deleted item"
+      end    
     end
 
     describe "GET show" do
@@ -83,9 +95,7 @@ describe ItemRequestsController do
       it "assigns the requested requests as @item_request" do
         ItemRequest.stub(:find).with("42") { mock_item_request }
         get :show, :id => "42"
-        assigns(:item_request).should be(mock_item_request)
-      end
-      
+        assigns(:item_request).should be(mock_item_request) end 
       it "should allow requester to view the request" do
         # mock_item_request.stub(:requester).and_return(signedin_user.person)
         as_the_requester
@@ -111,7 +121,6 @@ describe ItemRequestsController do
         flash[:alert].should eql(I18n.t('messages.only_gifter_and_requester_can_access'))
         response.should redirect_to(root_path)
       end
-
     end
 
     describe "POST create" do
@@ -178,6 +187,16 @@ describe ItemRequestsController do
 
       end
 
+      context "When the requested item has been deleted" do
+
+        before :each do
+          Item.stub(:find).with("42").and_return(mock_item)
+          mock_item.stub(:deleted?).and_return(true)
+          post :create, :item_id => '42'
+        end
+      
+        it_should_behave_like "requesting a deleted item"
+      end    
     end
 
     describe "PUT accept" do

@@ -1,5 +1,4 @@
 Feature: Item requests management page
-
   As a As user who loads web page for first time
   I want to see if can exchange items
   In order to create manage items ownership 
@@ -9,12 +8,14 @@ Feature: Item requests management page
     Given a person exists with name: "Maria"
     Given I am the owner of item with name "Mobile"
     And "Maria" is the owner of item with name "Bike"
-    @javascript    
-  Scenario: Requests item 
-    Given Looking at person page with name "Maria"
-    Then I follow "request"
-    And I should see the words "request", "Bike"
-        @javascript
+
+   @javascript    
+   Scenario: Requests item 
+      Given Looking at person page with name "Maria"
+      Then I follow "request"
+      And I should see the words "request", "Bike"
+
+  @javascript
   Scenario: I accept someones request for my item
     Given "Maria" requested item with name "Mobile" from "John"
     Then Looking at my person page
@@ -89,8 +90,10 @@ Feature: Item requests management page
     Then Looking at my person page
     And I should see "1 different people"
     
-    
-    
-      
-    
-    
+    @last_test
+    Scenario: I request an item that has been deleted 
+      Given an item exists with name: "Sweet ride"
+      And the logged person is the owner
+      And I delete that item
+      When "Maria" requests that item
+      Then a item request should not exist

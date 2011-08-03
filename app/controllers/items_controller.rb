@@ -104,8 +104,13 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def get_item
     @item = Item.find_by_id(params[:id])
+
+    if @item.deleted?
+      redirect_to items_path, :alert => (I18n.t('messages.items.is_deleted'))
+    end
   end
   
   def only_owner!

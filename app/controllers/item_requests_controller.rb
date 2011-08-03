@@ -3,6 +3,7 @@ class ItemRequestsController < ApplicationController
   before_filter :get_item_request, :only => [ :show, :accept, :reject, :cancel, :collected, :complete ]
   before_filter :only_requester_or_gifter, :only => [ :show, :cancel, :collected, :complete ]
   before_filter :only_gifter, :only => [ :accept, :reject ]
+  before_filter :check_if_item_is_deleted, :only => [:new, :create]
 
   def new
     @item = Item.find(params[:item_id])
@@ -167,6 +168,15 @@ class ItemRequestsController < ApplicationController
   end
   
   private
+
+  def check_if_item_is_deleted
+    item = Item.find(params[:item_id]) if params[:item_id]
+
+    if item and item.deleted?
+      redirect_to items_path, :alert => (I18n.t('messages.items.is_deleted'))
+    end
+  end
+
   def get_item_request
     @item_request = ItemRequest.find(params[:id])
   end

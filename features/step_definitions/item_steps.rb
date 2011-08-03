@@ -14,3 +14,4 @@ Then /^the item description should be "([^"]*)"$/ do |description|
   last_item = model('that item')
   last_item.description.should match description
 end
+

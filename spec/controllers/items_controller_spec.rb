@@ -3,9 +3,23 @@ require 'spec_helper'
 describe ItemsController do
   
   let(:signedin_user) { generate_mock_user_with_person }
-    let(:mock_items)    { [ mock_model(Item, :name => "Item1", :owner => signedin_user.person).as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
+  let(:mock_items)    { [ mock_model(Item, :name => "Item1", :owner => signedin_user.person).
+                        as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
   
-  it_should_require_signed_in_user_for_actions :show, :edit, :update, :destroy, :mark_as_normal, :mark_as_lost, :mark_as_damaged
+  it_should_require_signed_in_user_for_actions :show, :edit, :update, 
+                                               :destroy, :mark_as_normal, 
+                                               :mark_as_lost, :mark_as_damaged
+
+
+  shared_examples_for "requesting a deleted item" do
+    it "should redirect the 'index' action" do
+      response.should redirect_to items_path
+    end
+
+    it "should tell the user that the item has been deleted" do
+      flash[:alert].should match I18n.t('messages.items.is_deleted')
+    end
+  end
 
   def mock_item(stubs={})
     @mock_item ||= mock_model(Item, stubs).as_null_object
@@ -28,16 +42,18 @@ describe ItemsController do
     end
 
     describe "GET show" do
-      it "assigns the requested item as @item" do
+      before :each do
         Item.stub(:find_by_id).with("37") { mock_item }
+        mock_item.stub!(:deleted?).and_return(false)
+      end
+
+      it "assigns the requested item as @item" do
         get :show, :id => "37"
         assigns(:item).should be(mock_item)
       end
       
       it "should allow owner to view the item" do
         mock_item.stub(:is_owner?).with(signedin_user.person).and_return(true)
-        Item.stub(:find_by_id).with("37") { mock_item }
-
         get :show, :id => "37"
         assigns(:item).should be(mock_item)
         response.should be_success
@@ -45,11 +61,18 @@ describe ItemsController do
 
       it "should allow non-owner members to view the item" do
         mock_item.stub(:is_owner?).with(signedin_user.person).and_return(false)
-        Item.stub(:find_by_id).with("37") { mock_item }
-      
         get :show, :id => "37"
         assigns(:item).should be(mock_item)
         response.should be_success
+      end
+
+      context "When the requested item is deleted" do
+        before :each do
+          mock_item.stub!(:deleted?).and_return(true)
+          get :show, :id => "37"
+        end
+      
+        it_should_behave_like "requesting a deleted item"
       end
     end
 
@@ -62,32 +85,47 @@ describe ItemsController do
     end
 
     describe "GET edit" do
-      it "assigns the requested item as @item" do
+      before :each do
+        mock_item.stub!(:deleted?).and_return(false)
         Item.stub(:find_by_id).with("37") { mock_item }
+      end
+
+      it "assigns the requested item as @item" do
         get :edit, :id => "37"
         assigns(:item).should be(mock_item)
       end
       
       it "should allow only owner edit the item" do
         mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
-        Item.stub(:find_by_id).with("37") { mock_item }
-
         get :edit, :id => "37"
         assigns(:item).should be(mock_item)
       end
 
       it "should deny access for non-owner members" do
         mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
-        Item.stub(:find_by_id).with("37") { mock_item }
-      
         get :edit, :id => "37"
         flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
         response.should redirect_to(root_path)
+      end
+
+      context "When the requested item is deleted" do
+        before :each do
+          mock_item.stub!(:deleted?).and_return(true)
+          get :edit, :id => "37"
+        end
+      
+        it_should_behave_like "requesting a deleted item"
       end
     end
 
     describe "POST create" do
       describe "with valid params" do
+        before :each do
+          new_rep_rating = Factory(:reputation_rating)
+          signedin_user.person.should_receive(:reputation_rating).and_return(new_rep_rating)
+          signedin_user.person.should_receive(:items).and_return([mock_item])
+        end
+
         it "assigns a newly created item as @item" do
           Item.stub(:new).with({'these' => 'params'}) { mock_item(:save => true) }
           post :create, :item => {'these' => 'params'}
@@ -123,92 +161,114 @@ describe ItemsController do
     end
 
     describe "PUT update" do
+      before :each do
+        Item.stub(:find_by_id).with("37") { mock_item }
+        mock_item.stub!(:deleted?).and_return(false)
+      end
+
       describe "with valid params" do
         it "updates the requested item" do
-          Item.stub(:find_by_id).with("37") { mock_item }
           mock_item.should_receive(:update_attributes).with({'these' => 'params'})
           put :update, :id => "37", :item => {'these' => 'params'}
         end
         
         it "should allow only owner to update the item" do
           mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
-          Item.stub(:find_by_id).with("37") { mock_item }
-
           put :update, :id => "37", :item => {'these' => 'params'}
         end
 
         it "should deny access for non-owner members" do
           mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
-          Item.stub(:find_by_id).with("37") { mock_item }
-
           put :update, :id => "37", :item => {'these' => 'params'}
           flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
           response.should redirect_to(root_path)
         end
 
         it "assigns the requested item as @item" do
-          Item.stub(:find_by_id) { mock_item(:update_attributes => true) }
-          put :update, :id => "1"
+          put :update, :id => "37"
           assigns(:item).should be(mock_item)
         end
 
         it "redirects to the item" do
-          Item.stub(:find_by_id) { mock_item(:update_attributes => true) }
-          put :update, :id => "1"
+          put :update, :id => "37"
           response.should redirect_to(item_url(mock_item))
         end
       end
 
       describe "with invalid params" do
+        before :each do
+          mock_item.stub!(:update_attributes).and_return(false)
+        end
+
         it "assigns the item as @item" do
-          Item.stub(:find_by_id) { mock_item(:update_attributes => false) }
-          put :update, :id => "1"
+          put :update, :id => "37"
           assigns(:item).should be(mock_item)
         end
 
         it "re-renders the 'edit' template" do
-          Item.stub(:find_by_id) { mock_item(:update_attributes => false) }
-          put :update, :id => "1"
-          response.should render_template("edit")
+          put :update, :id => "37"
+          response.should render_template :edit
         end
+      end
+
+      context "When the requested item is deleted" do
+        before :each do
+          mock_item.stub!(:deleted?).and_return(true)
+          put :update, :id => "37"
+        end
+      
+        it_should_behave_like "requesting a deleted item"
       end
     end
 
     describe "DELETE destroy" do
-      it "destroys the requested item" do
+      before :each do
         Item.stub(:find_by_id).with("37") { mock_item }
+        mock_item.stub!(:deleted?).and_return(false)
+      end
+
+      it "should set the 'deleted' flag to true on the item" do
+        delete :destroy, :id => "37"
+        mock_item.deleted.should be_true
+      end
+
+      it "destroys the requested item" do
         mock_item.should_receive(:delete)
         delete :destroy, :id => "37"
       end
       
       it "should allow only owner edit the item" do
         mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
-        Item.stub(:find_by_id).with("37") { mock_item }
-
         delete :destroy, :id => "37"
         response.should redirect_to(items_path)
       end
 
       it "should deny access for non-owner members" do
         mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
-        Item.stub(:find_by_id).with("37") { mock_item }
-      
         delete :destroy, :id => "37"
         flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
         response.should redirect_to(root_path)
       end
 
       it "redirects to the items list" do
-        Item.stub(:find_by_id) { mock_item }
-        delete :destroy, :id => "1"
+        delete :destroy, :id => "37"
         response.should redirect_to(items_url)
+      end
+
+      context "When the requested item is deleted" do
+        before :each do
+          mock_item.stub!(:deleted?).and_return(true)
+          delete :destroy, :id => "37"
+        end
+      
+        it_should_behave_like "requesting a deleted item"
       end
     end
 
     describe "PUT mark_as_normal" do
-
       before do
         Item.stub(:find_by_id).with("37") { mock_item }
+        mock_item.stub!(:deleted?).and_return(false)
       end
   
       it "assigns the requested item as @item" do
@@ -236,12 +296,21 @@ describe ItemsController do
         put :mark_as_normal, :id => "37"
       end
 
+      context "When the requested item is deleted" do
+        before :each do
+          mock_item.stub!(:deleted?).and_return(true)
+          put :mark_as_normal, :id => "37"
+        end
+      
+        it_should_behave_like "requesting a deleted item"
+      end    
     end
 
     describe "PUT mark_as_lost" do
 
       before do
         Item.stub(:find_by_id).with("37") { mock_item }
+        mock_item.stub!(:deleted?).and_return(false)
       end
   
       it "assigns the requested item as @item" do
@@ -269,12 +338,21 @@ describe ItemsController do
         put :mark_as_lost, :id => "37"
       end
 
+      context "When the requested item is deleted" do
+        before :each do
+          mock_item.stub!(:deleted?).and_return(true)
+          put :mark_as_lost, :id => "37"
+        end
+      
+        it_should_behave_like "requesting a deleted item"
+      end    
     end
 
     describe "PUT mark_as_damaged" do
 
       before do
         Item.stub(:find_by_id).with("37") { mock_item }
+        mock_item.stub!(:deleted?).and_return(false)
       end
   
       it "assigns the requested item as @item" do
@@ -302,6 +380,14 @@ describe ItemsController do
         put :mark_as_damaged, :id => "37"
       end
 
+      context "When the requested item is deleted" do
+        before :each do
+          mock_item.stub!(:deleted?).and_return(true)
+          put :mark_as_damaged, :id => "37"
+        end
+      
+        it_should_behave_like "requesting a deleted item"
+      end    
     end
   end
 

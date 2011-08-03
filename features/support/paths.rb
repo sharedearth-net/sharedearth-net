@@ -20,6 +20,8 @@ module NavigationHelpers
       edit_polymorphic_path(model($1))
     when /the show page of (.+)/    
       polymorphic_path(model($1))
+    when /items/
+      items_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
