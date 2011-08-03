@@ -13,9 +13,11 @@
 				<li class="items selected">
 					<a href="#">Items</a>
 				</li>
-				<li class="people">
-					<a href="#">Skils</a>
-				</li>
+				<!--
+					<li class="people">
+						<a href="#">Skills</a>
+						</li>
+				-->
 			</ul>
 		
 		</div><!--	/sidebar-left	-->
@@ -43,8 +45,8 @@
 							</a>
 					        <div>
 								<p>
-		  							<%= link_to item.name, item_path(item), :class => 'positive'  %>&nbsp;|&nbsp;
-									<a href="#"><%= item.item_type %></a>&nbsp;|
+		  							<%= link_to item.name, item_path(item), :class => 'positive'  %>&nbsp;&nbsp;
+									<a href="#"><%= item.item_type %></a>&nbsp;
 									<%= item.purpose? %>		
 								</p>
 								<ul class="action-list">
