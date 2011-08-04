@@ -29,6 +29,7 @@ Feature: Item requests management page
     And I follow "reject"
     Then I should see "There are no unanswered requests"
     Then I should see "rejected"
+
     @javascript
   Scenario: I reject someones request for my item
     Given I requested item with name "Bike" from person with name "Maria"
@@ -90,10 +91,18 @@ Feature: Item requests management page
     Then Looking at my person page
     And I should see "1 different people"
     
-    @last_test
-    Scenario: I request an item that has been deleted 
+   Scenario: I request an item that has been deleted 
       Given an item exists with name: "Sweet ride"
       And the logged person is the owner
       And I delete that item
       When "Maria" requests that item
       Then a item request should not exist
+
+   @javascript
+   Scenario: Rejected Item Request still appear on the Dashboard
+      Given "Maria" requested item with name "Mobile" from "John"
+      And I am on the "dashboard" page
+      When I follow "reject"
+      And I wait until all Ajax requests are complete
+      Then I should not see "view request"
+      And I should not see "accept"

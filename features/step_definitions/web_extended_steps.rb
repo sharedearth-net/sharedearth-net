@@ -76,4 +76,8 @@ Then /^I should not see "(.*)" in "([^"]*)"$/ do |word,css|
   within(:css, '#{css}') { Then %{I should not see "#{word}""} }
 end
 
-
+When /^I wait until all Ajax requests are complete$/ do
+  wait_until do
+      page.evaluate_script('$.active') == 0
+  end
+end

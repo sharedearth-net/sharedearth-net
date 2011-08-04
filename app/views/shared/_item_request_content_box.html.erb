@@ -1,24 +1,30 @@
-							<li class="content-box clearfix">
-								<%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
-                <%= render :partial => "shared/item_request_box.html.erb", :locals => {:req => req} %>	
-								<% comments = req.comments%>				
-			        <div class="inner-content">
+<% unless req.rejected? %>
+  <li class="content-box clearfix"> 
+  <br />
+    <%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), 
+                         request_path(req) %>
 
-				        <ul class="comment-list">
-				        <%  req.comments.each do |c| -%>
-				          <% person = c.user.person %>
-				          <li class="clearfix">	
-						        <%= image_tag person.avatar(:square), :class => "thumb" %>
-						        <p>
-							        <strong><%= link_to person.name, person_path(person) %></strong> <%= c.comment %>
-							        <span><%= time_ago_in_words(c.created_at) %> ago</span>
-						        </p>
-					        </li> 
-				        <% end unless comments.empty? -%>
+    <%= render :partial => "shared/item_request_box.html.erb", :locals => {:req => req} %>	
+    
+    <% comments = req.comments%>				
+      <div class="inner-content">
 
-					        <%= render :partial => 'comments/new.html.erb', :locals => { :commentable => req } %>
+      <ul class="comment-list">
+      <%  req.comments.each do |c| -%>
+        <% person = c.user.person %>
+        <li class="clearfix">	
+          <%= image_tag person.avatar(:square), :class => "thumb" %>
+          <p><strong><%= link_to person.name, person_path(person) %></strong> <%= c.comment %>
+             <span><%= time_ago_in_words(c.created_at) %> ago</span>
+          </p>
+       </li> 
+      <% end unless comments.empty? -%>
 
-				        </ul>
-			        </div><!-- /inner-content -->	
-								</div>
-							</li>
+     <%= render :partial => 'comments/new.html.erb', :locals => { :commentable => req } %>
+
+    </ul>
+    </div><!-- /inner-content -->	
+    </div>
+  </li>
+<% end %>
+<!-- -->
