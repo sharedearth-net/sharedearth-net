@@ -104,7 +104,9 @@
 							<ul class="clearfix">
 				      <% @items.each do |item| %>
                 <li class="item clearer">
-										<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
+										<div class="item-image-holder">
+											<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
+										</div>
 										<div>
 											<p>
 											  <%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;&nbsp;										
