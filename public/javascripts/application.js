@@ -58,7 +58,7 @@ dojo.require("sen.app");
 dojo.ready(function() {
 	sen.app.init();
     
-    dojo.query("#item_description").forEach(function(node) {
+    /*dojo.query("#item_description").forEach(function(node) {
         var text = dojo.attr(node, "value");
         
         dojo.connect(node, "onfocus", function(e) {
@@ -74,7 +74,7 @@ dojo.ready(function() {
                 dojo.removeClass(e.target, "active");
             }
         })
-    });
+    });*/
     
     /*dojo.query("textarea").forEach(function(node) {
         var text = dojo.attr(node, "value");
