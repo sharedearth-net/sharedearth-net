@@ -6,25 +6,18 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @active_item_requests = current_user.person.active_item_requests
-    @people_network_requests = current_user.person.received_people_network_requests + current_user.person.people_network_requests
+    @active_item_requests     = current_user.person.active_item_requests
+    @people_network_requests  = current_user.person.received_people_network_requests + 
+                                current_user.person.people_network_requests
     @requests = @active_item_requests + @people_network_requests
+
     @requests.sort! { |a,b| b.created_at <=> a.created_at }
-    
+
     @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30) unless current_user.person.activity_logs.empty?
-    event_logs = current_user.person.news_feed
 
-    trusted_persons_ids = "#{current_user.person.id}"
-    if (current_user.person.trusted_friends.size >= 1)
-      trusted_persons_ids << ', '
-      trusted_persons_ids << current_user.person.trusted_friends.map(&:id).join(', ')
-    end
-
-    @events = EventDisplay.paginate(:page => params[:page], 
-                                    :per_page => 25, 
-                                    :conditions => [ "person_id IN (#{trusted_persons_ids})" ], 
-                                    :order => 'created_at DESC', :include => [:event_log])
-   end
+    current_user.person.news_feed
+    @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
+  end
 
   def about
     about_layout = (current_user.nil? ? 'shared_earth' : 'application')

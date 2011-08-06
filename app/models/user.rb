@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   validates_presence_of :provider, :uid
   validates_uniqueness_of :uid, :scope => :provider
 
+  delegate :network_activity, :to => :person
+
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth["provider"]

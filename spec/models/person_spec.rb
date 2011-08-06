@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Person do
-
   let(:user) { mock_model(User) }
   let(:short_name) { 'some normal name' }
   let(:long_name) { 'juan' * 20 }
@@ -132,7 +131,6 @@ describe Person, ".first_name" do
 end
 
 describe Person, "When printing user trust profile" do
-
   it "should generate proper gift act rating" do
   #TODO
   end
@@ -144,7 +142,45 @@ describe Person, "When printing user trust profile" do
   it "should generate proper number of gift act actions" do
   #TODO
   end
-  
 end
   
-  
+
+describe Person, ".network_activity" do
+  let(:person) { Factory(:person) }
+
+  let(:maria)  { Factory(:person) }
+
+  let(:mr_t) { Factory(:person) }
+
+  let(:my_event_displays) do 
+    FactoryGirl.create_list(:event_display, 5, :person_id => person.id, :event_log_id => 1)
+  end
+
+  let(:maria_event_displays) do 
+    FactoryGirl.create_list(:event_display, 5, :person_id => maria.id, :event_log_id => 2)
+  end
+
+  let(:mr_t_event_displays) do 
+    FactoryGirl.create_list(:event_display, 5, :person_id => mr_t.id, :event_log_id => 3)
+  end
+
+  before :each do
+    person.stub!(:trusted_friends).and_return([maria])
+  end
+
+  it "should respond to 'network_activity'" do
+    person.should respond_to(:network_activity)
+  end  
+
+  it "should include the EventDisplays that belong to the person" do
+    my_event_displays.should include(*person.network_activity)
+  end
+
+  it "should include the EventDisplays of the people on my trusted network" do
+    maria_event_displays.should include(*person.network_activity)
+  end
+
+  it "should not include the EventDisplays of the people that aren't on my trusted network" do
+    mr_t_event_displays.should_not include(*person.network_activity)
+  end
+end

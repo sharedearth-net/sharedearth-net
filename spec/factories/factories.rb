@@ -72,6 +72,9 @@ Factory.define :event_log do |i|
   i.primary_full_name 'Shary Demo'  
 end
 
+Factory.define :event_display do |e|
+end
+
 Factory.define :activity_log do |i|
   i.event_code 1
   i.primary_id 1

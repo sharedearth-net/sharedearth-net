@@ -27,7 +27,17 @@ class Person < ActiveRecord::Base
   after_create :create_entity_for_person
   after_create :create_person_join_activity_log
   
-   scope :authorized, where("authorised_account = true")
+  scope :authorized, where("authorised_account = true")
+
+  def network_activity
+    my_people_id = trusted_friends.collect { |friend| friend.id }
+    my_people_id << id
+
+    EventDisplay.group(:event_log_id).
+                having(:person_id => my_people_id).
+                order('created_at DESC').
+                includes(:event_log)
+  end
 
   def belongs_to?(some_user)
     user == some_user

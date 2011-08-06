@@ -22,6 +22,9 @@ module NavigationHelpers
       polymorphic_path(model($1))
     when /items/
       items_path
+    when /"(.+)"'s profile page/
+      person = Person.find_by_name($1)
+      person_path(person)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
