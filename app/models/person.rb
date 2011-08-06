@@ -33,7 +33,8 @@ class Person < ActiveRecord::Base
     my_people_id = trusted_friends.collect { |friend| friend.id }
     my_people_id << id
 
-    EventDisplay.group(:event_log_id).
+    EventDisplay.select('id, type_id, person_id, event_log_id, created_at, updated_at').
+                group(:event_log_id).
                 having(:person_id => my_people_id).
                 order('created_at DESC').
                 includes(:event_log)
