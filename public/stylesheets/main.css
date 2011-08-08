@@ -2159,7 +2159,13 @@ a.normal:visited {
 			#search-page #content ul li.people-holder p {
 			    padding-top: 17px;
 			}
-
+			
+			
+			#search-page #content ul li.people-holder p a:link,
+			#search-page #content ul li.people-holder p a:visited {
+				text-transform: none;
+			}
+				
 
 	/* Search Page - sidebar-left */
 
