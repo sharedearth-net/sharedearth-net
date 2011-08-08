@@ -11,15 +11,7 @@ describe ItemsController do
                                                :mark_as_lost, :mark_as_damaged
 
 
-  shared_examples_for "requesting a deleted item" do
-    it "should redirect the 'index' action" do
-      response.should redirect_to items_path
-    end
 
-    it "should tell the user that the item has been deleted" do
-      flash[:alert].should match I18n.t('messages.items.is_deleted')
-    end
-  end
 
   def mock_item(stubs={})
     @mock_item ||= mock_model(Item, stubs).as_null_object
@@ -64,15 +56,6 @@ describe ItemsController do
         get :show, :id => "37"
         assigns(:item).should be(mock_item)
         response.should be_success
-      end
-
-      context "When the requested item is deleted" do
-        before :each do
-          mock_item.stub!(:deleted?).and_return(true)
-          get :show, :id => "37"
-        end
-      
-        it_should_behave_like "requesting a deleted item"
       end
     end
 

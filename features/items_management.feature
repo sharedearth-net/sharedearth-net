@@ -130,13 +130,13 @@ Feature: Manage Items
       And the logged person is the owner
       And I delete that item
       When I go to the show page of that item
-      Then I should be on 'items'
-      And I should see "That Item has been deleted!"
+      Then I should not see any of the action links
+      And I should see "This item has been deleted"
    
    Scenario: Editing a deleted item
       Given an item exist
       And the logged person is the owner
       And I delete that item
-      When I go to the show page of that item
+      When I go to the edit page of that item
       Then I should be on 'items'
       And I should see "That Item has been deleted!"

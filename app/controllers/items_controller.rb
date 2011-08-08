@@ -4,6 +4,9 @@ class ItemsController < ApplicationController
   before_filter :only_owner!, :only => [:edit, :update, :destroy, :mark_as_normal, :mark_as_lost, :mark_as_damaged]
   before_filter :actions_completed?, :only => [:mark_as_lost, :mark_as_damaged]
 
+  before_filter :check_if_item_is_deleted, :only => [:edit, :update, :destroy, 
+                                                     :mark_as_normal, :mark_as_lost, 
+                                                     :mark_as_damaged]
   # GET /items
   # GET /items.xml
   def index
@@ -105,12 +108,14 @@ class ItemsController < ApplicationController
 
   private
 
-  def get_item
-    @item = Item.find_by_id(params[:id])
-
+  def check_if_item_is_deleted
     if @item.deleted?
       redirect_to items_path, :alert => (I18n.t('messages.items.is_deleted'))
     end
+  end
+
+  def get_item
+    @item = Item.find_by_id(params[:id])
   end
   
   def only_owner!

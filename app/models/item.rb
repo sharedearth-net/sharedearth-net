@@ -239,7 +239,7 @@ class Item < ActiveRecord::Base
   def set_attrs_before_deleting
     self.deleted_at = Time.zone.now
     self.deleted = true
-    self.name = 'This item has been removed'
+    self.name = 'This item has been deleted'
     self.description = ''
     self.photo = nil
   end
@@ -251,6 +251,16 @@ class Item < ActiveRecord::Base
   
   def delete_new_item_event_log
     new_item_event_log = event_logs.where(:event_type_id => EventType.add_item).first
-    new_item_event_log.destroy unless new_item_event_log.nil?
+
+    unless new_item_event_log.nil?
+      delete_event_displays_for(new_item_event_log)
+      new_item_event_log.destroy
+    end
+  end
+
+  def delete_event_displays_for(event_log)
+    EventDisplay.where(:event_log_id => event_log.id).each do |event_display|
+      event_display.destroy
+    end
   end
 end

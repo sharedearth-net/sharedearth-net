@@ -184,3 +184,21 @@ describe Person, ".network_activity" do
     mr_t_event_displays.should_not include(*person.network_activity)
   end
 end
+
+describe Person, ".trusted_friends_items" do
+  let(:juan) { Factory(:person) }
+
+  let(:golbert) { Factory(:person) }
+
+  let(:golbert_items) { FactoryGirl.create_list(:item, 5, :owner => golbert) }
+
+  before :each do
+    golbert_items[0].delete
+
+    juan.stub!(:trusted_friends).and_return([golbert])
+  end
+ 
+  it "should only return the items that are not deleted" do
+    juan.trusted_friends_items.size.should == 4
+  end 
+end

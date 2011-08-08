@@ -111,7 +111,7 @@ class Person < ActiveRecord::Base
   
   def trusted_friends_items
     items = []
-    self.trusted_friends.map{|f| f.items.map{|i|items.push(i)}}  
+    self.trusted_friends.map{ |f| f.items.without_deleted.map{|i|items.push(i)}}  
     items  
   end
   

@@ -15,3 +15,8 @@ Then /^the item description should be "([^"]*)"$/ do |description|
   last_item.description.should match description
 end
 
+Then /^I should not see any of the action links$/ do
+  page.should have_no_content("Edit")
+  page.should have_no_content("Lost")
+  page.should have_no_content("Damaged")
+end

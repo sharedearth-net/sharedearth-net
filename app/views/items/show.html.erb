@@ -27,6 +27,7 @@
 							</span>
 						</p>
 						<%= owner_only(@item) do %>
+                    <% unless @item.deleted? %>
 							<ul class="action-buttons-list clearfix">
 								<% if @item.normal? %>
 									<li><%= link_to 'Edit', edit_item_path(@item) %></li>
@@ -43,6 +44,7 @@
 								</li>
 						    <% end -%>  						
 							</ul>
+                     <% end %>
 						<% end %>
 					</div>
 				</li>
