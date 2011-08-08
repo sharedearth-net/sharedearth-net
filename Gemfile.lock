@@ -190,6 +190,7 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
+    pg (0.11.0)
     pickle (0.4.8)
       cucumber (>= 0.8)
       rake
@@ -303,6 +304,7 @@ DEPENDENCIES
   mysql2
   omniauth (~> 0.2.6)
   paperclip
+  pg
   pickle
   possessive
   rails (= 3.0.7)

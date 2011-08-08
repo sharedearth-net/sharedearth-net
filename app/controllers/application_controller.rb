@@ -5,15 +5,17 @@ class ApplicationController < ActionController::Base
   
   layout :dynamic_layout
   
-  # Render 404's
-  rescue_from ActiveRecord::RecordNotFound, :with => :missing_record_error
+  unless Rails.env.development?
+    # Render 404's
+    rescue_from ActiveRecord::RecordNotFound, :with => :missing_record_error
 
-  # Render 501's
-  rescue_from ActiveRecord::StatementInvalid, :with => :generic_error
-  rescue_from RuntimeError, :with => :generic_error
-  rescue_from NoMethodError, :with => :no_method_error
-  rescue_from NameError, :with => :generic_error
-  rescue_from ActionView::TemplateError, :with => :generic_error
+    # Render 501's
+    rescue_from ActiveRecord::StatementInvalid, :with => :generic_error
+    rescue_from RuntimeError, :with => :generic_error
+    rescue_from NoMethodError, :with => :no_method_error
+    rescue_from NameError, :with => :generic_error
+    rescue_from ActionView::TemplateError, :with => :generic_error
+  end
 
   private
 
