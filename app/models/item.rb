@@ -88,7 +88,7 @@ class Item < ActiveRecord::Base
         item_name_like = words.map{|k| "upper(name) LIKE upper('%#{k}%')" }.join(" AND ")
         item_desc_like = words.map{|k| "upper(description) LIKE upper('%#{k}%')" }.join(" AND ")
         sql_like = "(" + item_type_like + ") OR (" + item_name_like + ") OR (" + item_desc_like + ")"
-        search_sql = "select id from items where id in (#{items_sql}) and (#{sql_like})"
+        search_sql = "select id from items where id in (#{items_sql}) and (#{sql_like}) and deleted_at IS NULL"
         items_ids = ActiveRecord::Base.connection.execute(search_sql) 
  
         ids = items_ids.map{ |i| i["id"] }

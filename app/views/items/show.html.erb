@@ -23,7 +23,9 @@
 								<%= @item.description %>
 							</span>
 							<span>
-							   <%= link_to "Request this item", requests_path(:item_id => @item.id), :method => :post unless @item.is_owner?(current_user.person)%>
+                      <% unless @item.deleted? %>
+							   <%= link_to "Request this item", requests_path(:item_id => @item.id), :method => :post unless @item.is_owner?(current_user.person) %>
+                        <% end %>
 							</span>
 						</p>
 						<%= owner_only(@item) do %>
