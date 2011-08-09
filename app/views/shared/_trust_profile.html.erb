@@ -1,13 +1,15 @@
-<div class="trust-box-holder">
+<% viewing_my_profile = (person == current_user.person) %>
 
-	<div class="trust-reputation-box">
+<div class="trust-box-holder <%= 'my-trust-box-holder' if viewing_my_profile %>">
+	<div class="trust-reputation-box <%= 'my-trust-reputation-box' if viewing_my_profile %>">
 		
 		<div class="clearfix">
 			<h2>
 				<%= link_to person.name, person_path(person), :class => "loged-out" if name %> 
 			</h2>
 
-			<% if person != current_user.person %>
+			<% unless viewing_my_profile  %>
+
 				<% if person.requested_trusted_relationship?(current_user.person) %>
 				<h2 class="rhs-link">
 					<%= link_to "cancel trust request", people_network_request_path(person.requested_trusted_relationship(current_user.person)), :method => :delete %>
@@ -48,6 +50,8 @@
 			<li class="first clearfix">
 			  <%= in_network?(current_user.person, person )%>
 			</li>
+        
+			<% unless viewing_my_profile %>
 
 			<li class="second clearfix">
 				<!--
@@ -75,6 +79,7 @@
 					<%= link_to trusted, (network_person_path(person))%>		
 				</p>
 			</li>
+         <% end %>
 		</ul>
 	</div>
 </div><!-- /trust-reputation-box  -->
