@@ -6,6 +6,8 @@ class PeopleNetwork < ActiveRecord::Base
   scope :involves_as_person, lambda { |person| where(:person_id => person) }
   scope :involves, lambda { |person| where("person_id = ? OR trusted_person_id = ?", person.id, person.id) }
   
+  scope :trusted_personal_network, where(:entity_type_id => EntityType::TRUSTED_PERSON_ENTITY)
+
   validates_presence_of :person_id, :trusted_person_id
   
   # def requester?(person)

@@ -78,21 +78,26 @@ class Item < ActiveRecord::Base
   end
 
   def self.search(search, person_id)
-    if search.empty?
-        nil
-    else
-        person = Person.find_by_id(person_id)
-        items_sql = "select distinct resource_id from resource_networks where entity_id in (select entity_id from people_networks where person_id = #{person_id} and entity_type_id = 7)"     
-        words = search.split(/[ ]/)
-        item_type_like = words.map{|k| "upper(item_type) LIKE upper('%#{k}%') " }.join(" AND ")
-        item_name_like = words.map{|k| "upper(name) LIKE upper('%#{k}%')" }.join(" AND ")
-        item_desc_like = words.map{|k| "upper(description) LIKE upper('%#{k}%')" }.join(" AND ")
-        sql_like = "(" + item_type_like + ") OR (" + item_name_like + ") OR (" + item_desc_like + ")"
-        search_sql = "select id from items where id in (#{items_sql}) and (#{sql_like}) and deleted_at IS NULL"
-        items_ids = ActiveRecord::Base.connection.execute(search_sql) 
- 
-        ids = items_ids.map{ |i| i["id"] }
-        Item.where(:id => ids)
+    unless search.empty?
+      person = Person.find_by_id(person_id)
+
+      entity_ids = person.people_networks.trusted_personal_network.
+                          select(:entity_id).
+                          collect(&:entity_id)
+
+      items_ids = ResourceNetwork.select('DISTINCT resource_id').
+                                  where(:entity_id => entity_ids).
+                                  collect(&:resource_id)
+      
+      matcher = Item.where(:id => items_ids)
+
+      search.split(/[ ]/).each do |word|
+        matcher = matcher.
+          where("UPPER(item_type) like ? OR UPPER(name) like ? OR UPPER(description) like ?", 
+            "%#{word.upcase}%", "%#{word.upcase}%", "%#{word.upcase}%")
+      end
+
+      matcher = matcher.where(:deleted_at => nil)
     end
   end
   

@@ -1,20 +1,26 @@
 require 'spec_helper'
 
 describe Item do
-  # include UserSpecHelper
-  
   let(:person) { mock_model(Person) }
 
   it { should belong_to(:owner) }
+
   it { should have_many(:item_requests) }
   
   it { should validate_presence_of(:purpose) }
+
   it { should validate_presence_of(:item_type) }
+  
   it { should validate_presence_of(:name) }
+
   it { should validate_presence_of(:status) }
+
   it { should validate_presence_of(:owner_id) }
+
   it { should validate_presence_of(:owner_type) }
+
   it { should_not allow_value(Item::PURPOSE_SHAREAGE).for(:purpose) }
+
   it { should_not allow_value(Item::PURPOSE_COMMUNAL).for(:purpose) }
 
   it "should have a 'deleted' flag" do
@@ -101,5 +107,66 @@ describe Item, ".delete" do
     item.delete
     item.reload
     item.photo.should_not be_present
+  end
+end
+
+describe Item, '.search' do
+  let(:items_requester) { Factory(:person) }
+
+  let(:items_owner) { Factory(:person) }
+
+  let(:item_type_car) { Factory(:item, :item_type => 'car', :owner => items_owner) }
+
+  let(:item_named_stuff) { Factory(:item, :name => 'stuff', :owner => items_owner) }
+
+  let(:item_with_description) { Factory(:item, :description => 'Deux', :owner => items_owner) }
+
+  let(:item_deleted) { Factory(:item, :name => 'deleted', :owner => items_owner) }
+
+  before :each do
+    PeopleNetwork.create_trust!(items_owner, items_requester)
+
+    # Create a resource_network for each item
+    [item_type_car, item_named_stuff, item_with_description].each do |item|
+      Factory(:resource_network, :resource_id => item.id, :entity_id => items_requester.id)
+    end
+
+    # Create a 'duplicated' resource_network for testing purposes
+    Factory(:resource_network, :resource_id => item_named_stuff, 
+            :entity_id => items_requester.id)
+
+    item_deleted.delete
+  end
+
+  it "should return nil if the search term is empty" do
+    Item.search('', items_requester.id).should be_nil
+  end
+
+  it "should return the right item when searching for a specific type" do
+    result = Item.search('car', items_requester.id)  
+    result.should include(item_type_car)
+  end
+
+  it "should return the right item when searching for a specific name" do
+    result = Item.search('stuff', items_requester.id)  
+    result.should include(item_named_stuff)
+  end
+
+  it "should return the right item when searching for a specific description" do
+    result = Item.search('Deux', items_requester.id)
+    result.should include(item_with_description)
+  end
+
+  it "should not return duplicated items" do
+    result = Item.search('stuff', items_requester.id)
+    result.should have(1).items
+  end
+
+  it "should not return deleted items" do
+    Item.search('deleted', items_requester.id).should be_empty
+  end
+
+  it "should ignore the text case" do
+    Item.search('StuFf', items_requester.id).should_not be_empty  
   end
 end

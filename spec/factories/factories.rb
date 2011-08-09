@@ -98,3 +98,6 @@ end
 
 Factory.define :comment do |comment|
 end
+
+Factory.define :resource_network do |res_network|
+end
