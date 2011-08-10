@@ -1,11 +1,19 @@
 <div class="network-activity">
-	<h2><%= title ||= 'Your Network Activity' %></h2>
-		<ul>
-		  <% events.each do |event| %>
-		  <li class="sidebar-box clearfix">
-			<%= 
-				 render :partial => "shared/event_log_entry", :locals => { :event_log => event.event_log }
-			%>
+  <h2><%= title ||= 'Your Network Activity' %></h2>
+    <ul>
+      <% events.each do |event| %>
+		  <% event_sentence = event_log_sentence(event.event_log, nil, 
+                                                EventDisplay::DASHBOARD_FEED) %>
+            <% unless event_sentence.empty? %>
+            <li class="sidebar-box clearfix">
+            <div class="inner-content">
+              <p><%= event_sentence %></p>
+
+             <div class="action clearfix">
+               <%= render :partial => "shared/event_log_actions_compact", 
+                          :locals => { :event_log => event.event_log } %>
+             </div>
+         </div>
 			
 			<% comments = event.event_log.comments%>				
 			<div class="inner-content">
@@ -29,6 +37,7 @@
 							
 		</li>
 			    
+      <% end %>
 		<% end unless @events.nil? %>		
 	</ul>
 	
