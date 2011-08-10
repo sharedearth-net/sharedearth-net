@@ -24,18 +24,32 @@ class User < ActiveRecord::Base
   #Inform everybody if this person is their friend on fb
   def inform_mutural_friends(token)
     registered_user = FbGraph::User.me(token)
+    event_log = nil
+
     begin
       friends_list = registered_user.friends(options = {:access_token => token})  
     rescue
       puts "Access token was incorrect"
     end
-    friends_list.each do |friend|
-      connection = User.find(:first, :conditions => ['uid = ?', friend.identifier])
-      if !connection.nil? 
+
+    unless friends_list.nil?
+      friends_list.each do |friend|
+
+        connection = User.find(:first, :conditions => ['uid = ?', friend.identifier])
+        next if connection.nil?
+
         #First parameter user that joined, second person that is informed
-        EventLog.fb_friend_join_event_log(self.person, connection.person, EventType.fb_friend_join)
+        event_log = EventLog.fb_friend_join_event_log(self.person, connection.person, 
+                                                      EventType.fb_friend_join)
+        EventEntity.create!(:event_log => event_log, :entity => connection.person, 
+                            :user_only => true)
+      end 
+
+      unless event_log.nil?
+        EventEntity.create!(:event_log => event_log, :entity => self.person, 
+                            :user_only => true)  
       end
-    end unless friends_list.nil?
+    end
   end
   
   # Available avatar sizes

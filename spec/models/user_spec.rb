@@ -78,7 +78,7 @@ describe User, ".create_with_omniauth" do
   end
 
   it "should take only the first 20 chars from the provided name" do
-    truncated_name = valid_omniauth_hash["user_info"]["name"].slice(0..20)
+    truncated_name = valid_omniauth_hash["user_info"]["name"].slice(0..19)
     new_user = User.create_with_omniauth(valid_omniauth_hash)
     new_user.person.name.should match truncated_name
   end
@@ -96,6 +96,50 @@ describe User, ".avatar" do
     valid_user = User.new(valid_user_attributes)
     ["square", "small", "large"].each do |avatar_size|
       valid_user.avatar(avatar_size).should eql("http://graph.facebook.com/#{valid_user_attributes[:uid]}/picture/?type=#{avatar_size}")
+    end
+  end
+end
+
+describe User, ".inform_mutual_friends" do
+  let(:juan)  { Factory(:person) }
+
+  let(:maria) { Factory(:person) }
+
+  let(:pedro) { Factory(:person) }
+
+  let(:token) { '123abc' }
+
+  before :each do
+    # I hate using mocks, but it seems there's no other way around this =/
+    fb_pedro_user = mock('fb_pedro_user', { :identifier => pedro.user.uid })
+    fb_juan_user  = mock('fb_juan_user',  { :identifier => juan.user.uid })
+    fb_maria_user = mock('fb_maria_user', { :identifier => maria.user.uid })
+
+    fb_registered_user = mock('fb_registered_user')
+    fb_registered_user.stub(:friends).and_return([fb_pedro_user, fb_maria_user])
+
+    FbGraph::User.stub!(:me).and_return(fb_registered_user)
+  end
+  
+  context "When Juan joins sharedearth" do
+    before :each do
+      juan.user.inform_mutural_friends(token)
+    end
+
+    it "should create an event log notifying Maria" do
+      the_logs = EventLog.where(:primary_id  => juan.id).
+                          where(:secondary_id => maria.id)  
+      the_logs.should_not be_empty
+    end
+    
+    it "should create an event log notifying Pedro" do
+      the_logs = EventLog.where(:primary_id  => juan.id).
+                          where(:secondary_id => pedro.id)  
+      the_logs.should_not be_empty    
+    end
+
+    it "should not create duplicated event logs" do
+      EventEntity.where(:entity_id => juan.id).size.should == 1
     end
   end
 end
