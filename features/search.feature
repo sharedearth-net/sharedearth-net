@@ -1,8 +1,7 @@
 Feature: Searching for items and people
-
-  As a As user who has items and relationship with other users
-  I want to see if search can be performed
-  In order So I find item to request
+  As an user who has items and relationships with other users
+  I want to see if a search can be performed
+  In order to find items and people
   
   Background:
     Given the user is logged in
@@ -67,5 +66,17 @@ Feature: Searching for items and people
     Then I press "Search" 
     And I should see "In the network"
     And I should see "Maria"
-    
-    
+
+   Scenario: Searching for a person that has not accepted the Privacy Policy
+      Given a person exists with name: "Juan Antonio"
+      And that person has not accepted the Privacy Policy
+      When I fill in "search" with "Juan"
+      And I press "Search"
+      Then I should see "Juan Antonio"
+
+   Scenario: Searching for an unauthorized person
+      Given a person exists with name: "Lourdes Altagracia"
+      And that person is not authorized
+      When I fill in "search" with "Lourdes"
+      And I press "Search"
+      Then I should not see "Lourdes Altagracia"

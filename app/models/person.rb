@@ -27,7 +27,7 @@ class Person < ActiveRecord::Base
   after_create :create_entity_for_person
   after_create :create_person_join_activity_log
   
-  scope :authorized, where("authorised_account = true")
+  scope :authorized, where(:authorised_account => true)
 
   def network_activity
     my_people_id = trusted_friends.collect { |friend| friend.id }
@@ -92,7 +92,7 @@ class Person < ActiveRecord::Base
   end
   
   def self.search(search)
-    search.empty? ? '' : Person.where("upper(name) LIKE upper(?) and accepted_tc = (?) and accepted_pp = (?)", "%#{search}%", true, true)
+    search.empty? ? '' : authorized.where("UPPER(name) LIKE UPPER(?)", "%#{search}%")
   end
   
   def searchable_core_of_friends
