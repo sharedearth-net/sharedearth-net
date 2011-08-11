@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   layout :dynamic_layout
   
-  unless Rails.env.development?
+  if Rails.env.production?
     # Render 404's
     rescue_from ActiveRecord::RecordNotFound, :with => :missing_record_error
 

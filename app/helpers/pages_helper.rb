@@ -194,7 +194,13 @@ module PagesHelper
   end
   
   def fb_friend_join_sentence(event_log, person)
-    sentence = @first_person_full + " has connected to sharedearth.net " 
+    if person.id == event_log.primary_id
+      sentence = "You have connected to sharedearth.net " 
+
+    else
+      sentence = @first_person_full + " has connected to sharedearth.net " 
+    end
+
     sentence.html_safe 
   end
   
