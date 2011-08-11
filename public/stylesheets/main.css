@@ -565,7 +565,19 @@ a.normal:visited {
 						padding: 6px 0 3px 22px;
 						font-weight: normal;
 					}
-					
+				
+				
+			/* trust and reputation box - my trust */
+			
+			.my-trust-box-holder {
+			    background: url("../images/bg-trust-box-my.png") no-repeat 0 0  transparent;
+			    height: 180px;
+			    margin-bottom: 18px;
+			}
+			
+				.my-trust-reputation-box {
+				
+				}
 				
 		
 

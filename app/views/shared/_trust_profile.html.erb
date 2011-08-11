@@ -47,10 +47,26 @@
 		<%= image_tag("devider-trust-profile.png", :class => "devider", :alt => "")  %>
 		<h3><%= link_to 'Trust Profile', (network_person_path(person))%></h3>
 		<ul>
-			<li class="first clearfix">
-			  <%= in_network?(current_user.person, person )%>
-			</li>
-        
+			<% unless viewing_my_profile %>
+				<li class="first clearfix">
+				  <%= in_network?(current_user.person, person )%>
+				</li>
+			<% end %>
+        	
+
+			<% if viewing_my_profile %>
+				<li class="last clearfix">
+				  <% trusted_count = person.trusts_me_count %>
+					<%= image_tag("ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile")  %>
+
+					<p>
+						<% trusted = trusted_count.to_s + ((trusted_count == 1) ? " person " : " people ") + 'in your trusted network' %>
+						<%= link_to trusted, (network_person_path(person))%>		
+					</p>
+				</li>
+			<% end %>
+			
+
 			<% unless viewing_my_profile %>
 
 			<li class="second clearfix">
