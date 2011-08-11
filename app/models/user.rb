@@ -1,3 +1,5 @@
+require 'fb_service'
+
 class User < ActiveRecord::Base
   has_one :person, :dependent => :destroy
 
@@ -21,34 +23,17 @@ class User < ActiveRecord::Base
     user
   end
   
-  #Inform everybody if this person is their friend on fb
+  # Informs all the authorized user's friends
   def inform_mutural_friends(token)
-    registered_user = FbGraph::User.me(token)
-    event_log = nil
+    if person.authorised_account?
+      event_log   = EventLog.fb_friend_join_event_log(person)
+      friend_list = FbService.get_my_friends(token)
 
-    begin
-      friends_list = registered_user.friends(options = {:access_token => token})  
-    rescue
-      puts "Access token was incorrect"
-    end
-
-    unless friends_list.nil?
-      friends_list.each do |friend|
-
-        connection = User.find(:first, :conditions => ['uid = ?', friend.identifier])
-        next if connection.nil?
-
-        #First parameter user that joined, second person that is informed
-        event_log = EventLog.fb_friend_join_event_log(self.person, connection.person, 
-                                                      EventType.fb_friend_join)
-        EventEntity.create!(:event_log => event_log, :entity => connection.person, 
-                            :user_only => true)
+      friend_list.each do |friend|
+        create_fb_event_entity(event_log, friend)
       end 
 
-      unless event_log.nil?
-        EventEntity.create!(:event_log => event_log, :entity => self.person, 
-                            :user_only => true)  
-      end
+      create_fb_event_entity(event_log, person)
     end
   end
   
@@ -88,5 +73,11 @@ class User < ActiveRecord::Base
   def lock!
     self.lockout = Time.now
     save!
+  end
+
+  private
+
+  def create_fb_event_entity(event_log, person)
+    EventEntity.create!(:event_log => event_log, :entity => person, :user_only => true)
   end
 end

@@ -107,8 +107,6 @@ describe User, ".inform_mutual_friends" do
 
   let(:pedro) { Factory(:person) }
 
-  let(:jose) { Factory(:person, :authorised_account => false) }
-
   let(:token) { '123abc' }
 
   before :each do
@@ -116,10 +114,9 @@ describe User, ".inform_mutual_friends" do
     fb_pedro_user = mock('fb_pedro_user', { :identifier => pedro.user.uid })
     fb_juan_user  = mock('fb_juan_user',  { :identifier => juan.user.uid })
     fb_maria_user = mock('fb_maria_user', { :identifier => maria.user.uid })
-    fb_jose_user = mock('fb_jose_user',   { :identifier => jose.user.uid })
 
     fb_registered_user = mock('fb_registered_user')
-    fb_registered_user.stub(:friends).and_return([fb_pedro_user, fb_maria_user, fb_jose_user ])
+    fb_registered_user.stub(:friends).and_return([fb_pedro_user, fb_maria_user])
 
     FbGraph::User.stub!(:me).and_return(fb_registered_user)
   end
@@ -135,10 +132,16 @@ describe User, ".inform_mutual_friends" do
       }.to change { EventLog.count }.by(1)
     end
 
-    it "should create an Event Entity associated with each of its authorized friends" do
-      EventEntity.where(:entity_id => maria.id).should_not be_empty
-      EventEntity.where(:entity_id => pedro.id).should_not be_empty
-      EventEntity.where(:entity_id => jose.id).should be_empty
+    it "should create an event log notifying Maria" do
+      the_logs = EventLog.where(:primary_id  => juan.id).
+                          where(:secondary_id => maria.id)  
+      the_logs.should_not be_empty
+    end
+    
+    it "should create an event log notifying Pedro" do
+      the_logs = EventLog.where(:primary_id  => juan.id).
+                          where(:secondary_id => pedro.id)  
+      the_logs.should_not be_empty    
     end
 
     it "should not create duplicated event logs" do
