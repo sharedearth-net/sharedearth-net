@@ -64,7 +64,7 @@ group :development, :test do
   gem 'pickle'
   gem 'ruby-debug'
   gem 'heroku_san'
-  gem 'pg'
+#  gem 'pg'
 end
 gem "simplecov", :require => false, :group => :test
 gem 'activeadmin'
