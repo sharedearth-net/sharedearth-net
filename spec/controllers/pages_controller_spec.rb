@@ -4,8 +4,8 @@ describe PagesController do
   render_views
 
   let(:mock_item_request) { mock_model(ItemRequest).as_null_object }
-  let(:mock_person) { mock_model(Person).as_null_object }
-  let(:signedin_user) { generate_mock_user_with_person }
+  let(:mock_person) { Factory(:person) }
+  let(:signedin_user) { Factory(:person).user }
 
   it_should_require_signed_in_user_for_actions :dashboard
 
@@ -64,19 +64,16 @@ describe PagesController do
       end
       
       it "assigns the current person's active requests as @active_item_requests" do
-        mock_item_requests = [mock_model(ItemRequest, :created_at => Time.now), mock_model(ItemRequest, :created_at => Time.now)]
-        signedin_user.stub(:person).and_return(mock_model(Person))
+        mock_item_requests = [Factory(:item_request), Factory(:item_request)]
+        signedin_user.stub(:person).and_return(Factory(:person))
         signedin_user.person.stub(:active_item_requests) { mock_item_requests }
-        signedin_user.person.stub(:received_people_network_requests) { [] } # TODO
-        signedin_user.person.stub(:people_network_requests) { [] } # TODO
-        signedin_user.person.stub(:activity_logs) { [] } # TODO
-        signedin_user.person.stub(:news_feed) { [] } # TODO
+        signedin_user.person.stub(:received_people_network_requests) { [] }
+        signedin_user.person.stub(:people_network_requests) { [] }
+        signedin_user.person.stub(:activity_logs) { [] }
+        signedin_user.person.stub(:news_feed) { [] }
         get :dashboard
         assigns(:active_item_requests).should eq(mock_item_requests)
       end
-
     end
-
   end
-
 end

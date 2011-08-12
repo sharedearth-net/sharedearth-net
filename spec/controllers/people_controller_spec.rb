@@ -19,7 +19,7 @@ describe PeopleController do
       before do
         mock_person.stub(:items).and_return(mock_items)
         mock_person.stub(:belongs_to?).and_return(true)
-        Person.stub(:find).with("37") { mock_person }
+        Person.stub(:find_by_id).with("37") { mock_person }
       end
 
       it "should set the 'has_reviewed_profile' flag to true" do
@@ -44,7 +44,7 @@ describe PeopleController do
       before do
         mock_person.stub_chain(:items, :without_deleted).and_return(mock_items)
         mock_person.stub(:unanswered_requests).and_return(mock_item_requests)
-        Person.stub(:find).with("37") { mock_person }
+        Person.stub(:find_by_id).with("37") { mock_person }
         get :show, :id => "37"
       end
       
@@ -71,7 +71,7 @@ describe PeopleController do
       before do
         mock_person.stub(:items).and_return(mock_items)
         mock_person.stub(:belongs_to?).and_return(true)
-        Person.stub(:find).with("37") { mock_person }
+        Person.stub(:find_by_id).with("37") { mock_person }
       end
       
       it "assigns the requested person as @person" do
@@ -105,7 +105,7 @@ describe PeopleController do
 
       before do
         mock_person.stub(:belongs_to?).and_return(true)
-        Person.stub(:find).with("37") { mock_person }
+        Person.stub(:find_by_id).with("37") { mock_person }
       end
       
       describe "with valid params" do

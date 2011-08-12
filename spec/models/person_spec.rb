@@ -173,15 +173,24 @@ describe Person, ".network_activity" do
   end  
 
   it "should include the EventDisplays that belong to the person" do
-    my_event_displays.should include(*person.network_activity)
+    my_event_log_ids = my_event_displays.collect(&:event_log_id)
+    my_network_activity_events_ids = person.network_activity.collect(&:event_log_id)
+
+    my_event_log_ids.should include(*my_network_activity_events_ids)
   end
 
   it "should include the EventDisplays of the people on my trusted network" do
-    maria_event_displays.should include(*person.network_activity)
+    maria_event_log_ids = maria_event_displays.collect(&:event_log_id)
+    my_network_activity_events_ids = person.network_activity.collect(&:event_log_id)
+
+    my_network_activity_events_ids.should include(*maria_event_log_ids)
   end
 
   it "should not include the EventDisplays of the people that aren't on my trusted network" do
-    mr_t_event_displays.should_not include(*person.network_activity)
+    mr_t_event_log_ids = mr_t_event_displays.collect(&:event_log_id)
+    my_network_activity_events_ids = person.network_activity.collect(&:event_log_id)
+
+    my_network_activity_events_ids.should_not include(*mr_t_event_log_ids)
   end
 end
 

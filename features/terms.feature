@@ -48,7 +48,7 @@ Feature: Accepting terms
     Then I should see the words "TERMS AND CONDITIONS"
     When I follow "Accept"
     Then I should see "Transparency Policy"
-    When I follow "No thanks"
+    When I follow "Reject"
     Then I should see the words "Welcome" and "Connect"
   
   Scenario: I should be able to accept transparency
@@ -71,7 +71,7 @@ Feature: Accepting terms
     And I follow "Connect"
     Then I should see the words "Edit Profile"
     
-  Scenario: I should be able to decline terms, and get beck to same page
+  Scenario: I should be able to decline terms, and get back to the same page
     Then I fill in active invitation
     And I press "Submit"
     Then I should see the words "TERMS AND CONDITIONS"

@@ -124,9 +124,11 @@ describe ItemRequest, ".accept!" do
   end
 
   it "should raise exception if request object is cannot be saved" do
-    @item_request = ItemRequest.new # invalid object attrs
+    # invalid object attrs    
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_REQUESTED) 
     expect { @item_request.accept! }.to raise_error
   end
+
   after(:all) do
     #delete_item_request_helper_environment
   end
@@ -148,7 +150,8 @@ describe ItemRequest, ".reject!" do
   end
 
   it "should raise exception if request object is cannot be saved" do
-    @item_request = ItemRequest.new # invalid object attrs
+    # invalid object attrs 
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_REQUESTED)
     expect { @item_request.reject! }.to raise_error
   end
 
@@ -170,7 +173,8 @@ describe ItemRequest, ".cancel!" do
   end
 
   it "should raise exception if request object is cannot be saved" do
-    @item_request = ItemRequest.new # invalid object attrs
+    # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_REQUESTED)
     expect { @item_request.cancel!(@requester) }.to raise_error
   end
 
@@ -181,6 +185,7 @@ describe ItemRequest, ".collected!" do
 
   before(:each) do
     setup_item_request_helper_environment
+    @item_request.update_attributes(:status => ItemRequest::STATUS_ACCEPTED)
   end
   
   it "should update status to collected" do
@@ -192,7 +197,7 @@ describe ItemRequest, ".collected!" do
   end
 
   it "should raise exception if request object is cannot be saved" do
-    @item_request = ItemRequest.new # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_ACCEPTED)
     expect { @item_request.collected! }.to raise_error
   end
 end
@@ -202,6 +207,7 @@ describe ItemRequest, ".complete!" do
 
   before(:each) do
     setup_item_request_helper_environment
+    @item_request.update_attributes(:status => ItemRequest::STATUS_ACCEPTED)
   end
   
   it "should update status to completed" do
@@ -213,7 +219,8 @@ describe ItemRequest, ".complete!" do
   end
 
   it "should raise exception if request object is cannot be saved" do
-    @item_request = ItemRequest.new # invalid object attrs
+    # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_ACCEPTED) 
     expect { @item_request.complete!(@requester) }.to raise_error
   end
 

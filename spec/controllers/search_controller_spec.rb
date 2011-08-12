@@ -4,7 +4,7 @@ describe SearchController do
 
   describe "GET 'index'" do
     before do
-      controller.stub!(:current_user).and_return(signedin_user)
+      controller.stub!(:current_user).and_return(Factory(:person).user)
     end
     it "should be successful" do
       get 'index'

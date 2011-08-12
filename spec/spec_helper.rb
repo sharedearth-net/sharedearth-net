@@ -55,5 +55,28 @@ end
 #require 'simplecov'
 #SimpleCov.start
 
+module UserSpecHelper
+  def valid_user_attributes
+    {
+      :provider => 'facebook',
+      :uid => '111111111'
+    }
+  end
 
-
+  def valid_omniauth_hash
+    {
+      "provider" => 'facebook',
+      "uid" => '111111111',
+      "user_info" => {
+        "name" => "Slobodan Kovacevic",
+        "nickname" => "basti"
+      },
+      "credentials" => {
+        "token" => "111111111"
+      },
+      "extra" => {
+        "email" => "testing@test.net"
+      }
+    }
+  end
+end
