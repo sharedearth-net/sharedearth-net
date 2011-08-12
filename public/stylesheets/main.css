@@ -2456,6 +2456,24 @@ a.normal:visited {
 
 		}
 		
+		
+			/* Items Page - content - request button*/
+		
+			#items-page #content .inner-content .request-button-holder {
+				width: 90px;
+                height: 30px;
+				text-indent: -1000em;
+			}
+		
+			#items-page #content .inner-content .request-button-holder a:link,
+            #items-page #content .inner-content .request-button-holder a:visited {
+                display: block;
+                background: url('../images/bg-bt-request.png') no-repeat top left;
+                width: 90px;
+                height: 30px;
+            }
+
+		
 			#items-page #content ul.action-buttons-list {
 				margin-left: 0;
 				list-style: none;
