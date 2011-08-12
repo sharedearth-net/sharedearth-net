@@ -2,8 +2,10 @@
 
 module UserMocks
   def generate_mock_user_with_person(stubs = {})
-    defaults = {:name => "Slobodan Kovacevic", :nickname => "basti", :person => mock_person, :avatar => "http://graph.facebook.com/basti/picture"}
-    # @user = mock_model(User, defaults.merge(stubs))
+    defaults = {:name => "Slobodan Kovacevic", 
+                :nickname => "basti", 
+                :person => mock_person, 
+                :avatar => "http://graph.facebook.com/basti/picture"}
     mock_model(User, defaults.merge(stubs))
   end
   
@@ -13,6 +15,6 @@ module UserMocks
   
   def mock_person(stubs = {})
     defaults = {:authorised_account => true, :accepted_tc => true, :accepted_pp => true}
-    mock_model(Person, defaults.merge(stubs))
+    Factory(:person, defaults.merge(stubs))
   end
 end

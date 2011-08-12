@@ -2,13 +2,8 @@ require 'spec_helper'
 
 describe "pages/dashboard.html.erb" do
 
-  let(:signedin_user) { generate_mock_user_with_person }
-  let(:current_person) { 
-    mock_model(Person,
-      :name => "Current Person",
-      :avatar => "avatar-current.jpg"
-    )
-  }
+  let(:signedin_user)  { generate_mock_user_with_person }
+  let(:current_person) { Factory(:person, :name => "Current Person") }
 
   before(:each) do
     view.stub(:current_user).and_return(signedin_user)
