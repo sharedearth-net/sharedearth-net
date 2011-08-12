@@ -47,7 +47,7 @@ describe User, ".create_with_omniauth" do
   it "should create new person for this new user" do
     expect {
       User.create_with_omniauth(valid_omniauth_hash)
-    }.should change(Person, :count).by(1) 
+    }.should change(Person.unscoped, :count).by(1) 
   end
 
   it "should take only the first 20 chars from the provided name" do
@@ -116,24 +116,6 @@ describe User, ".inform_mutual_friends" do
 
     it "should not create duplicated event logs" do
       EventEntity.where(:entity_id => juan.id).size.should == 1
-    end
-  end
-
-  context "Unauthorized User" do
-    before :each do
-      juan.update_attributes(:authorised_account => false)
-    end
-
-    it "should not create a new Event Log" do
-      expect {
-        juan.user.inform_mutural_friends(token)
-      }.to_not change { EventLog.count }
-    end
-
-    it "should not create a new Event Entity for any of its friends" do
-      expect {
-        juan.user.inform_mutural_friends(token)
-      }.to_not change { EventEntity.count }
     end
   end
 end

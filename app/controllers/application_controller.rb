@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate_user!
-    if current_user.nil?
+    if current_user.nil? or current_user.person.nil?
       redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
     elsif !current_user.person.authorised? && Settings.invitations == 'true'
       redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
@@ -41,9 +41,11 @@ class ApplicationController < ActionController::Base
   
   # Control which layout is used.
   def dynamic_layout
-    if current_user.nil?
+    if current_user.nil? 
       'welcome'
-    elsif !current_user.person.authorised? && Settings.invitations == 'true'
+    elsif current_user.person.nil?
+      'beta_welcome'
+    elsif Settings.invitations == 'true' and not current_user.person.authorised?
       'beta_welcome'
     else
       'application'

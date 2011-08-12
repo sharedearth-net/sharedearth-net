@@ -35,14 +35,17 @@ class SessionsController < ApplicationController
   # provider: facebook
   ##
   def create
-    auth = request.env["omniauth.auth"]
+    auth  = request.env["omniauth.auth"]
     token = auth["credentials"]["token"]
-    user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth)
+    user  = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
+            User.create_with_omniauth(auth)
     user.token = token
     user.save!
+
     session[:user_id] = user.id
     session[:fb_token] = auth["credentials"]["token"] if auth['provider'] == 'facebook'
-    if user.person.authorised?
+
+    if not user.person.nil? and user.person.authorised?
       if user.person.accepted_tc? && user.person.accepted_pp?
         redirect_to dashboard_path
       elsif !user.person.accepted_tc?

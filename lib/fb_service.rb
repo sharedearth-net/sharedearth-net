@@ -16,7 +16,7 @@ module FbService
       friends_identifiers = friends_list.collect(&:identifier)
 
       user_list   = User.where(:uid => friends_identifiers)
-      people_ids  = user_list.collect(&:person).collect(&:id)
+      people_ids  = user_list.collect(&:person).delete_if { |p| p.nil? }.collect(&:id)
       friend_list = Person.authorized.where(:id => people_ids)
     end
 
