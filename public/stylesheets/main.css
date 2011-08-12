@@ -1437,27 +1437,24 @@ a.normal:visited {
 			padding:0;
 		}
 		
-		#community-page #content .items-expanded ul li.item,
-		#community-page #content .items-list ul li.item {
+		#community-page #content .items-expanded ul li.item {
 			height: 50px;
 		}
 		
-		#community-page #content .items-expanded ul li .thumb,
-		#community-page #content .items-list ul li .thumb {
+		#community-page #content .items-expanded ul li  {
 			    float: left;
 			    margin-right: 10px;
 			    margin-top: 3px;
 			    max-height: 50px;
 		}
 		
-		#community-page #content .items-expanded ul li div,
-		#community-page #content .items-list ul li div {
+		
+		#community-page #content .items-expanded ul li div {
 		    float: left;
 		    width: 382px;
 		}
 		
-		#community-page #content .items-expanded ul li.item,
-		#community-page #content .items-list ul li.item {
+		#community-page #content .items-expanded ul li.item {
 		    margin-bottom: 10px;
 		}
 		
@@ -1478,12 +1475,25 @@ a.normal:visited {
 				}
 	
 	
-	#community-page #content .items-expanded ul li .item-image-holder,
-	#community-page #content .items-list ul li .item-image-holder {
+	#community-page #content .items-expanded ul li .item-image-holder {
 		float: left;
 		width: 60px;
 	}
 	
+	
+	/* community page - items list */
+	
+	#community-page #content .items-list {
+	}
+	
+		#community-page #content .items-list ul {
+			margin-top: 10px;
+		}
+	
+		#community-page #content .items-list ul li.item {
+		    margin-bottom: 0px;
+			height: auto;
+		}
 	
 	
 	/* community page - sidebar */
