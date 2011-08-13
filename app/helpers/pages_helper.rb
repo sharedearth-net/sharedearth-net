@@ -525,7 +525,7 @@ module PagesHelper
         when 'ITEM REPAIRED'
             res = "<li>#{link_to "view item", item_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"  
         when 'FB FRIEND JOIN'
-          res = "<li>#{link_to "view profile", person_path(log.secondary)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"  
+          res = "<li>#{link_to "view profile", person_path(log.primary)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"  
         else
           res = ""
       end

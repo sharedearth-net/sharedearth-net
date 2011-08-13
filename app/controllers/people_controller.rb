@@ -69,8 +69,8 @@ class PeopleController < ApplicationController
     else           
       @items = @person.trusted_friends_items
     end
-    @events = EventDisplay.paginate(:page => params[:page], :per_page => 10, :conditions => [ 'person_id=?', current_user.person.id ], 
-                                                                             :order => 'created_at DESC', :include => [:event_log])
+
+    @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25) 
   end
 
   def edit
