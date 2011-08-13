@@ -2,17 +2,25 @@ require 'spec_helper'
 
 describe Person do
   let(:user) { mock_model(User) }
+
   let(:short_name) { 'some normal name' }
+
   let(:long_name) { 'juan' * 20 }
 
   it { should belong_to(:user) }
+
   it { should have_many(:items) }
+
   it { should have_many(:item_requests) }
+
   it { should have_many(:item_gifts) }
   
   it { should validate_presence_of(:user_id) }
+
   it { should validate_presence_of(:name) }
+
   it { should allow_value(short_name).for(:name) }
+
   it { should_not allow_value(long_name).for(:name) }
 
   it "should check if it belongs to user" do
@@ -98,12 +106,22 @@ describe Person, ".request_trusted_relationship" do
   
   it "should create new person network request" do
     request_person = stub_model(Person, :name => "Requester")
-    person = stub_model(Person, :name => "Receiver")
+    person         = stub_model(Person, :name => "Receiver")
     expect {
       person.request_trusted_relationship(request_person)
     }.to change { person.received_people_network_requests.count }.by(1)
   end
-  
+
+
+  it "should create only one person network request on mulitple request attempts" do
+    requester = Factory(:person)
+    requested = Factory(:person)
+    
+    expect {
+      requested.request_trusted_relationship(requester)
+      requested.request_trusted_relationship(requester)
+    }.to change { PeopleNetworkRequest.count }.by(1) 
+  end
 end
 
 describe Person, ".requested_trusted_relationship?" do

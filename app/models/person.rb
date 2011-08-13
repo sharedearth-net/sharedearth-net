@@ -4,9 +4,13 @@ class Person < ActiveRecord::Base
   has_many :item_requests, :as => :requester
   has_many :item_gifts, :as => :gifter, :class_name => "ItemRequest"
   has_many :people_network_requests
-  has_many :received_people_network_requests, :class_name => "PeopleNetworkRequest", :foreign_key => "trusted_person_id"
+  has_many :received_people_network_requests, 
+           :class_name => "PeopleNetworkRequest", 
+           :foreign_key => "trusted_person_id"
   has_many :people_networks
-  has_many :received_people_networks, :class_name => "PeopleNetwork", :foreign_key => "trusted_person_id"
+  has_many :received_people_networks, 
+           :class_name => "PeopleNetwork", 
+           :foreign_key => "trusted_person_id"
 
   has_many :activity_logs, :as => :primary
   has_many :activity_logs_as_secondary, :as => :secondary, :class_name => "ActivityLog"
@@ -232,7 +236,9 @@ class Person < ActiveRecord::Base
   ###########
   
   def request_trusted_relationship(person_requesting)
-    self.received_people_network_requests.create(:person => person_requesting)
+    unless requested_trusted_relationship?(person_requesting)
+      received_people_network_requests.create(:person => person_requesting)
+    end
   end
   
   def requested_trusted_relationship?(person_requesting)

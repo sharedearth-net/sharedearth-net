@@ -12,10 +12,20 @@ Feature: Relationship management page
       Then I follow "establish trust"
       And I should see "Establish trust request pending"
 
-   @last_test
    Scenario: Notifications of acceptance of trust request
       Given I am on "Maria"'s profile page
       And I follow "establish trust"
       And "Maria" accepts my trust request
       When I go to the dashboard page
       Then I should see "You have established a trusted relationship with" only once
+
+   Scenario: Requesting a trust relationship more than once
+      Given I request a trust relationship with "Maria" 2 times
+      When I am on the dashboard page
+      Then I should see "You are establishing a trusted relationship with"
+
+   Scenario: Both users request a trust relationship at the same time
+      Given I request a trust relationship with "Maria" 1 times
+      And "Maria" request a trust relationship with me
+      When I am on the dashboard page
+      Then I should see "You have established a trusted relationship with"
