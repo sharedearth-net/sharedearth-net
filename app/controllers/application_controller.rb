@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(user_id) if user_id
     # TODO: should handle unlikely case where user with that ID no longer exists
   end
+
+  def current_person
+    current_user.person if current_user
+  end
   
   def authenticate_user!
     if current_user.nil? or current_user.person.nil?
