@@ -19,10 +19,21 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def next_policy_path
+    if not current_user.person.accepted_tc?
+      terms_path
+    elsif not current_user.person.accepted_tr?
+      transparency_index_path
+    elsif not current_user.person.accepted_pp?
+      principles_terms_path
+    else
+      current_person.has_reviewed_profile? ? dashboard_path : edit_person_path(current_person)
+    end
+  end
+
   def current_user
     user_id = session[:user_id]
     @current_user ||= User.find(user_id) if user_id
-    # TODO: should handle unlikely case where user with that ID no longer exists
   end
 
   def current_person
@@ -30,16 +41,14 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate_user!
-    if current_user.nil? or current_user.person.nil?
+    if current_user.nil? or current_person.nil?
       redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
-    elsif !current_user.person.authorised? && Settings.invitations == 'true'
+    elsif Settings.invitations == 'true' and not current_person.authorised?
       redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
-    elsif !current_user.person.accepted_tc?
-      redirect_to terms_path
-    elsif !current_user.person.accepted_tr?
-      redirect_to transparency_index_path
-    elsif !current_user.person.accepted_pp?
-      redirect_to principles_terms_path
+    elsif not current_person.accepted_tc? or 
+          not current_person.accepted_tr? or 
+          not current_person.accepted_pp?
+      redirect_to next_policy_path
     end
   end
   

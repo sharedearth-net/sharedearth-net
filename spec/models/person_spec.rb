@@ -229,3 +229,62 @@ describe Person, ".trusted_friends_items" do
     juan.trusted_friends_items.size.should == 4
   end 
 end
+
+describe Person, ".accepted_tc?" do
+  it "should return false if the accepted_tc flag is set to false" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_tc => false)
+    person.accepted_tc?.should be_false
+  end
+
+  it "should return false if the tc_version is not the same as the one in the app" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_tc => true, :tc_version => 1)
+    TC_VERSION = 2
+    person.accepted_tc?.should be_false
+  end
+
+  it "should return true otherwise" do
+    person = Factory(:person)
+    TC_VERSION = 2
+    person.update_attributes(:accepted_tc => true, :tc_version => TC_VERSION)
+    person.accepted_tc?.should be_true
+  end
+end
+
+describe Person, ".accepted_tr?" do
+  it "should return false if the accepted_tr flag is set to false" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_tr => false)
+    person.accepted_tr?.should be_false
+  end
+
+  it "should return true otherwise" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_tc => true)
+    person.accepted_tr?.should be_true
+  end
+end
+
+describe Person, ".accepted_pp?" do
+  it "should return false if the accepted_pp flag is set to false" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_pp => false)
+    person.accepted_pp?.should be_false
+  end
+
+  it "should return false if the tc_version is not the same as the one in the app" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_pp => true, :pp_version => 1)
+    PP_VERSION = 2
+    person.accepted_pp?.should be_false
+  end
+
+  it "should return true otherwise" do
+    person = Factory(:person)
+    PP_VERSION = 2
+    person.update_attributes(:accepted_pp => true, :pp_version => PP_VERSION)
+    person.accepted_pp?.should be_true
+  end
+end
+

@@ -13,6 +13,8 @@ Given /^I am signed in with provider "([^"]*)"$/ do |provider|
 end
 
 Given /^the user is logged in$/ do
+  FbService.stub!(:fb_logout_url).and_return(dashboard_path)
+
   person = Factory(:person, :id => 1)
   person.authorise!
   person.accept_tc!
@@ -23,11 +25,15 @@ Given /^the user is logged in$/ do
 end
 
 Given /^the unauthorised user is logged in$/ do
+  FbService.stub!(:fb_logout_url).and_return(dashboard_path)
+
   omniauth_mock_facebook
   visit "/auth/facebook"
 end
 
 Given /^the unaccepted user is logged in$/ do
+  FbService.stub!(:fb_logout_url).and_return(dashboard_path)
+
   person = Factory(:person)
   person.authorise!
   omniauth_mock_facebook_with_uid(person.user.uid)
@@ -37,4 +43,3 @@ end
 Given /^the invitation system is on$/ do
   Settings.invitations = 'true'
 end
-

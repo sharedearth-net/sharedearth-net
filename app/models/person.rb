@@ -63,11 +63,12 @@ class Person < ActiveRecord::Base
   
   def accept_tc!
     self.accepted_tc = true
+    self.tc_version  = TC_VERSION
     save!
   end
   
   def accepted_tc?
-    self.accepted_tc == true
+    self.accepted_tc and self.tc_version == TC_VERSION
   end
   
   def accept_tr!
@@ -76,16 +77,17 @@ class Person < ActiveRecord::Base
   end
   
   def accepted_tr?
-    self.accepted_tr == true
+    self.accepted_tr
   end
   
   def accept_pp!
     self.accepted_pp = true
+    self.pp_version  = PP_VERSION
     save!
   end
   
   def accepted_pp?
-    self.accepted_pp == true
+    self.accepted_pp and self.pp_version == PP_VERSION
   end
   
   def create_entity_for_person

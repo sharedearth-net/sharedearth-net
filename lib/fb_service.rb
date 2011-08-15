@@ -22,4 +22,11 @@ module FbService
 
     friend_list
   end
+
+  def self.fb_logout_url(fb_api_key, fb_session_key, return_url)
+    url = "http://www.facebook.com/logout.php"
+    url << "?api_key=#{fb_api_key}"
+    url << "&session_key=#{fb_session_key}"
+    url << "&confirm=1&next=#{return_url}"
+  end
 end

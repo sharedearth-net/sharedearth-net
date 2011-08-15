@@ -50,6 +50,7 @@ class InvitationsController < ApplicationController
   
   def validate
    redirect_to root_path, :notice => "Your account has been locked. Try again in 24 hours" and return if current_user.locked?
+
    key = params[:key]
    unless key.empty?
      invitation = Invitation.find_by_invitation_unique_key(key)
@@ -57,7 +58,7 @@ class InvitationsController < ApplicationController
         invitation.update_attributes(:invitee_person_id => current_user.person.id, :accepted_date => Time.now, :invitation_active => false)
         current_user.person.authorise!
         current_user.inform_mutural_friends(session[:fb_token])
-        redirect_to terms_path and return
+        redirect_to next_policy_path and return
      end
    end 
    current_user.validation_failed!
