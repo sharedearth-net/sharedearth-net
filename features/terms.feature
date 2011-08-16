@@ -117,7 +117,6 @@ Feature: Accepting terms
       And I press "Submit"
       Then I should be on the dashboard page
 
-   @last_test
    Scenario: User should not see the logo, name and toolbar on the Terms page
       Then I fill in active invitation
       And I press "Submit"
@@ -125,7 +124,6 @@ Feature: Accepting terms
       And I should not see the page name
       And I should not see the toolbar
 
-   @last_test
    Scenario: User should not see the logo, name and toolbar on the Transparency page
       Then I fill in active invitation
       And I press "Submit"
@@ -134,7 +132,6 @@ Feature: Accepting terms
       And I should not see the page name
       And I should not see the toolbar
 
-   @last_test
    Scenario: User should not see the logo, name and toolbar on the Principles page
       Then I fill in active invitation
       And I press "Submit"

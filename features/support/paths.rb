@@ -25,6 +25,8 @@ module NavigationHelpers
     when /"(.+)"'s profile page/
       person = Person.find_by_name($1)
       person_path(person)
+    when /others page/
+      others_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

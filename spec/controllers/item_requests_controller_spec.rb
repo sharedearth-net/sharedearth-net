@@ -36,6 +36,7 @@ describe ItemRequestsController do
 
       before do
         Item.stub(:find).with("42").and_return(mock_item)
+        Item.stub(:find_by_id).with("42").and_return(mock_item)
         mock_item_request.stub(:requester=)
         mock_item_request.stub(:gifter=)
       end
@@ -124,11 +125,10 @@ describe ItemRequestsController do
     end
 
     describe "POST create" do
-
       describe "with valid params" do
-
         before do
           mock_item_request.stub(:save).and_return(true)
+          Item.stub(:find_by_id).and_return(Factory(:item))
         end
 
         it "assigns a newly created item request as @item_request" do
@@ -171,6 +171,7 @@ describe ItemRequestsController do
 
         before do
           mock_item_request.stub(:save).and_return(false)
+          Item.stub(:find_by_id).and_return(Factory(:item))
         end
         
         it "assigns a newly created but unsaved request as @item_request" do

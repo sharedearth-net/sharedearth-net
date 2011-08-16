@@ -1,5 +1,4 @@
 Sharedearthapp::Application.routes.draw do
-
   resources :transparency, :only => [:index] do
     collection do
       put 'accept_tr'
@@ -7,8 +6,10 @@ Sharedearthapp::Application.routes.draw do
   end
 
   ActiveAdmin.routes(self)
-  
 
+  resources :fb_friends, :only => [:index]
+  get 'others'            => "fb_friends#index"
+  get 'search_fb_friends' => "fb_friends#search"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_scope :admin_user do
