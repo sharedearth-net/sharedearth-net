@@ -1943,8 +1943,6 @@ a.normal:visited {
 	
 	.feedback-box {
 		background: #fff;
-		border-right: 2px solid #076d04;
-		border-left: 2px solid #076d04;
 		width: 428px;
 		padding: 10px 28px;
 	}
@@ -1952,6 +1950,7 @@ a.normal:visited {
 		#wrapper .feedback-box p {
 			font-size: 14px;
 			margin-bottom: 20px;
+			text-align: center;
 		}
 	
 		ul.feedback-buttons {
