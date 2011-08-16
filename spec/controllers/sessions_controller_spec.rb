@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe SessionsController do
+  include UserSpecHelper
 
   describe "GET 'destroy'" do
     def do_get
@@ -15,6 +16,7 @@ describe SessionsController do
 
     it "should remove user_id from session (signout user)" do
       session[:user_id] = 1
+      session[:fb_token] = '123'
       do_get
       session[:user_id].should be_nil
     end
@@ -22,8 +24,8 @@ describe SessionsController do
 
   describe "GET 'create'" do
     before do
-      @auth = {"provider" => "facebook", "uid" => "111111", "user_info" => { "name" => "Slobodan Kovacevic", "nickname" => "basti" }, "credentials" => { "token" => "101448083266993|e988f10d01ea27bff083648b.1-625817457|vbqk5KMmrxogpCzR9A2JFA_KEBg"} }
-      @user = mock_model(User)
+      @auth = valid_omniauth_hash
+      @user = Factory(:person).user
       request.stub!(:env).and_return({ "omniauth.auth" => @auth })
     end
     
@@ -52,7 +54,7 @@ describe SessionsController do
     it "should set flash notice redirect user to root url" do
       do_get
       flash[:notice].should eql(nil)
-      response.should redirect_to(dashboard_path)
+      response.should redirect_to root_path
     end
   end
   

@@ -3,8 +3,10 @@ require 'spec_helper'
 describe PeopleNetworkRequestsController do
 
   let(:signedin_user) { generate_mock_user_with_person }
-  let(:mock_person)   { mock_model(Person).as_null_object }
-  let(:mock_people_network_request)   { mock_model(PeopleNetworkRequest).as_null_object }
+
+  let(:mock_person) { mock_model(Person).as_null_object }
+
+  let(:mock_people_network_request) { mock_model(PeopleNetworkRequest).as_null_object }
 
   it_should_require_signed_in_user_for_actions :all
 
@@ -32,6 +34,7 @@ describe PeopleNetworkRequestsController do
     describe "POST create" do
 
       before do
+        signedin_user.person.should_receive(:requested_trusted_relationship?)
         mock_person.stub(:belongs_to?).and_return(true)
         Person.stub(:find).with("37") { mock_person }
       end
@@ -52,7 +55,6 @@ describe PeopleNetworkRequestsController do
         post :create, :trusted_person_id => "37"
         response.should redirect_to(person_path(mock_person))
       end
-
     end
 
     describe "DELETE destroy" do
@@ -60,7 +62,7 @@ describe PeopleNetworkRequestsController do
       before do
         # mock_person.stub(:belongs_to?).and_return(true)
         mock_people_network_request.stub(:trusted_person).and_return(mock_person)
-        PeopleNetworkRequest.stub(:find).with("37") { mock_people_network_request }
+        PeopleNetworkRequest.stub(:find_by_id).with("37") { mock_people_network_request }
       end
     
       it "assigns the requested request as @person_network_request" do
@@ -106,7 +108,7 @@ describe PeopleNetworkRequestsController do
     
       before(:each) do
         mock_people_network_request.stub(:trusted_person).and_return(mock_person)
-        PeopleNetworkRequest.stub(:find).with("37") { mock_people_network_request }
+        PeopleNetworkRequest.stub(:find_by_id).with("37") { mock_people_network_request }
       end
 
       it "assigns the requested request as @item_request" do

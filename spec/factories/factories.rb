@@ -66,6 +66,9 @@ Factory.define :people_network do |p|
   p.entity_type_id 7
 end
 
+Factory.define :people_network_request do |p|
+end
+
 Factory.define :event_log do |i|
   i.association :primary, :factory => :person
   i.primary_short_name 'Shary'

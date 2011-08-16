@@ -2,17 +2,25 @@ require 'spec_helper'
 
 describe Person do
   let(:user) { mock_model(User) }
+
   let(:short_name) { 'some normal name' }
+
   let(:long_name) { 'juan' * 20 }
 
   it { should belong_to(:user) }
+
   it { should have_many(:items) }
+
   it { should have_many(:item_requests) }
+
   it { should have_many(:item_gifts) }
   
   it { should validate_presence_of(:user_id) }
+
   it { should validate_presence_of(:name) }
+
   it { should allow_value(short_name).for(:name) }
+
   it { should_not allow_value(long_name).for(:name) }
 
   it "should check if it belongs to user" do
@@ -98,12 +106,22 @@ describe Person, ".request_trusted_relationship" do
   
   it "should create new person network request" do
     request_person = stub_model(Person, :name => "Requester")
-    person = stub_model(Person, :name => "Receiver")
+    person         = stub_model(Person, :name => "Receiver")
     expect {
       person.request_trusted_relationship(request_person)
     }.to change { person.received_people_network_requests.count }.by(1)
   end
-  
+
+
+  it "should create only one person network request on mulitple request attempts" do
+    requester = Factory(:person)
+    requested = Factory(:person)
+    
+    expect {
+      requested.request_trusted_relationship(requester)
+      requested.request_trusted_relationship(requester)
+    }.to change { PeopleNetworkRequest.count }.by(1) 
+  end
 end
 
 describe Person, ".requested_trusted_relationship?" do
@@ -173,15 +191,24 @@ describe Person, ".network_activity" do
   end  
 
   it "should include the EventDisplays that belong to the person" do
-    my_event_displays.should include(*person.network_activity)
+    my_event_log_ids = my_event_displays.collect(&:event_log_id)
+    my_network_activity_events_ids = person.network_activity.collect(&:event_log_id)
+
+    my_event_log_ids.should include(*my_network_activity_events_ids)
   end
 
   it "should include the EventDisplays of the people on my trusted network" do
-    maria_event_displays.should include(*person.network_activity)
+    maria_event_log_ids = maria_event_displays.collect(&:event_log_id)
+    my_network_activity_events_ids = person.network_activity.collect(&:event_log_id)
+
+    my_network_activity_events_ids.should include(*maria_event_log_ids)
   end
 
   it "should not include the EventDisplays of the people that aren't on my trusted network" do
-    mr_t_event_displays.should_not include(*person.network_activity)
+    mr_t_event_log_ids = mr_t_event_displays.collect(&:event_log_id)
+    my_network_activity_events_ids = person.network_activity.collect(&:event_log_id)
+
+    my_network_activity_events_ids.should_not include(*mr_t_event_log_ids)
   end
 end
 
@@ -202,3 +229,62 @@ describe Person, ".trusted_friends_items" do
     juan.trusted_friends_items.size.should == 4
   end 
 end
+
+describe Person, ".accepted_tc?" do
+  it "should return false if the accepted_tc flag is set to false" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_tc => false)
+    person.accepted_tc?.should be_false
+  end
+
+  it "should return false if the tc_version is not the same as the one in the app" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_tc => true, :tc_version => 1)
+    TC_VERSION = 2
+    person.accepted_tc?.should be_false
+  end
+
+  it "should return true otherwise" do
+    person = Factory(:person)
+    TC_VERSION = 2
+    person.update_attributes(:accepted_tc => true, :tc_version => TC_VERSION)
+    person.accepted_tc?.should be_true
+  end
+end
+
+describe Person, ".accepted_tr?" do
+  it "should return false if the accepted_tr flag is set to false" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_tr => false)
+    person.accepted_tr?.should be_false
+  end
+
+  it "should return true otherwise" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_tc => true)
+    person.accepted_tr?.should be_true
+  end
+end
+
+describe Person, ".accepted_pp?" do
+  it "should return false if the accepted_pp flag is set to false" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_pp => false)
+    person.accepted_pp?.should be_false
+  end
+
+  it "should return false if the tc_version is not the same as the one in the app" do
+    person = Factory(:person)
+    person.update_attributes(:accepted_pp => true, :pp_version => 1)
+    PP_VERSION = 2
+    person.accepted_pp?.should be_false
+  end
+
+  it "should return true otherwise" do
+    person = Factory(:person)
+    PP_VERSION = 2
+    person.update_attributes(:accepted_pp => true, :pp_version => PP_VERSION)
+    person.accepted_pp?.should be_true
+  end
+end
+

@@ -14,7 +14,6 @@ class TransparencyController < ApplicationController
   
   def accept_tr
     current_user.person.accept_tr!
-    redirect_to principles_terms_path
+    redirect_to next_policy_path
   end
-
 end

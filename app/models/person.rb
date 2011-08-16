@@ -4,9 +4,13 @@ class Person < ActiveRecord::Base
   has_many :item_requests, :as => :requester
   has_many :item_gifts, :as => :gifter, :class_name => "ItemRequest"
   has_many :people_network_requests
-  has_many :received_people_network_requests, :class_name => "PeopleNetworkRequest", :foreign_key => "trusted_person_id"
+  has_many :received_people_network_requests, 
+           :class_name => "PeopleNetworkRequest", 
+           :foreign_key => "trusted_person_id"
   has_many :people_networks
-  has_many :received_people_networks, :class_name => "PeopleNetwork", :foreign_key => "trusted_person_id"
+  has_many :received_people_networks, 
+           :class_name => "PeopleNetwork", 
+           :foreign_key => "trusted_person_id"
 
   has_many :activity_logs, :as => :primary
   has_many :activity_logs_as_secondary, :as => :secondary, :class_name => "ActivityLog"
@@ -27,6 +31,7 @@ class Person < ActiveRecord::Base
   after_create :create_entity_for_person
   after_create :create_person_join_activity_log
   
+  default_scope where(:authorised_account => true) if INVITATION_SYS_ON
   scope :authorized, where(:authorised_account => true)
 
   def network_activity
@@ -58,11 +63,12 @@ class Person < ActiveRecord::Base
   
   def accept_tc!
     self.accepted_tc = true
+    self.tc_version  = TC_VERSION
     save!
   end
   
   def accepted_tc?
-    self.accepted_tc == true
+    self.accepted_tc and self.tc_version == TC_VERSION
   end
   
   def accept_tr!
@@ -71,16 +77,17 @@ class Person < ActiveRecord::Base
   end
   
   def accepted_tr?
-    self.accepted_tr == true
+    self.accepted_tr
   end
   
   def accept_pp!
     self.accepted_pp = true
+    self.pp_version  = PP_VERSION
     save!
   end
   
   def accepted_pp?
-    self.accepted_pp == true
+    self.accepted_pp and self.pp_version == PP_VERSION
   end
   
   def create_entity_for_person
@@ -231,7 +238,9 @@ class Person < ActiveRecord::Base
   ###########
   
   def request_trusted_relationship(person_requesting)
-    self.received_people_network_requests.create(:person => person_requesting)
+    unless requested_trusted_relationship?(person_requesting)
+      received_people_network_requests.create(:person => person_requesting)
+    end
   end
   
   def requested_trusted_relationship?(person_requesting)

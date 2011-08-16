@@ -9,12 +9,12 @@ class TermsController < ApplicationController
 
   def accept_tc
     current_user.person.accept_tc!
-    redirect_to transparency_index_path
+    redirect_to next_policy_path
   end
   
   def accept_pp
     current_user.person.accept_pp!
-    redirect_to edit_person_path(current_user.person)
+    redirect_to next_policy_path
   end
     
   def dynamic_layout

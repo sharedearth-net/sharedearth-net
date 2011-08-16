@@ -6,12 +6,15 @@ class PeopleNetworkRequestsController < ApplicationController
 
   def create
     @trusted_person = Person.find(params[:trusted_person_id])
-    if @trusted_person.request_trusted_relationship(current_user.person)
-      redirect_to @trusted_person
+    current_person  = current_user.person
+
+    if current_person.requested_trusted_relationship?(@trusted_person)
+      current_person.requested_trusted_relationship(@trusted_person).confirm!
     else
-      # TODO: handle this better (should not happen)
-      redirect_to @trusted_person
-    end  
+      @trusted_person.request_trusted_relationship(current_person)
+    end
+
+    redirect_to @trusted_person
   end
   
   def destroy
@@ -32,8 +35,10 @@ class PeopleNetworkRequestsController < ApplicationController
   # end
 
   private
+
   def get_people_network_request
-    @people_network_request = PeopleNetworkRequest.find(params[:id])
+    @people_network_request = PeopleNetworkRequest.find_by_id(params[:id])
+    redirect_to dashboard_path if @people_network_request.nil?
   end
 
   def only_requester_or_trusted_person
