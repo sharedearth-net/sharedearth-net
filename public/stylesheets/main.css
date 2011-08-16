@@ -3491,3 +3491,6 @@ a.normal:visited {
 		width: 43px;
 	}
 
+.hide-on-policy-page {
+  display: none !important;
+}

@@ -43,3 +43,16 @@ Given /^the logged person has accepted all terms and conditions$/ do
                                   :authorised_account   => true,
                                   :has_reviewed_profile => true)
 end
+
+
+Then /^I should not see the logo$/ do
+  page.should have_css('div.header-lhs.hide-on-policy-page', :visible => false)
+end
+
+Then /^I should not see the page name$/ do
+  page.should have_css('div.logo-type-holder.hide-on-policy-page', :visible => false)
+end
+
+Then /^I should not see the toolbar$/ do
+  page.should have_css('div.bar-holder div.hide-on-policy-page', :visible => false)
+end

@@ -4,20 +4,18 @@
   <title>sharedearth.net</title>
   <%= render :partial => "layouts/meta_header" %>
 </head>
+
 <body>
+  <div id="container">
+    <div id="header">
+	   <div class="header-lhs <%= yield(:hide_on_policy_class)%>">
+		  <%= link_to "sharedearth.net", dashboard_path, 
+                    :title => "sharedearth.net - trust. share. connect." %>
+       </div>
 
-	<div id="container">
-		<div id="header">
-
-			<div class="header-lhs">
-				<%= link_to "sharedearth.net", dashboard_path, :title => "sharedearth.net - trust. share. connect." %>
-			</div>
-
-			<div class="header-rhs">
-
+			<div class="header-rhs" style="<%= yield(:hide_on_policy_margin)%>">
 				<div class="clearfix">
-
-					<div class="status-holder">
+					<div class="status-holder <%= yield(:hide_on_policy_class)%>">
 						<ul>
 							<li class="feedback-rating">
 							  <% feedback_rating = current_user.person.reputation_rating.feedback_rating? if !current_user.nil?%>
@@ -40,8 +38,10 @@
 							</li>
 						</ul>
 					</div>
-					<div class="logo-type-holder">
-						<%= link_to "sharedearth.net", root_path, :title => "sharedearth.net - trust. share. connect." %>
+
+					<div class="logo-type-holder <%= yield(:hide_on_policy_class)%>">
+						<%= link_to "sharedearth.net", root_path, 
+                              :title => "sharedearth.net - trust. share. connect." %>
 					</div>
 
 				</div>
@@ -49,7 +49,7 @@
 				<div class="bar-holder">
 
 
-					<div class="bar-holder-rhs">
+					<div class="bar-holder-rhs <%= yield(:hide_on_policy_class)%>">
 						<ul>
 							<li>
 								<% if current_user %>
@@ -67,7 +67,7 @@
 						</ul>
 					</div>
 
-					<div class="search-holder clearfix">
+					<div class="search-holder clearfix <%= yield(:hide_on_policy_class)%>">
 					  <%= form_tag search_index_path, :method => 'get' do %>
 					<div class="search-bg-holder-first clearfix">
               			<div class="search-bg-holder-second clearfix">
@@ -78,7 +78,7 @@
             <% end %>
 					</div>
 
-					<div class="bar-holder-home">
+					<div class="bar-holder-home <%= yield(:hide_on_policy_class)%>">
 						<ul>				
 	                        <li>
 								<% if current_user %>
@@ -88,7 +88,7 @@
 	                    </ul>
 					</div>
 
-					<div class="bar-holder-lhs">
+					<div class="bar-holder-lhs <%= yield(:hide_on_policy_class)%>">
 						<ul>
 							<li>
 								<%= link_to "share", new_item_path %>

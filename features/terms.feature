@@ -116,3 +116,30 @@ Feature: Accepting terms
       Then I fill in active invitation
       And I press "Submit"
       Then I should be on the dashboard page
+
+   @last_test
+   Scenario: User should not see the logo, name and toolbar on the Terms page
+      Then I fill in active invitation
+      And I press "Submit"
+      And I should not see the logo
+      And I should not see the page name
+      And I should not see the toolbar
+
+   @last_test
+   Scenario: User should not see the logo, name and toolbar on the Transparency page
+      Then I fill in active invitation
+      And I press "Submit"
+      When I follow "Accept"
+      Then I should not see the logo
+      And I should not see the page name
+      And I should not see the toolbar
+
+   @last_test
+   Scenario: User should not see the logo, name and toolbar on the Principles page
+      Then I fill in active invitation
+      And I press "Submit"
+      When I follow "Accept"
+      Then I follow "Accept"
+      And I should not see the logo
+      And I should not see the page name
+      And I should not see the toolbar

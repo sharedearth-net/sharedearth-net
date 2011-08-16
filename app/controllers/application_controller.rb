@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user, :redirect_to_back
+  helper_method :current_user, :current_person, :redirect_to_back
   
   layout :dynamic_layout
   
