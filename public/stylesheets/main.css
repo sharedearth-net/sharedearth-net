@@ -1493,6 +1493,10 @@ a.normal:visited {
 		#community-page #content .items-list ul li.item {
 		    margin-bottom: 0px;
 			height: auto;
+			display: block;
+			float: left;
+			width: 33%;
+			text-transform: capitalize;
 		}
 	
 	
