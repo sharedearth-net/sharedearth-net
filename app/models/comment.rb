@@ -13,5 +13,5 @@ class Comment < ActiveRecord::Base
 
   default_scope :order => 'created_at ASC'
 
-  validates_length_of :comment, :maximum => 255
+  validates_length_of :comment, :maximum => 4000
 end

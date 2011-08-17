@@ -7,7 +7,7 @@ describe Item do
 
   let(:long_name) { 'itemnator 300' * 300 }
 
-  let(:long_description) { 'cool stuff' * 300 }
+  let(:long_description) { 'cool stuff' * 3000 }
 
   it { should belong_to(:owner) }
 

@@ -27,7 +27,7 @@ class Person < ActiveRecord::Base
 
   validates_length_of :name, :maximum => 20
   validates_length_of :location, :maximum => 255
-  validates_length_of :description, :maximum => 255
+  validates_length_of :description, :maximum => 4000
   validates_presence_of :user_id, :name
   
   after_create :create_entity_for_person

@@ -9,7 +9,7 @@ describe Person do
 
   let(:long_location) { 'finland' * 300 }
 
-  let(:long_description) { 'I do it for the lulz' * 300 }
+  let(:long_description) { 'I do it for the lulz' * 3000 }
 
   it { should belong_to(:user) }
 
