@@ -20,38 +20,43 @@ Feature: Item requests management page
     Given "Maria" requested item with name "Mobile" from "John"
     Then Looking at my person page
     And I follow "accept"
+    Then Looking at my person page
     Then I should see "There are no unanswered requests"
-    #Then I should see the words "accepted", "collect", "complete"
-    @javascript
+
+  @javascript
   Scenario: I reject someones request for my item
     Given "Maria" requested item with name "Mobile" from "John"
     Then Looking at my person page
     And I follow "reject"
+    Then Looking at my person page
     Then I should see "There are no unanswered requests"
-    Then I should see "rejected"
 
-    @javascript
+  @javascript
   Scenario: I reject someones request for my item
     Given I requested item with name "Bike" from person with name "Maria"
     Then Looking at my person page
     And I follow "cancel"
+    Then Looking at my person page
     Then I should see "There are no unanswered requests"
-    Then I should see the words "canceled"
+
     @javascript
   Scenario: I click on item collected for active request
     Given "Maria" requested item with name "Mobile" from "John"
     Then Looking at my person page
     And I follow "accept"
+    Then Looking at my person page
     Then I should see "There are no unanswered requests"
     And I am on the dashboard page
     Then I should see the words "collect", "complete"
     And I follow "collect"
     Then I should see the words "collected"
+
     @javascript
   Scenario: I click on item completed for active request
     Given "Maria" requested item with name "Mobile" from "John"
     Then Looking at my person page
     And I follow "accept"
+    Then Looking at my person page
     Then I should see "There are no unanswered requests"
     And I am on the dashboard page
     Then I should see the words "collect", "complete"
@@ -62,6 +67,7 @@ Feature: Item requests management page
     Given "Maria" requested item with name "Mobile" from "John"
     And Looking at my person page
     And I follow "accept"
+    And Looking at my person page
     Then I should see "There are no unanswered requests"
     And I am on the dashboard page
     Then I should see the words "collect", "complete"
@@ -69,11 +75,13 @@ Feature: Item requests management page
     Then I should see the words "Later"
     Then Looking at my person page
     And I should see "1 different people"
+
     @javascript
   Scenario: I click on item completed for active request
     Given "Maria" requested item with name "Mobile" from "John"
     And Looking at my person page
     And I follow "accept"
+    And Looking at my person page
     Then I should see "There are no unanswered requests"
     And I am on the dashboard page
     And I should see "complete"
@@ -84,6 +92,7 @@ Feature: Item requests management page
     Given "Maria" requested item with name "Mobile" from "John"
     And Looking at my person page
     And I follow "accept"
+    And Looking at my person page
     Then I should see "There are no unanswered requests"
     And I am on the dashboard page
     And I follow "complete"
