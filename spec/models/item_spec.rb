@@ -3,6 +3,12 @@ require 'spec_helper'
 describe Item do
   let(:person) { mock_model(Person) }
 
+  let(:long_item_type) { 'trololol' * 300 }
+
+  let(:long_name) { 'itemnator 300' * 300 }
+
+  let(:long_description) { 'cool stuff' * 300 }
+
   it { should belong_to(:owner) }
 
   it { should have_many(:item_requests) }
@@ -22,6 +28,12 @@ describe Item do
   it { should_not allow_value(Item::PURPOSE_SHAREAGE).for(:purpose) }
 
   it { should_not allow_value(Item::PURPOSE_COMMUNAL).for(:purpose) }
+
+  it { should_not allow_value(long_item_type).for(:item_type) }
+
+  it { should_not allow_value(long_name).for(:name) }
+
+  it { should_not allow_value(long_description).for(:description) }
 
   it "should have a 'deleted' flag" do
     item = Factory(:item)

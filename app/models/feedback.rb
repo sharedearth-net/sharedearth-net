@@ -17,6 +17,7 @@ class Feedback < ActiveRecord::Base
   after_create :feedback_reputation_count, :if => :both_parties_left_feedback?
   #TEMPORARY REMOVED, ADD NEW EVENT LOG TYPES FIRST WITH MIGRATION
   #after_create :post_feedback_event_log, :if => :both_parties_left_feedback?
+  validates_length_of   :feedback_note, :maximum => 255, :if => :neutral_or_negative?
   validates_presence_of :feedback_note , :if => :neutral_or_negative?
   validates_presence_of :feedback
   

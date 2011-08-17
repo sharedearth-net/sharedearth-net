@@ -12,4 +12,6 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   default_scope :order => 'created_at ASC'
+
+  validates_length_of :comment, :maximum => 255
 end
