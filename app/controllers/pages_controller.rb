@@ -29,4 +29,7 @@ class PagesController < ApplicationController
     about_layout = (current_user.nil? ? 'shared_earth' : 'application')
     render :layout => about_layout
   end
+
+  def no_javascript
+  end
 end
