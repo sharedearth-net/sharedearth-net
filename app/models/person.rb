@@ -116,9 +116,13 @@ class Person < ActiveRecord::Base
     people = Person.all.collect { |p| p if p.items.without_deleted.count >= items_count.to_i }.delete_if {|p| p.nil?}
   end
   
-  def trusted_friends_items
+  def trusted_friends_items(type = nil)
     items = []
-    self.trusted_friends.map{ |f| f.items.without_deleted.map{|i|items.push(i)}}  
+    if type.nil?
+      self.trusted_friends.map{ |f| f.items.without_deleted.map{|i|items.push(i)}}  
+    else
+      self.trusted_friends.map{ |f| f.items.without_deleted.with_type(type).map{|i|items.push(i)}}  
+    end
     items  
   end
   
