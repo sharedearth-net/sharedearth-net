@@ -6,6 +6,7 @@
 		<div class="clearfix">
 			<h2>
 				<%= link_to person.name, person_path(person), :class => "loged-out" if name %> 
+				<%= link_to "edit profile", edit_person_path(@person) if current_user.person == @person %>
 			</h2>
 
 			<% unless viewing_my_profile  %>
@@ -16,7 +17,7 @@
 				</h2>
 				<% elsif people_network = current_user.person.trusts?(person) %>
 				<h2 class="rhs-link">
-					<%= link_to "withdraw trust", people_network_path(people_network), :method => :delete %>
+					<%= link_to "withdraw trust", people_network_path(people_network), :method => :delete, :class => "withdraw" %>
 				</h2>
 				<% elsif current_user.person.requested_trusted_relationship?(person) %>
 				<h2 class="rhs-link">
@@ -26,8 +27,11 @@
 				<h2 class="rhs-link">
 					<%= link_to "establish trust", people_network_requests_path(:trusted_person_id => person), :method => :post %>
 				</h2>
+				
+				
 				<% end %>
 			<% end %>
+			
 		</div>
 		
 		<%= image_tag("devider-trust-profile.png", :class => "devider clearer", :alt => "")  %>

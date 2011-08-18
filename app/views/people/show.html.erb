@@ -11,9 +11,6 @@
 					<div class="inner-content">
 						<h2 class='trusted'>
 							<%= @person.name %>
-							<span>
-								<%= link_to "edit profile", edit_person_path(@person) if current_user.person == @person %>
-							</span>
 						</h2>
 
 						<p class="status-holder-profile">
