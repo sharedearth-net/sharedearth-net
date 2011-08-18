@@ -6,9 +6,9 @@
 	<div id="content">
 	
 		<div class="content-box-holder no-bg">
-			<% type = params[:filter_type] %>
+			
 			<h2>
-				<%= link_to "Items" if items_search %> <%= ' > ' + type unless type.nil? %>
+				<%= link_to "Items" if items_search %>
 				<%= link_to "People" if people_search %>
 				<%= link_to "All Results" if all_search %>
 			</h2>
@@ -24,7 +24,7 @@
 			<% if (((@items.empty? && items_search) || (@people.empty? && people_search)) && !all_search) || (all_search && @items.empty? && @people.empty? )%>
 			  <h3>Search term not found</h3>
 			<% end %>
-			<% if !@items.empty? && !type.nil?-%>
+			<% unless @items.empty? -%>
 			  <div class="items-list clearfix">
 			  <h3 class="default-title">
 					From your trusted network
@@ -32,23 +32,6 @@
 				<ul class="clearfix">
 				<% @items.each do |item| %>
           <%= render :partial => "items/item", :locals => {:item => item} %>
-        <% end%>
-				</ul>
-				<!--<a href="#" class="button-more">
-					2 more
-				</a>
-				-->
-				</div><!-- /items-list -->
-			<% end -%>
-			<% unless (@items.empty? || !type.nil?)-%>
-			  <div class="items-list clearfix">
-			  <h3 class="default-title">
-					From your trusted network
-				</h3>
-				<ul class="clearfix">
-				<% types = @items.map{|i| i.item_type}.uniq %>
-				<% types.each do |t| %>
-          <%= link_to t, search_index_path(:search => params[:search], :filter_type => t) %>
         <% end%>
 				</ul>
 				<!--<a href="#" class="button-more">
@@ -83,3 +66,4 @@
 	
 </div><!--	/search-page -->
 			
+
