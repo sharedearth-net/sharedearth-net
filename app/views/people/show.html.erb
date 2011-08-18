@@ -36,7 +36,7 @@
 				<li>
 					<div class="items-list clearfix">
 						<h3>Items</h3>
-						<% unless @items.size.zero? %>
+						<% if @items.count < 8 %>
 							<ul class="clearfix">
 								<% @items.each do |item| %>
 									<li class="item clearer">
@@ -69,6 +69,18 @@
 									</li>
 								<% end %>
 							</ul>
+						<% elsif @items.count >= 8 %>
+						
+					      <ul class="clearfix">
+					      <% @items.map{|i| i.item_type}.uniq.each do |item_type| %>
+						      <li class="item">
+							      <p>						
+								      <%= link_to item_type, person_path(current_user.person, :filter_type => item_type) %>
+							      </p>
+						      </li>
+	              <% end if !@items.nil?%>
+					      </ul>
+
 						<% else %>
 							<p class="event-sentences">No items are currently being shared</p>
 						<% end %>
