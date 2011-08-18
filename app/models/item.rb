@@ -60,6 +60,7 @@ class Item < ActiveRecord::Base
   scope :only_lost, :conditions => { :status => STATUS_LOST }
   scope :only_damaged, :conditions => { :status => STATUS_DAMAGED }
   scope :visible_to_other_users, where("status IN (#{STATUSES_VISIBLE_TO_OTHER_USERS.join(",")})")
+  scope :with_type, lambda { |entity| where("item_type = ?", entity) }
 
   def is_owner?(entity)
     self.owner == entity
