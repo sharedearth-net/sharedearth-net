@@ -1,4 +1,7 @@
-<% content_for(:hide_on_policy_class, 'hide-on-policy-page') unless current_person.accepted_tr? %>
+<% unless current_person.accepted_tr?
+  content_for(:hide_on_policy_class, 'hide-on-policy-page')
+  content_for(:hide_on_policy_top_margin, 'style=margin-top:100px;')
+end %>
 
 <div id="site-information-pages" class="transparency">
 

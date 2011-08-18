@@ -1,4 +1,7 @@
-<% content_for(:hide_on_policy_class, 'hide-on-policy-page') unless current_person.accepted_tc? %>
+<% unless current_person.accepted_tc?
+  content_for(:hide_on_policy_class, 'hide-on-policy-page')
+  content_for(:hide_on_policy_top_margin, 'style=margin-top:100px;')
+end %>
 
 <div id="terms-conditions-page">
 

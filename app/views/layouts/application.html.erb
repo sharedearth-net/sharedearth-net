@@ -120,7 +120,7 @@
 	<%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
 <% end %>
 
-<div id="wrapper" class="clearfix">
+<div id="wrapper" class="clearfix" <%= yield(:hide_on_policy_top_margin)%>>
 	
 	<%= yield %>
 
