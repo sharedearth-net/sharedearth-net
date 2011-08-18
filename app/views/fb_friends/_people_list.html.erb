@@ -1,0 +1,11 @@
+<div class="items-list clearfix">
+  <h3 class="default-title">In the network</h3>
+  <ul class="clearfix">
+    <% people.each do |person| %>
+      <%= render :partial => "people/person", :locals => {:person => person} %>
+      <ul class="action-list">
+		  <li><%= trust_action_link_for(person) %></li>
+      </ul>
+    <% end %>
+  </ul>
+</div>

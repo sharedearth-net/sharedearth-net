@@ -1,0 +1,19 @@
+<div id="search-page" class="clearfix">
+  <%= render 'search_pane' %>
+  <div id="content">
+    <div class="content-box-holder no-bg">
+      <h2>
+        <%= link_to "Find the Others", others_path %>
+      </h2>
+
+      <%= render 'search_box' %>
+		
+      <% if @people.empty? %>
+         <h3>Search term not found</h3>
+		<% else %>
+        <%= render 'people_list', :people => @people %>
+		<% end -%>
+
+    </div>
+  </div>
+</div>

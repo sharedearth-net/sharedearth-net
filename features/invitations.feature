@@ -19,7 +19,7 @@ Feature: Sending invitations
     
   Scenario: When user requests invitation
     And I follow "request invitation"
-    Then I should see the words "Your request for invitation has been received"
+    Then I should see the words "Your request has been received."
 
   Scenario: I should be lead to terms page when I enter the invitation
     Then I fill in active invitation

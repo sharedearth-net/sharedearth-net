@@ -181,9 +181,9 @@ class ItemRequestsController < ApplicationController
   end
 
   def check_if_item_is_deleted
-    item = Item.find(params[:item_id]) if params[:item_id]
+    item = Item.find_by_id(params[:item_id])
 
-    if item and item.deleted?
+    if item.nil? or item.deleted?
       redirect_to items_path, :alert => (I18n.t('messages.items.is_deleted'))
     end
   end

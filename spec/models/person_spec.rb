@@ -7,6 +7,10 @@ describe Person do
 
   let(:long_name) { 'juan' * 20 }
 
+  let(:long_location) { 'finland' * 300 }
+
+  let(:long_description) { 'I do it for the lulz' * 3000 }
+
   it { should belong_to(:user) }
 
   it { should have_many(:items) }
@@ -22,6 +26,10 @@ describe Person do
   it { should allow_value(short_name).for(:name) }
 
   it { should_not allow_value(long_name).for(:name) }
+
+  it { should_not allow_value(long_location).for(:location) }
+
+  it { should_not allow_value(long_description).for(:description) }
 
   it "should check if it belongs to user" do
     person = Person.new(:user => user)

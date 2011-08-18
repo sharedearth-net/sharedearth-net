@@ -3275,6 +3275,12 @@ a.normal:visited {
 		font-size: 12px;
 	}
 	
+	#sidebar h2.rhs-link a.withdraw:link,
+	#sidebar h2.rhs-link a.withdraw:visited {
+		color: #62775a;
+		font-size: 10px;
+	}
+	
 	
 	/* Headings on pages when a person name (e.g. Dan Gooden) or item (e.g. 26 Speed Mountain Bike) or Action\Request sentences */
 	
@@ -3343,9 +3349,9 @@ a.normal:visited {
 
 		/* Reputation & Trust Headings for T&R box */
 
-		.trust-reputation-box h3,
-		.trust-reputation-box h3 a:link,
-		.trust-reputation-box h3 a:visited {
+		#sidebar .trust-reputation-box h3,
+		#sidebar .trust-reputation-box h3 a:link,
+		#sidebar .trust-reputation-box h3 a:visited {
 			font-family: verdana, tahoma, arial, sans-serif;
 			color: #315859;
 			font-size: 10px;
@@ -3360,7 +3366,9 @@ a.normal:visited {
 		#sidebar .trust-reputation-box ul.action-list li,
 		#sidebar .trust-reputation-box ul li p,
 		.trust-reputation-box ul.action-list li a:link,
-		.trust-reputation-box ul.action-list li a:visited {
+		.trust-reputation-box ul.action-list li a:visited,
+		#sidebar .trust-reputation-box a:link,
+		#sidebar .trust-reputation-box a:visited {
 		    color: #62775a;
 		    font-size: 11px;
 		}				
