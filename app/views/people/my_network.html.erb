@@ -71,12 +71,13 @@
 				
 			-->
 
-			
-
-			<% if @items.count < 8  -%>
+			<% unless @items.count.zero? -%>
+			  
 				<div class="items-expanded clearfix">
 
-					<h3>Items</h3>
+					<h3>Items <%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %></h3>
+					
+					<% if @items.count < 8  -%>
 
 					<ul class="clearfix">
 					<% @items.each do |item| %>
@@ -113,26 +114,25 @@
 	              		<% end if !@items.nil?%>
 					</ul>
 
-				</div><!--	/items-expanded	-->
+
 			<% else %>	
 			
-				<div class="items-list clearfix">
-
-					<h3>Items</h3>
-
 					<ul class="clearfix">
-					<% @items.each do |item| %>
+					<% @items.map{|i| i.item_type}.uniq.each do |item_type| %>
 						<li class="item">
 							<p>						
-								<%= link_to item.item_type, "#" %>
+								<%= link_to item_type, my_network_person_path(current_user.person, :filter_type => item_type, :type => params[:type]) %>
 							</p>
 						</li>
-	              		<% end if !@items.nil?%>
+	        <% end if !@items.nil?%>
 					</ul>
-
-				</div><!--	/items-list	-->
 			
-	       <% end -%>
+	     <% end -%>
+	     
+				</div><!--	/items-expanded	-->
+			<% end -%>
+
+			
 	
 			<!--
 			
