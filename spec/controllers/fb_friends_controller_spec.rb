@@ -35,21 +35,21 @@ describe FbFriendsController do
     let(:pedro)     { Factory(:person, :name => 'Pedro') }
 
     before :each do
-      FbService.stub(:get_my_friends).and_return([marceline, pedro])
+      FbService.stub(:search_fb_friends).and_return([marceline])
     end
 
     it "should be successful" do
-      get :search, :search_terms => ''
+      get :search_fb_friends, :search_terms => ''
       response.should be_success
     end
 
     it "should render the right template" do
-      get :search, :search_terms => ''
+      get :search_fb_friends, :search_terms => ''
       response.should render_template :index
     end
 
     it "should do the search only on my FB friends" do
-      get :search, :search_terms => 'Mar'
+      get :search_fb_friends, :search_terms => 'Mar'
       response.body.should match marceline.name
       response.body.should_not match pedro.name
       response.body.should_not match maria.name

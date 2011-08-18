@@ -3545,3 +3545,7 @@ a.normal:visited {
 .hide-on-policy-page {
   display: none !important;
 }
+
+#search-page #sidebar-left {
+  margin-top :75px;
+}
