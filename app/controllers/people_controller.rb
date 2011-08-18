@@ -16,10 +16,18 @@ class PeopleController < ApplicationController
 
   def show
     if @person.belongs_to? current_user
-      @items = @person.items.without_deleted
+      if params[:filter_type].nil?
+        @items = @person.items.without_deleted
+      else
+        @items = @person.items.without_deleted.with_type(params[:filter_type])
+      end
       @unanswered_requests = @person.unanswered_requests
     else
-      @items = @person.items.without_deleted.visible_to_other_users
+      if params[:filter_type].nil?
+        @items = @person.items.without_deleted.visible_to_other_users
+      else
+        @items = @person.items.without_deleted.visible_to_other_users.with_type(params[:filter_type])
+      end
       @unanswered_requests = @person.unanswered_requests(current_user.person)
     end
 
@@ -59,15 +67,11 @@ class PeopleController < ApplicationController
   end
   
   def my_network
-    unless params[:type].nil?
-      case params[:type]
-          when 'trusted'
-            @items = @person.trusted_friends_items
-          else
-            #
-      end
-    else           
-      @items = @person.trusted_friends_items
+    case params[:type]
+      when 'trusted'
+        @items = @person.trusted_friends_items(params[:filter_type])
+      else
+        @items = @person.trusted_friends_items(params[:filter_type])
     end
 
     @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25) 
