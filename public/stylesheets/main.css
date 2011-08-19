@@ -1000,6 +1000,25 @@ a.normal:visited {
 		margin-top: -5px;
 	}
 	
+	
+		/* profile page - content - items-list */
+
+		#profile-page  #content .items-list {
+		}
+
+			#profile-page  #content .items-list ul {
+				margin-top: 10px;
+			}
+
+			#profile-page  #content .items-list ul li.item {
+			    margin-bottom: 0px;
+				height: auto;
+				display: block;
+				float: left;
+				width: 33%;
+				text-transform: capitalize;
+			}
+	
 		/* profile-page - content - requests */
 		
 		#profile-page #content .requests ul.action-list {
@@ -1010,6 +1029,30 @@ a.normal:visited {
 		#profile-page  #content .items-list .requests ul li div p {
 			margin-bottom: 0;
 		}
+		
+		#profile-page #content .items-list .requests ul li.item {
+		    display: auto;
+		    float: none;
+		    height: 50px;
+		    margin-bottom: 0;
+		    text-transform: none;
+		    width: auto;
+			margin-top: 0;
+			margin:0;
+		}
+		
+			#profile-page #content .items-list .requests ul {
+			    margin-top: 0;
+			}
+			
+				#profile-page #content .items-list .requests ul li {
+
+				}
+			
+					#profile-page .items-list .requests ul li div {
+					}
+			
+			
 	
 	
 		/* profile-page - content - comments */
