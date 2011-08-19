@@ -30,6 +30,17 @@ module FbService
                               where("UPPER(name) LIKE UPPER(?)", "%#{search_term}%")
   end
 
+  def self.post_on_my_wall(token, msg, link = '', options = {})
+    fb_user = fb_user_from(token)
+
+    if options[:append_name]
+      fb_user = fb_user.fetch
+      msg = "#{fb_user.name} #{msg}"
+    end
+
+    fb_user.feed!(:message => msg, :link => link)
+  end
+
   def self.fb_logout_url(fb_api_key, fb_session_key, return_url)
     "http://www.facebook.com/logout.php" << 
     "?api_key=#{fb_api_key}" << 

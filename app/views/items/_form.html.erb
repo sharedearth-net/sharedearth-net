@@ -29,20 +29,20 @@
                               Item::PURPOSE_SHARE, 
                               :checked => @item.share?, 
                               :id => :share %> 
-           <%= f.label :Share, "Share", :class => "radio-labels-holder" %>
+          <%= f.label :Share, "Share", :class => "radio-labels-holder" %>
     		  <%= f.radio_button :purpose, 
                               Item::PURPOSE_GIFT, 
                               :checked => @item.gift?, 
                               :id => :gift %> 
-            <%= f.label :Gift, "Gift", :class => "radio-labels-holder" %>
+           <%= f.label :Gift, "Gift", :class => "radio-labels-holder" %>
 
 <!-- these buttons are not functional (shareage, communal) -->
 		    	<%= f.radio_button :purpose, 
                                Item::PURPOSE_SHAREAGE, 
                                :id => :shareage,
                                :disabled => true %> 
-            <%= f.label :Share, "Shareage", :class => "radio-labels-holder" %>
-				
+           <%= f.label :Share, "Shareage", :class => "radio-labels-holder" %>
+			
         		<%= f.radio_button :purpose, 
                                Item::PURPOSE_COMMUNAL, 
                                :id => :communal,
@@ -85,7 +85,15 @@
     		<%= f.text_area :description,
                          :default_description =>  "A description of the item, and your expectations, e.g. My spare bike is available to those in-between bikes, or new to the area. I do use it occasionally and like to share it around, so would prefer short-term sharing or daily loans" %>
 		</li>
+
+    <% if @can_post_to_fb %>
+      <li class="clearfix">
+        <%= f.label :post_it_on_fb, 'Post this item on Facebook' %>
+        <%= f.check_box :post_it_on_fb, :checked => true %>
+      </li>
+    <% end %>
 	
+
 		<li class="clearfix">
 			<ul class="action-buttons-list">
 				<li>

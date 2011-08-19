@@ -140,3 +140,14 @@ Feature: Manage Items
       When I go to the edit page of that item
       Then I should be on 'items'
       And I should see "That Item has been deleted!"
+
+  Scenario: Posting new item on FB wall
+    Given I am on the new item page
+    Then I should see "Post this item on Facebook"
+    And the "item_post_it_on_fb" checkbox should be checked
+
+  Scenario: Edit item without changing it's description
+    Given an item exist with description: "some description"
+    And the logged person is the owner
+    When I am on the edit page of that item
+    Then I should not see "Post this item on Facebook"

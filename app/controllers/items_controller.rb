@@ -1,16 +1,14 @@
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_item, :only => [:show, :edit, :update, :destroy, :mark_as_normal, :mark_as_lost, :mark_as_damaged]
-  before_filter :only_owner!, :only => [:edit, :update, :destroy, :mark_as_normal, :mark_as_lost, :mark_as_damaged]
+  before_filter :get_item, :only => [:show, :edit, :update, :destroy, 
+                                     :mark_as_normal, :mark_as_lost, :mark_as_damaged]
+  before_filter :only_owner!, :only => [:edit, :update, :destroy,   
+                                        :mark_as_normal, :mark_as_lost, :mark_as_damaged]
   before_filter :actions_completed?, :only => [:mark_as_lost, :mark_as_damaged]
-
   before_filter :check_if_item_is_deleted, :only => [:edit, :update, :destroy, 
                                                      :mark_as_normal, :mark_as_lost, 
                                                      :mark_as_damaged]
-  # GET /items
-  # GET /items.xml
   def index
-  
     @items = current_user.person.items.without_deleted
 
     respond_to do |format|
@@ -19,8 +17,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # GET /items/1
-  # GET /items/1.xml
   def show
     respond_to do |format|
       format.html # show.html.erb
@@ -28,10 +24,9 @@ class ItemsController < ApplicationController
     end
   end
 
-  # GET /items/new
-  # GET /items/new.xml
   def new
     @item = Item.new
+    @can_post_to_fb = true if fb_token
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,12 +34,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # GET /items/1/edit
-  def edit
-  end
-
-  # POST /items
-  # POST /items.xml
   def create
     @item = Item.new(params[:item])
     @item.owner = current_user.person
@@ -55,7 +44,13 @@ class ItemsController < ApplicationController
       if @item.save
         @item.create_new_item_event_log
         @item.create_new_item_activity_log
-        current_user.person.reputation_rating.update_attributes(:activity_level => 1) if current_user.person.items.count == 1
+
+        if current_user.person.items.count == 1
+          current_user.person.reputation_rating.update_attributes(:activity_level => 1)
+        end
+
+        post_new_item_on_fb(@item) if @item.post_it_on_fb == '1'
+
         format.html { redirect_to @item }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
@@ -65,8 +60,9 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PUT /items/1
-  # PUT /items/1.xml
+  def edit
+  end
+
   def update
     respond_to do |format|
       if @item.update_attributes(params[:item])
@@ -80,8 +76,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # DELETE /items/1
-  # DELETE /items/1.xml
   def destroy
     @item.delete
 
@@ -108,6 +102,10 @@ class ItemsController < ApplicationController
 
   private
 
+  def actions_completed?
+    redirect_to item_path(@item), :notice => "Can't do that. Item is currently in use." unless @item.available?
+  end
+ 
   def check_if_item_is_deleted
     if @item.deleted?
       redirect_to items_path, :alert => (I18n.t('messages.items.is_deleted'))
@@ -121,9 +119,11 @@ class ItemsController < ApplicationController
   def only_owner!
     redirect_to(root_path, :alert => I18n.t('messages.only_owner_can_access')) and return unless @item.is_owner?(current_user.person)
   end
-  
-  def actions_completed?
-    redirect_to item_path(@item), :notice => "Can't do that. Item is currently in use." unless @item.available?
+
+  def post_new_item_on_fb(item)
+    msg  = "is now sharing their #{item.item_type.downcase} on sharedearth.net."
+    link = item_url(item)
+
+    FbService.post_on_my_wall(fb_token, msg, link, :append_name => true)
   end
-  
 end

@@ -62,8 +62,11 @@ class Item < ActiveRecord::Base
   scope :only_normal, :conditions => { :status => STATUS_NORMAL }
   scope :only_lost, :conditions => { :status => STATUS_LOST }
   scope :only_damaged, :conditions => { :status => STATUS_DAMAGED }
-  scope :visible_to_other_users, where("status IN (#{STATUSES_VISIBLE_TO_OTHER_USERS.join(",")})")
+  scope :visible_to_other_users, 
+        where("status IN (#{STATUSES_VISIBLE_TO_OTHER_USERS.join(",")})")
   scope :with_type, lambda { |entity| where("item_type = ?", entity) }
+
+  attr_accessor :post_it_on_fb
 
   def is_owner?(entity)
     self.owner == entity
