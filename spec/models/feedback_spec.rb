@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Feedback, "validations" do
-  let(:long_feedback_note) { 'derpy derp' * 300 } 
+  let(:long_feedback_note) { 'd' * 401 } 
 
   let(:some_feedback)  { Factory(:feedback) }
 

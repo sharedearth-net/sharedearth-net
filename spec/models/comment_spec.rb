@@ -19,7 +19,7 @@ describe Comment do
 end
 
 describe Comment, "validations" do
-  let(:long_comment) { 'some random comment' * 3000 }
+  let(:long_comment) { 'a' * 421 }
 
   it { should_not allow_value(long_comment).for(:comment) }
 end

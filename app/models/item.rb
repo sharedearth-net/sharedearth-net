@@ -42,9 +42,9 @@ class Item < ActiveRecord::Base
                   },
                  :default_url => "/images/noimage-:style.png"
 
-  validates_length_of    :item_type, :maximum => 255
-  validates_length_of    :name, :maximum => 255
-  validates_length_of    :description, :maximum => 4000
+  validates_length_of    :item_type, :maximum => 30
+  validates_length_of    :name, :maximum => 50
+  validates_length_of    :description, :maximum => 400
   validates_inclusion_of :purpose, :in => [PURPOSE_SHARE, PURPOSE_GIFT],
                          :message => " must be in #{PURPOSES.values.join ', '}"
   validates_presence_of  :purpose, :item_type, :name, :owner_id, :owner_type, :status

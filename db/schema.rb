@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110803161937) do
+ActiveRecord::Schema.define(:version => 20110819152711) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(:version => 20110803161937) do
     t.integer  "item_request_id"
     t.integer  "person_id"
     t.integer  "feedback",        :limit => 255
-    t.string   "feedback_note"
+    t.text     "feedback_note"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
