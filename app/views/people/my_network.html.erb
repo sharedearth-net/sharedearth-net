@@ -77,7 +77,7 @@
 
 					<h3>Items <%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %></h3>
 					
-					<% if @items.count < 8  -%>
+					<% if @items.count < 8 || !params[:filter_type].nil? -%>
 
 					<ul class="clearfix">
 					<% @items.each do |item| %>

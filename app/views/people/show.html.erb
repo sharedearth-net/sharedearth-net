@@ -33,7 +33,7 @@
 				<li>
 					<div class="items-list clearfix">
 						<h3>Items</h3>
-						<% if @items.count < 8 %>
+						<% if @items.count < 8  || !params[:filter_type].nil?%>
 							<ul class="clearfix">
 								<% @items.each do |item| %>
 									<li class="item clearer">
