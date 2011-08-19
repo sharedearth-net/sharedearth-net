@@ -6,7 +6,6 @@
 		<div class="clearfix">
 			<h2>
 				<%= link_to person.name, person_path(person), :class => "loged-out" if name %> 
-				<%= link_to "edit profile", edit_person_path(@person) if current_user.person == @person %>
 			</h2>
 
 			<% unless viewing_my_profile  %>
@@ -30,6 +29,12 @@
 				
 				
 				<% end %>
+			<% end %>
+			
+			<% if current_user.person == @person  %>
+			<h2 class="rhs-link">
+				<%= link_to "edit profile", edit_person_path(@person) %>
+			</h2>
 			<% end %>
 			
 		</div>
