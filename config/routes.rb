@@ -71,6 +71,7 @@ end
       put "complete"
       put "cancel"
       put "collected"
+      post 'new_comment'
     end
     resources :feedbacks
   end

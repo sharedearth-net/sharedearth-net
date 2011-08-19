@@ -20,7 +20,8 @@
        </li> 
       <% end unless comments.empty? -%>
 
-     <%= render :partial => 'comments/new.html.erb', :locals => { :commentable => req } %>
+     <%= render :partial => 'comments/new.html.erb', :locals => { :commentable => req,
+                                                                  :is_private     => true } %>
 
     </ul>
     </div><!-- /inner-content -->	
