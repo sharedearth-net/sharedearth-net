@@ -31,5 +31,6 @@ class PagesController < ApplicationController
   end
 
   def no_javascript
+    render :layout => 'welcome'
   end
 end

@@ -13,13 +13,14 @@
 
 	<script src="static/js/jquery-1.5.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="static/js/script.js" type="text/javascript" charset="utf-8"></script>
-	<%= favicon_link_tag 'favicon.ico' %>
+  
+  <script>
+    $(document).ready(function() {
+      $('.button-holder-connect a').attr('href', "/auth/facebook");
+    });
+  </script>
 
-   <% if yield(:no_js_msg).empty? %>
-     <noscript>
-       <meta http-equiv="refresh" content="0;url=/no_javascript">
-     </noscript>
-   <% end %>
+	<%= favicon_link_tag 'favicon.ico' %>
 
 </head>
 <body>
