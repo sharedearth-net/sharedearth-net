@@ -152,7 +152,6 @@ Feature: Manage Items
     When I am on the edit page of that item
     Then I should not see "Post this item on Facebook"
 
-  @last_test
   Scenario: Showing the 'Post it on fb' after failing validation
     Given I am on the new item page
     When I press "Save"
