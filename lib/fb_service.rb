@@ -13,16 +13,13 @@ module FbService
   end
 
   def self.people_from_fb_friends(fb_friends)
-    friends_identifiers = fb_friends.collect(&:identifier)
+    friends_identifiers =  fb_friends.empty? ? [] : fb_friends.collect(&:identifier)
     Person.joins(:user).where('users.uid' => friends_identifiers)
   end
 
   def self.get_my_friends(token)
     friends_list = fb_friends_from(token)
-
-    friends_list.empty? ? [] : people_from_fb_friends(friends_list).
-                               authorized.
-                               order(:name)
+    people_from_fb_friends(friends_list).authorized.order(:name)
   end
 
   def self.search_fb_friends(token, search_term)

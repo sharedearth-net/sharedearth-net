@@ -1,5 +1,9 @@
 <div class="items-list clearfix">
-  <h3 class="default-title">Facebook friends on sharedeart</h3>
+
+  <h3 class="default-title">
+    <%= @searching_people ? 'In the network' : 'Facebook friends on sharedeart.net' %>
+  </h3>
+
   <ul class="clearfix">
     <% people.each do |person| %>
       <%= render :partial => "person", :locals => {:person => person} %>
