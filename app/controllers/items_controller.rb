@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
   before_filter :check_if_item_is_deleted, :only => [:edit, :update, :destroy, 
                                                      :mark_as_normal, :mark_as_lost, 
                                                      :mark_as_damaged]
+  before_filter :check_if_user_has_fb_account, :only => [:new, :create]
   def index
     @items = current_user.person.items.without_deleted
 
@@ -26,7 +27,6 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @can_post_to_fb = true if fb_token
 
     respond_to do |format|
       format.html # new.html.erb
@@ -110,6 +110,10 @@ class ItemsController < ApplicationController
     if @item.deleted?
       redirect_to items_path, :alert => (I18n.t('messages.items.is_deleted'))
     end
+  end
+
+  def check_if_user_has_fb_account
+    @can_post_to_fb = true if fb_token
   end
 
   def get_item
