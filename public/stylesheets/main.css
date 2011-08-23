@@ -3204,7 +3204,6 @@ a.normal:visited {
 	#community-page #content h3 {
 		font-size: 12px; 
 		color: #315859;
-		
 	}
 	
 	
@@ -3373,11 +3372,17 @@ a.normal:visited {
 
 		#sidebar .trust-reputation-box h2,
 		#sidebar-left .trust-reputation-box h2,
-		.trust-reputation-box h2 a:link,
-		.trust-reputation-box h2 a:visited {
+		#sidebar .trust-reputation-box h2 a:link,
+		#sidebar .trust-reputation-box h2 a:visited {
 			color: #62775a;
 			font-size: 13px;
 		}
+		
+			#sidebar .trust-reputation-box h2.edit-profile-link a:link,
+			#sidebar .trust-reputation-box h2.edit-profile-link a:visited {
+				font-size: 12px;
+				color: #127e0e;
+			}
 
 
 			/* class 'trusted' should be added dynamicaly if the name of person is in trusted network */
