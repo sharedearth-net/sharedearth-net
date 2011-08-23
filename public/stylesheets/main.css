@@ -1004,6 +1004,7 @@ a.normal:visited {
 		/* profile page - content - items-list */
 
 		#profile-page  #content .items-list {
+			
 		}
 
 			#profile-page  #content .items-list ul {
@@ -1018,6 +1019,60 @@ a.normal:visited {
 				width: 33%;
 				text-transform: capitalize;
 			}
+			
+		
+		/* profile page - content - items-expanded */
+		
+		#profile-page #content .items-expanded {
+			padding:0;
+			padding-left: 165px;
+		    padding-right: 0;
+		    width: 451px;
+		}
+		
+		#profile-page #content .items-expanded ul li.item {
+			height: 50px;
+		}
+		
+		#profile-page #content .items-expanded ul li  {
+			    float: left;
+			    margin-right: 10px;
+			    margin-top: 3px;
+			    max-height: 50px;
+			 	float: left;
+		}
+		
+		
+		#profile-page #content .items-expanded ul li div {
+		    float: left;
+		    width: 382px;
+		}
+		
+		#profile-page #content .items-expanded ul li.item {
+		    margin-bottom: 10px;
+			width: 451px;
+		}
+		
+			#profile-page #content .items-expanded ul li {
+			    color: #127E0E;
+			    display: block;
+			    float: left;
+			    font-size: 12px;
+			}
+			
+				#profile-page #content .items-expanded ul li p {
+					clear: both;
+				    float: left;
+				    line-height: 14px;
+				    margin: 0 0 6px;
+				}
+	
+	
+	#profile-page #content .items-expanded ul li .item-image-holder {
+		float: left;
+		width: 60px;
+	}
+		
 	
 		/* profile-page - content - requests */
 		

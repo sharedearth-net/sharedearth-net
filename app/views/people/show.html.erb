@@ -31,13 +31,18 @@
 				</li>
 			
 				<li>
-					<div class="items-list clearfix">
-						<h3>Items</h3>
+					<div class="clearfix">
+						
+						
 						<% if @items.count < 8  || !params[:filter_type].nil?%>
+						<div class="items-expanded clearfix">
+							<h3>Items</h3>
 							<ul class="clearfix">
 								<% @items.each do |item| %>
 									<li class="item clearer">
+										<div class="item-image-holder">
 										<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
+										</div>
 										<div>
 											<p>
 											  <%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;&nbsp;										
@@ -66,8 +71,9 @@
 									</li>
 								<% end %>
 							</ul>
+						</div>
 						<% elsif @items.count >= 8 %>
-						
+						<div class="items-list clearfix">
 					      <ul class="clearfix">
 					      <% @items.map{|i| i.item_type}.uniq.each do |item_type| %>
 						      <li class="item">
