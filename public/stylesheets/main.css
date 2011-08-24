@@ -1513,10 +1513,18 @@ a.normal:visited {
 	    width: 452px;
 	}
 	
-		#community-page #content .inner-content {
-			width: 295px;
-			margin-left: 0;
+		#community-page #content .content-box-holder {
+			
 		}
+		
+			#community-page .content-box {
+				width: 452px;
+			}
+	
+				#community-page #content .inner-content {
+					width: 452px;
+					margin-left: 0;
+				}
 	
 		#community-page #content h2 img {
 		    float: left;
