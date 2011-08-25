@@ -70,12 +70,11 @@
 			<!--
 				
 			-->
-
+      <div class="items-list clearfix">
+				<h3>Items <%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %></h3>
+					
 			<% unless @items.count.zero? -%>
 			  
-				<div class="items-expanded clearfix">
-
-					<h3>Items <%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %></h3>
 					
 					<% if @items.count < 8 || !params[:filter_type].nil? -%>
 
@@ -126,7 +125,7 @@
 						</li>
 	        <% end if !@items.nil?%>
 					</ul>
-			
+					
 	     <% end -%>
 	     
 				</div><!--	/items-expanded	-->
