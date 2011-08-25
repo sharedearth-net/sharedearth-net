@@ -18,7 +18,7 @@
 			<% comments = event.event_log.comments%>				
 			<div class="inner-content">
 
-				<ul class="comment-list comment-list-hidden">
+				<ul class="comment-list <%= comments.count.zero? ? 'comment-list-hidden' : '' %> ">
 				<% comments.each do |c| -%>
 				  <% person = c.user.person %>
 				  <li class="clearfix">	
