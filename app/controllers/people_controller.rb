@@ -17,14 +17,14 @@ class PeopleController < ApplicationController
   def show
     if @person.belongs_to? current_user
       if params[:filter_type].nil?
-        @items = @person.items.without_deleted
+        @items = @person.items.without_deleted.sort_by{|i| i.item_type.downcase}
       else
         @items = @person.items.without_deleted.with_type(params[:filter_type])
       end
       @unanswered_requests = @person.unanswered_requests
     else
       if params[:filter_type].nil?
-        @items = @person.items.without_deleted.visible_to_other_users
+        @items = @person.items.without_deleted.visible_to_other_users.sort_by{|i| i.item_type.downcase}
       else
         @items = @person.items.without_deleted.visible_to_other_users.with_type(params[:filter_type])
       end
@@ -69,9 +69,9 @@ class PeopleController < ApplicationController
   def my_network
     case params[:type]
       when 'trusted'
-        @items = @person.trusted_friends_items(params[:filter_type])
+        @items = @person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
       else
-        @items = @person.trusted_friends_items(params[:filter_type])
+        @items = @person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
     end
 
     @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25) 
