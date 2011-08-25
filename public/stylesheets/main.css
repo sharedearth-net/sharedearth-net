@@ -2698,6 +2698,13 @@ a.normal:visited {
 						background: transparent url('../images/bg-upload-img.png') no-repeat top left;
 						padding-top: 44px;
 					}
+					
+					#item-edit-page ul.form-holder li.checkbox-holder {
+					}
+					
+						#item-edit-page .rhs ul.form-holder li.checkbox-holder label {
+							width: 347px;
+						}
 			
 						#item-edit-page ul.form-holder li.button-holder label {
 							width: 34px;
