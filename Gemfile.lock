@@ -54,6 +54,11 @@ GEM
       builder
       mime-types
       xml-simple
+    aws-ses (0.4.3)
+      builder
+      mail (> 2.2.5)
+      mime-types
+      xml-simple
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
     capybara (1.0.0)
@@ -291,6 +296,7 @@ DEPENDENCIES
   acts_as_commentable
   autotest
   aws-s3
+  aws-ses (~> 0.4.3)
   capybara
   cucumber
   cucumber-rails
@@ -300,6 +306,7 @@ DEPENDENCIES
   ffaker
   guard-rspec
   heroku_san
+  mail
   mysql2
   omniauth (~> 0.2.6)
   paperclip

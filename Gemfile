@@ -70,4 +70,6 @@ gem "simplecov", :require => false, :group => :test
 gem 'activeadmin'
 gem "rails-settings", :git => "git://github.com/100hz/rails-settings.git"
 gem 'sass'  #for use in activeadmin
+gem "mail"
+gem "aws-ses", "~> 0.4.3", :require => 'aws/ses'
 
