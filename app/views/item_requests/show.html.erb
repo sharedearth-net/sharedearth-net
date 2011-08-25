@@ -1,19 +1,19 @@
 <div id="request-page">
 
-	<div id="content" class="item-request">
+	<div id="content" class="item-request" style="width: 596px;">
 		
 		<div class="content-box-holder no-bg">
 			<ul>
-				<li class="content-box clearfix">
+				<li class="content-box clearfix" style="width: 596px;">
 				
 					<%= image_tag @item_request.requester.avatar(:large), :class => "thumb" %>
 				
-					<div class="inner-content">
+					<div class="inner-content" style="margin-left: 55px;">
 						<%= render :partial => "shared/item_request_sentence", :locals => { :req => @item_request, :dashboard => false } %>
 				
 						<%= image_tag @item_request.item.photo.url(:medium), :class => "pic-medium" if @item_request.item.photo? %>
 					
-						<ul class="action-buttons-list clearfix">
+						<ul class="action-buttons-list clearfix" style="margin-top: 30px;">
 				
 							<% if @item_request.status == ItemRequest::STATUS_REQUESTED %>
 
@@ -76,40 +76,10 @@
 		<% if (@item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)) && !@item_request.completed? %>
 		
 		<li class="content-box clearfix">
-
-			<div class="discussion-holder">
-
+			<div class="discussion-holder" style="margin-left:170px;width:430px;">
 				<ul class="comment-list">
-					
-					<li class="<%= cycle :even, ''  %> clearfix">
-						<div class="comment-box">
-							<%commentable = @item_request%>
-							<%=form_for(Comment.new, :format => :json) do |f|%>
-		              <%=f.hidden_field :commentable_id, :value=> commentable.id, :class => 'new-comment-commentable-id' %>
-		              <%= f.hidden_field :commentable_type, :value => commentable.class.name, :class => 'new-comment-commentable-type' %>
-		              <div class="comment-box">
-			              <%=f.text_area :comment, :rows => '1', :value => 'Discuss', :cols => '13', :id => :comment, :class => 'new-comment-text' %>
-		              </div>
-               		<%=f.submit "Add comment"%>
-	             <%end%>
-						</div>
-					</li>
-					<% @comments.each do |c| -%>
-					<% person = c.user.person %>
-							<li class="<%= cycle :even, '' %> clearfix">
-						<div class="time-ago">
-							<%= time_ago_in_words(c.created_at) %> ago
-						</div>			
-						<%= image_tag person.avatar(:square), :class => "thumb" %>
-						<p>
-							<a href="#">
-								<strong><%= link_to person.name, person_path(person) %></strong>
-							</a>
-							<%= c.comment %>
-						</p>
-					</li>
-						<% end unless @comments.nil?-%>
-					
+          <%= render 'comment_form',        :item_request => @item_request %>
+          <%= render :partial => 'comment', :collection   => @comments %>
 				</ul>
 
 			</div><!-- /discussion-holder -->
@@ -120,7 +90,7 @@
 	
 	</div><!-- /content -->
 
-	<div id="sidebar">
+	<div id="sidebar" style="margin-left:50px;">
 	
 		<%= render :partial => "shared/trust_profile", :locals => { :person => (@item_request.gifter?(current_user.person) ? @item_request.requester : @item_request.gifter), :name => true } %>
 	

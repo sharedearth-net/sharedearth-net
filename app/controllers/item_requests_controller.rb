@@ -157,6 +157,23 @@ class ItemRequestsController < ApplicationController
       end
     end
   end
+
+  def new_comment
+    model_name = params[:comment][:commentable_type]
+    record_commentable = model_name.constantize.find(params[:comment][:commentable_id])
+
+    @comment = record_commentable.comments.create(:commentable => record_commentable, 
+                                                  :user_id     => current_user.id, 
+                                                  :comment     => params[:comment][:comment] )
+  
+    respond_to do |format|
+      format.json do
+        @comment_html = render_to_string(:partial => 'item_requests/comment.html.erb', 
+                                         :locals  => { :comment => @comment } )
+        render :json => { :success => true, :comment_html => @comment_html  }
+      end
+    end
+  end
   
   private
 

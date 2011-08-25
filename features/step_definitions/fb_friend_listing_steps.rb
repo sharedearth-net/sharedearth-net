@@ -23,3 +23,8 @@ Given /^"([^"]*)" and "([^"]*)" are my friends on FB$/ do |arg1, arg2|
 
   FbService.stub!(:get_my_friends).and_return([first_person, second_person])
 end
+
+Then /^I should see "([^"]*)" and then "([^"]*)"$/ do |first_word, second_word|
+  order = Regexp.new("#{first_word}.*#{second_word}", Regexp::MULTILINE)
+  raise "Did not find keywords in the requested order!" unless page.body =~ order
+end 

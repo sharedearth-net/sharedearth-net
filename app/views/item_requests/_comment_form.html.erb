@@ -1,0 +1,27 @@
+<li class="<%= cycle :even, ''  %> clearfix" style="width:430px;">
+  <div class="comment-box">
+
+    <%=form_for Comment.new, 
+                :url    => new_comment_request_path(item_request),
+                :format => :json do |f|%>
+
+        <%=f.hidden_field :commentable_id, 
+                          :value=> item_request.id, 
+                          :class => 'new-comment-commentable-id' %>
+        <%= f.hidden_field :commentable_type, 
+                           :value => item_request.class.name, 
+                           :class => 'new-comment-commentable-type' %>
+
+        <div class="comment-box">
+          <%=f.text_area :comment, 
+                         :rows => '1', 
+                         :value => 'Discuss privately', 
+                         :cols => '13', 
+                         :id => :comment, 
+                         :class => 'new-comment-text', 
+                         :style => 'width:418px;' %>
+        </div>
+        <%=f.submit "Add comment"%>
+     <%end%>
+  </div>
+</li>

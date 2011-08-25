@@ -3,11 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	
 	<title>sharedearth.net - trust. share. connect.</title>
-	
 	<link rel="stylesheet" href="static/css/reset-min.css" type="text/css" media="screen" title="no title" charset="utf-8" />
 	<link rel="stylesheet" href="static/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8" />
 
@@ -16,8 +13,15 @@
 
 	<script src="static/js/jquery-1.5.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="static/js/script.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script>
+    $(document).ready(function() {
+      $('.button-holder-connect a').attr('href', "/auth/facebook");
+    });
+  </script>
+
 	<%= favicon_link_tag 'favicon.ico' %>
-	
+
 </head>
 <body>
 
@@ -28,31 +32,8 @@
 		</h1>
 
 		<div id="content" class="clearfix">
-
-
-			<p>	
-				sharedearth.net is a social network for humans to build 
-				<strong>trust</strong> and <strong>share</strong> possessions and skills, helping us rewrite 
-				our cultural and economic stories to reflect our emerging 
-				experience of universal <strong>interconnection</strong>. <a class="learn-more" href="/about">Learn more.</a>
-			</p>
-			<div class="button-holder-connect">
-				<h2>
-					<%= link_to "connect", '/auth/facebook', :title =>"connect" %>
-				</h2>
-				<p>
-					(requires Facebook)
-				</p>
-			</div>
-
-			<div class="button-holder-host">
-				<h2>
-					<a href="http://sharedearthplatform.org" title="host your own server">host your own server</a>
-				</h2>
-			</div>
-
+        <%= yield(:no_js_msg).empty? ? render('layouts/welcome_msg') : yield(:no_js_msg) %>
 		</div>
-
 
 		<div id="footer">
 			<p>

@@ -11,8 +11,6 @@ describe ItemsController do
                                                :mark_as_lost, :mark_as_damaged
 
 
-
-
   def mock_item(stubs={})
     @mock_item ||= mock_model(Item, stubs).as_null_object
   end
@@ -64,6 +62,28 @@ describe ItemsController do
         Item.stub(:new) { mock_item }
         get :new
         assigns(:item).should be(mock_item)
+      end
+
+      context "When the logged user is not associated with a FB account" do
+        before :each do
+          controller.stub(:fb_token).and_return(nil)
+        end
+
+        it "should set the 'can_post_to_fb' flag to falsy" do
+          get :new
+          assigns(:can_post_to_fb).should be_nil 
+        end
+      end
+
+      context "When the logged user is associated with a FB account" do
+        before :each do
+          controller.stub(:fb_token).and_return('123')
+        end
+
+        it "should set the 'can_post_to_fb' flag to true" do
+          get :new
+          assigns(:can_post_to_fb).should be_true 
+        end
       end
     end
 

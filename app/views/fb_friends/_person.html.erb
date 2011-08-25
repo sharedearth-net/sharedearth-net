@@ -1,0 +1,7 @@
+<li class="people-holder clearfix">
+	<%= image_tag person.avatar(:square), :class => "thumb" %>
+	<div>
+		<p><%= link_to person.name, person_path(person) %></p>
+    <p style="padding-top:0px;"><%= trust_action_link_for(person) %></p>
+	</div>
+</li>

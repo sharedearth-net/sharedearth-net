@@ -68,7 +68,7 @@ Feature: Manage Items
     And "Nick" is the owner of item with name "Mobile"
     Given "Maria" has trusted relationship with "Nick"
     And Looking at person page with name "Nick"
-    And I should see "establish trust"
+    And I should see "acknowledge trust"
     Then I should see "Mobile"
     When I fill in "search" with "Mobile"
     Then I press "Search" 
@@ -140,3 +140,19 @@ Feature: Manage Items
       When I go to the edit page of that item
       Then I should be on 'items'
       And I should see "That Item has been deleted!"
+
+  Scenario: Posting new item on FB wall
+    Given I am on the new item page
+    Then I should see "Post this item on Facebook"
+    And the "item_post_it_on_fb" checkbox should be checked
+
+  Scenario: Edit item without changing it's description
+    Given an item exist with description: "some description"
+    And the logged person is the owner
+    When I am on the edit page of that item
+    Then I should not see "Post this item on Facebook"
+
+  Scenario: Showing the 'Post it on fb' after failing validation
+    Given I am on the new item page
+    When I press "Save"
+    Then I should see "Post this item on Facebook"

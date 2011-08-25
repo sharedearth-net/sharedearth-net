@@ -43,9 +43,9 @@ class Item < ActiveRecord::Base
                   },
                  :default_url => "/images/noimage-:style.png"
 
-  validates_length_of    :item_type, :maximum => 255
-  validates_length_of    :name, :maximum => 255
-  validates_length_of    :description, :maximum => 4000
+  validates_length_of    :item_type, :maximum => 30
+  validates_length_of    :name, :maximum => 50
+  validates_length_of    :description, :maximum => 400
   validates_inclusion_of :purpose, :in => [PURPOSE_SHARE, PURPOSE_GIFT],
                          :message => " must be in #{PURPOSES.values.join ', '}"
   validates_presence_of  :purpose, :item_type, :name, :owner_id, :owner_type, :status
@@ -63,8 +63,11 @@ class Item < ActiveRecord::Base
   scope :only_normal, :conditions => { :status => STATUS_NORMAL }
   scope :only_lost, :conditions => { :status => STATUS_LOST }
   scope :only_damaged, :conditions => { :status => STATUS_DAMAGED }
-  scope :visible_to_other_users, where("status IN (#{STATUSES_VISIBLE_TO_OTHER_USERS.join(",")})")
+  scope :visible_to_other_users, 
+        where("status IN (#{STATUSES_VISIBLE_TO_OTHER_USERS.join(",")})")
   scope :with_type, lambda { |entity| where("item_type = ?", entity) }
+
+  attr_accessor :post_it_on_fb
 
   def is_owner?(entity)
     self.owner == entity

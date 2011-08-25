@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def fb_token
+    session[:fb_token]
+  end
+
   def next_policy_path
     if not current_user.person.accepted_tc?
       terms_path
@@ -94,6 +98,7 @@ class ApplicationController < ActionController::Base
       format.html {render_404}
     end
   end
+
   #Error 501
   def generic_error(exception, message = "OK that didn't work. Try something else.")
     respond_to do |format|

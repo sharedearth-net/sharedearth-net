@@ -1,7 +1,7 @@
 Feature: People network management
 
   As a As user who loads web page for first time
-  I want to establish trusted relationship
+  I want to acknowledge trusted relationship
   In order So I can share items/skills
   
   Background:

@@ -8,15 +8,21 @@ class FbFriendsController < ApplicationController
     @people  = FbService.get_my_friends(fb_token)
   end
 
-  def search
+  def search_fb_friends
     fb_token     = session[:fb_token]
     search_terms = params[:search_terms] || ''
 
-    all_friends = FbService.get_my_friends(fb_token)
+    @people = FbService.search_fb_friends(fb_token, search_terms)
 
-    @people = all_friends.delete_if do |friend|
-      !friend.name.upcase.match search_terms.upcase
-    end
+    render :index
+  end
+
+  def search_people
+    @searching_people = true
+    search_terms = params[:search_terms] || ''
+
+    @people = Person.search(search_terms)
+    @people = @people - [current_user.person] unless @people.empty?
 
     render :index
   end

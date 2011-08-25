@@ -24,7 +24,7 @@
 				</h2>
 				<% else %>
 				<h2 class="rhs-link">
-					<%= link_to "establish trust", people_network_requests_path(:trusted_person_id => person), :method => :post %>
+					<%= link_to "acknowledge trust", people_network_requests_path(:trusted_person_id => person), :method => :post %>
 				</h2>
 				
 				
@@ -32,7 +32,7 @@
 			<% end %>
 			
 			<% if current_user.person == @person  %>
-			<h2 class="rhs-link">
+			<h2 class="rhs-link edit-profile-link">
 				<%= link_to "edit profile", edit_person_path(@person) %>
 			</h2>
 			<% end %>
@@ -66,7 +66,8 @@
 			<% if viewing_my_profile %>
 				<li class="last clearfix">
 				  <% trusted_count = person.trusts_me_count %>
-					<%= image_tag("ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile")  %>
+					<%= image_tag("ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile") %>		
+
 
 					<p>
 						<% trusted = trusted_count.to_s + ((trusted_count == 1) ? " person " : " people ") + 'in your trusted network' %>

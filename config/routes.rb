@@ -8,8 +8,9 @@ Sharedearthapp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :fb_friends, :only => [:index]
-  get 'others'            => "fb_friends#index"
-  get 'search_fb_friends' => "fb_friends#search"
+  get 'findtheothers'     => "fb_friends#index"
+  get 'search_fb_friends' => "fb_friends#search_fb_friends"
+  get 'search_people'     => "fb_friends#search_people"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_scope :admin_user do
@@ -70,6 +71,7 @@ end
       put "complete"
       put "cancel"
       put "collected"
+      post 'new_comment'
     end
     resources :feedbacks
   end
@@ -80,6 +82,7 @@ end
   match "/dashboard", :to => "pages#dashboard"
   match "/principles", :to => "terms#principles"
   match '/about' => 'pages#about'
+  match '/no_javascript' => 'pages#no_javascript'
 
   root :to => "pages#index"
 

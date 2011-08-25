@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Item do
   let(:person) { mock_model(Person) }
 
-  let(:long_item_type) { 'trololol' * 300 }
+  let(:long_item_type) { 'l' * 31 }
 
-  let(:long_name) { 'itemnator 300' * 300 }
+  let(:long_name) { 'i' * 51 }
 
-  let(:long_description) { 'cool stuff' * 3000 }
+  let(:long_description) { 'f' * 401 } 
 
   it { should belong_to(:owner) }
 
