@@ -153,6 +153,7 @@ a.normal:visited {
 						width: auto;
 						font-size: 11px;
 						margin-left: 6px;
+						margin-right: 5px;
 					}
 					
 						.status-holder ul li a:link,
@@ -540,7 +541,7 @@ a.normal:visited {
 				.trust-reputation-box ul.action-list li {
 					font-size: 11px;
 					margin-top: 10px;
-					margin-right: 19px;
+					margin-right: 14px;
 					height: auto;
 				}
 
