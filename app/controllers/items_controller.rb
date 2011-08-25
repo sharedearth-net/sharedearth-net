@@ -50,6 +50,10 @@ class ItemsController < ApplicationController
     @item.owner = current_user.person
     @item.status = Item::STATUS_NORMAL
     @item.available = true
+    @item.file = params[:file] if params.has_key?(:file)
+    # detect Mime-Type (mime-type detection doesn't work in flash)
+    @item.file_content_type = MIME::Types.type_for(params[:name]).to_s if params.has_key?(:name)
+
 
     respond_to do |format|
       if @item.save
