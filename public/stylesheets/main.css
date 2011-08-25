@@ -2431,8 +2431,10 @@ a.normal:visited {
 			}
 			
 			#user-trusted-page #content ul li p a:link,
-			#user-trusted-page #content ul li p a:visited {
-			    color: #62775a;
+			#user-trusted-page #content ul li p a:visited,
+			#user-trusted-page #content p a:link,
+			#user-trusted-page #content p a:visited {
+			    color: #62775A;
 			}
 			
 			.network-holder {
