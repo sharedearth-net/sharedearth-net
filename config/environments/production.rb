@@ -48,4 +48,6 @@ Sharedearthapp::Application.configure do
   config.active_support.deprecation = :notify
   
   Sass::Plugin.options[:never_update] = true
+  
+  config.action_mailer.delivery_method = :ses
 end
