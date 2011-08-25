@@ -33,9 +33,10 @@ class Item < ActiveRecord::Base
   has_many :event_logs, :as => :action_object
   has_many :event_logs_as_related, :as => :related
 
+  #If changed, run in rails console - Item.all.each {|i| i.photo.reprocess! }
   has_attachment :photo,
                  :styles => {
-                   :large => "600x600>",
+                   :large => "300x300#",
                    :medium => "150x150>",
                    :small => "100x100>",
                    :square => "50x50"
