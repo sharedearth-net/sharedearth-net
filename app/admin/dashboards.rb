@@ -50,5 +50,14 @@ ActiveAdmin::Dashboards.build do
          'Feature coming soon'
        end
   end
+  
+  if Settings.invitations.to_s == 'false'
+    section "Invite your friend" do
+       ul do
+         render 'invite'
+       end
+    end
+  end
+  
 
 end
