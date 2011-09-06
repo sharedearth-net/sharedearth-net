@@ -294,4 +294,13 @@ class Person < ActiveRecord::Base
     ItemRequest.find_by_requester_id(self.id).nil?
   end
   
+  def decrease_invitations!
+    self.invitations_count -= 1
+    save!
+  end
+  
+  def invitations_count?
+    self.invitations_count
+  end
+  
 end

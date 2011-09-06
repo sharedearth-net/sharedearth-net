@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
   #before_filter :authenticate_user!, :only => [:purge]
+  before_filter :allowed_to_invite?, :only => [:invite]
     
   def create    
     invitations = params[:invitations].to_i
@@ -77,6 +78,34 @@ class InvitationsController < ApplicationController
       redirect_to root_path
     else
       redirect_to root_path, :notice => "Your account has been locked. Try again in 24 hours" 
+    end
+  end
+  
+  def invite
+     #Check if email format is proper
+     if current_user.nil?
+       inviter_id = nil
+     else
+       inviter_id = current_user.person.id
+     end
+     @invitation = Invitation.create!(:inviter_person_id => inviter_id, :invitation_active => true) unless params[:email].nil?
+     begin
+       UserMailer.invite_email(params[:email], @invitation.invitation_unique_key).deliver
+       current_user.person.decrease_invitations! unless current_user.nil?
+     rescue Exception => e
+       puts "Email sending failed"
+     end
+     
+     redirect_to_back
+  end
+  
+  private
+   
+  def allowed_to_invite?
+    if current_user.nil?
+      true #if admin
+    else
+      current_user.person.invitations_count == 0 ? false :true    
     end
   end
   
