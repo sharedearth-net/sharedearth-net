@@ -35,6 +35,7 @@ end
   get "invitations/purge"
   get "invitations/preview"
   get "invitations/switch"
+  get "invitations/invite"
 
   get "people/cancel/:id" => "people#cancel"
 
