@@ -82,7 +82,11 @@ GEM
       capybara (>= 1.0.0)
       cucumber (~> 1.0.0)
       nokogiri (>= 1.4.6)
+    daemons (1.1.4)
     database_cleaner (0.6.7)
+    delayed_job (2.1.4)
+      activesupport (~> 3.0)
+      daemons
     devise (1.4.2)
       bcrypt-ruby (~> 2.1.2)
       orm_adapter (~> 0.0.3)
@@ -301,6 +305,7 @@ DEPENDENCIES
   cucumber
   cucumber-rails
   database_cleaner
+  delayed_job
   factory_girl_rails
   fb_graph
   ffaker
