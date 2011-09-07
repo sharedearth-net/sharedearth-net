@@ -50,13 +50,16 @@ ActiveAdmin::Dashboards.build do
          'Feature coming soon'
        end
   end
-  
-  if Settings.invitations.to_s == 'false'
-    section "Invite your friend" do
-       ul do
-         render 'invite'
-       end
-    end
+
+  #The only way to make this work on clean install
+  if ActiveRecord::Base.connection.table_exists? 'settings' 
+		if Settings.invitations.to_s == 'true'
+		  section "Invite your friend" do
+		     ul do
+		       render 'invite'
+		     end
+		  end
+		end
   end
   
 
