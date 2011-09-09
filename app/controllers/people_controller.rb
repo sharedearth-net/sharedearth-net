@@ -43,7 +43,7 @@ class PeopleController < ApplicationController
     unless params[:type].nil?
       case params[:type]
           when 'mutual'
-            @mutual_friends = @person.mutural_friends(current_user.person) 
+            @mutual_friends = @person.mutural_friends(current_user.person)
           when 'extended'
             #
           when 'other'
@@ -54,7 +54,7 @@ class PeopleController < ApplicationController
           else
             #
       end
-    else       
+    else
       @trusted_network = @person.trusted_friends
       @mutual_friends = @person.mutural_friends(current_user.person)
       @other = @trusted_network - @mutual_friends
@@ -65,7 +65,7 @@ class PeopleController < ApplicationController
       format.xml  { render :xml => @item }
     end
   end
-  
+
   def my_network
     case params[:type]
       when 'trusted'
@@ -74,7 +74,7 @@ class PeopleController < ApplicationController
         @items = @person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
     end
 
-    @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25) 
+    @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
   end
 
   def edit
