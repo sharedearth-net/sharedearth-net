@@ -65,7 +65,7 @@ class Item < ActiveRecord::Base
   scope :only_damaged, :conditions => { :status => STATUS_DAMAGED }
   scope :visible_to_other_users, 
         where("status IN (#{STATUSES_VISIBLE_TO_OTHER_USERS.join(",")})")
-  scope :with_type, lambda { |entity| where("item_type = ?", entity) }
+  scope :with_type, lambda { |entity| where("UPPER(item_type) LIKE UPPER(?)", entity) }
 
   attr_accessor :post_it_on_fb
 
