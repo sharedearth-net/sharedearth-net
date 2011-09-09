@@ -51,7 +51,7 @@ Given /^Person with name "(.*)" left (positive|negative|neutral) feedback for la
         note = "Neutral opinion"
     end
     person = Person.find_by_name("#{person}")
-    Factory(:feedback, :person => person, :item_request_id => @item_request, :feedback => feed, :feedback_note => note)
+    Factory(:feedback, :person => person, :item_request_id => @item_request.id, :feedback => feed, :feedback_note => note)
 end
 
 Given /^"(.*)" has trusted relationship with "(.*)"$/ do |person1, person2|
