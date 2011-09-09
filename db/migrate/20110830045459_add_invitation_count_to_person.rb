@@ -1,6 +1,6 @@
 class AddInvitationCountToPerson < ActiveRecord::Migration
   def self.up
-    add_column :people, :invitations_count, :integer, :default => '20'
+    add_column :people, :invitations_count, :integer
   end
 
   def self.down
