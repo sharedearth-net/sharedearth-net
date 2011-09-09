@@ -7,7 +7,7 @@
 <div id="dashboard-page" class="<%= dashboard_class %>">
 	<div id="content">
 		<%= render :partial => 'people/new_person' if current_user.person.reputation_rating.activity_level_count.zero? || current_user.person.gift_act_rating.zero? %>
-    <% if Settings.invitations.to_s == 'true' && !current_user.person.invitations.nil? -%>
+    <% if Settings.invitations.to_s == 'true' && (!current_user.person.invitations_count.nil?) -%>
     	<%= 'You have ' + current_user.person.invitations_count?.to_s + ' invitations to share'%>
 			<%= form_tag '/invitations/invite', :method => :get do -%>
 				<div class="comment-box">
