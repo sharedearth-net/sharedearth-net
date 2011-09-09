@@ -90,7 +90,7 @@ class InvitationsController < ApplicationController
      end
      @invitation = Invitation.create!(:inviter_person_id => inviter_id, :invitation_active => true) unless params[:email].nil?
      begin
-       UserMailer.delay.invite_email(params[:email], @invitation.invitation_unique_key)
+       UserMailer.invite_email(params[:email], @invitation.invitation_unique_key).deliver
        current_user.person.decrease_invitations! unless current_user.nil?
      rescue Exception => e
        puts "Email sending failed"
