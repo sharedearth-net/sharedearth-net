@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
   
   def invite_email(email, code)
     @invitation_code = code
-    mail(:to => "#{email}", :subject => "Registered")
+    mail(:to => "#{email}", :subject => "Invitation")
   end
   
   def testing
