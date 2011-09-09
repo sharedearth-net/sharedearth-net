@@ -3,7 +3,7 @@ ActiveAdmin.register Person do
      column "Name", :name, :sortable => false
      column "Authorised", :authorised_account
      column "E-mail", :email
-     column "Invitations count", :invitations_count, :sortable => false
+     column "Invitations count", :invitations_count
      default_actions
   end
 
