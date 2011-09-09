@@ -57,7 +57,7 @@ describe PeopleController do
       end
       
       it "should assign person's items as @items" do
-        assigns(:items).should == mock_person.items.without_deleted
+        assigns(:items).should == mock_person.items.without_deleted.sort_by{|i| i.item_type.downcase}
       end
 
       it "should assign person's unanswered requests as @unanswered_requests" do
