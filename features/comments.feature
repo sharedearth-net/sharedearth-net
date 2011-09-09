@@ -14,12 +14,12 @@ Feature: Leaving comment to everything
     
   Scenario: Showing no comment add link
     Then I should not see "Add comment"
-  
+  @javascript
   Scenario: Showing add comment on item request, leaving comment
     Then I follow "view request"
     When I fill in the following:
      | comment   | My comment opinion |
-     And press "Add comment"
+     And I submit the comment
     Then I should see "My comment opinion"
     @javascript
   Scenario: Commenting event log
@@ -35,7 +35,7 @@ Feature: Leaving comment to everything
     And I should see "comments(0)"
     When I fill in the following:
      | comment   | My comment opinion |
-     And press "Add comment"
+    And I submit the comment
     Then I should see "My comment opinion"
     And I should see "comments(1)"
     @javascript
@@ -54,7 +54,7 @@ Feature: Leaving comment to everything
     And I follow "home"
     When I fill in the following:
      | comment   | My public opinion |
-     And press "Add comment"
+    And I submit the comment
     Then I should see "My public opinion"
     And I should see "comments(1)"
     Then I follow "leave feedback"
