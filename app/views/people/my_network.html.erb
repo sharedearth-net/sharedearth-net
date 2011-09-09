@@ -117,7 +117,7 @@
 			<% else %>	
 			
 					<ul class="clearfix">
-					<% @items.map{|i| i.item_type}.uniq.each do |item_type| %>
+					<% @items.map{|i| i.item_type.downcase}.uniq.each do |item_type| %>
 						<li class="item">
 							<p>						
 								<%= link_to item_type, my_network_person_path(current_user.person, :filter_type => item_type, :type => params[:type]) %>
