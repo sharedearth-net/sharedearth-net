@@ -74,7 +74,7 @@
 						<% elsif @items.count >= 8 %>
 						<div class="items-list clearfix">
 					      <ul class="clearfix">
-					      <% @items.map{|i| i.item_type}.uniq.each do |item_type| %>
+					      <% @items.map{|i| i.item_type.downcase}.uniq.each do |item_type| %>
 						      <li class="item">
 							      <p>						
 								      <%= link_to item_type, person_path(current_user.person, :filter_type => item_type) %>
@@ -92,7 +92,7 @@
 					<div class="items-list unanswered-requests clearfix">
 						<div class="requests">
 							<h3>Requests</h3>
-							<% unless @unanswered_requests.size.zero? %>
+							<% unless @unanswered_requests.size == 0 %>
 								<ul class="clearfix">
 									<% @unanswered_requests.each do |req| %>
 										<li class="item clearer">
