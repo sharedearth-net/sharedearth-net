@@ -209,17 +209,17 @@ ActiveRecord::Schema.define(:version => 20110830060025) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "authorised_account"
-    t.boolean  "accepted_tc"
-    t.decimal  "tc_version"
-    t.decimal  "pp_version"
+    t.boolean  "authorised_account",   :default => false
+    t.boolean  "accepted_tc",          :default => false
+    t.decimal  "tc_version",           :default => 1.0
+    t.decimal  "pp_version",           :default => 1.0
     t.string   "location"
     t.text     "description"
-    t.boolean  "accepted_pp"
+    t.boolean  "accepted_pp",          :default => false
     t.string   "email"
-    t.boolean  "accepted_tr"
-    t.boolean  "has_reviewed_profile"
-    t.integer  "invitations_count"
+    t.boolean  "accepted_tr",          :default => false
+    t.boolean  "has_reviewed_profile", :default => false
+    t.integer  "invitations_count",    :default => 20
   end
 
   create_table "people_network_requests", :force => true do |t|
