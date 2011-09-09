@@ -13,4 +13,6 @@ Given /^Looking at person network page with name "([^"]*)"$/ do |name|
   visit network_person_path(person)
 end
 
-
+When /^I submit the comment$/ do
+ find_field('comment').native.send_key(:enter)
+end
