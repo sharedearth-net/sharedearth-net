@@ -4,12 +4,7 @@ module FbService
   end
 
   def self.fb_friends_from(token)
-    begin
       return fb_user_from(token).friends(options = {:access_token => token}) || []
-    rescue
-      puts "Access token was incorrect"
-      return []
-    end
   end
 
   def self.people_from_fb_friends(fb_friends)
