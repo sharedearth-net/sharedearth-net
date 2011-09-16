@@ -29,14 +29,9 @@ describe FbService, ".get_fb_friends_from" do
   let(:mock_fb_friends) { [mock('fb_friend_one'), mock('fb_friend_two')] }
 
   context "When using an invalid access token" do
-    before :each do
-      # I hate using mocks =/
-      mock_fb_user.stub(:friends).and_raise 'Lol'
-      FbService.stub(:fb_user_from).and_return(mock_fb_user)
-    end
 
     it "should return an empty list" do
-      FbService.fb_friends_from(token).should be_empty
+      expect{FbService.fb_friends_from(token)}.to raise_exception(FbGraph::Unauthorized) 
     end
   end
 
