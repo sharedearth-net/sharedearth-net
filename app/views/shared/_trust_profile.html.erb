@@ -12,7 +12,7 @@
 
 				<% if person.requested_trusted_relationship?(current_user.person) %>
 				<h2 class="rhs-link">
-					<%= link_to "cancel trust request", people_network_request_path(person.requested_trusted_relationship(current_user.person)), :method => :delete %>
+					<%= link_to "cancel trust request", people_network_request_path(person.requested_trusted_relationship(current_user.person)), :method => :delete, :class => "trust-cancel" %>
 				</h2>
 				<% elsif people_network = current_user.person.trusts?(person) %>
 				<h2 class="rhs-link">
@@ -20,11 +20,11 @@
 				</h2>
 				<% elsif current_user.person.requested_trusted_relationship?(person) %>
 				<h2 class="rhs-link">
-				  <%= link_to "confirm trust", confirm_people_network_request_path(current_user.person.requested_trusted_relationship(person)), :id => "confirm_button", :method => :put %>
+				  <%= link_to "confirm trust", confirm_people_network_request_path(current_user.person.requested_trusted_relationship(person)), :id => "confirm_button", :method => :put, :class => "trust-confirm" %>
 				</h2>
 				<% else %>
 				<h2 class="rhs-link">
-					<%= link_to "acknowledge trust", people_network_requests_path(:trusted_person_id => person), :method => :post %>
+					<%= link_to "acknowledge trust", people_network_requests_path(:trusted_person_id => person), :method => :post, :class => "trust-acknowledge" %>
 				</h2>
 				
 				
