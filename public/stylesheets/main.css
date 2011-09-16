@@ -3451,9 +3451,22 @@ a.normal:visited {
 			font-size: 13px;
 		}
 		
+			#sidebar .trust-reputation-box h2.rhs-link a.trust-confirm:link,
+			#sidebar .trust-reputation-box h2.rhs-link a.trust-confirm:visited {
+				color: #127e0e;
+				font-size: 11px;
+			}
+		
+			#sidebar .trust-reputation-box h2.rhs-link a.trust-cancel:link,
+			#sidebar .trust-reputation-box h2.rhs-link a.trust-cancel:visited {
+				font-size: 10px;
+			}
+			
+			#sidebar .trust-reputation-box h2.rhs-link a.trust-acknowledge:link,
+			#sidebar .trust-reputation-box h2.rhs-link a.trust-acknowledge:visited,
 			#sidebar .trust-reputation-box h2.edit-profile-link a:link,
 			#sidebar .trust-reputation-box h2.edit-profile-link a:visited {
-				font-size: 12px;
+				font-size: 11px;
 				color: #127e0e;
 			}
 
