@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.create_person(:name  => auth["user_info"]["name"].slice(0..19), 
+      user.build_person(:name  => auth["user_info"]["name"].slice(0..19), 
                          :email => auth["user_info"]["email"],
                          :authorised_account => false)
 
-      user.person.create_reputation_rating(:gift_actions  => 0,:distinct_people => 0, 
+      user.person.build_reputation_rating(:gift_actions  => 0,:distinct_people => 0, 
                                            :total_actions => 0, :positive_feedback => 0, 
                                            :negative_feedback => 0, :neutral_feedback => 0,
                                            :requests_received => 0, :requests_answered => 0, 
