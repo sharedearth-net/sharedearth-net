@@ -9,4 +9,13 @@ class RequestedInvitation < ActiveRecord::Base
     # Add an error to the model if the count is not zero
     errors.add_to_base("You already requested invitation") unless count == 0
   end
+  def sent!
+     self.sent = true
+		 save!
+  end
+  
+  def accepted!
+  	 self.accepted = true
+     save!
+  end
 end
