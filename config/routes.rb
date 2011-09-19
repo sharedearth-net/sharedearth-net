@@ -83,6 +83,7 @@ end
   match "/dashboard", :to => "pages#dashboard"
   match "/principles", :to => "terms#principles"
   match '/about' => 'pages#about'
+  match '/contribute' => 'pages#contribute'
   match '/no_javascript' => 'pages#no_javascript'
 
   root :to => "pages#index"

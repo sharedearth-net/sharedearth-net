@@ -14,12 +14,12 @@
 
         <div class="comment-box">
           <%=f.text_area :comment, 
-                         :rows => '1', 
-                         :value => 'Discuss privately', 
+                         :rows => '1',
                          :cols => '13', 
                          :id => :comment, 
                          :class => 'new-comment-text', 
-                         :style => 'width:418px;' %>
+                         :style => 'width:418px;',
+                         :value => 'Discuss' %>
         </div>
         <%=f.submit "Add comment"%>
      <%end%>

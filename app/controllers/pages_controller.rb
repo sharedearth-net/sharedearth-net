@@ -30,6 +30,11 @@ class PagesController < ApplicationController
     render :layout => about_layout
   end
 
+  def contribute
+    contribute_layout = (current_user.nil? ? 'shared_earth' : 'application')
+    render :layout => contribute_layout
+  end
+
   def no_javascript
     render :layout => 'welcome'
   end

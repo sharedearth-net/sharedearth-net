@@ -1,4 +1,3 @@
-<% is_private ||= false %>
 <li class="no-bg">
 	<%=form_for(Comment.new, :format => ActionFormat::FORMAT) do |f|%>
 		<%=f.hidden_field :commentable_id, 
@@ -13,8 +12,8 @@
                      :rows  => '1', 
                      :cols  => '13', 
                      :id    => :comment, 
-                     :class => 'new-comment-text', 
-                     :value => (is_private ? 'Discuss privately' : 'Write a comment...') %>
+                     :class => 'new-comment-text',
+                     :value => 'Write a comment...' %>
 		</div>
  		<%=f.submit "Add comment"%>
 	<%end%>
