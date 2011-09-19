@@ -42,18 +42,20 @@
 			<% end -%>
 			<% unless @people.empty? -%>
 			  <div class="items-list clearfix">
-			  <h3 class="default-title">
+			  	<h3 class="default-title">
 					In the network
 				</h3>
+				<p>
+					Looking for people on sharedearth.net? <a class="trusted" href=" /findtheothers">Find the others.</a>
+				</p>
 				<ul class="clearfix">
 				<% @people.each do |person| %>
           <%= render :partial => "people/person", :locals => {:person => person} %>
         <% end%>
 				</ul>
-				<!--<a href="#" class="button-more">
-					2 more
-				</a>
-				-->
+				
+				
+				
 				</div><!-- /items-list -->
 			<% end -%>
 			

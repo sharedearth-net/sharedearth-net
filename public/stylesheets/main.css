@@ -1514,6 +1514,11 @@ a.normal:visited {
 	    width: 452px;
 	}
 	
+		#community-page  #content p a.trusted:link,
+		#community-page  #content p a.trusted:visited {
+			color: #127e0e;
+		}
+	
 		#community-page #content .content-box-holder {
 			
 		}
@@ -1530,6 +1535,8 @@ a.normal:visited {
 		#community-page #content h2 img {
 		    float: left;
 		}
+		
+		
 		
 		#community-page .button-more {
 			float: left;
@@ -1640,6 +1647,10 @@ a.normal:visited {
 			width: 356px;
 		}
 		
+			#community-page #sidebar ul.comment-list li p {
+			    width: 314px;
+			}
+		
 		#community-page #sidebar .comment-box {
 			padding-bottom: 0;
 		}
@@ -1651,8 +1662,9 @@ a.normal:visited {
 			    overflow: auto;
 			    padding: 2px 0 0 4px;
 			}
+			
+			
 										
-
 /*............Request Page............*/
 		
 
@@ -2218,6 +2230,7 @@ a.normal:visited {
 			    height: 15px;
 			    overflow: auto;
 			    padding: 2px 0 0 4px;
+				margin-bottom: 9px;
 			}
 			
 			#search-page .search-holder button {
@@ -2296,6 +2309,11 @@ a.normal:visited {
 			#search-page #content ul li.people-holder p a:link,
 			#search-page #content ul li.people-holder p a:visited {
 				text-transform: none;
+			}
+			
+			#search-page #content p a.trusted:link,
+			#search-page #content p a.trusted:visited {
+				color: #127e0e;
 			}
 				
 
