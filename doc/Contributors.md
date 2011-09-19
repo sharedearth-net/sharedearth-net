@@ -13,7 +13,7 @@ Predrag Tomcanji	- css\html creation
 
 Nebojsa Zoric		- primary developer
 
-Juan Hawa - developer
+Juan Hawa Fernandez - developer
 
 Dwight M		- AJAX development
 
