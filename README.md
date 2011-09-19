@@ -1,7 +1,7 @@
 #sharedearth.net
 
 ##What is sharedearth.net?
-[sharedearth.net](http://sharedearth.net) is a social network for humans to build trust and share possessions and skills, helping us rewrite our cultural and economic stories to reflect our emerging experience of universal interconnection.
+[sharedearth.net](http://sharedearth.net) is a social network for humans to build trust and share possessions and skills, helping us to coordinate our resources consciously, while contributing to the re-imagination of our cultural and economic stories to reflect our emerging experience of universal interconnection.
 
 This is a project for the commons - for a world where everything is shared.
 
