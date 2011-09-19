@@ -5,13 +5,15 @@ Dan Gooden 		- founder
 
 Andrea Guerrini		- idea development & feedback
 
-Francisa Sallato 	- main designer
+Francisa Sallato 	- main graphic designer
 
 Slobodan Kovacevic 	- initial architect and developer
 
 Predrag Tomcanji	- css\html creation
 
-Nebojsa Zoric		- developer
+Nebojsa Zoric		- primary developer
+
+Juan Hawa - developer
 
 Dwight M		- AJAX development
 
@@ -19,6 +21,6 @@ Dwight M		- AJAX development
 #minor
 Josh B			- code review
 
-Daniel H		- contributing designer
+Daniel H		- contributing graphic designer
 
-Matt M			- contributing designer
+Matt M			- contributing graphic designer
