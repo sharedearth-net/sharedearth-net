@@ -23,6 +23,9 @@
 		
 			<% if (((@items.empty? && items_search) || (@people.empty? && people_search)) && !all_search) || (all_search && @items.empty? && @people.empty? )%>
 			  <h3>Search term not found</h3>
+				<p>
+					Looking for people on sharedearth.net? <a class="trusted" href=" /findtheothers">Find the others.</a>
+				</p>
 			<% end %>
 			<% unless @items.empty? -%>
 			  <div class="items-list clearfix">
