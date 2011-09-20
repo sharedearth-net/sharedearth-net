@@ -1549,6 +1549,7 @@ a.normal:visited {
 		
 		#community-page #content .items-expanded {
 			padding:0;
+			margin-top: 6px;
 		}
 		
 		#community-page #content .items-expanded ul li.item {
