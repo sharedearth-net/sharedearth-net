@@ -1,10 +1,55 @@
-<p>Dear,</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<p>You are invited to join sharedearth by your friend! Please go to sharedearth.net and use invitation code below</p>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-<p><%= @invitation_code %></p>
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<title>SharedEarth.net - trust. share. connect.</title>
+	
 
-<p>Become part of history and change world with love.</p>
+	<style>
+		body  {
+			margin: 0;
+			padding: 0;
+		}
+	
+	</style>
+	
+</head>
+<body>
+
+<div id="container" style="width: 650px; margin: 0 auto; ">
+		<%= image_tag("top-pic.jpg", :alt => "SharedEarth.net - trust. share. connect.", :title => "SharedEarth.net - trust. share. connect.", :style => "display: block;" )  %>
+	
+	<div id="content" style="width: 520px; margin: 0 auto;">
+		
+		<p style="font-family: verdana, arial, sans-serif; font-size: 14px; color: #033333; line-height: 50px;">
+			Dear human being,
+			<br />
+			You have been invited to join <a title="SharedEarth.net - trust. share. connect." style="font-size: 16px; font-weight: bold; color: #033333; text-decoration: none;" href="http://sharedearth.net/">sharedearth.net</a> by Dan Gooden.
+			<br />
+			Please visit <a title="SharedEarth.net - trust. share. connect." style="font-size: 16px; font-weight: bold; color: #033333; text-decoration: none;" href="http://sharedearth.net/">sharedearth.net</a> to connect and use this invitation code:
+		</p>
+		<p style="font-family: verdana, arial, sans-serif; font-size: 24px; color: #033333; line-height: 50px; text-align: center;">
+			<%= @invitation_code %>
+		</p>
+		
+		<p style="font-family: verdana, arial, sans-serif; font-size: 14px; color: #033333; line-height: 50px;">
+			Look forward to seeing you in the network!
+			<br />
+			<a title="SharedEarth.net - trust. share. connect." style="font-size: 16px; color: #033333; text-decoration: none;" href="http://sharedearth.net/">sharedearth.net</a>
+		</p>
+		
+	</div>
 
 
-   Sharedearth
+	<div id="footer">
+		<%= image_tag("bottom-pic.jpg", :alt => "SharedEarth.net - trust. share. connect.", :title => "SharedEarth.net - trust. share. connect.", :style => "display: block;" )  %>
+	</div>
+		
+</div>
+
+</body>
+</html>
