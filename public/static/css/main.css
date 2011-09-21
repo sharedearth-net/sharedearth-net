@@ -90,7 +90,7 @@ a:hover {
 
 		h1 {
 			width: 309px;
-			height: 296px;
+			height: 358px;
 			text-indent: -1000em;
 			background: url('../graphics/logo.png') no-repeat top left;
 		}
@@ -100,37 +100,11 @@ a:hover {
 			h1 a:visited {
 				background: url('../graphics/logo.png') no-repeat top left;
 				width: 309px;
-				height: 296px;
+				height: 358px;
 				display: block;
 				overflow: hidden;
 			}
 			
-		h3 {
-			font-family: "Century Gothic", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-			font-size: 40px;
-			color: #7fbc0f;
-			text-indent: -2px;
-			text-align: center;
-			clear: both;
-			padding: 0;
-			line-height: 27px;
-			margin-top: 10px;
-		}
-		
-		h3 span.breaker {
-			display: block;
-			text-align: center;
-		}
-		
-		h3 span.small {
-			font-size: 20px;
-			text-align: center;
-		}
-		
-		h3 span.dark {
-			color: #097b05;
-		}
-	
 	
 	
 	/* content */
