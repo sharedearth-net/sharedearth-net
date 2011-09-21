@@ -3096,6 +3096,7 @@ a.normal:visited {
 	#site-information-pages #content {
 		width: 80%;
         margin-left: 100px;
+        font-family: arial, sans-serif;
 	}
 
 		#site-information-pages img.main-pic {
@@ -3116,7 +3117,7 @@ a.normal:visited {
 		}
 
 		#site-information-pages #content h3 {
-				font-size: 14px;
+                font-size: .813em;
 				color: #127e0e;
 				font-weight: normal;
 				margin: 0 0 13px 0;
@@ -3193,7 +3194,11 @@ a.normal:visited {
 			font-size: 15px;
 		}
 
-
+        /* Contribute Page */
+        #site-information-pages #content h3 span.contribute {
+                text-decoration: none;
+                color: #127e0e;
+			}
 
         /* Transparency Page */
 
