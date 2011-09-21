@@ -1414,6 +1414,13 @@ a.normal:visited {
 			margin-top: 9px;
 		}
 		
+			#edit-profile-page #sidebar .trust-reputation-box h2.rhs-link {
+				float: right;
+			    font-size: 14px;
+			    text-align: right;
+				display: none;
+			}
+		
 		
 		/* edit profile - comments */
 		
