@@ -2324,6 +2324,7 @@ a.normal:visited {
 		float: left;
 		width: 150px;
 		padding: 0 15px 0 0;
+		margin-top: 10px;
 	}
 
 		#search-page #sidebar-left h2 {
@@ -3661,6 +3662,4 @@ a.normal:visited {
   display: none !important;
 }
 
-#search-page #sidebar-left {
-  margin-top :75px;
-}
+
