@@ -2314,15 +2314,24 @@ a.normal:visited {
 			}
 			
 			
-			#search-page #content ul li.people-holder p a:link,
-			#search-page #content ul li.people-holder p a:visited {
-				text-transform: none;
+				#search-page #content ul li.people-holder p a:link,
+				#search-page #content ul li.people-holder p a:visited {
+					text-transform: none;
+				}
+			
+				#search-page #content p a.trusted:link,
+				#search-page #content p a.trusted:visited {
+					color: #127e0e;
+				}
+			
+			#search-page #content ul li.people-holder p.action-link {
+				padding-top: 0;
 			}
 			
-			#search-page #content p a.trusted:link,
-			#search-page #content p a.trusted:visited {
-				color: #127e0e;
-			}
+				#search-page #content ul li.people-holder p.action-link a:link,
+				#search-page #content ul li.people-holder p.action-link a:visited {
+					font-size: 11px;
+				}
 				
 
 	/* Search Page - sidebar-left */
