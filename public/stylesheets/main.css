@@ -783,7 +783,6 @@ a.normal:visited {
 					color: #333333;
 				}
 				
-				
 				ul.comment-list input[type="submit"] {
 					display: block;
 				}
@@ -861,7 +860,6 @@ a.normal:visited {
 	
 		/* dashboard - content - comments */
 		
-		
 		#dashboard-page #content ul.comment-list {
 			
 		}
@@ -886,6 +884,10 @@ a.normal:visited {
 					
 					#dashboard-page #content .comment-box textarea {
 					    width: 418px;
+					}
+					
+					#dashboard-page #content .invitation-box textarea {
+						width: 468px;
 					}
 
 	/* dashboard - sidebar */
