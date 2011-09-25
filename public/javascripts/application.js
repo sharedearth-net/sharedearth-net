@@ -51,43 +51,20 @@ $(document).ready(function() {
   });
 });
 
-//dojo.registerModulePath("sen", "../../sen");          // DEVELOPMENT ENVIRONMENT
-dojo.registerModulePath("sen", "../../release/sen");    // BUILD ENVIRONMENT
+////////////////////////////////////////////////////////////////////////
+// All code above should eventually be ported to Dojo
+
+
+// THIS WAS SET FOR DEVELOPMENT ONLY, BUT IN THE INTEREST OF TRANSPARENCY AND
+// NOT HIDING CODE FOR NOW IT IS GOING TO BE HOW IT IS USED PUBLICALLY
+// At this stage there is no need to compile the code
+dojo.registerModulePath("sen", "../../sen");
+//dojo.registerModulePath("sen", "../../release/sen");    // FUTURE BUILD ENVIRONMENT
+
+// Require the base sen.app class
 dojo.require("sen.app");
 
 dojo.ready(function() {
-	sen.app.init();
-    
-    /*dojo.query("#item_description").forEach(function(node) {
-        var text = dojo.attr(node, "value");
-        
-        dojo.connect(node, "onfocus", function(e) {
-            dojo.addClass(e.target, "active");
-            if (dojo.attr(e.target, "value") == text) {
-                dojo.attr(e.target, "value", "");
-            }
-        });
-        
-        dojo.connect(node, "onblur", function(e) {
-            if (dojo.attr(e.target, "value") == "") {
-                dojo.attr(e.target, "value", text);
-                dojo.removeClass(e.target, "active");
-            }
-        })
-    });*/
-    
-    /*dojo.query("textarea").forEach(function(node) {
-        var text = dojo.attr(node, "value");
-        
-        dojo.connect(node, "onfocus", function(e) {
-            dojo.addClass(e.target, "active");
-        });
-        
-        dojo.connect(node, "onblur", function(e) {
-            if (dojo.attr(e.target, "value") == "") {
-                dojo.attr(e.target, "value", text);
-                dojo.removeClass(e.target, "value");
-            }
-        })
-    });*/
+    var senApp = new sen.app();
+    senApp.init();
 });
