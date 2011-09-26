@@ -18,4 +18,14 @@ class RequestedInvitation < ActiveRecord::Base
   	 self.accepted = true
      save!
   end
+
+  def invited_name
+    person = Person.find_by_user_id(self.user_id)
+    person.name unless person.nil?
+  end  
+  
+  def invited_email
+  	person = Person.find_by_user_id(self.user_id)
+    person.email unless person.nil?
+  end
 end

@@ -101,7 +101,11 @@ class Person < ActiveRecord::Base
   end
   
   def self.search(search)
-    search.empty? ? '' : authorized.where("UPPER(name) LIKE UPPER(?)", "%#{search}%")
+    if Settings.invitations == 'true'
+      search.empty? ? '' : authorized.where("UPPER(name) LIKE UPPER(?)", "%#{search}%")
+    else
+ 			search.empty? ? '' : where("UPPER(name) LIKE UPPER(?)", "%#{search}%")
+    end
   end
   
   def searchable_core_of_friends
