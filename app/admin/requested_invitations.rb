@@ -24,6 +24,8 @@ ActiveAdmin.register RequestedInvitation do
 
 	index do
      column "User id", :user_id, :sortable => false
+     column "Name", :invited_name
+     column "E-mail", :invited_email
      column "Invitation requested", :invitation_sent_date
      column "Sent invitation", :sent
      column "Accepted invitation", :accepted
