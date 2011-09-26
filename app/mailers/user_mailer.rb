@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
 
   def invite_email(email, code)
     @invitation_code = code
-    mail(:to => "#{email}", :subject => "Your sharedearth.net Invitation")
+    mail(:to => "#{email}", :subject => "Your sharedearth.net invitation")
   end
 
   def testing
