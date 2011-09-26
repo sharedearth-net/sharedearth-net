@@ -1,4 +1,4 @@
-<% unless current_person.accepted_pp?
+<% unless current_user.nil? || current_user.person.accepted_pp?
   content_for(:hide_on_policy_class, 'hide-on-policy-page')
   content_for(:hide_on_policy_top_margin, 'style=margin-top:100px;')
 end %>
