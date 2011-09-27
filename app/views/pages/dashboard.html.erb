@@ -16,13 +16,25 @@
 			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 			<ul>
 				<li class="content-box clearfix">
+					<%= image_tag("logo-small.png", :alt => "", :class => "thumb")  %>
 					<div class="inner-content">
-						<p>
-							<%= 'You have ' + current_user.person.invitations_count?.to_s + ' invitations to share'%>
+						<div class="clearfix">
+
+							<p>
+								<%= 'You have ' + current_user.person.invitations_count?.to_s + ' invitations to share'%>
+							</p>
+							
+							<div class="action clearfix">
+								<ul>
+									<li>
+										<a href="#">invite someone</a>
+									</li>
+								</ul>
+							</div>
 							<%= form_tag '/invitations/invite', :method => :get do -%>
-						</p>
-						<div class="comment-box invitation-box">
-							<%= text_area_tag :email, "invite someone"%>
+							<div class="comment-box invitation-box">
+								<%= text_area_tag :email, "invite someone"%>
+							</div>
 						</div>
 						<%= submit_tag 'Invite' %>
 					</div>

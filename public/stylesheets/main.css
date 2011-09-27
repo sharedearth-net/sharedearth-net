@@ -886,8 +886,8 @@ a.normal:visited {
 					    width: 418px;
 					}
 					
-					#dashboard-page #content .invitation-box textarea {
-						width: 468px;
+					#dashboard-page #content .invitation-box {
+						float: left;
 					}
 
 	/* dashboard - sidebar */
