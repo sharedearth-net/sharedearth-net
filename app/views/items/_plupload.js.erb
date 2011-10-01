@@ -13,15 +13,19 @@ $(function() {
   var atoken = $("input[name=authenticity_token]").val();  
 	var uploader = new plupload.Uploader({
 		runtimes : 'gears,html5,flash,silverlight,browserplus',
-		browse_button : 'pickfiles',
+		browse_button : 'button-holder',
 		container : 'container',
 		max_file_size : '10mb',
+		upload_path: 'uploads/$_SESSION[id]/',
 		url : '/items',
 		flash_swf_url : '/plupload/js/plupload.flash.swf',
 		silverlight_xap_url : '/plupload/js/plupload.silverlight.xap',
 		//RoR - make sure form is multipart  
       multipart: true,  
-      //RoR - make sure to send authenticity token and any other parameters that are on the plain html form  
+//RoR - make sure to send authenticity token and any other parameters that are on the plain html form  
+   multipart_params: {  
+    "authenticity_token" : '<%= form_authenticity_token %>'  
+   }  ,
 		filters : [
 			{title : "Image files", extensions : "jpg,gif,png"},
 			{title : "Zip files", extensions : "zip"}
@@ -29,10 +33,51 @@ $(function() {
 		resize : {width : 320, height : 240, quality : 10}
 	});
 	
+	
 	// Client side form validation  
   $("form").submit(function(e){
-		$('form').submit();  
+		uploader.start();
+		e.preventDefault();
   });
+  
+  uploader.bind('PostInit', function(up, params) {
+        // Initialize Preview.
+        if(uploader.runtime == "html5") {
+            var inputFile = document.getElementById(uploader.id + '_html5');
+            var oldFunction = inputFile.onchange;
+
+            inputFile.onchange = function() {
+                nativeFiles = this.files;
+                oldFunction.call(inputFile);
+            }
+        }
+    });
+
+
+    uploader.bind('FilesAdded', function(up, files) {   
+    for (var i in files) {
+            // Your code...
+
+            // Load Preview
+            if(uploader.runtime == "html5") {
+                var fileObject = uploader.getFile(files[i].id);
+                var reader = new FileReader();
+
+                reader.onload = (function(file, id) {
+                    return function(e) {
+                        
+                        var span = document.getElementById('item-pic-holder');
+                        span.removeAttribute("class")
+                        span.innerHTML = "<img src='"+e.target.result+"' height='100' width='100'/>";
+                      };
+                })(nativeFiles[i], files[i].id);
+
+                reader.readAsDataURL(nativeFiles[i]);
+            }
+        }    
+           
+
+    });
 
 	uploader.bind('Init', function(up, params) {
 		$('#filelist').html("<div>Current runtime: " + params.runtime + "</div>");
@@ -47,8 +92,12 @@ $(function() {
 
 	uploader.bind('FilesAdded', function(up, files) {
 		$.each(files, function(i, file) {
+
+		
+		  $('#item-pic-holder').append('<img alt="Upload Imag" src="/uploads/' + file.target_name + '" /> ');
+		  
 			$('#filelist').append(
-				'<div id="' + file.id + '">' +
+				'<div id="' + file.id + '">' + file.src + file.target_name +
 				file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' +
 			'</div>');
 		});
@@ -76,4 +125,15 @@ $(function() {
 });
 </script>
 
-			
+			<!--div id="container">
+
+    <div id="filelist">No runtime found.</div>
+
+    <br />
+
+    <a id="pickfiles" href="#">[Select files]</a>
+
+    <a id="uploadfiles" href="#">[Upload files]</a>
+
+</div-->
+
