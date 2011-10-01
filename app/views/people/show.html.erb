@@ -35,7 +35,12 @@
 						
 						<% if @items.count < 8  || !params[:filter_type].nil?%>
 						<div class="items-expanded clearfix">
-							<h3>Items</h3>
+						  <% if params[:filter_type].nil? -%>
+						    <h3>Items</h3>
+						  <% else -%>
+						    <h3><%= link_to 'Items', items_path %> > <%= params[:filter_type].to_s %> </h3>
+						  <% end -%>
+							
 							<ul class="clearfix">
 								<% @items.each do |item| %>
 									<li class="item clearer">
