@@ -21,3 +21,30 @@ By default app will use local file system for storage. If you want to use S3 for
 
    * Create s3.yml: `cp config/s3.yml.example config/s3.yml`
    * Edit s3.yml and set access_key_id, secret_access_key and bucket
+   
+
+##Setup Facebook keys and Amazon SES keys
+Please setup environment variables accordingly 
+
+   For Facebook:
+     ENV['SEN_FACEBOOK_APP_ID']    - your facebook app id
+     ENV['SEN_FACEBOOK_APP_SECRET'] - your facebook app secret
+   For Amazon Ses:
+       ENV['SEN_SES_KEY']   - Amazon Ses key
+       ENV['SEN_SES_SECRET']   - Amazon SES secret
+       
+ For local settings add these lines at the end of ~/.bashrc file
+ 
+      export SEN_SES_KEY='mykey'
+      export SEN_SES_SECRET='mysecret'
+      export SEN_FACEBOOK_APP_ID='facebookid'
+      export SEN_FACEBOOK_APP_SECRET='facebooksecret'
+  
+  *note you mush reset terminal, or reset your system to this can take effect
+       
+ If you are deploying application to heroku use this command 
+ 
+ heroku config:add SEN_SES_KEY=8N029N81 SEN_SES_SECRET=9s83109d3+583493190
+ 
+ 
+ * note this is just example usage
