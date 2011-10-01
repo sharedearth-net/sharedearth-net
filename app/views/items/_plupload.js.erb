@@ -30,15 +30,31 @@ $(function() {
 			{title : "Image files", extensions : "jpg,gif,png"},
 			{title : "Zip files", extensions : "zip"}
 		],
-		resize : {width : 320, height : 240, quality : 10}
+		resize : {width : 320, height : 240}
 	});
 	
 	
 	// Client side form validation  
   $("form").submit(function(e){
-		uploader.start();
-		e.preventDefault();
+		if (uploader.files.length > 0) {
+
+            // When all files are uploaded submit form
+       uploader.start();
+ 		   e.preventDefault();
+            uploader.bind('StateChanged', function() {
+
+                if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
+
+                    $('form')[0].submit();
+
+                }
+
+            });
+
+
+        }
   });
+  
   
   uploader.bind('PostInit', function(up, params) {
         // Initialize Preview.
