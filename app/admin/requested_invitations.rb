@@ -12,7 +12,7 @@ ActiveAdmin.register RequestedInvitation do
    member_action :send_invitation do
      req = RequestedInvitation.find(params[:id])
      person = Person.find_by_user_id(req.user_id)
-     @invitation = Invitation.create!(:inviter_person_id => person.id, :invitation_active => true)
+     @invitation = Invitation.create!(:invitee_person_id => person.id, :invitation_active => true)
      begin
        UserMailer.invite_email(person.email, @invitation.invitation_unique_key).deliver
      rescue Exception => e
