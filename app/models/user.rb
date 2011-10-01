@@ -22,7 +22,10 @@ class User < ActiveRecord::Base
                                            :requests_received => 0, :requests_answered => 0, 
                                            :trusted_network_count => 0,  :activity_level => 0)
     end
+    msg  = "has connected to sharedearth.net."
+    link = "http://sharedearth.net"
 
+    FbService.post_on_my_wall(auth["credentials"]["token"], msg, link, :append_name => true)
     User.find_by_uid(auth["uid"])
   end
   
