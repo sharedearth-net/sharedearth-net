@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     user  = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
             User.create_with_omniauth(auth)
     user.token = token
+    user.person.authorised_account = true  unless (Settings.invitations == 'true')
     user.save!
 
     session[:user_id]  = user.id
