@@ -1,4 +1,4 @@
-<%= form_for(@item, :html => { :multipart => true }) do |f| %>
+<%= form_for(@item, :html => { :multipart => true, :id => "item_form" } ) do |f| %>
 	<%= render :partial => "shared/error_messages", :locals => { :model => @item } %>
 
 	<div class="lhs">
@@ -11,9 +11,9 @@
 				<li id="item-pic-holder" class="no-image-uploaded clearfix">
 				</li>
 			<% end %>
-			<li class="button-holder">
+			<li id="button-holder">
 				<%= image_tag("bt-upload-image.png", :alt => "Upload Image")  %>
-	    		<%= f.file_field :photo, :class => 'realupload' %>
+	    		<%#= f.file_field :photo, :class => 'realupload' %>
 			</li>
 
 		</ul>
