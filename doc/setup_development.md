@@ -24,14 +24,19 @@ By default app will use local file system for storage. If you want to use S3 for
    
 
 ##Setup Facebook keys and Amazon SES keys
-Please setup environment variables accordingly 
+Please setup environment variables accordingly, then reset terminal or system to apply the changes.
 
    For Facebook:
-     ENV['SEN_FACEBOOK_APP_ID']    - your facebook app id (or use the public development app id:   216097298441765)
-     ENV['SEN_FACEBOOK_APP_SECRET'] - your facebook app secret (or use the public development key:   cb27474f079a8ae3a07e592c7d8fb2e1)
+      
+      ENV['SEN_FACEBOOK_APP_ID']    - your facebook app id (or use the public development app id:   216097298441765)
+      
+      ENV['SEN_FACEBOOK_APP_SECRET'] - your facebook app secret (or use the public development key:   cb27474f079a8ae3a07e592c7d8fb2e1)
+     
    For Amazon Ses:
-       ENV['SEN_SES_KEY']   - Amazon Ses key (no public keys available)
-       ENV['SEN_SES_SECRET']   - Amazon SES secret (no public keys available)
+      
+      ENV['SEN_SES_KEY']   - Amazon Ses key (no public keys available)
+      
+      ENV['SEN_SES_SECRET']   - Amazon SES secret (no public keys available)
        
  For local settings add these lines at the end of ~/.bashrc file
  
@@ -40,9 +45,9 @@ Please setup environment variables accordingly
       export SEN_FACEBOOK_APP_ID='facebookid'
       export SEN_FACEBOOK_APP_SECRET='facebooksecret'
   
-  *note you mush reset terminal, or reset your system to this can take effect
        
  If you are deploying application to heroku use this command 
  
  heroku config:add SEN_SES_KEY=8N029N81 SEN_SES_SECRET=9s83109d3+583493190
- * note this is just example usage
+ 
+* note this is just example usage
