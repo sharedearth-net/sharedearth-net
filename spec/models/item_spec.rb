@@ -34,7 +34,10 @@ describe Item do
   it { should_not allow_value(long_name).for(:name) }
 
   it { should_not allow_value(long_description).for(:description) }
-
+  
+  before(:each) do
+    File.stub!(:unlink).and_return(true)
+  end
   it "should have a 'deleted' flag" do
     item = Factory(:item)
     item.should respond_to(:deleted)
@@ -76,7 +79,11 @@ describe Item do
 end
 
 describe Item, ".delete" do
+
   let(:item) { Factory(:item) }
+  before(:each) do
+    File.stub!(:unlink).and_return(true)
+  end
 
   it "should set the 'deleted' flag to true" do
     item.delete
@@ -123,6 +130,9 @@ describe Item, ".delete" do
 end
 
 describe Item, '.search' do
+  before(:each) do
+    File.stub!(:unlink).and_return(true)
+  end
   let(:items_requester) { Factory(:person) }
 
   let(:items_owner) { Factory(:person) }

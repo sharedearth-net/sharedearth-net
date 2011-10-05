@@ -69,13 +69,10 @@ module UserSpecHelper
       "uid" => '111111111',
       "user_info" => {
         "name" => "Slobodan Kovacevic",
-        "nickname" => "basti"
+        "email" => "testing@test.net"
       },
       "credentials" => {
         "token" => "111111111"
-      },
-      "extra" => {
-        "email" => "testing@test.net"
       }
     }
   end

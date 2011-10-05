@@ -44,6 +44,10 @@ Factory.define :item do |i|
   i.association :owner, :factory => :person
   i.status Item::STATUS_NORMAL
   i.purpose Item::PURPOSE_SHARE
+  i.photo_file_name "test.jpg"
+  i.photo_content_type "image/jpeg"
+  i.photo_file_size 100000
+  i.photo_updated_at Time.now
 end
 
 Factory.define :item_request do |i|
