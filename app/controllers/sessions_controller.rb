@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
 
       session[:fb_token] = nil
       session[:user_id] = nil
+      session[:fb_drop_url] = nil
 			redirect_to root_path
       #redirect_to FbService.fb_logout_url(fb_api_key, fb_session_key, root_url)  #This redirects to facebook
     end
