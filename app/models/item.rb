@@ -46,21 +46,23 @@ class Item < ActiveRecord::Base
   validates_length_of    :item_type, :maximum => 30
   validates_length_of    :name, :maximum => 50
   validates_length_of    :description, :maximum => 400
-=begin
+
   validates_inclusion_of :purpose, :in => [PURPOSE_SHARE, PURPOSE_GIFT],
                          :message => " must be in #{PURPOSES.values.join ', '}"
   validates_presence_of  :purpose, :item_type, :name, :owner_id, :owner_type, :status
   validates_inclusion_of :status, :in => STATUSES.keys, 
                          :message => " must be in #{STATUSES.values.join ', '}"
-=end
+
   
   after_create :create_entity_for_item
   after_create :add_to_resource_network
   after_create :item_event_log
+  after_save :destroy_original
+
   
-  validates_attachment_size :photo, :less_than => 1.megabyte
-  #validates_attachment_content_type :photo, :content_type => /image\//
-  validates_attachment_content_type :photo, :content_type => [/image\/jpg/, /image\/jpeg/, /image\/pjpeg/, /image\/gif/, /image\/png/, /image\/x-png/]
+  validates_attachment_size :photo, :less_than => 10.megabyte
+  validates_attachment_content_type :photo, :content_type => /image\//
+  #validates_attachment_content_type :photo, :content_type => [/image\/jpg/, /image\/jpeg/, /image\/pjpeg/, /image\/gif/, /image\/png/, /image\/x-png/]
   
   scope :without_deleted, :conditions => { :deleted_at => nil }
   scope :only_normal, :conditions => { :status => STATUS_NORMAL }
@@ -278,5 +280,12 @@ class Item < ActiveRecord::Base
     EventDisplay.where(:event_log_id => event_log.id).each do |event_display|
       event_display.destroy
     end
+  end
+  
+  
+  private
+
+  def destroy_original
+    File.unlink(self.photo.path)
   end
 end
