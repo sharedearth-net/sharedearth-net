@@ -73,7 +73,7 @@
 				
 			-->
       
-				<h3>Items <%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %></h3>
+				<h3><%= link_to 'Items', items_path, :style => "color: #315859;" %> <%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %></h3>
 					
 			<% unless @items.count.zero? -%>
 			  
