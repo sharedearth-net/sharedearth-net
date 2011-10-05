@@ -23,7 +23,7 @@ Given /^the user is logged in$/ do
   omniauth_mock_facebook_with_uid(person.user.uid)
   visit "/auth/facebook"
 
-  FbService.stub(:post_on_my_wall).and_return(true)
+  FbService.stub!(:post_on_my_wall).and_return(true)
 end
 
 Given /^the unauthorised user is logged in$/ do
