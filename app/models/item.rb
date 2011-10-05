@@ -37,6 +37,7 @@ class Item < ActiveRecord::Base
   has_attachment :photo,
                  :styles => {
                    :large => "300x300#",
+                   :original => "300x300#",
                    :medium => "150x150>",
                    :small => "100x100>",
                    :square => "50x50"
@@ -57,7 +58,7 @@ class Item < ActiveRecord::Base
   after_create :create_entity_for_item
   after_create :add_to_resource_network
   after_create :item_event_log
-  after_save :destroy_original
+  #after_save :destroy_original
 
   
   validates_attachment_size :photo, :less_than => 10.megabyte
@@ -286,6 +287,6 @@ class Item < ActiveRecord::Base
   private
 
   def destroy_original
-    File.unlink(self.photo.path)
+    self.photo.destroy
   end
 end
