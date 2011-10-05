@@ -64,6 +64,7 @@ group :development, :test do
   gem 'pickle'
   gem 'ruby-debug'
   gem 'heroku_san'
+  gem 'nifty-generators'
 #  gem 'pg'
 end
 gem "simplecov", :require => false, :group => :test
@@ -74,3 +75,4 @@ gem "mail"
 gem "aws-ses", "~> 0.4.3", :require => 'aws/ses'
 gem 'delayed_job' #What you can do today, don't leave for tomorrow
 
+gem "mocha", :group => :test
