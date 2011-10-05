@@ -1,5 +1,6 @@
 
 <!-- Thirdparty intialization scripts, needed for the Google Gears and BrowserPlus runtimes -->
+
 <script type="text/javascript" src="/plupload/js/gears_init.js"></script>
 <script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
 
@@ -15,9 +16,9 @@ $(function() {
 		runtimes : 'gears,html5,flash,silverlight,browserplus',
 		browse_button : 'button-holder',
 		container : 'container',
-		max_file_size : '10mb',
+		max_file_size : '1mb',
 		upload_path: 'uploads/$_SESSION[id]/',
-		url : '/items',
+		url : '/images.js',
 		flash_swf_url : '/plupload/js/plupload.flash.swf',
 		silverlight_xap_url : '/plupload/js/plupload.silverlight.xap',
 		//RoR - make sure form is multipart  
@@ -36,25 +37,70 @@ $(function() {
 	
 	// Client side form validation  
   $("form").submit(function(e){
-		if (uploader.files.length > 0) {
+      var upload = false;
+		  // Validate number of uploaded files
+		  // Files in queue upload them first
+        if (uploader.files.length > 0) {
+            upload = true;
+            // When all files are uploaded submit form
+            uploader.bind('StateChanged', function() {
+                if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
+                    $('form')[0].submit();
+                }
+            });
+             
+            uploader.start();
+
+        }else{
+           $('form')[0].submit();
+        }
+
+        if(upload){
+                    e.preventDefault();
+                    return false;
+        }
+
+//        return false;
+       
+  });
+  
+  /*
+    $('#uploadfiles').click(function(e) {
+
+       // Files in queue upload them first
+
+        if (uploader.files.length > 0) {
 
             // When all files are uploaded submit form
-       uploader.start();
- 		   e.preventDefault();
+
             uploader.bind('StateChanged', function() {
 
                 if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
 
-                    $('form')[0].submit();
+                   // $('form')[0].submit();
 
                 }
 
             });
 
+                 
+            uploader.settings.multipart_params.type = 'super';
+            uploader.start();
+
+        } else {
+
+            alert('You must queue at least one file.');
 
         }
-  });
-  
+
+ 
+
+        return false;
+
+
+    });
+
+  */
   
   uploader.bind('PostInit', function(up, params) {
         // Initialize Preview.
@@ -68,6 +114,12 @@ $(function() {
             }
         }
     });
+    
+    uploader.bind('Init', function(up, params) {
+
+        $('#filelist').html("<div>Current runtime: " + params.runtime + "</div>");
+    });
+
 
 
     uploader.bind('FilesAdded', function(up, files) {   
@@ -84,7 +136,7 @@ $(function() {
                         
                         var span = document.getElementById('item-pic-holder');
                         span.removeAttribute("class")
-                        span.innerHTML = "<img src='"+e.target.result+"' height='100' width='100'/>";
+                        span.innerHTML = "<img src='"+e.target.result+"' height='150' width='150'/>";
                       };
                 })(nativeFiles[i], files[i].id);
 
@@ -95,53 +147,13 @@ $(function() {
 
     });
 
-	uploader.bind('Init', function(up, params) {
-		$('#filelist').html("<div>Current runtime: " + params.runtime + "</div>");
-	});
-
-	$('#uploadfiles').click(function(e) {
-		uploader.start();
-		e.preventDefault();
-	});
 
 	uploader.init();
 
-	uploader.bind('FilesAdded', function(up, files) {
-		$.each(files, function(i, file) {
-
-		
-		  $('#item-pic-holder').append('<img alt="Upload Imag" src="/uploads/' + file.target_name + '" /> ');
-		  
-			$('#filelist').append(
-				'<div id="' + file.id + '">' + file.src + file.target_name +
-				file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' +
-			'</div>');
-		});
-
-		up.refresh(); // Reposition Flash/Silverlight
-	});
-
-	uploader.bind('UploadProgress', function(up, file) {
-		$('#' + file.id + " b").html(file.percent + "%");
-	});
-
-	uploader.bind('Error', function(up, err) {
-		$('#filelist').append("<div>Error: " + err.code +
-			", Message: " + err.message +
-			(err.file ? ", File: " + err.file.name : "") +
-			"</div>"
-		);
-
-		up.refresh(); // Reposition Flash/Silverlight
-	});
-
-	uploader.bind('FileUploaded', function(up, file) {
-		$('#' + file.id + " b").html("100%");
-	});
 });
 </script>
 
-			<!--div id="container">
+			<div id="container">
 
     <div id="filelist">No runtime found.</div>
 
@@ -151,5 +163,5 @@ $(function() {
 
     <a id="uploadfiles" href="#">[Upload files]</a>
 
-</div-->
+</div>
 
