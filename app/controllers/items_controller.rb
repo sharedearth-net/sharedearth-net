@@ -33,17 +33,14 @@ class ItemsController < ApplicationController
       format.xml  { render :xml => @item }
     end
   end
-
+  
   def create
     @item = Item.new(params[:item])
     @item.owner = current_user.person
     @item.status = Item::STATUS_NORMAL
     @item.available = true
-    @item.photo = params[:file] if params.has_key?(:file)
-    # detect Mime-Type (mime-type detection doesn't work in flash)
-    @item.photo_content_type = MIME::Types.type_for(params[:name]).to_s if params.has_key?(:name)
 
-    respond_to do |format|
+     respond_to do |format|
       if @item.save
         @item.create_new_item_event_log
         @item.create_new_item_activity_log
@@ -52,7 +49,7 @@ class ItemsController < ApplicationController
           current_user.person.reputation_rating.update_attributes(:activity_level => 1)
         end
 
-        post_new_item_on_fb(@item) if @item.post_it_on_fb == '1'
+        post_new_item_on_fb(@item) if params[:item][:post_it_on_fb] == "1"
 
         format.html { redirect_to @item }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
@@ -63,14 +60,9 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
+  # PUT /items/1
+  # PUT /items/1.xml
   def update
-     @item.photo = params[:file] if params.has_key?(:file)
-    # detect Mime-Type (mime-type detection doesn't work in flash)
-    @item.photo_content_type = MIME::Types.type_for(params[:name]).to_s if params.has_key?(:name)
-
     respond_to do |format|
       if @item.update_attributes(params[:item])
         format.html { redirect_to @item }
