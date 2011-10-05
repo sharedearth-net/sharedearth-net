@@ -55,6 +55,10 @@ class ApplicationController < ActionController::Base
           not current_person.accepted_tr? or
           not current_person.accepted_pp?
       redirect_to next_policy_path
+    elsif not session[:fb_drop_url].nil?
+      url = session[:fb_drop_url]
+      session[:fb_drop_url] = nil
+      redirect_to url
     end
   end
 
@@ -124,6 +128,7 @@ class ApplicationController < ActionController::Base
   end
 
   def facebook_login
+    session[:fb_drop_url] = request.env["HTTP_REFERER"] unless request.env["HTTP_REFERER"].blank?
     render :template => 'static_pages/fb_logged_out', :status => :not_implemented
   end
 end
