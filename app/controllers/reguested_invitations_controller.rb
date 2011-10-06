@@ -2,6 +2,8 @@ class ReguestedInvitationsController < ApplicationController
   before_filter :only_logged_and_not_authorised
 
   def create
+    redirect_to root_path,  :notice => "Testing response"
+=begin
     request = RequestedInvitation.find_by_user_id(current_user.id)
 
     if request.nil?
@@ -10,6 +12,7 @@ class ReguestedInvitationsController < ApplicationController
     else
       redirect_to root_path, :notice => "You have already requested an invitation. It will be dispatched as soon as possible."
     end
+=end
   end
   
   private
