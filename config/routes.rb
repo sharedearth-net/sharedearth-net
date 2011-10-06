@@ -17,7 +17,7 @@ Sharedearthapp::Application.routes.draw do
     get '/admin/logout', :to => 'active_admin/devise/sessions#destroy'
 end
 
-  get "reguested_invitations/create"
+
   
   resources :terms, :only => [:index] do
     collection do
@@ -26,6 +26,15 @@ end
       get 'principles'
     end
   end
+  
+   resources :requested_invitations, :only => [:index] do
+    collection do
+      get 'give'
+    end
+  end
+  
+  #resources :requested_invitations, :only => [ :create ]
+    #post "reguested_invitations/create"
   
   resources :comments, :only => [:create]
 
@@ -76,6 +85,8 @@ end
     end
     resources :feedbacks
   end
+  
+
   
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
