@@ -37,6 +37,9 @@ end
 
 describe User, ".create_with_omniauth" do
   include UserSpecHelper
+  before(:each) do
+    FbService.stub!(:post_on_my_wall).and_return(true)
+  end
   
   it "should create new user using omniauth hash" do
     expect {
