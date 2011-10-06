@@ -16,24 +16,26 @@
 			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 			<ul>
 				<li class="content-box clearfix">
-					<%= image_tag("logo-small.png", :alt => "", :class => "thumb")  %>
+					<%= image_tag("trusted_icon_yourself.png", :alt => "", :class => "thumb")  %>
 					<div class="inner-content">
 						<div class="clearfix">
 
 							<p>
-								<%= 'You have ' + current_user.person.invitations_count?.to_s + ' invitations to share'%>
+								You have 5 invitations to give
+								<!--<%= 'You have ' + current_user.person.invitations_count?.to_s + ' invitations to give'%>-->
 							</p>
 							
 							<div class="action clearfix">
 								<ul>
+									<li>time since</li>
 									<li>
-										<a href="#">invite someone</a>
+										<a href="#">invite friends</a>
 									</li>
 								</ul>
 							</div>
 							<%= form_tag '/invitations/invite', :method => :get do -%>
 							<div class="comment-box invitation-box">
-								<%= text_area_tag :email, "invite someone"%>
+								<%= text_area_tag :email, "Enter email addresses here, using a comma to separate. E.g. asdf@asdf.com, qwer@qwer.com"%>
 							</div>
 						</div>
 						<%= submit_tag 'Invite' %>
@@ -42,7 +44,7 @@
 			</ul>
 
 			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
-		</div>
+		</div><!-- /content-box-holder -->
 	<% end -%>
 <% end -%>
 		<% unless @requests.count.zero? %>
