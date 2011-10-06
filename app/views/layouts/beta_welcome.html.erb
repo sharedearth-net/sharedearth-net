@@ -57,10 +57,11 @@
 							<%= submit_tag 'Submit' %>
 						</h2>
 					</div>
-						 <% end %>
+					
+				<% end %>
+						
 					<div class="button-holder-request">
-							 <%= button_to "request invitation", RequestedInvitation.new , :method => :post, :title => "request invitation", :id => "request invitation" %>
-							 
+						<%= button_to "request invitation", RequestedInvitation.new , :method => :post, :title => "request invitation", :id => "request invitation" %>	 
 					</div>
 						
 						 
@@ -68,7 +69,7 @@
 						<%= link_to 'remove account', invitations_purge_path %> or <%= link_to 'disconnect', signout_path %>
 					</p>
 				</div>
-				
+				 
 			</div>
 			
 		</div><!-- /content -->

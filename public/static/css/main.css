@@ -263,13 +263,15 @@ a:hover {
 				text-indent: -1000em;
 			}
 
-			#container.invitation-page .button-holder-request a:link,
-			#container.invitation-page .button-holder-request a:visited {
+			#container.invitation-page  .button-holder-request input {
 				display: block;
 				background: url('../graphics/bt-request.png') no-repeat top left;
 				width: 158px;
 				height: 30px;
 				overflow: hidden;
+				border: none;
+				text-indent: -1000em;
+				cursor: pointer;
 			}
 
 		#container.invitation-page .button-holder-submit {
