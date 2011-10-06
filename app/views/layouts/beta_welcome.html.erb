@@ -38,6 +38,8 @@
 				sharedearth.net is now in private beta
 			</p>
 		
+		<%#= link_to 'put req.', give_requested_invitations_path, :method => :put, :class => 'positive' %>
+		<%#= link_to 'Connect', accept_pp_terms_path, :method => 'put', :class => 'positive' %>
 			<% flash.each do |name, msg| %>
 			  <%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
 			<% end %>
@@ -49,7 +51,9 @@
 				<div class="clearfix">
 					<div class="button-holder-request">
 						<h2>
-						  <%= link_to 'request invitation', give_requested_invitations_path, :method => 'put', :title => "request invitation", :id => "request invitation" %>							
+						  
+						  <%#= link_to 'request invitation', give_requested_invitations_path, :method => 'put', :title => "request invitation", :id => "request invitation" %>
+							
 						</h2>
 					</div>
 			
@@ -60,6 +64,11 @@
 						</h2>
 					</div>
 						 <% end %>
+					<div class="button-holder">
+							 <%= button_to "request invitation", RequestedInvitation.new , :method => :post, :title => "request invitation", :id => "request invitation" %>
+					</div>
+						
+						 
 					<p>
 						<%= link_to 'remove account', invitations_purge_path %> or <%= link_to 'disconnect', signout_path %>
 					</p>

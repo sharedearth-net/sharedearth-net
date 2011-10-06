@@ -27,11 +27,7 @@ end
     end
   end
   
-   resources :requested_invitations, :only => [:index] do
-    collection do
-      get 'give'
-    end
-  end
+   resources :requested_invitations, :only => [:create]
   
   #resources :requested_invitations, :only => [ :create ]
     #post "reguested_invitations/create"

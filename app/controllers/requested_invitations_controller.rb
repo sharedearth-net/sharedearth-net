@@ -3,7 +3,7 @@ class RequestedInvitationsController < ApplicationController
   def index
   end
 
-  def give
+  def create
     request = RequestedInvitation.find_by_user_id(current_user.id)
 
     if request.nil?
@@ -17,7 +17,7 @@ class RequestedInvitationsController < ApplicationController
   private
    
   def only_logged_and_not_authorised
-    current_user && current_user.person.authorised? unless current_user.nil?
+    current_user && current_user.person.authorised? unless current_user.person.nil?
   end
   
 end
