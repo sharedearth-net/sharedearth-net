@@ -38,7 +38,6 @@
 				sharedearth.net is now in private beta
 			</p>
 		
-		
 			<% flash.each do |name, msg| %>
 			  <%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
 			<% end %>
@@ -50,7 +49,7 @@
 				<div class="clearfix">
 					<div class="button-holder-request">
 						<h2>
-							<%= link_to 'request invitation', reguested_invitations_create_path, :method => 'post', :title => "request invitation", :id => "request invitation" %>
+						  <%= link_to 'request invitation', give_requested_invitations_path, :method => 'put', :title => "request invitation", :id => "request invitation" %>							
 						</h2>
 					</div>
 			

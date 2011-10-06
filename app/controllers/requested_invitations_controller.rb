@@ -1,7 +1,9 @@
-class ReguestedInvitationsController < ApplicationController
+class RequestedInvitationsController < ApplicationController
   before_filter :only_logged_and_not_authorised
+  def index
+  end
 
-  def create
+  def give
     request = RequestedInvitation.find_by_user_id(current_user.id)
 
     if request.nil?
@@ -15,7 +17,7 @@ class ReguestedInvitationsController < ApplicationController
   private
    
   def only_logged_and_not_authorised
-    current_user && current_user.person.authorised?
+    current_user && current_user.person.authorised? unless current_user.nil?
   end
   
 end
