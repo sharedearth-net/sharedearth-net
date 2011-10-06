@@ -49,13 +49,7 @@
 				<%= text_field_tag :key, params[:key] %>
 
 				<div class="clearfix">
-					<div class="button-holder-request">
-						<h2>
-						  
-						  <%#= link_to 'request invitation', give_requested_invitations_path, :method => 'put', :title => "request invitation", :id => "request invitation" %>
-							
-						</h2>
-					</div>
+					
 			
 
 					<div class="button-holder-submit">
@@ -64,8 +58,9 @@
 						</h2>
 					</div>
 						 <% end %>
-					<div class="button-holder">
+					<div class="button-holder-request">
 							 <%= button_to "request invitation", RequestedInvitation.new , :method => :post, :title => "request invitation", :id => "request invitation" %>
+							 
 					</div>
 						
 						 
