@@ -3282,7 +3282,14 @@ a.normal:visited {
                 }
 
 
-
+				#site-information-pages.principles .post-to-wall {
+					font-family: "Lucida Grande",verdana,tahoma,arial,sans-serif;
+					font-size: 12px;
+					color: #62775A;
+				    font-weight: bold;
+					margin-top: 13px;
+					text-align: center;
+				}
 
 
 						
