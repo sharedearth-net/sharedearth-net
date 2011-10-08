@@ -14,6 +14,10 @@ class TermsController < ApplicationController
   
   def accept_pp
     current_user.person.accept_pp!
+    msg  = "has connected to sharedearth.net."
+    link = "http://sharedearth.net"
+
+    FbService.post_on_my_wall(current_user.token, msg, link, :append_name => true)
     redirect_to next_policy_path
   end
     
