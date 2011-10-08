@@ -12,20 +12,16 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.build_person(:name  => auth["user_info"]["name"].slice(0..19), 
+      user.create_person(:name  => auth["user_info"]["name"].slice(0..19), 
                          :email => auth["user_info"]["email"],
                          :authorised_account => false)
 
-      user.person.build_reputation_rating(:gift_actions  => 0,:distinct_people => 0, 
+      user.person.create_reputation_rating(:gift_actions  => 0,:distinct_people => 0, 
                                            :total_actions => 0, :positive_feedback => 0, 
                                            :negative_feedback => 0, :neutral_feedback => 0,
                                            :requests_received => 0, :requests_answered => 0, 
                                            :trusted_network_count => 0,  :activity_level => 0)
     end
-    msg  = "has connected to sharedearth.net."
-    link = "http://sharedearth.net"
-
-    FbService.post_on_my_wall(auth["credentials"]["token"], msg, link, :append_name => true)
     User.find_by_uid(auth["uid"])
   end
   
