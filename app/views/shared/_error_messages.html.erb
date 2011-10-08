@@ -1,8 +1,8 @@
 <% if model.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(model.errors.count, "error") %> prohibited this item from being saved:</h2>
+  <div id="error_explanation" style="display:none;">
+    <h2 id="error_title"><%= pluralize(model.errors.count, "error") %> prohibited this item from being saved</h2>
 
-    <ul>
+    <ul id="error_list">
     <% model.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>

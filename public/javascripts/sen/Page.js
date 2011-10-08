@@ -194,6 +194,8 @@ dojo.declare("sen.Page", null, {
 			
 			// Allow clicks on the overlay to close the notification off
 			this.events.notice.push(dojo.connect(dojo.byId("notification-overlay"), "onclick", this, "hideNotice"));
+			this.events.notice.push(dojo.connect(dojo.byId("notification-close"), "onclick", this, "hideNotice"));
+      this.events.notice.push(dojo.connect(dojo.byId("notification-ok"), "onclick", this, "hideNotice"));
 		}
 	},
 	
