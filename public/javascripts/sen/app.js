@@ -50,6 +50,24 @@ dojo.declare("sen.app", null, {
 					senModule.unload();
 				});
 			}
+			
+			var error_div = dojo.byId("error_explanation");
+			if (error_div){
+				
+				if ( senModule && senModule.notify ) {
+					// module does not inherit Page
+					var page_obj = senModule;
+				}
+				else
+				{
+					var page_obj = new sen.Page();
+				}
+				
+			  var title = dojo.byId("error_title").innerHTML;
+			  var list = dojo.byId("error_list").innerHTML;
+			  page_obj.notify({ title: title, body: list });
+			}
+			
 		});
 	}
 });
