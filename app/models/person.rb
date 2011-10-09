@@ -33,7 +33,7 @@ class Person < ActiveRecord::Base
   after_create :create_entity_for_person
   after_create :create_person_join_activity_log
   
-  default_scope where(:authorised_account => true) if INVITATION_SYS_ON
+  #default_scope where(:authorised_account => true) if INVITATION_SYS_ON
   scope :authorized, where(:authorised_account => true)
 
   def network_activity
