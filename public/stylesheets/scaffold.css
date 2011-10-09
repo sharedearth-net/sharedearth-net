@@ -41,7 +41,7 @@ div.field, div.actions {
 }
 
 .field_with_errors {
-
+  display:inline;
 }
 
 .field_with_errors > input {
