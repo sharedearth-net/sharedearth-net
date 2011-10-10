@@ -117,7 +117,7 @@
 		# possible values include: flash-notice and flash-alert
 		# (CSS rules also allow flash-info - which is not used at the moment)
 	%>
-	<%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
+	<%= content_tag :div, msg, :class => "message-holder flash-#{name}", :style => "display:none;" %>
 <% end %>
 
 <div id="wrapper" class="clearfix" <%= yield(:hide_on_policy_top_margin)%>>
@@ -155,13 +155,27 @@
 </div>
 <!-- #container -->
 
-<div id="notification-overlay"></div>
+<div id="notification-overlay" ></div>
 
-<div id="notification-box">
-	<div id="notification-title">
-		Notice
-	</div>
-	<div id="notification-body"></div>
+<div id="notification-box" >
+  <table>
+    <tr id="notification-header">
+      <td>
+        <span id="notification-title"> This is test</span>
+        <img id="notification-close" src="/images/closelabel.png" style="float:right;">
+      </td>
+    </tr>
+    <tr>
+      <td id="notification-body">
+        This is body
+      </td>
+    </tr>
+    <tr id="notification-footer" >
+      <td>
+        <button id="notification-ok">OK</button>
+      </td>
+    </tr>
+  </table>
 </div>
 
 </body>
