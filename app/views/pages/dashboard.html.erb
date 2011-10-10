@@ -12,7 +12,7 @@
 		
 		
 <% if Settings.invitations.to_s == 'true' && (!current_user.person.invitations_count.nil?) -%>
-		<div class="content-box-holder">
+		<!--div class="content-box-holder">
 			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
 			<ul>
 				<li class="content-box clearfix">
@@ -22,7 +22,7 @@
 
 							<p>
 								You have 5 invitations to give
-								<!--<%= 'You have ' + current_user.person.invitations_count?.to_s + ' invitations to give'%>-->
+								%= 'You have ' + current_user.person.invitations_count?.to_s + ' invitations to give'%>
 							</p>
 							
 							<div class="action clearfix">
@@ -44,7 +44,7 @@
 			</ul>
 
 			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
-		</div><!-- /content-box-holder -->
+		</div--><!-- /content-box-holder -->
 	<% end -%>
 <% end -%>
 		<% unless @requests.count.zero? %>

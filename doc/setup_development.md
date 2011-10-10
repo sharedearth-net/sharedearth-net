@@ -38,7 +38,7 @@ Please setup environment variables accordingly, then reset terminal or system to
       
       ENV['SEN_SES_SECRET']   - Amazon SES secret (no public keys available)
        
- For local settings add these lines at the end of ~/.bashrc file
+ For local settings add these lines at the end of ~/.bash_profile file (or ~/.bashrc if .bash_profile doesn't exist)
  
       export SEN_SES_KEY='mykey'
       export SEN_SES_SECRET='mysecret'
