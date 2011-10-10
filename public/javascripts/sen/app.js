@@ -51,21 +51,44 @@ dojo.declare("sen.app", null, {
 				});
 			}
 			
-			var error_div = dojo.byId("error_explanation");
-			if (error_div){
+			var showPopup = false;
+			var popupTitle, popupBody;
+			
+			var errorDiv = dojo.byId("error_explanation");
+			if (errorDiv){
+			  showPopup = true;
+			  var popupTitle = dojo.byId("error_title").innerHTML;
+			  var popupBody = dojo.byId("error_list").innerHTML;
+			}
+			else
+			{
+			  var statusMessageDivs = dojo.query(".message-holder");
+		      if ( statusMessageDivs.length > 0 ) {
 				
-				if ( senModule && senModule.notify ) {
-					// module does not inherit Page
-					var page_obj = senModule;
-				}
-				else
-				{
-					var page_obj = new sen.Page();
+				showPopup = true;
+				
+				statusMessageBodies = [];
+				
+				for ( var i = 0 ; i < statusMessageDivs.length ; i++ ) {
+				  var statusMessageDiv = statusMessageDivs[i];
+				  statusMessageBodies.push( statusMessageDiv.innerHTML );
 				}
 				
-			  var title = dojo.byId("error_title").innerHTML;
-			  var list = dojo.byId("error_list").innerHTML;
-			  page_obj.notify({ title: title, body: list });
+				popupTitle = "Notice"; popupBody = statusMessageBodies.join("<br />");
+				
+			  }
+		    }
+			
+			if ( showPopup ){
+			  if ( senModule && senModule.notify ) {
+				  // module does not inherit Page
+				  var pageObj = senModule;
+			  }
+			  else
+			  {
+				  var pageObj = new sen.Page();
+			  }
+			  pageObj.notify({ title: popupTitle, body: popupBody });
 			}
 			
 		});

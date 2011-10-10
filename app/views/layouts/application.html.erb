@@ -117,7 +117,7 @@
 		# possible values include: flash-notice and flash-alert
 		# (CSS rules also allow flash-info - which is not used at the moment)
 	%>
-	<%= content_tag :div, msg, :class => "message-holder flash-#{name}" %>
+	<%= content_tag :div, msg, :class => "message-holder flash-#{name}", :style => "display:none;" %>
 <% end %>
 
 <div id="wrapper" class="clearfix" <%= yield(:hide_on_policy_top_margin)%>>
