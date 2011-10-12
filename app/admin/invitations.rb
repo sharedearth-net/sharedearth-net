@@ -6,6 +6,7 @@ ActiveAdmin.register Invitation do
      column "Unique key", :invitation_unique_key
      column "Invitation active", :invitation_active
      column "Invitee", :invitee, :sortable => false
+     column "Ivitee email", :invitee_email
      column "Accepted date", :accepted_date
   end
   
