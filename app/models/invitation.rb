@@ -1,5 +1,5 @@
 class Invitation < ActiveRecord::Base
-  attr_accessible :inviter_person_id, :invitation_unique_key, :invitation_active, :accepted_date, :invitee_person_id
+  attr_accessible :inviter_person_id, :invitation_unique_key, :invitation_active, :accepted_date, :invitee_person_id, :invitee_email
   before_create :generate_key
   belongs_to :person
   def generate_key(length=6)
