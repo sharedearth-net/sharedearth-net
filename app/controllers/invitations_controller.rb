@@ -90,7 +90,7 @@ class InvitationsController < ApplicationController
      else
        inviter_id = current_user.person.id
      end
-     @invitation = Invitation.create!(:inviter_person_id => inviter_id, :invitation_active => true) unless params[:email].nil?
+     @invitation = Invitation.create!(:inviter_person_id => inviter_id, :invitation_active => true, :invitee_email => params[:email].to_s) unless params[:email].nil?
      begin
        UserMailer.invite_email(params[:email], @invitation.invitation_unique_key).deliver
        current_user.person.decrease_invitations! unless current_user.nil?
@@ -104,6 +104,7 @@ class InvitationsController < ApplicationController
   private
    
   def allowed_to_invite?
+    #TODO: This would allow to hack into application and user who is not registered to pass a parameter to controller and use our email servers
     if current_user.nil?
       true #if admin
     else
