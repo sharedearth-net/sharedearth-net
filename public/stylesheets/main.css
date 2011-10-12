@@ -2586,20 +2586,21 @@ a.normal:visited {
 				
 			}
 			
-				#items-page #content h2 span.item-type {
-					font-size: 14px;
-					/*text-transform: lowercase;*/
-					color: #62775a;
-				}
-			
+				#items-page #content h2 span.item-type,
 				#items-page #content h2 span.item-purpose {
-					font-size: 14px;
-					/*text-transform: lowercase;*/
-					color: #838683;
+					font-size: 11px;
+					color: #9c9e9c;
+				}
+				
+				#items-page #content h2 span.item-type {
+					text-transform: lowercase;
 				}
 			
 				#items-page #content p span.description {
 					height: auto;
+					font-size: 12px;
+					color: #838683;
+					margin-top: 15px;
 				}
 	
 		#items-page #content .inner-content {
@@ -3703,8 +3704,8 @@ a.normal:visited {
 #notification-box {
 	display: none;
 	overflow: hidden;
-	width: 400px;
-	height: 200px;
+	width: 250px;
+	height: 150px;
 	border: 1px solid #555;
 	padding: 0;
 	margin: auto auto;
@@ -3712,52 +3713,29 @@ a.normal:visited {
 	background-color: #fff;
 }
 
-#notification-box table {
-  width:100%;
-  height:100%;
-  border-spacing:0;
-}
-
-#notification-box #notification-header {
+#notification-box #notification-title {
 	background-color: #6ea801;
 	color: #fff;
+	width: 236px;
+	padding: 7px;
 	margin: 0;
-  height:30px;
 	font-size: 14px;
 	border-bottom: 1px solid #555;
 	font-weight: bold;
+	position: absolute;
+	top: 0;
+	left: 0;
 	box-shadow: 0 1px 3px #666666;
 	-moz-box-shadow: 0 1px 3px #666666;
 	text-shadow: 1px 1px 1px #666;
 }
 
-#notification-box #notification-header td {
-  padding:7px;
-}
-
-#notification-box #notification-close {
-  cursor:pointer;
-  float:right;
-  padding:4px;
-}
-
 #notification-box #notification-body {
-  padding:7px;
-  vertical-align:top;
-  color: #222;
-  font-size: 12px;
-}
-
-#notification-box #notification-footer {
-  background-color: #ddd;
+	width: 236px;
+	padding: 40px 7px 7px;
 	color: #222;
+	height: 100%;
 	margin: 0;
-  height:26px;
-	font-size: 14px;
-	font-weight: bold;
+	font-size: 12px;
 }
 
-#notification-box #notification-footer > td {
-  padding:7px;
-  text-align:right;
-}
