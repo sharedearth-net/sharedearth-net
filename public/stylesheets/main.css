@@ -2848,6 +2848,10 @@ a.normal:visited {
 					color: #333;
 				}
 				
+				#item-edit-page ul.form-holder li label.radio-labels-holder-off {
+					color: #9c9e9c;
+				}
+				
 				#item-edit-page ul.form-holder li input[type="text"] {
 					width: 268px;
 					color: #333;
