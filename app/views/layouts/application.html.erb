@@ -23,13 +23,22 @@
 								<%= link_to !current_user.nil? ? (feedback_rating.nil? ? "n/a" : (feedback_rating.to_s) + "%") : "0%", "#", :title => "Positive Feedback Rating" %>
 							</li>
 							<li class="people-helped">
-								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.distinct_people_count.to_s : "0", "#", :title => "People Helped" %>
+  							<% if !current_user.nil? -%>
+  								<%= link_to current_user.person.reputation_rating.distinct_people_count.to_s, my_network_person_path(current_user.person), :title => "People Helped" %>
+  							<% else -%>
+    							<%= link_to "0", "#", :title => "People Helped" %>
+  							<% end -%>
 							</li>
 							<li class="giftactions">
 								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.gift_actions_count.to_s : "0", "#", :title => "Gift Actions" %>
 							</li>
 							<li class="giftact-rating">
-							  <%= link_to !current_user.nil? ? current_user.person.mutural_friends_count(current_user.person) : "0", "#", :title => "Number of people in your trusted network" %>
+								<% if !current_user.nil? -%>
+									<%= link_to current_user.person.mutural_friends_count(current_user.person), my_network_person_path(current_user.person), :title => "Number of people in your trusted network" %>
+								<% else -%>
+								  <%= link_to "0", "#", :title => "Number of people in your trusted network" %>
+								<% end -%>
+							  
 							</li>
 							<li class="activity-level">
 							<% if !current_user.nil? -%>
