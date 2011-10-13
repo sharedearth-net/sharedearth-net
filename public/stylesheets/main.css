@@ -3253,7 +3253,7 @@ a.normal:visited {
         }
 
         #site-information-pages.principles .buttons-holder ul {
-
+			position: relative;
         }
 
             #site-information-pages.principles .buttons-holder ul li {
@@ -3277,11 +3277,22 @@ a.normal:visited {
                     height: 24px;
                 }
 
+
                 #site-information-pages.principles .buttons-holder ul li.no a:link,
                 #site-information-pages.principles .buttons-holder ul li.no a:visited {
                     background: url('../images/bg-bt-no-tc.png') no-repeat top left;
                 }
-
+				
+				#site-information-pages.principles .buttons-holder ul li input[type="submit"] {
+					display: block;
+                    background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
+                    width: 77px;
+                    height: 24px;
+					border: none;
+					text-indent: -1000em;
+					overflow: hidden;
+					cursor: pointer;
+				}
 
 				#site-information-pages.principles .post-to-wall {
 					font-family: "Lucida Grande",verdana,tahoma,arial,sans-serif;
@@ -3290,6 +3301,9 @@ a.normal:visited {
 				    font-weight: bold;
 					margin-top: 13px;
 					text-align: center;
+					position: absolute;
+					top: 25px;
+					background: #333;
 				}
 
 
