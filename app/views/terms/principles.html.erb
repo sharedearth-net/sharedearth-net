@@ -110,7 +110,14 @@ end %>
 		    <div class="buttons-holder">
 			    <ul class="clearfix">
 				    <li>
-					    <%= link_to 'Connect', accept_pp_terms_path, :method => 'put', :class => 'positive' %>
+              <% form_tag('/terms/accept_pp', :method => :put)  do -%>
+								<div class="post-to-wall">
+									<%= check_box_tag 'facebook' %>
+									Post on my Facebook wall that I've connected to sharedearth.net
+								</div> 
+								<div><%= submit_tag %></div>
+							<% end -%>
+					    <%#= link_to 'Connect', accept_pp_terms_path, :method => 'put', :class => 'positive', :id => 'connect' %>
 				    </li>
 				    <li class="no">
 					    <%= link_to 'No thanks', signout_path, :class => 'positive' %>
