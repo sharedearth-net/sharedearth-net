@@ -515,7 +515,7 @@ module PagesHelper
         when 'NEGATIVE FEEDBACK'
           res = "<li>#{link_to "view feedback", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
         when 'GIFTING'
-          res = "<li>#{link_to "view action", request_path(log.related)}</li>"
+          res = "<li>#{link_to "view action", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
         when 'TRUST ESTABLISHED'
           res = "<li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
         when 'TRUST WITHDRAWN'
