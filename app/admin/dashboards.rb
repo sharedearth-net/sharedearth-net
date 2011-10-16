@@ -54,7 +54,7 @@ ActiveAdmin::Dashboards.build do
   #The only way to make this work on clean install
   if ActiveRecord::Base.connection.table_exists? 'settings' 
 		if Settings.invitations.to_s == 'true'
-		  section "Invite your friend" do
+		  section "Send an invitation via email" do
 		     ul do
 		       render 'invite'
 		     end
