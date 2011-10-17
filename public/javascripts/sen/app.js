@@ -54,6 +54,13 @@ dojo.declare("sen.app", null, {
 			var showPopup = false;
 			var popupTitle, popupBody;
 			
+			if ( window.notificationTitle && window.notificationMessage ) {
+			  showPopup = true;
+			  var popupTitle = window.notificationTitle;
+			  var popupBody = window.notificationMessage;
+			}
+			
+			/*
 			var errorDiv = dojo.byId("error_explanation");
 			if (errorDiv){
 			  showPopup = true;
@@ -78,6 +85,7 @@ dojo.declare("sen.app", null, {
 				
 			  }
 		    }
+			*/
 			
 			if ( showPopup ){
 			  if ( senModule && senModule.notify ) {
