@@ -171,7 +171,7 @@ dojo.declare("sen.pages.items", null, {
 			node: commentNode,
 			duration: 200,
 			properties: {
-				height: { start: "30", end: "15" }
+				height: { start: "50", end: "15" }
 			}
 		}).play();
 		
@@ -187,7 +187,7 @@ dojo.declare("sen.pages.items", null, {
 			node: commentNode,
 			duration: 200,
 			properties: {
-				height: { start: "15", end: "30" }
+				height: { start: "15", end: "50" }
 			}
 		}).play();
 		
