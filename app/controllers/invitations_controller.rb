@@ -44,6 +44,8 @@ class InvitationsController < ApplicationController
        authorised = Person.all
        authorised.each { |person| person.authorise! }
     else 
+       authorised = Person.all
+       authorised.each { |person| person.authorise! }
        Settings.invitations = 'false'
     end
     redirect_to admin_dashboard_path
