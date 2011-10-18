@@ -973,6 +973,10 @@ a.normal:visited {
 		line-height: 19px;
 	    margin-bottom: 6px;
 	}
+	
+		#profile-page #content h3 span {
+			text-transform: capitalize;
+		}
 
 	#profile-page .items-list {
 		padding-left: 165px;
@@ -1032,7 +1036,7 @@ a.normal:visited {
 		/* profile page - content - items-expanded */
 		
 		#profile-page #content .items-expanded {
-			padding:0;
+			padding: 10px;
 			padding-left: 165px;
 		    padding-right: 0;
 		    width: 451px;
@@ -1049,7 +1053,6 @@ a.normal:visited {
 			    max-height: 50px;
 			 	float: left;
 		}
-		
 		
 		#profile-page #content .items-expanded ul li div {
 		    float: left;
@@ -1527,6 +1530,14 @@ a.normal:visited {
 	#community-page #content {
 	    width: 452px;
 	}
+	
+		#community-page #content h3 {
+
+		}
+		
+		#community-page #content h3 span {
+			text-transform: capitalize;
+		}
 	
 		#community-page  #content p a.trusted:link,
 		#community-page  #content p a.trusted:visited {
@@ -3347,7 +3358,8 @@ a.normal:visited {
 	#manage-resources-page #content h3.default-title,
 	#dashboard-page #content h3,
 	#profile-page #content h3,
-	#community-page #content h3 {
+	#community-page #content h3, 
+	#profile-page #content h3 a {
 		font-size: 12px; 
 		color: #315859;
 	}
