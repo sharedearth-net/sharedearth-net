@@ -42,7 +42,10 @@
 						  <% else -%>
 						    <h3>
 								<strong>
-									<%= link_to 'Items', person_path(@person) %> <%= params[:filter_type].to_s %> 
+									<%= link_to 'Items', person_path(@person) %>
+									<span>
+										<%= ' > ' + params[:filter_type].to_s %> 
+									</span>
 								</strong>
 							</h3>
 								
@@ -85,9 +88,6 @@
 						</div>
 						<% elsif @items.count >= 8 %>
 						<div class="items-list clearfix">
-							<h3>
-								<strong>Items</strong>
-							</h3>
 					      <ul class="clearfix">
 					      <% @items.map{|i| i.item_type.downcase}.uniq.each do |item_type| %>
 						      <li class="item">
