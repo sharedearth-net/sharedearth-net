@@ -105,7 +105,9 @@ class PeopleController < ApplicationController
 
   def get_person
     @person = Person.find_by_id(params[:id])
-    redirect_to dashboard_path if @person.nil? || (@person.authorised_account == false)
+    if @person.nil? || (current_user.person != @person && @person.authorised_account == false)
+      redirect_to dashboard_path
+    end
   end
   
   def only_if_person_is_signed_in!
