@@ -1023,6 +1023,11 @@ a.normal:visited {
 				text-transform: capitalize;
 			}
 			
+			
+			#profile-page  #content .items-list ul li.item p {
+				margin-bottom: 6px;
+				line-height: 14px;
+			}
 		
 		/* profile page - content - items-expanded */
 		
@@ -3622,7 +3627,7 @@ a.normal:visited {
 	#content .items-list ul p a:link,
 	#content .items-list ul p a:visited {
 		font-size: 12px;
-		color: #62775a;
+		color: #333;
 		/*text-transform: lowercase;*/
 	}
 	

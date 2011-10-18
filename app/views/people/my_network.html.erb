@@ -73,13 +73,16 @@
 				
 			-->
       
-				<h3><% if params[:type] == 'trusted' -%>
-					<%= link_to 'Items', my_network_person_path(current_user.person, :type => 'trusted'), :style => "color: #315859;" %>
-				<% else -%>
-				  <%= link_to 'Items', my_network_person_path(current_user.person), :style => "color: #315859;" %>
-				<% end -%>
-          <%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %>
-        </h3>
+				<h3>
+					<strong>
+					<% if params[:type] == 'trusted' -%>
+						<%= link_to 'Items', my_network_person_path(current_user.person, :type => 'trusted'), :style => "color: #315859;" %>
+					<% else -%>
+				  		<%= link_to 'Items', my_network_person_path(current_user.person), :style => "color: #315859;" %>
+					<% end -%>
+          			<%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %>
+					</strong>
+        		</h3>
 					
 			<% unless @items.count.zero? -%>
 			  
