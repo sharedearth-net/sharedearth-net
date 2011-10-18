@@ -88,9 +88,6 @@
 						</div>
 						<% elsif @items.count >= 8 %>
 						<div class="items-list clearfix">
-							<h3>
-								<strong>Items</strong>
-							</h3>
 					      <ul class="clearfix">
 					      <% @items.map{|i| i.item_type.downcase}.uniq.each do |item_type| %>
 						      <li class="item">
