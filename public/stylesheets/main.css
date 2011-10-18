@@ -1241,11 +1241,11 @@ a.normal:visited {
 }
 
 	#edit-profile-page #content {
-		width: 535px;
+		width: 555px;
 	}
 
 		#edit-profile-page .content-box {
-			width: 535px;
+			width: 555px;
 		}
 
 			ul.form-holder {
@@ -1307,13 +1307,13 @@ a.normal:visited {
 			/* right hand side */
 
 			#edit-profile-page .rhs {
-				width: 370px;
+				width: 390px;
 				float: left;
 			}
 
 				#edit-profile-page label {
 					font-family: "Lucida Grande", verdana, tahoma, arial, sans-serif;
-					color: #62775a;
+					color: #81927b;
 					font-size: 10px;
 					font-weight: bold;
 				}
@@ -1349,7 +1349,7 @@ a.normal:visited {
 					}	
 						
 					#edit-profile-page .rhs ul.form-holder li label {
-						width: 87px;
+						width: 116px;
 						font-size: 12px;
 						display: block;
 						float: left;
@@ -1375,6 +1375,10 @@ a.normal:visited {
 					#edit-profile-page ul.form-holder li label.active {
 						color: #127e0e;
 						font-weight: bold;
+					}
+					
+					#edit-profile-page ul.form-holder li.checkbox-holder label {
+					    width: 376px;
 					}
 					
 					#edit-profile-page ul.action-buttons-list {
@@ -1404,7 +1408,7 @@ a.normal:visited {
 	/* edit profile - sidebar */
 				
 	#edit-profile-page #sidebar {
-		margin-left: 111px;
+		margin-left: 91px;
 		width: 356px;
 	}
 	
