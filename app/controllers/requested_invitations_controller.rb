@@ -8,9 +8,9 @@ class RequestedInvitationsController < ApplicationController
 
     if request.nil?
       RequestedInvitation.create!(:user_id => current_user.id, :invitation_sent_date => Time.now)
-      redirect_to root_path, :notice => "Your request has been received. The site is currently at capacity. Your invite will be dispatched as soon as possible."
+      redirect_to root_path, :notice => I18n.t("messages.requested_invitations.at_capacity")
     else
-      redirect_to root_path, :notice => "You have already requested an invitation. It will be dispatched as soon as possible."
+      redirect_to root_path, :notice => I18n.t("messages.requested_invitations.already_requested")
     end
   end
   
