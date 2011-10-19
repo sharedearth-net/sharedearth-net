@@ -1,6 +1,6 @@
 <%= form_for(@item, :html => { :multipart => true} ) do |f| %>
 	<%= render :partial => "shared/error_messages", :locals => { :model => @item } %>
-
+<div id="content">
 	<div class="lhs">
 		<ul class="form-holder">
 			<% if @item.photo? %>
@@ -54,8 +54,8 @@
 
 
 				<p class="description under-radio">
-              <span>What is this?</span>
-              <span>What is this?</span>
+              		<span>What is this?</span>
+		            <span>What is this?</span>
 				</p>
 <!-- these buttons are not functional (shareage, communal) -->
 				
@@ -98,7 +98,7 @@
 	
 
 		<li class="clearfix">
-			<ul class="action-buttons-list">
+			<ul class="action-buttons-list clearfix">
 				<li>
 					<%= f.submit 'Save' %>
 				</li>
@@ -108,5 +108,6 @@
 			</ul>
 		</li>
 	</ul>
+</div>
 </div>
 <% end %>
