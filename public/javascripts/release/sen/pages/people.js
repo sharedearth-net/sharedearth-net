@@ -1,8 +1,360 @@
-/*
-	Copyright (c) 2004-2011, The Dojo Foundation All Rights Reserved.
-	Available via Academic Free License >= 2.1 OR the modified BSD license.
-	see: http://dojotoolkit.org/license for details
-*/
+////////////////////////////////////////////////////
+// SharedEarth.net JS
+// ------------------	
+// Page class - people (/people/*)
+////////////////////////////////////////////////////
 
+// Let dojo know about us
+dojo.provide("sen.page.people");
 
-if(!dojo._hasResource["sen.pages.people"]){dojo._hasResource["sen.pages.people"]=true;dojo.provide("sen.pages.people");dojo.require("dojo.fx");dojo.require("dojo.NodeList-fx");dojo.require("dojo.NodeList-traverse");dojo.require("dojo.NodeList-manipulate");dojo.declare("sen.pages.people",null,{connectedEvents:null,inFlight:null,init:function(){this.connectedEvents={"dashboard":[],"comments":[]};this.inFlight={"dashboard":[],"comments":[]};this.initUi();this.initEvents();},initUi:function(){dojo.query("form.new_comment input#comment_submit").forEach(function(_1){dojo.style(_1,"display","none");});},initEvents:function(){this.connectCommentEvents();},connectDashboardEvents:function(_2){var _3=_2!==undefined?_2+".dashboard-action-link":".dashboard-action-link",_4=this;this.disconnectDashboardEvents(_2);dojo.query(_3).forEach(function(_5){var _6=dojo.connect(_5,"onclick",_4,function(e){_4.doLinkClick(_5,e);});_4.connectedEvents.dashboard.push(_6);});dojo.query("a.action-comments-show-hide").forEach(function(_7){var _8=dojo.connect(_7,"onclick",_4,"toggleActionComments");_4.connectedEvents.comments.push(_8);});},disconnectDashboardEvents:function(_9){dojo.forEach(this.connectedEvents.dashboard,dojo.disconnect);this.connectedEvents.dashboard=[];},connectCommentEvents:function(){var _a=this;dojo.query("form.new_comment").forEach(function(_b){var _c=dojo.connect(_b,"onsubmit",_a,"addComment");_a.connectedEvents.comments.push(_c);var _c=dojo.connect(_b,"onkeypress",_a,"addComment");_a.connectedEvents.comments.push(_c);});dojo.query("a.comments-show-hide").forEach(function(_d){var _e=dojo.connect(_d,"onclick",_a,"toggleComments");_a.connectedEvents.comments.push(_e);});dojo.query("form.new_comment textarea").forEach(function(_f){if(dojo.attr(_f,"value")!="Write a comment..."){dojo.addClass(_f,"active-comment-box");}var _10=dojo.connect(_f,"onfocus",_a,"toggleCommentBoxHeight");_a.connectedEvents.comments.push(_10);});dojo.query("form.new_comment textarea").forEach(function(_11){var _12=dojo.connect(_11,"onblur",_a,"toggleCommentBoxHeight");_a.connectedEvents.comments.push(_12);});},disconnectCommentEvents:function(_13){dojo.forEach(this.connectedEvents.comments,dojo.disconnect);this.connectedEvents.comments=[];},toggleCommentBoxHeight:function(e){if(e.type=="blur"){this.commentBlur(e.target);}else{this.commentFocus(e.target);}},commentBlur:function(_14){dojo.animateProperty({node:_14,duration:200,properties:{height:{start:"30",end:"15"}}}).play();if(dojo.attr(_14,"value")==""){dojo.attr(_14,"value","Write a comment...");dojo.removeClass(_14,"active-comment-box");}},commentFocus:function(_15){dojo.animateProperty({node:_15,duration:200,properties:{height:{start:"15",end:"30"}}}).play();if(dojo.attr(_15,"value")=="Write a comment..."){dojo.attr(_15,"value","");}dojo.addClass(_15,"active-comment-box");},toggleComments:function(e){dojo.stopEvent(e);var _16=this,_17=new dojo.NodeList(e.target);if(_17.parents(".sidebar-box").query("ul.comment-list").length>0){_17.parents(".sidebar-box").query("ul.comment-list").forEach(function(_18){dojo.toggleClass(_18,"comment-list-hidden");});}else{_17.parents(".sidebar-box").next().query("ul.comment-list").forEach(function(_19){dojo.toggleClass(_19,"comment-list-hidden");});}},toggleActionComments:function(e){dojo.stopEvent(e);var _1a=this,_1b=new dojo.NodeList(e.target);_1b.parents("div.inner-content").query("ul.comment-list").forEach(function(_1c){dojo.toggleClass(_1c,"comment-list-hidden");});},addComment:function(e){if(dojo.getNodeProp(e.target,"tagName").toLowerCase()!=="form"){if(e.keyCode==dojo.keys.ENTER&&e.shiftKey==false){dojo.stopEvent(e);var nl=new dojo.NodeList(e.target),_1d=nl.parents("form").attr("action"),_1e=nl.parents("form");}else{if(e.keyCode==dojo.keys.ESCAPE){dojo.attr(e.target,"value","");e.target.blur();this.commentBlur(e.target);return;}else{return;}}}else{dojo.stopEvent(e);var _1d=dojo.attr(e.target,"action"),_1e=new dojo.NodeList(e.target);}var _1f=this,_20=_1e.query(".new-comment-commentable-id").first().attr("value"),_21=_1e.query(".new-comment-text").first().attr("value");if(this.inFlight.comments[_20]!==true&&_21!=""){dojo.style(e.target,"display","none");_1e.before("<div class=\"loader\"></div>");this.inFlight.comments[_20]=true;dojo.xhrPost({url:_1d,handleAs:"json",content:{"comment[commentable_id]":_20,"comment[commentable_type]":_1e.query(".new-comment-commentable-type").first().attr("value"),"comment[comment]":_21,"authenticity_token":dojo.global.AUTH_TOKEN,"utf8":"✓"},load:function(_22){if(_22.success&&_22.success==false){}else{var _23=String(_22.comment_html).replace(/\"clearfix\"/,"\"clearfix new-comment\" style=\"opacity:0;\"");_1e.parents(".comment-list").children("li.no-bg").before(_23);_1e.parents(".comment-list").children("li.new-comment").fadeIn({auto:true,duration:800});var _24=_1e.parents("div.inner-content").prev().query("a.comments-show-hide").first(),_25=_24.attr("innerHTML");regExp=/([0-9]+)/g,currentCount=String(_25).match(regExp);var _26=String(_25).replace(regExp,parseInt(currentCount)+1);_24.attr("innerHTML",_26);_1e.query("textarea").attr("value","");dojo.style(e.target,"display",null);_1e.parent().query("div.loader").remove();_1f.inFlight.comments[_20]=false;}},error:function(err,_27){alert("Oops! Something went wrong.");dojo.style(e.target,"display",null);_1e.parent().query("div.loader").remove();_1f.inFlight.comments[_20]=false;}});}return;},doLinkClick:function(_28,e){dojo.stopEvent(e);var _29=dojo.attr(e.target,"href"),_2a=this,_2b=new dojo.NodeList(e.target),_2c=_2b.parents("li.content-box").children("a").attr("href"),_2d=String(_2c).replace("/requests/","");if(this.inFlight.dashboard[_2d]!==true){var _2e=_2b.parents("div.action ul");_2e.forEach(function(_2f){dojo.style(_2f,"display","none");});_2e.before("<div class=\"loader\"></div>");this.inFlight.dashboard[_2d]=true;dojo.xhrPut({url:_29,handleAs:"json",content:{"authenticity_token":dojo.global.AUTH_TOKEN},load:function(_30){if(_30.success&&_30.success==false){}else{var _31=_30.activity_html,_32=_30.request_html,_33=_2b.parents("li.item"),_34=_33.prev(),_35=dojo.query("ul.dashboard-recent-activity").children().first(),_36=false;if(_34.length===0){_34=_33.parent();_33.remove();if(String(_32)!==""){_34.forEach(function(_37){dojo.place(_32,_37,"first");});}else{_36=true;}if(_34.children("li").length==0){_34.parents("div.content-box-holder").forEach(function(_38){dojo.style(_38,"display","none");});}}else{_33.remove();if(String(_32)!==""){_34.after(_32);}else{_36=true;}if(_34.parent().children("li").length==0){_34.parents("div.content-box-holder").forEach(function(_39){dojo.style(_39,"display","none");});}}if(_36){var url="requests/"+_2d+"/feedbacks/new";window.location.href=url;}else{_2a.initUi();_35.after(_31);_2a.disconnectDashboardEvents();_2a.disconnectCommentEvents();_2a.connectDashboardEvents();_2a.connectCommentEvents();_2e.forEach(function(_3a){dojo.style(_3a,"display",null);});_2e.parent().query("div.loader").remove();_2a.inFlight.dashboard[_2d]=false;}}},error:function(err,_3b){alert("Oops! Something went wrong.");_2e.forEach(function(_3c){dojo.style(_3c,"display",null);});_2e.parent().query("div.loader").remove();_2a.inFlight.dashboard[_2d]=false;}});}},unload:function(){this.disconnectDashboardEvents();this.disconnectCommentEvents();}});}
+// Dependencies
+dojo.require("dojo.fx");
+dojo.require("dojo.NodeList-fx");
+dojo.require("dojo.NodeList-traverse");
+dojo.require("dojo.NodeList-manipulate");
+
+// Class definition
+dojo.declare("sen.page.people", [sen.Page], {
+    
+	constructor: function () {
+		// Call our parent constructor
+        this.inherited(arguments);
+	},
+	
+	initUi: function() {
+		// Hide submit buttons for adding comments
+		dojo.query("form.new_comment input#comment_submit").forEach(function(node) {
+			dojo.style(node, "display", "none");
+		});
+		
+		//this.notify({ title: "Notification!", body: "Notification! Yeah!" });
+	},
+	
+	initEvents: function() {
+		
+		this.inherited(arguments);	// Parent function
+		
+		this.connectDashboardEvents();
+		this.connectCommentEvents();
+	},
+	
+	connectDashboardEvents: function(prefix) {
+		
+		var selector = prefix !== undefined ? prefix + ".dashboard-action-link" : ".dashboard-action-link",
+			self = this;
+		
+		// Disconnect dashboard actions
+		this.disconnectEvents("dashboard");
+		
+		// Connect each action
+		// TODO: Currently this will remove all events and re-attach them
+		// Would be good to find a way to just remove the ones that were
+		// remove()d and connect only new elements
+		dojo.query(selector).forEach(function(node) {
+			var eventConn = dojo.connect(node, "onclick", self, function(e) { self.doLinkClick(node, e); });
+			self.events.dashboard.push(eventConn);
+		});
+		
+		// Show hide comment lists
+		dojo.query("a.action-comments-show-hide").forEach(function(node) {
+			var eventConn = dojo.connect(node, "onclick", self, "toggleActionComments");
+			self.events.comments.push(eventConn);
+		});
+	},
+	
+	connectCommentEvents: function() {
+		
+		var self = this;
+		
+		// Comment form
+		dojo.query("form.new_comment").forEach(function(node) {
+			// Submit action - to remove later?
+			var eventConn = dojo.connect(node, "onsubmit", self, "addComment");
+			self.events.comments.push(eventConn);
+			
+			// Key press of 'enter' key
+			var eventConn = dojo.connect(node, "onkeypress", self, "addComment");
+			self.events.comments.push(eventConn);
+		});
+		
+		// Show hide comment lists
+		dojo.query("a.comments-show-hide").forEach(function(node) {
+			var eventConn = dojo.connect(node, "onclick", self, "toggleComments");
+			self.events.comments.push(eventConn);
+		});
+		
+		// Make textareas bigger on focus
+		dojo.query("form.new_comment textarea").forEach(function(node) {
+			self.setDefaultText(node);
+			
+			var eventConn = dojo.connect(node, "onfocus", self, "toggleCommentBox");
+			self.events.comments.push(eventConn);
+		});
+		
+		// Make textareas smaller on blur
+		dojo.query("form.new_comment textarea").forEach(function(node) {
+			var eventConn = dojo.connect(node, "onblur", self, "toggleCommentBox");
+			self.events.comments.push(eventConn);
+		});
+		
+		// ABOUT ME BOX
+		// Make textarea bigger on focus
+		//dojo.query("#person_description").forEach(function(node) {
+		//	var eventConn = dojo.connect(node, "onfocus", self, "toggleTextareaStyle");
+		//	self.connectedEvents.comments.push(eventConn);
+		//});
+		//
+		//// Make textarea smaller on blur
+		//dojo.query("#person_description").forEach(function(node) {
+		//	var eventConn = dojo.connect(node, "onblur", self, "toggleTextareaStyle");
+		//	self.connectedEvents.comments.push(eventConn);
+		//});
+	},
+	
+	//toggleTextareaStyle: function(e) {
+	//	
+	//	if (e.type == "blur") {
+	//		
+	//		dojo.removeClass(e.target, "active-comment-box");
+	//		
+	//	} else {
+	//		
+	//		dojo.addClass(e.target, "active-comment-box");
+	//	}
+	//},
+	
+	toggleComments: function(e) {
+		
+		// Stop the link event and propagation
+		dojo.stopEvent(e);
+		
+		var self = this,
+			targetNode = new dojo.NodeList(e.target);
+		
+		// This is kind of hacky, the HTML generated really should be uniform
+		if (targetNode.parents(".sidebar-box").query("ul.comment-list").length > 0) {
+			targetNode.parents(".sidebar-box").query("ul.comment-list").forEach(function(node) {
+				dojo.toggleClass(node, "comment-list-hidden");
+			});
+		} else {
+			targetNode.parents(".sidebar-box").next().query("ul.comment-list").forEach(function(node) {
+				dojo.toggleClass(node, "comment-list-hidden");
+			});
+		}
+	},
+	
+	toggleActionComments: function(e) {
+		
+		// Stop the link event and propagation
+		dojo.stopEvent(e);
+		
+		var self = this,
+			targetNode = new dojo.NodeList(e.target);
+		
+		targetNode.parents("div.inner-content").query("ul.comment-list").forEach(function(node) {
+			dojo.toggleClass(node, "comment-list-hidden");
+		});
+	},
+	
+	addComment: function(e) {
+		
+		//console.debug("content:", dojo.contentBox(dojo.attr(e.target, "value")), e.target, dojo.attr(e.target, "scrollHeight"));
+		
+		// Check if our target node is the form, or somewhere else
+		// Somewhere else would mean it came from a keypress, not form submit
+		if (dojo.getNodeProp(e.target, "tagName").toLowerCase() !== "form") {
+			
+			// Check if the enter key was pressed, otherwise don't do anything
+			if (e.keyCode == dojo.keys.ENTER &&
+				e.shiftKey == false) {
+				
+				dojo.stopEvent(e);	// Stop propagation and prevent default
+				
+				var nl = new dojo.NodeList(e.target),
+					ajaxUrl = nl.parents("form").attr("action"),
+					targetNode = nl.parents("form");
+				
+			} else if (e.keyCode == dojo.keys.ESCAPE) {
+				
+				// Blur the field, and return from here
+				//console.debug("text:", e.target, dojo.attr);
+				dojo.attr(e.target, "value", "");
+				e.target.blur();
+				this.commentBlur(e.target);
+				return;
+				
+			} else {
+				return;		// They're hitting shift+enter to add a new line, don't submit
+			}
+		} else {
+			dojo.stopEvent(e);	// Stop propagation and prevent default
+			
+			var ajaxUrl = dojo.attr(e.target, "action"),
+				targetNode = new dojo.NodeList(e.target);
+		}
+		
+		var self = this,
+			commentId = targetNode.query(".new-comment-commentable-id").first().attr("value"),
+			comment = targetNode.query(".new-comment-text").first().attr("value");
+		
+		// Make sure we're not already adding a comment for this item
+		if (this.inFlight.comments[commentId] !== true && comment != "") {
+		
+			// Show our loader
+			dojo.style(e.target, "display", "none");
+			targetNode.before('<div class="loader"></div>');
+			
+			// This request is in flight, don't allow any more
+			this.inFlight.comments[commentId] = true;
+			
+			// POST for forms
+			dojo.xhrPost({
+				url: ajaxUrl,
+				handleAs: "json",
+				content: {
+					"comment[commentable_id]": commentId,
+					"comment[commentable_type]": targetNode.query(".new-comment-commentable-type").first().attr("value"),
+					"comment[comment]": comment,
+					"authenticity_token": dojo.global.AUTH_TOKEN,
+					"utf8": "✓"
+				},
+				
+				load: function(data) {
+					
+					// Successful request?
+					if (data.success && data.success == false) {
+						
+						self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
+						
+					} else {
+						var comment = String(data.comment_html).replace(/\"clearfix\"/, "\"clearfix new-comment\" style=\"opacity:0;\"");
+						
+						// Add the comment dom node and fade it in
+						targetNode.parents(".comment-list").children("li.no-bg").before(comment);
+						targetNode.parents(".comment-list").children("li.new-comment").fadeIn({auto: true, duration: 800});
+						
+						// Then find the text listing the number of comments, and increment the count
+						var commentCountNode = targetNode.parents("div.inner-content").prev().query("a.comments-show-hide").first(),
+							currentText = commentCountNode.attr("innerHTML");
+							regExp = /([0-9]+)/g,
+							currentCount = String(currentText).match(regExp);
+						
+						// Write the count back to the dom node
+						var newComment = String(currentText).replace(regExp, parseInt(currentCount) + 1);
+						commentCountNode.attr("innerHTML", newComment);
+						
+						// Blank out the textarea
+						targetNode.query("textarea").attr("value", "");
+						
+						// Show the textarea again and hide the loader
+						dojo.style(e.target, "display", null);
+						targetNode.parent().query("div.loader").remove();
+						
+						// Finally, we're no longer in flight
+						self.inFlight.comments[commentId] = false;
+					}
+				},
+				
+				error: function(err, ioArgs){
+					self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
+					
+					// Show the textarea again and hide the loader
+					dojo.style(e.target, "display", null);
+					targetNode.parent().query("div.loader").remove();
+					
+					// We're no longer in flight
+					self.inFlight.comments[commentId] = false;
+				}
+			});
+		}
+		
+		return;
+	},
+	
+	doLinkClick: function(node, e) {
+		
+		// Prevent the event from continuing and propagating in the browser
+		dojo.stopEvent(e);
+		
+		var ajaxUrl = dojo.attr(e.target, "href"),
+			self = this,
+			nodeList = new dojo.NodeList(e.target),
+			requestIdLink = nodeList.parents("li.content-box").children("a").attr("href"),
+			requestId = String(requestIdLink).replace("/requests/", "");
+		
+		// Make sure we're not already processing an action for this request
+		if (this.inFlight.dashboard[requestId] !== true) {
+		
+			// Show our loader
+			var actionList = nodeList.parents("div.requests ul.action-list");
+			actionList.forEach(function(node) {
+				dojo.style(node, "display", "none");
+			});
+			actionList.before('<div class="loader"></div>');
+			
+			// This request is in flight, don't allow any more
+			this.inFlight.dashboard[requestId] = true;
+			
+			// Rails requires a PUT
+			dojo.xhrPut({
+				url: ajaxUrl,
+				handleAs: "json",
+				content: {
+					"authenticity_token": dojo.global.AUTH_TOKEN	// Required by Rails
+				},
+				load: function(data) {
+					
+					// TODO: Error checking if we got a bad request, or is it covered
+					// by the error callback?
+					if (data.success && data.success == false) {
+						
+						self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
+						
+					} else {
+						
+						var activityHtml = data.activity_html,
+							requestHtml = data.request_html,
+							requestNodeRemove = nodeList.parents("li.item"),
+							requestNode = requestNodeRemove.prev(),
+							activityNode = dojo.query("ul.dashboard-recent-activity").children().first(),
+							redirectToFeedback = false;
+						
+						// Make sure we have an element, otherwise just find the parent and stick it in as the first element
+						// Remove the activity node and put the new one in
+						// Checks to make sure that the <ul> isn't empty apart from this node, and if so, act differently
+						if (requestNode.length === 0) {
+							
+							requestNode = requestNodeRemove.parent();
+							requestNodeRemove.remove();
+							
+							// Insert the HTML node
+							if (String(requestHtml) !== "") {
+								requestNode.forEach(function(node) {
+									//dojo.place('<li class="content-box clearfix">'+requestHtml+'</li>', node, "first");
+									requestNode.after("<p class='event-sentences'>There are no unanswered requests</p>");
+								});
+							} 
+													
+						} 
+						actionList.parent().query("div.loader").remove();
+						
+					
+					}
+				},
+				
+				error: function (err, ioArgs) {
+					self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
+					
+					// Show the textarea again and hide the loader
+					actionList.forEach(function (node) {
+						dojo.style(node, "display", null);
+					});
+					actionList.parent().query("div.loader").remove();
+					
+					// Finally, we're no longer in flight
+					self.inFlight.dashboard[requestId] = false;
+				}
+			});
+		}
+	}
+});
