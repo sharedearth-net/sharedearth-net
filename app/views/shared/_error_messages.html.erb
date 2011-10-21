@@ -1,11 +1,9 @@
 <% if model.errors.any? %>
-  <div id="error_explanation" style="display:none;">
-    <h2 id="error_title"><%= pluralize(model.errors.count, "error") %> prohibited this item from being saved</h2>
-
-    <ul id="error_list">
+  <script>
+    window.notificationTitle = window.notificationTitle || "<%= pluralize(model.errors.count, "error") %> prohibited this item from being saved";
+    window.notificationMessage = window.notificationMessage || "";
     <% model.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+      window.notificationMessage += "<%=raw escape_javascript( msg ) %><br />";
     <% end %>
-    </ul>
-  </div>
+  </script>
 <% end %>
