@@ -26,6 +26,7 @@ en:
       marked_as_lost: "Item has been marked as lost."
       marked_as_damaged: "Item has been marked as damaged."
       is_deleted: "That Item has been deleted!"
+      in_use: "Can't do that. Item is currently in use."
     people:
       requested_trusted_relationship: "Created request to acknowledge trusted relationship."
       only_own_network: "Sorry. You can only see your own network"
@@ -34,3 +35,11 @@ en:
       destroy: "Cancelled request to acknowledge trusted relationship."
     people_network:
       destroy: "You withdrew your trust in this person."
+    invitations:
+      wrong_data: "Please enter correct data in fields"
+      successfully_created: "Successfully created invitations."
+      account_locked: "Your account has been locked. Try again in 24 hours"
+      invalid_or_inactive_code: "The code you have provided is invalid or inactive"
+    requested_invitations:
+      at_capacity: "Your request has been received. The site is currently at capacity. Your invite will be dispatched as soon as possible."
+      already_requested: "You have already requested an invitation. It will be dispatched as soon as possible."
