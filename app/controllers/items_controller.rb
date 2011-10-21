@@ -102,7 +102,7 @@ class ItemsController < ApplicationController
   private
 
   def actions_completed?
-    redirect_to item_path(@item), :notice => "Can't do that. Item is currently in use." unless @item.available?
+    redirect_to item_path(@item), :notice => I18n.t("messages.items.in_use") unless @item.available?
   end
  
   def check_if_item_is_deleted
