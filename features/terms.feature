@@ -67,7 +67,7 @@ Feature: Accepting terms
       Then I should see "Transparency Policy"
       And I follow "Accept"
       Then I should see "DESIGN PRINCIPLES"
-      And I follow "Connect"
+      And I press "Connect"
       Then I should see the words "Edit Profile"
     
    Scenario: I should be able to decline terms, and get back to the same page
@@ -84,7 +84,7 @@ Feature: Accepting terms
       Then I should see "Transparency Policy"
       And I follow "Accept"
       Then I should see "DESIGN PRINCIPLES"
-      And I follow "Connect"
+      And I press "Connect"
       Then I should be on the dashboard page
 
    Scenario: User has accepted Terms and Transparency but not the Principles
@@ -92,7 +92,7 @@ Feature: Accepting terms
       Then I fill in active invitation
       And I press "Submit"
       Then I should see "DESIGN PRINCIPLES"
-      And I follow "Connect"
+      And I press "Connect"
       Then I should be on the dashboard page
 
    Scenario: User has accepted Transparency and Principles but not Terms
