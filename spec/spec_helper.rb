@@ -21,6 +21,10 @@ Spork.prefork do
     nil
   end
 
+  Capybara.register_driver :rack_test do |app|
+    Capybara::RackTest::Driver.new(app, :browser => :chrome)
+  end
+
   RSpec.configure do |config|
     # == Mock Framework
     #
