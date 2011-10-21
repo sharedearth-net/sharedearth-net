@@ -47,12 +47,7 @@ describe Item do
     item = Factory(:item)
     item.should_not be_deleted
   end
-  
-  it "should verify owner" do
-    item = Item.new(:owner => person)
-    item.is_owner?(person).should be_true
-  end
-  
+    
   it "should transfer ownership to new owner" do
     #TO DO check if ownership is transfered
   end

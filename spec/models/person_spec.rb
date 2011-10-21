@@ -254,7 +254,6 @@ describe Person, ".accepted_tc?" do
 
   it "should return true otherwise" do
     person = Factory(:person)
-    TC_VERSION = 2
     person.update_attributes(:accepted_tc => true, :tc_version => TC_VERSION)
     person.accepted_tc?.should be_true
   end
@@ -290,7 +289,6 @@ describe Person, ".accepted_pp?" do
 
   it "should return true otherwise" do
     person = Factory(:person)
-    PP_VERSION = 2
     person.update_attributes(:accepted_pp => true, :pp_version => PP_VERSION)
     person.accepted_pp?.should be_true
   end
