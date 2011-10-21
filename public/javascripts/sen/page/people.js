@@ -286,7 +286,7 @@ dojo.declare("sen.page.people", [sen.Page], {
 		if (this.inFlight.dashboard[requestId] !== true) {
 		
 			// Show our loader
-			var actionList = nodeList.parents("div.action ul");
+			var actionList = nodeList.parents("div.requests ul.action-list");
 			actionList.forEach(function(node) {
 				dojo.style(node, "display", "none");
 			});
@@ -331,76 +331,14 @@ dojo.declare("sen.page.people", [sen.Page], {
 							if (String(requestHtml) !== "") {
 								requestNode.forEach(function(node) {
 									//dojo.place('<li class="content-box clearfix">'+requestHtml+'</li>', node, "first");
-									dojo.place(requestHtml, node, "first");
+									requestNode.after("<p class='event-sentences'>There are no unanswered requests</p>");
 								});
-							} else {
-								redirectToFeedback = true;
-							}
-							
-							// Hide the requests green area box if it's empty
-							if (requestNode.children("li").length == 0) {
-								requestNode.parents("div.content-box-holder").forEach(function(node) {
-									dojo.style(node, "display", "none");
-								});
-							}
-							
-						} else {
-							
-							requestNodeRemove.remove();
-							
-							// Insert the HTML node
-							if (String(requestHtml) !== "") {
-								//requestNode.after('<li class="content-box clearfix">'+requestHtml+'</li>');
-								requestNode.after(requestHtml);
-							} else {
-								redirectToFeedback = true;
-							}
-							
-							// Hide the requests box if it's empty
-							if (requestNode.parent().children("li").length == 0) {
-								requestNode.parents("div.content-box-holder").forEach(function(node) {
-									dojo.style(node, "display", "none");
-								});
-							}
-						}
+							} 
+													
+						} 
+						actionList.parent().query("div.loader").remove();
 						
-						if (redirectToFeedback) {
-							
-							var url = "requests/"+requestId+"/feedbacks/new";
-							window.location.href = url;
-							
-						} else {
-							
-							// TODO: Temp fix
-							// TEMP: Hide add comment buttons
-							self.initUi();
-							
-							// Add the item to the recent activity list
-							activityNode.after(activityHtml);
-							
-							// TODO: Optimise - shouldn't need to disconnect and reconnect all events,
-							// no matter how inexpensive it may be. Inefficient.
-							self.disconnectDashboardEvents();
-							self.disconnectCommentEvents();
-							
-							// Connect events for the new links
-							// We need to reconnect comment events, too
-							self.connectDashboardEvents();
-							self.connectCommentEvents();
-							
-							// Update the top metrics, if required
-							// "activity_level":"3","gift_actions":"9","people_helped":"1
-							//self.updateMetrics(data);
-							
-							// Show the textarea again and hide the loader
-							actionList.forEach(function(node) {
-								dojo.style(node, "display", null);
-							});
-							actionList.parent().query("div.loader").remove();
-							
-							// Finally, we're no longer in flight
-							self.inFlight.dashboard[requestId] = false;
-						}
+					
 					}
 				},
 				
