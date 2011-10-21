@@ -7,7 +7,7 @@ describe SearchController do
       controller.stub!(:current_user).and_return(Factory(:person).user)
     end
     it "should be successful" do
-      get 'index'
+      get :index, :search => "Something"
       response.should be_success
     end
   end
