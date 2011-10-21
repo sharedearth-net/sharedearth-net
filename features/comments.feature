@@ -19,7 +19,7 @@ Feature: Leaving comment to everything
     Then I follow "view request"
     When I fill in the following:
      | comment   | My comment opinion |
-     And I submit the comment
+    And I submit the comment
     Then I should see "My comment opinion"
     @javascript
   Scenario: Commenting event log

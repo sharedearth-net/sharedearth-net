@@ -18,7 +18,7 @@ Feature: Sending invitations
     Then I should see the words "The code you have provided is invalid or inactive"
     
   Scenario: When user requests invitation
-    And I follow "request invitation"
+    And I press "request invitation"
     Then I should see the words "Your request has been received."
 
   Scenario: I should be lead to terms page when I enter the invitation

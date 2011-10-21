@@ -76,7 +76,7 @@ Feature: Searching for items and people
 
    Scenario: Searching for an unauthorized person
       Given a person exists with name: "Lourdes Altagracia"
-      And that person is not authorized
+      And "Lourdes Altagracia" is not authorized
       When I fill in "search" with "Lourdes"
       And I press "Search"
       Then I should not see "Lourdes Altagracia"
