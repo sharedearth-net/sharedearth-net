@@ -775,7 +775,7 @@ a.normal:visited {
 				}
 				
 				.comment-box textarea.active-comment-box,
-				#edit-profile-page ul.form-holder textarea.active-comment-box,
+				#item-profile-form-page ul.form-holder textarea.active-comment-box,
 				#request-page #content .comment-box textarea.active-comment-box,
 				#sidebar .comment-box textarea.active-comment-box,
 				#community-page #sidebar .comment-box textarea.active-comment-box{
@@ -1231,221 +1231,6 @@ a.normal:visited {
 						#profile-page #sidebar .comment-box textarea {
 							width: 334px;
 						}
-
-
-						
-/*............Edit Profile............*/
-
-#edit-profile-page {
-
-}
-
-	#edit-profile-page #content {
-		width: 535px;
-	}
-
-		#edit-profile-page .content-box {
-			width: 535px;
-		}
-
-			ul.form-holder {
-
-			}
-
-				ul.form-holder li {
-					display: block;
-					margin: 3px 0;
-				}
-		
-					ul.form-holder li ul.action-buttons-list {
-						margin-left: 0px;
-					}
-		
-						ul.form-holder li ul.action-buttons-list li {
-							margin-right: 13px;
-						}
-
-					ul.form-holder li label {
-						font-size: 12px;
-					}
-
-					ul.form-holder li input[type="text"] {
-						border: 1px solid #8E948E;
-					    color: #999999;
-					    font-size: 13px;
-					    height: 15px;
-					    overflow: auto;
-					    padding: 2px 0 0 4px;
-					    width: 264px;
-					}
-
-					ul.form-holder li textarea {
-						border: 1px solid #8E948E;
-					    color: #999999;
-					    font-size: 13px;
-					    height: 115px;
-					    overflow: auto;
-					    padding: 2px 0 0 4px;
-					    width: 393px;
-					}
-
-					ul.form-holder li input[type="submit"] {
-						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
-						padding: 0 7px;
-						color: #127e0e;
-						display: block;
-						border: 1px solid #aab1a9;
-						line-height: 15px;
-						text-transform: capitalize;
-						cursor: pointer;
-					}
-
-					ul.form-holder li input[type="file"] {
-						margin-bottom: 10px;
-					}
-			
-			/* right hand side */
-
-			#edit-profile-page .rhs {
-				width: 370px;
-				float: left;
-			}
-
-				#edit-profile-page label {
-					font-family: "Lucida Grande", verdana, tahoma, arial, sans-serif;
-					color: #62775a;
-					font-size: 10px;
-					font-weight: bold;
-				}
-
-				#edit-profile-page .rhs ul {
-					margin-top: 16px;
-				}
-
-					#edit-profile-page .rhs ul li {
-
-					}						
-
-						#edit-profile-page .rhs ul li p.description {
-						    color: #9c9e9c;
-						    font-size: 11px;
-							margin-left: 87px;
-						}
-
-						#edit-profile-page .rhs ul li p.under-radio {
-							font-size: 9px;
-							text-align: right;
-							margin-right: 27px;
-						}
-
-							#edit-profile-page .rhs ul li p.under-radio a:link,
-						 	#edit-profile-page .rhs ul li p.under-radio a:visited {
-								margin-left: 23px;
-								color: #9c9e9c;
-							}
-						
-					#edit-profile-page .rhs ul.form-holder li {
-						margin-bottom: 23px;
-					}	
-						
-					#edit-profile-page .rhs ul.form-holder li label {
-						width: 87px;
-						font-size: 12px;
-						display: block;
-						float: left;
-					}
-
-					#edit-profile-page ul.form-holder li input[type="text"] {
-						width: 268px;
-						color: #333;
-						font-size: 12px;
-					}
-
-					#edit-profile-page ul.form-holder li textarea {
-						color: #333;
-					    font-size: 12px;
-						width: 268px;
-					}
-
-					#edit-profile-page ul.form-holder li textarea.active {
-						color: #333;
-						font-size: 12px;
-					}
-
-					#edit-profile-page ul.form-holder li label.active {
-						color: #127e0e;
-						font-weight: bold;
-					}
-					
-					#edit-profile-page ul.action-buttons-list {
-					    clear: both;
-					    margin-left: 149px;
-					}
-					
-						#edit-profile-page ul.action-buttons-list li {
-							
-						}
-					
-							#edit-profile-page ul.action-buttons-list li a:link,
-							#edit-profile-page ul.action-buttons-list li a:visited {
-							    background: url("../images/bg-bt-request-list.png") repeat-x scroll 0 0 #CCE5A0;							 
-							    height: 19px;
-							    line-height: 15px;
-							    padding: 3px 7px 0;
-							}
-					
-					#edit-profile-page ul.action-buttons-list li input[type="submit"] {
-						width: 58px;
-						height: 24px;
-						background-color: #cce5a0;
-					}
-					
-					
-	/* edit profile - sidebar */
-				
-	#edit-profile-page #sidebar {
-		margin-left: 111px;
-		width: 356px;
-	}
-	
-		#edit-profile-page #sidebar .inner-content {
-		    width: 340px;
-		}
-		
-		#edit-profile-page #sidebar h2 {
-			padding-left: 16px;
-		}
-		
-		#edit-profile-page #sidebar .trust-reputation-box h2 {
-			padding-left: 0;
-			float: left;
-			width: 40%;
-			height: 17px;
-			margin-top: 9px;
-		}
-		
-			#edit-profile-page #sidebar .trust-reputation-box h2.rhs-link {
-				float: right;
-			    font-size: 14px;
-			    text-align: right;
-				display: none;
-			}
-		
-		
-		/* edit profile - comments */
-		
-		#edit-profile-page #sidebar ul.comment-list li {
-		    width: 332px;
-		}
-		
-		
-			#edit-profile-page #sidebar .comment-box {
-				width: 340px;
-			}
-		
-				#edit-profile-page #sidebar .comment-box textarea {
-					width: 334px;
-				}
 										
 
 
@@ -2706,77 +2491,227 @@ a.normal:visited {
 
 
 
-/*............Edit Item............*/
+/*............Add/Edit Item/Profile Forms............*/
+
+#item-profile-form-page {
 	
-	#item-edit-page {
-		
+}
+
+	
+	/* Item Pages Content */
+	
+	#item-profile-form-page #content {
+		width: 650px;
 	}
 	
-		#item-edit-page ul.form-holder {
-			
-		}
-		
-			#item-edit-page ul.form-holder li {
-				margin-bottom: 13px;
-			}
-			
-				#item-edit-page ul.form-holder li label {
-					display: block;
-					float: left;
-					margin-top: 5px;
-				}
-			
-	
-		/* left hand side */
-		
-		#item-edit-page .lhs {
+		#item-profile-form-page .lhs {
 			width: 210px;
 			float: left;
 			margin-right: 30px;
 		}
+	
+	
+	/* Profile Pages Content */
+	
+	#item-profile-form-page .profile-form-page #content {
+		width: 555px;
+	}
+	
+		#item-profile-form-page .content-box {
+		    width: 555px;
+		}
 		
-			#item-edit-page .lhs ul {
-			
+			#item-profile-form-page .profile-form-page ul.form-holder li {
+				margin-bottom: 23px;
 			}
+	
+	
+	/* Profile Pages Sidebar */
+	
+	#item-profile-form-page #sidebar {
+	    margin-left: 91px;
+	    width: 356px;
+	}
+	
+	
+		/* edit profile - sidebar */
+
+		#item-profile-form-page #sidebar {
+			margin-left: 91px;
+			width: 356px;
+		}
+
+			#item-profile-form-page #sidebar .inner-content {
+			    width: 340px;
+			}
+
+			#item-profile-form-page #sidebar h2 {
+				padding-left: 16px;
+			}
+
+			#item-profile-form-page #sidebar .trust-reputation-box h2 {
+				padding-left: 0;
+				float: left;
+				width: 40%;
+				height: 17px;
+				margin-top: 9px;
+			}
+
+				#item-profile-form-page #sidebar .trust-reputation-box h2.rhs-link {
+					float: right;
+				    font-size: 14px;
+				    text-align: right;
+					display: none;
+				}
+
+
+			/* edit profile - comments */
+
+			#item-profile-form-page #sidebar ul.comment-list li {
+			    width: 332px;
+			}
+
+
+				#item-profile-form-page #sidebar .comment-box {
+					width: 340px;
+				}
+
+					#item-profile-form-page #sidebar .comment-box textarea {
+						width: 334px;
+					}
+	
+	
+		/* Add/Edit Item/Profile Forms general */
+	
+		#item-profile-form-page #content p {
+			margin-bottom: 0;
+		}
+
+		#item-profile-form-page ul.form-holder {
+
+		}
 		
-				#item-edit-page .lhs ul li {
+			#item-profile-form-page ul.form-holder li {
+				margin-bottom: 13px;
+			}
+			
+			ul.form-holder {
+
+			}
+
+				ul.form-holder li {
+					display: block;
+					margin: 3px 0;
+				}
+		
+					ul.form-holder li ul.action-buttons-list {
+						margin-left: 0px;
+					}
+		
+						ul.form-holder li ul.action-buttons-list li {
+							margin-right: 13px;
+						}
+
+					ul.form-holder li label {
+						font-size: 12px;
+					}
+
+					ul.form-holder li input[type="text"] {
+						border: 1px solid #8E948E;
+					    color: #999999;
+					    font-size: 13px;
+					    height: 15px;
+					    overflow: auto;
+					    padding: 2px 0 0 4px;
+					    width: 264px;
+					}
+
+					ul.form-holder li textarea {
+						border: 1px solid #8E948E;
+					    color: #999999;
+					    font-size: 13px;
+					    height: 115px;
+					    overflow: auto;
+					    padding: 2px 0 0 4px;
+					    width: 393px;
+					}
+
+					ul.form-holder li input[type="submit"] {
+						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+						padding: 0 7px;
+						color: #127e0e;
+						display: block;
+						border: 1px solid #aab1a9;
+						line-height: 15px;
+						text-transform: capitalize;
+						cursor: pointer;
+					}
+
+					ul.form-holder li input[type="file"] {
+						margin-bottom: 10px;
+					}
+
+				#item-profile-form-page ul.form-holder li label {
+					display: block;
+					float: left;
+					margin-top: 5px;
+				}
+				
+				#item-profile-form-page ul.form-holder li textarea {
+				    color: #333333;
+				    font-size: 12px;
+				    width: 268px;
+				}
+
+
+		/* Add/Edit Item/Profile Forms lhs */
+
+
+		#item-profile-form-page .lhs {
+			width: 210px;
+			float: left;
+			margin-right: 30px;
+		}
+
+			#item-profile-form-page .lhs ul {
+
+			}
+
+				#item-profile-form-page .lhs ul li {
 					text-align: center;
 					height: 144px;
 				}
-		
-					#item-edit-page ul.form-holder li.button-holder {
+
+					#item-profile-form-page ul.form-holder li.button-holder {
 						position: relative;
 						padding-top: 0;
 					}
-					
-					#item-edit-page ul.form-holder li.no-image-uploaded {
+
+					#item-profile-form-page ul.form-holder li.no-image-uploaded {
 						background: transparent url('../images/bg-upload-img.png') no-repeat top left;
 						padding-top: 44px;
 					}
-					
-					#item-edit-page ul.form-holder li.checkbox-holder {
+
+					#item-profile-form-page ul.form-holder li.checkbox-holder {
 					}
-					
-						#item-edit-page .rhs ul.form-holder li.checkbox-holder label {
-							width: 347px;
-						}
-			
-						#item-edit-page ul.form-holder li.button-holder label {
+
+
+						#item-profile-form-page ul.form-holder li.button-holder label {
 							width: 34px;
 						}
-						
-						#item-edit-page ul.form-holder li.button-holder img {
+
+						#item-profile-form-page ul.form-holder li.button-holder img {
 							margin-top: 3px;
 						}
-						
-						#item-edit-page ul.form-holder li img.item-pic {
+
+						#item-profile-form-page ul.form-holder li img.item-pic {
 							vertical-align: middle;		
 							display: block;
 							margin: 0 auto;
 							max-width: 150px;
 						}
-						
-						#item-edit-page ul.form-holder li input[type="file"] {
+
+						#item-profile-form-page ul.form-holder li input[type="file"] {
 							display: block;
 							position: absolute;
 							top: 4px;
@@ -2789,132 +2724,123 @@ a.normal:visited {
 							cursor: pointer;
 							font-size: 6px;
 						}
-						
+
 						#item_photo {
 							cursor: pointer;
-						}
-		
-		
-		/* right hand side */
-		
-		#item-edit-page .rhs {
-			width: 370px;
+						}			
+
+
+		/* Add/Edit Item/Profile Forms rhs */
+
+		#item-profile-form-page .rhs {
+			width: 390px;
 			float: left;
 		}
-		
-		#item-edit-page .rhs h2.new {
+
+		#item-profile-form-page .rhs h2.new {
 			display: none;
 		}
-		
-		#item-edit-page.new .rhs h2.new {
+
+		#item-profile-form-page.new .rhs h2.new {
 			display: block;
 		}
-		
-		#item-edit-page.new .rhs h2.edit {
+
+		#item-profile-form-page.new .rhs h2.edit {
 			display: none;
 		}
-		
-		#item-edit-page .rhs h2.edit {
+
+		#item-profile-form-page .rhs h2.edit {
 			display: block;
 		}
-		
-		#item-edit-page label {
+
+		#item-profile-form-page label {
 			font-family: "Lucida Grande", verdana, tahoma, arial, sans-serif;
-			color: #62775a;
+			color: #81927B;
 			font-size: 10px;
 			font-weight: bold;
 		}
-		
-			#item-edit-page .rhs ul {
+
+			#item-profile-form-page .rhs ul {
 				margin-top: 16px;
 			}
-	
-				#item-edit-page .rhs ul li {
-			
+
+				#item-profile-form-page .rhs ul li {
+
 				}						
-				
-				#item-edit-page .rhs ul li p.description {
+
+				#item-profile-form-page .rhs ul li p.description {
 				    color: #9c9e9c;
 				    font-size: 11px;
-					margin-left: 87px;
-				}
-				
-				#item-edit-page .rhs ul li p.under-radio {
-					font-size: 9px;
-					text-align: right;
-					margin-right: 27px;
-				}
-				
-			   #item-edit-page .rhs ul li p.under-radio a:link,
-			   #item-edit-page .rhs ul li p.under-radio a:visited,
-            #item-edit-page .rhs ul li p.under-radio span {
-			   	margin-left: 23px;
-					color: #9c9e9c;
+					margin-left: 116px;
 				}
 
-				#item-edit-page .rhs ul.form-holder li label {
-					width: 87px;
+				#item-profile-form-page #content .rhs ul li p.under-radio {
+					font-size: 9px;
+					text-align: right;
+					margin-right: 18px;
+				}
+
+			   	#item-profile-form-page #content .rhs ul li p.under-radio a:link,
+			   	#item-profile-form-page #content .rhs ul li p.under-radio a:visited,
+		    	#item-profile-form-page #content .rhs ul li p.under-radio span {
+			   		margin-left: 23px;
+					color: #9c9e9c;
+					display: inline;
+				}
+
+				#item-profile-form-page .rhs ul.form-holder li label {
+					width: 116px;
 					font-size: 12px;
 				}
-				
-				#item-edit-page ul.form-holder li label.radio-labels-holder {
+
+				#item-profile-form-page ul.form-holder li label.radio-labels-holder {
 					float: none;
 					display: inline;
 					font-weight: bold;
 					color: #333;
 				}
-				
-				#item-edit-page ul.form-holder li label.radio-labels-holder-off {
+
+				#item-profile-form-page ul.form-holder li label.radio-labels-holder-off {
 					color: #9c9e9c;
 				}
-				
-				#item-edit-page ul.form-holder li input[type="text"] {
+
+				#item-profile-form-page ul.form-holder li input[type="text"] {
 					width: 268px;
 					color: #333;
 					font-size: 12px;
 				}
-				
-				#item-edit-page ul.form-holder li textarea {
-					color: #9C9E9C;
-				    font-size: 11px;
-					width: 268px;
-				}
-				
-				#item-edit-page ul.form-holder li textarea.active {
+
+				#item-profile-form-page ul.form-holder li textarea.active {
 					color: #333;
 					font-size: 12px;
 				}
-				
-				#item-edit-page ul.form-holder li label.active {
+
+				#item-profile-form-page ul.form-holder li label.active {
 					color: #127e0e;
 					font-weight: bold;
 				}
-				
-				#item-edit-page .rhs ul.form-holder li input[type="submit"] {
+
+				#item-profile-form-page .rhs ul.form-holder li input[type="submit"] {
 					width: 58px;
 					height: 24px;
 					background-color: #cce5a0;
 				}
-				
 
+				#item-profile-form-page ul.action-buttons-list {
+					margin-left: 189px;
+					clear: both;
+				}
 
-		/* edit item - action buttons */
-									
-		#item-edit-page ul.action-buttons-list {
-			margin-left: 149px;
-			clear: both;
-		}
+					#item-profile-form-page ul.action-buttons-list li {
+						display: block;
+						float: left;
+						text-align: center;
+						font-size: 13px;
+						margin-right: 13px;
+					}
 
-			#item-edit-page ul.action-buttons-list li {
-				display: block;
-				float: left;
-				text-align: center;
-				font-size: 13px;
-				margin-right: 13px;
-			}
-
-				#item-edit-page ul.action-buttons-list li a:link,
-				#item-edit-page ul.action-buttons-list li a:visited {
+				#item-profile-form-page ul.action-buttons-list li a:link,
+				#item-profile-form-page ul.action-buttons-list li a:visited {
 					background: #cce5a0 url('../images/bg-bt-request-list.png') repeat-x 0 0;
 					padding: 3px 7px 0 7px;
 					color: #234d4d;
@@ -2925,16 +2851,20 @@ a.normal:visited {
 					text-transform: capitalize;
 				}
 
-				#item-edit-page ul.action-buttons-list li a:hover {
+				#item-profile-form-page ul.action-buttons-list li a:hover {
 					text-decoration: none;
 				}
 
-				#item-edit-page ul.action-buttons-list li a.positive:link,
-				#item-edit-page ul.action-buttons-list li a.positive:visited {
+				#item-profile-form-page ul.action-buttons-list li a.positive:link,
+				#item-profile-form-page ul.action-buttons-list li a.positive:visited {
 					color: #127e0e;
 				}
-
-
+	
+				#item-profile-form-page ul.form-holder li.checkbox-holder label  {
+					width: 376px;
+				}
+	
+	
 
 /*............Manage Resources Page............*/
 
@@ -3484,7 +3414,6 @@ a.normal:visited {
 	
 	/* Headings on pages when a person name (e.g. Dan Gooden) or item (e.g. 26 Speed Mountain Bike) or Action\Request sentences */
 	
-	#edit-profile-page #content h2,
 	#completed-request-page #content h2,
 	#completed-request-page #content h2 a:link,
 	#completed-request-page #content h2 a:visited,
@@ -3495,18 +3424,17 @@ a.normal:visited {
 	#request-page #content h2 a:visited,
 	#items-page #content h2 a:link,
 	#items-page #content h2 a:visited,
-	#item-edit-page h2,
-	#edit-profile-page #content h2 {
+	#item-profile-form-page #content h2 {
 		color: #62775a;
 		font-size: 16px;
 	}
 	
-	#edit-profile-page #content h2,
+	#item-profile-form-page #content h2,
 	#completed-request-page #content h2,
 	#items-page #content h2,
 	#request-page #content h2,
 	#profile-page #content h2,
-	#item-edit-page h2 {
+	#item-profile-form-page h2, {
 		margin-top: 7px;
 	}
 

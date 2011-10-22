@@ -24,7 +24,7 @@
 							</li>
 							<li class="people-helped">
   							<% if !current_user.nil? -%>
-  								<%= link_to current_user.person.reputation_rating.distinct_people_count.to_s, my_network_person_path(current_user.person), :title => "People Helped" %>
+  								<%= link_to current_user.person.reputation_rating.distinct_people_count.to_s, network_person_path(current_user.person), :title => "People Helped" %>
   							<% else -%>
     							<%= link_to "0", "#", :title => "People Helped" %>
   							<% end -%>
@@ -34,7 +34,7 @@
 							</li>
 							<li class="giftact-rating">
 								<% if !current_user.nil? -%>
-									<%= link_to current_user.person.mutural_friends_count(current_user.person), my_network_person_path(current_user.person), :title => "Number of people in your trusted network" %>
+									<%= link_to current_user.person.mutural_friends_count(current_user.person), network_person_path(current_user.person), :title => "Number of people in your trusted network" %>
 								<% else -%>
 								  <%= link_to "0", "#", :title => "Number of people in your trusted network" %>
 								<% end -%>
@@ -120,15 +120,6 @@
 		<!-- #header -->
 
 
-<% flash.each do |name, msg| %>
-	<%
-		# this will output all set flash messages and it will give each appropriate id
-		# possible values include: flash-notice and flash-alert
-		# (CSS rules also allow flash-info - which is not used at the moment)
-	%>
-	<%= content_tag :div, msg, :class => "message-holder flash-#{name}", :style => "display:none;" %>
-<% end %>
-
 <div id="wrapper" class="clearfix" <%= yield(:hide_on_policy_top_margin)%>>
 	
 	<%= yield %>
@@ -164,28 +155,7 @@
 </div>
 <!-- #container -->
 
-<div id="notification-overlay" ></div>
-
-<div id="notification-box" >
-  <table>
-    <tr id="notification-header">
-      <td>
-        <span id="notification-title"> This is test</span>
-        <img id="notification-close" src="/images/closelabel.png" style="float:right;">
-      </td>
-    </tr>
-    <tr>
-      <td id="notification-body">
-        This is body
-      </td>
-    </tr>
-    <tr id="notification-footer" >
-      <td>
-        <button id="notification-ok">OK</button>
-      </td>
-    </tr>
-  </table>
-</div>
+<%= render "shared/notification" %>
 
 </body>
 </html>

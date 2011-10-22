@@ -27,7 +27,7 @@ describe TermsController do
     end
 
     it "should redirect the user to its profile page" do
-      get :accept_pp
+      put 'accept_pp' 
       response.should redirect_to edit_person_path(logged_person)
     end
   end

@@ -57,6 +57,7 @@ class ApplicationController < ActionController::Base
       redirect_to next_policy_path
     elsif not session[:fb_drop_url].nil?
       url = session[:fb_drop_url]
+      url = new_item_path if url == items_path
       session[:fb_drop_url] = nil
       redirect_to url
     end
@@ -128,7 +129,7 @@ class ApplicationController < ActionController::Base
   end
 
   def facebook_login
-    session[:fb_drop_url] = request.env["HTTP_REFERER"] unless request.env["HTTP_REFERER"].blank?
+    session[:fb_drop_url] = request.request_uri unless request.request_uri.blank?
     render :template => 'static_pages/fb_logged_out', :status => :not_implemented
   end
 end

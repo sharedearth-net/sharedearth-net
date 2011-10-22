@@ -13,7 +13,7 @@ end
 When /^that person accepts all terms and conditions$/ do
   click_link "Accept"
   click_link "Accept"
-  click_link "Connect"  
+  click_button "Connect"  
 end
 
 When /^I lol$/ do

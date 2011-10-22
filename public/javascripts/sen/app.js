@@ -50,36 +50,8 @@ dojo.declare("sen.app", null, {
 					senModule.unload();
 				});
 			}
-			
-			var showPopup = false;
-			var popupTitle, popupBody;
-			
-			var errorDiv = dojo.byId("error_explanation");
-			if (errorDiv){
-			  showPopup = true;
-			  var popupTitle = dojo.byId("error_title").innerHTML;
-			  var popupBody = dojo.byId("error_list").innerHTML;
-			}
-			else
-			{
-			  var statusMessageDivs = dojo.query(".message-holder");
-		      if ( statusMessageDivs.length > 0 ) {
-				
-				showPopup = true;
-				
-				statusMessageBodies = [];
-				
-				for ( var i = 0 ; i < statusMessageDivs.length ; i++ ) {
-				  var statusMessageDiv = statusMessageDivs[i];
-				  statusMessageBodies.push( statusMessageDiv.innerHTML );
-				}
-				
-				popupTitle = "Notice"; popupBody = statusMessageBodies.join("<br />");
-				
-			  }
-		    }
-			
-			if ( showPopup ){
+
+			if ( window.notificationTitle && window.notificationMessage ){
 			  if ( senModule && senModule.notify ) {
 				  // module does not inherit Page
 				  var pageObj = senModule;
@@ -88,7 +60,7 @@ dojo.declare("sen.app", null, {
 			  {
 				  var pageObj = new sen.Page();
 			  }
-			  pageObj.notify({ title: popupTitle, body: popupBody });
+			  pageObj.notify({ title: window.notificationTitle, body: window.notificationMessage });
 			}
 			
 		});

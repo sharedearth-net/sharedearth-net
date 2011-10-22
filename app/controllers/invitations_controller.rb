@@ -6,7 +6,7 @@ class InvitationsController < ApplicationController
     invitations = params[:invitations].to_i
     items = params[:items].to_i
     
-    redirect_to new_admin_invitation_path, :notice => "Please enter correct data in fields" and return if (invitations <= 0  || items < 0)
+    redirect_to new_admin_invitation_path, :notice => I18n.t('messages.invitations.wrong_data') and return if (invitations <= 0  || items < 0)
     people = Person.with_items_more_than(items)
       @invites = []
       invitations.times do |inv|
@@ -17,7 +17,7 @@ class InvitationsController < ApplicationController
         end
       end
       if @invites.each(&:save!)
-        redirect_to admin_invitations_path, :notice => "Successfully created invitations."
+        redirect_to admin_invitations_path, :notice =>  I18n.t('messages.invitations.successfully_created')
       else
         redirect_to new_admin_invitation_path
       end
@@ -44,13 +44,15 @@ class InvitationsController < ApplicationController
        authorised = Person.all
        authorised.each { |person| person.authorise! }
     else 
+       authorised = Person.all
+       authorised.each { |person| person.authorise! }
        Settings.invitations = 'false'
     end
     redirect_to admin_dashboard_path
   end
   
   def validate
-   redirect_to root_path, :notice => "Your account has been locked. Try again in 24 hours" and return if current_user.locked?
+   redirect_to root_path, :notice => I18n.t('messages.invitations.account_locked') and return if current_user.locked?
 
    key = params[:key]
    unless key.empty?
@@ -66,9 +68,9 @@ class InvitationsController < ApplicationController
    end 
    current_user.validation_failed!
    if current_user.locked?
-     redirect_to root_path, :notice => "Your account has been locked. Try again in 24 hours" 
+     redirect_to root_path, :notice => I18n.t('messages.invitations.account_locked')
    else
-     redirect_to root_path, :notice => "The code you have provided is invalid or inactive" 
+     redirect_to root_path, :notice => I18n.t('messages.invitations.invalid_or_inactive_code')
    end
    
   end
@@ -79,7 +81,7 @@ class InvitationsController < ApplicationController
       session[:user_id] = nil
       redirect_to root_path
     else
-      redirect_to root_path, :notice => "Your account has been locked. Try again in 24 hours" 
+      redirect_to root_path, :notice => I18n.t('messages.invitations.account_locked')
     end
   end
   
