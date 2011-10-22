@@ -3239,7 +3239,7 @@ a.normal:visited {
                     width: 77px;
                     height: 24px;
 					border: none;
-					text-indent: -1000em;
+					/*text-indent: -1000em; */
 					overflow: hidden;
 					cursor: pointer;
 				}
