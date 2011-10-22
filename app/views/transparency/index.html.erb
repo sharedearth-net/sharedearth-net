@@ -214,7 +214,7 @@ end %>
 			Continued use of the site will be taken as conclusive evidence of your acceptance of the Transparency Policy.
 		</h3>
 		<% if !current_user.nil? -%>
-		  <% if !current_user.person.accepted_tr? -%>
+		  <% if !current_user.person.accepted_tr?  && current_user.person.authorised?-%>
 		    <div class="buttons-holder">
 			    <ul class="action-buttons-list clearfix">
 				    <li>
