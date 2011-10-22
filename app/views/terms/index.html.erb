@@ -190,7 +190,7 @@ end %>
 			Continued use of the site will be taken as conclusive evidence of your acceptance of the Terms and Conditions.
 		</h3>
 		<% if !current_user.nil? -%>
-		  <% if !current_user.person.accepted_tc? -%>
+		  <% if !current_user.person.accepted_tc? && current_user.person.authorised? -%>
 		    <div class="buttons-holder">
 			    <ul class="action-buttons-list clearfix">
 				    <li>

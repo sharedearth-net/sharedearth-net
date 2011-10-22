@@ -106,7 +106,7 @@ end %>
             <br>
 		</h3>
 		<% if !current_user.nil? -%>
- 		  <% if !current_user.person.accepted_pp? -%>
+ 		  <% if !current_user.person.accepted_pp?  && current_user.person.authorised? -%>
 		    <div class="buttons-holder">
 			    <ul class="clearfix">
 				    <li>
