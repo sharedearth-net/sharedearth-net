@@ -3239,9 +3239,9 @@ a.normal:visited {
                     width: 77px;
                     height: 24px;
 					border: none;
-					/*text-indent: -1000em; */
 					overflow: hidden;
 					cursor: pointer;
+					text-indent: -1000em;
 				}
 
 				#site-information-pages.principles .post-to-wall {
@@ -3250,9 +3250,11 @@ a.normal:visited {
 					color: #62775A;
 				    font-weight: bold;
 					margin-top: 13px;
-					text-align: center;
 					position: absolute;
 					top: 25px;
+					left: -125px;
+					text-indent: 0;
+					width: 500px;
 				}
 
 
