@@ -1,41 +1,41 @@
 <!-- Handle flash messages here as they are displayed in notification -->
 
 <% if flash.length > 0 %>
-  <script>
+	<script>
 	window.notificationTitle = window.notificationTitle || "Notice";
 	window.notificationMessage = window.notificationMessage || "";
 
 	<% flash.each do |name, msg| %>
-	  <%
-		  # this will output all set flash messages and it will give each appropriate id
-		  # possible values include: flash-notice and flash-alert
-		  # (CSS rules also allow flash-info - which is not used at the moment)
-	  %>
-	  window.notificationMessage += "<%=raw escape_javascript( msg ) %><br \/>";
+		<%
+			# this will output all set flash messages and it will give each appropriate id
+			# possible values include: flash-notice and flash-alert
+			# (CSS rules also allow flash-info - which is not used at the moment)
+		%>
+		window.notificationMessage += "<%=raw escape_javascript( msg ) %><br \/>";
 	<% end %>
 
-  </script>
+	</script>
 <% end %>
 
 <div id="notification-overlay" ></div>
 
 <div id="notification-box" >
-  <table>
-    <tr id="notification-header">
-      <td>
-        <span id="notification-title"> This is test</span>
-        <img id="notification-close" src="/images/closelabel.png" style="float:right;">
-      </td>
-    </tr>
-    <tr>
-      <td id="notification-body">
-        This is body
-      </td>
-    </tr>
-    <tr id="notification-footer" >
-      <td>
-        <button id="notification-ok">OK</button>
-      </td>
-    </tr>
-  </table>
+	<table>
+		<tr id="notification-header">
+			<td>
+				<span id="notification-title"> This is test</span>
+				<img id="notification-close" src="/images/closelabel.png" style="float:right;">
+			</td>
+		</tr>
+		<tr>
+			<td id="notification-body">
+				This is body
+			</td>
+		</tr>
+		<tr id="notification-footer" >
+			<td>
+				<button id="notification-ok">OK</button>
+			</td>
+		</tr>
+	</table>
 </div>
