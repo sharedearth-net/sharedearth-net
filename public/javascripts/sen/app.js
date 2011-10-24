@@ -52,15 +52,15 @@ dojo.declare("sen.app", null, {
 			}
 
 			if ( window.notificationTitle && window.notificationMessage ){
-			  if ( senModule && senModule.notify ) {
-				  // module does not inherit Page
-				  var pageObj = senModule;
-			  }
-			  else
-			  {
-				  var pageObj = new sen.Page();
-			  }
-			  pageObj.notify({ title: window.notificationTitle, body: window.notificationMessage });
+				if ( senModule && senModule.notify ) {
+					// module does not inherit Page
+					var pageObj = senModule;
+				}
+				else
+				{
+					var pageObj = new sen.Page();
+				}
+				pageObj.notify({ title: window.notificationTitle, body: window.notificationMessage });
 			}
 			
 		});
