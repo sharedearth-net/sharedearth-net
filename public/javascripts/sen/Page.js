@@ -26,7 +26,8 @@ dojo.declare("sen.Page", null, {
 		this.events = {
 			notice: [],
 			dashboard: [],
-			comments: []
+			comments: [],
+			item: []
 		};
 		
 		// In flight status for various parts of the page
@@ -214,5 +215,30 @@ dojo.declare("sen.Page", null, {
 		dojo.style("notification-overlay", { display: "none" });
 		
 		this.disconnectEvents("notice");
+	},
+	
+	/*
+	 * Show loading popup with ajax-loader.gif
+	 * */
+	showLoading: function(){
+
+		// Get the size of the window so we can calculate the position
+		var windowBox = dojo.window.getBox();
+		
+		// Set the properties of the overlay box, the left and top positions
+		dojo.style("loading-box", {
+			display: "block",
+			left: ( windowBox.w - dojo.style("loading-box", "width") ) / 2 + "px",
+			top: ( (windowBox.h - dojo.style("loading-box", "height") ) / 2) - 20 + "px",
+			position: "absolute"
+		});
+		
+		// Set the window background for the overlay. i.e the body becomes darker
+		dojo.style("loading-overlay", {
+			display: "block",
+			width: windowBox.w + "px",
+			height: windowBox.h + "px"
+		});
+
 	}
 });
