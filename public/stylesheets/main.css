@@ -3570,8 +3570,12 @@ a.normal:visited {
 	#content .items-list ul p a:visited {
 		font-size: 12px;
 		color: #333;
-		/*text-transform: lowercase;*/
 	}
+	
+		#content .items-expanded ul p a.item-type:link,
+		#content .items-expanded ul p a.item-type:visited {
+			color: #62775a;
+		}
 	
 	/* for an item request sentence */
 	
