@@ -46,7 +46,7 @@
 					        <div>
 								<p>
 		  							<%= link_to item.name, item_path(item), :class => 'positive'  %>&nbsp;&nbsp;
-									<a href="#"><%= item.item_type %></a>&nbsp;
+									<%= link_to item.item_type, "#", :class => "item-type" %>&nbsp;
 									<%= item.purpose? %>		
 								</p>
 								<ul class="action-list">
