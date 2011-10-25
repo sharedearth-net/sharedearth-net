@@ -3643,6 +3643,7 @@ a.normal:visited {
 	
 	#sidebar ul.comment-list li p {
 		font-size: 11px;
+		width: 298px;
 	}
 
 	div.loader {
