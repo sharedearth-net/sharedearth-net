@@ -106,7 +106,7 @@ end %>
             <br>
 		</h3>
 		<% if !current_user.nil? -%>
- 		  <% if !current_user.person.accepted_pp? -%>
+ 		  <% if !current_user.person.accepted_pp? && current_user.person.authorised_account && current_user.person.accepted_tr? && current_user.person.accepted_tc?-%>
 		    <div class="buttons-holder">
 			    <ul class="clearfix">
 				    <li>
@@ -115,7 +115,7 @@ end %>
 									<%= check_box_tag 'facebook', true %>
 									<label for="facebook">Post on my Facebook wall that I've connected to sharedearth.net</label>
 								</div> 
-								<div><%= submit_tag %></div>
+								<div><%= submit_tag "Connect" %></div>
 							<% end -%>
 					    <%#= link_to 'Connect', accept_pp_terms_path, :method => 'put', :class => 'positive', :id => 'connect' %>
 				    </li>
