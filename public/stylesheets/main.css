@@ -2668,9 +2668,9 @@ a.normal:visited {
 
 
 		#item-profile-form-page .lhs {
-			width: 210px;
+			width: 150px;
 			float: left;
-			margin-right: 30px;
+			margin-right: 15px;
 		}
 
 			#item-profile-form-page .lhs ul {
@@ -2681,6 +2681,10 @@ a.normal:visited {
 					text-align: center;
 					height: 144px;
 				}
+				
+					#item-pic-holder {
+						margin-top: 0;
+					}
 
 					#item-profile-form-page ul.form-holder li.button-holder {
 						position: relative;
@@ -2715,7 +2719,7 @@ a.normal:visited {
 							display: block;
 							position: absolute;
 							top: 4px;
-							left: 65px;
+							left: 36px;
 							opacity: 0;
 							-moz-opacity: 0;
 							filter: alpha(opacity:0) ;
@@ -2723,6 +2727,7 @@ a.normal:visited {
 							width: 85px;
 							cursor: pointer;
 							font-size: 6px;
+							background: red;
 						}
 
 						#item_photo {
