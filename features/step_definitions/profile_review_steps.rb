@@ -1,5 +1,6 @@
 Given /^(.+) logs in$/ do |person_model|
   person = model(person_model)
+  person.authorise!
   omniauth_mock_facebook_with_uid(person.user.uid)
   visit "/auth/facebook"
 end
