@@ -15,11 +15,15 @@ Feature: Accepting terms
       Then I fill in active invitation
       And I press "Submit"
       Then I should see "TERMS AND CONDITIONS"
-
+      And I should not see link with text "back"
+      And I should not see link with text "disconnect"
+ 
    Scenario: I should be able to decline terms
       Then I fill in active invitation
       And I press "Submit"
       Then I should see the words "TERMS AND CONDITIONS"
+      And I should not see link with text "back"
+      And I should not see link with text "disconnect"
       Then I follow "Reject"
       Then I should see "connect"
 
@@ -29,6 +33,8 @@ Feature: Accepting terms
       Then I should see the words "TERMS AND CONDITIONS"
       When I follow "Accept"
       Then I should see "Transparency Policy"
+      And I should not see link with text "back"
+      And I should not see link with text "disconnect"
     
    Scenario: I should be able to decline principles 
       Then I fill in active invitation
@@ -67,6 +73,8 @@ Feature: Accepting terms
       Then I should see "Transparency Policy"
       And I follow "Accept"
       Then I should see "DESIGN PRINCIPLES"
+      And I should not see link with text "back"
+      And I should not see link with text "disconnect"
       And I press "Connect"
       Then I should see the words "Edit Profile"
     
