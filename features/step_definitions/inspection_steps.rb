@@ -101,8 +101,9 @@ Then /^I (should|should not) see link with text "(.*)"$/ do |should_or_should_no
       if should_or_should_not == "should"
         page.should have_link text
       elsif should_or_should_not == "should not"
+         page.should_not have_xpath('//a', :text => text) 
          #page.should_not have_link text
-         page.should_not have_selector 'a', :text => '#{text}'
+         #page.should_not have_selector 'a', :text => text
       end
 end
 
