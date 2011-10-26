@@ -12,27 +12,27 @@ Feature: Checking toolbar and buttons that appear
       Then I should see the words "Welcome", "Enter your invitation code to continue" and "sharedearth.net is now in private beta"
       Then I fill in active invitation
       And I press "Submit"
- 
+ @javascript
   Scenario: I should see page with toolbar and without buttons
     Then I follow "About"
-     And I should not see link with text "back"
+     And I should see link with text "back"
      And I should not see link with text "disconnect"
-
+@javascript
   Scenario: I should see page with toolbar and without buttons
     Then I follow "Principles"
      And I should not see link with text "back"
      And I should not see link with text "disconnect"
      And I should not see link with text "Connect"
-
+@javascript
   Scenario: I should see page with toolbar and without buttons
     Then I follow "Transparency"
      And I should not see link with text "back"
      And I should not see link with text "disconnect"
      And I should not see link with text "Accept"
-
+@javascript
   Scenario: I should see page with toolbar and without buttons
     Then I follow "Contribute"
-     And I should not see link with text "back"
+     And I should see link with text "back"
      And I should not see link with text "disconnect"
 @javascript
   Scenario: I should see page with toolbar and without buttons
@@ -40,28 +40,28 @@ Feature: Checking toolbar and buttons that appear
      And I should not see link with text "back"
      And I should not see link with text "disconnect"
      And I should see link with text "Accept"
-
+@javascript
   Scenario: I should see page with toolbar and without buttons
     Then I follow "Accept"
     Then I follow "Principles"
      And I should not see link with text "back"
      And I should not see link with text "disconnect"
      And I should not see link with text "Connect"
-
+@javascript
   Scenario: I should see page with toolbar and without buttons
     Then I follow "Accept"
     Then I follow "Transparency"
      And I should not see link with text "back"
      And I should not see link with text "disconnect"
      And I should see link with text "Accept"
-
+@javascript
   Scenario: I should see page with toolbar and without buttons
     Then I follow "Accept"
     Then I follow "Terms"
      And I should not see link with text "back"
      And I should not see link with text "disconnect"
      And I should not see link with text "Accept"
-
+@javascript
   Scenario: I should see page with toolbar and without buttons
     Then I follow "Accept"
     Then I follow "Accept"
@@ -69,7 +69,7 @@ Feature: Checking toolbar and buttons that appear
      And I should not see link with text "back"
      And I should not see link with text "disconnect"
      And I should see link with text "No thanks"
-
+@javascript
   Scenario: I should see page with toolbar and without buttons
     Then I follow "Accept"
     Then I follow "Accept"
