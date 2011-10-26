@@ -3062,6 +3062,35 @@ a.normal:visited {
 		}
 
 
+/*............Static Pages (e.g. loged out, 404, 501) ............*/
+
+#static-page {
+	
+}
+
+	#static-page #content {
+		float: none;
+		width: 100%;
+	}
+	
+		#static-page #content h4 {
+			font-size: 26px;
+			color: #333;
+			margin-bottom: 30px;
+		}
+		
+		#static-page #content p {
+			font-size: 22px;
+			color: #5c5c5c;
+		}
+		
+			#static-page #content p a:link,
+			#static-page #content p a:visited {
+				color: #62775a;
+			}
+
+
+
 /*............Site Information Pages (e.g. About, Transparency, Principles)............*/
 	
 #site-information-pages {
@@ -3697,7 +3726,7 @@ a.normal:visited {
 	background-color: #6ea801;
 	color: #fff;
 	margin: 0;
-  height:30px;
+  	height:30px;
 	font-size: 14px;
 	border-bottom: 1px solid #555;
 	font-weight: bold;
