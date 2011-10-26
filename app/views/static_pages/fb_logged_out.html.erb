@@ -1,3 +1,9 @@
-<h4>In order to use this feature you must be logged into Facebook</h4>
+<div id="static-page">
+	
+	<div id="content">
+		<h4>In order to use this feature you must be logged into Facebook</h4>
+		<p><%= link_to 'Log into Facebook', '/auth/facebook' %> or <%= link_to "go back", url_for(:back) %></p>
+	</div><!--	/content  -->
+	
+</div><!--	/static-page  -->
 
-<%= link_to 'Log into Facebook', '/auth/facebook' %> or <%= link_to "go back", url_for(:back) %>
