@@ -10,14 +10,14 @@ Feature: Accepting terms
     
    Scenario: I should see enter invitation code page
       Then I should see the words "Welcome", "Enter your invitation code to continue" and "sharedearth.net is now in private beta"
-    
+   @javascript 
    Scenario: I should be lead to terms page when I enter the invitation
       Then I fill in active invitation
       And I press "Submit"
       Then I should see "TERMS AND CONDITIONS"
       And I should not see link with text "back"
       And I should not see link with text "disconnect"
- 
+   @javascript 
    Scenario: I should be able to decline terms
       Then I fill in active invitation
       And I press "Submit"
@@ -26,7 +26,7 @@ Feature: Accepting terms
       And I should not see link with text "disconnect"
       Then I follow "Reject"
       Then I should see "connect"
-
+   @javascript 
    Scenario: I should be able to accept terms
       Then I fill in active invitation
       And I press "Submit"
@@ -64,7 +64,7 @@ Feature: Accepting terms
       Then I should see "Transparency Policy"
       And I follow "Accept"
       Then I should see "DESIGN PRINCIPLES"
-    
+   @javascript 
    Scenario: I should be able to accept principles and use
       Then I fill in active invitation
       And I press "Submit"
