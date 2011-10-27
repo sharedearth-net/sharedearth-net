@@ -27,8 +27,7 @@
 									</li>
 									<li class="clearfix">
 										<%= f.label "Confirm Email"  %>
-									
-							    		<%= f.text_field :email %>
+										<%= f.text_field :email_confirmation, :value => @person.email_confirmation || @person.email %>
 									</li>
 									<li class="clearfix">
 										<%= f.label "Location"  %>
