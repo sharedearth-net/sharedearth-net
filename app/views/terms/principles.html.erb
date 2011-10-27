@@ -110,7 +110,7 @@ end %>
 		    <div class="buttons-holder">
 			    <ul class="clearfix">
 				    <li>
-              <% form_tag('/terms/accept_pp', :method => :put)  do -%>
+              <%= form_tag('/terms/accept_pp', :method => :put)  do -%>
 								<div class="post-to-wall">
 									<%= check_box_tag 'facebook', true %>
 									<label for="facebook">Post on my Facebook wall that I've connected to sharedearth.net</label>
