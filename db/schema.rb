@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111011144607) do
+ActiveRecord::Schema.define(:version => 20111028122306) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_type_id"
+    t.boolean  "read",                        :default => false
+    t.integer  "email_notification_id"
   end
 
   add_index "activity_logs", ["event_code"], :name => "index_activity_logs_on_event_code"
@@ -94,6 +96,13 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "email_notifications", :force => true do |t|
+    t.integer  "person_id"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "entities", :force => true do |t|
     t.integer  "entity_type_id"
@@ -210,17 +219,19 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "authorised_account",   :default => false
-    t.boolean  "accepted_tc",          :default => false
-    t.decimal  "tc_version",           :default => 1.0
-    t.decimal  "pp_version",           :default => 1.0
+    t.boolean  "authorised_account",                                      :default => false
+    t.boolean  "accepted_tc",                                             :default => false
+    t.decimal  "tc_version",               :precision => 10, :scale => 0, :default => 1
+    t.decimal  "pp_version",               :precision => 10, :scale => 0, :default => 1
     t.string   "location"
     t.text     "description"
-    t.boolean  "accepted_pp",          :default => false
+    t.boolean  "accepted_pp",                                             :default => false
     t.string   "email"
-    t.boolean  "accepted_tr",          :default => false
-    t.boolean  "has_reviewed_profile", :default => false
+    t.boolean  "accepted_tr",                                             :default => false
+    t.boolean  "has_reviewed_profile",                                    :default => false
     t.integer  "invitations_count"
+    t.integer  "email_notification_count",                                :default => 0
+    t.datetime "last_notification_email"
   end
 
   create_table "people_network_requests", :force => true do |t|
@@ -299,6 +310,7 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
     t.string   "token"
     t.datetime "lockout"
     t.integer  "validations_failed", :default => 0
+    t.datetime "last_activity"
   end
 
 end
