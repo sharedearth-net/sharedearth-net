@@ -26,6 +26,7 @@ class Person < ActiveRecord::Base
   has_one :reputation_rating
 
   validates_length_of :name, :maximum => 20
+  validates :email, :confirmation => true
   validates_length_of :location, :maximum => 42
   validates_length_of :description, :maximum => 400
   validates_presence_of :user_id, :name
