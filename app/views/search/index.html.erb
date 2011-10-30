@@ -34,7 +34,7 @@
 				</h3>
 				<ul class="clearfix">
 				<% @items.each do |item| %>
-          <%= render :partial => "items/item", :locals => {:item => item} %>
+          <%= render "items/item", :item => item, :action_list => [:person_name, :view, :request].to_set  %>
         <% end%>
 				</ul>
 				<!--<a href="#" class="button-more">
@@ -72,4 +72,3 @@
 	
 </div><!--	/search-page -->
 			
-

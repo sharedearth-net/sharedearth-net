@@ -1,23 +1,61 @@
 <li class="item clearer">
-		        <%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
-		        <div>
-							<p>
-  							<%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;
-								<%= link_to item.item_type, "#" %>&nbsp;
-								<%= item.purpose? %>		
-							</p>
-							<ul class="action-list">
-								<li class="person-name">
-									<%= link_to_person(item.owner, :class => "positive capitalize") %>
-								</li>
-								<li>
-									<%= link_to "view item", item_path(item) %>
-								</li>				
-								<%unless item.active_request_by?(current_user) || item.is_owner?(current_user.person)%>
-								<li>
-									<%= link_to "request", requests_path(:item_id => item.id), :method => :post %>
-								</li>
-								<% end -%>		
-							</ul>
-						</div>
+	<div class="item-image-holder">
+		<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
+	</div>
+	<div class="item-info">
+		<p>
+			<%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;&nbsp;										
+			<%= link_to item.item_type, "#", :class => "item-type" %>&nbsp;&nbsp;&nbsp;
+			<%= item.purpose? %>	
+		</p>
+
+		<ul class="action-list">
+			<% if action_list.include?(:person_name) %>
+			<li class="person-name">
+				<%= link_to_person(item.owner, :class => "positive capitalize") %>
+			</li>
+			<% end %>
+			<% if action_list.include?(:gift_actions) %>
+			<li>
+				<%= link_to item.owner.reputation_rating.gift_actions_count.to_s, "#", :class => "giftactions", :title => "Gift Actions" %>
+			</li>
+			<% end %>
+			<% if action_list.include?(:people_helped) %>
+			<li>
+				<%= link_to item.owner.reputation_rating.distinct_people_count.to_s, "#", :class => "people-helped", :title => "People Helped" %>
+			</li>			
+			<% end %>
+			<% if action_list.include?(:view) %>
+			<li>
+				<%= link_to "view item", item_path(item) %>
+			</li>
+			<% end %>
+			<% if action_list.include?(:request) %>
+				<%unless item.active_request_by?(current_user) || item.is_owner?(current_user.person)%>
+				<li>
+					<%= link_to "request", requests_path(:item_id => item.id), :method => :post %>
+				</li>
+				<% end -%>		
+			<% end %>
+			<% if action_list.include?(:show) %>
+			<li>
+				<%= link_to 'show', item %></a>
+			</li>
+			<% end %>
+			<% if action_list.include?(:edit) %>
+			<% if item.normal? %>
+				<li><%= link_to 'edit', edit_item_path(item) %></li>
+			<% end %>
+			<% end %>
+			<% if action_list.include?(:delete) %>
+			<% if item.available? -%>
+			<li>
+				<%= link_to 'Delete', item, :confirm => 'Are you sure?', :method => :delete %>
+			</li>
+			<% end -%>
+			<% end -%>
+		</ul>
+
+
+	</div>
 </li>
