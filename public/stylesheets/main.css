@@ -636,6 +636,10 @@ a.normal:visited {
 							margin: 0 0 6px 0;
 							line-height: 14px;
 						}
+						
+						.gift-item {
+							color:#127e0e !important;
+						}
 							
 		
 		/*  global - icons - trust box, items etc. */

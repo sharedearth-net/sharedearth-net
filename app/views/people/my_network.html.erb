@@ -102,13 +102,9 @@
 			
 			<div class="items-list clearfix">
 					<ul class="clearfix">
-					<% @items.map{|i| i.item_type.downcase}.uniq.each do |item_type| %>
-						<li class="item">
-							<p>						
-								<%= link_to item_type, my_network_person_path(current_user.person, :filter_type => item_type, :type => params[:type]) %>
-							</p>
-						</li>
-	        		<% end if !@items.nil?%>
+					<% item_types_with_gift_status(@items).each do |item_type, is_gift| %>
+					  <%= render "items/item_type", :item_type => item_type, :is_gift => is_gift %>
+	        <% end if !@items.nil?%>
 					</ul>
 					
 	     <% end -%>

@@ -13,7 +13,7 @@
 								<%= @item.item_type %>
 							</span>
 							&nbsp;&nbsp;&nbsp;
-							<span class="item-purpose">
+							<span class="item-purpose<%= (@item.gift? ? " gift-item" : "") %>">
 								<%= @item.purpose? %>
 							</span>
 						</h2>
