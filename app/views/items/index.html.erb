@@ -39,31 +39,7 @@
 					
 					<ul class="clearfix">
 						<% @items.each do |item| %>
-						<li class="item clearer">
-							<a href="/items/<%= item.id %>">
-								<%= image_tag item.photo.url(:square), :class => "thumb" %>
-							</a>
-					        <div>
-								<p>
-		  							<%= link_to item.name, item_path(item), :class => 'positive'  %>&nbsp;&nbsp;
-									<%= link_to item.item_type, "#", :class => "item-type" %>&nbsp;
-									<%= item.purpose? %>		
-								</p>
-								<ul class="action-list">
-									<li>
-										<%= link_to 'show', item %></a>
-									</li>
-									<% if item.normal? %>
-								    	<li><%= link_to 'edit', edit_item_path(item) %></li>
-								    <% end %>
-									<% if item.available? -%>
-									<li>
-										<%= link_to 'Delete', item, :confirm => 'Are you sure?', :method => :delete %>
-									</li>
-									<% end -%>
-								</ul>
-							</div>
-						</li>
+						  <%= render "items/item", :item => item, :action_list => [:show, :edit, :delete].to_set  %>
 						<% end if !@items.nil?%>
 					</ul>
 					
