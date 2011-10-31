@@ -603,14 +603,12 @@ a.normal:visited {
 				margin-bottom: 10px;
 			}
 
-				.items-list ul li .thumb {
-					max-height: 50px;
+				.items-list ul li .item-image-holder {
 					float: left;
-					margin-right: 10px;
-					margin-top: 3px;
+					width: 60px;
 				}
 
-				.items-list ul li div {
+				.items-list ul li .item-info {
 					width: 430px;
 					float: left;
 				}
@@ -637,6 +635,10 @@ a.normal:visited {
 						    float: left;
 							margin: 0 0 6px 0;
 							line-height: 14px;
+						}
+						
+						.gift-item {
+							color:#127e0e !important;
 						}
 							
 		
@@ -2074,11 +2076,9 @@ a.normal:visited {
 				margin-bottom: 4px;
 			}
 
-				#search-page .items-list ul li .thumb {
-				    float: left;
-				    margin-right: 10px;
-				    margin-top: 3px;
-				    max-height: 50px;
+				#search-page .items-list ul li .item-image-holder {
+					float: left;
+					width: 60px;
 				}
 
 				#search-page a.communities:link,
