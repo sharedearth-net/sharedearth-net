@@ -39,6 +39,9 @@ class ActivityLog < ActiveRecord::Base
                                                       p1.id, p1.class.to_s, p2.id, p2.class.to_s, EventType.current_actions_underway) }
   scope :public_activities, lambda { |entity| where("(primary_id = ? AND primary_type = ? and event_type_id IN (?) ) ", entity.id, entity.class.to_s, EventType.current_actions_underway) }
   scope :item_public_activities, lambda { |entity| where("(action_object_id = ? AND action_object_type = ? and event_type_id IN (?) ) ", entity.id, entity.class.to_s, EventType.current_actions_underway_items) }
+  scope :unread, where(:read => false)
+  scope :email_not_sent, where("email_notification_id is null")
+  scope :include_person, lambda { |entity| where("(primary_id = ? AND primary_type = 'Person') OR (secondary_id = ? AND secondary_type = 'Person')", entity.id, entity.id)}
 
   def self.next_event_code
     current_max = ActivityLog.maximum(:event_code)
@@ -197,6 +200,15 @@ class ActivityLog < ActiveRecord::Base
       :related => nil,
       :event_type_id => event_type_requester
     )
+  end
+
+  def is_read!
+  	self.read = true
+    save!
+  end
+
+  def is_read?
+  	self.read == true
   end
 
 
