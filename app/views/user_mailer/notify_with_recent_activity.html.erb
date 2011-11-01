@@ -1,0 +1,7 @@
+<p>Recent activity connected with your profile<p>
+
+<p>
+<% @recent_activity_logs.each do |activity_log| %>
+      <%#= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log } %>
+<% end unless @recent_activity_logs.nil?%>
+</p>
