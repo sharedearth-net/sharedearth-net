@@ -19,8 +19,12 @@ class PagesController < ApplicationController
 
     @requests.sort! { |a,b| b.created_at <=> a.created_at }
 
-    @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30) unless current_user.person.activity_logs.empty?
-
+    unless current_user.person.activity_logs.empty?
+      @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30) 
+      @recent_activity_logs.each { |log| log.is_read! } unless @recent_activity_logs.nil?
+		end
+    current_user.person.reset_notification_count!
+    current_user.record_last_activity!
     current_user.person.news_feed
     @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
   end
