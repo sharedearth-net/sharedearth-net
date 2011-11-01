@@ -36,6 +36,12 @@ class Person < ActiveRecord::Base
   
   #default_scope where(:authorised_account => true) if INVITATION_SYS_ON
   scope :authorized, where(:authorised_account => true)
+  scope :no_email_sent, where("email_notification_count = 0")
+  scope :low_volume_email_sent, where("email_notification_count IN (1,2) AND last_notification_email < ?", Time.now - 78.hours)
+  scope :high_volume_email_sent, where("email_notification_count IN (3,4) AND last_notification_email < ?", Time.now - 168.hours)
+  scope :notification_cantidate, where("(email_notification_count = 0) OR ((email_notification_count in (?)) AND last_notification_email < ?) OR ((email_notification_count in (?)) AND last_notification_email < ?)", [1,2], Time.now - 78.hours, [3,4], Time.now - 168.hours) 
+  scope :exclude_users, lambda { |entity| where("id not in (?)", entity)}
+  
 
   def network_activity
     my_people_id = trusted_friends.collect { |friend| friend.id }
@@ -306,6 +312,15 @@ class Person < ActiveRecord::Base
   
   def invitations_count?
     self.invitations_count
+  end
+
+  def reset_notification_count!
+    self.email_notification_count = 0
+    save!
+  end
+
+  def email_notifications_count?
+    self.email_notification_count
   end
   
 end
