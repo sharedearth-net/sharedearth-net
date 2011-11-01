@@ -11,6 +11,10 @@ describe Person do
 
   let(:long_description) { 'I' * 401 }
 
+  it { should have_db_column(:email_notification_count).of_type(:integer) }
+
+  it { should have_db_column(:last_notification_email).of_type(:datetime) }
+
   it { should belong_to(:user) }
 
   it { should have_many(:items) }

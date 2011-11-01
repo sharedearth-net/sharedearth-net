@@ -62,7 +62,7 @@ describe PagesController do
         response.should be_success
         response.should render_template("pages/dashboard")
       end
-      
+
       it "assigns the current person's active requests as @active_item_requests" do
         mock_item_requests = [Factory(:item_request), Factory(:item_request)]
         signedin_user.stub(:person).and_return(Factory(:person))
@@ -74,6 +74,18 @@ describe PagesController do
         get :dashboard
         assigns(:active_item_requests).should eq(mock_item_requests)
       end
+
+      it "should reset person email notification count" do
+				mock_item_requests = [Factory(:item_request), Factory(:item_request)]
+        signedin_user.stub(:person).and_return(Factory(:person))
+        signedin_user.person.stub(:active_item_requests) { mock_item_requests }
+        signedin_user.person.stub(:received_people_network_requests) { [] }
+        signedin_user.person.stub(:people_network_requests) { [] }
+        signedin_user.person.stub(:activity_logs) { [] }
+        signedin_user.person.stub(:news_feed) { [] }
+     		get :dashboard
+        signedin_user.person.email_notifications_count?.should eql(0)
+    end
     end
   end
 end
