@@ -76,3 +76,4 @@ gem "aws-ses", "~> 0.4.3", :require => 'aws/ses'
 gem 'delayed_job' #What you can do today, don't leave for tomorrow
 
 gem "mocha", :group => :test
+gem 'whenever', :require => false

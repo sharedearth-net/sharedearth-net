@@ -70,6 +70,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.2.0)
       ffi (~> 1.0.6)
+    chronic (0.6.4)
     cocaine (0.1.0)
     columnize (0.3.4)
     cucumber (1.0.2)
@@ -289,6 +290,9 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    whenever (0.7.0)
+      activesupport (>= 2.3.4)
+      chronic (~> 0.6.3)
     will_paginate (3.0.pre2)
     xml-simple (1.1.0)
     xpath (0.1.4)
@@ -333,4 +337,5 @@ DEPENDENCIES
   spork (~> 0.9.0.rc)
   sqlite3-ruby
   webrat
+  whenever
   will_paginate (~> 3.0.pre2)
