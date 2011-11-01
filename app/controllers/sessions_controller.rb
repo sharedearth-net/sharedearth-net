@@ -8,6 +8,8 @@ class SessionsController < ApplicationController
             User.create_with_omniauth(auth)
     user.token = token
     user.person.authorise! if (Settings.invitations == 'false')
+    user.person.reset_notification_count!
+    user.record_last_activity!
     user.save!
 
     session[:user_id]  = user.id
@@ -21,6 +23,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
 
     else
+      current_user.record_last_activity!
       split_token = session[:fb_token].split("|")
       fb_api_key = split_token[0]
       fb_session_key = split_token[1]
