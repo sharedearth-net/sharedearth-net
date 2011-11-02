@@ -1,7 +1,56 @@
-<p>Recent activity connected with your profile<p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<p>
-<% @recent_activity_logs.each do |activity_log| %>
-      <%#= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log } %>
-<% end unless @recent_activity_logs.nil?%>
-</p>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<title>sharedearth.net - trust. share. connect.</title>
+	
+
+	<style>
+		body  {
+			margin: 0;
+			padding: 0;
+		}
+	
+	</style>
+	
+</head>
+<body>
+
+<div id="container" style="width: 650px; margin: 0 auto; ">
+		<%= image_tag("http://sharedearthplatform.org/static/graphics/emailv1-top-pic.jpg", :alt => "sharedearth.net - trust. share. connect.", :title => "sharedearth.net - trust. share. connect.", :style => "display: block;" )  %>
+	
+	<div id="content" style="width: 520px; margin: 0 auto;">
+		
+		<p>Recent activity connected with your profile<p>
+		<div>
+		<% @recent_activity_logs.each do |activity_log| %>
+		      <%#= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log } %>
+		<% end unless @recent_activity_logs.nil?%>
+		</div>
+	
+		
+	
+		
+	</div>
+
+
+	<div id="footer">
+	    <p style="text-align: center;">
+            <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/about">About</a> <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/terms/principles">Principles</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/transparency">Transparency</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/contribute">Contribute</a> <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="mailto:info@sharedearth.net">Contact</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/terms">Terms</a>
+        </p>
+	</ul>
+        <%= image_tag("http://sharedearthplatform.org/static/graphics/emailv1-bottom-pic.jpg", :alt => "sharedearth.net - trust. share. connect.", :title => "sharedearth.net - trust. share. connect.", :style => "display: block;" )  %>
+	</div>
+		
+</div>
+
+</body>
+</html>
+
+
+
+
