@@ -5,7 +5,7 @@
 
 	<div class="action clearfix">
 		<ul>
-			<li><%= time_ago_in_words activity_log.created_at %> ago</li>
+			<li class="time-since"><%= time_ago_in_words activity_log.created_at %> ago</li>
 			<li>
 				<%= render :partial => "shared/activity_log_actions_compact.html.erb", :locals => { :activity_log => activity_log } %>
 			</li>
