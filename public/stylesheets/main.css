@@ -3071,7 +3071,30 @@ a.normal:visited {
 	#static-page #content {
 		float: none;
 		width: 100%;
+		text-align: center;
 	}
+	
+	#static-page #content #columns-holder {
+		#position: relative;
+		#top: -50%;
+		width: 1002px;
+	}
+	
+	
+	#static-page #content .vertical-positioner-outside {
+		display: table;
+		height: 488px;
+		#position: relative;
+		overflow: hidden;
+	}
+	
+	#static-page #content .vertical-positioner-inside {
+		#position: absolute;
+		#top: 50%;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	
 	
 		#static-page #content h4 {
 			font-size: 26px;
@@ -3082,6 +3105,7 @@ a.normal:visited {
 		#static-page #content p {
 			font-size: 22px;
 			color: #5c5c5c;
+			text-align: center;
 		}
 		
 			#static-page #content p a:link,
