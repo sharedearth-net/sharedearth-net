@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   if Rails.env.production?
     # Render 404's
     rescue_from ActiveRecord::RecordNotFound, :with => :missing_record_error
+    rescue_from ActionController::RoutingError, :with => :missing_page
 
     # Render 501's
     rescue_from ActiveRecord::StatementInvalid, :with => :generic_error
