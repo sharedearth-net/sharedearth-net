@@ -46,16 +46,23 @@ module PagesHelper
   end
   
   def add_item_sentence(event_log, person)
+
+    verb = "now sharing"
+		if event_log.action_object.gift?
+			verb = "gifting"
+		elsif event_log.action_object.share?
+			verb = "now sharing"
+		end
    
     if event_log.involved_as_requester?(person)
        if @same_person
-         sentence = "You are now sharing your" + " " + @item
+         sentence = "You are #{ verb } your" + " " + @item
        else
-         sentence = event_log.primary_short_name + " " + "is now sharing their" + " " + @item
+         sentence = event_log.primary_short_name + " " + "is #{ verb } their" + " " + @item
        end
       
     else
-      sentence = @requester + " " + "is now sharing their" + " " + @item
+      sentence = @requester + " " + "is #{ verb } their" + " " + @item
     end
     sentence.html_safe
   end
