@@ -1,7 +1,152 @@
-<p>Recent activity connected with your profile<p>
-<%= @current_user.person.name %>
-<p>
-<% @recent_activity_logs.each do |activity_log| %>
-      <%= notify_recent_activity_sentence(activity_log, @current_user)%><br />
-<% end unless @recent_activity_logs.nil?%>
-</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<title>sharedearth.net - trust. share. connect.</title>
+	
+
+	<style>
+		body  {
+			margin: 0;
+			padding: 0;
+			font-family: "lucida grande",verdana,tahoma,arial,sans-serif;
+		}
+		
+		a:link,
+		a:visited {
+			text-decoration: none;
+		}
+		
+		a:hover {
+			text-decoration: underline;
+		}
+		
+		.content-box-holder {
+		    margin: 14px 0;
+		}
+		
+		.content-box-holder img {
+		    display: block;
+		}
+		
+		h2 {
+			padding: 0;
+			margin: 0;
+			line-height: 15px;
+		    margin-bottom: 0;
+			color: #315859;
+		    font-size: 12px;
+			font-weight: normal;
+		}
+		
+		.content-box .thumb {
+		    width: 50px;
+			display: none;
+		}
+		
+		.content-box {
+		    background: #ebf5da;
+		    padding: 0 15px 21px;
+		    width: 481px;
+		}
+		
+		.content-box p {
+			font-size: 11px;
+			padding: 0;
+			margin: 0;
+			width: 400px;
+			float: left;
+			line-height: 14px;
+		}
+		
+		.content-box p a:link,
+		.content-box p a:visited {
+		    color: #333;
+		}
+		
+		
+		.content-box p a.positive:link,
+		.content-box p a.positive:visited {
+			color: #127E0E;
+		}
+		
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+		
+		ul li {
+			list-style-type: none;
+		}
+		
+		.action ul {
+			width: 80px;
+			
+			float: left;
+		}
+		
+		.action ul li {
+			line-height: 14px;
+			font-size: 11px;
+		}
+		
+		.action ul li a:link,
+		.action ul li a:visited {
+			color: #62775A;
+		    font-size: 11px;
+		}
+		
+		.action ul li.time-since {
+			background: red;
+			display: none;
+		}
+		
+		a.button-more {
+			display: none;
+		}
+
+	</style>
+	
+</head>
+<body>
+
+<div id="container" style="width: 650px; margin: 0 auto; ">
+		<%= image_tag("http://sharedearthplatform.org/static/graphics/emailv1-top-pic.jpg", :alt => "sharedearth.net - trust. share. connect.", :title => "sharedearth.net - trust. share. connect.", :style => "display: block;" )  %>
+	
+	<div id="content" style="width: 511px; margin: 0 auto;">
+		
+		<div class="content-box-holder">
+			<%= image_tag("http://sharedearthplatform.org/static/graphics/curve-top-content-box.png", :alt => "", :style => "display: block;" )  %>
+			<ul>
+				<li class="content-box clearfix">
+					<h2>
+						Recent activity connected with your profile
+					</h2>
+				</li>
+				<% @recent_activity_logs.each do |activity_log| %>
+           <%#= notify_recent_activity_sentence(activity_log, @current_user)%><br />
+				<% end unless @recent_activity_logs.nil?%>
+			</ul>
+			<%= image_tag("http://sharedearthplatform.org/static/graphics/curve-bottom-content-box.png", :alt => "", :style => "display: block;" )  %>
+		</div><!-- /content-box-holder -->
+		
+		
+	</div><!-- /content -->
+
+
+	<div id="footer">
+	    <p style="text-align: center;">
+            <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/about">About</a> <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/terms/principles">Principles</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/transparency">Transparency</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/contribute">Contribute</a> <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="mailto:info@sharedearth.net">Contact</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/terms">Terms</a>
+        </p>
+        <%= image_tag("http://sharedearthplatform.org/static/graphics/emailv1-bottom-pic.jpg", :alt => "sharedearth.net - trust. share. connect.", :title => "sharedearth.net - trust. share. connect.", :style => "display: block;" )  %>
+	</div>
+		
+</div>
+
+</body>
+</html>
+
