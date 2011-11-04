@@ -41,6 +41,7 @@ class Person < ActiveRecord::Base
   scope :high_volume_email_sent, where("email_notification_count IN (3,4) AND last_notification_email < ?", Time.now - 168.hours)
   scope :notification_cantidate, where("(email_notification_count = 0) OR ((email_notification_count in (?)) AND last_notification_email < ?) OR ((email_notification_count in (?)) AND last_notification_email < ?)", [1,2], Time.now - 78.hours, [3,4], Time.now - 168.hours) 
   scope :exclude_users, lambda { |entity| where("id not in (?)", entity)}
+  scope :include_users, lambda { |entity| where("id in (?)", entity)}
   
 
   def network_activity
