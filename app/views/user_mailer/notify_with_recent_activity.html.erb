@@ -1,7 +1,7 @@
 <p>Recent activity connected with your profile<p>
-
+<%= @current_user.person.name %>
 <p>
 <% @recent_activity_logs.each do |activity_log| %>
-      <%#= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log } %>
+      <%= notify_recent_activity_sentence(activity_log, @current_user)%><br />
 <% end unless @recent_activity_logs.nil?%>
 </p>
