@@ -490,6 +490,176 @@ module PagesHelper
     sentence.html_safe
      
   end
+
+  def notify_recent_activity_sentence(activity_log, current_user)
+    gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
+    item = activity_log.action_object
+    unless activity_log.secondary_short_name.nil? || item.nil?
+      if(item.is_owner?(activity_log.secondary))     
+        gifter              = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary, :only_path => false), :class => "positive")
+        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive")
+      
+        requester           = (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary, :only_path => false), :class => "positive")
+        requester_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary, :only_path => false), :class => "positive")
+        
+        
+      else
+        requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary, :only_path => false), :class => "positive")
+        requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive")
+      
+        gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary, :only_path => false), :class => "positive")
+        gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary, :only_path => false), :class => "positive")
+        
+      end
+        
+      possesive = item.is_owner?(current_user.person) ? "your" : "their"
+
+    end
+    item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object, :only_path => false), :class => "item-link" unless activity_log.action_object.nil?
+    unless activity_log.secondary.nil?
+      person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary, :only_path => false), :class => "positive"
+      other_person        = link_to activity_log.primary.first_name, person_path(activity_log.primary, :only_path => false), :class => "positive"
+      person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive"
+    end
+    
+    sentence = ""
+    case activity_log.event_type_id
+    when 1
+      sentence = "You are now sharing your " + item 
+    when 2
+      sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
+    when 3
+      sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
+    when 4
+      sentence = gifter + " accepted " + requester_possesive + " request to borrow " + possesive + " " + item  # Check this one
+    when 5
+      sentence = gifter + " rejected " + requester_possesive + " request to borrow " + possesive + " " +  item  # Check this one
+    when 6
+      sentence = gifter + " accepted " + requester_possesive + " request to borrow " + possesive + " " + item
+    when 7
+      sentence = gifter + " rejected " + requester_possesive + " request to borrow " + possesive + " " + item
+    when 8
+      sentence = requester + " collected " + gifter_possesive + " " + item
+    when 9
+      sentence = requester + " collected " + gifter_possesive + " " +  item
+    when 10
+      sentence = requester + " completed the action of borrowing " + possesive + " " + item
+    when 11
+      sentence = requester + " completed the action of borrowing " + gifter_possesive + " " + item
+    when 12
+      sentence = gifter + " completed the action of sharing " + possesive + " " + item + " with " + requester
+    when 13
+      sentence = gifter + " completed the action of sharing their " + item + " with " + requester
+    when 14
+      sentence = gifter + " canceled the action sharing " + possesive + " " + item + " with " + requester
+    when 15
+      sentence = gifter + " canceled the action sharing their " + item + " with " + requester
+    when 16
+      sentence = requester + " canceled the request to borrow " + possesive + " " + item
+    when 17
+      sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
+      
+      
+      
+    when 18
+      sentence =  ""
+    when 19
+      sentence =  "You are now sharing your " + item
+    when 20
+      sentence =  ""
+    when 21
+      sentence =  ""
+    when 22
+      sentence =  ""
+    when 23
+      sentence =  ""
+    when 24
+      sentence =  "Your " + item + " is damaged!" #this is duplicate of - 51
+    when 25
+      sentence =  "Your " + item + " is repaired!" #this is duplicate of - 52
+    when 26
+      sentence =  ""
+
+      
+      
+    when 27
+      sentence =  "You accepted " + person_possesive + " request for your " + item
+    when 28
+      sentence =  "You rejected " + person_possesive + " request for your " + item
+    when 29
+      sentence =  person + " accepted your request for their " + item
+    when 30
+      sentence =  person + " rejected your request for their " +  item
+    when 31
+      sentence =  person + " completed the action of receiving your " + item
+    when 32
+      sentence =  "You completed the action of receiving " + person_possesive + " " + item
+    when 33
+      sentence =  "You completed the action of gifting your " + item + " to " + person
+    when 34
+      sentence =  person + " completed the action of gifting their " + item + " to you"
+    when 35
+      sentence =  "You canceled the action of gifting your " + item + " to " + person 
+    when 36
+      sentence =  person + " canceled the action of gifting their " + item + " to you"
+    when 37
+      sentence =  person + " canceled the request for your " + item
+    when 38
+      sentence =  "You cancelled the request for " + person_possesive + " " + item 
+    
+    #Check if sentence underneath are according to documentation, maybe they have changed  
+    when 39
+      sentence =  "You connected to sharedearth.net"
+    when 40
+      sentence =  "You made a request to borrow " + person_possesive + " " + item  #this is duplicate of - 3, not used at this moment, left for possible future use
+    when 41
+      sentence =  person + " confirmed you have a trusted relationship with them"
+    when 42
+      sentence =  "You confirmed you have a trusted relationship with " + person
+    when 43
+      sentence =  person + " denied you have a trusted relationship with them"
+    when 44
+      sentence =  "You denied you have a trusted relationship with " + person
+    when 45
+      sentence =  "You have withdrawn your trust for " + person
+    when 46
+      sentence =  person + " has withdrawn their trust for you"
+    when 47
+      sentence =  "You cancelled the establishment of a trusted relationship with " + person
+    when 48
+      sentence =  person + " cancelled the establishment of a trusted relationship with you"
+    when 49
+      sentence =  "You lost your " + item + "!"
+    when 50
+      sentence =  "You found your " + item + "!"
+    when 51
+      sentence =  "Your " + item + "is damaged!"    #this is duplicate of - when 24
+    when 52
+      sentence =  "Your " + item + " is repaired!"  #this is duplicate of - when 25
+    when 53
+      sentence =  "You removed your " + item + " from sharedearth.net"
+    when 54
+      sentence =  "You connected to sharedearth.net"
+    when 55
+      sentence =  person + " has left you positive feedback after borrowing your " + item
+    when 56
+      sentence =  person + " has left you positive feedback after sharing their " + item + " with you"
+    when 57
+      sentence =  person + " has left you negative feedback after borrowing your " + item
+    when 58
+      sentence =  person + " has left you negative feedback after sharing their " + item + " with you"
+    when 59
+      sentence =  person + " has left you neutral feedback after borrowing your " + item
+    when 60
+      sentence =  person + " has left you neutral feedback after sharing their " + item + " with you"
+
+    else
+      #
+    end
+    
+    sentence.html_safe
+     
+  end
   
   def show_comments(log)
     related = log.related
