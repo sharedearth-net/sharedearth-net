@@ -13,9 +13,10 @@ class UserMailer < ActionMailer::Base
     mail(:to => "#{email}", :subject => "Your sharedearth.net invitation")
   end
 
-  def notify_with_recent_activity(recent_activity_logs, email)
+  def notify_with_recent_activity(recent_activity_logs, email, current_user)
     @recent_activity_logs = recent_activity_logs
-    mail(:to => "#{email}", :subject => "Sharedearth.net recent activities")
+    @current_user = current_user
+    mail(:to => "#{email}", :subject => "Your recent activity on sharedearth.net")
   end
 
 end
