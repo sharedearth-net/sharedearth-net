@@ -40,6 +40,7 @@ class PeopleController < ApplicationController
   def network
     @other, @mutual_friends, @trusted_network, @extended_network = [], [], [], []
     current_person = current_user.person
+    @self = ( current_person.id == @person.id )
     unless params[:type].nil?
       case params[:type]
           when 'mutual'
