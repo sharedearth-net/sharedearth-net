@@ -1,6 +1,6 @@
 
 
-<div id="user-trusted-page">
+<div id="user-trusted-page" class="<%= "self-network" if @self %>">
 	<div id="sidebar-left">
 		<%= image_tag @person.avatar(:medium), :class => "thumb" %>
 		<ul>
