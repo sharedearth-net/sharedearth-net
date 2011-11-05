@@ -57,7 +57,7 @@
 			
 				<div class="rhs clearfix">
 					
-					<%= image_tag("ic-trusted-net-others-green-large.png", :class => "icons", :alt => "Trusted Profile")  %>
+					<%= image_tag(!@self ? "ic-trusted-net-others-green-large.png" : "ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile")  %>
 					<h4><%= !@self ? "mutual networks" : "trusted network" %></h4>
 					<p>
 						<a href="#">
