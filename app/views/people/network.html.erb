@@ -1,12 +1,13 @@
 
 
-<div id="user-trusted-page">
+<div id="user-trusted-page" class="<%= "self-network" if @self %>">
 	<div id="sidebar-left">
 		<%= image_tag @person.avatar(:medium), :class => "thumb" %>
 		<ul>
 			<li class="all <%= params[:type].nil? ? "selected" : ""%>">
 				<%= link_to 'All', network_person_path(@person) %>
 			</li>
+			<% unless @self %>
 			<li class="all <%= (params[:type] == 'mutual') ? "selected" : ""%>">
 				<%= link_to 'Mutual', network_person_path(@person, :type => 'mutual') %>
 			</li>
@@ -18,6 +19,7 @@
 			<li class="people <%= (params[:type] == 'other') ? "selected" : ""%>">
 				<%= link_to 'Others', network_person_path(@person, :type => 'other') %>
 			</li>
+			<% end %>
 		</ul>
 	
 	</div><!--	/sidebar-left	-->
@@ -27,11 +29,13 @@
 		<div class="content-box-holder no-bg">
 		
 			<h2><%= @person.name %> <%= image_tag("arrow-right.png", :class => "", :alt => "")  %> Trusted Network</h2>
+			<% unless @self %>
 			<ul>
 				<li class="clearfix">
 					<%= in_network?(current_user.person, @person )%>
 				</li>
 			</ul>
+			<% end %>
 			
 			
 			<% if !@mutual_friends.empty? %>
@@ -53,14 +57,15 @@
 			
 				<div class="rhs clearfix">
 					
-					<%= image_tag("ic-trusted-net-others-green-large.png", :class => "icons", :alt => "Trusted Profile")  %>
-					<h4>mutual networks</h4>
+					<%= image_tag(!@self ? "ic-trusted-net-others-green-large.png" : "ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile")  %>
+					<h4><%= !@self ? "mutual networks" : "trusted network" %></h4>
 					<p>
 						<a href="#">
 							<%= trusted_network = @person.mutural_friends_count(current_user.person) %>
 						</a>
-						<%= (trusted_network == 1) ? " person " : " people " %> in your mutual network
+						<%= (trusted_network == 1) ? " person " : " people " %> in your <%= !@self ? "mutual" : "trusted" %> network
 					</p>
+
 				</div>
 				
 			</div><!-- /network-holder -->
@@ -131,7 +136,7 @@
 			
 			
 			
-			<% if params[:type].nil? %>
+			<% if params[:type].nil? && !@self %>
 			<ul>
 				<li class="clearfix">
 					<%= image_tag("ic-trusted-network.png", :class => "icons", :alt => "Trusted Network")  %>
