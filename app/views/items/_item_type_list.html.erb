@@ -1,0 +1,5 @@
+<ul class="clearfix">
+	<% item_types_with_gift_status(items).each do |item_type, is_gift| %>
+		<%= render "items/item_type", :item_type => item_type, :is_gift => is_gift %>
+	<% end if !@items.nil?%>
+</ul>
