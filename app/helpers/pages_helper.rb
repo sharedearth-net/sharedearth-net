@@ -357,7 +357,7 @@ module PagesHelper
     sentence = ""
     case activity_log.event_type_id
     when 1
-      sentence = "You are " + verb_from_purpose(event_log.action_object) + " your " + item 
+      sentence = "You are " + verb_from_purpose(activity_log.action_object) + " your " + item 
     when 2
       sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
     when 3
@@ -527,7 +527,7 @@ module PagesHelper
     sentence = ""
     case activity_log.event_type_id
     when 1
-      sentence = "You are now sharing your " + item 
+      sentence = "You are " + verb_from_purpose(activity_log.action_object) + " your " + item 
     when 2
       sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
     when 3
@@ -566,7 +566,7 @@ module PagesHelper
     when 18
       sentence =  ""
     when 19
-      sentence =  "You are now sharing your " + item
+      sentence =  "You are " + verb_from_purpose(activity_log.action_object) + " your " + item
     when 20
       sentence =  ""
     when 21
