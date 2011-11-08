@@ -32,7 +32,6 @@ class Person < ActiveRecord::Base
   validates_presence_of :user_id, :name
   
   after_create :create_entity_for_person
-  after_create :create_person_join_activity_log
   
   #default_scope where(:authorised_account => true) if INVITATION_SYS_ON
   scope :authorized, where(:authorised_account => true)
@@ -67,6 +66,7 @@ class Person < ActiveRecord::Base
   end
   
   def authorise!
+    create_person_join_activity_log if !self.authorised_account # should get called only once
     self.authorised_account = true
     save!
   end
