@@ -50,7 +50,7 @@
 			<% if action_list.include?(:delete) %>
 			<% if item.available? -%>
 			<li>
-				<%= link_to 'Delete', item, :confirm => 'Are you sure?', :method => :delete %>
+				<%= link_to 'delete', item, :confirm => 'Are you sure?', :method => :delete %>
 			</li>
 			<% end -%>
 			<% end -%>
