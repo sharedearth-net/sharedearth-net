@@ -128,7 +128,7 @@
 					</h2>
 				</li>
 				<% @recent_activity_logs.each do |activity_log| %>
-           <%#= notify_recent_activity_sentence(activity_log, @current_user)%><br />
+           <%= notify_recent_activity_sentence(activity_log, @current_user)%><br />
 				<% end unless @recent_activity_logs.nil?%>
 			</ul>
 			<%= image_tag("http://sharedearthplatform.org/static/graphics/curve-bottom-content-box.png", :alt => "", :style => "display: block;" )  %>
