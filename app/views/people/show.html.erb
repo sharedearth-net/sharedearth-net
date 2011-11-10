@@ -62,15 +62,7 @@
 							<h3>
 								<strong>Items</strong>
 							</h3>
-					      <ul class="clearfix">
-					      <% @items.map{|i| i.item_type.downcase}.uniq.each do |item_type| %>
-						      <li class="item">
-							      <p>						
-								      <%= link_to item_type, person_path(@person, :filter_type => item_type) %>
-							      </p>
-						      </li>
-	              <% end if !@items.nil?%>
-					      </ul>
+					      <%= render "items/item_type_list", :items => @items %>
 
 						<% else %>
 							<p class="event-sentences">No items are currently being shared</p>
