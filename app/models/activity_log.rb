@@ -77,7 +77,8 @@ class ActivityLog < ActiveRecord::Base
       :secondary_short_name => item_request.gifter.first_name,
       :secondary_full_name => item_request.gifter.name,
       :related => item_request,
-      :event_type_id => EventType.new_item_request_requester
+      :event_type_id => EventType.new_item_request_requester, 
+      :read => true
     )
   end
   
@@ -113,7 +114,8 @@ class ActivityLog < ActiveRecord::Base
       :secondary_short_name => item_request.gifter.first_name,
       :secondary_full_name => item_request.gifter.name,
       :related => item_request,
-      :event_type_id => event_type_requester
+      :event_type_id => event_type_requester,
+      :read => true
     )
   end
 
@@ -127,7 +129,8 @@ class ActivityLog < ActiveRecord::Base
        :action_object => item,
        :action_object_type_readable => item.item_type,
        :related => item,
-       :event_type_id => EventType.add_item
+       :event_type_id => EventType.add_item,
+       :read => true
      )
    end
    
@@ -141,7 +144,8 @@ class ActivityLog < ActiveRecord::Base
        :action_object => nil,
        :action_object_type_readable => nil,
        :related => nil,
-       :event_type_id => EventType.new_person_join
+       :event_type_id => EventType.new_person_join,
+			 :read => true
      )
    end
    
@@ -150,7 +154,7 @@ class ActivityLog < ActiveRecord::Base
   # Second param: Type of the event for gifter
   # Third param: Type of the event for the requester 
   # #####
-  
+  #THIS IS ONLY USED WHEN TWO PERSONS CONFIRMS RELATIONSHIP, SECOND PERSON IS THE ONE WHO CONFIRMS TRUST
   def self.create_activity_log(first_person, second_person, object, event_type_requester, event_type_gifter)
     event_code = ActivityLog.next_event_code
     if(second_person.nil?)
@@ -198,7 +202,8 @@ class ActivityLog < ActiveRecord::Base
       :secondary_short_name => first_person.first_name,
       :secondary_full_name => first_person.name,
       :related => nil,
-      :event_type_id => event_type_requester
+      :event_type_id => event_type_requester, 
+      :read => true
     )
   end
 
@@ -211,5 +216,8 @@ class ActivityLog < ActiveRecord::Base
   	self.read == true
   end
 
-
+  def log_notification_email!(entity)
+  	self.email_notification_id = entity.id
+    save!
+  end
 end
