@@ -8,8 +8,9 @@ class ApplicationController < ActionController::Base
   if Rails.env.production?
     # Render 404's
     rescue_from ActiveRecord::RecordNotFound, :with => :missing_record_error
-    rescue_from ActionController::RoutingError, :with => :missing_page
-
+    rescue_from ActionController::RoutingError, :with => :missing_page  #Rails 3.0/3.1 can't catch this error still
+	rescue_from ActionController::RoutingError, :with => :missing_page
+	
     # Render 501's
     rescue_from ActiveRecord::StatementInvalid, :with => :generic_error
     rescue_from RuntimeError, :with => :generic_error
@@ -18,6 +19,12 @@ class ApplicationController < ActionController::Base
     rescue_from ActionView::TemplateError, :with => :generic_error
 
     rescue_from FbGraph::Unauthorized, :with => :facebook_login
+  end
+
+  def missing_page(exception = nil)
+    respond_to do |format|
+      format.html {render_404}
+    end
   end
 
   private
@@ -101,11 +108,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def missing_page(exception = nil)
-    respond_to do |format|
-      format.html {render_404}
-    end
-  end
+
 
   #Error 501
   def generic_error(exception, message = "OK that didn't work. Try something else.")
