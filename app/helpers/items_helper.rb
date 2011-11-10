@@ -10,8 +10,9 @@ module ItemsHelper
   def item_types_with_gift_status(items)
 		item_types = {}
 		items.each do |item|
-		 item_types[item.item_type] = item_types[item.item_type] || item.gift?
+		itype = item.item_type.downcase
+		item_types[itype] = item_types[itype] || item.gift?
 		end
 		item_types
-		end
+	end
 end
