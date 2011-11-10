@@ -22,6 +22,7 @@ describe SessionsController do
     it "should remove user_id from session (signout user)" do
       session[:user_id] = 1
       session[:fb_token] = '123'
+      signedin_user.stub(:record_last_activity!).and_return(true)
       do_get
       session[:user_id].should be_nil
     end
@@ -36,6 +37,7 @@ describe SessionsController do
     before do
       @auth = valid_omniauth_hash
       @user = Factory(:person).user
+      sign_in_as_user(signedin_user)
       request.stub!(:env).and_return({ "omniauth.auth" => @auth })
     end
 
