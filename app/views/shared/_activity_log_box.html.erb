@@ -1,4 +1,4 @@
-<li class="content-box clearfix <%= !activity_log.is_read? ? 'read-recent-activity' : ''%>">
+<li class="content-box clearfix <%= activity_log.is_read? ? 'read-recent-activity' : ''%>">
   <%= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb" %>
 
   <div class="inner-content">
