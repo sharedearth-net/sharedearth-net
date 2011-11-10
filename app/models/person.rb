@@ -39,7 +39,7 @@ class Person < ActiveRecord::Base
   scope :no_email_sent, where("email_notification_count = 0")
   scope :low_volume_email_sent, where("email_notification_count IN (1,2) AND last_notification_email < ?", Time.now - 78.hours)
   scope :high_volume_email_sent, where("email_notification_count IN (3,4) AND last_notification_email < ?", Time.now - 168.hours)
-  scope :notification_cantidate, where("(email_notification_count = 0) OR ((email_notification_count in (?)) AND last_notification_email < ?) OR ((email_notification_count in (?)) AND last_notification_email < ?)", [1,2], Time.now - 78.hours, [3,4], Time.now - 168.hours) 
+  scope :notification_cantidate, where("(email_notification_count = 0) OR ((email_notification_count in (?)) AND last_notification_email < ?) OR ((email_notification_count in (?)) AND last_notification_email < ?) AND authorised_account = ?", [1,2], Time.now - 78.hours, [3,4], Time.now - 168.hours, true) 
   scope :exclude_users, lambda { |entity| where("id not in (?)", entity)}
   scope :include_users, lambda { |entity| where("id in (?)", entity)}
   
@@ -323,5 +323,14 @@ class Person < ActiveRecord::Base
   def email_notifications_count?
     self.email_notification_count
   end
+
+  def increase_email_notification_count!
+     self.email_notification_count += 1
+  	 save!
+  end
   
+  def log_email_notification_time!
+    self.last_notification_email = Time.now
+    save!
+  end
 end
