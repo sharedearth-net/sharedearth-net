@@ -26,11 +26,12 @@ class Person < ActiveRecord::Base
   has_one :reputation_rating
 
   validates_length_of :name, :maximum => 20
-  validates :email, :confirmation => true
+  validates :email, :confirmation => true, :presence => true, :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }  
   validates_length_of :location, :maximum => 42
   validates_length_of :description, :maximum => 400
   validates_presence_of :user_id, :name
   
+  before_validation :sanitize_fields
   after_create :create_entity_for_person
   
   #default_scope where(:authorised_account => true) if INVITATION_SYS_ON
@@ -333,4 +334,15 @@ class Person < ActiveRecord::Base
     self.last_notification_email = Time.now
     save!
   end
+  
+  private
+  
+  def sanitize_fields
+		self.name = self.name.strip unless self.name.nil?
+		self.email = self.email.strip unless self.email.nil?
+		self.email_confirmation = self.email_confirmation.strip unless self.email_confirmation.nil?
+		self.location = self.location.strip unless self.location.nil?
+		self.description = self.description.strip unless self.description.nil?
+  end
+  
 end
