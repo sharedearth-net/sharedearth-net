@@ -55,6 +55,7 @@ class Item < ActiveRecord::Base
                          :message => " must be in #{STATUSES.values.join ', '}"
 
   
+  before_validation :sanitize_fields
   after_create :create_entity_for_item
   after_create :add_to_resource_network
   after_create :item_event_log
@@ -288,5 +289,11 @@ class Item < ActiveRecord::Base
 
   def destroy_original
     self.photo.destroy
+  end
+  
+  def sanitize_fields
+		self.item_type = self.item_type.strip.downcase unless self.item_type.nil?
+		self.name = self.name.strip unless self.name.nil?
+		self.description = self.description.strip unless self.description.nil?
   end
 end
