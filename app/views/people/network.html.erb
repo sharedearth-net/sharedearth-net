@@ -46,7 +46,7 @@
 					<ul>
 						<% @mutual_friends.each do |p| -%>
 						<li class="people-holder clearfix">
-							<%= image_tag p.avatar(:small), :class => "thumb" %>
+							<%= image_tag p.avatar(:square), :class => "thumb" %>
 							<p>
 								<%= link_to p.name, person_path(p)  %>
 							</p>
@@ -81,7 +81,7 @@
 			<ul>
 				<% @extended_network.each do |p| -%>
 				<li class="people-holder clearfix">
-					<%= image_tag p.avatar(:small), :class => "thumb" %>
+					<%= image_tag p.avatar(:square), :class => "thumb" %>
 					<p>
 						<%= p.name%>
 					</p>
@@ -107,7 +107,7 @@
 					<ul>
 						<% @other.each do |p| -%>
 						<li class="people-holder clearfix">
-							<%= image_tag p.avatar(:small), :class => "thumb" %>
+							<%= image_tag p.avatar(:square), :class => "thumb" %>
 							<p>
 								<%= link_to p.name, person_path(p)  %>
 							</p>
