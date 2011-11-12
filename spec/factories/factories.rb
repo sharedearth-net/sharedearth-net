@@ -2,6 +2,7 @@ Factory.define :user do |u|
   u.provider "Facebook"
   u.sequence(:uid) { |n|  Time.now.to_i.to_s + "#{n}" }
   u.token '111'
+  u.last_activity Time.now
 end
 
 Factory.define :person do |p|
@@ -12,6 +13,7 @@ Factory.define :person do |p|
   p.accepted_tc true
   p.accepted_pp true
   p.accepted_tr true 
+  p.email_notification_count 0
 end
 
 Factory.define :new_person, :class => Person do |p|
