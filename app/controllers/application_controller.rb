@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
     # Render 404's
     rescue_from ActiveRecord::RecordNotFound, :with => :missing_record_error
     rescue_from ActionController::RoutingError, :with => :missing_page  #Rails 3.0/3.1 can't catch this error still
-	rescue_from ActionController::RoutingError, :with => :missing_page
 	
     # Render 501's
     rescue_from ActiveRecord::StatementInvalid, :with => :generic_error
@@ -21,7 +20,7 @@ class ApplicationController < ActionController::Base
     rescue_from FbGraph::Unauthorized, :with => :facebook_login
   end
 
-  def missing_page(exception = nil)
+  def missing_route(exception = nil)
     respond_to do |format|
       format.html {render_404}
     end
@@ -117,6 +116,12 @@ class ApplicationController < ActionController::Base
       format.json do
         render :json => {:error => message}
       end
+    end
+  end
+
+  def missing_page(exception = nil)
+    respond_to do |format|
+      format.html {render_404}
     end
   end
 
