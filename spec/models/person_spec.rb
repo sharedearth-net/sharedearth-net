@@ -22,7 +22,7 @@ describe Person do
   it { should have_many(:item_requests) }
 
   it { should have_many(:item_gifts) }
-  
+
   it { should validate_presence_of(:user_id) }
 
   it { should validate_presence_of(:name) }
@@ -39,7 +39,7 @@ describe Person do
     person = Person.new(:user => user)
     person.belongs_to?(user).should be_true
   end
-  
+
   it "should check if it belongs to user (negative case)" do
     some_other_user = mock_model(User)
     person = Person.new(:user => user)
@@ -81,17 +81,17 @@ describe Person, ".active_item_requests" do
 end
 
 describe Person, ".avatar" do
-  
+
   it "should return user's avatar" do
     user = mock_model(User, :avatar => "avatar1.jpg")
     person = Person.new(:user => user)
     person.avatar.should eql(user.avatar)
   end
-  
+
 end
 
 describe Person, ".trusted_network_count(other_person)" do
-  
+
   it "should return user's number friends of friends" do
     first_user = mock_model(User)
     second_user = mock_model(User)
@@ -99,11 +99,11 @@ describe Person, ".trusted_network_count(other_person)" do
     second_person = Person.new(:user => second_user)
     #TO DO: Finish this test, create more people, and check network count
   end
-  
+
 end
 
 describe Person, ".trusts_me_count" do
-  
+
   it "should return number of users who trusts current user" do
     first_user = mock_model(User)
     second_user = mock_model(User)
@@ -111,11 +111,11 @@ describe Person, ".trusts_me_count" do
     second_person = Person.new(:user => second_user)
     #TO DO: Finish this test, create more people, and check trusts me count
   end
-  
+
 end
 
 describe Person, ".request_trusted_relationship" do
-  
+
   it "should create new person network request" do
     request_person = stub_model(Person, :name => "Requester")
     person         = stub_model(Person, :name => "Receiver")
@@ -128,16 +128,16 @@ describe Person, ".request_trusted_relationship" do
   it "should create only one person network request on mulitple request attempts" do
     requester = Factory(:person)
     requested = Factory(:person)
-    
+
     expect {
       requested.request_trusted_relationship(requester)
       requested.request_trusted_relationship(requester)
-    }.to change { PeopleNetworkRequest.count }.by(1) 
+    }.to change { PeopleNetworkRequest.count }.by(1)
   end
 end
 
 describe Person, ".requested_trusted_relationship?" do
-  
+
   it "should return true if request for trusted relationship already exists" do
     request_person = stub_model(Person, :name => "Requester")
     person = stub_model(Person, :name => "Receiver")
@@ -150,11 +150,11 @@ describe Person, ".requested_trusted_relationship?" do
     person = stub_model(Person, :name => "Receiver")
     person.requested_trusted_relationship?(request_person).should be_false
   end
-  
+
 end
 
 describe Person, ".first_name" do
-  
+
   it "should return first name" do
     Person.new(:name => "Slobodan Kovacevic").first_name.should eql("Slobodan")
   end
@@ -164,16 +164,16 @@ describe Person, "When printing user trust profile" do
   it "should generate proper gift act rating" do
   #TODO
   end
-  
+
   it "should generate proper number of people helped" do
   #TODO
   end
-  
+
   it "should generate proper number of gift act actions" do
   #TODO
   end
 end
-  
+
 
 describe Person, ".network_activity" do
   let(:person) { Factory(:person) }
@@ -182,15 +182,15 @@ describe Person, ".network_activity" do
 
   let(:mr_t) { Factory(:person) }
 
-  let(:my_event_displays) do 
+  let(:my_event_displays) do
     FactoryGirl.create_list(:event_display, 5, :person_id => person.id, :event_log_id => 1)
   end
 
-  let(:maria_event_displays) do 
+  let(:maria_event_displays) do
     FactoryGirl.create_list(:event_display, 5, :person_id => maria.id, :event_log_id => 2)
   end
 
-  let(:mr_t_event_displays) do 
+  let(:mr_t_event_displays) do
     FactoryGirl.create_list(:event_display, 5, :person_id => mr_t.id, :event_log_id => 3)
   end
 
@@ -200,7 +200,7 @@ describe Person, ".network_activity" do
 
   it "should respond to 'network_activity'" do
     person.should respond_to(:network_activity)
-  end  
+  end
 
   it "should include the EventDisplays that belong to the person" do
     my_event_log_ids = my_event_displays.collect(&:event_log_id)
@@ -236,10 +236,10 @@ describe Person, ".trusted_friends_items" do
 
     juan.stub!(:trusted_friends).and_return([golbert])
   end
- 
+
   it "should only return the items that are not deleted" do
     juan.trusted_friends_items.size.should == 4
-  end 
+  end
 end
 
 describe Person, ".accepted_tc?" do
@@ -295,6 +295,67 @@ describe Person, ".accepted_pp?" do
     person = Factory(:person)
     person.update_attributes(:accepted_pp => true, :pp_version => PP_VERSION)
     person.accepted_pp?.should be_true
+  end
+  describe Person do
+    describe "#notification_candidate scope" do
+      before :each do
+        @first_person = Factory(:person, :authorised_account => false)
+        @second_person = Factory(:person)
+        @third_person = Factory(:person, :email_notification_count => 1, :last_notification_email => Time.now - 60.hours )
+        @forth_person = Factory(:person, :email_notification_count => 3, :last_notification_email => Time.now - 120.hours )
+        @fifth_person = Factory(:person, :email_notification_count => 1, :last_notification_email => Time.now - 80.hours )
+        @sixth_person = Factory(:person, :email_notification_count => 3, :last_notification_email => Time.now - 170.hours )
+        @seventh_person = Factory(:person, :email_notification_count => 5, :last_notification_email => Time.now - 120.hours )
+        @eight_person = Factory(:person, :email_notification_count => 3, :last_notification_email => Time.now - 60.hours )
+        @nine_person = Factory(:person, :email_notification_count => 2, :last_notification_email => Time.now - 120.hours )
+      end
+
+      it "should return only authorised users, when users are inactive with certain conditions" do
+        persons = Person.notification_candidate
+        persons = [@second_person, @third_person, @forth_person]
+      end
+
+      it "should not return unauthorised users" do
+        persons = Person.notification_candidate
+        persons.should_not include{@first_person}
+      end
+
+      it "should not return when email notification count is more than 4" do
+        persons = Person.notification_candidate
+        persons.should_not include{@seventh_person}
+      end
+      it "should not return when email notification count is 2 but last notification is more than 68 hours" do
+        persons = Person.notification_candidate
+        persons.should_not include{@nine_person}
+      end
+      it "should not return when email notification count is 3, but last notification is sent less than 68 hours" do
+        persons = Person.notification_candidate
+        persons.should_not include{@eight_person}
+      end
+      it "should return authorised account" do
+        persons = Person.notification_candidate
+        persons.should include{@second_person}
+      end
+
+      describe "Only active users" do
+        before do
+          @active_user = Factory(:user)
+          @unactive_user = Factory(:user, :last_activity => Time.now - 13.hours)
+        end
+
+        it "person scope should return only unactive user" do
+          unactive_ids = User.unactive.collect(&:id)
+          persons = Person.include_users(unactive_ids)
+          persons.should be{[@unactive_user]}
+        end
+
+        it "person scope should not return active user" do
+          unactive_ids = User.unactive.collect(&:id)
+          persons = Person.include_users(unactive_ids)
+          persons.should_not include{@active_user}
+        end
+      end
+    end
   end
 end
 
