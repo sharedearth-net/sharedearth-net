@@ -30,44 +30,9 @@
 				</li>
 			
 				<li>
-					<div class="clearfix">
-						
-						
-						<% if @items.count < 8  || !params[:filter_type].nil?%>
-						<div class="items-expanded clearfix">
-						  <% if params[:filter_type].nil? -%>
-						    <h3>
-								<strong>Items</strong>
-							</h3>
-						  <% else -%>
-						    <h3>
-								<strong>
-									<%= link_to 'Items', person_path(@person) %>
-									<span>
-										<%= ' > ' + params[:filter_type].to_s %> 
-									</span>
-								</strong>
-							</h3>
-								
-						  <% end -%>
-							
-							<ul class="clearfix">
-								<% @items.each do |item| %>
-									<%= render "items/item", :item => item, :action_list => [:gift_actions, :people_helped, :view, :request].to_set  %>
-								<% end %>
-							</ul>
-						</div>
-						<% elsif @items.count >= 8 %>
-						<div class="items-list clearfix">
-							<h3>
-								<strong>Items</strong>
-							</h3>
-					      <%= render "items/item_type_list", :items => @items %>
+				
+					<%= render "items/item_list" %>
 
-						<% else %>
-							<p class="event-sentences">No items are currently being shared</p>
-						<% end %>
-					</div>
 				</li>
 				<li>
 					<div class="items-list unanswered-requests clearfix">
