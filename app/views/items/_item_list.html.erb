@@ -1,0 +1,31 @@
+<h3 class="items-title">
+	<strong>
+		<%= link_to 'Items', params.merge({ :filter_type => nil }), :style => "color: #315859;" %>
+		<span>
+			<%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %>
+		</span>
+	</strong>
+</h3>
+
+<% unless @items.count.zero? -%>
+
+	<% if @items.count < 8 || !params[:filter_type].nil? -%>
+
+		<div class="items-expanded clearfix">
+
+			<ul class="clearfix">
+			<% @items.each do |item| %>
+				<%= render "items/item", :item => item, :action_list => [:person_name, :view, :request].to_set  %>
+			<% end if !@items.nil?%>
+			</ul>
+
+	<% else %>	
+
+		<div class="items-list clearfix">
+			<%= render "items/item_type_list", :items => @items %>
+
+	<% end -%>
+	 
+	</div><!--	/items-list	-->
+
+<% end -%>

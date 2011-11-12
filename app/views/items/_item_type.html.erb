@@ -1,5 +1,5 @@
 <li class="item" >
 	<p>
-		<%= link_to item_type, my_network_person_path(current_user.person, :filter_type => item_type, :type => params[:type]), :class => is_gift ? "gift-item" : "" %>
+		<%= link_to item_type, params.merge({ :filter_type => item_type }), :class => is_gift ? "gift-item" : "" %>
 	</p>
 </li>

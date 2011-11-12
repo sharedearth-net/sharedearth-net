@@ -1010,6 +1010,12 @@ a.normal:visited {
 	}
 	
 	
+		#profile-page  #content .items-title {
+			padding-left: 165px;
+			padding-right: 0;
+			width: 451px;
+		}
+	
 		/* profile page - content - items-list */
 
 		#profile-page  #content .items-list {
