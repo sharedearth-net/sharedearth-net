@@ -52,16 +52,7 @@ relating to the other person in the transaction as well.
 			</div>
 		</li>
 		<% if event -%>
-		<!-- comments begin -->
-		<div class="inner-content">
-			<ul class="comment-list">
-  			<% log.comments.each do |c| -%>
-					<%= render :partial => 'comments/comment', :locals => {:c => c} %>
-				<% end -%>
-				<%= render :partial => 'comments/new', :locals => { :commentable => log } %>
-			</ul>
-		</div>
-		<!-- comments end -->
+		  <%= render :partial => '/comments/comment_box', :locals => {:object => log} %>
 		<% end -%>
 
 		
