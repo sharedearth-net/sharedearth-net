@@ -13,11 +13,11 @@ describe User do
     @user.attributes = valid_user_attributes
     @user.should be_valid
   end
-  
+
   it "should require provider" do
     @user.should have(1).error_on(:provider)
   end
-  
+
   it "should require uid" do
     @user.should have(1).error_on(:uid)
   end
@@ -28,11 +28,11 @@ describe User do
     @user.should_not be_valid
     @user.should have(1).error_on(:uid)
   end
-  
+
   it "should not require nickname" do
     @user.should have(0).error_on(:nickname)
   end
-  
+
 end
 
 describe User, ".create_with_omniauth" do
@@ -40,17 +40,17 @@ describe User, ".create_with_omniauth" do
   before(:each) do
     FbService.stub!(:post_on_my_wall).and_return(true)
   end
-  
+
   it "should create new user using omniauth hash" do
     expect {
       User.create_with_omniauth(valid_omniauth_hash)
     }.should change(User, :count).by(1)
   end
-  
+
   it "should create new person for this new user" do
     expect {
       User.create_with_omniauth(valid_omniauth_hash)
-    }.should change(Person.unscoped, :count).by(1) 
+    }.should change(Person.unscoped, :count).by(1)
   end
 
   it "should take only the first 20 chars from the provided name" do
@@ -99,7 +99,7 @@ describe User, ".inform_mutual_friends" do
 
     FbGraph::User.stub!(:me).and_return(fb_registered_user)
   end
-  
+
   context "Authorized User" do
     before :each do
       juan.user.inform_mutural_friends(token)
@@ -121,4 +121,19 @@ describe User, ".inform_mutual_friends" do
       EventEntity.where(:entity_id => juan.id).size.should == 1
     end
   end
+
+describe "Scopes" do
+
+    describe "#unactive scope" do
+      before :each do
+        @first_user  = Factory.create(:user, :last_activity => Time.now)
+        @second_user = Factory.create(:user, :last_activity => (Time.now - 13.hours))
+      end
+
+      it "should return a list of comments ordered by creation date" do
+        users = User.unactive
+        users.should == [@second_user]
+      end
+    end
+end
 end
