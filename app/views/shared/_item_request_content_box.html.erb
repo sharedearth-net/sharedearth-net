@@ -6,7 +6,8 @@
 
     <%= render :partial => "shared/item_request_box.html.erb", :locals => {:req => req} %>	
   
-    <%= render :partial => '/comments/comment_box', :locals => {:object => req, :new_comment => true} %>
+    <%= render :partial => '/comments/comment_box', :locals => {:object => req, :new_comment => true,
+																																:is_private     => true} %>
     			
     </div>
   </li>
