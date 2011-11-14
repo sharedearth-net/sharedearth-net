@@ -10,7 +10,7 @@
 
    * Clone sharedearth.net repository: `git clone git@github.com:sharedearth-net/sharedearth-net.git`
    * Create database.yml (example database.yml uses sqlite): `cp config/database.yml-sample config/database.yml`
-   * Install required gems: `bundle install`
+   * Install required gems: `bundle install --path vendor/bundle --without production`
    * Migrate database: `rake db:migrate` (for development)
    * Start server: `rails server`
    * Open [http://senlocal.heroku.com:3000/](http://senlocal.heroku.com:3000/) in your browser
