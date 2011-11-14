@@ -62,7 +62,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'pickle'
-  gem 'ruby-debug'
+  gem 'ruby-debug19'
   gem 'heroku_san'
   gem 'nifty-generators'
 #  gem 'pg'
@@ -77,3 +77,4 @@ gem 'delayed_job' #What you can do today, don't leave for tomorrow
 
 gem "mocha", :group => :test
 gem 'whenever', :require => false
+gem 'simple_worker'
