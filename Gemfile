@@ -66,6 +66,9 @@ group :development, :test do
   gem 'nifty-generators'
 #  gem 'pg'
 end
+group :production do
+  gem 'thin'
+end
 gem "simplecov", :require => false, :group => :test
 gem 'activeadmin'
 gem "rails-settings", :git => "git://github.com/100hz/rails-settings.git"
