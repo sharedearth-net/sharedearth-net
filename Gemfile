@@ -62,7 +62,6 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'pickle'
-  gem 'ruby-debug19'
   gem 'heroku_san'
   gem 'nifty-generators'
 #  gem 'pg'
