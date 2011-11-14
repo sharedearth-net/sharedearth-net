@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     user  = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
             User.create_with_omniauth(auth)
     user.token = token
+    user.person.update_attributes(:email => auth["user_info"]["email"])
     user.person.authorise! if (Settings.invitations == 'false')
     user.person.reset_notification_count!
     user.record_last_activity!
