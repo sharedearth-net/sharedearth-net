@@ -64,6 +64,7 @@ group :development, :test do
   gem 'pickle'
   gem 'heroku_san'
   gem 'nifty-generators'
+  gem 'ruby-debug19', :require => 'ruby-debug'
 #  gem 'pg'
 end
 group :production do
