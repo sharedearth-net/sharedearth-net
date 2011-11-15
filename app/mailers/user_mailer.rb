@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-
+  helper :pages
   default :from => "\"sharedearth.net\" <noreply@sharedearth.net>"
 
   def invitation_confirmation(user, code)
