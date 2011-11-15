@@ -4,8 +4,7 @@ class MyWorker < SimpleWorker::Base
 
   # The run method is what SimpleWorker calls to run your worker
   def run
-    include PagesHelper
-    Cron.recent_activity
+    puts "Hello world"
   end
 
 end
