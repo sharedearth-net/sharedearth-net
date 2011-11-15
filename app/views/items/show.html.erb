@@ -7,10 +7,10 @@
 					<%= image_tag @item.photo.url(:medium), :class => "thumb" %>
 					<div class="inner-content">
 						<h2>
-							<%= @item.name %>
+							<%= auto_link(h(@item.name)).html_safe %>
 							<br />
 							<span class="item-type">
-								<%= @item.item_type %>
+								<%= @item.item_type  %>
 							</span>
 							&nbsp;&nbsp;&nbsp;
 							<span class="item-purpose<%= (@item.gift? ? " gift-item" : "") %>">
@@ -20,7 +20,7 @@
 					
 						<p class="description">
 							<span class="description">
-								<%= @item.description %>
+								<%= auto_link(h(@item.description)).html_safe %>
 							</span>
 							<span>
                       <% unless @item.deleted? %>
