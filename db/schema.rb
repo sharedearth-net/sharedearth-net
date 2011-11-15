@@ -219,18 +219,18 @@ ActiveRecord::Schema.define(:version => 20111028122306) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "authorised_account",       :default => false
-    t.boolean  "accepted_tc",              :default => false
-    t.decimal  "tc_version",               :default => 1.0
-    t.decimal  "pp_version",               :default => 1.0
+    t.boolean  "authorised_account",                                      :default => false
+    t.boolean  "accepted_tc",                                             :default => false
+    t.decimal  "tc_version",               :precision => 10, :scale => 0, :default => 1
+    t.decimal  "pp_version",               :precision => 10, :scale => 0, :default => 1
     t.string   "location"
     t.text     "description"
-    t.boolean  "accepted_pp",              :default => false
+    t.boolean  "accepted_pp",                                             :default => false
     t.string   "email"
-    t.boolean  "accepted_tr",              :default => false
-    t.boolean  "has_reviewed_profile",     :default => false
+    t.boolean  "accepted_tr",                                             :default => false
+    t.boolean  "has_reviewed_profile",                                    :default => false
     t.integer  "invitations_count"
-    t.integer  "email_notification_count", :default => 0
+    t.integer  "email_notification_count",                                :default => 0
     t.datetime "last_notification_email"
   end
 
