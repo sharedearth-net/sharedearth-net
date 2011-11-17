@@ -21,7 +21,6 @@ class PagesController < ApplicationController
 
     unless current_user.person.activity_logs.empty?
       @recent_activity_logs = current_user.person.recent_activity_logs
-      #@recent_activity_logs.each { |log| log.is_read! } unless @recent_activity_logs.nil?
 		end
     current_user.person.reset_notification_count!
     current_user.record_last_activity!
