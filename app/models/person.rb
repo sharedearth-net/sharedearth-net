@@ -42,7 +42,14 @@ class Person < ActiveRecord::Base
   scope :notification_candidate, where("(email_notification_count = 0) OR ((email_notification_count in (?)) AND last_notification_email < ?) OR ((email_notification_count in (?)) AND last_notification_email < ?) AND authorised_account = ?", [1,2], Time.now - 78.hours, [3,4], Time.now - 168.hours, true) 
   scope :exclude_users, lambda { |entity| where("id not in (?)", entity)}
   scope :include_users, lambda { |entity| where("id in (?)", entity)}
-  
+
+	def recent_activity_logs(min_count = 10)
+		logs = activity_logs.where(:read => false).order("#{ActivityLog.table_name}.created_at DESC")
+		if logs.count < min_count
+			logs = activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(min_count)
+		end
+		logs
+	end
 
   def network_activity
     my_people_id = trusted_friends.collect { |friend| friend.id }
