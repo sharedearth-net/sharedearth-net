@@ -20,8 +20,7 @@ class PagesController < ApplicationController
     @requests.sort! { |a,b| b.created_at <=> a.created_at }
 
     unless current_user.person.activity_logs.empty?
-      @recent_activity_logs = current_user.person.activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(30) 
-      @recent_activity_logs.each { |log| log.is_read! } unless @recent_activity_logs.nil?
+      @recent_activity_logs = current_user.person.recent_activity_logs
 		end
     current_user.person.reset_notification_count!
     current_user.record_last_activity!
