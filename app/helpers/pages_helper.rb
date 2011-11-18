@@ -1,21 +1,18 @@
 module PagesHelper
   #USE SAME METHOD TO DISPLAY MY EVENTS TO ME, AND MY EVENTS TO OTHER PERSON - SECOND PARAMETER INDICATES IF IT IS SHOWN TO OTHER PERSON IF NOT NIL
   def event_log_sentence(event_log, person, feed)
-   
-    
+
     @same_person = (person.nil? || (current_user.person == person)) ? true : false
     person||= current_user.person
     (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "normal" : text_class = ""
    
     @item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => text_class unless event_log.action_object_type_readable.nil?
-    @requester           = link_to event_log.primary_short_name, person_path(event_log.primary), :class => text_class unless event_log.primary_short_name.nil?
-  	@requester_possesive = link_to event_log.primary_short_name.possessive, person_path(event_log.primary), :class => text_class unless event_log.primary_short_name.nil?
-  	@gifter              = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_short_name.nil?
-  	@gifter_possesive    = link_to event_log.secondary_short_name.possessive, person_path(event_log.secondary), :class => text_class unless event_log.secondary_short_name.nil?
+    @requester           = link_to event_log.primary_full_name, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?
+  	@requester_possesive = link_to event_log.primary_full_name.possessive, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?
+  	@gifter              = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
+  	@gifter_possesive    = link_to event_log.secondary_full_name.possessive, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
   	 
-	  @first_person       = link_to event_log.primary_short_name, person_path(event_log.primary), :class => text_class unless event_log.primary_short_name.nil?
     @first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?
-    @second_person      = link_to event_log.secondary_short_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_short_name.nil?
     @second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
 
     case event_log.event_type_id
@@ -53,7 +50,7 @@ module PagesHelper
        if @same_person
          sentence = "You are #{ verb } your" + " " + @item
        else
-         sentence = event_log.primary_short_name + " " + "is #{ verb } their" + " " + @item
+         sentence = event_log.primary_full_name + " " + "is #{ verb } their" + " " + @item
        end
       
     else
@@ -68,13 +65,13 @@ module PagesHelper
      if @same_person
        sentence = "You borrowed " + @gifter_possesive + " " + @item
      else
-       sentence = event_log.primary_short_name + " borrowed " + @gifter_possesive + " " + @item
+       sentence = event_log.primary_full_name + " borrowed " + @gifter_possesive + " " + @item
      end
    elsif event_log.involved_as_gifter?(person)
      if @same_person
        sentence = @requester + " borrowed your " + @item
      else
-       sentence = event_log.secondary_short_name + " shared their " + @item + " with " + @requester
+       sentence = event_log.secondary_full_name + " shared their " + @item + " with " + @requester
      end
    elsif person.trusts?(event_log.primary) && !person.trusts?(event_log.secondary)
      sentence = @requester + " borrowed " + @gifter_possesive + " " + @item
@@ -95,13 +92,13 @@ module PagesHelper
      if @same_person
        sentence = "You received " + @gifter_possesive + " " + @item
      else
-       sentence = event_log.primary_short_name + " received " + @gifter_possesive + " " + @item
+       sentence = event_log.primary_full_name + " received " + @gifter_possesive + " " + @item
      end
    elsif event_log.involved_as_gifter?(person)
      if @same_person
        sentence = "You gifted your " + @item + " to " +  @requester
      else
-       sentence = event_log.secondary_short_name + " gifted their " + @item + " to " +  @requester
+       sentence = event_log.secondary_full_name + " gifted their " + @item + " to " +  @requester
      end
    elsif person.trusts?(event_log.primary) && !person.trusts?(event_log.secondary)
      sentence = @requester + " received " + @gifter_possesive + " " + @item
@@ -120,22 +117,22 @@ module PagesHelper
 
     if event_log.involved_as_requester?(person)
       if @same_person
-         sentence = "You have established a trusted relationship with " + @second_person
+         sentence = "You have established a trusted relationship with " + @second_person_full
        else
-         sentence = event_log.primary_short_name + " has established a trusted relationship with " + @second_person
+         sentence = event_log.primary_full_name + " has established a trusted relationship with " + @second_person_full
       end
     elsif event_log.involved_as_gifter?(person)
       if @same_person
-         sentence = "You have established a trusted relationship with " + @first_person
+         sentence = "You have established a trusted relationship with " + @first_person_full
       else
-         sentence = event_log.primary_short_name + " has established a trusted relationship with " + @first_person
+         sentence = event_log.primary_full_name + " has established a trusted relationship with " + @first_person_full
       end
     elsif person.trusts?(event_log.primary)
-      sentence = @first_person + " has established a trusted relationship with " + @second_person_full
+      sentence = @first_person_full + " has established a trusted relationship with " + @second_person_full
     elsif person.trusts?(event_log.secondary)
-      sentence = @second_person + " has established a trusted relationship with " + @first_person_full
+      sentence = @second_person_full + " has established a trusted relationship with " + @first_person_full
     elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-      sentence = @first_person + " and " + @second_person + " have established a trusted relationship"
+      sentence = @first_person_full + " and " + @second_person_full + " have established a trusted relationship"
     else 
       sentence = ""
     end
@@ -146,22 +143,22 @@ module PagesHelper
   def trust_withdrawn_sentence(event_log, person)
     if event_log.involved_as_requester?(person)
       if @same_person
-         sentence = "You have withdrawn your trust for " + @second_person
+         sentence = "You have withdrawn your trust for " + @second_person_full
        else
-         sentence = event_log.primary_short_name +  " has withdrawn their trust for " + @second_person_full
+         sentence = event_log.primary_full_name +  " has withdrawn their trust for " + @second_person_full
       end
     elsif event_log.involved_as_gifter?(person)
       if @same_person
-         sentence = @first_person + " has withdrawn their trust for you"
+         sentence = @first_person_full + " has withdrawn their trust for you"
       else
-         sentence = @first_person + " has withdrawn their trust for " + event_log.secondary_short_name
+         sentence = @first_person_full + " has withdrawn their trust for " + event_log.secondary_full_name
       end
     elsif person.trusts?(event_log.primary)
-      sentence = @first_person + " has withdrawn their trust for " + @second_person_full
+      sentence = @first_person_full + " has withdrawn their trust for " + @second_person_full
     elsif person.trusts?(event_log.secondary)
-      sentence = @second_person + " has withdrawn their trust for " + @first_person_full
+      sentence = @second_person_full + " has withdrawn their trust for " + @first_person_full
     elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-      sentence = @first_person + " has withdrawn their trust for " + @second_person
+      sentence = @first_person_full + " has withdrawn their trust for " + @second_person_full
     else
       sentence = ""
     end
@@ -174,7 +171,7 @@ module PagesHelper
        if @same_person
          sentence = "Your " + " " + @item + " " + "is broken"
        else
-         sentence = event_log.primary_short_name.possessive + " " + @item + " " + "is broken"
+         sentence = event_log.primary_full_name.possessive + " " + @item + " " + "is broken"
        end
     else
       sentence = @requester_possesive + " " + @item + " " + "is broken"
@@ -187,7 +184,7 @@ module PagesHelper
        if @same_person
          sentence = "Your " + " " + @item + " " + "has been repaired"
        else
-         sentence = event_log.primary_short_name.possessive + " " + @item + " " + "has been repaired"
+         sentence = event_log.primary_full_name.possessive + " " + @item + " " + "has been repaired"
        end
     else
       sentence = @requester_possesive + " " + @item + " " + "has been repaired"
@@ -326,18 +323,18 @@ module PagesHelper
   def recent_activity_sentence(activity_log)
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
     item = activity_log.action_object
-    unless activity_log.secondary_short_name.nil? || item.nil?
+    unless activity_log.secondary_full_name.nil? || item.nil?
       if(item.is_owner?(activity_log.secondary))     
-        gifter              = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive")
-        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive")
+        gifter              = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
+        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive")
       
         requester           = (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive")
         requester_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary), :class => "positive")
         
         
       else
-        requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive")
-        requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive")
+        requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
+        requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive")
       
         gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive")
         gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary), :class => "positive")
@@ -349,9 +346,9 @@ module PagesHelper
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
     unless activity_log.secondary.nil?
-      person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary), :class => "positive"
+      person              = link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive"
       other_person        = link_to activity_log.primary.first_name, person_path(activity_log.primary), :class => "positive"
-      person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary), :class => "positive"
+      person_possesive    = link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive"
     end
     
     sentence = ""
@@ -496,18 +493,18 @@ module PagesHelper
   def notify_recent_activity_sentence(activity_log, current_user)
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
     item = activity_log.action_object
-    unless activity_log.secondary_short_name.nil? || item.nil?
+    unless activity_log.secondary_full_name.nil? || item.nil?
       if(item.is_owner?(activity_log.secondary))     
-        gifter              = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary, :only_path => false), :class => "positive")
-        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive")
+        gifter              = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary, :only_path => false), :class => "positive")
+        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive")
       
         requester           = (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary, :only_path => false), :class => "positive")
         requester_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary, :only_path => false), :class => "positive")
         
         
       else
-        requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_short_name, person_path(activity_log.secondary, :only_path => false), :class => "positive")
-        requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive")
+        requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary, :only_path => false), :class => "positive")
+        requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive")
       
         gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.first_name, person_path(activity_log.primary, :only_path => false), :class => "positive")
         gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.first_name.possessive, person_path(activity_log.primary, :only_path => false), :class => "positive")
@@ -519,9 +516,9 @@ module PagesHelper
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object, :only_path => false), :class => "item-link" unless activity_log.action_object.nil?
     unless activity_log.secondary.nil?
-      person              = link_to activity_log.secondary_short_name, person_path(activity_log.secondary, :only_path => false), :class => "positive"
+      person              = link_to activity_log.secondary_full_name, person_path(activity_log.secondary, :only_path => false), :class => "positive"
       other_person        = link_to activity_log.primary.first_name, person_path(activity_log.primary, :only_path => false), :class => "positive"
-      person_possesive    = link_to activity_log.secondary_short_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive"
+      person_possesive    = link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive"
     end
     
     sentence = ""
