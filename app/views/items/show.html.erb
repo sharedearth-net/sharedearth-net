@@ -7,7 +7,7 @@
 					<%= image_tag @item.photo.url(:medium), :class => "thumb" %>
 					<div class="inner-content">
 						<h2>
-							<%=sanitize auto_link(h(@item.name)) %>
+							<%=raw auto_link(h(@item.name), :all, :target => "_blank") %>
 							<br />
 							<span class="item-type">
 								<%= @item.item_type  %>
@@ -20,7 +20,7 @@
 					
 						<p class="description">
 							<span class="description">
-								<%=sanitize auto_link(h(@item.description)) %>
+								<%=raw auto_link(h(@item.description), :all, :target => "_blank") %>
 							</span>
 							<span>
                       <% unless @item.deleted? %>
