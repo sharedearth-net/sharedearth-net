@@ -10,9 +10,13 @@ module ItemsHelper
   def item_types_with_gift_status(items)
 		item_types = {}
 		items.each do |item|
-		itype = item.item_type.downcase
-		item_types[itype] = item_types[itype] || item.gift?
+			itype = item.item_type.downcase
+			item_types[itype] = item_types[itype] || item.gift?
 		end
-		item_types
+		item_types_array = []
+		item_types.each do |type, is_gift|
+			item_types_array << { :type => type, :is_gift => is_gift }
+		end
+		item_types_array.sort_by { |item_type| item_type[:type] }
 	end
 end
