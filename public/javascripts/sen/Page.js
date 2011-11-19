@@ -228,7 +228,7 @@ dojo.declare("sen.Page", null, {
 		// Set the properties of the overlay box, the left and top positions
 		dojo.style("loading-box", {
 			display: "block",
-			left: ( windowBox.w - dojo.style("loading-box", "width") ) / 2 + "px",
+			left: ( windowBox.w - dojo.style("loading-box", "width") ) / 2 - 60 + "px",
 			top: ( (windowBox.h - dojo.style("loading-box", "height") ) / 2) - 20 + "px",
 			position: "absolute"
 		});
