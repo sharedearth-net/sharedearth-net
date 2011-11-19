@@ -26,6 +26,14 @@ end
       get 'principles'
     end
   end
+
+  resources :legal_notices, :only => [:index] do
+    collection do
+      put 'accept_tc'
+      put 'accept_pp'
+      get 'principles'
+    end
+  end
   
    resources :requested_invitations, :only => [:create]
   
