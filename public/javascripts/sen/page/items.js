@@ -16,16 +16,6 @@ dojo.declare("sen.page.items", [sen.Page], {
 	events: null,
 	inFlight: null,
 	
-	init: function() {
-		// Init the interface and connect events
-		this.initUi();
-		
-		// getting called from parent Page
-		// need to remove it from Page.js but that looks like big change 
-		// and might break other things
-		// this.initEvents();
-	},
-	
 	initUi: function() {
 		
 	},
