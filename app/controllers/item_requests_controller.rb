@@ -210,7 +210,7 @@ class ItemRequestsController < ApplicationController
   end
   
   def only_requester_or_gifter
-    unless @item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)
+    unless @item_request.completed? || @item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person) 
       redirect_to(root_path, :alert => I18n.t('messages.only_gifter_and_requester_can_access'))
     end    
   end
