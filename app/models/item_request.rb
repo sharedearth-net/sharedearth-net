@@ -51,6 +51,10 @@ class ItemRequest < ActiveRecord::Base
   def gifter?(gifter)
     self.gifter == gifter
   end
+
+  def involved?(entity)
+  	(self.gifter == entity) || (self.requester == entity)
+  end
   
   def self.new_by_requester(params, requester)
     item_request           = self.new(params)
