@@ -5,9 +5,9 @@
 			<div class="content-box-holder no-bg">
 				<ul>
 					<li class="content-box clearfix">
-				
+
 						<%= image_tag @person.avatar(:large), :class => "thumb" %>
-				
+
 						<div class="inner-content rhs">
 							<h2>Edit Profile</h2>
 							<%= form_for(@person, :html => { :multipart => true }) do |f| %>
@@ -17,12 +17,12 @@
 								<ul class="form-holder">
 									<li class="clearfix">
 										<%= f.label "Your Name"  %>
-									
+
 							    		<%= f.text_field :name %>
 									</li>
 									<li class="clearfix">
 										<%= f.label "Email"  %>
-									
+
 							    		<%= f.text_field :email %>
 									</li>
 									<li class="clearfix">
@@ -31,18 +31,19 @@
 									</li>
 									<li class="clearfix">
 										<%= f.label "Location"  %>
-									
+
 							    		<%= f.text_field :location, {:class=>"text-input", :maxlength=>"50"} %>
 									</li>
 									<li class="clearfix">
 										<%= f.label "About me"  %>
-									
+
 							    		<%= f.text_area :description, {:class=>"text-input", :rows=>"5", :maxlength=>"400"} %>
 									</li>
-                                                                        <li class="checkbox-holder clearfix">
+									<li class="checkbox-holder clearfix">
 								        <%= f.label 'Enable smart email notifications' %>
 										<input type="checkbox" checked="checked" />
-								        </li>
+								      </li>
+									<li class="clearfix">
 										<div class="actions">
 											<ul class="action-buttons-list">
 												<li>
@@ -60,7 +61,7 @@
 								</ul>
 							  </div>
 						 <% end %>
-					
+
 						</div><!--	/inner-content	-->
 					</li>
 				</ul>
@@ -68,13 +69,13 @@
 			</div><!-- /content-box-holder  -->
 
 		</div><!-- /content -->
-	
+
 		<div id="sidebar">
 
 			<%= render :partial => "shared/trust_profile", :locals => { :person => @person, :name => false } %>
 
 			<%= render :partial => "shared/latest_activity_person", :locals => { :person => @person } %>
-	
+
 		</div><!-- sidebar -->
 	</div><!-- /profile-form-page -->
 </div><!-- /item-profile-form-page -->
