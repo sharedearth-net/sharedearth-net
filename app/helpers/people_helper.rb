@@ -33,4 +33,12 @@ module PeopleHelper
 		end
 		"#{image}<p>#{link}</p>".html_safe
  end
+ 
+ def trusted_person_class(person)
+	if current_user.person.trusts?(person)
+		" trusted"
+	else
+		" untrusted"
+	end
+ end
 end

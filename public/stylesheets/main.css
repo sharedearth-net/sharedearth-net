@@ -3807,3 +3807,7 @@ a.normal:visited {
 #loading-box > img {
 	display:block;
 }
+
+a.trusted {
+	color:#127e0e;
+}
