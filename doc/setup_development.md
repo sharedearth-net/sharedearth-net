@@ -51,3 +51,6 @@ Please setup environment variables accordingly, then reset terminal or system to
  heroku config:add SEN_SES_KEY=8N029N81 SEN_SES_SECRET=9s83109d3+583493190
  
 * note this is just example usage
+
+##Running tests note
+  On Ubuntu firefox version 3.6.x can run tests. Upgrading it to new version 8 will not execute cucumber tests properly, as selenium-webdriver changed
