@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_item, :only => [:show, :edit, :update, :destroy, 
-                                     :mark_as_normal, :mark_as_lost, :mark_as_damaged]
-  before_filter :only_owner!, :only => [:edit, :update, :destroy,   
-                                        :mark_as_normal, :mark_as_lost, :mark_as_damaged]
+  before_filter :get_item, :only => [:show, :edit, :update, :destroy,
+                                     :mark_as_normal, :mark_as_lost, :mark_as_damaged, :mark_as_hidden]
+  before_filter :only_owner!, :only => [:edit, :update, :destroy,
+                                        :mark_as_normal, :mark_as_lost, :mark_as_damaged, :mark_as_hidden]
   before_filter :actions_completed?, :only => [:mark_as_lost, :mark_as_damaged]
-  before_filter :check_if_item_is_deleted, :only => [:edit, :update, :destroy, 
-                                                     :mark_as_normal, :mark_as_lost, 
+  before_filter :check_if_item_is_deleted, :only => [:edit, :update, :destroy,
+                                                     :mark_as_normal, :mark_as_lost,
                                                      :mark_as_damaged]
   before_filter :check_if_user_has_fb_account, :only => [:new, :create]
   def index
@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
       format.xml  { render :xml => @item }
     end
   end
-  
+
   def create
     @item = Item.new(params[:item])
     @item.owner = current_user.person
@@ -68,7 +68,7 @@ class ItemsController < ApplicationController
         format.html { redirect_to @item }
         format.xml  { head :ok }
       else
-      
+
         format.html { render :action => "edit" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end
@@ -99,12 +99,17 @@ class ItemsController < ApplicationController
     redirect_to item_path(@item)
   end
 
+  def mark_as_hidden
+    @item.hidden!
+    redirect_to item_path(@item)
+  end
+
   private
 
   def actions_completed?
     redirect_to item_path(@item), :notice => I18n.t("messages.items.in_use") unless @item.available?
   end
- 
+
   def check_if_item_is_deleted
     if @item.deleted?
       redirect_to items_path, :alert => (I18n.t('messages.items.is_deleted'))
@@ -118,7 +123,7 @@ class ItemsController < ApplicationController
   def get_item
     @item = Item.find_by_id(params[:id])
   end
-  
+
   def only_owner!
     redirect_to(root_path, :alert => I18n.t('messages.only_owner_can_access')) and return unless @item.is_owner?(current_user.person)
   end
