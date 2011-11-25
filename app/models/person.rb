@@ -26,15 +26,14 @@ class Person < ActiveRecord::Base
   has_one :reputation_rating
 
   validates_length_of :name, :maximum => 20
-  validates :email, :confirmation => true, :presence => true, :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }  
   validates_length_of :location, :maximum => 42
   validates_length_of :description, :maximum => 400
   validates_presence_of :user_id, :name
+	validates :email, :presence => true, :email => true
   
-  before_validation :sanitize_fields
   after_create :create_entity_for_person
   
-  #default_scope where(:authorised_account => true) if INVITATION_SYS_ON
+  #default_scope where(:authorised_account => true) if INVITATION_SYS_ON # Turning this on would couse problems
   scope :authorized, where(:authorised_account => true)
   scope :no_email_sent, where("email_notification_count = 0")
   scope :low_volume_email_sent, where("email_notification_count IN (1,2) AND last_notification_email < ?", Time.now - 78.hours)
@@ -117,11 +116,7 @@ class Person < ActiveRecord::Base
   end
   
   def self.search(search)
-    if Settings.invitations == 'true'
-      search.empty? ? '' : authorized.where("UPPER(name) LIKE UPPER(?)", "%#{search}%")
-    else
- 			search.empty? ? '' : where("UPPER(name) LIKE UPPER(?)", "%#{search}%")
-    end
+		search.empty? ? '' : authorized.where("UPPER(name) LIKE UPPER(?)", "%#{search}%")
   end
   
   def searchable_core_of_friends
@@ -340,16 +335,6 @@ class Person < ActiveRecord::Base
   def log_email_notification_time!
     self.last_notification_email = Time.now
     save!
-  end
-  
-  private
-  
-  def sanitize_fields
-		self.name = self.name.strip unless self.name.nil?
-		self.email = self.email.strip unless self.email.nil?
-		self.email_confirmation = self.email_confirmation.strip unless self.email_confirmation.nil?
-		self.location = self.location.strip unless self.location.nil?
-		self.description = self.description.strip unless self.description.nil?
   end
   
 end
