@@ -16,6 +16,7 @@ development:
   app: sharedearthnet
   config: &default
     BUNDLE_WITHOUT: "development:test"
+    domain_url: http://sharedearthnet.heroku.com
 
 demo: 
   app: sen-demo
