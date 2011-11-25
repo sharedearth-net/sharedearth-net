@@ -7,6 +7,7 @@ end
 
 Factory.define :person do |p|
   p.name "John"
+  p.email "john@doe.com"
   p.association :user, :factory => :user
   p.association :reputation_rating, :factory => :reputation_rating
   p.authorised_account true
@@ -105,7 +106,8 @@ Factory.define :invitation do |i|
   i.invitation_active true
 end
 
-Factory.define :comment do |comment|
+Factory.define :comment do |i|
+  i.comment "My awesome comment"
 end
 
 Factory.define :resource_network do |res_network|

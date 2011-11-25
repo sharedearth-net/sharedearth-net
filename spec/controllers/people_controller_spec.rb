@@ -42,14 +42,14 @@ describe PeopleController do
 
     describe "GET show" do
       before do
-        mock_person.stub_chain(:items, :without_deleted).and_return(mock_items)
+        mock_person.stub_chain(:items, :without_deleted, :sort_by).and_return(mock_items)
         mock_person.stub(:unanswered_requests).and_return(mock_item_requests)
         Person.stub(:find_by_id).with("37") { mock_person }
         get :show, :id => "37"
       end
 
       it "assigns the requested person as @person" do
-        assigns(:person).should be(rock_person)
+        assigns(:person).should be(mock_person)
       end
 
       it "should render show template" do
@@ -62,6 +62,33 @@ describe PeopleController do
 
       it "should assign person's unanswered requests as @unanswered_requests" do
         assigns(:unanswered_requests).should == mock_person.unanswered_requests
+      end
+
+      context "filtering with type" do
+
+        before do
+          mock_person.stub_chain(:items, :without_deleted, :with_type).and_return(mock_items)
+          mock_person.stub(:unanswered_requests).and_return(mock_item_requests)
+          Person.stub(:find_by_id).with("37") { mock_person }
+          get :show, :id => "37"
+        end
+
+        it "assigns the requested person as @person" do
+          assigns(:person).should be(mock_person)
+        end
+
+        it "should render show template" do
+          response.should render_template("show")
+        end
+
+        it "should assign person's items as @items" do
+          assigns(:items).should == mock_person.items.without_deleted.with_type{|i| i.item_type.downcase}
+        end
+
+        it "should assign person's unanswered requests as @unanswered_requests" do
+          assigns(:unanswered_requests).should == mock_person.unanswered_requests
+        end
+
       end
 
     end

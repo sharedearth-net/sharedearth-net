@@ -5,7 +5,8 @@ module UserMocks
     defaults = {:name => "Slobodan Kovacevic", 
                 :nickname => "basti", 
                 :person => mock_person, 
-                :avatar => "http://graph.facebook.com/basti/picture"}
+                :avatar => "http://graph.facebook.com/basti/picture", 
+								:uid => '111111'}
     mock_model(User, defaults.merge(stubs))
   end
   
