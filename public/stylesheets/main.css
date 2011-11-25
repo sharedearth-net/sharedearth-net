@@ -3523,7 +3523,7 @@ a.normal:visited {
 		/* Name on top of T&R box */
 
 		#sidebar .trust-reputation-box h2,
-		#sidebar-left .trust-reputation-box .name_with_location,
+		#sidebar-left .trust-reputation-box h2,
 		#sidebar .trust-reputation-box h2 a:link,
 		#sidebar .trust-reputation-box h2 a:visited {
 			color: #62775a;
