@@ -1,16 +1,17 @@
 Feature: Item requests management page
   As a As user who loads web page for first time
   I want to see if can exchange items
-  In order to create manage items ownership 
-  
+  In order to create manage items ownership
+
   Background:
     Given the user is logged in
     Given a person exists with name: "Maria"
+		Given a person exists with name: "Bach"
     Given I am the owner of item with name "Mobile"
     And "Maria" is the owner of item with name "Bike"
 
-   @javascript    
-   Scenario: Requests item 
+   @javascript
+   Scenario: Requests item
       Given Looking at person page with name "Maria"
       Then I follow "request"
       And I should see the words "request", "bike"
@@ -99,8 +100,8 @@ Feature: Item requests management page
     And I follow "Later"
     Then Looking at my person page
     And I should see "1 different people"
-    
-   Scenario: I request an item that has been deleted 
+
+   Scenario: I request an item that has been deleted
       Given an item exists with name: "Sweet ride"
       And the logged person is the owner
       And I delete that item
@@ -115,3 +116,36 @@ Feature: Item requests management page
       And I wait until all Ajax requests are complete
       Then I should not see "view request"
       And I should not see "accept"
+
+   @javascript
+   Scenario: Looking at own completed item request page
+      Given Person with name "John" has completed request with "Maria"
+      And I am looking at last request page
+      Then I should see "John shared their bike with Maria"
+
+   @javascript
+   Scenario: Looking at other completed item request page
+      Given Person with name "Bach" has accepted request with "Maria"
+      And I am looking at last request page
+      Then I should see "Recent Activity"
+
+   @javascript
+   Scenario: Looking at other completed item request page, don't see private comments
+      Given Person with name "Bach" has completed request with "Maria"
+			Given "Bach" left comment "Nice" for last request
+      And I am looking at last request page
+      Then I should not see "Nice"
+
+   @javascript
+   Scenario: Looking at other completed item request page, don't see private comments
+      Given Person with name "Bach" has completed request with "Maria"
+			Given "John" left comment "Nice" for last request
+      And I am looking at last request page
+      Then I should not see "Nice"
+
+   @javascript
+   Scenario: Looking at other completed item request page, don't see private comments
+      Given Person with name "John" has completed request with "Maria"
+			Given "John" left comment "Nice" for last request
+      And I am looking at last request page
+      Then I should see "Nice"

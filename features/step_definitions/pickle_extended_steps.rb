@@ -3,6 +3,11 @@ Given /^"(.*)" is the owner of item with name "(.*)"$/ do |name, item|
     Factory(:item, :owner => person, :name => item)
 end
 
+Given /^"(.*)" is the owner of hidden item with name "(.*)"$/ do |name, item|
+    person = Person.find_by_name("#{name}")
+    Factory(:item, :owner => person, :name => item, :hidden => true)
+end
+
 Given /^I am the owner of item with name "(.*)"$/ do |item|
     person = Person.find_by_name("John")
     Factory(:item, :owner => person, :name => item)
@@ -22,11 +27,19 @@ Given /^I requested item with name "(.*)" from person with name "(.*)"$/ do |ite
     Factory(:item_request, :requester => me, :gifter => person, :item => item)
 end
 
-Given /^Person with name "(.*)" has completed request with "(.*)"$/ do |person1, person2|
+Given /^Person with name "(.*)" has (completed|accepted|canceled) request with "(.*)"$/ do |person1, status, person2|
+		case status
+      when "completed"
+        status_name = ItemRequest::STATUS_COMPLETED
+      when "accepted"
+        status_name = ItemRequest::STATUS_ACCEPTED
+      when "canceled"
+        status_name = ItemRequest::STATUS_CANCELED
+    end
     person1 = Person.find_by_name("#{person1}")
     person2 = Person.find_by_name("#{person2}")
     item = Factory(:item, :owner => person1) 
-    @item_request = Factory(:item_request, :requester => person2, :gifter => person1, :item => item, :status => ItemRequest::STATUS_COMPLETED)
+    @item_request = Factory(:item_request, :requester => person2, :gifter => person1, :item => item, :status => status_name)
     Factory(:event_log, :primary => person2, :secondary => person1, :action_object => item, :related => @item_request )
 end
 
@@ -63,4 +76,24 @@ end
 
 Given /^I delete (.+)$/ do |model_name|
   model(model_name).delete
+end
+
+Given /^"(.*)" (completed|accepted|canceled) item request with "(.*)" for item "(.*)"$/ do |person_1, status, person_2, item|
+		case status
+      when "completed"
+        status_name = ItemRequest::STATUS_COMPLETED
+      when "accepted"
+        status_name = ItemRequest::STATUS_ACCEPTED
+      when "canceled"
+        status_name = ItemRequest::STATUS_CANCELED
+    end
+    person_1 = Person.find_by_name("#{person_1}")
+    person_2 = Person.find_by_name("#{person_2}")
+    item = Item.find_by_name("#{item}")
+    @item_request = Factory(:item_request, :requester => person_1, :gifter => person_2, :item => item, :status => status_name)
+end
+
+Given /^"(.*)" left comment "(.*)" for last request$/ do |person, comment|
+    person = Person.find_by_name("#{person}")
+    Factory(:comment, :commentable => @item_request, :user_id => person.user.id, :comment => comment)
 end
