@@ -14,11 +14,11 @@ module ApplicationHelper
   def requester_and_gifter_only(item_request, &block)
     capture(&block) if current_user && (item_request.gifter?(current_user.person) || item_request.requester?(current_user.person))
   end
-  
+
   def person_name(person, options = {})
     defaults = { :downcase_you => false, :possessive => false }
     options = defaults.merge(options)
-    
+
     if person.user == current_user
       name = options[:possessive] ? "Your" : "You"
       name.downcase! if options[:downcase_you]
@@ -30,6 +30,8 @@ module ApplicationHelper
   end
   
   def link_to_person(person, options = {})
+		options[:class] ||= ""
+		options[:class] += trusted_person_class(person)
     person.user == current_user ? person_name(person, options) : link_to(person_name(person, options), person_path(person), options)
   end
 
