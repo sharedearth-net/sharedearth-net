@@ -1,6 +1,6 @@
 <div id="items-page">
 	<div id="content">
-		
+
 		<div class="content-box-holder no-bg">
 			<ul>
 				<li class="content-box clearfix">
@@ -14,10 +14,10 @@
 							</span>
 							&nbsp;&nbsp;&nbsp;
 							<span class="item-purpose<%= (@item.gift? ? " gift-item" : "") %>">
-								<%= @item.purpose? %>
+								<%= @item.hidden? ? 'hidden' : @item.purpose? %>
 							</span>
 						</h2>
-					
+
 						<p class="description">
 							<span class="description">
 								<%=raw auto_link(h(@item.description), :all, :target => "_blank") %>
@@ -46,14 +46,14 @@
 		  				    	<li class="plain-link">
 									<%= link_to 'delete', @item, :confirm => 'Are you sure?', :method => :delete %>
 								</li>
-						    <% end -%>  						
+						    <% end -%>
 							</ul>
                      <% end %>
 						<% end %>
 					</div>
 				</li>
-			
-				
+
+
 			</ul>
 		</div>
 
@@ -63,7 +63,7 @@
 		<%= render :partial => "shared/trust_profile", :locals => { :person => @item.owner, :name => true } %>
 		<%= render :partial => "shared/latest_activity_item", :locals => { :item =>  @item } %>
 	</div><!-- /sidebar -->
-	
+
 </div><!-- /items-page -->
 
 

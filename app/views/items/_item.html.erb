@@ -4,9 +4,10 @@
 	</div>
 	<div class="item-info">
 		<p>
-			<%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;&nbsp;										
+			<%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;&nbsp;
 			<%= link_to item.item_type, "#", :class => "item-type" %>&nbsp;&nbsp;&nbsp;
-			<%= content_tag(:span, item.purpose?, :style => "display:inline;", :class => (item.gift? ? "gift-item" : "") ) %>
+			<%= content_tag(:span, item.hidden? ? 'hidden' : item.purpose?, :style => "display:inline;", :class => (item.gift? ? "gift-item" : "") ) %>
+      <%= link_to("hide", mark_as_hidden_item_path(item), :method => :PUT) unless item.hidden?%>
 		</p>
 
 		<ul class="action-list">
@@ -23,7 +24,7 @@
 			<% if action_list.include?(:people_helped) %>
 			<li>
 				<%= link_to item.owner.reputation_rating.distinct_people_count.to_s, "#", :class => "people-helped", :title => "People Helped" %>
-			</li>			
+			</li>
 			<% end %>
 			<% if action_list.include?(:view) %>
 			<li>
@@ -35,7 +36,7 @@
 				<li>
 					<%= link_to "request", requests_path(:item_id => item.id), :method => :post %>
 				</li>
-				<% end -%>		
+				<% end -%>
 			<% end %>
 			<% if action_list.include?(:show) %>
 			<li>
