@@ -59,6 +59,7 @@ end
       put "mark_as_normal"
       put "mark_as_lost"
       put "mark_as_damaged"
+			put "mark_as_hidden"
     end
   end
 
