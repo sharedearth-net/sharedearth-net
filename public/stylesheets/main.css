@@ -1613,8 +1613,8 @@ a.normal:visited {
 			padding-left: 0;
 			float: left;
 			width: 50%;
-			height: 17px;
-		    margin-top: 9px;
+			height: 23px;
+		  margin-top: 7px;
 		}	
 	
 		#request-page #sidebar .trust-reputation-box h2.rhs-link {
@@ -2479,8 +2479,8 @@ a.normal:visited {
 		float: left;
 		padding-left: 0;
 		width: 50%;
-		height: 17px;
-		margin-top: 9px;
+		height: 23px;
+		margin-top: 7px;
 	}
 
 	#items-page #sidebar .trust-reputation-box h2.rhs-link {
@@ -3528,6 +3528,15 @@ a.normal:visited {
 		#sidebar .trust-reputation-box h2 a:visited {
 			color: #62775a;
 			font-size: 13px;
+		}
+		
+		/* Location below name */
+		#sidebar .trust-reputation-box h2 .location,
+		#sidebar-left .trust-reputation-box h2 .location {
+			display:block;
+			padding:0;
+			margin-top:-2px;
+			font-size:11px;
 		}
 		
 			#sidebar .trust-reputation-box h2.rhs-link a.trust-confirm:link,
