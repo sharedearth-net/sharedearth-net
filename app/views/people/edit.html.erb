@@ -26,10 +26,6 @@
 							    		<%= f.text_field :email %>
 									</li>
 									<li class="clearfix">
-										<%= f.label "Confirm Email"  %>
-										<%= f.text_field :email_confirmation, :value => @person.email_confirmation || @person.email %>
-									</li>
-									<li class="clearfix">
 										<%= f.label "Location"  %>
 									
 							    		<%= f.text_field :location, {:class=>"text-input", :maxlength=>"50"} %>
