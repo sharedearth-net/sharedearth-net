@@ -3100,9 +3100,10 @@ a.normal:visited {
 		}
 
 		#terms-conditions-page #content .buttons-holder {
-			width: 150px;
+			width:153px;
 			padding-top: 3px;
 			margin: 0 auto;
+            text-align: center;
 		}
 
         /* Contribute Page */

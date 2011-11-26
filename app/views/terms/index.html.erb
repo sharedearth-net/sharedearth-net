@@ -179,22 +179,7 @@ end %>
 		<h3 class="bottom-title">
 			Continued use of the site will be taken as conclusive evidence of your acceptance of the Terms and Conditions.
 		</h3>
-		<% if !current_user.nil? -%>
-		  <% if !current_user.person.accepted_tc? && current_user.person.authorised? -%>
-		    <div class="buttons-holder">
-			    <ul class="action-buttons-list clearfix">
-				    <li>
-					    <%= link_to 'Accept', accept_tc_terms_path, :method => 'put', :class => 'positive' %>
-				    </li>
-				    <li>
-			      	<%= link_to 'Reject', signout_path, :class => 'positive' %>
-				    </li>
-			    </ul>
-		    </div>
-		  <% end -%>
-		<% end -%>
-		
-		
+
 	</div><!--	/content -->
 	
 </div><!--	/terms-conditions-page -->
