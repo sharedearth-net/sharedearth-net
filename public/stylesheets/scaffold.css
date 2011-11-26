@@ -17,6 +17,8 @@ a.green, a.green:visited { color: #127e0e; 	text-decoration: underline; }
 
 a.grey, a.grey:visited { color: #9C9C9C; 	text-decoration: underline; }
 
+a.brownish, a.grey:visited { color: #62755a; 	text-decoration: underline; }
+
 
 div.field, div.actions {
   margin-bottom: 10px;
