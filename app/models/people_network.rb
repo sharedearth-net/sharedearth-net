@@ -10,6 +10,9 @@ class PeopleNetwork < ActiveRecord::Base
 
   validates_presence_of :person_id, :trusted_person_id
   
+  after_create :update_mutual_network_after_create
+  after_destroy :update_mutual_network_after_destroy
+  
   # def requester?(person)
   #   self.person == person
   # end
@@ -30,4 +33,34 @@ class PeopleNetwork < ActiveRecord::Base
     EventLog.create_trust_established_event_log(first_person, second_person)
     ActivityLog.create_activity_log(first_person, second_person, nil, EventType.trust_established_other_party, EventType.trust_established_initiator)
   end
+
+  def update_mutual_network_after_create
+		if self.entity_type_id == EntityType::TRUSTED_PERSON_ENTITY
+			person_ids_to_insert = PeopleNetwork.find_by_sql("select distinct(trusted_person_id) " + #select all mutual_person ids
+				"from people_networks where person_id in " + # person should be friend of
+				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::TRUSTED_PERSON_ENTITY}) " + # current person's friend
+				"and trusted_person_id not in" + # but should not be
+				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::TRUSTED_PERSON_ENTITY}) " + # friend of current person
+				"and trusted_person_id != #{self.person_id} " + # and not current person
+				"and trusted_person_id not in" + # and that person is
+				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::MUTUAL_PERSON_ENTITY}) ") # not already a mutual person
+			person_ids_to_insert.each do |pi|
+				PeopleNetwork.create!( :person_id => self.person_id, :trusted_person_id => pi["trusted_person_id"], :entity_id => pi["trusted_person_id"], :entity_type_id => EntityType::MUTUAL_PERSON_ENTITY )
+			end
+		end
+  end
+
+  def update_mutual_network_after_destroy
+		if self.entity_type_id == EntityType::TRUSTED_PERSON_ENTITY
+			people_networks_to_delete = PeopleNetwork.destroy_all("person_id = #{self.person_id} and entity_type_id = #{EntityType::MUTUAL_PERSON_ENTITY} " +# delete all mutual friends
+				"and trusted_person_id not in (" + # except
+				"select distinct(trusted_person_id) " + #select all mutual_person ids
+				"from people_networks where person_id in " + # person should be friend of
+				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::TRUSTED_PERSON_ENTITY}) " + # current person's friend
+				"and trusted_person_id not in " + # but should not be
+				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::TRUSTED_PERSON_ENTITY}) " + # friend of current person
+				"and trusted_person_id != #{self.person_id} )") # and not current person
+		end
+  end
+
 end
