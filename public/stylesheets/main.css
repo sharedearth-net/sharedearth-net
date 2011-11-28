@@ -1122,8 +1122,14 @@ a.normal:visited {
 				#profile-page #content .items-list .requests ul li {
 
 				}
+				
+				#profile-page .items-list .requests ul li div.avatar-holder {
+					float: left;
+				    width: 60px;
+				}
 			
 					#profile-page .items-list .requests ul li div {
+						float: left;
 					}
 			
 			
@@ -1490,6 +1496,7 @@ a.normal:visited {
 	/* request-page - content */
 		
 	#request-page #content {
+		width: 616px;
 	}
 		
 		#request-page #content .content-box-holder {
@@ -1497,12 +1504,12 @@ a.normal:visited {
 		}
 		
 			#request-page #content .content-box {
-				width: 524px;
+				width: 616px;
 			}
 		
 				#request-page #content .inner-content {
 		  			overflow: hidden;
-					width: 359px;
+					width: 451px;
 				}
 		
 					#request-page #content .action-buttons-list {
@@ -1529,8 +1536,8 @@ a.normal:visited {
 			}
 		
 			#request-page #content .discussion-holder {
-				width: 359px;
-				margin: 0 0 0 165px;
+				width: 466px;
+				margin: 0 0 0 150px;
 				overflow: hidden;
 			}
 		
@@ -1541,7 +1548,7 @@ a.normal:visited {
 			color: #127E0E;
 		    float: none;
 		    font-size: 12px;
-			width: 351px;
+			width: 458px;
 			background: #f4f9eb;
 		}
 		
@@ -1562,17 +1569,18 @@ a.normal:visited {
 	
 			#request-page #content ul.comment-list .time-ago {
 				float: right;
-			    width: 80px;
 				color: #838683;
 				font-size: 11px;
-				margin-top: 18px;
+				margin-top: 3px;
+				width: 130px;
+				text-align: right;
 			}
 	
 				#request-page #content ul.comment-list p {
 					clear: none;
 					padding-top: 4px;
 					padding-right: 4px;
-					width: 227px;
+					width: 284px;
 					color: #333;
 					font-size: 12px;
 				}
@@ -1591,7 +1599,7 @@ a.normal:visited {
 				}
 				
 				#request-page #content .comment-box textarea {
-					width: 349px;
+					width: 456px;
 					color: #838683;
 					font-size: 11px;
 				}
@@ -1603,6 +1611,10 @@ a.normal:visited {
 	
 
 	/* request - sidebar */	
+	
+	#request-page #sidebar {
+		margin-left: 30px; 
+	}
 	
 	#request-page #sidebar h2 {
 		padding-left: 16px;
@@ -3285,6 +3297,11 @@ a.normal:visited {
 		#dashboard-page p a.trusted:visited {
 			color: #127e0e;
 		}
+		
+		
+		#dashboard-page .read-recent-activity p {
+			color: #62755a;
+		}
 	
 	
 	/* Event sentences in News Feed (on dashboard) and Latest Activity (on profile pages) */
@@ -3364,6 +3381,8 @@ a.normal:visited {
 		color: #62775a;
 		font-size: 11px;
 	}
+	
+	
 	
 	
 	/* Main action shortcuts shown in near headers (e.g. 'establish trust', 'edit profile' etc) */
@@ -3550,9 +3569,14 @@ a.normal:visited {
 		color: #333;
 	}
 		
+		
 		#content ul p a.item-type:link,
 		#content ul p a.item-type:visited {
 			color: #62775a;
+		}
+		
+		#content .items-expanded ul p a.item-type {
+			text-transform: lowercase;
 		}
 	
 	/* for an item request sentence */

@@ -1,14 +1,14 @@
 <div id="request-page">
 
-	<div id="content" class="item-request" style="width: 596px;">
+	<div id="content" class="item-request">
 		
 		<div class="content-box-holder no-bg">
 			<ul>
-				<li class="content-box clearfix" style="width: 596px;">
+				<li class="content-box clearfix">
 				
 					<%= image_tag @item_request.requester.avatar(:large), :class => "thumb" %>
 				
-					<div class="inner-content" style="margin-left: 55px;">
+					<div class="inner-content">
 						<%= render :partial => "shared/item_request_sentence", :locals => { :req => @item_request, :dashboard => false } %>
 				
 						<%= image_tag @item_request.item.photo.url(:medium), :class => "pic-medium" if @item_request.item.photo? %>
@@ -70,27 +70,28 @@
 				
 					</div>
 				</li>
+				
+				<% if (@item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)) && !@item_request.completed? %>
+
+				<li class="content-box clearfix">
+					<div class="discussion-holder">
+						<ul class="comment-list">
+		          			<%= render 'comment_form',        :item_request => @item_request %>
+					        <%= render :partial => 'comment', :collection   => @comments %>
+						</ul>
+
+					</div><!-- /discussion-holder -->
+				</li>
+
+				<% end %>
+				
 			</ul>
 		</div><!-- /content-box-holder  -->
-		
-		<% if (@item_request.gifter?(current_user.person) || @item_request.requester?(current_user.person)) && !@item_request.completed? %>
-		
-		<li class="content-box clearfix">
-			<div class="discussion-holder" style="margin-left:170px;width:430px;">
-				<ul class="comment-list">
-          <%= render 'comment_form',        :item_request => @item_request %>
-          <%= render :partial => 'comment', :collection   => @comments %>
-				</ul>
-
-			</div><!-- /discussion-holder -->
-		</li>
-		
-		<% end %>
-
+	
 	
 	</div><!-- /content -->
 
-	<div id="sidebar" style="margin-left:50px;">
+	<div id="sidebar">
 	
 		<%= render :partial => "shared/trust_profile", :locals => { :person => (@item_request.gifter?(current_user.person) ? @item_request.requester : @item_request.gifter), :name => true } %>
 	

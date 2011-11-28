@@ -55,7 +55,7 @@
 		}
 		
 		.content-box p {
-			font-size: 11px;
+			font-size: 12px;
 			padding: 0;
 			margin: 0;
 			width: 400px;
@@ -97,7 +97,7 @@
 		.action ul li a:link,
 		.action ul li a:visited {
 			color: #62775A;
-		    font-size: 11px;
+		    font-size: 12px;
 		}
 		
 		.action ul li.time-since {
@@ -120,18 +120,16 @@
 	<div id="content" style="width: 511px; margin: 0 auto;">
 		
 		<div class="content-box-holder">
-			<%= image_tag("http://sharedearthplatform.org/static/graphics/curve-top-content-box.png", :alt => "", :style => "display: block;" )  %>
 			<ul>
 				<li class="content-box clearfix">
 					<h2>
-						Recent activity connected with your profile
+						Your Recent Activity on sharedearth.net
 					</h2>
 				</li>
 				<% @recent_activity_logs.each do |activity_log| %>
            <%= notify_recent_activity_sentence(activity_log, @current_user)%><br />
 				<% end unless @recent_activity_logs.nil? || @recent_activity_logs.empty? %>
 			</ul>
-			<%= image_tag("http://sharedearthplatform.org/static/graphics/curve-bottom-content-box.png", :alt => "", :style => "display: block;" )  %>
 		</div><!-- /content-box-holder -->
 		
 		
