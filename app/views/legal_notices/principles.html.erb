@@ -1,0 +1,114 @@
+<% unless current_user.nil? || current_user.person.accepted_pp?
+  content_for(:hide_on_policy_class, 'hide-on-policy-page')
+  content_for(:hide_on_policy_top_margin, 'style=margin-top:100px;')
+end %>
+
+<div id="terms-conditions-page" class="principles">
+
+	<div id="content">
+		<%= image_tag "terms-conditions-main-pic.jpg", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
+	    <%= image_tag "logo-type-large.png", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
+      <h1>
+          Design Principles
+      </h1>
+
+        <h6>
+          sharedearth.net operates differently to most social networks, due to its foundation on the principle of sharing.
+        </h6>
+
+
+		<h2>
+			sharedearth.net is designed for people and communities.
+		</h2>
+
+        <p class="principles">
+          This is about creating human networks, for the benefit of humans, not corporations or special interest groups.
+		</p>
+
+		<h2>
+            sharedearth.net operates on the principle of gift culture.
+        </h2>
+
+        <p class="principles">
+          Share and give only when you're comfortable, and respect others - e.g. refuel after borrowing a neighbours lawn mower, and repair items you break. Advertising, marketing, profiteering, and the provision of goods and services in exchange for, or expectation of money is not welcome and may lead to account deactivation or blocking.
+		</p>
+
+		<h2>
+          Everyone's profile is visible to every user of the site.
+        </h2>
+		
+        <p class="principles">
+          You are not required to provide or publish any identifying information. Your email address is not public, nor used for any purpose except site notifications and updates. Your profile is your digital reputation and history of interactions on the site. It will be used by other users to determine if they wish to interact, give or share with you, so take responsibility for your actions.
+		</p>
+
+
+		<h2>
+            Every item, skill or resource you share or offer on the site is visible to every user of the site.
+        </h2>
+
+        <p class="principles">
+          Be sensible about what you share through the site. In future, features may be introduced that allow you to set visibility levels for specific items.
+		</p>
+
+		<h2>
+            You are not obliged to accept any request for your resources, nor penalised for declining a request.
+        </h2>
+		
+        <p class="principles">
+          You are encouraged to share your gifts consciously and wisely with those who also give to the community. In doing so, our network will grow and become sustainable as others will be encouraged to share and give what they can.
+		</p>
+		
+		<h2 class="green">
+			sharedearth.net is designed with love, for a world that is shared.
+            <br>
+            <br>
+		</h2>
+
+		<% if !current_user.nil? -%>
+ 		  <% if !current_user.person.accepted_pp? && current_user.person.authorised_account && current_user.person.accepted_tr? && current_user.person.accepted_tc?-%>
+		    <div class="buttons-holder">
+			    <ul class="clearfix">
+				    <li>
+              <%= form_tag('/legal_notices/accept_pp', :method => :put)  do -%>
+								<div class="post-to-wall">
+									<%= check_box_tag 'facebook', '1', true %>
+									<label for="facebook">Post on my Facebook wall that I've connected to sharedearth.net</label>
+								</div> 
+								<div><%= submit_tag "Connect" %></div>
+							<% end -%>
+					    <%#= link_to 'Connect', accept_pp_terms_path, :method => 'put', :class => 'positive', :id => 'connect' %>
+				    </li>
+				    <li class="no">
+					    <%= link_to 'No thanks', signout_path, :class => 'positive' %>
+				    </li>
+			    </ul>
+		    </div>
+
+        <p class="principles">
+          <br><br>
+          If you are uncomfortable with the underlying design principles please do not continue. You are welcome to use the code to run your own server operating with different principles. See <a class="brownish" href="http://sharedearthplatform.org">sharedearthplatform.org</a> for more details.
+        </p>
+
+
+  		<% end -%>
+		<% end -%>
+
+
+		<!--
+			BEGIN post to FB wall
+		-->
+		
+		<!--
+		 	<div class="post-to-wall">
+				<input type="checkbox" />
+				Post on my Facebook wall that I've connected to sharedearth.net
+			</div> 
+		-->
+		
+		<!--
+			END post to FB wall
+		-->
+		
+	</div><!--	/content -->
+	
+</div><!--	/terms-conditions-page-->
