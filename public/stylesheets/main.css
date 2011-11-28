@@ -3297,6 +3297,11 @@ a.normal:visited {
 		#dashboard-page p a.trusted:visited {
 			color: #127e0e;
 		}
+		
+		
+		#dashboard-page .read-recent-activity p {
+			color: #62755a;
+		}
 	
 	
 	/* Event sentences in News Feed (on dashboard) and Latest Activity (on profile pages) */
@@ -3376,6 +3381,8 @@ a.normal:visited {
 		color: #62775a;
 		font-size: 11px;
 	}
+	
+	
 	
 	
 	/* Main action shortcuts shown in near headers (e.g. 'establish trust', 'edit profile' etc) */
