@@ -1122,8 +1122,14 @@ a.normal:visited {
 				#profile-page #content .items-list .requests ul li {
 
 				}
+				
+				#profile-page .items-list .requests ul li div.avatar-holder {
+					float: left;
+				    width: 60px;
+				}
 			
 					#profile-page .items-list .requests ul li div {
+						float: left;
 					}
 			
 			
