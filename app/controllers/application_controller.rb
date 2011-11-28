@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     # Render 404's
     rescue_from ActiveRecord::RecordNotFound, :with => :missing_record_error
     rescue_from ActionController::RoutingError, :with => :missing_page  #Rails 3.0/3.1 can't catch this error still
-	
+
     # Render 501's
     rescue_from ActiveRecord::StatementInvalid, :with => :generic_error
     rescue_from RuntimeError, :with => :generic_error
@@ -33,12 +33,10 @@ class ApplicationController < ActionController::Base
   end
 
   def next_policy_path
-    if not current_user.person.accepted_tc?
-      terms_path
-    elsif not current_user.person.accepted_tr?
-      transparency_index_path
+    if not current_user.person.accepted_tc? || current_user.person.accepted_tr?
+      legal_notices_path
     elsif not current_user.person.accepted_pp?
-      principles_terms_path
+      principles_legal_notices_path
     else
       current_person.has_reviewed_profile? ? dashboard_path : edit_person_path(current_person)
     end

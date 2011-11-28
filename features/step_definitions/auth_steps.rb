@@ -1,5 +1,4 @@
 Given /^I am signed in$/ do  
-  visit login_path
   visit oauth_callback_path
 end  
 
@@ -28,8 +27,8 @@ end
 
 Given /^the unauthorised user is logged in$/ do
   FbService.stub!(:fb_logout_url).and_return(dashboard_path)
-
-  omniauth_mock_facebook
+  person = Factory(:person, :id => 1, :authorised_account => false, :accepted_tc => false, :accepted_pp => false, :accepted_tr => false )
+  omniauth_mock_facebook_with_uid(person.user.uid)
   visit "/auth/facebook"
 end
 

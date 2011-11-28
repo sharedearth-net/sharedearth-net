@@ -29,7 +29,7 @@ end
 
   resources :legal_notices, :only => [:index] do
     collection do
-      put 'accept_tc'
+      put 'accept_legal_notice'
       put 'accept_pp'
       get 'principles'
     end

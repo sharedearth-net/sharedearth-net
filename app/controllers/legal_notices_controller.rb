@@ -3,15 +3,16 @@ class LegalNoticesController < ApplicationController
 
   def index
   end
-  
+
   def principles
   end
 
-  def accept_tc
+  def accept_legal_notice
     current_user.person.accept_tc!
+    current_user.person.accept_tr!
     redirect_to next_policy_path
   end
-  
+
   def accept_pp
     current_user.person.accept_pp!
     if !params[:facebook].nil?
@@ -22,7 +23,7 @@ class LegalNoticesController < ApplicationController
     end
     redirect_to next_policy_path
   end
-    
+
   def dynamic_layout
     if current_user.nil?  || !current_user.person.authorised_account
       'shared_earth'
