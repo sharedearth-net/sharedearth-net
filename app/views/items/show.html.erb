@@ -37,7 +37,11 @@
 									<li><%= link_to 'Edit', edit_item_path(@item) %></li>
 									<li><%= link_to 'Lost', mark_as_lost_item_path(@item), :method => :put %></li>
 									<li><%= link_to 'Damaged', mark_as_damaged_item_path(@item), :method => :put %></li>
-                                    <li><%= link_to("hide", mark_as_hidden_item_path(@item), :method => :PUT) unless @item.hidden?%></li>
+                  <% if @item.hidden? -%>
+                    <li><%= link_to("unhide", mark_as_unhidden_item_path(@item), :method => :PUT)%></li>
+                  <% else -%>
+                    <li><%= link_to("hide", mark_as_hidden_item_path(@item), :method => :PUT)%></li>
+                  <% end -%>
 								<% elsif @item.lost? %>
 									<li><%= link_to 'Found', mark_as_normal_item_path(@item), :method => :put %></li>
 								<% elsif @item.damaged? %>

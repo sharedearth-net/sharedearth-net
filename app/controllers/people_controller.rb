@@ -74,7 +74,6 @@ class PeopleController < ApplicationController
       else
         @items = @person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
     end
-debugger
     @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
   end
 

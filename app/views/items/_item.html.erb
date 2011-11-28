@@ -7,6 +7,7 @@
 			<%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;&nbsp;
 			<%= link_to item.item_type, "#", :class => "item-type" %>&nbsp;&nbsp;&nbsp;
 			<%= content_tag(:span, item.hidden? ? 'hidden' : item.purpose?, :style => "display:inline;", :class => (item.gift? ? "gift-item" : "") ) %>
+      <%= link_to("unhide", mark_as_unhidden_item_path(item), :method => :PUT) if item.hidden?%>
 		</p>
 
 		<ul class="action-list">
