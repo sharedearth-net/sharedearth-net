@@ -1,13 +1,13 @@
 <% person = comment.user.person %>
-<li class="<%= cycle :even, '' %> clearfix" style="width:430px;">
-  <div class="time-ago" style="margin-top:3px;width:140px;text-align:right;margin-right:10px;">
+<li class="<%= cycle :even, '' %> clearfix">
+  <div class="time-ago">
     <%= time_ago_in_words(comment.created_at) %> ago
   </div>			
 
   <%= image_tag person.avatar(:square), :class => "thumb" %>
 
   <p>
-    <a href="#"><strong><%= link_to person.name, person_path(person) %></strong></a>
+    <strong><%= link_to person.name, person_path(person) %></strong>
     <%= comment.comment %>
   </p>
 </li>
