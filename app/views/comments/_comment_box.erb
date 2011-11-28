@@ -8,7 +8,7 @@
 
 				<% end unless object.comments.empty? -%>
 
-				<%= render :partial => 'comments/new', :locals => { :commentable => object } %>
+				<%= render :partial => 'comments/new.html.erb', :locals => { :commentable => object } %>
 
 				</ul>
 			</div><!-- /inner-content -->	

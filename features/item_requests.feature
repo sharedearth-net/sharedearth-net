@@ -105,7 +105,7 @@ Feature: Item requests management page
       Given an item exists with name: "Sweet ride"
       And the logged person is the owner
       And I delete that item
-      When "Maria" requests that item
+      When "Maria" requests Item
       Then a item request should not exist
 
    @javascript
