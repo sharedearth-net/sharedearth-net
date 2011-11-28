@@ -1,13 +1,14 @@
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_item, :only => [:show, :edit, :update, :destroy,
-                                     :mark_as_normal, :mark_as_lost, :mark_as_damaged, :mark_as_hidden]
+                                     :mark_as_normal, :mark_as_lost, :mark_as_damaged, :mark_as_hidden, :mark_as_unhidden]
   before_filter :only_owner!, :only => [:edit, :update, :destroy,
-                                        :mark_as_normal, :mark_as_lost, :mark_as_damaged, :mark_as_hidden]
-  before_filter :actions_completed?, :only => [:mark_as_lost, :mark_as_damaged]
+                                        :mark_as_normal, :mark_as_lost, :mark_as_damaged, :mark_as_hidden, :mark_as_unhidden]
+  before_filter :actions_completed?, :only => [:mark_as_lost, :mark_as_damaged, :mark_as_hidden]
   before_filter :check_if_item_is_deleted, :only => [:edit, :update, :destroy,
                                                      :mark_as_normal, :mark_as_lost,
                                                      :mark_as_damaged]
+  before_filter :check_if_item_is_hidden, :only => [:show]
   before_filter :check_if_user_has_fb_account, :only => [:new, :create]
   def index
     @items = current_user.person.items.without_deleted
@@ -104,6 +105,11 @@ class ItemsController < ApplicationController
     redirect_to item_path(@item)
   end
 
+  def mark_as_unhidden
+    @item.unhide!
+    redirect_to item_path(@item)
+  end
+
   private
 
   def actions_completed?
@@ -116,6 +122,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def check_if_item_is_hidden
+    if @item.hidden? && !@item.is_owner?(current_user)
+      redirect_to items_path, :alert => (I18n.t('messages.items.is_not_available'))
+    end
+  end
   def check_if_user_has_fb_account
     @can_post_to_fb = true if fb_token
   end

@@ -35,6 +35,7 @@ describe ItemsController do
       before :each do
         Item.stub(:find_by_id).with("37") { mock_item }
         mock_item.stub!(:deleted?).and_return(false)
+        mock_item.stub(:hidden?).and_return(false)
       end
 
       it "assigns the requested item as @item" do
@@ -54,6 +55,18 @@ describe ItemsController do
         get :show, :id => "37"
         assigns(:item).should be(mock_item)
         response.should be_success
+      end
+
+      context "hidden item" do
+        before do
+          Item.stub(:find_by_id).with("37") {mock_item}
+          mock_item.stub(:hidden?).and_return(true)
+          mock_item.stub(:is_owner?).with(signedin_user).and_return(false)
+          get :show, :id => "37"
+        end
+
+        it_should_behave_like "requesting a hidden item"
+
       end
     end
 
@@ -423,6 +436,41 @@ describe ItemsController do
       it "should change item status to 'hidden'" do
         mock_item.should_receive(:hidden!).once
         put :mark_as_hidden, :id => "37"
+      end
+
+    end
+
+		describe "PUT mark_as_unhidden" do
+
+      before do
+        Item.stub(:find_by_id).with("37") { mock_item }
+        mock_item.stub!(:hidden?).and_return(true)
+        mock_item.stub(:available?).and_return(true)
+      end
+
+      it "assigns the item as @item unhide" do
+        put :mark_as_unhidden, :id => "37"
+        assigns(:item).should be(mock_item)
+      end
+
+      it "should allow only owner unhide the item" do
+        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
+
+        put :mark_as_hidden, :id => "37"
+        assigns(:item).should be(mock_item)
+      end
+
+      it "should deny access for non-owner members" do
+        mock_item.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
+
+        put :mark_as_unhidden, :id => "37"
+        flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
+        response.should redirect_to(root_path)
+      end
+
+      it "should change item status to 'hidden'" do
+        mock_item.should_receive(:unhide!).once
+        put :mark_as_unhidden, :id => "37"
       end
 
     end

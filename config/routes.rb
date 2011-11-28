@@ -18,7 +18,7 @@ Sharedearthapp::Application.routes.draw do
 end
 
 
-  
+
   resources :terms, :only => [:index] do
     collection do
       put 'accept_tc'
@@ -34,16 +34,16 @@ end
       get 'principles'
     end
   end
-  
+
    resources :requested_invitations, :only => [:create]
-  
+
   #resources :requested_invitations, :only => [ :create ]
     #post "reguested_invitations/create"
-  
+
   resources :comments, :only => [:create]
 
   resources :invitations, :except => [:destroy, :edit, :show, :new]
-  
+
   get "invitations/validate"
   get "invitations/purge"
   get "invitations/preview"
@@ -60,16 +60,17 @@ end
       put "mark_as_lost"
       put "mark_as_damaged"
 			put "mark_as_hidden"
+      put "mark_as_unhidden"
     end
   end
 
   resources :people, :only => [:show, :edit, :update, :index, :destroy] do
-    member do 
+    member do
       get :network
       get :my_network
     end
   end
-    
+
   resources :people_network_requests, :only => [:create, :destroy] do
     member do
       put "confirm"
@@ -78,7 +79,7 @@ end
   end
 
   resources :people_network, :only => [ :destroy ]
-  
+
   resources :item_requests, :except => [:index, :destroy, :edit], :path => "requests", :as => "requests" do
     member do
       put "accept"
@@ -90,9 +91,9 @@ end
     end
     resources :feedbacks
   end
-  
 
-  
+
+
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
 

@@ -149,6 +149,11 @@ class Item < ActiveRecord::Base
     self.hidden
   end
 
+  def unhide!
+    self.hidden = false
+    save!
+  end
+
   def restore
     self.deleted_at = nil
     self.deleted = false
