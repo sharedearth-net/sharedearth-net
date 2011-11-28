@@ -15,7 +15,6 @@ Factory.define :person do |p|
   p.accepted_pp true
   p.accepted_tr true 
   p.email_notification_count 0
-  p.smart_notifications false
 end
 
 Factory.define :new_person, :class => Person do |p|

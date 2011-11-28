@@ -35,6 +35,7 @@ class Person < ActiveRecord::Base
 
   #default_scope where(:authorised_account => true) if INVITATION_SYS_ON # Turning this on would couse problems
   scope :authorized, where(:authorised_account => true)
+  scope :with_smart_notifications, where(:smart_notifications => true)
   scope :no_email_sent, where("email_notification_count = 0")
   scope :low_volume_email_sent, where("email_notification_count IN (1,2) AND last_notification_email < ?", Time.now - 78.hours)
   scope :high_volume_email_sent, where("email_notification_count IN (3,4) AND last_notification_email < ?", Time.now - 168.hours)

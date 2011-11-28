@@ -9,7 +9,7 @@ describe Cron do
   describe Cron do
     before do
       UserMailer.stub(:notify_with_recent_acitivity).with(recent_activity, 'example@temp.com', person.user).and_return(true)
-      Person.stub_chain(:notification_candidate, :include_users).and_return([person])
+      Person.stub_chain(:notification_candidate, :with_smart_notifications, :include_users).and_return([person])
     end
 
     it "should have a published named scope that returns articles with published flag set to true" do
