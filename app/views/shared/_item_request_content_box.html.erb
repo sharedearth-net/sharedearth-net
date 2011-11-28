@@ -1,6 +1,5 @@
 <% unless req.rejected? %>
   <li class="content-box clearfix"> 
-  <br />
     <%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), 
                          request_path(req) %>
 
