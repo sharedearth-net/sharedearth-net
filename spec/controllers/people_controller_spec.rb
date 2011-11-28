@@ -4,8 +4,9 @@ describe PeopleController do
 
   let(:signedin_user) { generate_mock_user_with_person }
   let(:mock_person)   { mock_model(Person).as_null_object }
-  let(:mock_items)    { [ mock_model(Item, :name => "Item1").as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
+  let(:mock_items)    { [ mock_model(Item, :name => "Item1").as_null_object, mock_model(Item, :name => "Item2", :item_type => "book").as_null_object ] }
   let(:mock_item_requests)    { [ mock_model(ItemRequest).as_null_object, mock_model(ItemRequest).as_null_object ] }
+  let(:mock_event) {mock_model(EventDisplay).as_null_object}
 
   it_should_require_signed_in_user_for_actions :show, :edit, :update, :cancel
 
@@ -18,7 +19,7 @@ describe PeopleController do
 
       before do
         mock_person.stub(:items).and_return(mock_items)
-        mock_person.stub(:belongs_to?).and_return(true)
+        mock_person.stub(:belongs_to?).and_return(false)
         Person.stub(:find_by_id).with("37") { mock_person }
       end
 
@@ -44,6 +45,7 @@ describe PeopleController do
       before do
         mock_person.stub_chain(:items, :without_deleted, :sort_by).and_return(mock_items)
         mock_person.stub(:unanswered_requests).and_return(mock_item_requests)
+        mock_person.stub(:belongs_to?).and_return(true)
         Person.stub(:find_by_id).with("37") { mock_person }
         get :show, :id => "37"
       end
@@ -70,7 +72,7 @@ describe PeopleController do
           mock_person.stub_chain(:items, :without_deleted, :with_type).and_return(mock_items)
           mock_person.stub(:unanswered_requests).and_return(mock_item_requests)
           Person.stub(:find_by_id).with("37") { mock_person }
-          get :show, :id => "37"
+          get :show, :id => "37", :filter_type => "book"
         end
 
         it "assigns the requested person as @person" do
@@ -82,7 +84,50 @@ describe PeopleController do
         end
 
         it "should assign person's items as @items" do
-          assigns(:items).should == mock_person.items.without_deleted.with_type{|i| i.item_type.downcase}
+          assigns(:items).should == mock_person.items.without_deleted.sort_by{"book"}
+        end
+
+        it "should assign person's unanswered requests as @unanswered_requests" do
+          assigns(:unanswered_requests).should == mock_person.unanswered_requests
+        end
+
+      end
+
+      context "When showing other people profile" do
+        before do
+          mock_person.stub_chain(:items, :without_deleted, :visible_to_other_users, :without_hidden, :sort_by).and_return(mock_items)
+          mock_person.stub(:belongs_to?).and_return(false)
+          Person.stub(:find_by_id).with("37") {mock_person}
+          get :show, :id => "37"
+        end
+
+
+        it "should assign person's items without hidden" do
+          assigns(:items).should == mock_person.items.without_deleted.visible_to_other_users.without_hidden.sort_by{|i| i.item_type.downcase}
+        end
+
+      end
+
+      context "filtering with type when showing other people profile" do
+
+        before do
+          mock_person.stub_chain(:items, :without_deleted, :visible_to_other_users, :without_hidden, :with_type).and_return(mock_items)
+          mock_person.stub(:unanswered_requests).and_return(mock_item_requests)
+          mock_person.stub(:belongs_to?).and_return(false)
+          Person.stub(:find_by_id).with("37") { mock_person }
+          get :show, :id => "37", :filter_type => "book"
+        end
+
+        it "assigns the requested person as @person" do
+          assigns(:person).should be(mock_person)
+        end
+
+        it "should render show template" do
+          response.should render_template("show")
+        end
+
+        it "should assign person's items as @items" do
+          assigns(:items).should == mock_person.items.without_deleted.visible_to_other_users.without_hidden.with_type{|i| i.item_type.downcase}
         end
 
         it "should assign person's unanswered requests as @unanswered_requests" do
@@ -216,5 +261,17 @@ describe PeopleController do
       end
     end
 
+    describe "GET my_network" do
+      before do
+        mock_person.chain_stub(:trusted_friends_items, :sort_by).and_return{mock_items}
+        signedin_user.stub(:network_activity).and_return{mock_event}
+        Person.stub(:find_by_id).with("37").and_return{mock_person}
+        get :my_network, :id => "37", :type => "trusted"
+      end
+
+      it "should return list of items in my network withouth hidden" do
+        assigns(:items).should == mock_person.trusted_friends_items("trusted").without_hidden.sort_by{|i| i.item_type.downcase}
+      end
+    end
   end
 end
