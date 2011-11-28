@@ -3550,9 +3550,14 @@ a.normal:visited {
 		color: #333;
 	}
 		
+		
 		#content ul p a.item-type:link,
 		#content ul p a.item-type:visited {
 			color: #62775a;
+		}
+		
+		#content .items-expanded ul p a.item-type {
+			text-transform: lowercase;
 		}
 	
 	/* for an item request sentence */
