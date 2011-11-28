@@ -47,6 +47,7 @@ Factory.define :item do |i|
   i.association :owner, :factory => :person
   i.status Item::STATUS_NORMAL
   i.purpose Item::PURPOSE_SHARE
+  i.available true
   i.photo_file_name "test.jpg"
   i.photo_content_type "image/jpeg"
   i.photo_file_size 100000
