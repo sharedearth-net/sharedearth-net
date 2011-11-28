@@ -580,6 +580,21 @@ class EventType < ActiveRecord::Base
 
   def neutral_feedback_requester?
     self.id == EventType.neutral_feedback_requester
-  end  
-  
+  end
+
+  def self.trust_request(return_only_id = true)
+    return_only_id ? 61 : EventType.find(61)
+  end
+
+  def trust_request?
+    self.id == EventType.trust_request
+  end
+
+  def self.trust_request_other_party(return_only_id = true)
+    return_only_id ? 62 : EventType.find(62)
+  end
+
+  def trust_request_other_party?
+    self.id == EventType.trust_request
+  end
 end

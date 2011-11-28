@@ -481,6 +481,10 @@ module PagesHelper
       sentence =  person + " has left you neutral feedback after borrowing your " + item
     when 60
       sentence =  person + " has left you neutral feedback after sharing their " + item + " with you"
+    when 61
+      sentence =  "You have indicated you have a trusted relationship with " + person
+    when 62
+      sentence =  person + " has indicated they have a trusted relationship with you"
 
     else
       #
@@ -651,6 +655,10 @@ module PagesHelper
       sentence =  person + " has left you neutral feedback after borrowing your " + item
     when 60
       sentence =  person + " has left you neutral feedback after sharing their " + item + " with you"
+    when 61
+      sentence =  "You have indicated you have a trusted relationship with " + person
+    when 62
+      sentence =  person + " has indicated they have a trusted relationship with you"
 
     else
       #

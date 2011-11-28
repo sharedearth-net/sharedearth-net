@@ -4,9 +4,13 @@
 	<div class="trust-reputation-box <%= 'my-trust-reputation-box' if viewing_my_profile %>">
 		
 		<div class="clearfix">
-			<h2>
-				<%= link_to person.name, person_path(person), :class => "loged-out" if name %> 
-			</h2>
+			<% if name  %>
+				<h2>
+					<%= link_to person.name, person, :class => "loged-out" %> 
+					<br />
+					<span class="location"><%= person.location %></span>
+				</h2>
+			<% end %>
 
 			<% unless viewing_my_profile  %>
 

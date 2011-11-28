@@ -3,108 +3,67 @@
   content_for(:hide_on_policy_top_margin, 'style=margin-top:100px;')
 end %>
 
-<div id="site-information-pages" class="principles">
+<div id="terms-conditions-page" class="principles">
 
 	<div id="content">
-		<%= image_tag "terms-conditions-main-pic.jpg", :class => "main-pic", :alt => "sharedearth.net - from ego to wego", :title => "sharedearth.net - from ego to wego"  %>
+		<%= image_tag "terms-conditions-main-pic.jpg", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
+	    <%= image_tag "logo-type-large.png", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
+      <h1>
+          Design Principles
+      </h1>
+
+        <h6>
+          sharedearth.net operates differently to most social networks, due to its foundation on the principle of sharing.
+        </h6>
+
+
 		<h2>
-			Important Information
+			sharedearth.net is designed for people and communities.
 		</h2>
-		
-		<h3>
-			sharedearth.net operates differently to most social networks, due to its foundation on the principle of sharing.
-		</h3>
-		
-		<h3>
-			If you are uncomfortable with the underlying design principles please do not continue.
-		</h3>
 
-        <h3>
-            You are welcome to use the code to run your own server operating with different principles. See <a class="green" href="http://sharedearthplatform.org">sharedearthplatform.org</a> for more details.
-        </h3>
-		
-		
-		<h4>
-          <br>
-          DESIGN PRINCIPLES</h4>
+        <p class="principles">
+          This is about creating human networks, for the benefit of humans, not corporations or special interest groups.
+		</p>
 
-		<h5>
-            <br>
-			sharedearth.net is designed for people and communities, not for companies, corporations or special interest groups.
-		</h5>
-
-		<h5>
-            <br>
+		<h2>
             sharedearth.net operates on the principle of gift culture.
-        </h5>
+        </h2>
 
-        <p>
-			<em>
-				Share and give only when you're comfortable, and respect others - e.g. refuel after borrowing a neighbours lawn mower, and repair items you break.
-			</em>
+        <p class="principles">
+          Share and give only when you're comfortable, and respect others - e.g. refuel after borrowing a neighbours lawn mower, and repair items you break. Advertising, marketing, profiteering, and the provision of goods and services in exchange for, or expectation of money is not welcome and may lead to account deactivation or blocking.
 		</p>
 
-		<p class="top-separated">
-			Advertising, marketing, profiteering, and the provision of goods and services in exchange for, or expectation of money is not welcome and may lead to account deactivation or blocking.
-		</p>
-
-		<h5>
-            <br>
-            Everyone's profile is shared and visible to every user of the site.</h5>
+		<h2>
+          Everyone's profile is visible to every user of the site.
+        </h2>
 		
-		<p>
-			<em>
-				You are not required to provide or publish any identifying information. You are not required to provide your date of birth, income level, gender, address, job title or phone number. Your email address is not public, nor used for any purpose except site notifications and updates.
-			</em>
+        <p class="principles">
+          You are not required to provide or publish any identifying information. Your email address is not public, nor used for any purpose except site notifications and updates. Your profile is your digital reputation and history of interactions on the site. It will be used by other users to determine if they wish to interact, give or share with you, so take responsibility for your actions.
 		</p>
 
-		<h5>
-            <br>
-            Every completed transaction and related feedback is shared and visible to every user of the site.</h5>
-			
-		<p>
-			<em>This information forms your digital reputation and history of interactions on the site. It will be used by other users to determine if they wish to interact, give or share with you, so take responsibility for your actions. </em>
+
+		<h2>
+            Every item, skill or resource you share or offer on the site is visible to every user of the site.
+        </h2>
+
+        <p class="principles">
+          Be sensible about what you share through the site. In future, features may be introduced that allow you to set visibility levels for specific items.
 		</p>
 
-		<p class="top-separated">sharedearth.net does not take responsibility for your items or actions, and will not get involved in disputes, as per our Terms and Conditions.</p>
-
-		<h5>
-            <br>
-            Requests, incomplete actions, and any related discussion is intended to be visible only to the parties involved.</h5>
+		<h2>
+            You are not obliged to accept any request for your resources, nor penalised for declining a request.
+        </h2>
 		
-		<p>
-			<em>
-				To facilitate transactions with other users, use the discussion functionality available within an action or request. The posts within a discussion are not intended to be accessible to other users on the site. Use common-sense when sharing and interacting with other users, e.g. provide a phone number to facilitate interactions and exchanging details rather than posting your home address on the site.
-			</em>
-		</p>
-
-		<h5>
-            <br>
-            Every item, skill or resource you share or offer on the site is visible to every user of the site.</h5>
-		<p>
-			<em>
-				Be sensible about what you share through the site. Over time, resources permitting, privacy features may be introduced that allow you to set visibility levels for specific items.
-			</em>
-		</p>
-
-		<h5>
-            <br>
-            Any user can request the resources you share or offer on the site.</h5>
-
-		<h5>
-            <br>
-            You are not obliged to accept any request for your resources, nor penalised for declining a request.</h5>
-		
-		<p>
-			<em>
-				In fact we encourage you to share your gifts consciously and wisely with those who also give to the community. In doing so, our network will grow and become sustainable as others will be encouraged to share and give what they can.
-			</em>
+        <p class="principles">
+          You are encouraged to share your gifts consciously and wisely with those who also give to the community. In doing so, our network will grow and become sustainable as others will be encouraged to share and give what they can.
 		</p>
 		
-		<h3 class="bottom-title">
+		<h2 class="green">
 			sharedearth.net is designed with love, for a world that is shared.
             <br>
-		</h3>
+            <br>
+		</h2>
+
 		<% if !current_user.nil? -%>
  		  <% if !current_user.person.accepted_pp? && current_user.person.authorised_account && current_user.person.accepted_tr? && current_user.person.accepted_tc?-%>
 		    <div class="buttons-holder">
@@ -124,6 +83,13 @@ end %>
 				    </li>
 			    </ul>
 		    </div>
+
+        <p class="principles">
+          <br><br>
+          If you are uncomfortable with the underlying design principles please do not continue. You are welcome to use the code to run your own server operating with different principles. See <a class="brownish" href="http://sharedearthplatform.org">sharedearthplatform.org</a> for more details.
+        </p>
+
+
   		<% end -%>
 		<% end -%>
 

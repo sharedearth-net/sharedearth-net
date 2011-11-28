@@ -3,33 +3,41 @@
   content_for(:hide_on_policy_top_margin, 'style=margin-top:100px;')
 end %>
 
-<div id="site-information-pages" class="principles">
+<div id="terms-conditions-page">
 
 	<div id="content">
 		<%= image_tag "terms-conditions-main-pic.jpg", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
-		<h4>
-          <%= image_tag "logo-type-large.png", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
-          <br>
+	    <%= image_tag "logo-type-large.png", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
+      <h1>
           Legal Notices
-        </h4>
+      </h1>
 
-        <p>
-			<em>
-                sharedearth.net is designed for a world where we each take complete responsibility for our ourselves, each other, our community, and our planet.  That culture is not yet firmly established, so you are required to read and accept the Terms and Conditions.
-            </em>
-        </p>
+        <h6>
+          sharedearth.net is designed for a world where we each take complete responsibility for our ourselves, each other, our community, and our planet.  That culture is not yet firmly established, so you are required to read and accept the <a class="brownish" href="/terms" title="Terms and Conditions" target="_blank">Terms and Conditions</a>.
+        </h6>
 
-              <p>
-			<em>
-                sharedearth.net prioritises transparency over privacy to encourage the development of commons culture and its values of sharing, transparency and openness. As a consequence there is very little privacy functionality built into the platform. Read the Transparency Policy for more information.
-            </em>
-        </p>
+        <h6>
+          sharedearth.net prioritises transparency over privacy to encourage the development of commons culture and its values of sharing, transparency and openness. As a consequence there is very little privacy functionality built into the platform. Read the <a class="brownish" href="/transparency" title="Transparency Policy" target="_blank">Transparency Policy</a> for more information.
+        </h6>
 
-		<h5>
-            <br>
-                Continued use of the site will be taken as conclusive evidence of your acceptance of the Terms and Conditions and Transparency Policy.
-        </h5>
+		<h3 class="bottom-title">
+          Continued use of the site will be taken as conclusive evidence of your acceptance of the Terms and Conditions and Transparency Policy.
+        </h3>
 
+		<% if !current_user.nil? -%>
+		  <% if !current_user.person.accepted_tc? && current_user.person.authorised? -%>
+		    <div class="buttons-holder">
+			    <ul class="action-buttons-list clearfix">
+				    <li>
+					    <%= link_to 'Accept', accept_tc_terms_path, :method => 'put', :class => 'positive' %>
+				    </li>
+				    <li>
+			      	<%= link_to 'Reject', signout_path, :class => 'positive' %>
+				    </li>
+			    </ul>
+		    </div>
+		  <% end -%>
+		<% end -%>
 
 	</div><!--	/content -->
 	

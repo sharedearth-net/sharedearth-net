@@ -7,7 +7,6 @@
 			<%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;&nbsp;
 			<%= link_to item.item_type, "#", :class => "item-type" %>&nbsp;&nbsp;&nbsp;
 			<%= content_tag(:span, item.hidden? ? 'hidden' : item.purpose?, :style => "display:inline;", :class => (item.gift? ? "gift-item" : "") ) %>
-      <%= link_to("hide", mark_as_hidden_item_path(item), :method => :PUT) unless item.hidden?%>
 		</p>
 
 		<ul class="action-list">
@@ -48,6 +47,11 @@
 				<li><%= link_to 'edit', edit_item_path(item) %></li>
 			<% end %>
 			<% end %>
+          	<% if action_list.include?(:hide) %>
+			<li>
+				<%= link_to("hide", mark_as_hidden_item_path(item), :method => :PUT) unless item.hidden?%>
+			</li>
+            <% end %>
 			<% if action_list.include?(:delete) %>
 			<% if item.available? -%>
 			<li>
