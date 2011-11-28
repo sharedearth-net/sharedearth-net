@@ -96,6 +96,7 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    escape_utils (0.2.4)
     eventmachine (0.12.10)
     factory_girl (2.0.1)
     factory_girl_rails (1.1.0)
@@ -332,6 +333,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   delayed_job
+  escape_utils
   factory_girl_rails
   fb_graph
   ffaker
