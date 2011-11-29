@@ -3302,6 +3302,11 @@ a.normal:visited {
 		#dashboard-page .read-recent-activity p {
 			color: #62755a;
 		}
+		
+			#dashboard-page .read-recent-activity p a:link,
+			#dashboard-page .read-recent-activity p a:visited {
+				color: #62755a;
+			}
 	
 	
 	/* Event sentences in News Feed (on dashboard) and Latest Activity (on profile pages) */
