@@ -108,6 +108,10 @@ class Person < ActiveRecord::Base
     self.accepted_pp and self.pp_version == PP_VERSION
   end
 
+  def has_reviewed_profile?
+  	self.has_reviewed_profile == true
+  end
+
   def create_entity_for_person
     Entity.create!(:entity_type_id => EntityType::PERSON_ENTITY, :specific_entity_id => self.id)
   end
