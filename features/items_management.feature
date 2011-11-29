@@ -175,5 +175,6 @@ Feature: Manage Items
     Given "John" is the owner of item with name "Mobile"
     Given Looking at my person page
     Then I should not see "hidden"
-    Then I follow "hide"
+    Then I follow "Mobile"
+    And I follow "hide"
     And I should see "hidden"
