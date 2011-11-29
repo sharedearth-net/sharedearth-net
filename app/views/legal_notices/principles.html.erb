@@ -7,7 +7,7 @@ end %>
 
 	<div id="content">
 		<%= image_tag "terms-conditions-main-pic.jpg", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
-	    <%= image_tag "logo-type-large.png", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
+	    <%= image_tag "logo-type-large.png", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net" if !current_user.nil? && current_user.person.accepted_pp? %>
       <h1>
           Design Principles
       </h1>
