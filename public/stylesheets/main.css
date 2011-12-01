@@ -824,6 +824,10 @@ a.normal:visited {
 			width: 50px;
 		}
 		
+		#dashboard-page .dashboard-recent-activity .content-box .thumb {
+			width: 41px;
+		}
+		
 			#dashboard-page .inner-content {
 				width: 424px;
 				float: left;
