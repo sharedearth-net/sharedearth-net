@@ -1128,8 +1128,8 @@ a.normal:visited {
 			    margin-top: 0;
 			}
 			
-				#profile-page #content .items-list .requests ul li {
-
+				#profile-page #content .items-list .requests ul li.item {
+					margin-bottom: 9px;
 				}
 				
 				#profile-page .items-list .requests ul li div.avatar-holder {
