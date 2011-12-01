@@ -10,11 +10,6 @@
 	
 
 	<style>
-		body  {
-			margin: 0;
-			padding: 0;
-			font-family: "lucida grande",verdana,tahoma,arial,sans-serif;
-		}
 		
 		a:link,
 		a:visited {
@@ -25,7 +20,7 @@
 			text-decoration: underline;
 		}
 		
-		.content-box-holder {
+		/*.content-box-holder {
 		    margin: 14px 0;
 		}
 		
@@ -34,24 +29,16 @@
 		}
 		
 		h2 {
-			padding: 0;
-			margin: 0;
-			line-height: 15px;
-		    margin-bottom: 0;
-			color: #315859;
-		    font-size: 12px;
-			font-weight: normal;
+			
 		}
-		
+		*/
 		.content-box .thumb {
 		    width: 50px;
 			display: none;
 		}
 		
 		.content-box {
-		    background: #ebf5da;
-		    padding: 0 15px 21px;
-		    width: 481px;
+		    
 		}
 		
 		.content-box p {
@@ -85,7 +72,6 @@
 		
 		.action ul {
 			width: 80px;
-			
 			float: left;
 		}
 		
@@ -112,22 +98,22 @@
 	</style>
 	
 </head>
-<body>
+<body style="font-family: 'lucida grande',verdana,tahoma,arial,sans-serif; margin: 0; padding: 0;">
 
 <div id="container" style="width: 650px; margin: 0 auto; ">
-		<%= image_tag("http://sharedearthplatform.org/static/graphics/emailv1-top-pic.jpg", :alt => "sharedearth.net - trust. share. connect.", :title => "sharedearth.net - trust. share. connect.", :style => "display: block;" )  %>
 	
-	<div id="content" style="width: 511px; margin: 0 auto;">
+	<div id="content" style="width: 650px; margin: 0 auto;">
 		
-		<div class="content-box-holder">
-			<ul>
-				<li class="content-box clearfix">
-					<h2>
+		<div class="content-box-holder" style=" margin: 14px 0;">
+			<ul style="margin: 0; padding: 0;">
+				<li class="content-box clearfix" style="padding: 0 15px 21px; width: 481px; list-style-type: none;">
+					<h2 style="padding: 0; margin: 0; line-height: 15px; margin-bottom: 0; color: #315859; font-size: 12px;	font-weight: normal;">
 						Your Recent Activity on sharedearth.net
 					</h2>
 				</li>
+				
 				<% @recent_activity_logs.each do |activity_log| %>
-           <%= notify_recent_activity_sentence(activity_log, @current_user)%><br />
+           			<%= notify_recent_activity_sentence(activity_log, @current_user)%><br />
 				<% end unless @recent_activity_logs.nil? || @recent_activity_logs.empty? %>
 			</ul>
 		</div><!-- /content-box-holder -->
@@ -136,12 +122,15 @@
 	</div><!-- /content -->
 
 
-	<div id="footer">
-	    <p style="text-align: center;">
+	<div id="footer" style="clear: both;">
+	    <p>
             <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/about">About</a> <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/terms/principles">Principles</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/transparency">Transparency</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/contribute">Contribute</a> <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="mailto:info@sharedearth.net">Contact</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/terms">Terms</a>
         </p>
-        <%= image_tag("http://sharedearthplatform.org/static/graphics/emailv1-bottom-pic.jpg", :alt => "sharedearth.net - trust. share. connect.", :title => "sharedearth.net - trust. share. connect.", :style => "display: block;" )  %>
+       
 	</div>
+	<p style="font-size: 10px; color: #9c9e9c;">
+		To disable email notifications edit your profile and uncheck Enable smart email notifications
+	</p>
 		
 </div>
 
