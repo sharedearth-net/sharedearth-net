@@ -453,6 +453,10 @@ a.normal:visited {
 								float: left;
 								margin-right: 17px;
 							}
+							
+							.inner-content .action ul li.last {
+								margin-right: 0;
+							}
 	
 
 	/* global - sidebar */
@@ -1238,6 +1242,10 @@ a.normal:visited {
 					float: left;
 					margin-right: 17px;
 					font-size: 11px;
+				}
+				
+				ul.action-list li.last {
+					margin-right: 0;
 				}
 				
 				
