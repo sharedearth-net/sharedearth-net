@@ -172,14 +172,15 @@ class ActivityLog < ActiveRecord::Base
       first_person_first_name = first_person.first_name
       first_person_name = first_person.name    
     end
-    
+    read_initiator = false
     if(object.nil?)
       action_object_type_readable = nil
+      read_initiator = true
     else
       action_object_type_readable = object.item_type
     end
 
-    # create log for gifter
+    # create log for gifter, also used for person who confirmed relationship
     ActivityLog.create!(
       :event_code => event_code,
       :primary => first_person,
@@ -189,7 +190,8 @@ class ActivityLog < ActiveRecord::Base
       :secondary_short_name => second_person.first_name,
       :secondary_full_name => second_person.name,
       :related => nil,
-      :event_type_id => event_type_gifter
+      :event_type_id => event_type_gifter,
+      :read => !read_initiator
     )
 
     # create log for requester
@@ -203,7 +205,7 @@ class ActivityLog < ActiveRecord::Base
       :secondary_full_name => first_person.name,
       :related => nil,
       :event_type_id => event_type_requester, 
-      :read => true
+      :read => read_initiator
     )
   end
 
