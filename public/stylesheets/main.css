@@ -1571,20 +1571,20 @@ a.normal:visited {
 				color: #127E0E;
 			}
 	
-			#request-page #content ul.comment-list .time-ago {
+			#request-page #content ul.comment-list span.time-ago {
 				float: right;
 				color: #838683;
 				font-size: 11px;
-				margin-top: 3px;
-				width: 130px;
 				text-align: right;
+				display: auto;
+				height: auto;
 			}
 	
 				#request-page #content ul.comment-list p {
 					clear: none;
 					padding-top: 4px;
 					padding-right: 4px;
-					width: 284px;
+					width: 414px;
 					color: #333;
 					font-size: 12px;
 				}
