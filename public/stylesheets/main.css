@@ -2077,6 +2077,10 @@ a.normal:visited {
 			font-size: 11px;
 			color: #127E0E;
 		}
+		
+			#search-page #content h3.default-title {
+				margin-bottom: 9px;
+			}
 
 			#search-page #content h2 img {
 				display: inline;
@@ -2152,6 +2156,13 @@ a.normal:visited {
 				#search-page #content ul li.people-holder p.action-link a:link,
 				#search-page #content ul li.people-holder p.action-link a:visited {
 					font-size: 11px;
+					color: #62775a;
+				}
+				
+				
+				#search-page #content ul li.people-holder div {
+				    float: left;
+					width: 480px;
 				}
 				
 
