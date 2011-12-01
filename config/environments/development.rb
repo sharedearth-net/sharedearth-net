@@ -24,6 +24,6 @@ Sharedearthapp::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
   
   config.action_mailer.delivery_method = :ses
-  config.action_mailer.default_url_options = { :host => 'senlocal.heroku.com' }
+  config.action_mailer.default_url_options = { :host => 'senlocal.heroku.com:3000' }
 end
 
