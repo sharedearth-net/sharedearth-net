@@ -48,6 +48,7 @@ class Person < ActiveRecord::Base
 		if logs.count < min_count
 			logs = activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(min_count)
 		end
+    logs.each { |a| a.is_read! }
 		logs
 	end
 
@@ -266,6 +267,7 @@ class Person < ActiveRecord::Base
   def request_trusted_relationship(person_requesting)
     unless requested_trusted_relationship?(person_requesting)
       received_people_network_requests.create(:person => person_requesting)
+      ActivityLog.create_activity_log(self, person_requesting, nil, EventType.trust_request, EventType.trust_request_other_party)
     end
   end
 
