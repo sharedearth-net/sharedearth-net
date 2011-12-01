@@ -800,6 +800,10 @@ a.normal:visited {
 		width: 516px;
 	}
 	
+	#dashboard-page .loader {
+	    margin-top: 20px;
+	}
+	
 	#dashboard-page #content p {
 		margin-bottom: 0;
 	}
