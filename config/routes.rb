@@ -102,6 +102,7 @@ end
   match '/about' => 'pages#about'
   match '/contribute' => 'pages#contribute'
   match '/no_javascript' => 'pages#no_javascript'
+  match '/collect_email' => 'pages#collect_email'
 
   root :to => "pages#index"
 

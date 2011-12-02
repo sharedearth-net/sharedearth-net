@@ -138,6 +138,8 @@ a:hover {
 				float: none;
 				line-height: 12px;
 				margin: 0;
+				text-align:center;
+				width:96px;
 			}
 		
 			.button-holder-connect h2 {
@@ -146,13 +148,24 @@ a:hover {
 				text-indent: -1000em;
 			}
 		
-			.button-holder-connect a:link,
-			.button-holder-connect a:visited {
+			.button-holder-connect h2 a:link,
+			.button-holder-connect h2 a:visited {
 				display: block;
 				background: url('../graphics/bt-connect.png') no-repeat top left;
 				width: 96px;
 				height: 42px;
 				overflow: hidden;
+			}
+			
+			.button-holder-connect p a:link,
+			.button-holder-connect p a:visited {
+				width: auto;
+				font-size: 10px;
+				font-family: verdana, arial, sans-serif;
+				float: none;
+				line-height: 12px;
+				margin: 0;
+				color:inherit;
 			}
 			
 			

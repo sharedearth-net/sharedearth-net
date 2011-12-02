@@ -41,4 +41,8 @@ class PagesController < ApplicationController
   def no_javascript
     render :layout => 'welcome'
   end
+  
+  def collect_email
+		render :layout => nil
+  end
 end
