@@ -5,15 +5,15 @@ class PeopleNetwork < ActiveRecord::Base
   scope :involves_as_trusted_person, lambda { |person| where(:trusted_person_id => person) }
   scope :involves_as_person, lambda { |person| where(:person_id => person) }
   scope :involves, lambda { |person| where("person_id = ? OR trusted_person_id = ?", person.id, person.id) }
-  
+
   scope :trusted_personal_network, where(:entity_type_id => EntityType::TRUSTED_PERSON_ENTITY)
   scope :personal_network, where(["entity_type_id = ? or entity_type_id = ?", EntityType::TRUSTED_PERSON_ENTITY, EntityType::MUTUAL_PERSON_ENTITY])
 
   validates_presence_of :person_id, :trusted_person_id
-  
+
   after_create :update_mutual_network_after_create
   after_destroy :update_mutual_network_after_destroy
-  
+
   # def requester?(person)
   #   self.person == person
   # end
@@ -47,6 +47,7 @@ class PeopleNetwork < ActiveRecord::Base
 				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::MUTUAL_PERSON_ENTITY}) ") # not already a mutual person
 			person_ids_to_insert.each do |pi|
 				PeopleNetwork.create!( :person_id => self.person_id, :trusted_person_id => pi["trusted_person_id"], :entity_id => pi["trusted_person_id"], :entity_type_id => EntityType::MUTUAL_PERSON_ENTITY )
+				PeopleNetwork.create!( :person_id => self.pi["trusted_person_id"], :trusted_person_id => person_id, :entity_id => pi["trusted_person_id"], :entity_type_id => EntityType::MUTUAL_PERSON_ENTITY )
 			end
 		end
   end
