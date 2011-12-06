@@ -4,7 +4,7 @@
 				<ul class="comment-list <%= object.comments.count.zero? && !new_comment ? 'comment-list-hidden' : '' %> ">
 				<% object.comments.each do |c| -%>
 
-				  <%= render :partial => '/comments/comment', :locals => {:c => c} %>
+				  <%= render :partial => '/comments/comment.html.erb', :locals => {:c => c} %>
 
 				<% end unless object.comments.empty? -%>
 
