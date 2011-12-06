@@ -453,6 +453,10 @@ a.normal:visited {
 								float: left;
 								margin-right: 17px;
 							}
+							
+							.inner-content .action ul li.last {
+								margin-right: 0;
+							}
 	
 
 	/* global - sidebar */
@@ -800,6 +804,10 @@ a.normal:visited {
 		width: 516px;
 	}
 	
+	#dashboard-page .loader {
+	    margin-top: 20px;
+	}
+	
 	#dashboard-page #content p {
 		margin-bottom: 0;
 	}
@@ -822,6 +830,10 @@ a.normal:visited {
 	
 		#dashboard-page .content-box .thumb {
 			width: 50px;
+		}
+		
+		#dashboard-page .dashboard-recent-activity .content-box .thumb {
+			width: 41px;
 		}
 		
 			#dashboard-page .inner-content {
@@ -896,6 +908,7 @@ a.normal:visited {
 	
 	#dashboard-page #sidebar {
 		margin-left: 30px;
+		margin-top: 20px;
 		width: 456px;
 	}
 	
@@ -1119,8 +1132,8 @@ a.normal:visited {
 			    margin-top: 0;
 			}
 			
-				#profile-page #content .items-list .requests ul li {
-
+				#profile-page #content .items-list .requests ul li.item {
+					margin-bottom: 9px;
 				}
 				
 				#profile-page .items-list .requests ul li div.avatar-holder {
@@ -1229,6 +1242,10 @@ a.normal:visited {
 					float: left;
 					margin-right: 17px;
 					font-size: 11px;
+				}
+				
+				ul.action-list li.last {
+					margin-right: 0;
 				}
 				
 				
@@ -1567,20 +1584,20 @@ a.normal:visited {
 				color: #127E0E;
 			}
 	
-			#request-page #content ul.comment-list .time-ago {
+			#request-page #content ul.comment-list span.time-ago {
 				float: right;
 				color: #838683;
 				font-size: 11px;
-				margin-top: 3px;
-				width: 130px;
 				text-align: right;
+				display: auto;
+				height: auto;
 			}
 	
 				#request-page #content ul.comment-list p {
 					clear: none;
 					padding-top: 4px;
 					padding-right: 4px;
-					width: 284px;
+					width: 414px;
 					color: #333;
 					font-size: 12px;
 				}
@@ -2077,6 +2094,10 @@ a.normal:visited {
 			font-size: 11px;
 			color: #127E0E;
 		}
+		
+			#search-page #content h3.default-title {
+				margin-bottom: 9px;
+			}
 
 			#search-page #content h2 img {
 				display: inline;
@@ -2152,6 +2173,13 @@ a.normal:visited {
 				#search-page #content ul li.people-holder p.action-link a:link,
 				#search-page #content ul li.people-holder p.action-link a:visited {
 					font-size: 11px;
+					color: #62775a;
+				}
+				
+				
+				#search-page #content ul li.people-holder div {
+				    float: left;
+					width: 480px;
 				}
 				
 

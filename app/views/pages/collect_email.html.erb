@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>sharedearth.net</title>
+  <%= render :partial => "layouts/meta_header" %>
+  <style>
+		html {
+			background: url('/static/graphics/bg-html.png') repeat-x 0 0 ;
+		}
+		body {
+			padding:20px;
+			background-color:Transparent;
+		}
+		input, button { padding:2px; }
+  </style>
+</head>
+
+<body>
+	<p>
+	In future different sign-in methods will be available, so humans without Facebook accounts can connect to sharedearth.net.
+	</p>
+	<br />
+	<p>
+	To be informed when this happens, leave your email address below, and respond to the confirmation email.
+	</p>
+	<br />
+	<form action="http://groups.google.com/group/sharedearthnet/boxsubscribe" target="_blank" onsubmit="setTimeout(function(){this.close();},0)">
+		<div>
+			<input style="width:250px;" onfocus="this.value=''" type="text" value="Email" name="email" />
+			<input type="submit" value="Connect" />
+		</div>
+	</form>
+</body>
+</html>
+
