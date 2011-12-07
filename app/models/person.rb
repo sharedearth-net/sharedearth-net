@@ -48,7 +48,6 @@ class Person < ActiveRecord::Base
 		if logs.count < min_count
 			logs = activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(min_count)
 		end
-    logs.each { |a| a.is_read! }
 		logs
 	end
 
