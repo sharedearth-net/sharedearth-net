@@ -214,4 +214,126 @@ class ActivityLog < ActiveRecord::Base
   	self.email_notification_id = entity.id
     save!
   end
+
+  #Check if passed person value initiated activity log (Recent activity)
+  def recent_activity_subject?(current_person)
+    if current_person != self.secondary
+      person = self.secondary
+    else
+      person = self.primary
+    end
+    
+    case self.event_type_id
+    when 1
+      true
+    when 2
+      false
+    when 3
+      true
+    when 4
+      true
+    when 5
+      true
+    when 6
+      false
+    when 7
+      false
+    when 8
+      false
+    when 9
+      true
+    when 10
+      false
+    when 11
+      true
+    when 12
+      true
+    when 13
+      false
+    when 14
+      true
+    when 15
+      false
+    when 16
+      false
+    when 17
+      true
+       
+      
+    when 27
+      true
+    when 28
+      true
+    when 29
+      false
+    when 30
+      false
+    when 31
+      false
+    when 32
+      true
+    when 33
+      true
+    when 34
+      false
+    when 35
+      true
+    when 36
+      false
+    when 37
+      false
+    when 38
+      true
+    when 39
+      true
+    when 40
+      true
+    #41 and 42 avatar don't match with who performed the action
+    when 41
+      true
+    when 42
+      false
+    when 43
+      false
+    when 44
+      true
+    when 45
+      true
+    when 46
+      false
+    when 47
+      true
+    when 48
+      false
+    when 49
+      true
+    when 51
+      true
+    when 52
+      true
+    when 53
+      true
+    when 54
+      true
+    when 55
+      false
+    when 56
+      false
+    when 57
+      false
+    when 58
+      false
+    when 59
+      false
+    when 60
+      false
+		when 61
+      true
+    when 62
+      false
+    else
+      true
+    end
+   
+  end
 end
