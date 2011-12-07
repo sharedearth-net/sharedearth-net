@@ -2,7 +2,7 @@ class Cron
 
   def self.recent_activity
     unactive_user_ids = User.unactive.collect(&:id)
-    @persons = Person.notification_candidate.with_smart_notifications.include_users(unactive_user_ids)
+    @persons = Person.notification_candidate.with_smart_notifications#.include_users(unactive_user_ids)
     @persons.each do |p| 
       @recent_activity_logs = ActivityLog.include_person(p).unread.email_not_sent
       unless @recent_activity_logs.nil? || @recent_activity_logs.empty?
