@@ -314,6 +314,10 @@ module PagesHelper
       person
     when 60
       person
+		when 61
+      current_person
+    when 62
+      person
     else
       current_person
     end
