@@ -13,7 +13,7 @@ class Cron
           #p.increase_email_notification_count!
           #p.log_email_notification_time!
 		    rescue Exception => e
-		      puts "Email sending failed to " + p.email + "For" + @recent_activity_logs.size
+		      puts "Email sending failed to " + p.email + "For" + @recent_activity_logs.map {|a| a.id.to_s}
 		    end
 			end
 		end
