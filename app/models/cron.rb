@@ -6,6 +6,8 @@ class Cron
     @persons.each do |p| 
       @recent_activity_logs = ActivityLog.include_person(p).unread#.email_not_sent
       unless @recent_activity_logs.nil? || @recent_activity_logs.empty?
+        UserMailer.notify_with_recent_activity(@recent_activity_logs, p.email, p.user).deliver
+=begin
 				begin
 		      UserMailer.notify_with_recent_activity(@recent_activity_logs, p.email, p.user).deliver
 		      #email_notification = EmailNotification.create!(:person_id => p.id, :email => p.email)
@@ -16,6 +18,7 @@ class Cron
 		      puts "Email sending failed to " + p.email + "For"
           puts @recent_activity_logs.map {|a| a.id.to_s}
 		    end
+=end
 			end
 		end
   end
