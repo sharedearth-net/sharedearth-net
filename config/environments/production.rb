@@ -50,4 +50,6 @@ Sharedearthapp::Application.configure do
   Sass::Plugin.options[:never_update] = true
   
   config.action_mailer.delivery_method = :ses
+  config.action_mailer.default_url_options = { :host => ENV['domain_url'] }
+
 end
