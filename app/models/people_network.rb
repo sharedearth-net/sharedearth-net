@@ -23,6 +23,8 @@ class PeopleNetwork < ActiveRecord::Base
   # end
 
   def self.create_trust!(first_person, second_person)
+		# 2 calls given below should be always happen in conjunction
+		# for update_mutual_network_after_create
     PeopleNetwork.create!(:person => first_person, :trusted_person => second_person,
                           :entity_id => second_person.id, 
                           :entity_type_id => EntityType::TRUSTED_PERSON_ENTITY)
@@ -47,13 +49,15 @@ class PeopleNetwork < ActiveRecord::Base
 				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::MUTUAL_PERSON_ENTITY}) ") # not already a mutual person
 			person_ids_to_insert.each do |pi|
 				PeopleNetwork.create!( :person_id => self.person_id, :trusted_person_id => pi["trusted_person_id"], :entity_id => pi["trusted_person_id"], :entity_type_id => EntityType::MUTUAL_PERSON_ENTITY )
-				PeopleNetwork.create!( :person_id => self.pi["trusted_person_id"], :trusted_person_id => person_id, :entity_id => pi["trusted_person_id"], :entity_type_id => EntityType::MUTUAL_PERSON_ENTITY )
+				#creating reverse relation at the same time
+				PeopleNetwork.create!( :person_id => pi["trusted_person_id"], :trusted_person_id => self.person_id, :entity_id => pi["trusted_person_id"], :entity_type_id => EntityType::MUTUAL_PERSON_ENTITY )
 			end
 		end
   end
 
   def update_mutual_network_after_destroy
 		if self.entity_type_id == EntityType::TRUSTED_PERSON_ENTITY
+
 			people_networks_to_delete = PeopleNetwork.destroy_all("person_id = #{self.person_id} and entity_type_id = #{EntityType::MUTUAL_PERSON_ENTITY} " +# delete all mutual friends
 				"and trusted_person_id not in (" + # except
 				"select distinct(trusted_person_id) " + #select all mutual_person ids
@@ -62,6 +66,17 @@ class PeopleNetwork < ActiveRecord::Base
 				"and trusted_person_id not in " + # but should not be
 				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::TRUSTED_PERSON_ENTITY}) " + # friend of current person
 				"and trusted_person_id != #{self.person_id} )") # and not current person
+
+			#also delete reverse MUTUAL relations
+			people_networks_to_delete = PeopleNetwork.destroy_all("trusted_person_id = #{self.person_id} and entity_type_id = #{EntityType::MUTUAL_PERSON_ENTITY} " +# delete all mutual friends
+				"and person_id not in (" + # except
+				"select distinct(trusted_person_id) " + #select all mutual_person ids
+				"from people_networks where person_id in " + # person should be friend of
+				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::TRUSTED_PERSON_ENTITY}) " + # current person's friend
+				"and trusted_person_id not in " + # but should not be
+				"(select trusted_person_id from people_networks where person_id = #{self.person_id} and entity_type_id = #{EntityType::TRUSTED_PERSON_ENTITY}) " + # friend of current person
+				"and trusted_person_id != #{self.person_id} )") # and not current person
+
 		end
   end
 
