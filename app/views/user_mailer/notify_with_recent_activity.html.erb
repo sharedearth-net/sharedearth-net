@@ -130,7 +130,7 @@
        
 	</div>
 	<p style="font-size: 10px; color: #9c9e9c; text-align: center">
-		To disable email notifications go to <%= link_to "Edit Profile", :style => "text-decoration: underline;" edit_person_path(@person) %> and uncheck Enable smart email notifications
+		To disable email notifications go to <%= link_to "Edit Profile", edit_person_path(@current_user.person, :only_path => false), :style => "text-decoration: underline;" %> and uncheck Enable smart email notifications
 	</p>
 	 <%= image_tag("http://sharedearthplatform.org/static/graphics/emailv1-bottom-pic.jpg", :alt => "sharedearth.net - trust. share. connect.", :title => "sharedearth.net - trust. share. connect.", :style => "display: block;" )  %>	
 </div>
