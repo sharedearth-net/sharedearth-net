@@ -6,4 +6,5 @@ class EntityType < ActiveRecord::Base
   COMMUNITY_ENTITY      = 5.freeze
   PROJECT_ENTITY        = 6.freeze
   TRUSTED_PERSON_ENTITY = 7.freeze
+  MUTUAL_PERSON_ENTITY = 	8.freeze
 end

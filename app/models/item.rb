@@ -97,7 +97,7 @@ class Item < ActiveRecord::Base
     unless search.empty?
       person = Person.find_by_id(person_id)
 
-      entity_ids = person.people_networks.trusted_personal_network.
+      entity_ids = person.people_networks.personal_network.
                           select(:entity_id).
                           collect(&:entity_id)
 
