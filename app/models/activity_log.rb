@@ -218,16 +218,16 @@ class ActivityLog < ActiveRecord::Base
   #Check if passed person value initiated activity log (Recent activity)
   def recent_activity_subject?(current_person)
     if current_person != self.secondary
-      person = self.secondary
+      person = false
     else
-      person = self.primary
+      person = true
     end
-    
-    case self.event_type_id
+
+  case self.event_type_id
     when 1
       true
     when 2
-      false
+      person
     when 3
       true
     when 4
@@ -235,27 +235,27 @@ class ActivityLog < ActiveRecord::Base
     when 5
       true
     when 6
-      false
+      person
     when 7
-      false
+      person
     when 8
-      false
+      person
     when 9
       true
     when 10
-      false
+      person
     when 11
       true
     when 12
       true
     when 13
-      false
+      person
     when 14
       true
     when 15
-      false
+      person
     when 16
-      false
+      person
     when 17
       true
        
@@ -265,46 +265,45 @@ class ActivityLog < ActiveRecord::Base
     when 28
       true
     when 29
-      false
+      person
     when 30
-      false
+      person
     when 31
-      false
+      person
     when 32
       true
     when 33
       true
     when 34
-      false
+      person
     when 35
       true
     when 36
-      false
+      person
     when 37
-      false
+      person
     when 38
       true
     when 39
       true
     when 40
       true
-    #41 and 42 avatar don't match with who performed the action
     when 41
-      true
+      person
     when 42
-      false
+      true
     when 43
-      false
+      person
     when 44
       true
     when 45
       true
     when 46
-      false
+      person
     when 47
       true
     when 48
-      false
+      person
     when 49
       true
     when 51
@@ -316,24 +315,24 @@ class ActivityLog < ActiveRecord::Base
     when 54
       true
     when 55
-      false
+      person
     when 56
-      false
+      person
     when 57
-      false
+      person
     when 58
-      false
+      person
     when 59
-      false
+      person
     when 60
-      false
+      person
 		when 61
       true
     when 62
-      false
+      person
     else
       true
     end
-   
+
   end
 end
