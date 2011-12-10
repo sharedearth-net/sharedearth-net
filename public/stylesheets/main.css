@@ -1212,10 +1212,12 @@ a.normal:visited {
 			margin-top: 9px;
 		}	
 		
-		#profile-page #sidebar .trust-reputation-box h2.rhs-link {
+		#profile-page #sidebar .trust-reputation-box .rhs-link {
+			/*
 			float: right;
-			text-align: right;
 			font-size: 14px;
+			*/
+			position:absolute;right:0px;bottom:2px;text-align: right;
 		}
 				
 		.trust-reputation-box h3 {
@@ -1646,10 +1648,8 @@ a.normal:visited {
 		  margin-top: 7px;
 		}	
 	
-		#request-page #sidebar .trust-reputation-box h2.rhs-link {
-			float: right;
-			text-align: right;
-			font-size: 14px;
+		#request-page #sidebar .trust-reputation-box .rhs-link {
+			position:absolute;right:0px;bottom:2px;
 		}
 		
 		
@@ -2523,10 +2523,8 @@ a.normal:visited {
 		margin-top: 7px;
 	}
 
-	#items-page #sidebar .trust-reputation-box h2.rhs-link {
-	    float: right;
-	    font-size: 14px;
-	    text-align: right;
+	#items-page #sidebar .trust-reputation-box .rhs-link {
+		position:absolute;right:0px;bottom:2px;
 	}
 
 			
@@ -2603,10 +2601,8 @@ a.normal:visited {
 				margin-top: 9px;
 			}
 
-				#item-profile-form-page #sidebar .trust-reputation-box h2.rhs-link {
-					float: right;
-				    font-size: 14px;
-				    text-align: right;
+				#item-profile-form-page #sidebar .trust-reputation-box .rhs-link {
+					position:absolute;right:0px;bottom:2px;
 					display: none;
 				}
 
@@ -3422,14 +3418,14 @@ a.normal:visited {
 
 	h2 span a:link,
 	h2 span a:visited,
-	#sidebar h2.rhs-link a:link,
-	#sidebar h2.rhs-link a:visited {
+	#sidebar .rhs-link a:link,
+	#sidebar .rhs-link a:visited {
 		color: #127e0e;
 		font-size: 12px;
 	}
 	
-	#sidebar h2.rhs-link a.withdraw:link,
-	#sidebar h2.rhs-link a.withdraw:visited {
+	#sidebar .rhs-link a.withdraw:link,
+	#sidebar .rhs-link a.withdraw:visited {
 		color: #62775a;
 		font-size: 10px;
 	}
@@ -3475,8 +3471,27 @@ a.normal:visited {
 		#request-page #content .no-bg h2.trusted a:visited {
 			color: #127e0e;
 		}
-			
-			
+		
+		/* Top bar with name+location and action link */
+		
+		#sidebar .trust-reputation-box .top-bar {
+			width:100%;
+			height:100%;
+			padding-top:10px;
+			margin-bottom:-4px;
+		}
+
+		#sidebar .trust-reputation-box .top-bar .relative_container {
+			height:100%;
+			width:100%;
+			position:relative;
+			padding:0;
+			margin:0;
+			border:0;
+			line-height:85%;
+			min-height:15px;
+		}
+
 		/* Name on top of T&R box */
 
 		#sidebar .trust-reputation-box h2,
@@ -3486,7 +3501,7 @@ a.normal:visited {
 			color: #62775a;
 			font-size: 13px;
 		}
-		
+
 		/* Location below name */
 		#sidebar .trust-reputation-box h2 .location,
 		#sidebar-left .trust-reputation-box h2 .location {
@@ -3496,21 +3511,21 @@ a.normal:visited {
 			font-size:11px;
 		}
 		
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-confirm:link,
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-confirm:visited {
+			#sidebar .trust-reputation-box .rhs-link a.trust-confirm:link,
+			#sidebar .trust-reputation-box .rhs-link a.trust-confirm:visited {
 				color: #127e0e;
 				font-size: 11px;
 			}
 		
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-cancel:link,
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-cancel:visited {
+			#sidebar .trust-reputation-box .rhs-link a.trust-cancel:link,
+			#sidebar .trust-reputation-box .rhs-link a.trust-cancel:visited {
 				font-size: 10px;
 			}
 			
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-acknowledge:link,
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-acknowledge:visited,
-			#sidebar .trust-reputation-box h2.edit-profile-link a:link,
-			#sidebar .trust-reputation-box h2.edit-profile-link a:visited {
+			#sidebar .trust-reputation-box .rhs-link a.trust-acknowledge:link,
+			#sidebar .trust-reputation-box .rhs-link a.trust-acknowledge:visited,
+			#sidebar .trust-reputation-box .edit-profile-link a:link,
+			#sidebar .trust-reputation-box .edit-profile-link a:visited {
 				font-size: 11px;
 				color: #127e0e;
 			}
