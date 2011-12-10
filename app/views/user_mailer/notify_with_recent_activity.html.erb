@@ -6,7 +6,7 @@
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
-	<title>sharedearth.net - trust. share. connect.</title>
+	<title>Recent Activity on sharedearth.net</title>
 	
 
 	<style>
@@ -112,10 +112,12 @@
 						Your Recent Activity on <a style="color: #315859; text-decoration: underline;" href="http://sharedearth.net" title="sharedearth.net - trust. share. connect.">sharedearth.net</a>
 					</h2>
 				</li>
-				
-				<% @recent_activity_logs.each do |activity_log| %>
+                <p style="padding: 0; margin: 0; line-height: 14px; margin-bottom: 0; color: #333; font-size: 12px;	font-weight: normal;">
+			    <% @recent_activity_logs.each do |activity_log| %>
 						<%= notify_recent_activity_sentence(activity_log, @current_user) + '<br />'.html_safe %>
 				<% end unless @recent_activity_logs.nil? || @recent_activity_logs.empty? %>
+		        </p>
+
 			</ul>
 		</div><!-- /content-box-holder -->
 		
@@ -130,9 +132,9 @@
        
 	</div>
 	<p style="font-size: 10px; color: #9c9e9c; text-align: center">
-		To disable email notifications go to <%= link_to "Edit Profile", edit_person_path(@current_user.person, :only_path => false), :style => "text-decoration: underline;" %> and uncheck Enable smart email notifications
+		To disable email notifications go to <%= link_to "Edit Profile", edit_person_path(@current_user.person, :only_path => false), :style => "font-size: 10px; color: #9c9e9c; text-decoration: underline;" %> and uncheck Enable smart email notifications
 	</p>
-	 <%= image_tag("http://sharedearthplatform.org/static/graphics/emailv1-bottom-pic.jpg", :alt => "sharedearth.net - trust. share. connect.", :title => "sharedearth.net - trust. share. connect.", :style => "display: block;" )  %>	
+	 <%= image_tag("http://sharedearthplatform.org/static/graphics/emailv1-bottom-pic.jpg", :alt => "sharedearth.net - trust. share. connect.", :title => "sharedearth.net - trust. share. connect.", :style => "display: block;" )  %>
 </div>
 
 </body>
