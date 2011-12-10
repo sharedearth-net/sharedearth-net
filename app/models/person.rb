@@ -51,8 +51,18 @@ class Person < ActiveRecord::Base
 		logs
 	end
 
+	def trusted_network_activity
+    my_people_id = self.people_networks.trusted_personal_network.collect { |n| n.trusted_person_id }
+    my_people_id << id
+
+    EventDisplay.select('DISTINCT event_log_id').
+                 where(:person_id => my_people_id).
+                 order('event_log_id DESC').
+                 includes(:event_log)
+  end
+
   def network_activity
-    my_people_id = trusted_friends.collect { |friend| friend.id }
+    my_people_id = self.people_networks.personal_network.collect { |n| n.trusted_person_id }
     my_people_id << id
 
     EventDisplay.select('DISTINCT event_log_id').
@@ -66,7 +76,7 @@ class Person < ActiveRecord::Base
   end
 
   def trusts?(other_person)
-    self.people_networks.involves_as_trusted_person(other_person).first
+    self.people_networks.trusted_personal_network.involves_as_trusted_person(other_person).first
   end
 
   def authorised?
@@ -117,7 +127,11 @@ class Person < ActiveRecord::Base
   end
 
   def trusted_network_size
-    self.people_networks.count
+    self.people_networks.trusted_personal_network.count
+  end
+  
+  def personal_network_size
+    self.people_networks.personal_network.count
   end
 
   def self.search(search)
@@ -125,17 +139,31 @@ class Person < ActiveRecord::Base
   end
 
   def searchable_core_of_friends
-    ids = self.people_networks.map { |n| n.trusted_person_id }
+    ids = self.people_networks.trusted_personal_network.map { |n| n.trusted_person_id }
     ids.push( self.id)
     ids = ids.map! { |k| "#{k}" }.join(",")
   end
+  
+  def personal_network_friends
+		self.people_networks.personal_network.map { |n| n.trusted_person }
+  end
 
   def trusted_friends
-    self.people_networks.map { |n| n.trusted_person }
+    self.people_networks.trusted_personal_network.map { |n| n.trusted_person }
   end
 
   def self.with_items_more_than(items_count)
     people = Person.all.collect { |p| p if p.items.without_deleted.count >= items_count.to_i }.delete_if {|p| p.nil?}
+  end
+  
+  def personal_network_items(type = nil)
+    items = []
+    if type.nil?
+      self.personal_network_friends.map{ |f| f.items.without_deleted.without_hidden.map{|i|items.push(i)}}
+    else
+      self.personal_network_friends.map{ |f| f.items.without_deleted.without_hidden.with_type(type).map{|i|items.push(i)}}
+    end
+    items
   end
 
   def trusted_friends_items(type = nil)
@@ -150,30 +178,30 @@ class Person < ActiveRecord::Base
 
   def mutural_friends(other_person)
     mutural_friends = []
-    self.people_networks.each do |n|
+    self.people_networks.trusted_personal_network.each do |n|
       mutural_friends.push(n.trusted_person) if n.trusted_person.trusts?(other_person)
     end
     mutural_friends
   end
 
   def extended_network_size
-    people_ids = self.people_networks.map{|i| i["trusted_person_id"]}
+    people_ids = self.people_networks.trusted_personal_network.map{|i| i["trusted_person_id"]}
     friends = Person.find(:all, :conditions => ["id IN (?)", people_ids])
     size = 0
-    friends.each { |person| size += person.people_networks.count }
+    friends.each { |person| size += person.people_networks.trusted_personal_network.count }
     size
   end
 
   def mutural_friends_count(other_person)
     mutural_friends = 0
-    self.people_networks.each do |pn|
+    self.people_networks.trusted_personal_network.each do |pn|
       mutural_friends+=1 if pn.trusted_person.trusts?(other_person)
     end
     mutural_friends
   end
 
   def trusts_me_count
-    self.people_networks.involves(self).count
+    self.people_networks.trusted_personal_network.involves(self).count
   end
 
   def all_item_requests
@@ -342,5 +370,6 @@ class Person < ActiveRecord::Base
     self.last_notification_email = Time.now
     save!
   end
+
 
 end

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   scope :unactive, where("last_activity < ?", Time.now)
 
   delegate :network_activity, :to => :person
+  delegate :trusted_network_activity, :to => :person
 
   def self.create_with_omniauth(auth)
     create! do |user|
