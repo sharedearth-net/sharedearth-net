@@ -93,19 +93,28 @@ class Item < ActiveRecord::Base
     ResourceNetwork.create!(:entity_id => self.owner.id, :entity_type_id => 1, :resource_id => self.id, :resource_type_id => 2)
   end
 
-  def self.search(search, person_id, filter_item_type = nil)
+  def self.search(search, person_id = nil, filter_item_type = nil)
     unless search.empty?
-      person = Person.find_by_id(person_id)
+    
+			unless person_id.nil?
 
-      entity_ids = person.people_networks.personal_network.
-                          select(:entity_id).
-                          collect(&:entity_id)
+				person = Person.find_by_id(person_id)
 
-      items_ids = ResourceNetwork.select('DISTINCT resource_id').
-                                  where(:entity_id => entity_ids).
-                                  collect(&:resource_id)
+				entity_ids = person.people_networks.personal_network.
+														select(:entity_id).
+														collect(&:entity_id)
 
-      matcher = filter_item_type.nil? ? Item.where(:id => items_ids).order("#{Item.table_name}.item_type ASC") : Item.where(:id => items_ids, :item_type => filter_item_type).order("#{Item.table_name}.item_type ASC")
+				items_ids = ResourceNetwork.select('DISTINCT resource_id').
+																		where(:entity_id => entity_ids).
+																		collect(&:resource_id)
+
+				matcher = filter_item_type.nil? ? Item.where(:id => items_ids).order("#{Item.table_name}.item_type ASC") : Item.where(:id => items_ids, :item_type => filter_item_type).order("#{Item.table_name}.item_type ASC")
+
+			else
+
+				matcher = filter_item_type.nil? ? Item.order("#{Item.table_name}.item_type ASC") : Item.where(:id => items_ids, :item_type => filter_item_type).order("#{Item.table_name}.item_type ASC")
+
+			end
 
       search.split(/[ ]/).each do |word|
         matcher = matcher.
