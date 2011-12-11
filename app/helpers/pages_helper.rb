@@ -498,7 +498,14 @@ module PagesHelper
      
   end
 
-  def notify_recent_activity_sentence(activity_log, current_user)
+  def notify_recent_activity_sentence(activity_log, current_user, email_sentence = false)
+  
+		if email_sentence
+			def link_to(title, url, options = {})
+				title
+			end
+		end
+  
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
     item = activity_log.action_object
     unless activity_log.secondary_full_name.nil? || item.nil?
@@ -508,15 +515,14 @@ module PagesHelper
       
         requester           = (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary, :only_path => false), :class => "positive")
         requester_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary, :only_path => false), :class => "positive")
-        
-        
+
       else
         requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary, :only_path => false), :class => "positive")
         requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary, :only_path => false), :class => "positive")
       
         gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary, :only_path => false), :class => "positive")
         gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary, :only_path => false), :class => "positive")
-        
+
       end
         
       possesive = item.is_owner?(current_user.person) ? "your" : "their"
