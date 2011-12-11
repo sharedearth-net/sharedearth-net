@@ -20,7 +20,7 @@
 		        </div>
 	      		<% end %>
 			</div>
-		
+
 			<% if (((@items.empty? && items_search) || (@people.empty? && people_search)) && !all_search) || (all_search && @items.empty? && @people.empty? )%>
 			  <h3>Search term not found</h3>
 				<p>
@@ -30,7 +30,7 @@
 			<% unless @items.empty? -%>
 			  <div class="items-list clearfix">
 			  <h3 class="default-title">
-					From your personal network
+					From sharedearth network
 				</h3>
 				<ul class="clearfix">
 				<% @items.each do |item| %>
