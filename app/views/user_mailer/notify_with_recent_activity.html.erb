@@ -109,16 +109,17 @@
 			<ul style="margin: 0; padding: 0;">
 				<li class="content-box clearfix" style="padding: 0 15px 21px 0; width: 481px; list-style-type: none;">
 					<h2 style="padding: 0; margin: 0; line-height: 15px; margin-bottom: 0; color: #315859; font-size: 12px;	font-weight: bold;">
-						Your Recent Activity on sharedearth.net
+						Your Recent Activity on <a style="font-size: 12px; color: #315859; font-weight: bold; text-decoration: none;" href="http://sharedearth.net" title="sharedearth.net">sharedearth.net</a>
 					</h2>
-                    <a style="font-size: 11px; color: #62775a; text-decoration: underline;" href="http://sharedearth.net" title="View your dashboard">view your dashboard</a>
+
 				</li>
                 <p style="padding: 0; margin: 0; line-height: 20px; margin-left: 15px; color: #333; font-size: 12px;	font-weight: normal;">
 			    <% @recent_activity_logs.each do |activity_log| %>
 						<%= notify_recent_activity_sentence(activity_log, @current_user) + '<br />'.html_safe %>
 				<% end unless @recent_activity_logs.nil? || @recent_activity_logs.empty? %>
 		        </p>
-
+                <br />
+                <a style="font-size: 12px; color: #62775a; text-decoration: underline;" href="http://sharedearth.net" title="Go to sharedearth.net">Go to sharedearth.net</a>
 			</ul>
 		</div><!-- /content-box-holder -->
 		
