@@ -16,7 +16,8 @@ class UserMailer < ActionMailer::Base
   def notify_with_recent_activity(recent_activity_logs, email, current_user)
     @recent_activity_logs = recent_activity_logs
     @current_user = current_user
-    mail(:to => "#{email}", :subject => "Recent Activity on sharedearth.net")
+    @time = @current_user.last_activity?
+    mail(:to => "#{email}", :subject => "Recent Activity on sharedearth.net since #{ @time.strftime("#{@time.day.ordinalize} %B %Y") }")
   end
 
 end
