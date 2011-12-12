@@ -114,7 +114,7 @@
 				</li>
                 <p style="padding: 0; margin: 0; line-height: 20px; margin-left: 15px; color: #333; font-size: 12px;	font-weight: normal;">
 			    <% @recent_activity_logs.each do |activity_log| %>
-						<%= notify_recent_activity_sentence(activity_log, @current_user, true) + '<br />'.html_safe %>
+						<%= notify_recent_activity_sentence(activity_log, @current_user) + '<br />'.html_safe %>
 				<% end unless @recent_activity_logs.nil? || @recent_activity_logs.empty? %>
 		        </p>
 
