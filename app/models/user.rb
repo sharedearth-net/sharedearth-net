@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :provider, :uid
   validates_uniqueness_of :uid, :scope => :provider
-  scope :unactive, where("last_activity < ?", Time.now)
+  scope :unactive, where("last_activity < ?", Time.now - 12.hours)
 
   delegate :network_activity, :to => :person
   delegate :trusted_network_activity, :to => :person
