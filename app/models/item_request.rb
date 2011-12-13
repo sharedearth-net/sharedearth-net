@@ -204,7 +204,7 @@ class ItemRequest < ActiveRecord::Base
     end
     save!
   end
-  
+
   def change_ownership
     self.item.owner_id = self.requester_id
     self.item.owner_type = self.requester_type
@@ -265,7 +265,7 @@ class ItemRequest < ActiveRecord::Base
   end
   
   def create_gift_request_canceled_activity_log
-    if self.requester_id == @current_user_initiator
+    if self.requester_id == @person_initiator
       ActivityLog.create_item_request_activity_log(self, EventType.gift_requester_canceled_gifter, EventType.gift_requester_canceled_requester)
     else
       ActivityLog.create_item_request_activity_log(self, EventType.gift_gifter_canceled_gifter, EventType.gift_gifter_canceled_requester)
@@ -273,7 +273,7 @@ class ItemRequest < ActiveRecord::Base
   end
     
   def create_gift_request_completed_activity_log
-    if self.requester_id == @current_user_initiator
+    if self.requester_id == @person_initiator
       ActivityLog.create_item_request_activity_log(self, EventType.gift_requester_completed_gifter, EventType.gift_requester_completed_requester)
     else
       ActivityLog.create_item_request_activity_log(self, EventType.gift_gifter_completed_gifter, EventType.gift_requester_completed_requester)
