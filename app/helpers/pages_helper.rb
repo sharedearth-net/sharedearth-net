@@ -8,13 +8,13 @@ module PagesHelper
 
     @item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => text_class unless event_log.action_object_type_readable.nil?
 
-    @requester           = link_to_person event_log.primary, :name => :full_name, :class => text_class  unless event_log.primary.nil?
-  	@requester_possesive = link_to_person event_log.primary, :name => :full_name, :possessive => true, :class => text_class unless event_log.primary.nil?
-    @gifter              = link_to_person event_log.secondary, :name => :full_name, :class => text_class unless event_log.secondary.nil?
-  	@gifter_possesive    = link_to_person event_log.secondary, :name => :full_name, :possessive => true, :class => text_class unless event_log.secondary.nil?
+    @requester           = link_to_person event_log.primary, :downcase_you => true, :class => text_class  unless event_log.primary.nil?
+  	@requester_possesive = link_to_person event_log.primary, :downcase_you => true, :possessive => true, :class => text_class unless event_log.primary.nil?
+    @gifter              = link_to_person event_log.secondary, :downcase_you => true, :class => text_class unless event_log.secondary.nil?
+  	@gifter_possesive    = link_to_person event_log.secondary, :downcase_you => true, :possessive => true, :class => text_class unless event_log.secondary.nil?
 
-    @first_person_full  = link_to_person event_log.primary, :name => :full_name, :class => text_class unless event_log.primary.nil?
-    @second_person_full = link_to_person event_log.secondary, :name => :full_name, :class => text_class unless event_log.secondary.nil?
+    @first_person_full  = link_to_person event_log.primary, :check_current_user => false, :downcase_you => true, :class => text_class unless event_log.primary.nil?
+    @second_person_full = link_to_person event_log.secondary, :check_current_user => false, :downcase_you => true, :class => text_class unless event_log.secondary.nil?
 
     sentence = nil
 
@@ -342,19 +342,19 @@ module PagesHelper
       gifter_person = nil
 			
 			unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 32, 34, 36, 38].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
-				requester           = link_to_person activity_log.secondary, :name => :full_name, :class => "positive"
-				requester_possesive = link_to_person activity_log.secondary, :possessive => true, :name => :full_name, :class => "positive"
+				requester           = link_to_person activity_log.secondary, :class => "positive"
+				requester_possesive = link_to_person activity_log.secondary, :possessive => true, :downcase_you => true, :class => "positive"
 
-				gifter              = link_to_person activity_log.primary, :name => :full_name, :class => "positive"
-				gifter_possesive    = link_to_person activity_log.primary, :possessive => true, :name => :full_name, :class => "positive"
+				gifter              = link_to_person activity_log.primary, :class => "positive"
+				gifter_possesive    = link_to_person activity_log.primary, :possessive => true, :downcase_you => true, :class => "positive"
 
-        gifter_person = activity_log.primary
+        gifter_person       = activity_log.primary
 			else
-        gifter           = link_to_person activity_log.secondary, :name => :full_name, :class => "positive"
-				gifter_possesive = link_to_person activity_log.secondary, :possessive => true, :name => :full_name, :class => "positive"
+        gifter              = link_to_person activity_log.secondary, :class => "positive"
+				gifter_possesive    = link_to_person activity_log.secondary, :possessive => true, :downcase_you => true, :class => "positive"
 
-				requester              = link_to_person activity_log.primary, :name => :full_name, :class => "positive"
-				requester_possesive    = link_to_person activity_log.primary, :possessive => true, :name => :full_name, :class => "positive"
+				requester           = link_to_person activity_log.primary, :class => "positive"
+				requester_possesive = link_to_person activity_log.primary, :possessive => true, :downcase_you => true, :class => "positive"
 
         gifter_person = activity_log.secondary
 			end
@@ -363,9 +363,9 @@ module PagesHelper
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
     unless activity_log.secondary.nil?
-      person              = link_to_person activity_log.secondary, :name => :full_name, :class => "positive"
-      other_person        = link_to_person activity_log.primary, :name => :full_name, :class => "positive"
-      person_possesive    = link_to_person activity_log.primary, :possessive => true, :name => :full_name, :class => "positive"
+      person              = link_to_person activity_log.secondary, :check_current_user => false, :class => "positive"
+      other_person        = link_to_person activity_log.primary, :check_current_user => false, :class => "positive"
+      person_possesive    = link_to_person activity_log.primary, :check_current_user => false, :possessive => true, :class => "positive"
     end
     
     sentence = ""

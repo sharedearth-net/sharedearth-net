@@ -248,8 +248,6 @@ class Person < ActiveRecord::Base
     name.split.first
   end
 
-  alias :full_name, :name
-
   def news_feed
     # Updated SQL to get all events relating to anyone in a user's trusted
     # network or to themselves
