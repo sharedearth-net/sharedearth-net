@@ -8,7 +8,7 @@
 			<div class="relative_container" >
 
 				<% if name  %>
-					<%= link_to person.name, person, :class => "person-name", :style => "font-size:13px;" %> 
+					<%= link_to person.name, person, :class => "person-name" + trusted_person_class(person), :style => "font-size:13px;" %> 
 					<% unless person.location.empty? %>
 					<br /><span class="location" style="font-size:11px; color: #838683;"><%= person.location %></span>
 					<% end %>

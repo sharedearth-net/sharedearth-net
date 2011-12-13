@@ -3809,5 +3809,5 @@ a.normal:visited {
 }
 
 a.trusted {
-	color:#127e0e;
+	color:#127e0e !important;
 }
