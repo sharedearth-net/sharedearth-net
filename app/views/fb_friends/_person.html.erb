@@ -1,4 +1,4 @@
-<li class="people-holder clearfix">
+<li class="people-holder clearfix" id="person_<%= person.id %>">
 	<%= image_tag person.avatar(:square), :class => "thumb" %>
 	<div>
 		<p><%= link_to person.name, person_path(person) %></p>

@@ -14,18 +14,28 @@ class PeopleNetworkRequestsController < ApplicationController
       @trusted_person.request_trusted_relationship(current_person)
     end
 
-    redirect_to @trusted_person
+		respond_to do |format|
+			format.html { redirect_to @trusted_person }
+			format.js
+		end
   end
   
   def destroy
-    trusted_person = @people_network_request.trusted_person
+    @trusted_person = @people_network_request.trusted_person
     @people_network_request.destroy
-    redirect_to trusted_person
+    respond_to do |format|
+			format.html { redirect_to @trusted_person }
+			format.js
+		end
   end
   
   def confirm
     @people_network_request.confirm!
-    redirect_to @people_network_request.person
+    @trusted_person = @people_network_request.person
+    respond_to do |format|
+			format.html { redirect_to @trusted_person }
+			format.js
+		end
   end
 
   # used destroy for trusted_person too
