@@ -328,23 +328,12 @@ module PagesHelper
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
     item = activity_log.action_object
     unless activity_log.secondary_full_name.nil? || item.nil?
-      if(item.is_owner?(activity_log.secondary))     
-        gifter              = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
-        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive")
-      
-        requester           = (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary), :class => "positive")
-        requester_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary), :class => "positive")
-        
-        
-      else
-        requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
-        requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive")
-      
-        gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary), :class => "positive")
-        gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary), :class => "positive")
-        
-      end
-        
+			requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
+			requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive")
+		
+			gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary), :class => "positive")
+			gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary), :class => "positive")
+
       possesive = item.is_owner?(current_user.person) ? "your" : "their"
 
     end
@@ -416,9 +405,9 @@ module PagesHelper
       
       
     when 27
-      sentence =  "You accepted " + person_possesive + " request for your " + item
+      sentence =  gifter + " accepted " + requester_possesive + " request for " + possesive + " " + item
     when 28
-      sentence =  "You rejected " + person_possesive + " request for your " + item
+      sentence =  gifter + " rejected " + requester_possesive + " request for " + possesive + " " + item
     when 29
       sentence =  person + " accepted your request for their " + item
     when 30
@@ -434,9 +423,9 @@ module PagesHelper
     when 35
       sentence =  "You canceled the action of gifting your " + item + " to " + person 
     when 36
-      sentence =  person + " canceled the action of gifting their " + item + " to you"
+      sentence = gifter + " canceled the action of gifting their " + item + " to " + requester
     when 37
-      sentence =  person + " canceled the request for your " + item
+      sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 38
       sentence =  "You cancelled the request for " + person_possesive + " " + item 
     
