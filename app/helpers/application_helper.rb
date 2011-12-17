@@ -30,6 +30,8 @@ module ApplicationHelper
   end
   
   def link_to_person(person, options = {})
+		options[:class] ||= ""
+		options[:class] += trusted_person_class(person)
     person.user == current_user ? person_name(person, options) : link_to(person_name(person, options), person_path(person), options)
   end
 
