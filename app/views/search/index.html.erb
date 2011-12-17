@@ -33,9 +33,11 @@
 					From sharedearth.net network
 				</h3>
 				<ul class="clearfix">
-				<% @items.each do |item| %>
-          <%= render "items/item", :item => item, :action_list => [:person_name, :view, :request].to_set  %>
-        <% end%>
+				<% @item_in_groups.each do |type, items| %>
+					<% items.each do |item| %>
+						<%= render "items/item", :item => item, :action_list => [:person_name, :view, :request].to_set  %>
+					<% end%>
+				<% end %>
 				</ul>
 				<!--<a href="#" class="button-more">
 					2 more
