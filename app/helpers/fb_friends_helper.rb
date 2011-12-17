@@ -22,6 +22,8 @@ module FbFriendsHelper
       href = people_network_requests_path(:trusted_person_id => person) 
       options = { :method => :post }
     end
+    
+    options[:remote] = true
 
     link_to(text, href, options)
   end
