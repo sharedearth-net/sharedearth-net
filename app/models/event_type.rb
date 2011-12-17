@@ -393,7 +393,7 @@ class EventType < ActiveRecord::Base
   end
   
   def self.current_actions_underway
-    [2,3,4,6,8,9,27,29]
+    [2,3,4,6,8,9,27,29,37]
   end
   
     def self.current_actions_underway_items
