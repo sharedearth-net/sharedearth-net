@@ -1,0 +1,22 @@
+<div class="content-box-holder network-status-info">
+	<%= image_tag("curve-top-content-box.png", :alt => "")  %>
+	<ul>
+		<li class="content-box clearfix">
+			<a href="<%= my_network_person_path(current_user.person) %>" class="view-network">view network</a>
+			<h2>Your Network Status</h2>
+		</li>
+		<li class="content-box clearfix">
+			<%= image_tag "ic-trusted-community.png", :class => "icons", :align => "left", :alt => "Trusted Network" %>
+			<p>&nbsp;<%= pluralize(current_person.trusted_network_size, 'person') %> in your trusted network</p>
+		</li class="content-box clearfix">
+		<li class="content-box clearfix">
+			<%= image_tag "ic-people-community.png", :class => "icons", :align => "left", :alt => "Personal Network" %>
+			<p>&nbsp;<%= pluralize(current_person.personal_network_size, 'person') %> in your entire network</p>
+		</li>
+		<li class="content-box clearfix">
+			<%= image_tag "ic-items-community.png", :class => "icons", :align => "left", :alt => "Items" %>
+			<p>&nbsp;<%= pluralize(current_person.personal_network_items_count, 'item') %> available in your network</p>
+		</li>
+	</ul>
+	<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
+</div>
