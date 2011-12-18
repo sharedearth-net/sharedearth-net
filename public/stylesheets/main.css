@@ -871,7 +871,28 @@ a.normal:visited {
 					color: #127e0e;
 				}
 				
-	
+
+		/* dashboard - content - network status info */
+		
+		 #dashboard-page .network-status-info {
+		
+		}
+
+			#dashboard-page .network-status-info a.view-network {
+				float:right;
+				color: #81927B;
+				font-size: 11px;
+			}
+			
+			#dashboard-page .network-status-info li.content-box:last-child {
+				padding-bottom:2px;
+			}
+
+			#dashboard-page .network-status-info li p {
+				line-height:20px;
+			}
+		
+
 		/* dashboard - content - comments */
 		
 		#dashboard-page #content ul.comment-list {

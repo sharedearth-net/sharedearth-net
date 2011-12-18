@@ -81,12 +81,14 @@
 			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
 			</div>
 			<!-- /content-box-holder  -->
+		<% else %>
+			<%= render "network_status_info" %>
 		<% end %>
 	
 	
 		<div class="content-box-holder">
 			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
-		
+
 			<ul class="dashboard-recent-activity">
 				<li class="content-box clearfix">
 					<h2>Recent Activity</h2>
