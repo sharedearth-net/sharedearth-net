@@ -93,28 +93,9 @@ class Item < ActiveRecord::Base
     ResourceNetwork.create!(:entity_id => self.owner.id, :entity_type_id => 1, :resource_id => self.id, :resource_type_id => 2)
   end
 
-  def self.search(search, person_id = nil, filter_item_type = nil)
+  def self.search(search, person_id, filter_item_type = nil)
     unless search.empty?
-    
-			unless person_id.nil?
-
-				person = Person.find_by_id(person_id)
-
-				entity_ids = person.people_networks.personal_network.
-														select(:entity_id).
-														collect(&:entity_id)
-
-				items_ids = ResourceNetwork.select('DISTINCT resource_id').
-																		where(:entity_id => entity_ids).
-																		collect(&:resource_id)
-
-				matcher = filter_item_type.nil? ? Item.where(:id => items_ids).order("#{Item.table_name}.item_type ASC") : Item.where(:id => items_ids, :item_type => filter_item_type).order("#{Item.table_name}.item_type ASC")
-
-			else
-
-				matcher = filter_item_type.nil? ? Item.order("#{Item.table_name}.item_type ASC") : Item.where(:id => items_ids, :item_type => filter_item_type).order("#{Item.table_name}.item_type ASC")
-
-			end
+			matcher = filter_item_type.nil? ? Item.where("owner_id != ?", person_id).order("#{Item.table_name}.item_type ASC") : Item.where("owner_id != ?", person_id).where(:item_type => filter_item_type).order("#{Item.table_name}.item_type ASC")
 
       search.split(/[ ]/).each do |word|
         matcher = matcher.
