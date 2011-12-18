@@ -8,16 +8,16 @@ class SearchController < ApplicationController
           @items  = Item.search(params[:search], current_person.id)
           @item_in_groups = group_items_by_network(@items)
         when 'people'
-          @people = Person.search(params[:search], current_person)
+          @people = Person.search(params[:search])
           @people_in_groups = group_people_by_network(@people)
         when 'all'
           @items = Item.search(params[:search], current_person.id)
-          @people = Person.search(params[:search], current_person)
+          @people = Person.search(params[:search])
           @item_in_groups = group_items_by_network(@items)
           @people_in_groups = group_people_by_network(@people)
         else
           @items = Item.search(params[:search], current_person.id)
-          @people = Person.search(params[:search], current_person) if @items.empty?
+          @people = Person.search(params[:search]) if @items.empty?
           @item_in_groups = group_items_by_network(@items)
           @people_in_groups = group_people_by_network(@people)
           if !@items.empty?
