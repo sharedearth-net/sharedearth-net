@@ -11,7 +11,7 @@ module PagesHelper
   	@requester_possesive = link_to event_log.primary_full_name.possessive, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?
   	@gifter              = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
   	@gifter_possesive    = link_to event_log.secondary_full_name.possessive, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
-  	 
+
     @first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?
     @second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
 
@@ -328,14 +328,22 @@ module PagesHelper
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
     item = activity_log.action_object
     unless activity_log.secondary_full_name.nil? || item.nil?
-			requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
-			requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive")
-		
-			gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary), :class => "positive")
-			gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary), :class => "positive")
+			
+			unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 32, 34, 36, 38].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
+				requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
+				requester_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive")
+
+				gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary), :class => "positive")
+				gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary), :class => "positive")
+			else
+				gifter           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
+				gifter_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive")
+
+				requester           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary), :class => "positive")
+				requester_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary), :class => "positive")
+			end
 
       possesive = item.is_owner?(current_user.person) ? "your" : "their"
-
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
     unless activity_log.secondary.nil?
@@ -492,22 +500,21 @@ module PagesHelper
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
     item = activity_log.action_object
     unless activity_log.secondary_full_name.nil? || item.nil?
-      if(item.is_owner?(activity_log.secondary))     
-        gifter              = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
-        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : activity_log.secondary_full_name.possessive
-      
-        requester           = (activity_log.primary == current_user.person) ? "You" : activity_log.primary.name
-        requester_possesive = (activity_log.primary == current_user.person) ? "your" : activity_log.primary.name.possessive
 
-      else
+      unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 32, 34, 36, 38].include?(activity_log.event_type_id.to_i) # event types where roles are reversed  
         requester           = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
         requester_possesive = (activity_log.secondary == current_user.person) ? "your" : activity_log.secondary_full_name.possessive
-      
+
         gifter           =  (activity_log.primary == current_user.person) ? "You" : activity_log.primary.name
         gifter_possesive = (activity_log.primary == current_user.person) ? "your" : activity_log.primary.name.possessive
+      else
+				gifter              = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
+        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : activity_log.secondary_full_name.possessive
 
+        requester           = (activity_log.primary == current_user.person) ? "You" : activity_log.primary.name
+        requester_possesive = (activity_log.primary == current_user.person) ? "your" : activity_log.primary.name.possessive
       end
-        
+
       possesive = item.is_owner?(current_user.person) ? "your" : "their"
 
     end
