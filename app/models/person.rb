@@ -156,6 +156,16 @@ class Person < ActiveRecord::Base
     people = Person.all.collect { |p| p if p.items.without_deleted.count >= items_count.to_i }.delete_if {|p| p.nil?}
   end
   
+  def personal_network_items_count(type = nil)
+		items_count = 0
+    if type.nil?
+      self.personal_network_friends.map{ |f| items_count += f.items.without_deleted.without_hidden.count }
+    else
+      self.personal_network_friends.map{ |f| items_count += f.items.without_deleted.without_hidden.with_type(type).count }
+    end
+    items_count
+  end
+  
   def personal_network_items(type = nil)
     items = []
     if type.nil?
@@ -164,6 +174,16 @@ class Person < ActiveRecord::Base
       self.personal_network_friends.map{ |f| f.items.without_deleted.without_hidden.with_type(type).map{|i|items.push(i)}}
     end
     items
+  end
+  
+  def trusted_friends_items_count(type = nil)
+		items_count = 0
+    if type.nil?
+      self.trusted_friends.map{ |f| items_count += f.items.without_deleted.without_hidden.count }
+    else
+      self.trusted_friends.map{ |f| items_count += f.items.without_deleted.without_hidden.with_type(type).count }
+    end
+    items_count
   end
 
   def trusted_friends_items(type = nil)
