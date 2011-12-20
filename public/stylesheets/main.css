@@ -933,6 +933,10 @@ a.normal:visited {
 		width: 456px;
 	}
 	
+		#dashboard-page #sidebar h2 {
+			line-height: 14px;
+		}
+	
 		#dashboard-page img.empty-village {
 			display: none;
 		}
