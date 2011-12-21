@@ -8,6 +8,7 @@ Feature: Item requests management page
     Given a person exists with name: "Maria"
 		Given a person exists with name: "Bach"
     Given I am the owner of item with name "Mobile"
+    Given I am the owner of shareage item with name "Pen"
     And "Maria" is the owner of item with name "Bike"
 
    @javascript
@@ -149,3 +150,62 @@ Feature: Item requests management page
 			Given "John" left comment "Nice" for last request
       And I am looking at last request page
       Then I should see "Nice"
+
+   #Shareage requests features
+
+   @javascript
+   Scenario: Rejected Item Request still appear on the Dashboard
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      When I follow "reject"
+      And I wait until all Ajax requests are complete
+      Then I should not see "view action"
+      And I should not see "accept"
+
+   @javascript
+   Scenario: Accepted shareage Item Request shows new actions on dashboard
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      When I follow "accept"
+      And I wait until all Ajax requests are complete
+      Then I should see "view action"
+      And I should see "collected"
+      And I should not see "completed"
+
+   @javascript
+   Scenario: Accepted shareage Item Request makes item hidden
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      When I follow "accept"
+      And I wait until all Ajax requests are complete
+      Then I should see "view action"
+      And Looking at my person page
+      Then I should see "hidden"
+
+   @javascript
+   Scenario: Shareage state Item actions on dashboard
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      When I follow "accept"
+      And I wait until all Ajax requests are complete
+      Then I should see "view action"
+      And I should see "collected"
+      And I should not see "completed"
+      When I follow "collected"
+      Then I should see "view action"
+      And I should see "recall item"
+
+   @javascript
+   Scenario: Shareage state Item actions on dashboard
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      When I follow "accept"
+      And I wait until all Ajax requests are complete
+      Then I should see "view action"
+      And I should see "collected"
+      And I should not see "completed"
+      When I follow "collected"
+      Then I should see "view action"
+      And I should see "recall item"
+      When I follow "recall item"
+      Then I should see "cancel recall"
