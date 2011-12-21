@@ -114,7 +114,7 @@
 	</div><!-- /content  -->
 
 	<div id="sidebar">
-	<% if current_user.person.personal_network_size == 0 -%>
+	<% if current_person.personal_network_size == 0 -%>
     <%= render :partial => 'shared/news_feed_empty' %>
   <% else -%>
     <%= render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } %>
