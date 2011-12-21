@@ -8,6 +8,7 @@ end
 Factory.define :person do |p|
   p.name "John"
   p.email "john@doe.com"
+  p.location "Australia"
   p.association :user, :factory => :user
   p.association :reputation_rating, :factory => :reputation_rating
   p.authorised_account true
