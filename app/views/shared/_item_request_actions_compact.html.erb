@@ -43,7 +43,7 @@
 		<li>	
 			<%= link_to "collected", collected_request_path(req, ActionFormat::FORMAT), :id => "collected_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
-		<% if req.item.purpose != Item::PURPOSE_GIFT %>
+		<% if req.item.purpose != Item::PURPOSE_GIFT && req.item.purpose != Item::PURPOSE_SHAREAGE  %>
 		<li>
 			<%= link_to "complete", complete_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
