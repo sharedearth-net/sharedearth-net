@@ -32,6 +32,19 @@ Feature: Manage Items
     And I should see "Nice mobile phone"
     And I should see "phone"
 
+  Scenario: Adding new item for shareage
+    Given I am on the new item page
+    Given a person exists
+    When I fill in the following:
+     | Item type   | phone               |
+     | Name        | Samsung             |
+     | Description | Nice mobile phone   |
+    And I choose "shareage"
+    Then I press "Save"
+    And I should see "Samsung"
+    And I should see "Nice mobile phone"
+    And I should see "phone"
+
   Scenario: Adding new item for gifting
     Given I am on the new item page
     When I fill in the following:
@@ -59,7 +72,7 @@ Feature: Manage Items
     And I should see "bike"
     And I should see "Mountainbike"
     Then I should see "view item"
-    And I should see "From your trusted network"
+    And I should see "From sharedearth.net network"
 
   Scenario: Item is searched and found record in extended network
     Given "Maria" has trusted relationship with "John"
@@ -75,7 +88,7 @@ Feature: Manage Items
     And I should not see "Mobile"
     Then I should not see "view item"
     And I should not see "From your extended network"
-
+  @javascript
   Scenario: Item is searched but it belongs to someone that is not in my trusted nor extended network
     And "Maria" is the owner of item with name "Bike"
     And Looking at person page with name "Maria"
