@@ -129,7 +129,7 @@ class Person < ActiveRecord::Base
   def trusted_network_size
     self.people_networks.trusted_personal_network.count
   end
-  
+
   def personal_network_size
     self.people_networks.personal_network.count
   end
@@ -143,7 +143,7 @@ class Person < ActiveRecord::Base
     ids.push( self.id)
     ids = ids.map! { |k| "#{k}" }.join(",")
   end
-  
+
   def personal_network_friends
 		self.people_networks.personal_network.map { |n| n.trusted_person }
   end
@@ -155,7 +155,7 @@ class Person < ActiveRecord::Base
   def self.with_items_more_than(items_count)
     people = Person.all.collect { |p| p if p.items.without_deleted.count >= items_count.to_i }.delete_if {|p| p.nil?}
   end
-  
+
   def personal_network_items_count(type = nil)
 		items_count = 0
     if type.nil?
@@ -165,7 +165,7 @@ class Person < ActiveRecord::Base
     end
     items_count
   end
-  
+
   def personal_network_items(type = nil)
     items = []
     if type.nil?
@@ -175,7 +175,7 @@ class Person < ActiveRecord::Base
     end
     items
   end
-  
+
   def trusted_friends_items_count(type = nil)
 		items_count = 0
     if type.nil?
@@ -389,6 +389,10 @@ class Person < ActiveRecord::Base
   def log_email_notification_time!
     self.last_notification_email = Time.now
     save!
+  end
+
+  def has_location?
+    !(self.location.nil? || self.location.empty?)
   end
 
 
