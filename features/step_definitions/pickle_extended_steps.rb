@@ -13,6 +13,17 @@ Given /^I am the owner of item with name "(.*)"$/ do |item|
     Factory(:item, :owner => person, :name => item)
 end
 
+Given /^I am the owner of shareage item with name "([^"]*)"$/ do |item|
+    person = Person.find_by_name("John")
+    Factory(:item, :owner => person, :name => item, :purpose => Item::PURPOSE_SHAREAGE)
+end
+
+Given /^"(.*)" is the owner of shareage item with name "(.*)"$/ do |name, item|
+    person = Person.find_by_name("#{name}")
+    Factory(:item, :owner => person, :name => item, :purpose => Item::PURPOSE_SHAREAGE)
+end
+
+
 Given /^"(.*)" requested item with name "(.*)" from "(.*)"$/ do |person1,item, person2|
     person1 = Person.find_by_name("#{person1}")
     person2 = Person.find_by_name("#{person2}")
