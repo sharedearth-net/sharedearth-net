@@ -12,7 +12,8 @@ class Item < ActiveRecord::Base
 
   PURPOSES = {
     PURPOSE_SHARE => 'share',
-    PURPOSE_GIFT  => 'gift'
+    PURPOSE_GIFT  => 'gift',
+    PURPOSE_SHAREAGE => 'shareage'
   }
 
   STATUSES = {
@@ -48,7 +49,7 @@ class Item < ActiveRecord::Base
   validates_length_of    :name, :maximum => 50
   validates_length_of    :description, :maximum => 400
 
-  validates_inclusion_of :purpose, :in => [PURPOSE_SHARE, PURPOSE_GIFT],
+  validates_inclusion_of :purpose, :in => [PURPOSE_SHARE, PURPOSE_GIFT, PURPOSE_SHAREAGE],
                          :message => " must be in #{PURPOSES.values.join ', '}"
   validates_presence_of  :purpose, :item_type, :name, :owner_id, :owner_type, :status
   validates_inclusion_of :status, :in => STATUSES.keys,
