@@ -130,6 +130,10 @@ class Item < ActiveRecord::Base
   def purpose?
     PURPOSES[self.purpose]
   end
+  
+  def is_shareage?
+  	self.purpose == Item::PURPOSE_SHAREAGE
+  end
 
   def hidden!
     self.hidden = true
