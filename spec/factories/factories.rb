@@ -14,7 +14,7 @@ Factory.define :person do |p|
   p.authorised_account true
   p.accepted_tc true
   p.accepted_pp true
-  p.accepted_tr true 
+  p.accepted_tr true
   p.email_notification_count 0
 end
 
@@ -81,7 +81,7 @@ end
 Factory.define :event_log do |i|
   i.association :primary, :factory => :person
   i.primary_short_name 'Shary'
-  i.primary_full_name 'Shary Demo'  
+  i.primary_full_name 'Shary Demo'
 end
 
 Factory.define :event_display do |e|
@@ -112,5 +112,7 @@ Factory.define :comment do |i|
   i.comment "My awesome comment"
 end
 
-Factory.define :resource_network do |res_network|
+Factory.define :resource_network do |i|
+  i.entity_type_id 1
+  i.resource_type_id 2
 end
