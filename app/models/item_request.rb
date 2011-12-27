@@ -186,10 +186,6 @@ class ItemRequest < ActiveRecord::Base
     self.status == STATUS_COMPLETED
   end
 
-  def is_shareage?
-  	self.purpose == Item::PURPOSE_SHAREAGE
-  end
-
   def has_left_feedback?(person_id)
     !Feedback.exists_for?(self.id, person_id)
   end

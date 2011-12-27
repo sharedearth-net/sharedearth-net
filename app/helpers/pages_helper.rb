@@ -7,37 +7,46 @@ module PagesHelper
     (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "normal" : text_class = ""
    
     @item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => text_class unless event_log.action_object_type_readable.nil?
-    @requester           = link_to event_log.primary_full_name, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?
-  	@requester_possesive = link_to event_log.primary_full_name.possessive, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?
-  	@gifter              = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
-  	@gifter_possesive    = link_to event_log.secondary_full_name.possessive, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
+    @requester           = (event_log.primary == current_user.person) ? "you" : (link_to event_log.primary_full_name, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?)
+  	@requester_possesive = (event_log.primary == current_user.person) ? "your" : (link_to event_log.primary_full_name.possessive, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?)
+  	@gifter              = (event_log.secondary == current_user.person) ? "you" : (link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?)
+  	@gifter_possesive    = (event_log.secondary == current_user.person) ? "your" : (link_to event_log.secondary_full_name.possessive, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?)
 
     @first_person_full  = link_to event_log.primary_full_name, person_path(event_log.primary), :class => text_class unless event_log.primary_full_name.nil?
     @second_person_full = link_to event_log.secondary_full_name, person_path(event_log.secondary), :class => text_class unless event_log.secondary_full_name.nil?
+    
+    sentence = nil
 
     case event_log.event_type_id
     when 18
-      sharing_sentence(event_log, person)
+      sentence = sharing_sentence(event_log, person)
     when 19
-      add_item_sentence(event_log, person)
+      sentence = add_item_sentence(event_log, person)
     when 20
-      negative_feedback_sentence(event_log, person)
+      sentence = negative_feedback_sentence(event_log, person)
     when 21
-      gifting_sentence(event_log, person)
+      sentence = gifting_sentence(event_log, person)
     when 22
-      trust_established_sentence(event_log, person)
+      sentence = trust_established_sentence(event_log, person)
     when 23
-      trust_withdrawn_sentence(event_log, person)
+      sentence = trust_withdrawn_sentence(event_log, person)
     when 24, 51
-      item_damaged_sentence(event_log, person)
+      sentence = item_damaged_sentence(event_log, person)
     when 25, 52
-      item_repaired_sentence(event_log, person)
+      sentence = item_repaired_sentence(event_log, person)
     when 26
-      fb_friend_join_sentence(event_log, person)
+      sentence = fb_friend_join_sentence(event_log, person)
     when 49
       
     else
       #
+    end
+
+    # make first character of sentence capital if starting with you
+    if sentence.starts_with?("you")
+      return sentence.slice(0..0).capitalize + sentence.slice(1..-1)
+    else
+      return sentence
     end
 
   end
@@ -50,7 +59,7 @@ module PagesHelper
        if @same_person
          sentence = "You are #{ verb } your" + " " + @item
        else
-         sentence = event_log.primary_full_name + " " + "is #{ verb } their" + " " + @item
+         sentence = @requester + " " + "is #{ verb } their" + " " + @item
        end
       
     else
@@ -92,13 +101,13 @@ module PagesHelper
      if @same_person
        sentence = "You received " + @gifter_possesive + " " + @item
      else
-       sentence = event_log.primary_full_name + " received " + @gifter_possesive + " " + @item
+       sentence = @requester + " received " + @gifter_possesive + " " + @item
      end
    elsif event_log.involved_as_gifter?(person)
      if @same_person
        sentence = "You gifted your " + @item + " to " +  @requester
      else
-       sentence = event_log.secondary_full_name + " gifted their " + @item + " to " +  @requester
+       sentence = @gifter + " gifted their " + @item + " to " +  @requester
      end
    elsif person.trusts?(event_log.primary) && !person.trusts?(event_log.secondary)
      sentence = @requester + " received " + @gifter_possesive + " " + @item
@@ -328,6 +337,8 @@ module PagesHelper
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
     item = activity_log.action_object
     unless activity_log.secondary_full_name.nil? || item.nil?
+    
+      gifter_person = nil
 			
 			unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 32, 34, 36, 38].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
 				requester           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
@@ -335,15 +346,19 @@ module PagesHelper
 
 				gifter           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary), :class => "positive")
 				gifter_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary), :class => "positive")
+        
+        gifter_person = activity_log.primary
 			else
 				gifter           = (activity_log.secondary == current_user.person) ? "You" : (link_to activity_log.secondary_full_name, person_path(activity_log.secondary), :class => "positive")
 				gifter_possesive = (activity_log.secondary == current_user.person) ? "your" : (link_to activity_log.secondary_full_name.possessive, person_path(activity_log.secondary), :class => "positive")
 
 				requester           =  (activity_log.primary == current_user.person) ? "You" : (link_to activity_log.primary.name, person_path(activity_log.primary), :class => "positive")
 				requester_possesive = (activity_log.primary == current_user.person) ? "your" : (link_to activity_log.primary.name.possessive, person_path(activity_log.primary), :class => "positive")
+
+        gifter_person = activity_log.secondary
 			end
 
-      possesive = item.is_owner?(current_user.person) ? "your" : "their"
+      possesive = ( gifter_person == current_user.person ) ? "your" : "their"
     end
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
     unless activity_log.secondary.nil?
@@ -385,7 +400,7 @@ module PagesHelper
     when 15
       sentence = gifter + " canceled the action sharing their " + item + " with " + requester
     when 16
-      sentence = requester + " canceled the request to borrow " + possesive + " " + item
+      sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
     when 17
       sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
       
@@ -417,9 +432,9 @@ module PagesHelper
     when 28
       sentence =  gifter + " rejected " + requester_possesive + " request for " + possesive + " " + item
     when 29
-      sentence =  person + " accepted your request for their " + item
+      sentence =  gifter + " accepted " + requester_possesive + " request for " + possesive + " " + item
     when 30
-      sentence =  person + " rejected your request for their " +  item
+      sentence =  gifter + " rejected " + requester_possesive + " request for " + possesive + " " + item
     when 31
       sentence =  person + " completed the action of receiving your " + item
     when 32
@@ -435,7 +450,7 @@ module PagesHelper
     when 37
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 38
-      sentence =  "You cancelled the request for " + person_possesive + " " + item 
+      sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     
     #Check if sentence underneath are according to documentation, maybe they have changed  
     when 39
