@@ -48,8 +48,9 @@ gem "acts_as_commentable"
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-	gem "shoulda", "~> 2.11"
   gem "rspec-rails", "~> 2.5"
+	gem "shoulda", "~> 2.11"
+  gem "shoulda-matchers"
 	gem "autotest"
 	gem "guard-rspec"
 	gem "webrat"

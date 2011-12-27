@@ -9,6 +9,8 @@ Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require "paperclip/matchers"
+	require 'shoulda'
+  require "shoulda-matchers"
   require 'factory_girl'
   require 'ffaker'
 
