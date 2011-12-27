@@ -89,7 +89,7 @@ class ItemRequest < ActiveRecord::Base
 
   def accept!
     return if !(self.status == STATUS_REQUESTED)
-    self.item.hidden! if item.is_shareage?
+    self.item.hidden! if self.item.is_shareage?
     self.status = STATUS_ACCEPTED
     save!
     self.item.share? ? create_item_request_accepted_activity_log : create_gift_request_accepted_activity_log
