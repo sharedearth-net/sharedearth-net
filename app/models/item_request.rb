@@ -37,6 +37,7 @@ class ItemRequest < ActiveRecord::Base
   scope :unanswered, where(:status => STATUS_REQUESTED)
   scope :answered, where(:status => [STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_COMPLETED])
   scope :older_than_2_weeks, where("created_at > ? and created_at < ? and status = ?",15.days.ago, 14.days.ago, STATUS_COMPLETED)
+  scope :requested_item, lambda { |entity| where("item_id = ? and status IN (?)", entity.id, [STATUS_REQUESTED]) }
 
   # validates_presence_of :description
   validates_presence_of :requester_id, :requester_type
@@ -92,6 +93,7 @@ class ItemRequest < ActiveRecord::Base
     self.item.hidden! if self.item.is_shareage?
     self.status = STATUS_ACCEPTED
     save!
+    decline_all_for_item(item)
     self.item.share? ? create_item_request_accepted_activity_log : create_gift_request_accepted_activity_log
     self.item.in_use!
     self.item.owner.reputation_rating.increase_requests_answered_count
@@ -276,5 +278,10 @@ class ItemRequest < ActiveRecord::Base
     else
       ActivityLog.create_item_request_activity_log(self, EventType.gift_gifter_completed_gifter, EventType.gift_requester_completed_requester)
     end
+  end
+
+  def decline_all_for_item(item)
+    requests_active_item = ItemRequest.requested_item(item)
+  	requests_active_item.each { |r| r.reject! }
   end
 end
