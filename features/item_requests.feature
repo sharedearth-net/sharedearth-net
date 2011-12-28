@@ -9,6 +9,7 @@ Feature: Item requests management page
 		Given a person exists with name: "Bach"
     Given I am the owner of item with name "Mobile"
     Given I am the owner of shareage item with name "Pen"
+    Given "Maria" is the owner of shareage item with name "BMX"
     And "Maria" is the owner of item with name "Bike"
 
    @javascript
@@ -152,7 +153,38 @@ Feature: Item requests management page
       Then I should see "Nice"
 
    #Shareage requests features
+   #Shareage stage 1
+  Scenario: Action Sentence from gifter perspective stage 1
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      Then I should see "Maria is requesting your bike for shareage"
 
+  Scenario: Action Sentence from requester perspective stage 1
+      Given "John" requested item with name "BMX" from "Maria"
+      And I am on the "dashboard" page
+      Then I should see "You are requesting Maria's bike for shareage"
+
+  Scenario: Action links from gifter perspective stage 1
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      Then I should see the words "accept", "reject", "view request", "comments(0)"
+
+  Scenario: Action Sentence from requester perspective stage 1
+      Given "John" requested item with name "BMX" from "Maria"
+      And I am on the "dashboard" page
+      Then I should see the words "cancel", "view request", "comments(0)"
+
+  Scenario: Recent activity Sentence from gifter perspective stage 1
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      Then I should see "Maria requested your bike for shareage"
+
+  Scenario: Recent activity Sentence from requester perspective stage 1
+      Given "John" requested item with name "BMX" from "Maria"
+      And I am on the "dashboard" page
+      Then I should see "You requested Maria's bike for shareage"
+
+   #Shareage stage 2 - to be continued
    @javascript
    Scenario: Rejected Item Request still appear on the Dashboard
       Given "Maria" requested item with name "Pen" from "John"
