@@ -1,9 +1,16 @@
+<% sentence_ending = ""%>
 <% if req.requested? %>
     <% if req.item.share? -%>
 			  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 			  <% sentence = "made a request to borrow" %>
 			  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
 			  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
+    <% elsif req.item.is_shareage? -%>
+			  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
+			  <% sentence = req.requester?(current_person) ? "are requesting" : "is requesting"%>
+			  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
+			  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
+        <% sentence_ending = " for shareage"%>
 	  <% else %>
 	    <% if req.requester?(current_user.person) -%>
 	        <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
@@ -15,7 +22,7 @@
 			    <% sentence = "has requested" %>
 			    <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
 			    <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
-	    <% end -%>    
+	    <% end -%>
 	  <% end %>
 <% elsif req.accepted? %>
   <% if req.item.share? -%>
@@ -51,7 +58,7 @@
 <% end %>
 
 <% if dashboard -%>
-  <%= (person_one + " " + sentence+ " " + person_two + " " + item).html_safe unless person_one.nil? && sentence.nil? if !person_one.nil? && !person_two.nil? && !sentence.nil?%>
+  <%= (person_one + " " + sentence+ " " + person_two + " " + item + sentence_ending).html_safe unless person_one.nil? && sentence.nil? if !person_one.nil? && !person_two.nil? && !sentence.nil?%>
 <% elsif !person_one.nil? && !person_two.nil? && !sentence.nil? -%>
    <h2>
 		<span>
