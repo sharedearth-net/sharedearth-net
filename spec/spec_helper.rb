@@ -69,6 +69,11 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   #Load all factories and report if there is duplicate definition
+	
+	# reload all the models
+  Dir["#{Rails.root}/app/models/**/*.rb"].each do |model|
+    load model
+  end
 end
 
 #Enable to have coverage tool
