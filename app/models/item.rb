@@ -132,7 +132,7 @@ class Item < ActiveRecord::Base
   end
   
   def is_shareage?
-  	self.purpose == Item::PURPOSE_SHAREAGE
+  	self.purpose == PURPOSE_SHAREAGE
   end
 
   def hidden!
