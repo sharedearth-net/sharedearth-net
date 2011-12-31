@@ -3683,7 +3683,12 @@ a.normal:visited {
 	
 		
 		/* for an item listing - for the person name underneath: 12 #333 (unless name of person is in trusted network, then #127e0e) */
-		
+		#content .items-expanded ul .person-name a.positive:link,
+		#content .items-expanded ul .person-name a.positive:visited,
+		#content .items-list ul .person-name a.positive:link,
+		#content .items-list ul .person-name a.positive:visited {
+			color: #62775a;
+		}
 		
 		/* Search Filter box (e.g. "All results", "Items", etc): */ 
 		
