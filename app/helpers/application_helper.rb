@@ -15,20 +15,6 @@ module ApplicationHelper
     capture(&block) if current_user && (item_request.gifter?(current_user.person) || item_request.requester?(current_user.person))
   end
 
-  def person_name(person, options = {})
-    defaults = { :downcase_you => false, :possessive => false, :check_current_user => true }
-    options = defaults.merge(options)
-
-    if options[:check_current_user] && person.user == current_user
-      name = options[:possessive] ? "Your" : "You"
-      name.downcase! if options[:downcase_you]
-    else
-      name = person.name
-      name = name.possessive if options[:possessive]
-    end
-    name
-  end
-
   def link_to_person(person, options = {})
     defaults = { :downcase_you => false, :possessive => false, :check_current_user => true, :no_link => false }
     options = defaults.merge(options)
