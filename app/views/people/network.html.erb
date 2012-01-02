@@ -28,7 +28,7 @@
 	
 		<div class="content-box-holder no-bg">
 		
-			<h2><%= @person.name %> <%= image_tag("arrow-right.png", :class => "", :alt => "")  %> Trusted Network</h2>
+			<h2><span class="<%= trusted_person_class(p) %>"><%= @person.name %></span> <%= image_tag("arrow-right.png", :class => "", :alt => "")  %> Trusted Network</h2>
 			<% unless @self %>
 			<ul>
 				<li class="clearfix">
@@ -48,7 +48,7 @@
 						<li class="people-holder clearfix">
 							<%= image_tag p.avatar(:square), :class => "thumb" %>
 							<p>
-								<%= link_to p.name, person_path(p)  %>
+								<%= link_to p.name, person_path(p), :class => trusted_person_class(p)  %>
 							</p>
 						</li>
 						<% end-%>
