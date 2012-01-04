@@ -1,5 +1,4 @@
 <div class="network-activity">
-  <h2><%= title ||= 'Your Network Activity' %></h2>
     <ul>
       <% events.each do |event| %>
 		  <% event_sentence = event_log_sentence(event.event_log, nil, 
