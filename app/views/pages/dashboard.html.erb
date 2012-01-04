@@ -81,8 +81,6 @@
 			<%= image_tag("curve-bottom-content-box.png", :alt => "")  %>
 			</div>
 			<!-- /content-box-holder  -->
-		<% else %>
-			<%= render "network_status_info" %>
 		<% end %>
 	
 	
@@ -114,6 +112,8 @@
 	</div><!-- /content  -->
 
 	<div id="sidebar">
+	<%= render "shared/network_status_info" %>
+	<%= image_tag "horizontal-divider.png", :class => "network_status_divider" %>
 	<% if current_person.personal_network_size == 0 -%>
     <%= render :partial => 'shared/news_feed_empty' %>
   <% else -%>
