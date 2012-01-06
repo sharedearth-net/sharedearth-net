@@ -8,8 +8,8 @@
 			<div class="relative_container" >
 
 				<% if name  %>
-					<%= link_to person.name, person, :class => "person-name", :style => "font-size:13px;" %>
-          <% unless person.has_location? %>
+					<%= link_to_person person, :check_current_user => false, :class => "person-name", :style => "font-size:13px;" %>
+					<% if person.has_location? %>
 					<br /><span class="location" style="font-size:11px; color: #838683;"><%= person.location %></span>
 					<% end %>
 				<% end %>
