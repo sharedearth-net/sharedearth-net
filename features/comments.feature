@@ -11,15 +11,31 @@ Feature: Leaving comment to everything
     And "Maria" is the owner of item with name "Bike"
     When "Maria" requested item with name "Mobile" from "John"
     And I follow "home"
-    
+
   Scenario: Showing no comment add link
     Then I should not see "Add comment"
+  @javascript
+  Scenario: Add comment on current request don't create recent activity
+    When I fill in the following:
+     | comment   | My comment opinion |
+    And I submit the comment
+    And I wait until all Ajax requests are complete
+    Then I should not see "commented on the request"
+  @javascript
+  Scenario: Add comment on current request
+    When I fill in the following:
+     | comment   | My comment opinion |
+    And I submit the comment
+    And I wait until all Ajax requests are complete
+    Then I should see "My comment opinion"
+
   @javascript
   Scenario: Showing add comment on item request, leaving comment
     Then I follow "view request"
     When I fill in the following:
      | comment   | My comment opinion |
     And I submit the comment
+    And I wait until all Ajax requests are complete
     Then I should see "My comment opinion"
     @javascript
   Scenario: Commenting event log
@@ -36,6 +52,7 @@ Feature: Leaving comment to everything
     When I fill in the following:
      | comment   | My comment opinion |
     And I submit the comment
+    And I wait until all Ajax requests are complete
     Then I should see "My comment opinion"
     And I should see "comments(1)"
     @javascript
@@ -55,10 +72,11 @@ Feature: Leaving comment to everything
     When I fill in the following:
      | comment   | My public opinion |
     And I submit the comment
+    And I wait until all Ajax requests are complete
     Then I should see "My public opinion"
     And I should see "comments(1)"
     Then I follow "leave feedback"
     And I follow "Later"
     Then I should see "My public opinion"
     Then I should see "My request opinion"
-    
+
