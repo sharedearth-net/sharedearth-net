@@ -42,6 +42,9 @@ class ActivityLog < ActiveRecord::Base
   scope :unread, where(:read => false)
   scope :email_not_sent, where("email_notification_id is null")
   scope :include_person, lambda { |entity| where("(primary_id = ? AND primary_type = 'Person') OR (secondary_id = ? AND secondary_type = 'Person')", entity.id, entity.id)}
+  scope :involves_request, lambda { |entity| where("related_id = ? and related_type = ?", entity.id, "ItemRequest") }
+  scope :comment_requester_events, where("event_type_id IN (?)",[64] )
+  scope :comment_gifter_events, where("event_type_id IN (?)",[63] )
 
   def self.next_event_code
     current_max = ActivityLog.maximum(:event_code)
@@ -198,6 +201,30 @@ class ActivityLog < ActiveRecord::Base
       :secondary_full_name => first_person.name,
       :related => nil,
       :event_type_id => event_type_requester
+    )
+  end
+
+  def self.create_item_request_comment_activity_log(item_request, commentier)
+    if item_request.requester?(commentier)
+      other_entity = item_request.gifter
+      event_type = 63
+    else
+      other_entity = item_request.requester
+      event_type = 64
+    end
+    event_code = ActivityLog.next_event_code
+
+    # create log for other entity
+    ActivityLog.create!(
+      :event_code => event_code,
+      :primary => other_entity,
+      :action_object => item_request.item,
+      :action_object_type_readable => item_request.item.item_type,
+      :secondary => commentier,
+      :secondary_short_name => commentier.first_name,
+      :secondary_full_name => commentier.name,
+      :related => item_request,
+      :event_type_id => event_type
     )
   end
 

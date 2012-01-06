@@ -874,14 +874,24 @@ a.normal:visited {
 
 		/* dashboard - content - network status info */
 		
-		 #dashboard-page .network-status-info {
-		
+		#dashboard-page .network-status-info {
+			width:456px;
 		}
+
+			#dashboard-page .network-status-info>img {
+				width:456px;
+			}
+			
+			#dashboard-page .network-status-info li.status-line {
+				padding:12px 15px 0 0;
+				width:426px;
+			}
 
 			#dashboard-page .network-status-info a.view-network {
 				float:right;
 				color: #81927B;
 				font-size: 11px;
+				padding-right:10px;
 			}
 			
 			#dashboard-page .network-status-info li.content-box:last-child {
@@ -929,9 +939,17 @@ a.normal:visited {
 	
 	#dashboard-page #sidebar {
 		margin-left: 30px;
-		margin-top: 20px;
+		margin-top: 0px;
 		width: 456px;
 	}
+	
+		#dashboard-page #sidebar .network_status_divider {
+			width:456px;
+		}
+		
+		#dashboard-page #sidebar .network-activity {
+			margin-top:10px;
+		}
 	
 		#dashboard-page #sidebar h2 {
 			line-height: 14px;

@@ -502,25 +502,31 @@ module PagesHelper
       sentence =  "You have indicated you have a trusted relationship with " + person
     when 62
       sentence =  person + " has indicated they have a trusted relationship with you"
-    when 63 #shareage gifter sentence stage 1
+    when 63
+      action = activity_log.related.accepted? ? " action " : " request "
+      sentence = person + " commented on the " + action  + " involving your " +  item
+    when 64
+      action = activity_log.related.accepted? ? " action " : " request "
+      sentence = person + " commented on the " + action + " involving their " + item
+    when 65 #shareage gifter sentence stage 1
       sentence = person + " requested your " + item + " for shareage"
-    when 64 #shareage requester sentence stage 1
+    when 66 #shareage requester sentence stage 1
       sentence = "You requested " + person + " " + item + " for shareage"
-    when 65 #shareage gifter sentence stage 2
+    when 67 #shareage gifter sentence stage 2
       sentence
-    when 66 #shareage requester sentence stage 2
+    when 68 #shareage requester sentence stage 2
       sentence
-    when 67 #shareage gifter sentence stage 3
+    when 69 #shareage gifter sentence stage 3
       sentence
-    when 68 #shareage requester sentence stage 3
+    when 70 #shareage requester sentence stage 3
       sentence
-    when 69 #shareage gifter sentence stage 4
+    when 71 #shareage gifter sentence stage 4
       sentence
-    when 70 #shareage requester sentence stage 4
+    when 72 #shareage requester sentence stage 4
       sentence
-    when 71 #shareage gifter sentence stage 5
+    when 73 #shareage gifter sentence stage 5
       sentence
-    when 72 #shareage requester sentence stage 5
+    when 74 #shareage requester sentence stage 5
       sentence
     else
       #
@@ -694,6 +700,32 @@ module PagesHelper
       sentence =  "You have indicated you have a trusted relationship with " + person
     when 62
       sentence =  person + " has indicated they have a trusted relationship with you"
+    when 63
+      action = activity_log.related.accepted? ? " action " : " request "
+      sentence = person + " commented on the " + action  + " involving your " +  item
+    when 64
+      action = activity_log.related.accepted? ? " action " : " request "
+      sentence = person + " commented on the " + action + " involving their " + item
+    when 65 #shareage gifter sentence stage 1
+      sentence = person + " requested your " + item + " for shareage"
+    when 66 #shareage requester sentence stage 1
+      sentence = "You requested " + person + " " + item + " for shareage"
+    when 67 #shareage gifter sentence stage 2
+      sentence
+    when 68 #shareage requester sentence stage 2
+      sentence
+    when 69 #shareage gifter sentence stage 3
+      sentence
+    when 70 #shareage requester sentence stage 3
+      sentence
+    when 71 #shareage gifter sentence stage 4
+      sentence
+    when 72 #shareage requester sentence stage 4
+      sentence
+    when 73 #shareage gifter sentence stage 5
+      sentence
+    when 74 #shareage requester sentence stage 5
+      sentence
 
     else
       #

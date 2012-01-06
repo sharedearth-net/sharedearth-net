@@ -14,5 +14,6 @@ Given /^Looking at person network page with name "([^"]*)"$/ do |name|
 end
 
 When /^I submit the comment$/ do
- find_field('comment').native.send_key(:enter)
+ #find_field('comment').native.send_key(:enter)
+ page.evaluate_script("document.getElementById('new_comment').submit();")
 end
