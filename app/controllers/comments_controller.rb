@@ -3,6 +3,8 @@ class CommentsController < ApplicationController
   model_name = params[:comment][:commentable_type]
   record_commentable = model_name.constantize.find(params[:comment][:commentable_id])
   @comment = record_commentable.comments.create(:commentable => record_commentable, :user_id => current_user.id, :comment => params[:comment][:comment] )
+
+  record_commentable.leave_comment!(current_person) if model_name == "ItemRequest"
   
   respond_to do |format|
       format.html { redirection_rules(model_name, record_commentable) }
