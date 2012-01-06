@@ -6,15 +6,15 @@
 		</li>
 		<li class="clearfix status-line">
 			<%= image_tag "ic-trusted-community.png", :class => "icons", :align => "left", :alt => "Trusted Network" %>
-			<p>&nbsp;<%= link_to pluralize(current_person.trusted_network_size, 'person') + " in your trusted network", network_person_path(current_person) %></p>
+			<p>&nbsp;<%= network_status_trusted_network %></p>
 		</li>
 		<li class="clearfix status-line">
 			<%= image_tag "ic-people-community.png", :class => "icons", :align => "left", :alt => "Personal Network" %>
-			<p>&nbsp;<%= link_to pluralize(current_person.personal_network_size, 'person') + " in your entire network", my_network_person_path(current_person) %></p>
+			<p>&nbsp;<%= network_status_personal_network %></p>
 		</li>
 		<li class="clearfix status-line">
 			<%= image_tag "ic-items-community.png", :class => "icons", :align => "left", :alt => "Items" %>
-			<p>&nbsp;<%= pluralize(current_person.personal_network_items_count, 'item') %> available in your network</p>
+			<p>&nbsp;<%= network_status_items %></p>
 		</li>
 	</ul>
 </div>
