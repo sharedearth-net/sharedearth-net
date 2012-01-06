@@ -6,7 +6,7 @@ Feature: Manage Items
   Background:
     Given the user is logged in
     Given a person exists with name: "Maria"
-
+@javascript
   Scenario: Adding new item for gifting
     Given I am on the new item page
     When I fill in the following:
