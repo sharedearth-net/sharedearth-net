@@ -38,6 +38,7 @@ class ItemRequest < ActiveRecord::Base
   scope :answered, where(:status => [STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_COMPLETED])
   scope :older_than_2_weeks, where("created_at > ? and created_at < ? and status = ?",15.days.ago, 14.days.ago, STATUS_COMPLETED)
   scope :requested_item, lambda { |entity| where("item_id = ? and status IN (?)", entity.id, [STATUS_REQUESTED]) }
+  scope :involves_item, lambda { |entity| where("item_id = ?", entity.id) }
 
   # validates_presence_of :description
   validates_presence_of :requester_id, :requester_type
@@ -192,6 +193,18 @@ class ItemRequest < ActiveRecord::Base
     !Feedback.exists_for?(self.id, person_id)
   end
 
+  def leave_comment!(commentier)
+    if self.requester?(commentier)
+      comments_unread = ActivityLog.involves_request(self).comment_gifter_events.unread
+    else
+      comments_unread = ActivityLog.involves_request(self).comment_requester_events.unread
+    end
+
+    if comments_unread.empty?
+    	create_item_request_comment_activity_log(commentier)
+    end
+  end
+
   private
 
   def item_type_based_status
@@ -278,6 +291,10 @@ class ItemRequest < ActiveRecord::Base
     else
       ActivityLog.create_item_request_activity_log(self, EventType.gift_gifter_completed_gifter, EventType.gift_requester_completed_requester)
     end
+  end
+
+  def create_item_request_comment_activity_log(commentier)
+  	ActivityLog.create_item_request_comment_activity_log(self, commentier)
   end
 
   def decline_all_for_item(item)
