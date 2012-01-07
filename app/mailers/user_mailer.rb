@@ -1,4 +1,5 @@
 class UserMailer < ActionMailer::Base
+  add_template_helper(ApplicationHelper)
   helper :pages
   default :from => "\"sharedearth.net\" <noreply@sharedearth.net>"
 
