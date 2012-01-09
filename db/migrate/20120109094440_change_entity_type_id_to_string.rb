@@ -10,6 +10,8 @@ class ChangeEntityTypeIdToString < ActiveRecord::Migration
     Entity.update_all("specific_entity_type='Project'",  ["entity_type_id = ?", EntityType::PROJECT_ENTITY])
 
     remove_column :entities, :entity_type_id
+
+    add_index :entities, [ :specific_entity_type, :specific_entity_id]
   end
 
   def self.down
