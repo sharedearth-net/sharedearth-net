@@ -357,6 +357,10 @@ class ActivityLog < ActiveRecord::Base
       true
     when 62
       person
+    when 63
+      false
+    when 64
+      false
     else
       true
     end
