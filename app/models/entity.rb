@@ -1,6 +1,6 @@
 class Entity < ActiveRecord::Base
 
-  belongs_to :specific_entity, :class_name => proc{ self.type }, :foreign_key => :bar_id
+  belongs_to :specific_entity, :polymorphic => true
 
   def type
     case entity_type_id
