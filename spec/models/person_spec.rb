@@ -121,7 +121,7 @@ describe Person, ".request_trusted_relationship" do
     person         = stub_model(Person, :name => "Receiver")
     expect {
       person.request_trusted_relationship(request_person)
-    }.to change { person.received_people_network_requests.count }.by(1)
+    }.to change { person.received_network_requests.count }.by(1)
   end
 
 
@@ -132,7 +132,7 @@ describe Person, ".request_trusted_relationship" do
     expect {
       requested.request_trusted_relationship(requester)
       requested.request_trusted_relationship(requester)
-    }.to change { PeopleNetworkRequest.count }.by(1)
+    }.to change { NetworkRequest.count }.by(1)
   end
 end
 

@@ -1,28 +1,28 @@
 require 'spec_helper'
 
-describe PeopleNetworkRequestsController do
+describe NetworkRequestsController do
 
   let(:signedin_user) { generate_mock_user_with_person }
 
   let(:mock_person) { mock_model(Person).as_null_object }
 
-  let(:mock_people_network_request) { mock_model(PeopleNetworkRequest).as_null_object }
+  let(:mock_network_request) { mock_model(NetworkRequest).as_null_object }
 
   it_should_require_signed_in_user_for_actions :all
 
   def as_the_requester
-    mock_people_network_request.stub(:requester?).and_return(true)
-    mock_people_network_request.stub(:trusted_person?).and_return(false)
+    mock_network_request.stub(:requester?).and_return(true)
+    mock_network_request.stub(:trusted_person?).and_return(false)
   end
 
   def as_the_trusted_person
-    mock_people_network_request.stub(:requester?).and_return(false)
-    mock_people_network_request.stub(:trusted_person?).and_return(true)
+    mock_network_request.stub(:requester?).and_return(false)
+    mock_network_request.stub(:trusted_person?).and_return(true)
   end
 
   def as_other_person
-    mock_people_network_request.stub(:requester?).and_return(false)
-    mock_people_network_request.stub(:trusted_person?).and_return(false)
+    mock_network_request.stub(:requester?).and_return(false)
+    mock_network_request.stub(:trusted_person?).and_return(false)
   end
 
   describe "for signed in member" do
@@ -61,22 +61,22 @@ describe PeopleNetworkRequestsController do
     
       before do
         # mock_person.stub(:belongs_to?).and_return(true)
-        mock_people_network_request.stub(:trusted_person).and_return(mock_person)
-        PeopleNetworkRequest.stub(:find_by_id).with("37") { mock_people_network_request }
+        mock_network_request.stub(:trusted_person).and_return(mock_person)
+        NetworkRequest.stub(:find_by_id).with("37") { mock_network_request }
       end
     
       it "assigns the requested request as @person_network_request" do
         delete :destroy, :id => "37"
-        assigns(:people_network_request).should be(mock_people_network_request)
+        assigns(:network_request).should be(mock_network_request)
       end
       
       it "cancels trusted relationship request" do
-        mock_people_network_request.should_receive(:destroy)
+        mock_network_request.should_receive(:destroy)
         delete :destroy, :id => "37"
       end
       
       it "redirects to the person page (profile)" do
-        mock_people_network_request.stub(:destroy).and_return(true)
+        mock_network_request.stub(:destroy).and_return(true)
         delete :destroy, :id => "37"
         response.should redirect_to(person_path(mock_person))
       end
@@ -107,17 +107,17 @@ describe PeopleNetworkRequestsController do
     describe "PUT confirm" do
     
       before(:each) do
-        mock_people_network_request.stub(:trusted_person).and_return(mock_person)
-        PeopleNetworkRequest.stub(:find_by_id).with("37") { mock_people_network_request }
+        mock_network_request.stub(:trusted_person).and_return(mock_person)
+        NetworkRequest.stub(:find_by_id).with("37") { mock_network_request }
       end
 
       it "assigns the requested request as @item_request" do
         put :confirm, :id => "37"
-        assigns(:people_network_request).should be(mock_people_network_request)
+        assigns(:network_request).should be(mock_network_request)
       end
       
       it "should confirm trust request" do
-        mock_people_network_request.should_receive(:confirm!).once
+        mock_network_request.should_receive(:confirm!).once
         put :confirm, :id => "37"
       end
 

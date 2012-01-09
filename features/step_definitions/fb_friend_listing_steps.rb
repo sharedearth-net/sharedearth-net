@@ -8,14 +8,14 @@ Given /^me and "([^"]*)" have a trust relationship$/ do |other_person_name|
   logged_person = Person.find(1)
   other_person  = Person.find_by_name(other_person_name)
 
-  Factory(:people_network, 
+  Factory(:human_network, 
           :trusted_person_id => other_person.id, 
           :person_id         => logged_person.id)
 end
 
 Given /^I have made a trust request to "([^"]*)"$/ do |person_name|
   requested = Person.find_by_name(person_name)
-  page.driver.post(people_network_requests_path(:trusted_person_id => requested.id))
+  page.driver.post(network_requests_path(:trusted_person_id => requested.id))
 end
 
 Given /^"([^"]*)" and "([^"]*)" are my friends on FB$/ do |arg1, arg2|

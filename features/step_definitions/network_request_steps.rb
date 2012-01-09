@@ -1,5 +1,5 @@
 Given /^"([^"]*)" accepts my trust request$/ do |person_name|
-  PeopleNetworkRequest.last.confirm!
+  NetworkRequest.last.confirm!
 end
 
 Then /^I should see "([^"]*)" only once$/ do |expression|
@@ -8,7 +8,7 @@ end
 
 Given /^I request a trust relationship with "([^"]*)" (\d+) times$/ do |person_name, times|
   person = Person.find_by_name(person_name) 
-  request_url = "/people_network_requests?trusted_person_id=#{person.id}"
+  request_url = "/network_requests?trusted_person_id=#{person.id}"
   times.to_i.times { page.driver.post(request_url) }
 end
 
@@ -19,6 +19,6 @@ Given /^"([^"]*)" request a trust relationship with me$/ do |person_name|
   visit "/auth/facebook"
 
   logged_person = Person.find_by_id(1)
-  request_url   = "/people_network_requests?trusted_person_id=#{logged_person.id}"
+  request_url   = "/network_requests?trusted_person_id=#{logged_person.id}"
   page.driver.post(request_url)
 end

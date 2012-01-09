@@ -71,11 +71,11 @@ Factory.define :feedback do |f|
   f.feedback Feedback::FEEDBACK_POSITIVE
 end
 
-Factory.define :people_network do |p|
+Factory.define :human_network do |p|
   p.entity_type_id 7
 end
 
-Factory.define :people_network_request do |p|
+Factory.define :network_request do |p|
 end
 
 Factory.define :event_log do |i|

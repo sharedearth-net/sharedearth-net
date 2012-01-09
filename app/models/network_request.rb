@@ -1,4 +1,4 @@
-class PeopleNetworkRequest < ActiveRecord::Base
+class NetworkRequest < ActiveRecord::Base
   belongs_to :person
   belongs_to :trusted_person, :class_name => "Person"
   
