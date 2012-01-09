@@ -111,6 +111,8 @@ ActiveRecord::Schema.define(:version => 20120109094440) do
     t.string   "specific_entity_type"
   end
 
+  add_index "entities", ["specific_entity_type", "specific_entity_id"], :name => "index_entities_on_specific_entity_type_and_specific_entity_id"
+
   create_table "entity_types", :force => true do |t|
     t.string   "entity_type_name"
     t.datetime "created_at"
