@@ -77,7 +77,7 @@ module ApplicationHelper
 
   def need_gcf_check
     ua = request.env['HTTP_USER_AGENT']
-    if ua =~ /MSIE/ || true
+    if ua =~ /MSIE/ && !( ua =~ /chromeframe/ )
       return true
     end
     false
