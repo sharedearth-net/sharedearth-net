@@ -52,6 +52,7 @@ Feature: Accepting terms
       Then I should see "Design Principles"
       And I should not see link with text "back"
       And I should not see link with text "disconnect"
+      Then I uncheck "facebook"
       And I press "Connect"
       Then I should see the words "Edit Profile"
 
@@ -62,12 +63,13 @@ Feature: Accepting terms
       Then I follow "Reject"
       Then I should see "connect"
 
-
+@javascript
    Scenario: User has accepted Terms and Transparency but not the Principles
       Given the logged person has accepted legal notice but not principles
       Then I fill in active invitation
       And I press "Submit"
       Then I should see "Design Principles"
+      When I uncheck "facebook"
       And I press "Connect"
       Then I should be on the dashboard page
 

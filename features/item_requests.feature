@@ -102,13 +102,13 @@ Feature: Item requests management page
     And I follow "Later"
     Then Looking at my person page
     And I should see "1 different people"
-
+@javascript
    Scenario: I request an item that has been deleted
-      Given an item exists with name: "Sweet ride"
-      And the logged person is the owner
-      And I delete that item
-      When "Maria" requests Item
-      Then a item request should not exist
+    Given Looking at Maria's item with name "Bike"
+    Given "Maria" deletes item "Bike"
+    Then I follow "Request"
+    Then I should see "not"
+    Then a item request should not exist
 
    @javascript
    Scenario: Rejected Item Request still appear on the Dashboard

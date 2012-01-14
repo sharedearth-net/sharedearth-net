@@ -85,9 +85,9 @@ Feature: Manage Items
     Then I should see "Mobile"
     When I fill in "search" with "Mobile"
     Then I press "Search"
-    And I should not see "Mobile"
-    Then I should not see "view item"
-    And I should not see "From your extended network"
+    And I should see "Mobile"
+    Then I should see "view item"
+    And I should see "From sharedearth.net network"
   @javascript
   Scenario: Item is searched but it belongs to someone that is not in my trusted nor extended network
     And "Maria" is the owner of item with name "Bike"
@@ -95,7 +95,8 @@ Feature: Manage Items
     Then I should see "Bike"
     When I fill in "search" with "Bike"
     Then I press "Search"
-    Then I should see "Search term not found"
+    And I should see "From sharedearth.net network"
+    And I should see "Bike"
 
    Scenario: Creating an Item without a purpose
       Given I am on the new item page
@@ -120,8 +121,9 @@ Feature: Manage Items
       And I fill in "Item type" with "Bmw"
       And I choose "shareage"
       And I press "Save"
-      Then I should not have a new Item
-      And I should see "prohibited this item from being saved"
+      Then I should see "bmw"
+      And I should see "A nice ride"
+      And I should see "shareage"
 
    Scenario: Create Item without description
       Given I am on the new item page
