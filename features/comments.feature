@@ -19,14 +19,14 @@ Feature: Leaving comment to everything
     When I fill in the following:
      | comment   | My comment opinion |
     And I submit the comment
-    And I wait until all Ajax requests are complete
+    #    And I wait until all Ajax requests are complete
     Then I should not see "commented on the request"
   @javascript
   Scenario: Add comment on current request
     When I fill in the following:
      | comment   | My comment opinion |
     And I submit the comment
-    And I wait until all Ajax requests are complete
+    #And I wait until all Ajax requests are complete
     Then I should see "My comment opinion"
 
   @javascript
