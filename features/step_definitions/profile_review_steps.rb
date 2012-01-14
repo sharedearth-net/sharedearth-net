@@ -25,3 +25,13 @@ Then /^I should be at (.+) profile page$/ do |person_model|
   person = model(person_model)
   current_url.should match edit_person_url(person)
 end
+
+Then /^I should be at logged in user edit profile page$/ do |person_model|
+  person = Person.first
+  current_url.should match edit_person_url(person)
+end
+
+Then /^I should be at logged in user profile show page$/ do
+  person = Person.first
+  current_url.should match person_url(person)
+end

@@ -89,6 +89,12 @@ Given /^I delete (.+)$/ do |model_name|
   model(model_name).delete
 end
 
+Given /^"(.*)" deletes item "(.*)"$/ do |name, item_name|
+  person = Person.find_by_name("#{name}")
+  item = Item.find_by_owner_id_and_name(person.id, "#{item_name}")
+  item.delete
+end
+
 Given /^"(.*)" (completed|accepted|canceled) item request with "(.*)" for item "(.*)"$/ do |person_1, status, person_2, item|
 		case status
       when "completed"
