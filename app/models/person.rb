@@ -122,6 +122,11 @@ class Person < ActiveRecord::Base
   	self.has_reviewed_profile == true
   end
 
+  def reviewed_profile!
+    self.has_reviewed_profile == true
+    save!
+  end
+
   def create_entity_for_person
     Entity.create!(:entity_type_id => EntityType::PERSON_ENTITY, :specific_entity_id => self.id)
   end
