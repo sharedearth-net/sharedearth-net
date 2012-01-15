@@ -33,6 +33,8 @@ Sharedearthapp::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
   config.action_mailer.default_url_options = { :host => 'senlocal.heroku.com' } 
+  config.action_mailer.asset_host = 'http://senlocal.heroku.com'
+
 end
 
 #Fix for Capybara losing session with omniauth. Rake uses example.org but Capybara uses www.example.com and it breaks session

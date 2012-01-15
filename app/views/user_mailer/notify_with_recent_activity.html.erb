@@ -129,16 +129,20 @@
 	<div class="network-status-info" style="margin: 0 auto 70px auto;">
 		<ul  style="margin: 0; padding: 0;">
 			<li class="clearfix" style="padding: 0 15px 21px 0; width: 481px; list-style-type: none;">
+				<a href="<%= my_network_person_path(@current_user.person, :only_path => false) %>" class="view-network" style="float:right;color: #81927B;font-size: 11px;padding-right:10px;text-decoration: none;" >view network</a>
 				<h2 style="padding:0;margin:0;font-size: 12px;color: #315859;line-height: 14px;">Your Network</h2>
 			</li>
 			<li class="clearfix status-line" style="margin-left:15px;padding: 12px 15px 0 0;width: 426px;line-height: 20px;font-size: 12px;list-style-type: none;">
-				<p style="padding:0;margin:0;color: #5C5C5C;"><%= network_status_trusted_network(@current_user.person, false, :style => "color: #5C5C5C;") %></p>
+				<%= image_tag "ic-trusted-community.png", :align => "left", :alt => "Trusted Network", :style => "max-width:24px;max-height:20px;" %>
+				<p style="padding:0;margin:0;color: #5C5C5C;">&nbsp;<%= network_status_trusted_network(@current_user.person, false, :style => "color: #5C5C5C;") %></p>
 			</li>
 			<li class="clearfix status-line" style="margin-left:15px;padding: 12px 15px 0 0;width: 426px;line-height: 20px;font-size: 12px;list-style-type: none;">
-				<p style="padding:0;margin:0;color: #5C5C5C;"><%= network_status_personal_network(@current_user.person, false, :style => "color: #5C5C5C;") %></p>
+				<%= image_tag "ic-people-community.png", :align => "left", :alt => "Personal Network", :style => "max-width:24px;max-height:20px;" %>
+				<p style="padding:0;margin:0;color: #5C5C5C;">&nbsp;<%= network_status_personal_network(@current_user.person, false, :style => "color: #5C5C5C;") %></p>
 			</li>
 			<li class="clearfix status-line" style="margin-left:15px;padding: 12px 15px 0 0;width: 426px;line-height: 20px;font-size: 12px;list-style-type: none;">
-				<p style="padding:0;margin:0;color: #5C5C5C;"><%= network_status_items(@current_user.person) %></p>
+				<%= image_tag "ic-items-community.png", :align => "left", :alt => "Items", :style => "max-width:24px;max-height:20px;" %>
+				<p style="padding:0;margin:0;color: #5C5C5C;">&nbsp;<%= network_status_items(@current_user.person) %></p>
 			</li>
 		</ul>
 	</div>
@@ -147,8 +151,7 @@
 	<div id="footer" style="clear: both; text-align: center">
 	    <p style="text-align: center">
             <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/about">About</a> <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/terms/principles">Principles</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/transparency">Transparency</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/contribute">Contribute</a> <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="mailto:info@sharedearth.net">Contact</a>  <a style="font-size: 11px; color: #78ba00; text-align: center; text-decoration: none;" href="sharedearth.net/terms">Terms</a>
-        </p>
-       
+      </p>
 	</div>
 	<p style="font-size: 10px; color: #9c9e9c; text-align: center">
 		To disable email notifications go to <%= link_to "Edit Profile", edit_person_path(@current_user.person, :only_path => false), :style => "font-size: 10px; color: #9c9e9c; text-decoration: underline;" %> and uncheck <em>Enable smart email notifications</em>
