@@ -75,4 +75,12 @@ module ApplicationHelper
     pluralize(person.personal_network_items_count, 'item') + " available in your network"
   end
 
+  def need_gcf_check
+    ua = request.env['HTTP_USER_AGENT']
+    if ua =~ /MSIE/ && !( ua =~ /chromeframe/ )
+      return true
+    end
+    false
+  end
+
 end
