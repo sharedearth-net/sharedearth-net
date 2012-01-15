@@ -1,4 +1,7 @@
 class Person < ActiveRecord::Base
+
+  acts_as_entity(EntityType::PERSON_ENTITY)
+
   belongs_to :user
   has_many :items, :as => :owner
   has_many :item_requests, :as => :requester

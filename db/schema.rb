@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120104091338) do
+ActiveRecord::Schema.define(:version => 20120109094440) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -105,11 +105,13 @@ ActiveRecord::Schema.define(:version => 20120104091338) do
   end
 
   create_table "entities", :force => true do |t|
-    t.integer  "entity_type_id"
     t.integer  "specific_entity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "specific_entity_type"
   end
+
+  add_index "entities", ["specific_entity_type", "specific_entity_id"], :name => "index_entities_on_specific_entity_type_and_specific_entity_id"
 
   create_table "entity_types", :force => true do |t|
     t.string   "entity_type_name"

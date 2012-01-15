@@ -1,5 +1,8 @@
 class Item < ActiveRecord::Base
+
   include PaperclipWrapper
+  
+  acts_as_entity(EntityType::ITEM_ENTITY)
 
   STATUS_NORMAL  = 10.freeze
   STATUS_LOST    = 20.freeze
