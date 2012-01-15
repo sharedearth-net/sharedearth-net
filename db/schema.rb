@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120109094440) do
+ActiveRecord::Schema.define(:version => 20120109154649) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -217,6 +217,13 @@ ActiveRecord::Schema.define(:version => 20120109094440) do
     t.boolean  "hidden",             :default => false
   end
 
+  create_table "network_requests", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "trusted_person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at"
@@ -236,13 +243,6 @@ ActiveRecord::Schema.define(:version => 20120109094440) do
     t.integer  "email_notification_count",                                :default => 0
     t.datetime "last_notification_email"
     t.boolean  "smart_notifications",                                     :default => true
-  end
-
-  create_table "people_network_requests", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "trusted_person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "people_networks", :force => true do |t|
