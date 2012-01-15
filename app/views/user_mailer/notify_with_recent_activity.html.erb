@@ -134,19 +134,18 @@
 			</li>
 			<li class="clearfix status-line" style="margin-left:15px;padding: 12px 15px 0 0;width: 426px;line-height: 20px;font-size: 12px;list-style-type: none;">
 				<%= image_tag "ic-trusted-community.png", :align => "left", :alt => "Trusted Network", :style => "max-width:24px;max-height:20px;" %>
-				<p style="padding:0;margin:0;color: #5C5C5C;">&nbsp;<%= network_status_trusted_network(@current_user.person, false, :style => "color: #5C5C5C;") %></p>
+				<p style="padding:0;margin:0;color: #5C5C5C;">&nbsp;<%= network_status_trusted_network(@current_user.person, false, :style => "color: #5C5C5C;text-decoration:none;") %></p>
 			</li>
 			<li class="clearfix status-line" style="margin-left:15px;padding: 12px 15px 0 0;width: 426px;line-height: 20px;font-size: 12px;list-style-type: none;">
 				<%= image_tag "ic-people-community.png", :align => "left", :alt => "Personal Network", :style => "max-width:24px;max-height:20px;" %>
-				<p style="padding:0;margin:0;color: #5C5C5C;">&nbsp;<%= network_status_personal_network(@current_user.person, false, :style => "color: #5C5C5C;") %></p>
+				<p style="padding:0;margin:0;color: #5C5C5C;">&nbsp;<%= network_status_personal_network(@current_user.person, false, :style => "color: #5C5C5C;text-decoration:none;") %></p>
 			</li>
 			<li class="clearfix status-line" style="margin-left:15px;padding: 12px 15px 0 0;width: 426px;line-height: 20px;font-size: 12px;list-style-type: none;">
-				<%= image_tag "ic-items-community.png", :align => "left", :alt => "Items", :style => "max-width:24px;max-height:20px;" %>
+				<%= image_tag "ic-items-community.png", :align => "left", :alt => "Items", :style => "max-width:24px;max-height:20px;text-decoration:none;" %>
 				<p style="padding:0;margin:0;color: #5C5C5C;">&nbsp;<%= network_status_items(@current_user.person) %></p>
 			</li>
 		</ul>
 	</div>
-
 
 	<div id="footer" style="clear: both; text-align: center">
 	    <p style="text-align: center">
