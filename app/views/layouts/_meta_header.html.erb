@@ -11,3 +11,25 @@
 <%= favicon_link_tag 'favicon.ico' %>
 
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+<% if need_gcf_check %>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <style>
+   /* 
+    CSS rules to use for styling the overlay:
+      .chromeFrameOverlayContent
+      .chromeFrameOverlayContent iframe
+      .chromeFrameOverlayCloseBar
+      .chromeFrameOverlayUnderlay
+   */
+  </style> 
+
+  <script>
+   $(function(){
+     CFInstall.check({
+       mode: "overlay",
+       destination: window.location.href
+     });
+    });
+  </script>
+<% end %>
