@@ -89,6 +89,10 @@ class Person < ActiveRecord::Base
     save!
   end
 
+  def has_email?
+  	!self.email.empty?
+  end
+
   def accept_tc!
     self.accepted_tc = true
     self.tc_version  = TC_VERSION
