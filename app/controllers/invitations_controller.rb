@@ -35,10 +35,10 @@ class InvitationsController < ApplicationController
     if Settings.invitations == 'false'
        Settings.invitations = 'true'
        authorised = Person.all
-       authorised.each { |person| person.authorise! }
+       authorised.each { |person| person.authorise! if person.has_email?}
     else 
        authorised = Person.all
-       authorised.each { |person| person.authorise! }
+       authorised.each { |person| person.authorise! if person.has_email?}
        Settings.invitations = 'false'
     end
     redirect_to admin_dashboard_path
