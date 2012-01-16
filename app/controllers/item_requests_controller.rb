@@ -162,6 +162,7 @@ class ItemRequestsController < ApplicationController
   def new_comment
     model_name = params[:comment][:commentable_type]
     record_commentable = model_name.constantize.find(params[:comment][:commentable_id])
+    record_commentable.leave_comment!(current_person)
 
     @comment = record_commentable.comments.create(:commentable => record_commentable,
                                                   :user_id     => current_user.id,
