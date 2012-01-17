@@ -1,6 +1,7 @@
 Given /^me and "([^"]*)" are friends on FB$/ do |other_person_name|
   other_person  = Person.find_by_name(other_person_name)
-  FbService.stub!(:search_fb_friends).and_return([other_person])
+  FbService.stub!(:search_fb_friends).and_return(Person.joins(:user).where('users.uid' => [other_person.user.uid]))
+  FbService.stub!(:get_my_friends).and_return(Person.joins(:user).where('users.uid' => [other_person.user.uid]))
 end
 
 Given /^me and "([^"]*)" have a trust relationship$/ do |other_person_name|
