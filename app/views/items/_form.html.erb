@@ -61,8 +61,11 @@
 				
 
     		<% else %>
-	    		<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled", :id => :share  %> <%= f.label :Share %>
-    		  <%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled", :id => :gift   %> <%= f.label :Gift %>
+	    		<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled", :id => :share  %>
+				<%= f.label :Share, :class => "radio-labels-holder radio-labels-holder-off" %>
+    		  	
+				<%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled", :id => :gift   %>
+				<%= f.label :Gift, :class => "radio-labels-holder radio-labels-holder-off" %>
     		<% end %>
 		</li>
     	<li class="clearfix">
