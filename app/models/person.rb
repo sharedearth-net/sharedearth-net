@@ -90,7 +90,7 @@ class Person < ActiveRecord::Base
   end
 
   def has_email?
-  	!self.email.empty?
+  	!self.email?
   end
 
   def accept_tc!
