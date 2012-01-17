@@ -140,9 +140,18 @@ class ItemsController < ApplicationController
   end
 
   def post_new_item_on_fb(item)
-    msg  = "is now sharing their #{item.item_type.downcase} on sharedearth.net."
+    case item.purpose
+    	when Item::PURPOSE_SHARE
+        msg = "Sharing my #{item.name.downcase} on sharedearth.net."
+      when Item::PURPOSE_SHAREAGE
+        msg = "Sharing my #{item.name.downcase} on sharedearth.net."
+      when Item::PURPOSE_GIFT
+        msg = "Gifting my #{item.name.downcase} on sharedearth.net."
+      else
+        msg = "Added my #{item.name.downcase} to sharedearth.net."
+    end
     link = item_url(item)
 
-    FbService.post_on_my_wall(fb_token, msg, link, :append_name => true)
+    FbService.post_on_my_wall(fb_token, msg, link, :append_name => false)
   end
 end
