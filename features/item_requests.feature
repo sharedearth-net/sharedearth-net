@@ -173,16 +173,16 @@ Feature: Item requests management page
       Given "John" requested item with name "BMX" from "Maria"
       And I am on the "dashboard" page
       Then I should see the words "cancel", "view request", "comments(0)"
-
+@javascript
   Scenario: Recent activity Sentence from gifter perspective stage 1
       Given "Maria" requested item with name "Pen" from "John"
       And I am on the "dashboard" page
-      Then I should see "Maria requested your bike for shareage"
+      Then I should see "Maria made a request to borrow your bike"
 
   Scenario: Recent activity Sentence from requester perspective stage 1
       Given "John" requested item with name "BMX" from "Maria"
       And I am on the "dashboard" page
-      Then I should see "You requested Maria's bike for shareage"
+      Then I should see "You made a request to borrow Maria's bike"
 
    #Shareage stage 2 - to be continued
    @javascript
