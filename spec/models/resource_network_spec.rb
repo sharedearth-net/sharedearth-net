@@ -2,14 +2,14 @@ require 'spec_helper'
 module ResourceNetworkHelperSpec
   def setup_resource_network_environment
     person = Factory(:person)
-    item = Factory(:item)
-    @resource_network = Factory(:resource_network, :entity_id => person.id, :resource_id => item.id)
+    @item = Factory(:item)
+    @resource_network = Factory(:resource_network, :entity_id => person.id, :resource_id => @item.id)
   end
 
 end
 
 describe ResourceNetwork do
-  it {should validate_presence_of(:type)}
+  it {should validate_presence_of(:owner_type)}
   it "should allow preset values as values for type" do
     ResourceNetwork::TYPES.each do |type|
       should allow_value(type).for(:type)
@@ -39,4 +39,16 @@ describe ResourceNetwork do
     @resource_network.set_possessor!(@new_owner, 1)
     expect {@resource_network.remove_possessor!}.to change { @resource_network.type }.from(ResourceNetwork::TYPE_GIFTER).to(ResourceNetwork::TYPE_GIFTER_AND_POSSESSOR)
   end
+end
+
+describe ResourceNetwork do
+  include ResourceNetworkHelperSpec
+  before do
+    setup_resource_network_environment
+  end
+
+  it "should find item associated with Resource Network" do
+    expect {ResourceNetwork.item(@item).first}.to_not raise_error
+  end
+
 end

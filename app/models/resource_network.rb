@@ -1,4 +1,5 @@
 class ResourceNetwork < ActiveRecord::Base
+  self.inheritance_column = "inheritance_type"
 
   TYPE_GIFTER_AND_POSSESSOR = 10.freeze
   TYPE_GIFTER = 20.freeze
