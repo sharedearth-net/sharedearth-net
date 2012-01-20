@@ -220,6 +220,7 @@ a:hover {
 						background: url('../graphics/sp-social.png') no-repeat bottom left;
 						width: 40px;
 						height: 40px;
+						overflow: hidden;
 					}
 					
 					#footer ul li a:hover {
