@@ -9,6 +9,7 @@ Feature: Item requests management page
 		Given a person exists with name: "Bach"
     Given I am the owner of item with name "Mobile"
     Given I am the owner of shareage item with name "Pen"
+    Given I am the owner of gift item with name "Chair"
     Given "Maria" is the owner of shareage item with name "BMX"
     And "Maria" is the owner of item with name "Bike"
 
@@ -53,6 +54,19 @@ Feature: Item requests management page
     Then I should see the words "collect", "complete"
     And I follow "collect"
     Then I should see the words "collected"
+
+    @javascript
+  Scenario: I click on item collected for active request for gift item
+    Given "Maria" requested item with name "Chair" from "John"
+    Then Looking at my person page
+    And I follow "accept"
+    Then Looking at my person page
+    Then I should see "There are no unanswered requests"
+    And I am on the dashboard page
+    Then I should see the words "collected"
+    And I follow "collected"
+    And I wait until all Ajax requests are complete
+    Then I should not see "Something"
 
     @javascript
   Scenario: I click on item completed for active request
