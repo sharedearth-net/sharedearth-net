@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120109154649) do
+ActiveRecord::Schema.define(:version => 20120120183300) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -174,6 +174,22 @@ ActiveRecord::Schema.define(:version => 20120109154649) do
     t.integer  "feedback"
   end
 
+  create_table "human_networks", :force => true do |t|
+    t.integer  "entity_id"
+    t.integer  "human_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "entity_type"
+    t.integer  "entity_master_id"
+    t.string   "human_network_type"
+    t.string   "human_type",         :default => "Person"
+    t.integer  "human_entity_id"
+  end
+
+  add_index "human_networks", ["entity_id"], :name => "index_human_networks_on_entity_type_and_entity_id"
+  add_index "human_networks", ["entity_master_id"], :name => "index_human_networks_on_entity_master_id"
+  add_index "human_networks", ["human_id"], :name => "index_human_networks_on_human_id"
+
   create_table "invitations", :force => true do |t|
     t.integer  "inviter_person_id"
     t.integer  "invitation_unique_key"
@@ -229,29 +245,20 @@ ActiveRecord::Schema.define(:version => 20120109154649) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "authorised_account",                                      :default => false
-    t.boolean  "accepted_tc",                                             :default => false
-    t.decimal  "tc_version",               :precision => 10, :scale => 0, :default => 1
-    t.decimal  "pp_version",               :precision => 10, :scale => 0, :default => 1
+    t.boolean  "authorised_account",       :default => false
+    t.boolean  "accepted_tc",              :default => false
+    t.decimal  "tc_version",               :default => 1.0
+    t.decimal  "pp_version",               :default => 1.0
     t.string   "location"
     t.text     "description"
-    t.boolean  "accepted_pp",                                             :default => false
+    t.boolean  "accepted_pp",              :default => false
     t.string   "email"
-    t.boolean  "accepted_tr",                                             :default => false
-    t.boolean  "has_reviewed_profile",                                    :default => false
+    t.boolean  "accepted_tr",              :default => false
+    t.boolean  "has_reviewed_profile",     :default => false
     t.integer  "invitations_count"
-    t.integer  "email_notification_count",                                :default => 0
+    t.integer  "email_notification_count", :default => 0
     t.datetime "last_notification_email"
-    t.boolean  "smart_notifications",                                     :default => true
-  end
-
-  create_table "people_networks", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "trusted_person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "entity_id"
-    t.integer  "entity_type_id"
+    t.boolean  "smart_notifications",      :default => true
   end
 
   create_table "person_gift_act_ratings", :force => true do |t|
@@ -294,7 +301,6 @@ ActiveRecord::Schema.define(:version => 20120109154649) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "type",             :default => 10
-    t.integer  "owner_type",       :default => 10
   end
 
   create_table "settings", :force => true do |t|

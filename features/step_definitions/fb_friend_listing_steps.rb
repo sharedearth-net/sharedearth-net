@@ -9,8 +9,9 @@ Given /^me and "([^"]*)" have a trust relationship$/ do |other_person_name|
   other_person  = Person.find_by_name(other_person_name)
 
   Factory(:human_network, 
-          :trusted_person_id => other_person.id, 
-          :person_id         => logged_person.id)
+          :human_id     => other_person.id, 
+          :entity_id    => logged_person.id,
+          :entity_type  => "Person"  )
 end
 
 Given /^I have made a trust request to "([^"]*)"$/ do |person_name|

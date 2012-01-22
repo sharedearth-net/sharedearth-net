@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
 
   include PaperclipWrapper
   
-  acts_as_entity(EntityType::ITEM_ENTITY)
+  acts_as_entity
 
   STATUS_NORMAL  = 10.freeze
   STATUS_LOST    = 20.freeze
@@ -133,7 +133,7 @@ class Item < ActiveRecord::Base
   end
 
   def create_entity_for_item
-    Entity.create!(:entity_type_id => EntityType::ITEM_ENTITY, :specific_entity_id => self.id)
+    Entity.create!(:specific_entity_type => "Item", :specific_entity_id => self.id)
   end
 
   def active_request_by?(user)

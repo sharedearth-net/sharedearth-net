@@ -13,7 +13,7 @@ class NetworkRequest < ActiveRecord::Base
   end
 
   def confirm!
-    PeopleNetwork.create_trust!(self.person, self.trusted_person) 
+    HumanNetwork.create_trust!(self.person, self.trusted_person) 
     self.destroy
   end
 end
