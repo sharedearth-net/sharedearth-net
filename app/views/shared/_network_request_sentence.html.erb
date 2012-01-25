@@ -1,0 +1,10 @@
+<% if req.requester?(current_user.person) %>
+	<%= link_to_person(req.person) %>
+	are establishing a trusted relationship with
+	<%= link_to_person(req.trusted_person, :downcase_you => true) %>
+<% else %>
+	<%= link_to_person(req.person) %>
+	has indicated
+	<%= link_to_person(req.trusted_person, :downcase_you => true) %>
+	have a trusted relationship with them
+<% end %>
