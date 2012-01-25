@@ -24,6 +24,15 @@ describe ItemRequestsController do
     mock_item_request.stub(:gifter?).and_return(false)
   end
 
+  describe 'test actions' do
+
+      it "show action should require signed in user" do
+          get :show, :id => '1'
+          response.should redirect_to(root_path)
+          flash[:alert].should eql(I18n.t('messages.must_be_signed_in'))
+        end
+  end
+
   describe "as signed in user" do
 
     before do
