@@ -20,6 +20,28 @@ module ItemRequestSpecHelper
     @ir2 = Factory(:item_request, :requester => requester1, :gifter => gifter, :item => item, :status => ItemRequest::STATUS_REQUESTED)
   end
 
+  def setup_shareage_environment
+    @requester_user = Factory(:user)
+    @requester      = Factory(:person, :user => @requester_user)
+    reputation  = Factory(:reputation_rating, :person_id => @requester.id)
+    @gifter_user = Factory(:user, :uid => '111')
+    @gifter      = Factory(:person, :user => @gifter_user)
+    reputation  = Factory(:reputation_rating, :person_id => @gifter.id)
+    @item        = Factory(:item, :owner => @gifter, :purpose => Item::PURPOSE_SHAREAGE)
+    @item_request = Factory(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
+  end
+
+  def setup_gift_environment
+    @requester_user = Factory(:user)
+    @requester      = Factory(:person, :user => @requester_user)
+    reputation  = Factory(:reputation_rating, :person_id => @requester.id)
+    @gifter_user = Factory(:user, :uid => '111')
+    @gifter      = Factory(:person, :user => @gifter_user)
+    reputation  = Factory(:reputation_rating, :person_id => @gifter.id)
+    @item        = Factory(:item, :owner => @gifter, :purpose => Item::PURPOSE_GIFT)
+    @item_request = Factory(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
+  end
+
   def delete_item_request_helper_environment
     @item_request.delete
     @gifter.delete
@@ -142,6 +164,94 @@ describe ItemRequest, ".accept!" do
   end
 end
 
+describe ItemRequest, ".accept! for shareage item" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    setup_shareage_environment
+  end
+
+  it "should update status to accepted" do
+    expect { @item_request.accept! }.to change { @item_request.status }.from(ItemRequest::STATUS_REQUESTED).to(ItemRequest::STATUS_ACCEPTED)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.accept! }.to change { @item_request.status }.to(ItemRequest::STATUS_ACCEPTED)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_REQUESTED)
+    expect { @item_request.accept! }.to raise_error
+  end
+
+  it "should create activity log as for shareage item request as accepted" do
+    @item_request.accept!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.shareage_accepted_requester).first
+
+    expect {
+      activity_log.reload
+    }.to_not raise_exception
+  end
+
+  it "should create activity log as for shareage item request as accepted" do
+    @item_request.accept!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.shareage_accepted_gifter).first
+
+    expect {
+      activity_log.reload
+    }.to_not raise_exception
+  end
+
+  after(:all) do
+    #delete_item_request_helper_environment
+  end
+end
+
+describe ItemRequest, ".accept! for gift item" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    setup_gift_environment
+  end
+
+  it "should update status to accepted" do
+    expect { @item_request.accept! }.to change { @item_request.status }.from(ItemRequest::STATUS_REQUESTED).to(ItemRequest::STATUS_ACCEPTED)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.accept! }.to change { @item_request.status }.to(ItemRequest::STATUS_ACCEPTED)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_REQUESTED)
+    expect { @item_request.accept! }.to raise_error
+  end
+
+  it "should create activity log as for shareage item request as accepted" do
+    @item_request.accept!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.gift_accepted_requester).first
+
+    expect {
+      activity_log.reload
+    }.to_not raise_exception
+  end
+
+  it "should create activity log as for shareage item request as accepted" do
+    @item_request.accept!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.gift_accepted_gifter).first
+
+    expect {
+      activity_log.reload
+    }.to_not raise_exception
+  end
+
+  after(:all) do
+    #delete_item_request_helper_environment
+  end
+end
+
 describe ItemRequest, ".reject!" do
   include ItemRequestSpecHelper
 
@@ -248,4 +358,44 @@ describe ItemRequest do
     @ir1.accept!
     @ir2.status == ItemRequest::STATUS_REJECTED
   end
+end
+
+describe ItemRequest do
+  include ItemRequestSpecHelper
+  before do
+    setup_shareage_environment
+  end
+
+  it "should create activity log for shareage for requester" do
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.new_shareage_item_request_requester).first
+
+    expect {
+      activity_log.reload
+    }.to_not raise_exception
+  end
+
+  it "should create activity log for shareage for gifter" do
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.new_shareage_item_request_gifter).first
+
+    expect {
+      activity_log.reload
+    }.to_not raise_exception
+  end
+
+  it "should not create activity log as for regular item request" do
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.new_item_request_requester).first
+
+    expect {
+      activity_log.reload
+    }.to raise_exception
+  end
+
+  it "should not create activity log as for regular item request" do
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.new_item_request_gifter).first
+
+    expect {
+      activity_log.reload
+    }.to raise_exception
+  end
+
 end
