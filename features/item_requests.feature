@@ -208,6 +208,44 @@ Feature: Item requests management page
       Then I should not see "view action"
       And I should not see "accept"
 
+   #Shareage stage 1 check sentences for request and recent activity 4 tests
+   @javascript
+   Scenario: Show request sentence when shareage item is requested - gifter
+      Given "Maria" requesting item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      Then I should see "Maria is requesting your pen for shareage"
+
+   @javascript
+   Scenario: Show request sentence when shareage item is requested - gifter
+      Given "Maria" requesting item with name "Pen" from "John"
+      And I am looking at last request page
+      Then I should see "Maria is requesting your pen for shareage"
+
+   @javascript
+   Scenario: Show request activity sentence when shareage item is requested - gifter
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      Then I should see "Maria requested your pen for shareage"
+
+   @javascript
+   Scenario: Show request sentence when shareage item is requested - requested
+      Given "John" requested item with name "BMX" from "Maria"
+      And I am on the "dashboard" page
+      Then I should see "You are requesting Maria's bike for shareage"
+
+   @javascript
+   Scenario: Show request activity sentence when shareage item i  requested - requester
+      Given "John" requested item with name "BMX" from "Maria"
+      And I am on the "dashboard" page
+      Then I should see "You requested Maria's bike for shareage"
+
+   @javascript
+   Scenario: Show request activity sentence when shareage item i  requested - requester
+      Given "John" requested item with name "BMX" from "Maria"
+      And I am looking at last request page
+      Then I should see "You requested Maria's bike for shareage"
+
+      #Shareage stage 2 tests
    @javascript
    Scenario: Accepted shareage Item Request shows new actions on dashboard
       Given "Maria" requested item with name "Pen" from "John"
@@ -217,6 +255,14 @@ Feature: Item requests management page
       Then I should see "view action"
       And I should see "collected"
       And I should not see "completed"
+
+   @javascript
+   Scenario: Accepted shareage Item Request shows action sentence on dashboard
+      Given "Maria" requested item with name "Pen" from "John"
+      And I am on the "dashboard" page
+      When I follow "accept"
+      And I wait until all Ajax requests are complete
+      Then I should see "Awaiting collection of your pen by Maria"
 
    @javascript
    Scenario: Accepted shareage Item Request makes item hidden
