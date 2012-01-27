@@ -44,7 +44,7 @@ class RefactorHumanNetworkColumns < ActiveRecord::Migration
 
     remove_column :human_networks, :entity_type_id
 
-    remove_index_with_quiet :human_networks, :entity_id
+    remove_index_with_quiet :human_networks, :entity_id, :quiet => true
 
     add_index_with_quiet :human_networks, [ :entity_master_id ], :quiet => true
     add_index_with_quiet :human_networks, [ :human_id ], :quiet => true

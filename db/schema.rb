@@ -186,7 +186,7 @@ ActiveRecord::Schema.define(:version => 20120120183300) do
     t.integer  "human_entity_id"
   end
 
-  add_index "human_networks", ["entity_id"], :name => "index_human_networks_on_entity_type_and_entity_id"
+  add_index "human_networks", ["entity_id", "entity_type"], :name => "index_human_networks_on_entity_id_and_entity_type"
   add_index "human_networks", ["entity_master_id"], :name => "index_human_networks_on_entity_master_id"
   add_index "human_networks", ["human_id"], :name => "index_human_networks_on_human_id"
 
