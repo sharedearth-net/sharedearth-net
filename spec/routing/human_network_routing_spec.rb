@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe PeopleNetworkController do
+describe HumanNetworkController do
   describe "routing" do
 
     # it "recognizes and generates #confirm_request" do
