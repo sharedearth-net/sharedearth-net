@@ -123,10 +123,11 @@ class ItemsController < ApplicationController
   end
 
   def check_if_item_is_hidden
-    if @item.hidden? && !@item.is_owner?(current_person)
+    if @item.hidden? && !@item.is_owner?(current_person) i#&& !ResourceNetwork.item(@item).entity(current_person).empty?
       redirect_to items_path, :alert => (I18n.t('messages.items.is_not_available'))
     end
   end
+
   def check_if_user_has_fb_account
     @can_post_to_fb = true if fb_token
   end
