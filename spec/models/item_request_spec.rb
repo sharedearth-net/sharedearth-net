@@ -252,6 +252,19 @@ describe ItemRequest, ".accept! for gift item" do
   end
 end
 
+describe ItemRequest, ".accept! for shareage" do
+  include ItemRequestSpecHelper
+  before do
+    setup_shareage_environment
+  end
+
+  it "should not be hidden when cancel is pressed" do
+    @item_request.accept!
+    @item.hidden?.should be_true
+  end
+
+end
+
 describe ItemRequest, ".reject!" do
   include ItemRequestSpecHelper
 
@@ -294,6 +307,20 @@ describe ItemRequest, ".cancel!" do
     # invalid object attrs
     @item_request = ItemRequest.new(:status => ItemRequest::STATUS_REQUESTED)
     expect { @item_request.cancel!(@requester) }.to raise_error
+  end
+
+end
+
+describe ItemRequest, ".cancel! for shareage" do
+  include ItemRequestSpecHelper
+  before do
+    setup_shareage_environment
+    @item_request.accept!
+  end
+
+  it "should not be hidden when cancel is pressed" do
+    @item_request.cancel!(@requester)
+    @item.hidden?.should be_false
   end
 
 end
@@ -396,6 +423,104 @@ describe ItemRequest do
     expect {
       activity_log.reload
     }.to raise_exception
+  end
+
+end
+
+
+describe ItemRequest, ".collected! for shareage" do
+  include ItemRequestSpecHelper
+  before do
+    setup_shareage_environment
+    @item_request.accept!
+    @item_request.collected!
+  end
+
+  it "should create activity log for shareage for gifter" do
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.collected_shareage_gifter).first
+
+    expect {
+      activity_log.reload
+    }.to_not raise_exception
+  end
+
+  it "should create activity log for shareage for requester" do
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.collected_shareage_requester).first
+
+    expect {
+      activity_log.reload
+    }.to_not raise_exception
+  end
+
+end
+
+
+describe ItemRequest, ".complete!" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    setup_item_request_helper_environment
+    @item_request.update_attributes(:status => ItemRequest::STATUS_ACCEPTED)
+  end
+
+  it "should update status to completed" do
+    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_ACCEPTED)
+    expect { @item_request.complete!(@requester) }.to raise_error
+  end
+
+end
+describe ItemRequest, ".complete!" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    setup_item_request_helper_environment
+    @item_request.update_attributes(:status => ItemRequest::STATUS_ACCEPTED)
+  end
+
+  it "should update status to completed" do
+    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_ACCEPTED)
+    expect { @item_request.complete!(@requester) }.to raise_error
+  end
+
+end
+describe ItemRequest, ".complete!" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    setup_item_request_helper_environment
+    @item_request.update_attributes(:status => ItemRequest::STATUS_ACCEPTED)
+  end
+
+  it "should update status to completed" do
+    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_ACCEPTED)
+    expect { @item_request.complete!(@requester) }.to raise_error
   end
 
 end
