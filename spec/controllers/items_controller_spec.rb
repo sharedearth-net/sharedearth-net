@@ -5,6 +5,9 @@ describe ItemsController do
   let(:signedin_user) { generate_mock_user_with_person }
   let(:mock_items)    { [ mock_model(Item, :name => "Item1", :owner => signedin_user.person).
                         as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
+  let(:item_one) {mock_model(Item)}
+  let(:item_two) {mock_model(Item)}
+  let(:resources) { [mock_model(ResourceNetwork, :resource => item_one),mock_model(ResourceNetwork, :resource => item_two)]}
 
   it_should_require_signed_in_user_for_actions :show, :edit, :update,
                                                :destroy, :mark_as_normal,
@@ -66,6 +69,19 @@ describe ItemsController do
         end
 
         it_should_behave_like "requesting a hidden item"
+
+      end
+      context "item in shareage" do
+        before do
+          mock_item.stub(:is_shareage?).and_return(true)
+        end
+
+
+        it "should show to shareage persons" do
+          get :show, :id => "37"
+          assigns(:item).should be(mock_item)
+          response.should be_success
+        end
 
       end
     end
