@@ -72,6 +72,26 @@ describe Item do
   # it { should validate_attachment_size(:photo).less_than(1.megabyte) }
 
 end
+describe Item, ".add_owner for shareage" do
+  let(:item) {Factory(:item)}
+  let(:requester) {Factory(:person)}
+  before do
+    File.stub!(:unlink).and_return(true)
+  end
+
+  it "add new owner to resource network" do
+    item.add_to_resource_network_for(requester)
+    resource = ResourceNetwork.item(item).entity(requester)
+    resource.should_not be_empty
+  end
+
+  it "remove new owner to resource network" do
+    item.add_to_resource_network_for(requester)
+    item.remove_from_resource_network_for(requester)
+    resource = ResourceNetwork.item(item).entity(requester)
+    resource.should be_empty
+  end
+end
 
 describe Item, ".delete" do
 
