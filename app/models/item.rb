@@ -4,6 +4,7 @@ class Item < ActiveRecord::Base
   STATUS_NORMAL  = 10.freeze
   STATUS_LOST    = 20.freeze
   STATUS_DAMAGED = 30.freeze
+  STATUS_SHAREAGE = 30.freeze
 
   PURPOSE_SHARE     = 10.freeze
   PURPOSE_GIFT      = 20.freeze
@@ -19,7 +20,8 @@ class Item < ActiveRecord::Base
   STATUSES = {
     STATUS_NORMAL     => 'normal',
     STATUS_LOST       => 'lost',
-    STATUS_DAMAGED    => 'damaged'
+    STATUS_DAMAGED    => 'damaged',
+    STATUS_SHAREAGE   => 'shareage'
   }
 
   STATUSES_VISIBLE_TO_OTHER_USERS = [ STATUS_NORMAL, STATUS_DAMAGED ]
@@ -94,6 +96,15 @@ class Item < ActiveRecord::Base
     ResourceNetwork.create!(:entity_id => self.owner.id, :entity_type_id => 1, :resource_id => self.id, :resource_type_id => 2)
   end
 
+  def add_to_resource_network_for(other_person)
+    ResourceNetwork.create!(:entity_id => other_person.id, :entity_type_id => 1, :resource_id => self.id, :resource_type_id => 2)
+  end
+
+  def remove_from_resource_network_for(person)
+    resource = ResourceNetwork.item(self).entity(person).first
+    resource.destroy
+  end
+
   def self.search(search, person_id, filter_item_type = nil)
     unless search.empty?
 			matcher = filter_item_type.nil? ? Item.where("owner_id != ?", person_id).order("#{Item.table_name}.item_type ASC") : Item.where("owner_id != ?", person_id).where(:item_type => filter_item_type).order("#{Item.table_name}.item_type ASC")
@@ -130,7 +141,11 @@ class Item < ActiveRecord::Base
   def purpose?
     PURPOSES[self.purpose]
   end
-  
+
+  def purpose_type?
+    self.purpose
+  end
+
   def is_shareage?
   	self.purpose == PURPOSE_SHAREAGE
   end
