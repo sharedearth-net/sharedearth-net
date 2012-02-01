@@ -338,6 +338,8 @@ module PagesHelper
    
   end
 
+  #Mature for refactoring!
+
   def recent_activity_sentence(activity_log)
     gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
     item = activity_log.action_object
@@ -369,6 +371,7 @@ module PagesHelper
     unless activity_log.secondary.nil?
       person              = link_to_person activity_log.secondary, :check_current_user => false, :class => "positive"
       other_person        = link_to_person activity_log.primary, :check_current_user => false, :class => "positive"
+      other_person_possesive        = link_to_person activity_log.secondary, :check_current_user => false, :possessive => true, :class => "positive"
       person_possesive    = link_to_person activity_log.primary, :check_current_user => false, :possessive => true, :class => "positive"
     end
     
@@ -512,26 +515,48 @@ module PagesHelper
     when 64
       action = activity_log.related.accepted? ? " action " : " request "
       sentence = person + " commented on the " + action + " involving their " + item
-    when 65 #shareage gifter sentence stage 1
+    when 65 #SHAREAGE REQUEST GIFTER
       sentence = person + " requested your " + item + " for shareage"
-    when 66 #shareage requester sentence stage 1
-      sentence = "You requested " + person + " " + item + " for shareage"
-    when 67 #shareage gifter sentence stage 2
+    when 66 #SHAREAGE REQUEST REQUESTER
+      sentence = "You requested " + other_person_possesive + " " + item + " for shareage"
+    when 67 #ACCEPT SHAREAGE GIFTER
       sentence
-    when 68 #shareage requester sentence stage 2
+    when 68 #REJECT SHAREAGE GIFTER
       sentence
-    when 69 #shareage gifter sentence stage 3
+    when 69 #ACCEPT SHAREAGE REQUESTER
       sentence
-    when 70 #shareage requester sentence stage 3
+    when 70 #REJECT SHAREAGE REQUESTER
       sentence
-    when 71 #shareage gifter sentence stage 4
-      sentence
-    when 72 #shareage requester sentence stage 4
-      sentence
-    when 73 #shareage gifter sentence stage 5
-      sentence
-    when 74 #shareage requester sentence stage 5
-      sentence
+    when 71 #COLLECTED SHAREAGE GIFTER
+      sentence = "Your " + item + " is now in shareage with " + requester
+    when 72 #COLLECTED SHAREAGE REQUESTER
+      sentence = "You have collected " + gifter_possesive + " " + item + " for shareage"
+=begin
+    when 73 #RETURN SHAREAGE GIFTER
+      sentence = requester + " would like to return your " + item
+    when 74 #RETURN SHAREAGE REQUESTER
+      sentence = "You have requested the return of " + gifter_possesive + " " + item
+    when 75 #RECALL SHAREAGE GIFTER
+      sentence = "You have recalled your " + item + " from " + requester
+    when 76 #RECALL SHAREAGE REQUESTER
+      sentence = gifter + " requested the return of their " + item
+    when 77 #CANCEL RECALL SHAREAGE GIFTER
+      sentence = "You cancelled the recall of your " + item + " from " + requester
+    when 78 #CANCEL RECALL SHAREAGE REQUESTER
+      sentence = gifter + " cancelled the recall of their " + item
+    when 79 #ACKNOWLEDGE SHAREAGE GIFTER
+      sentence = "You acknowledged " + requester_possesive + " request to return your " + item
+    when 80 #ACKNOWLEDGE SHAREAGE REQUESTER
+      sentence = gifter + " acknowledged your request to return their " +item
+    when 81 #RETURNED SHAREAGE GIFTER
+      sentence = "Your " + item + " has been returned by " + requestor
+    when 82 #RETURNED SHAREAGE REQUESTER
+      sentence = "You returned " + gifter_possesive + " " +item
+    when 83 #CANCEL RETURN SHAREAGE GIFTER
+      sentence = requester + " cancelled the request to return your " + item
+    when 84 #CANCEL RETURN SHAREAGE REQUESTER
+      sentence = "You cancelled the request to return " + gifter_possesive + " " + item
+=end
     else
       #
     end
@@ -568,6 +593,7 @@ module PagesHelper
       person              = activity_log.secondary_full_name
       other_person        = activity_log.primary.name
       person_possesive    = activity_log.secondary_full_name.possessive
+      other_person_possesive = activity_log.secondary_full_name.possessive
     end
     
     sentence = ""
