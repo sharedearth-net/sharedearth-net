@@ -38,14 +38,14 @@ Given /^"(.*)" requested item with name "(.*)" from "(.*)"$/ do |person1,item, p
     person1 = Person.find_by_name("#{person1}")
     person2 = Person.find_by_name("#{person2}")
     item = Item.find_by_name("#{item}")
-       Factory(:item_request, :requester => person1, :gifter => person2, :item => item)
+    @item_request = Factory(:item_request, :requester => person1, :gifter => person2, :item => item)
 end
 
 Given /^I requested item with name "(.*)" from person with name "(.*)"$/ do |item, person|
     person = Person.find_by_name("#{person}")
     me = Person.find_by_name("John")
     item = Item.find_by_name("#{item}")
-    Factory(:item_request, :requester => me, :gifter => person, :item => item)
+    @item_request = Factory(:item_request, :requester => me, :gifter => person, :item => item)
 end
 
 Given /^Person with name "(.*)" has (completed|accepted|canceled) request with "(.*)"$/ do |person1, status, person2|
@@ -64,8 +64,28 @@ Given /^Person with name "(.*)" has (completed|accepted|canceled) request with "
     Factory(:event_log, :primary => person2, :secondary => person1, :action_object => item, :related => @item_request )
 end
 
+Given /^Person with name "(.*)" has (completed|accepted|canceled) shareage request with "(.*)"$/ do |person1, status, person2|
+		case status
+      when "completed"
+        status_name = ItemRequest::STATUS_COMPLETED
+      when "accepted"
+        status_name = ItemRequest::STATUS_ACCEPTED
+      when "canceled"
+        status_name = ItemRequest::STATUS_CANCELED
+    end
+    person1 = Person.find_by_name("#{person1}")
+    person2 = Person.find_by_name("#{person2}")
+    item = Factory(:item, :owner => person1, :purpose => Item::PURPOSE_SHAREAGE) 
+    @item_request = Factory(:item_request, :requester => person2, :gifter => person1, :item => item, :status => status_name)
+    Factory(:event_log, :primary => person2, :secondary => person1, :action_object => item, :related => @item_request )
+end
+
 Given /^I am looking at last request page$/ do
   visit request_path(@item_request)
+end
+
+Then /^Last request is accepted$/ do
+  @item_request.accept!
 end
 
 Given /^invitation key exsists$/ do
