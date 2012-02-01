@@ -95,7 +95,17 @@ class ItemRequest < ActiveRecord::Base
     self.status = STATUS_ACCEPTED
     save!
     decline_all_for_item(item)
-    self.item.share? ? create_item_request_accepted_activity_log : create_gift_request_accepted_activity_log
+    case self.item.purpose?
+    	when Item::PURPOSES[Item::PURPOSE_SHARE]
+    		create_item_request_accepted_activity_log
+    	when Item::PURPOSES[Item::PURPOSE_GIFT]
+    		create_gift_request_accepted_activity_log
+      when Item::PURPOSES[Item::PURPOSE_SHAREAGE]
+        #create_shareage_request_accepted_activity_log
+      else
+         #
+    end
+    #self.item.share? ? create_item_request_accepted_activity_log : create_gift_request_accepted_activity_log
     self.item.in_use!
     self.item.owner.reputation_rating.increase_requests_answered_count
   end
@@ -117,6 +127,7 @@ class ItemRequest < ActiveRecord::Base
     end
     self.item.share? ? create_item_request_canceled_activity_log : create_gift_request_canceled_activity_log
     self.item.available!
+    self.item.unhide! if self.item.is_shareage?
     self.status = STATUS_CANCELED
     save!
   end
@@ -126,6 +137,7 @@ class ItemRequest < ActiveRecord::Base
     item = self.item
     self.item.gift? ? item.available! : item.in_use!
     self.update_reputation_for_parties_involved if self.item.gift?
+    self.item.add_additional_resource(self.requester) if self.item.is_shareage?
     item_type_based_status
   end
 
@@ -208,14 +220,19 @@ class ItemRequest < ActiveRecord::Base
   private
 
   def item_type_based_status
-    if self.item.share?
+    case self.item.purpose_type?
+    when Item::PURPOSE_SHARE
       self.status = STATUS_COLLECTED
       create_item_request_collected_activity_log
-    else
+    when Item::PURPOSE_GIFT
       self.status = STATUS_COMPLETED
       change_ownership
       create_gift_request_completed_activity_log
       create_gifting_event_log
+    when Item::PURPOSE_SHAREAGE
+      create_shareage_request_collected_activity_log
+    else
+      #
     end
     save!
   end
@@ -235,7 +252,11 @@ class ItemRequest < ActiveRecord::Base
   end
 
   def create_new_item_request_activity_log
-    ActivityLog.create_new_item_request_activity_log(self)
+    if self.item.is_shareage?
+      ActivityLog.create_new_shareage_item_request_activity_log(self)
+    else
+      ActivityLog.create_new_item_request_activity_log(self)
+    end
     self.item.owner.reputation_rating.increase_requests_received_count
   end
 
@@ -292,6 +313,16 @@ class ItemRequest < ActiveRecord::Base
       ActivityLog.create_item_request_activity_log(self, EventType.gift_gifter_completed_gifter, EventType.gift_requester_completed_requester)
     end
   end
+
+  #SHAREAGE ITEMS RELATED ACTIVITY LOG
+  def create_shareage_request_accepted_activity_log
+  	ActivityLog.create_item_request_activity_log(self, EventType.shareage_accepted_gifter, EventType.shareage_accepted_requester)
+  end
+
+  def create_shareage_request_collected_activity_log
+  	ActivityLog.create_item_request_activity_log(self, EventType.collected_shareage_gifter, EventType.collected_shareage_requester)
+  end
+  #MUTUAL RELATED ACTIVITY LOGS
 
   def create_item_request_comment_activity_log(commentier)
   	ActivityLog.create_item_request_comment_activity_log(self, commentier)
