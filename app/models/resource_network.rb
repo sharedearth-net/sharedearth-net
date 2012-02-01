@@ -13,6 +13,7 @@ class ResourceNetwork < ActiveRecord::Base
   validates_presence_of :type
 
    scope :item, lambda { |entity| where("resource_type_id =? AND resource_id = ?", 2, entity.id) }
+   scope :entity, lambda { |entity| where("entity_id =? AND entity_type_id = ?", entity.id, 1) }
 
    def set_possessor!(entity, entity_type_id)
      self.entity_id = entity.id
