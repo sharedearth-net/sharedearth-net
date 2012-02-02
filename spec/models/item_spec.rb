@@ -163,7 +163,7 @@ describe Item, '.search' do
   let(:item_hidden) { Factory(:item, :name => 'hidden', :owner => items_owner, :hidden => true)}
 
   before :each do
-    PeopleNetwork.create_trust!(items_owner, items_requester)
+    HumanNetwork.create_trust!(items_owner, items_requester)
 
     # Create a resource_network for each item
     [item_type_car, item_named_stuff, item_with_description].each do |item|

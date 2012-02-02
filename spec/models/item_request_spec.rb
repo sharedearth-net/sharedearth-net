@@ -11,6 +11,7 @@ module ItemRequestSpecHelper
     @item        = Factory(:item, :owner => @gifter)
     @item_request = Factory(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
   end
+
   def setup_many_item_requests
     requester      = Factory(:person)
     requester1      = Factory(:person)
