@@ -71,14 +71,14 @@ end
     end
   end
 
-  resources :people_network_requests, :only => [:create, :destroy] do
+  resources :network_requests, :only => [:create, :destroy] do
     member do
       put "confirm"
       put "deny", :action => :destroy
     end
   end
 
-  resources :people_network, :only => [ :destroy ]
+  resources :human_network, :only => [ :destroy ]
 
   resources :item_requests, :except => [:index, :destroy, :edit], :path => "requests", :as => "requests" do
     member do

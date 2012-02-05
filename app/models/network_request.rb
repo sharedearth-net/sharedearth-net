@@ -1,4 +1,4 @@
-class PeopleNetworkRequest < ActiveRecord::Base
+class NetworkRequest < ActiveRecord::Base
   belongs_to :person
   belongs_to :trusted_person, :class_name => "Person"
   
@@ -13,7 +13,7 @@ class PeopleNetworkRequest < ActiveRecord::Base
   end
 
   def confirm!
-    PeopleNetwork.create_trust!(self.person, self.trusted_person) 
+    HumanNetwork.create_trust!(self.person, self.trusted_person) 
     self.destroy
   end
 end

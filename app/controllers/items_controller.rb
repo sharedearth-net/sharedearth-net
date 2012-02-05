@@ -123,7 +123,7 @@ class ItemsController < ApplicationController
   end
 
   def check_if_item_is_hidden
-    if @item.hidden? && !@item.is_owner?(current_person) i#&& !ResourceNetwork.item(@item).entity(current_person).empty?
+    if @item.hidden? && !@item.is_owner?(current_person) #&& !ResourceNetwork.item(@item).entity(current_person).empty?
       redirect_to items_path, :alert => (I18n.t('messages.items.is_not_available'))
     end
   end
