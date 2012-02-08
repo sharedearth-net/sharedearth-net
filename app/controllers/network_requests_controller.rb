@@ -1,6 +1,6 @@
-class PeopleNetworkRequestsController < ApplicationController
+class NetworkRequestsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_people_network_request, :only => [ :destroy, :confirm ]
+  before_filter :get_network_request, :only => [ :destroy, :confirm ]
   before_filter :only_requester_or_trusted_person, :only => [ :destroy ]
   before_filter :only_trusted_person, :only => [ :confirm ]
 
@@ -21,8 +21,8 @@ class PeopleNetworkRequestsController < ApplicationController
   end
   
   def destroy
-    @trusted_person = @people_network_request.trusted_person
-    @people_network_request.destroy
+    @trusted_person = @network_request.trusted_person
+    @network_request.destroy
     respond_to do |format|
 			format.html { redirect_to @trusted_person }
 			format.js
@@ -30,8 +30,8 @@ class PeopleNetworkRequestsController < ApplicationController
   end
   
   def confirm
-    @people_network_request.confirm!
-    @trusted_person = @people_network_request.person
+    @network_request.confirm!
+    @trusted_person = @network_request.person
     respond_to do |format|
 			format.html { redirect_to @trusted_person }
 			format.js
@@ -40,26 +40,26 @@ class PeopleNetworkRequestsController < ApplicationController
 
   # used destroy for trusted_person too
   # def deny
-  #   # @people_network_request.deny!
-  #   # redirect_to(request_path(@people_network_request), :notice => I18n.t('messages.people_network_request.request_denied'))        
+  #   # @network_request.deny!
+  #   # redirect_to(request_path(@network_request), :notice => I18n.t('messages.network_request.request_denied'))        
   # end
 
   private
 
-  def get_people_network_request
-    @people_network_request = PeopleNetworkRequest.find_by_id(params[:id])
-    redirect_to dashboard_path if @people_network_request.nil?
+  def get_network_request
+    @network_request = NetworkRequest.find_by_id(params[:id])
+    redirect_to dashboard_path if @network_request.nil?
   end
 
   def only_requester_or_trusted_person
-    unless @people_network_request.trusted_person?(current_user.person) || @people_network_request.requester?(current_user.person)
+    unless @network_request.trusted_person?(current_user.person) || @network_request.requester?(current_user.person)
       redirect_to(root_path, :alert => I18n.t('messages.only_requester_and_trusted_person_can_access'))
     end    
   end
   
   def only_trusted_person
-    unless @people_network_request.trusted_person? current_user.person
-      redirect_to(person_path(@people_network_request.trusted_person), :alert => I18n.t('messages.only_trusted_person_can_access'))
+    unless @network_request.trusted_person? current_user.person
+      redirect_to(person_path(@network_request.trusted_person), :alert => I18n.t('messages.only_trusted_person_can_access'))
     end
   end
 end

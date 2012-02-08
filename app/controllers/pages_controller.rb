@@ -13,9 +13,9 @@ class PagesController < ApplicationController
 
   def dashboard
     @active_item_requests     = current_user.person.active_item_requests
-    @people_network_requests  = current_user.person.received_people_network_requests + 
-                                current_user.person.people_network_requests
-    @requests = @active_item_requests + @people_network_requests
+    @network_requests  = current_user.person.received_network_requests + 
+                                current_user.person.network_requests
+    @requests = @active_item_requests + @network_requests
 
     @requests.sort! { |a,b| b.created_at <=> a.created_at }
 

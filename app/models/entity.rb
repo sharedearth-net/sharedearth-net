@@ -1,3 +1,6 @@
 class Entity < ActiveRecord::Base
-  scope :item, lambda { |entity| where("entity_type_id =? AND specific_entity_id = ?", 2, entity.id) }
+
+  belongs_to :specific_entity, :polymorphic => true
+
+  scope :item, lambda { |entity| where("specific_entity_type =? AND specific_entity_id = ?", "Item", entity.id) }
 end

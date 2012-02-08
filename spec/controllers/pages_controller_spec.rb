@@ -67,8 +67,8 @@ describe PagesController do
         mock_item_requests = [Factory(:item_request), Factory(:item_request)]
         signedin_user.stub(:person).and_return(Factory(:person))
         signedin_user.person.stub(:active_item_requests) { mock_item_requests }
-        signedin_user.person.stub(:received_people_network_requests) { [] }
-        signedin_user.person.stub(:people_network_requests) { [] }
+        signedin_user.person.stub(:received_network_requests) { [] }
+        signedin_user.person.stub(:network_requests) { [] }
         signedin_user.person.stub(:activity_logs) { [] }
         signedin_user.person.stub(:news_feed) { [] }
         get :dashboard
@@ -79,8 +79,8 @@ describe PagesController do
 				mock_item_requests = [Factory(:item_request), Factory(:item_request)]
         signedin_user.stub(:person).and_return(Factory(:person))
         signedin_user.person.stub(:active_item_requests) { mock_item_requests }
-        signedin_user.person.stub(:received_people_network_requests) { [] }
-        signedin_user.person.stub(:people_network_requests) { [] }
+        signedin_user.person.stub(:received_network_requests) { [] }
+        signedin_user.person.stub(:network_requests) { [] }
         signedin_user.person.stub(:activity_logs) { [] }
         signedin_user.person.stub(:news_feed) { [] }
      		get :dashboard
