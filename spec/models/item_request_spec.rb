@@ -171,6 +171,23 @@ describe ItemRequest, ".accept! for shareage item" do
     setup_shareage_environment
   end
 
+  it "should not be hidden when cancel is pressed" do
+    @item_request.accept!
+    @item.hidden?.should be_true
+  end
+
+  it "should be two records in resource network for same item" do
+    @item_request.accept!
+    resource = ResourceNetwork.item(@item_request.item)
+    resource.length.should == 1
+  end
+
+  it "should update to GIFTER in resource network" do
+    @item_request.accept!
+    resource = ResourceNetwork.item(@item_request.item).gifter
+    resource.length.should == 1
+  end
+
   it "should update status to accepted" do
     expect { @item_request.accept! }.to change { @item_request.status }.from(ItemRequest::STATUS_REQUESTED).to(ItemRequest::STATUS_ACCEPTED)
   end
@@ -229,7 +246,7 @@ describe ItemRequest, ".accept! for gift item" do
     expect { @item_request.accept! }.to raise_error
   end
 
-  it "should create activity log as for shareage item request as accepted" do
+  it "should create activity log as for gift item request as accepted" do
     @item_request.accept!
     activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.gift_accepted_requester).first
 
@@ -238,7 +255,7 @@ describe ItemRequest, ".accept! for gift item" do
     }.to_not raise_exception
   end
 
-  it "should create activity log as for shareage item request as accepted" do
+  it "should create activity log as for gift item request as accepted" do
     @item_request.accept!
     activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.gift_accepted_gifter).first
 
@@ -250,19 +267,6 @@ describe ItemRequest, ".accept! for gift item" do
   after(:all) do
     #delete_item_request_helper_environment
   end
-end
-
-describe ItemRequest, ".accept! for shareage" do
-  include ItemRequestSpecHelper
-  before do
-    setup_shareage_environment
-  end
-
-  it "should not be hidden when cancel is pressed" do
-    @item_request.accept!
-    @item.hidden?.should be_true
-  end
-
 end
 
 describe ItemRequest, ".reject!" do
@@ -436,6 +440,23 @@ describe ItemRequest, ".collected! for shareage" do
     @item_request.collected!
   end
 
+  it "should update item status to shareage" do
+    @item_request.item.status.should == Item::STATUS_SHAREAGE
+  end
+
+  it "should update status to collected" do
+    @item_request.status.should == ItemRequest::STATUS_COLLECTED
+  end
+
+  it "should update item status to shareage" do
+    @item_request.item.status.should == Item::STATUS_SHAREAGE
+  end
+
+  it "should be two records in resource network for same item" do
+    resource = ResourceNetwork.item(@item_request.item)
+    resource.length.should == 2
+  end
+
   it "should create activity log for shareage for gifter" do
     activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.collected_shareage_gifter).first
 
@@ -478,49 +499,168 @@ describe ItemRequest, ".complete!" do
   end
 
 end
-describe ItemRequest, ".complete!" do
+
+describe ItemRequest, ".recall!" do
   include ItemRequestSpecHelper
 
   before(:each) do
-    setup_item_request_helper_environment
-    @item_request.update_attributes(:status => ItemRequest::STATUS_ACCEPTED)
+    setup_shareage_environment
+    @item_request.accept!
+    @item_request.collected!
   end
 
-  it "should update status to completed" do
-    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+  it "should update status to recalled" do
+    expect { @item_request.recall! }.to change { @item_request.status }.from(ItemRequest::STATUS_COLLECTED).to(ItemRequest::STATUS_RECALL)
   end
 
   it "should save the request object" do
-    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+    expect { @item_request.recall! }.to change { @item_request.status }.to(ItemRequest::STATUS_RECALL)
   end
 
   it "should raise exception if request object is cannot be saved" do
     # invalid object attrs
-    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_ACCEPTED)
-    expect { @item_request.complete!(@requester) }.to raise_error
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_COLLECTED)
+    expect { @item_request.recall! }.to raise_error
   end
 
+  it "should create activity log for gifter" do
+    @item_request.recall!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.recall_shareage_gifter).first
+
+    activity_log.should_not be_nil
+  end
+
+  it "should create activity log for requester" do
+    @item_request.recall!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.recall_shareage_requester).first
+
+    activity_log.should_not be_nil
+  end
+
+  after(:all) do
+    #delete_item_request_helper_environment
+  end
 end
-describe ItemRequest, ".complete!" do
+
+describe ItemRequest, ".return!" do
   include ItemRequestSpecHelper
 
   before(:each) do
-    setup_item_request_helper_environment
-    @item_request.update_attributes(:status => ItemRequest::STATUS_ACCEPTED)
+    setup_shareage_environment
+    @item_request.accept!
   end
 
-  it "should update status to completed" do
-    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+  it "should update status to return" do
+    expect { @item_request.return! }.to change { @item_request.status }.from(ItemRequest::STATUS_ACCEPTED).to(ItemRequest::STATUS_RETURN)
   end
 
   it "should save the request object" do
-    expect { @item_request.complete!(@requester) }.to change { @item_request.status }.to(ItemRequest::STATUS_COMPLETED)
+    expect { @item_request.return! }.to change { @item_request.status }.to(ItemRequest::STATUS_RETURN)
   end
 
   it "should raise exception if request object is cannot be saved" do
     # invalid object attrs
     @item_request = ItemRequest.new(:status => ItemRequest::STATUS_ACCEPTED)
-    expect { @item_request.complete!(@requester) }.to raise_error
+    expect { @item_request.return! }.to raise_error
   end
 
+  it "should create activity log for gifter" do
+    @item_request.return!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.return_shareage_gifter).first
+
+    activity_log.should_not be_nil
+  end
+
+  it "should create activity log for requester" do
+    @item_request.return!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.return_shareage_requester).first
+
+    activity_log.should_not be_nil
+  end
+  after(:all) do
+    #delete_item_request_helper_environment
+  end
+end
+
+describe ItemRequest, ".cancel_recall!" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    setup_shareage_environment
+    @item_request.accept!
+    @item_request.recall!
+  end
+
+  it "should update status to cancel recall" do
+    expect { @item_request.cancel_recall! }.to change { @item_request.status }.from(ItemRequest::STATUS_RECALL).to(ItemRequest::STATUS_CANCEL_RECALL)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.cancel_recall! }.to change { @item_request.status }.to(ItemRequest::STATUS_CANCEL_RECALL)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_RECALL)
+    expect { @item_request.cancel_recall! }.to raise_error
+  end
+
+  it "should create activity log for gifter" do
+    @item_request.cancel_recall!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.cancel_recall_shareage_gifter).first
+
+    activity_log.should_not be_nil
+  end
+
+  it "should create activity log for requester" do
+    @item_request.cancel_recall!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.cancel_recall_shareage_requester).first
+
+    activity_log.should_not be_nil
+  end
+
+  after(:all) do
+    #delete_item_request_helper_environment
+  end
+end
+
+describe ItemRequest, ".cancel_return!" do
+  include ItemRequestSpecHelper
+
+  before(:each) do
+    setup_shareage_environment
+    @item_request.accept!
+    @item_request.return!
+  end
+
+  it "should update status to cancel return" do
+    expect { @item_request.cancel_return! }.to change { @item_request.status }.from(ItemRequest::STATUS_RETURN).to(ItemRequest::STATUS_CANCEL_RETURN)
+  end
+
+  it "should save the request object" do
+    expect { @item_request.cancel_return! }.to change { @item_request.status }.to(ItemRequest::STATUS_CANCEL_RETURN)
+  end
+
+  it "should raise exception if request object is cannot be saved" do
+    # invalid object attrs
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_RETURN)
+    expect { @item_request.cancel_return! }.to raise_error
+  end
+
+  it "should create activity log for gifter" do
+    @item_request.cancel_return!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.cancel_return_shareage_gifter).first
+
+    activity_log.should_not be_nil
+  end
+
+  it "should create activity log for requester" do
+    @item_request.cancel_return!
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.cancel_return_shareage_requester).first
+
+    activity_log.should_not be_nil
+  end
+  after(:all) do
+    #delete_item_request_helper_environment
+  end
 end
