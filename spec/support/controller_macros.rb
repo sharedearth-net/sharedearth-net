@@ -5,8 +5,8 @@ module ControllerMacros
   
   module ClassMethods
     def it_should_require_signed_in_user_for_actions(*actions)
-      #TODO: exclude missing_route from action methods
       actions = controller_class.action_methods if actions.first == :all
+      actions.delete("missing_route")
       actions.each do |action|
         it "#{action} action should require signed in user" do
           #as_signed_out_visitor
