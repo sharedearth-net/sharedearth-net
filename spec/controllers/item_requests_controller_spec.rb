@@ -482,6 +482,159 @@ describe ItemRequestsController do
 
     end
 
+    describe "PUT return" do
+
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :return, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+
+      it "should change request status to 'return'" do
+        mock_item_request.should_receive(:return!).once
+        put :return, :id => "42"
+      end
+
+      it "should redirect to dashboard page" do
+        put :return, :id => "42"
+        flash[:notice].should eql(nil)
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should allow only requester to return the request" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :return, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should redirect gifter trying to return the request" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :return, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_requester_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+      it "should redirect other users trying to return the request" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :return, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_requester_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+    end
+
+    describe "PUT recall" do
+
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :recall, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+
+      it "should change request status to 'recall'" do
+        mock_item_request.should_receive(:recall!).once
+        put :recall, :id => "42"
+      end
+
+      it "should redirect to dashboard page" do
+        put :recall, :id => "42"
+        flash[:notice].should eql(nil)
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should allow only gifter to recall the request" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :recall, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should redirect requester trying to recall the request" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :recall, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+      it "should redirect other users trying to recall the request" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :recall, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+    end
+
+    describe "PUT acknowledge" do
+
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :acknowledge, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+
+      it "should change request status to 'acknowledge'" do
+        mock_item_request.should_receive(:acknowledge!).once
+        put :acknowledge, :id => "42"
+      end
+
+      it "should redirect to dashboard page" do
+        put :acknowledge, :id => "42"
+        flash[:notice].should eql(nil)
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should allow only gifter to acknowledge the request" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :acknowledge, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should redirect requester trying to acknowledge the request" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :acknowledge, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+      it "should redirect other users trying to acknowledge the request" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :acknowledge, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+    end
+
   end
 
 end
