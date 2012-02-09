@@ -708,19 +708,19 @@ class EventType < ActiveRecord::Base
     self.id == EventType.recall_shareage_requester
   end
 
-  def self.cancel_shareage_gifter(return_only_id = true)
+  def self.cancel_recall_shareage_gifter(return_only_id = true)
     return_only_id ? 77 : EventType.find(77)
   end
 
-  def cancel_shareage_gifter?
+  def cancel_recall_shareage_gifter?
     self.id == EventType.cancel_shareage_gifter
   end
 
-  def self.cancel_shareage_requester(return_only_id = true)
+  def self.cancel_recall_shareage_requester(return_only_id = true)
     return_only_id ? 78 : EventType.find(78)
   end
 
-  def cancel_shareage_requester?
+  def cancel_recall_shareage_requester?
     self.id == EventType.cancel_shareage_requester
   end
 
