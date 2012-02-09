@@ -147,7 +147,16 @@ class Item < ActiveRecord::Base
   end
 
   def is_shareage?
-  	self.purpose == PURPOSE_SHAREAGE
+    self.purpose == PURPOSE_SHAREAGE
+  end
+
+  def in_shareage?
+  	self.status == STATUS_SHAREAGE  	
+  end
+
+  def shareage!
+  	self.status = STATUS_SHAREAGE
+    save!
   end
 
   def hidden!
