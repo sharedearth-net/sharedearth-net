@@ -58,7 +58,15 @@
 		<li>
 			<%= link_to "complete", complete_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
 		<li>
-    <% end -%>
+    <% else -%>
+      	<li>
+      <% if !req.item.is_owner?(current_person) -%>
+   			<%= link_to "return", return_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
+      <% else -%>
+         <%= link_to "recall", recall_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
+      <% end -%>
+    		<li>
+    <% end %>
 	<% end %>
 
 <% end %>
