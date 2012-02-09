@@ -370,7 +370,7 @@ module PagesHelper
     item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
     unless activity_log.secondary.nil?
       person              = link_to_person activity_log.secondary, :check_current_user => false, :class => "positive"
-      other_person        = link_to_person activity_log.primary, :check_current_user => false, :class => "positive"
+      other_person        = link_to_person activity_log.secondary, :check_current_user => false, :class => "positive"
       other_person_possesive        = link_to_person activity_log.secondary, :check_current_user => false, :possessive => true, :class => "positive"
       person_possesive    = link_to_person activity_log.primary, :check_current_user => false, :possessive => true, :class => "positive"
     end
@@ -530,8 +530,8 @@ module PagesHelper
     when 71 #COLLECTED SHAREAGE GIFTER
       sentence = "Your " + item + " is now in shareage with " + requester
     when 72 #COLLECTED SHAREAGE REQUESTER
-      sentence = "You have collected " + gifter_possesive + " " + item + " for shareage"
-=begin
+      sentence = "You have collected " + other_person_possesive + " " + item + " for shareage"
+
     when 73 #RETURN SHAREAGE GIFTER
       sentence = requester + " would like to return your " + item
     when 74 #RETURN SHAREAGE REQUESTER
@@ -544,6 +544,7 @@ module PagesHelper
       sentence = "You cancelled the recall of your " + item + " from " + requester
     when 78 #CANCEL RECALL SHAREAGE REQUESTER
       sentence = gifter + " cancelled the recall of their " + item
+=begin
     when 79 #ACKNOWLEDGE SHAREAGE GIFTER
       sentence = "You acknowledged " + requester_possesive + " request to return your " + item
     when 80 #ACKNOWLEDGE SHAREAGE REQUESTER
@@ -552,11 +553,11 @@ module PagesHelper
       sentence = "Your " + item + " has been returned by " + requestor
     when 82 #RETURNED SHAREAGE REQUESTER
       sentence = "You returned " + gifter_possesive + " " +item
+=end
     when 83 #CANCEL RETURN SHAREAGE GIFTER
       sentence = requester + " cancelled the request to return your " + item
     when 84 #CANCEL RETURN SHAREAGE REQUESTER
       sentence = "You cancelled the request to return " + gifter_possesive + " " + item
-=end
     else
       #
     end
@@ -591,7 +592,7 @@ module PagesHelper
     item                = activity_log.action_object_type_readable unless activity_log.action_object.nil?
     unless activity_log.secondary.nil?
       person              = activity_log.secondary_full_name
-      other_person        = activity_log.primary.name
+      other_person        = activity_log.secondary_full_name
       person_possesive    = activity_log.secondary_full_name.possessive
       other_person_possesive = activity_log.secondary_full_name.possessive
     end
