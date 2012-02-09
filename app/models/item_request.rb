@@ -6,7 +6,12 @@ class ItemRequest < ActiveRecord::Base
   STATUS_COMPLETED = 30.freeze
   STATUS_REJECTED  = 40.freeze
   STATUS_CANCELED  = 50.freeze
-  STATUS_COLLECTED  = 60.freeze
+  STATUS_COLLECTED = 60.freeze
+  STATUS_RECALL    = 70.freeze
+  STATUS_RETURN    = 80.freeze
+  STATUS_ACKNOWLEDGE = 90.freeze
+  STATUS_CANCEL_RECALL = 100.freeze
+  STATUS_CANCEL_RETURN = 110.freeze
 
   STATUSES = {
     STATUS_REQUESTED  => 'requested',
@@ -14,10 +19,15 @@ class ItemRequest < ActiveRecord::Base
     STATUS_COMPLETED  => 'completed',
     STATUS_REJECTED  => 'rejected',
     STATUS_CANCELED  => 'canceled',
-    STATUS_COLLECTED  => 'collected'
+    STATUS_COLLECTED  => 'collected',
+    STATUS_RECALL    => 'recalled',
+    STATUS_RETURN    => 'return',
+    STATUS_ACKNOWLEDGE => 'acknowledged',
+    STATUS_CANCEL_RECALL => 'cancel recall',
+    STATUS_CANCEL_RETURN => 'cancel return'
   }
 
-  ACTIVE_STATUSES = [ STATUS_REQUESTED, STATUS_ACCEPTED, STATUS_COLLECTED ]
+  ACTIVE_STATUSES = [ STATUS_REQUESTED, STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_RECALL, STATUS_RETURN ]
 
   belongs_to :item
   belongs_to :requester, :polymorphic => true
@@ -96,12 +106,12 @@ class ItemRequest < ActiveRecord::Base
     save!
     decline_all_for_item(item)
     case self.item.purpose?
-    	when Item::PURPOSES[Item::PURPOSE_SHARE]
-    		create_item_request_accepted_activity_log
-    	when Item::PURPOSES[Item::PURPOSE_GIFT]
-    		create_gift_request_accepted_activity_log
+      when Item::PURPOSES[Item::PURPOSE_SHARE]
+        create_item_request_accepted_activity_log
+      when Item::PURPOSES[Item::PURPOSE_GIFT]
+        create_gift_request_accepted_activity_log
       when Item::PURPOSES[Item::PURPOSE_SHAREAGE]
-        #create_shareage_request_accepted_activity_log
+        create_shareage_request_accepted_activity_log
       else
          #
     end
@@ -137,7 +147,10 @@ class ItemRequest < ActiveRecord::Base
     item = self.item
     self.item.gift? ? item.available! : item.in_use!
     self.update_reputation_for_parties_involved if self.item.gift?
-    self.item.add_additional_resource(self.requester) if self.item.is_shareage?
+    if self.item.is_shareage?
+      self.item.add_to_resource_network_for(self.requester)
+      self.item.shareage!
+    end
     item_type_based_status
   end
 
@@ -150,6 +163,34 @@ class ItemRequest < ActiveRecord::Base
     save!
     self.item.share? ? create_item_request_completed_activity_log : create_gift_request_completed_activity_log
     create_sharing_event_log
+  end
+
+  def recall!
+    return if !(self.status == STATUS_COLLECTED)
+    self.status = STATUS_RECALL
+    save!
+    create_shareage_request_recall_activity_log
+  end
+
+  def return!
+    return if !(self.status == STATUS_COLLECTED)
+    self.status = STATUS_RETURN
+    save!
+    create_shareage_request_return_activity_log
+  end
+
+  def cancel_recall!
+    return if !(self.status == STATUS_RECALL)
+    self.status = STATUS_CANCEL_RECALL
+    save!
+    create_shareage_request_cancel_recall_activity_log
+  end
+
+  def cancel_return!
+    return if !(self.status == STATUS_RETURN)
+    self.status = STATUS_CANCEL_RETURN
+    save!
+    create_shareage_request_cancel_return_activity_log
   end
 
   def update_reputation_for_parties_involved
@@ -201,6 +242,14 @@ class ItemRequest < ActiveRecord::Base
     self.status == STATUS_COMPLETED
   end
 
+  def recall?
+    self.status == STATUS_RECALL
+  end
+
+  def return?
+    self.status == STATUS_RETURN
+  end
+
   def has_left_feedback?(person_id)
     !Feedback.exists_for?(self.id, person_id)
   end
@@ -230,6 +279,7 @@ class ItemRequest < ActiveRecord::Base
       create_gift_request_completed_activity_log
       create_gifting_event_log
     when Item::PURPOSE_SHAREAGE
+      self.status = STATUS_COLLECTED
       create_shareage_request_collected_activity_log
     else
       #
@@ -316,20 +366,37 @@ class ItemRequest < ActiveRecord::Base
 
   #SHAREAGE ITEMS RELATED ACTIVITY LOG
   def create_shareage_request_accepted_activity_log
-  	ActivityLog.create_item_request_activity_log(self, EventType.shareage_accepted_gifter, EventType.shareage_accepted_requester)
+    ActivityLog.create_item_request_activity_log(self, EventType.shareage_accepted_gifter, EventType.shareage_accepted_requester)
   end
 
   def create_shareage_request_collected_activity_log
-  	ActivityLog.create_item_request_activity_log(self, EventType.collected_shareage_gifter, EventType.collected_shareage_requester)
+    ActivityLog.create_item_request_activity_log(self, EventType.collected_shareage_gifter, EventType.collected_shareage_requester)
   end
+
+  def create_shareage_request_recall_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.recall_shareage_gifter, EventType.recall_shareage_requester)
+  end
+
+  def create_shareage_request_return_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.return_shareage_gifter, EventType.return_shareage_requester)
+  end
+
+  def create_shareage_request_cancel_recall_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.cancel_recall_shareage_gifter, EventType.cancel_recall_shareage_requester)
+  end
+
+  def create_shareage_request_cancel_return_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.cancel_return_shareage_gifter, EventType.cancel_return_shareage_requester)
+  end
+
   #MUTUAL RELATED ACTIVITY LOGS
 
   def create_item_request_comment_activity_log(commentier)
-  	ActivityLog.create_item_request_comment_activity_log(self, commentier)
+    ActivityLog.create_item_request_comment_activity_log(self, commentier)
   end
 
   def decline_all_for_item(item)
     requests_active_item = ItemRequest.requested_item(item)
-  	requests_active_item.each { |r| r.reject! }
+    requests_active_item.each { |r| r.reject! }
   end
 end
