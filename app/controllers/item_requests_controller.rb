@@ -1,9 +1,10 @@
 class ItemRequestsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_item_request, :only => [ :show, :accept, :reject, :cancel, :collected, :complete ]
+  before_filter :get_item_request, :only => [ :show, :accept, :reject, :cancel, :collected, :complete, :recall, :return ]
   before_filter :only_requester_or_gifter, :only => [ :cancel, :collected, :complete ]
   before_filter :public_only_when_completed, :only => [:show]
-  before_filter :only_gifter, :only => [ :accept, :reject ]
+  before_filter :only_gifter, :only => [ :accept, :reject, :recall ]
+  before_filter :only_requester, :only => [:return]
   before_filter :check_if_item_is_deleted, :only => [:new, :create]
 
   def new
@@ -159,6 +160,36 @@ class ItemRequestsController < ApplicationController
     end
   end
 
+  def recall
+    @item_request.recall!
+
+    respond_to do |format|
+      format.html { redirect_to_back }
+      format.json do
+        render :json => { :success => true,
+                          :request_html  => item_request_html(@item_request),
+                          :activity_html => last_activity_log_html_for(current_person) }
+      end
+    end
+
+
+  end
+
+  def return
+    @item_request.return!
+
+    respond_to do |format|
+      format.html { redirect_to_back }
+      format.json do
+        render :json => { :success => true,
+                          :request_html  => item_request_html(@item_request),
+                          :activity_html => last_activity_log_html_for(current_person) }
+      end
+    end
+
+
+  end
+
   def new_comment
     model_name = params[:comment][:commentable_type]
     record_commentable = model_name.constantize.find(params[:comment][:commentable_id])
@@ -225,7 +256,7 @@ class ItemRequestsController < ApplicationController
 
   def only_requester
     unless @item_request.requester? current_user.person
-      redirect_to(root_path, :alert => I18n.t('messages.only_requester_can_access'))
+      redirect_to(request_path(@item_request), :alert => I18n.t('messages.only_requester_can_access'))
     end
   end
 
