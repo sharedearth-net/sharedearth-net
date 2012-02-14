@@ -584,6 +584,108 @@ describe ItemRequestsController do
 
     end
 
+    describe "PUT cancel_return" do
+
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :cancel_return, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+
+      it "should change request status to 'cancel_return'" do
+        mock_item_request.should_receive(:cancel_return!).once
+        put :cancel_return, :id => "42"
+      end
+
+      it "should redirect to dashboard page" do
+        put :cancel_return, :id => "42"
+        flash[:notice].should eql(nil)
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should allow only requester to cancel return the request" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :cancel_return, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should redirect gifter trying to cancel return the request" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :cancel_return, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_requester_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+      it "should redirect other users trying to cancel return the request" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :cancel_return, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_requester_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+    end
+
+    describe "PUT cancel_recall" do
+
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :cancel_recall, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+
+      it "should change request status to 'cancel_recall'" do
+        mock_item_request.should_receive(:cancel_recall!).once
+        put :cancel_recall, :id => "42"
+      end
+
+      it "should redirect to dashboard page" do
+        put :cancel_recall, :id => "42"
+        flash[:notice].should eql(nil)
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should allow only gifter to cancel recall the request" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :cancel_recall, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should redirect requester trying to cancel recall the request" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :cancel_recall, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+      it "should redirect other users trying to cancel recall the request" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :cancel_recall, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        response.should redirect_to(request_url(mock_item_request))
+      end
+
+    end
+
     describe "PUT acknowledge" do
 
       before(:each) do
@@ -620,7 +722,7 @@ describe ItemRequestsController do
         ItemRequest.stub(:find).with("42") { mock_item_request }
 
         put :acknowledge, :id => "42"
-        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
+        flash[:alert].should be_blank
         response.should redirect_to(request_url(mock_item_request))
       end
 
@@ -629,8 +731,59 @@ describe ItemRequestsController do
         ItemRequest.stub(:find).with("42") { mock_item_request }
 
         put :acknowledge, :id => "42"
-        flash[:alert].should eql(I18n.t('messages.only_gifter_can_access'))
-        response.should redirect_to(request_url(mock_item_request))
+        flash[:alert].should eql(I18n.t('messages.only_gifter_and_requester_can_access'))
+        response.should redirect_to(root_url)
+      end
+
+    end
+
+    describe "PUT returned" do
+
+      before(:each) do
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+      end
+
+      it "assigns the requested request as @item_request" do
+        put :returned, :id => "42"
+        assigns(:item_request).should be(mock_item_request)
+      end
+
+      it "should change request status to 'return'" do
+        mock_item_request.should_receive(:returned!).once
+        put :returned, :id => "42"
+      end
+
+      it "should redirect to dashboard page" do
+        put :returned, :id => "42"
+        flash[:notice].should eql(nil)
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should allow only requester to return the request" do
+        as_the_requester
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :returned, :id => "42"
+        flash[:alert].should be_blank # make sure this is not an error redirect
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should allow gifter mark as returned the request" do
+        as_the_gifter
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :returned, :id => "42"
+        flash[:alert].should be_blank
+        response.should redirect_to(dashboard_path)
+      end
+
+      it "should redirect other users trying to return the request" do
+        as_other_person
+        ItemRequest.stub(:find).with("42") { mock_item_request }
+
+        put :returned, :id => "42"
+        flash[:alert].should eql(I18n.t('messages.only_gifter_and_requester_can_access'))
+        response.should redirect_to(root_path)
       end
 
     end
