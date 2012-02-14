@@ -9,9 +9,8 @@ class ItemRequest < ActiveRecord::Base
   STATUS_COLLECTED = 60.freeze
   STATUS_RECALL    = 70.freeze
   STATUS_RETURN    = 80.freeze
-  STATUS_ACKNOWLEDGE = 90.freeze
-  STATUS_CANCEL_RECALL = 100.freeze
-  STATUS_CANCEL_RETURN = 110.freeze
+  STATUS_ACKNOWLEDGED = 90.freeze
+  STATUS_RETURNED      = 100.freeze
 
   STATUSES = {
     STATUS_REQUESTED  => 'requested',
@@ -22,12 +21,11 @@ class ItemRequest < ActiveRecord::Base
     STATUS_COLLECTED  => 'collected',
     STATUS_RECALL    => 'recalled',
     STATUS_RETURN    => 'return',
-    STATUS_ACKNOWLEDGE => 'acknowledged',
-    STATUS_CANCEL_RECALL => 'cancel recall',
-    STATUS_CANCEL_RETURN => 'cancel return'
+    STATUS_ACKNOWLEDGED => 'acknowledged',
+    STATUS_RETURNED      => 'returned'
   }
 
-  ACTIVE_STATUSES = [ STATUS_REQUESTED, STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_RECALL, STATUS_RETURN ]
+  ACTIVE_STATUSES = [ STATUS_REQUESTED, STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_RECALL, STATUS_RETURN, STATUS_ACKNOWLEDGED ]
 
   belongs_to :item
   belongs_to :requester, :polymorphic => true
@@ -49,6 +47,7 @@ class ItemRequest < ActiveRecord::Base
   scope :older_than_2_weeks, where("created_at > ? and created_at < ? and status = ?",15.days.ago, 14.days.ago, STATUS_COMPLETED)
   scope :requested_item, lambda { |entity| where("item_id = ? and status IN (?)", entity.id, [STATUS_REQUESTED]) }
   scope :involves_item, lambda { |entity| where("item_id = ?", entity.id) }
+  scope :collected, where(:status => STATUS_COLLECTED)
 
   # validates_presence_of :description
   validates_presence_of :requester_id, :requester_type
@@ -148,7 +147,8 @@ class ItemRequest < ActiveRecord::Base
     self.item.gift? ? item.available! : item.in_use!
     self.update_reputation_for_parties_involved if self.item.gift?
     if self.item.is_shareage?
-      self.item.add_to_resource_network_for(self.requester)
+      self.item.change_resource_to_gifter
+      self.item.add_to_resource_network_for_possessor(self.requester)
       self.item.shareage!
     end
     item_type_based_status
@@ -181,16 +181,36 @@ class ItemRequest < ActiveRecord::Base
 
   def cancel_recall!
     return if !(self.status == STATUS_RECALL)
-    self.status = STATUS_CANCEL_RECALL
+    self.status = STATUS_COLLECTED
     save!
     create_shareage_request_cancel_recall_activity_log
   end
 
   def cancel_return!
     return if !(self.status == STATUS_RETURN)
-    self.status = STATUS_CANCEL_RETURN
+    self.status = STATUS_COLLECTED
     save!
     create_shareage_request_cancel_return_activity_log
+  end
+
+  def acknowledge!
+    return if !(self.status == STATUS_RECALL) && !(self.status == STATUS_RETURN)
+    self.status = STATUS_ACKNOWLEDGED
+    save!
+    create_shareage_request_acknowledged_activity_log
+  end
+
+  def returned!
+    return if !(self.status == STATUS_ACKNOWLEDGED)
+    self.status = STATUS_RETURNED
+    save!
+    create_shareage_request_returned_activity_log
+    self.item.remove_resource_for_possessor
+    self.item.change_resource_to_gifter_and_possessor
+    self.item.unhide!
+    self.item.available!
+    self.item.normal!
+    self.update_reputation_for_parties_involved
   end
 
   def update_reputation_for_parties_involved
@@ -246,8 +266,16 @@ class ItemRequest < ActiveRecord::Base
     self.status == STATUS_RECALL
   end
 
-  def return?
+  def in_return?
     self.status == STATUS_RETURN
+  end
+
+  def acknowledged?
+    self.status == STATUS_ACKNOWLEDGED
+  end
+
+  def returned?
+    self.status == STATUS_RETURNED
   end
 
   def has_left_feedback?(person_id)
@@ -387,6 +415,14 @@ class ItemRequest < ActiveRecord::Base
 
   def create_shareage_request_cancel_return_activity_log
     ActivityLog.create_item_request_activity_log(self, EventType.cancel_return_shareage_gifter, EventType.cancel_return_shareage_requester)
+  end
+
+  def create_shareage_request_acknowledged_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.acknowledge_shareage_gifter, EventType.acknowledge_shareage_requester)
+  end
+
+  def create_shareage_request_returned_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.returned_shareage_gifter, EventType.returned_shareage_requester)
   end
 
   #MUTUAL RELATED ACTIVITY LOGS
