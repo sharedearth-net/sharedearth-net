@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item_request = @item.item_requests.where(:status => ItemRequest::STATUS_COLLECTED).first
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @item }
