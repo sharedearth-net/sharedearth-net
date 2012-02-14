@@ -39,7 +39,7 @@
 					
 					<ul class="clearfix">
 						<% @items.each do |item| %>
-						  <%= render "items/item", :item => item, :action_list => [:show, :edit, :unhide, :hide, :delete].to_set  %>
+						  <%= render "items/item", :item => item, :action_list => [:show, :edit, :unhide, :hide, :delete, :recall, :return].to_set  %>
 						<% end if !@items.nil?%>
 					</ul>
 					

@@ -52,6 +52,13 @@
 									<%= link_to 'Delete', @item, :confirm => 'Are you sure?', :method => :delete %>
 								</li>
 						    <% end -%>
+                <% if !@item_request.nil? && @item_request.collected? && @item.in_shareage? -%>
+									<% if @item.is_owner?(current_person) -%>
+										<li><%= link_to 'Recall', recall_request_path(@item_request), :method => :put %></li>
+									<% else -%>
+										<li><%= link_to 'Return', return_request_path(@item_request), :method => :put %></li>
+									<% end -%>
+						    <% end -%>
 							</ul>
                      <% end %>
 						<% end %>
