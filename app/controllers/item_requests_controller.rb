@@ -1,10 +1,10 @@
 class ItemRequestsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_item_request, :only => [ :show, :accept, :reject, :cancel, :collected, :complete, :recall, :return ]
-  before_filter :only_requester_or_gifter, :only => [ :cancel, :collected, :complete ]
+  before_filter :get_item_request, :only => [ :show, :accept, :reject, :cancel, :collected, :complete, :recall, :return, :acknowledge, :cancel_recall, :cancel_return, :returned ]
+  before_filter :only_requester_or_gifter, :only => [ :cancel, :collected, :complete, :returned, :acknowledge ]
   before_filter :public_only_when_completed, :only => [:show]
-  before_filter :only_gifter, :only => [ :accept, :reject, :recall ]
-  before_filter :only_requester, :only => [:return]
+  before_filter :only_gifter, :only => [ :accept, :reject, :recall, :cancel_recall ]
+  before_filter :only_requester, :only => [:return, :cancel_return]
   before_filter :check_if_item_is_deleted, :only => [:new, :create]
 
   def new
@@ -28,7 +28,7 @@ class ItemRequestsController < ApplicationController
     @comments = @item_request.comments.sort { |a, b| b.created_at <=> a.created_at }
 
     respond_to do |format|
-      if @item_request.completed?
+      if @item_request.completed? || @item_request.returned?
         @commentable_object = EventLog.find_by_related_id_and_related_type(@item_request.id, "ItemRequest")
         @public_comments = @commentable_object.nil? ? [] :
                            @commentable_object.comments.sort do |a, b|
@@ -188,6 +188,72 @@ class ItemRequestsController < ApplicationController
     end
 
 
+  end
+
+  def cancel_recall
+    @item_request.cancel_recall!
+
+    respond_to do |format|
+      format.html { redirect_to_back }
+      format.json do
+        render :json => { :success => true,
+                          :request_html  => item_request_html(@item_request),
+                          :activity_html => last_activity_log_html_for(current_person) }
+      end
+    end
+
+
+  end
+
+  def cancel_return
+    @item_request.cancel_return!
+
+    respond_to do |format|
+      format.html { redirect_to_back }
+      format.json do
+        render :json => { :success => true,
+                          :request_html  => item_request_html(@item_request),
+                          :activity_html => last_activity_log_html_for(current_person) }
+      end
+    end
+
+
+  end
+
+  def acknowledge
+    @item_request.acknowledge!
+
+    respond_to do |format|
+      format.html { redirect_to_back }
+      format.json do
+        render :json => { :success => true,
+                          :request_html  => item_request_html(@item_request),
+                          :activity_html => last_activity_log_html_for(current_person) }
+      end
+    end
+
+
+  end
+
+  def returned
+    @item_request.returned!
+
+    respond_to do |format|
+      format.html { redirect_to new_request_feedback_path(@item_request) }
+      format.json do
+        people_helped_count  = current_person.reputation_rating.distinct_people_count.to_s
+        gift_actions_count   = current_person.reputation_rating.gift_actions_count.to_s
+        activity_level_count =current_person.reputation_rating.activity_level_count.to_s
+
+        render :json => { :success => true,
+                          :share   => 'false',
+                          :request_html  => '',
+                          :activity_html => last_activity_log_html_for(current_person),
+                          :people_helped => people_helped_count,
+                          :gift_actions => gift_actions_count,
+                          :activity_level => activity_level_count }
+      end
+    end
   end
 
   def new_comment
