@@ -8,6 +8,7 @@ describe ItemsController do
   let(:item_one) {mock_model(Item)}
   let(:item_two) {mock_model(Item)}
   let(:resources) { [mock_model(ResourceNetwork, :resource => item_one),mock_model(ResourceNetwork, :resource => item_two)]}
+  let(:item_request) {mock_model(ItemRequest, :item => mock_item, :status =>ItemRequest::STATUS_COLLECTED)}
 
   it_should_require_signed_in_user_for_actions :show, :edit, :update,
                                                :destroy, :mark_as_normal,
@@ -39,11 +40,17 @@ describe ItemsController do
         Item.stub(:find_by_id).with("37") { mock_item }
         mock_item.stub!(:deleted?).and_return(false)
         mock_item.stub(:hidden?).and_return(false)
+        mock_item.stub_chain(:item_requests, :collected).and_return(item_request)
       end
 
       it "assigns the requested item as @item" do
         get :show, :id => "37"
         assigns(:item).should be(mock_item)
+      end
+
+      it "assigns the related item request that is in state collected" do
+        get :show, :id => "37"
+        assigns(:item_request).should be(item_request)
       end
 
       it "should allow owner to view the item" do
