@@ -79,6 +79,18 @@
    <% else -%>
        <% full_sentence = gifter + " is requesting the return of their " + item %>
    <% end -%>
+<% elsif req.in_return? %>
+   <% if req.gifter?(current_person) -%>
+      <% full_sentence = "Awaiting return of your " + item %>
+   <% else -%>
+      <% full_sentence = "Return the " + item + " to " + gifter%>
+   <% end -%>
+<% elsif req.acknowledged? %>
+   <% if req.gifter?(current_person) -%>
+      <% full_sentence = "Awaiting return of your " + item %>
+   <% else -%>
+      <% full_sentence = "Return the " + item + " to " + gifter%>
+   <% end -%>
 <% elsif false %>
    <% if req.gifter?(current_person) -%>
       <% full_sentence = "Awaiting return of your " + item %>
@@ -94,7 +106,7 @@
     <%= (person_one + " " + sentence+ " " + person_two + " " + item + sentence_ending).html_safe unless person_one.nil? && sentence.nil? if !person_one.nil? && !person_two.nil? && !sentence.nil?%>	
   <% end -%>
   
-<% elsif !person_one.nil? && !person_two.nil? && !sentence.nil? && full_sentence.nil? -%>
+<% elsif !person_one.nil? && !person_two.nil? && !sentence.nil? && !sentence.nil? -%>
    <h2>
 		<span>
 			<%= person_one %>
