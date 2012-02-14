@@ -332,6 +332,46 @@ module PagesHelper
       person
     when 64
       person
+    when 65
+      current_person
+    when 66
+      person
+    when 67
+      current_person
+    when 68
+      person
+    when 69
+      person
+    when 70
+      current_person
+    when 71
+      person
+    when 72
+      current_person
+    when 73
+      person
+    when 74
+      current_person
+    when 75
+      current_person
+    when 76
+      person
+    when 77
+      current_person
+    when 78
+      person
+    when 79
+      current_person
+    when 80
+      person
+    when 81
+      person
+    when 82
+      current_person
+    when 83
+      person
+    when 84
+      current_person
     else
       current_person
     end
@@ -520,11 +560,11 @@ module PagesHelper
     when 66 #SHAREAGE REQUEST REQUESTER
       sentence = "You requested " + other_person_possesive + " " + item + " for shareage"
     when 67 #ACCEPT SHAREAGE GIFTER
-      sentence
+      sentence = "You accepted " + requester_possesive + " request for your " + item
     when 68 #REJECT SHAREAGE GIFTER
       sentence
     when 69 #ACCEPT SHAREAGE REQUESTER
-      sentence
+      sentence = other_person + " accepted your request for their " + item
     when 70 #REJECT SHAREAGE REQUESTER
       sentence
     when 71 #COLLECTED SHAREAGE GIFTER
@@ -539,21 +579,19 @@ module PagesHelper
     when 75 #RECALL SHAREAGE GIFTER
       sentence = "You have recalled your " + item + " from " + requester
     when 76 #RECALL SHAREAGE REQUESTER
-      sentence = gifter + " requested the return of their " + item
+      sentence = person + " requested the return of their " + item
     when 77 #CANCEL RECALL SHAREAGE GIFTER
       sentence = "You cancelled the recall of your " + item + " from " + requester
     when 78 #CANCEL RECALL SHAREAGE REQUESTER
-      sentence = gifter + " cancelled the recall of their " + item
-=begin
+      sentence = other_person + " cancelled the recall of their " + item
     when 79 #ACKNOWLEDGE SHAREAGE GIFTER
       sentence = "You acknowledged " + requester_possesive + " request to return your " + item
     when 80 #ACKNOWLEDGE SHAREAGE REQUESTER
-      sentence = gifter + " acknowledged your request to return their " +item
+      sentence = other_person + " acknowledged your request to return their " +item
     when 81 #RETURNED SHAREAGE GIFTER
-      sentence = "Your " + item + " has been returned by " + requestor
+      sentence = "Your " + item + " has been returned by " + requester
     when 82 #RETURNED SHAREAGE REQUESTER
-      sentence = "You returned " + gifter_possesive + " " +item
-=end
+      sentence = "You returned " + other_person_possesive + " " +item
     when 83 #CANCEL RETURN SHAREAGE GIFTER
       sentence = requester + " cancelled the request to return your " + item
     when 84 #CANCEL RETURN SHAREAGE REQUESTER
@@ -737,27 +775,47 @@ module PagesHelper
     when 64
       action = activity_log.related.accepted? ? " action " : " request "
       sentence = person + " commented on the " + action + " involving their " + item
-    when 65 #shareage gifter sentence stage 1
+    when 65 #SHAREAGE REQUEST GIFTER
       sentence = person + " requested your " + item + " for shareage"
-    when 66 #shareage requester sentence stage 1
-      sentence = "You requested " + person + " " + item + " for shareage"
-    when 67 #shareage gifter sentence stage 2
+    when 66 #SHAREAGE REQUEST REQUESTER
+      sentence = "You requested " + other_person_possesive + " " + item + " for shareage"
+    when 67 #ACCEPT SHAREAGE GIFTER
+      sentence = "You accepted " + requester_possesive + " request for your " + item
+    when 68 #REJECT SHAREAGE GIFTER
       sentence
-    when 68 #shareage requester sentence stage 2
+    when 69 #ACCEPT SHAREAGE REQUESTER
+      sentence = other_person + " accepted your request for their " + item
+    when 70 #REJECT SHAREAGE REQUESTER
       sentence
-    when 69 #shareage gifter sentence stage 3
-      sentence
-    when 70 #shareage requester sentence stage 3
-      sentence
-    when 71 #shareage gifter sentence stage 4
-      sentence
-    when 72 #shareage requester sentence stage 4
-      sentence
-    when 73 #shareage gifter sentence stage 5
-      sentence
-    when 74 #shareage requester sentence stage 5
-      sentence
+    when 71 #COLLECTED SHAREAGE GIFTER
+      sentence = "Your " + item + " is now in shareage with " + requester
+    when 72 #COLLECTED SHAREAGE REQUESTER
+      sentence = "You have collected " + other_person_possesive + " " + item + " for shareage"
 
+    when 73 #RETURN SHAREAGE GIFTER
+      sentence = requester + " would like to return your " + item
+    when 74 #RETURN SHAREAGE REQUESTER
+      sentence = "You have requested the return of " + gifter_possesive + " " + item
+    when 75 #RECALL SHAREAGE GIFTER
+      sentence = "You have recalled your " + item + " from " + requester
+    when 76 #RECALL SHAREAGE REQUESTER
+      sentence = person + " requested the return of their " + item
+    when 77 #CANCEL RECALL SHAREAGE GIFTER
+      sentence = "You cancelled the recall of your " + item + " from " + requester
+    when 78 #CANCEL RECALL SHAREAGE REQUESTER
+      sentence = other_person + " cancelled the recall of their " + item
+    when 79 #ACKNOWLEDGE SHAREAGE GIFTER
+      sentence = "You acknowledged " + requester_possesive + " request to return your " + item
+    when 80 #ACKNOWLEDGE SHAREAGE REQUESTER
+      sentence = other_person + " acknowledged your request to return their " +item
+    when 81 #RETURNED SHAREAGE GIFTER
+      sentence = "Your " + item + " has been returned by " + requester
+    when 82 #RETURNED SHAREAGE REQUESTER
+      sentence = "You returned " + other_person_possesive + " " +item
+    when 83 #CANCEL RETURN SHAREAGE GIFTER
+      sentence = requester + " cancelled the request to return your " + item
+    when 84 #CANCEL RETURN SHAREAGE REQUESTER
+      sentence = "You cancelled the request to return " + gifter_possesive + " " + item
     else
       #
     end
