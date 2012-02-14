@@ -14,6 +14,9 @@ class ResourceNetwork < ActiveRecord::Base
 
    scope :item, lambda { |entity| where("resource_type_id =? AND resource_id = ?", 2, entity.id) }
    scope :entity, lambda { |entity| where("entity_id =? AND entity_type_id = ?", entity.id, 1) }
+   scope :gifter, :conditions => { :type => TYPE_GIFTER }
+   scope :possessor, :conditions => { :type => TYPE_POSSESSOR }
+   scope :gifter_possessor, :conditions => { :type => TYPE_GIFTER_AND_POSSESSOR }
 
    def set_possessor!(entity, entity_type_id)
      self.entity_id = entity.id
@@ -24,6 +27,21 @@ class ResourceNetwork < ActiveRecord::Base
 
    def remove_possessor!
      self.entity_id = nil
+     self.type = TYPE_GIFTER_AND_POSSESSOR
+     save!
+   end
+
+   def to_gifter!
+     self.type = TYPE_GIFTER
+     save!
+   end
+
+   def to_possessor!
+     self.type = TYPE_POSSESSOR
+     save!
+   end
+
+   def to_gifter_and_possessor!
      self.type = TYPE_GIFTER_AND_POSSESSOR
      save!
    end
