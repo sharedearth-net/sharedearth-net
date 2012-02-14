@@ -92,6 +92,7 @@ end
       put "acknowledge"
       put "cancel_recall"
       put "cancel_return"
+      put "returned"
       post 'new_comment'
     end
     resources :feedbacks
