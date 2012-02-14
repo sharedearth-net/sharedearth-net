@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
 
   include PaperclipWrapper
-  
+
   acts_as_entity
 
   STATUS_NORMAL  = 10.freeze
@@ -95,19 +95,6 @@ class Item < ActiveRecord::Base
     !self.photo_file_name.nil?
   end
 
-  def add_to_resource_network
-    ResourceNetwork.create!(:entity_id => self.owner.id, :entity_type_id => 1, :resource_id => self.id, :resource_type_id => 2)
-  end
-
-  def add_to_resource_network_for(other_person)
-    ResourceNetwork.create!(:entity_id => other_person.id, :entity_type_id => 1, :resource_id => self.id, :resource_type_id => 2)
-  end
-
-  def remove_from_resource_network_for(person)
-    resource = ResourceNetwork.item(self).entity(person).first
-    resource.destroy
-  end
-
   def self.search(search, person_id, filter_item_type = nil)
     unless search.empty?
 			matcher = filter_item_type.nil? ? Item.where("owner_id != ?", person_id).order("#{Item.table_name}.item_type ASC") : Item.where("owner_id != ?", person_id).where(:item_type => filter_item_type).order("#{Item.table_name}.item_type ASC")
@@ -154,7 +141,7 @@ class Item < ActiveRecord::Base
   end
 
   def in_shareage?
-  	self.status == STATUS_SHAREAGE  	
+  	self.status == STATUS_SHAREAGE
   end
 
   def shareage!
@@ -209,10 +196,9 @@ class Item < ActiveRecord::Base
   end
 
   def normal!
-    status = self.status
     self.status = STATUS_NORMAL
     save!
-    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_repaired, self) if status == STATUS_DAMAGED
+    EventLog.create_news_event_log(self.owner, nil,  self , EventType.item_repaired, self) if self.status == STATUS_DAMAGED
   end
 
   def lost!
@@ -290,6 +276,36 @@ class Item < ActiveRecord::Base
     !deleted_at.nil?  or deleted
   end
 
+  #ResourceNetwork related methods
+
+  def add_to_resource_network
+    ResourceNetwork.create!(:entity_id => self.owner.id, :entity_type_id => 1, :resource_id => self.id, :resource_type_id => 2)
+  end
+
+  def add_to_resource_network_for_possessor(other_person)
+    ResourceNetwork.create!(:entity_id => other_person.id, :entity_type_id => 1, :resource_id => self.id, :resource_type_id => 2, :type => ResourceNetwork::TYPE_POSSESSOR)
+  end
+
+  def remove_resource_for_possessor
+   resource = ResourceNetwork.item(self).possessor.first
+   resource.destroy
+  end
+
+  def change_resource_to_gifter_and_possessor
+    resource = ResourceNetwork.item(self).gifter.first
+    resource.to_gifter_and_possessor!
+  end
+
+  def change_resource_to_gifter
+    resource = ResourceNetwork.item(self).gifter_possessor.first
+    resource.to_gifter!
+  end
+
+  def remove_from_resource_network_for(person)
+    resource = ResourceNetwork.item(self).entity(person).first
+    resource.destroy
+  end
+
   private
 
   def set_attrs_before_deleting
@@ -319,8 +335,6 @@ class Item < ActiveRecord::Base
       event_display.destroy
     end
   end
-
-
   private
 
   def destroy_original
