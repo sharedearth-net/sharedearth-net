@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130153359) do
+ActiveRecord::Schema.define(:version => 20120219122153) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -112,12 +112,6 @@ ActiveRecord::Schema.define(:version => 20120130153359) do
   end
 
   add_index "entities", ["specific_entity_type", "specific_entity_id"], :name => "index_entities_on_specific_entity_type_and_specific_entity_id"
-
-  create_table "entity_types", :force => true do |t|
-    t.string   "entity_type_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "event_displays", :force => true do |t|
     t.integer  "type_id"
@@ -301,7 +295,6 @@ ActiveRecord::Schema.define(:version => 20120130153359) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "type",             :default => 10
-    t.integer  "owner_type",       :default => 10
   end
 
   create_table "settings", :force => true do |t|

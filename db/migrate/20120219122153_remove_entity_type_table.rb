@@ -1,6 +1,17 @@
-class AddEntityTypeNames < ActiveRecord::Migration
+class RemoveEntityTypeTable < ActiveRecord::Migration
   def self.up
-  #insert entity type names to entity types table
+    drop_table :entity_types
+  end
+
+  def self.down
+    create_table :entity_types do |t|
+      t.string :entity_type_name
+
+      t.timestamps
+    end
+
+    # not initialising table but having following hash as reference
+    """
     entity_types = [
                       {:id => 1, :name => 'Person'},
                       {:id => 2, :name => 'Item'},
@@ -10,19 +21,7 @@ class AddEntityTypeNames < ActiveRecord::Migration
                       {:id => 6, :name => 'Project'},
                       {:id => 7, :name => 'Trusted Person'},
                       {:id => 8, :name => 'Mutual Person'}
-                      ]
-                      
-     begin
-       entity_types.each do |entity|
-         et = EntityType.new(:entity_type_name => entity[:name])
-         et.id = entity[:id]
-         et.save!
-       end
-    rescue
-      puts "Could not seed EntityType table"
-    end
-  end
-
-  def self.down
+                    ]
+    """
   end
 end
