@@ -38,7 +38,9 @@ module PagesHelper
     when 26
       sentence = fb_friend_join_sentence(event_log, person)
     when 49
-      
+      #
+    when 85
+      sentence = shareage_sentence(event_log, person)
     else
       #
     end
@@ -122,6 +124,35 @@ module PagesHelper
    
    sentence.html_safe
   end
+
+  def shareage_sentence(event_log, person)
+  
+   if event_log.involved_as_requester?(person)
+     if @same_person
+       sentence = "You borrowed " + @gifter_possesive + " " + @item
+     else
+       sentence = @requester + " borrowed " + @gifter_possesive + " " + @item
+     end
+   elsif event_log.involved_as_gifter?(person)
+     if @same_person
+       sentence = @requester + ' borrowed your ' + @item
+     else
+       sentence = @gifter + " lent their " + @item + " to " +  @requester
+     end
+   elsif person.trusts?(event_log.primary) && !person.trusts?(event_log.secondary)
+     sentence = @requester + " borrowed " + @gifter_possesive + " " + @item
+	 elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
+     sentence = @gifter + " lent their " + @item + " to " + @requester
+	 elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
+      sentence = @gifter + " lent their " + @item + " to " + @requester 
+   else
+     sentence = ""
+   end
+   
+   sentence.html_safe
+  end
+
+  
   
   def trust_established_sentence(event_log, person)
 
@@ -333,9 +364,9 @@ module PagesHelper
     when 64
       person
     when 65
-      current_person
-    when 66
       person
+    when 66
+      current_person
     when 67
       current_person
     when 68
@@ -482,7 +513,7 @@ module PagesHelper
     when 29
       sentence =  gifter + " accepted " + requester_possesive + " request for " + possesive + " " + item
     when 30
-      sentence =  gifter + " rejected " + requester_possesive + " request for " + possesive + " " + item
+      sentence =  requester + " rejected " + gifter_possesive + " request for " + possesive + " " + item
     when 31
       sentence =  person + " completed the action of receiving your " + item
     when 32
