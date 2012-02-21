@@ -771,4 +771,12 @@ class EventType < ActiveRecord::Base
   def cancel_return_shareage_requester?
     self.id == EventType.cancel_return_shareage_requester
   end
+
+  def self.shareage(return_only_id = true)
+    return_only_id ? 85 : EventType.find(85)
+  end
+
+  def shareage?
+    self.id == EventType.shareage
+  end
 end

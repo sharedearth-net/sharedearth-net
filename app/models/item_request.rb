@@ -211,6 +211,7 @@ class ItemRequest < ActiveRecord::Base
     self.item.available!
     self.item.normal!
     self.update_reputation_for_parties_involved
+    create_shareage_event_log
   end
 
   def update_reputation_for_parties_involved
@@ -327,6 +328,10 @@ class ItemRequest < ActiveRecord::Base
 
   def create_gifting_event_log
     EventLog.create_news_event_log(self.requester, self.gifter,  self.item , EventType.gifting, self)
+  end
+
+  def create_shareage_event_log
+    EventLog.create_news_event_log(self.requester, self.gifter,  self.item , EventType.shareage, self)
   end
 
   def create_new_item_request_activity_log
