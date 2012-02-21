@@ -856,6 +856,15 @@ describe ItemRequest, ".returned!" do
       @item_request.returned!
       @item_request.gifter.reputation_rating.distinct_people.should == 1
     end
+
+    it "should create event log for shareage" do
+      @item_request.returned!
+      event_log = @item_request.item.event_logs.where(:event_type_id => EventType.shareage).first
+
+      expect {
+        event_log.reload
+      }.to_not raise_exception
+    end
   after(:all) do
     #delete_item_request_helper_environment
   end
