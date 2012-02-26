@@ -146,7 +146,7 @@ class ItemsController < ApplicationController
     	when Item::PURPOSE_SHARE
         msg = "Sharing my #{item.name.downcase} on sharedearth.net."
       when Item::PURPOSE_SHAREAGE
-        msg = "Sharing my #{item.name.downcase} on sharedearth.net."
+        msg = "Seeking to put my #{item.name.downcase} into shareage (i.e. a long term lend!) via sharedearth.net."
       when Item::PURPOSE_GIFT
         msg = "Gifting my #{item.name.downcase} on sharedearth.net."
       else
