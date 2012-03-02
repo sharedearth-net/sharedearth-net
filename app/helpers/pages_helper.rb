@@ -403,6 +403,19 @@ module PagesHelper
       person
     when 84
       current_person
+    #WHEN 85?
+    when 86 #GIFTER CANCEL SHAREAGE GIFTER
+      current_person
+    when 87 #GIFTER CANCEL SHAREAGE REQUESTER
+      person
+    when 88 #REQUESTER CANCEL SHAREAGE GIFTER
+      person
+    when 89 #REQUESTER CANCEL SHAREAGE REQUESTER
+      current_person
+    when 90 #ACKNOWLEDGE RETURN SHAREAGE GIFTER
+      current_person
+    when 91 #ACKNOWLEDGE RETURN SHAREAGE REQUESTER
+      person
     else
       current_person
     end
@@ -627,6 +640,20 @@ module PagesHelper
       sentence = requester + " cancelled the request to return your " + item
     when 84 #CANCEL RETURN SHAREAGE REQUESTER
       sentence = "You cancelled the request to return " + gifter_possesive + " " + item
+    when 85 #SHAREAGE
+      sentence = ""
+    when 86 #GIFTER CANCEL SHAREAGE GIFTER
+      sentence =  "You canceled the action of placing your " + item + " into shareage with " + person 
+    when 87 #GIFTER CANCEL SHAREAGE REQUESTER
+      sentence = gifter + " canceled the action of placing their " + item + " into shareage with " + requester
+    when 88 #REQUESTER CANCEL SHAREAGE GIFTER
+      sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
+    when 89 #REQUESTER CANCEL SHAREAGE REQUESTER
+      sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
+    when 90 #ACKNOWLEDGE RETURN SHAREAGE GIFTER
+      sentence = "You acknowledged " + requester_possesive + " request to recall your " + item
+    when 91 #ACKNOWLEDGE RETURN SHAREAGE REQUESTER
+      sentence = other_person + " acknowledged your request to recall their " +item
     else
       #
     end
@@ -847,6 +874,20 @@ module PagesHelper
       sentence = requester + " cancelled the request to return your " + item
     when 84 #CANCEL RETURN SHAREAGE REQUESTER
       sentence = "You cancelled the request to return " + gifter_possesive + " " + item
+    when 85 #SHAREAGE
+      sentence = ""
+    when 86 #GIFTER CANCEL SHAREAGE GIFTER
+      sentence =  "You canceled the action of placing your " + item + " into shareage with " + person 
+    when 87 #GIFTER CANCEL SHAREAGE REQUESTER
+      sentence = gifter + " canceled the action of placing their " + item + " into shareage with " + requester
+    when 88 #REQUESTER CANCEL SHAREAGE GIFTER
+      sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
+    when 89 #REQUESTER CANCEL SHAREAGE REQUESTER
+      sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
+    when 90 #ACKNOWLEDGE RETURN SHAREAGE GIFTER
+      sentence = "You acknowledged " + requester_possesive + " request to recall your " + item
+    when 91 #ACKNOWLEDGE RETURN SHAREAGE REQUESTER
+      sentence = other_person + " acknowledged your request to recall their " +item
     else
       #
     end
