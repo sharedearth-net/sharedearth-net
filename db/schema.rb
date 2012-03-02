@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221103208) do
+ActiveRecord::Schema.define(:version => 20120302132016) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -324,6 +324,18 @@ ActiveRecord::Schema.define(:version => 20120221103208) do
     t.datetime "lockout"
     t.integer  "validations_failed", :default => 0
     t.datetime "last_activity"
+  end
+
+  create_table "villages", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "street"
+    t.string   "postcode"
+    t.string   "state"
+    t.string   "country"
+    t.integer  "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
