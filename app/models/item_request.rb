@@ -123,7 +123,16 @@ class ItemRequest < ActiveRecord::Base
     return if !(self.status == STATUS_REQUESTED)
     self.status = STATUS_REJECTED
     save!
-    self.item.share? ? create_item_request_rejected_activity_log : create_gift_request_rejected_activity_log
+    case self.item.purpose?
+      when Item::PURPOSES[Item::PURPOSE_SHARE]
+        create_item_request_rejected_activity_log
+      when Item::PURPOSES[Item::PURPOSE_GIFT]
+        create_gift_request_rejected_activity_log
+      when Item::PURPOSES[Item::PURPOSE_SHAREAGE]
+        create_shareage_request_rejected_activity_log
+      else
+         #
+    end
     self.item.available!
     self.item.owner.reputation_rating.increase_requests_answered_count
   end
@@ -134,7 +143,16 @@ class ItemRequest < ActiveRecord::Base
     if self.accepted? && (self.requester.id == @person_initiator)
       self.update_reputation_for_parties_involved
     end
-    self.item.share? ? create_item_request_canceled_activity_log : create_gift_request_canceled_activity_log
+    case self.item.purpose?
+      when Item::PURPOSES[Item::PURPOSE_SHARE]
+        create_item_request_canceled_activity_log
+      when Item::PURPOSES[Item::PURPOSE_GIFT]
+        create_gift_request_canceled_activity_log
+      when Item::PURPOSES[Item::PURPOSE_SHAREAGE]
+        create_shareage_request_canceled_activity_log
+      else
+         #
+    end
     self.item.available!
     self.item.unhide! if self.item.is_shareage?
     self.status = STATUS_CANCELED
@@ -195,9 +213,14 @@ class ItemRequest < ActiveRecord::Base
 
   def acknowledge!
     return if !(self.status == STATUS_RECALL) && !(self.status == STATUS_RETURN)
+    previous_state = self.status
     self.status = STATUS_ACKNOWLEDGED
     save!
-    create_shareage_request_acknowledged_activity_log
+    if previous_state == STATUS_RECALL
+      create_shareage_request_acknowledged_activity_log
+    else
+      create_shareage_request_return_acknowledged_activity_log
+    end
   end
 
   def returned!
@@ -402,6 +425,18 @@ class ItemRequest < ActiveRecord::Base
     ActivityLog.create_item_request_activity_log(self, EventType.shareage_accepted_gifter, EventType.shareage_accepted_requester)
   end
 
+  def create_shareage_item_request_rejected_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.shareage_rejected_gifter, EventType.shareage_rejected_requester)
+  end
+
+  def create_shareage_request_canceled_activity_log
+    if self.requester_id == @person_initiator
+      ActivityLog.create_item_request_activity_log(self, EventType.shareage_requester_canceled_gifter, EventType.shareage_requester_canceled_requester)
+    else
+      ActivityLog.create_item_request_activity_log(self, EventType.shareage_gifter_canceled_gifter, EventType.shareage_gifter_canceled_requester)
+    end
+  end
+
   def create_shareage_request_collected_activity_log
     ActivityLog.create_item_request_activity_log(self, EventType.collected_shareage_gifter, EventType.collected_shareage_requester)
   end
@@ -424,6 +459,10 @@ class ItemRequest < ActiveRecord::Base
 
   def create_shareage_request_acknowledged_activity_log
     ActivityLog.create_item_request_activity_log(self, EventType.acknowledge_shareage_gifter, EventType.acknowledge_shareage_requester)
+  end
+
+  def create_shareage_request_return_acknowledged_activity_log
+    ActivityLog.create_item_request_activity_log(self, EventType.acknowledge_return_shareage_gifter, EventType.acknowledge_return_shareage_requester)
   end
 
   def create_shareage_request_returned_activity_log
