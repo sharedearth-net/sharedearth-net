@@ -27,7 +27,7 @@ class EventType < ActiveRecord::Base
 
   # "ADD ITEM", # 1
   # "NEW ITEM REQUEST GIFTER", # 2
-  # "NEW ITEM REQUEST REQUESTER", # 3
+  # "NEW ITEM REQUEST REQUESTER", # 8
   # "ACCEPT RESPONSE GIFTER", # 4
   # "REJECT RESPONSE GIFTER", # 5
   # "ACCEPT RESPONSE REQUESTER", # 6
@@ -37,7 +37,7 @@ class EventType < ActiveRecord::Base
   # "REQUESTER COMPLETED GIFTER", # 10
   # "REQUESTER COMPLETED REQUESTER", # 11
   # "GIFTER COMPLETED GIFTER", # 12
-  # "GIFTER COMPLETED REQUESTER", # 13
+  # "GIFTER COMPLETED REQUESTER", # 18
   # "GIFTER CANCEL GIFTER", # 14
   # "GIFTER CANCEL REQUESTER", # 15
   # "REQUESTER CANCEL GIFTER", # 16
@@ -52,7 +52,7 @@ class EventType < ActiveRecord::Base
   end
 
   def self.new_item_request_requester(return_only_id = true)
-    return_only_id ? 3 : EventType.find(3)
+    return_only_id ? 8 : EventType.find(8)
   end
 
   def new_item_request_requester?
@@ -174,7 +174,7 @@ class EventType < ActiveRecord::Base
   end
 
   def self.item_gifter_completed_requester(return_only_id = true)
-    return_only_id ? 13 : EventType.find(13)
+    return_only_id ? 18 : EventType.find(18)
   end
 
   def item_gifter_collected_requester?
@@ -187,7 +187,7 @@ class EventType < ActiveRecord::Base
   #   { :id => 20, :name => "NEGATIVE FEEDBACK" },
   #   { :id => 21, :name => "GIFTING" },
   #   { :id => 22, :name => "TRUST ESTABLISHED" },
-  #   { :id => 23, :name => "TRUST WITHDRAWN" },
+  #   { :id => 28, :name => "TRUST WITHDRAWN" },
   #   { :id => 24, :name => "ITEM DAMAGED" },
   #   { :id => 25, :name => "ITEM REPAIRED" },
   #   { :id => 26, :name => "FB FRIEND JOIN" }
@@ -224,7 +224,7 @@ class EventType < ActiveRecord::Base
   end
 
   def self.trust_withdrawn(return_only_id = true)
-    return_only_id ? 23 : EventType.find(23)
+    return_only_id ? 28 : EventType.find(28)
   end
 
   def trust_withdrawn?
@@ -271,105 +271,105 @@ class EventType < ActiveRecord::Base
 
   #GIFTING EVENT TYPES
 
-  def self.gift_accepted_gifter(return_only_id = true)
+  def self.shareage_accepted_gifter(return_only_id = true)
     return_only_id ? 27 : EventType.find(27)
   end
 
-  def gift_accepted_gifter?
-    self.id == EventType.gift_accepted_gifter
+  def shareage_accepted_gifter?
+    self.id == EventType.shareage_accepted_gifter
   end
 
-  def self.gift_rejected_gifter(return_only_id = true)
+  def self.shareage_rejected_gifter(return_only_id = true)
     return_only_id ? 28 : EventType.find(28)
   end
 
-  def gift_rejected_gifter?
-    self.id == EventType.gift_rejected_gifter
+  def shareage_rejected_gifter?
+    self.id == EventType.shareage_rejected_gifter
   end
 
-  def self.gift_accepted_requester(return_only_id = true)
+  def self.shareage_accepted_requester(return_only_id = true)
     return_only_id ? 29 : EventType.find(29)
   end
 
-  def gift_accepted_requester?
-    self.id == EventType.gift_accepted_requester
+  def shareage_accepted_requester?
+    self.id == EventType.shareage_accepted_requester
   end
 
-  def self.gift_rejected_requester(return_only_id = true)
-    return_only_id ? 30 : EventType.find(30)
+  def self.shareage_rejected_requester(return_only_id = true)
+    return_only_id ? 80 : EventType.find(80)
   end
 
-  def gift_rejected_requester?
-    self.id == EventType.gift_rejected_requester
+  def shareage_rejected_requester?
+    self.id == EventType.shareage_rejected_requester
   end
 
-  def self.gift_requester_completed_gifter(return_only_id = true)
-    return_only_id ? 31 : EventType.find(31)
+  def self.shareage_requester_completed_gifter(return_only_id = true)
+    return_only_id ? 81 : EventType.find(81)
   end
 
-  def gift_requester_completed_gifter?
-    self.id == EventType.gift_requester_completed_gifter
+  def shareage_requester_completed_gifter?
+    self.id == EventType.shareage_requester_completed_gifter
   end
 
-    def self.gift_requester_completed_requester(return_only_id = true)
-    return_only_id ? 32 : EventType.find(32)
+    def self.shareage_requester_completed_requester(return_only_id = true)
+    return_only_id ? 82 : EventType.find(82)
   end
 
-  def gift_requester_completed_requester?
-    self.id == EventType.gift_requester_completed_requester
+  def shareage_requester_completed_requester?
+    self.id == EventType.shareage_requester_completed_requester
   end
 
-  def self.gift_gifter_completed_gifter(return_only_id = true)
-    return_only_id ? 33 : EventType.find(33)
+  def self.shareage_gifter_completed_gifter(return_only_id = true)
+    return_only_id ? 89 : EventType.find(89)
   end
 
-  def gift_gifter_completed_gifter?
-    self.id == EventType.gift_gifter_completed_gifter
+  def shareage_gifter_completed_gifter?
+    self.id == EventType.shareage_gifter_completed_gifter
   end
 
-    def self.gift_gifter_completed_requester(return_only_id = true)
-    return_only_id ? 34 : EventType.find(34)
+    def self.shareage_gifter_completed_requester(return_only_id = true)
+    return_only_id ? 84 : EventType.find(84)
   end
 
-  def gift_gifter_completed_requester?
-    self.id == EventType.gift_gifter_completed_requester
+  def shareage_gifter_completed_requester?
+    self.id == EventType.shareage_gifter_completed_requester
   end
 
-  def self.gift_gifter_canceled_gifter(return_only_id = true)
-    return_only_id ? 35 : EventType.find(35)
+  def self.shareage_gifter_canceled_gifter(return_only_id = true)
+    return_only_id ? 85 : EventType.find(85)
   end
 
-  def gift_gifter_canceled_gifter?
-    self.id == EventType.gift_gifter_canceled_gifter
+  def shareage_gifter_canceled_gifter?
+    self.id == EventType.shareage_gifter_canceled_gifter
   end
 
-    def self.gift_gifter_canceled_requester(return_only_id = true)
-    return_only_id ? 36 : EventType.find(36)
+    def self.shareage_gifter_canceled_requester(return_only_id = true)
+    return_only_id ? 86 : EventType.find(86)
   end
 
-  def gift_gifter_canceled_requester?
-    self.id == EventType.gift_gifter_canceled_requester
+  def shareage_gifter_canceled_requester?
+    self.id == EventType.shareage_gifter_canceled_requester
   end
 
-    def self.gift_requester_canceled_gifter(return_only_id = true)
-    return_only_id ? 37 : EventType.find(37)
+    def self.shareage_requester_canceled_gifter(return_only_id = true)
+    return_only_id ? 88 : EventType.find(88)
   end
 
-  def gift_requester_canceled_gifter?
-    self.id == EventType.gift_requester_canceled_gifter
+  def shareage_requester_canceled_gifter?
+    self.id == EventType.shareage_requester_canceled_gifter
   end
 
-  def self.gift_requester_canceled_requester(return_only_id = true)
-    return_only_id ? 38 : EventType.find(38)
+  def self.shareage_requester_canceled_requester(return_only_id = true)
+    return_only_id ? 89 : EventType.find(89)
   end
 
-  def gift_requester_canceled_requester?
-    self.id == EventType.gift_requester_canceled_requester
+  def shareage_requester_canceled_requester?
+    self.id == EventType.shareage_requester_canceled_requester
   end
 
 
   def self.completed_request_ids
-    [10,11,12,13,31,32,33,34]
+    [10,11,12,18,81,82,89,84]
   end
 
   def self.events_completed
@@ -381,23 +381,23 @@ class EventType < ActiveRecord::Base
   end
 
   def self.activity_canceled
-    [17,38]
+    [17,89]
   end
 
   def self.personal_actions
-    [1,3,4,5,9,11,12,14,17,27,28,32,33,35,38]
+    [1,8,4,5,9,11,12,14,17,27,28,82,89,85,89]
   end
 
   def self.personal_actions_objective
-    [2,6,7,10,13,15,16,29,30,31,34,36,37]
+    [2,6,7,10,18,15,16,29,80,81,84,86,88]
   end
 
   def self.current_actions_underway
-    [2,3,4,6,8,9,16,17,27,29,37,38]
+    [2,8,4,6,8,9,16,17,27,29,88,89]
   end
 
   def self.current_actions_underway_items
-    [2,4,8,27,37]
+    [2,4,8,27,88]
   end
 
   def completed?
@@ -406,18 +406,18 @@ class EventType < ActiveRecord::Base
 
   #NEW EVENT TYPES, CHECK FOR DUPLICATES WITH PREVIOUS ONE
   def self.new_person_join(return_only_id = true)
-    return_only_id ? 39 : EventType.find(39)
+    return_only_id ? 90 : EventType.find(90)
   end
 
   def new_person_join?
     self.id == EventType.new_person_join
   end
 
-  def self.new_gift_item_request_requester(return_only_id = true)
+  def self.new_shareage_item_request_requester(return_only_id = true)
     return_only_id ? 40 : EventType.find(40)
   end
 
-  def new_item_gift_request_requester?
+  def new_item_shareage_request_requester?
     self.id == EventType.new_item_request_requester
   end
 
@@ -438,7 +438,7 @@ class EventType < ActiveRecord::Base
   end
 
   def self.trust_denied_initiator(return_only_id = true)
-    return_only_id ? 43 : EventType.find(43)
+    return_only_id ? 48 : EventType.find(48)
   end
 
   def trust_denied_initiator?
@@ -519,7 +519,7 @@ class EventType < ActiveRecord::Base
 =end
 
   def self.item_removed(return_only_id = true)
-    return_only_id ? 53 : EventType.find(53)
+    return_only_id ? 58 : EventType.find(58)
   end
 
   def item_removed?
@@ -649,7 +649,7 @@ class EventType < ActiveRecord::Base
 =begin
                           {:id => 71, :name => "COLLECTED SHAREAGE GIFTER"},
                           {:id => 72, :name => "COLLECTED SHAREAGE REQUESTER"},
-                          {:id => 73, :name => "RETURN SHAREAGE GIFTER"},
+                          {:id => 78, :name => "RETURN SHAREAGE GIFTER"},
                           {:id => 74, :name => "RETURN SHAREAGE REQUESTER"},
                           {:id => 75, :name => "RECALL SHAREAGE GIFTER"},
                           {:id => 76, :name => "RECALL SHAREAGE REQUESTER"},
@@ -659,6 +659,9 @@ class EventType < ActiveRecord::Base
                           {:id => 80, :name => "ACKNOWLEDGE SHAREAGE REQUESTER"},
                           {:id => 81, :name => "RETURNED SHAREAGE GIFTER"},
                           {:id => 82, :name => "RETURNED SHAREAGE REQUESTER"}
+                          {:id => 89, :name => "CANCEL RETURN SHAREAGE GIFTER"},
+                          {:id => 84, :name => "CANCEL RETURN SHAREAGE REQUESTER"}
+                          {:id => 85, :name => "SHAREAGE" }
 =end
   def self.collected_shareage_gifter(return_only_id = true)
     return_only_id ? 71 : EventType.find(71)
@@ -677,7 +680,7 @@ class EventType < ActiveRecord::Base
   end
 
   def self.return_shareage_gifter(return_only_id = true)
-    return_only_id ? 73 : EventType.find(73)
+    return_only_id ? 78 : EventType.find(78)
   end
 
   def return_shareage_gifter?
@@ -757,7 +760,7 @@ class EventType < ActiveRecord::Base
   end
 
   def self.cancel_return_shareage_gifter(return_only_id = true)
-    return_only_id ? 83 : EventType.find(83)
+    return_only_id ? 89 : EventType.find(89)
   end
 
   def cancel_return_shareage_gifter?
@@ -779,4 +782,69 @@ class EventType < ActiveRecord::Base
   def shareage?
     self.id == EventType.shareage
   end
+
+=begin
+                          {:id => 86, :name => "GIFTER CANCEL SHAREAGE GIFTER"},
+                          {:id => 87, :name => "GIFTER CANCEL SHAREAGE REQUESTER"},
+                          {:id => 88, :name => "REQUESTER CANCEL SHAREAGE GIFTER"},
+                          {:id => 89, :name => "REQUESTER CANCEL SHAREAGE REQUESTER"},
+                          {:id => 90, :name => "ACKNOWLEDGE RETURN SHAREAGE GIFTER"},
+                          {:id => 91, :name => "ACKNOWLEDGE RETURN SHAREAGE REQUESTER"}
+=end
+
+
+  def self.shareage_gifter_canceled_gifter(return_only_id = true)
+    return_only_id ? 86 : EventType.find(8)
+  end
+
+  def shareage_gifter_canceled_gifter?
+    self.id == EventType.shareage_gifter_canceled_gifter
+  end
+
+    def self.shareage_gifter_canceled_requester(return_only_id = true)
+    return_only_id ? 86 : EventType.find(86)
+  end
+
+  def shareage_gifter_canceled_requester?
+    self.id == EventType.shareage_gifter_canceled_requester
+  end
+
+    def self.shareage_requester_canceled_gifter(return_only_id = true)
+    return_only_id ? 88 : EventType.find(88)
+  end
+
+  def shareage_requester_canceled_gifter?
+    self.id == EventType.shareage_requester_canceled_gifter
+  end
+
+  def self.shareage_requester_canceled_requester(return_only_id = true)
+    return_only_id ? 89 : EventType.find(89)
+  end
+
+  def shareage_requester_canceled_requester?
+    self.id == EventType.shareage_requester_canceled_requester
+  end
+
+  def self.acknowledge_return_shareage_gifter(return_only_id = true)
+    return_only_id ? 90 : EventType.find(90)
+  end
+
+  def acknowledge_return_shareage_gifter?
+    self.id == EventType.acknowledge_return_shareage_gifter
+  end
+
+  def self.acknowledge_return_shareage_requester(return_only_id = true)
+    return_only_id ? 91 : EventType.find(91)
+  end
+
+  def acknowledge_return_shareage_requester?
+    self.id == EventType.acknowledge_return_shareage_requester
+  end
+
+
+
+
+
+
+
 end
