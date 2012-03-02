@@ -322,6 +322,35 @@ describe ItemRequest, ".cancel! for shareage" do
     @item.hidden?.should be_false
   end
 
+  it "should create cancel shareage event log for requester" do
+    @item_request.cancel!(@requester)
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.canceled_shareage_requester).first
+    activity_log.should_not be_nil
+  end
+
+  it "should create cancel shareage event log for gifter when gifter canceled" do
+    @item_request.cancel!(@gifter)
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.shareage_gifter_canceled_gifter).first
+    activity_log.should_not be_nil
+  end
+
+  it "should create cancel shareage event log for requester when gifter canceled" do
+    @item_request.cancel!(@gifter)
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.shareage_gifter_canceled_requester).first
+    activity_log.should_not be_nil
+  end
+
+  it "should create cancel shareage event log for gifter when requester canceled" do
+    @item_request.cancel!(@requester)
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.shareage_requester_canceled_gifter).first
+    activity_log.should_not be_nil
+  end
+
+  it "should create cancel shareage event log for requester when gifter canceled" do
+    @item_request.cancel!(@requester)
+    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.shareage_requester_canceled_requester).first
+    activity_log.should_not be_nil
+  end
 end
 
 describe ItemRequest, ".collected!" do
@@ -742,14 +771,14 @@ describe ItemRequest, ".acknowledge!" do
 
     it "should create activity log for gifter" do
       @item_request.acknowledge!
-      activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.acknowledge_shareage_gifter).first
+      activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.acknowledge_return_shareage_gifter).first
 
       activity_log.should_not be_nil
     end
 
     it "should create activity log for requester" do
       @item_request.acknowledge!
-      activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.acknowledge_shareage_requester).first
+      activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.acknowledge_return_shareage_requester).first
 
       activity_log.should_not be_nil
     end
