@@ -418,7 +418,7 @@ module PagesHelper
     
       gifter_person = nil
 			
-			unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 32, 34, 36, 38].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
+			unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
 				requester           = link_to_person activity_log.secondary, :class => "positive"
 				requester_possesive = link_to_person activity_log.secondary, :possessive => true, :downcase_you => true, :class => "positive"
 
@@ -513,7 +513,7 @@ module PagesHelper
     when 29
       sentence =  gifter + " accepted " + requester_possesive + " request for " + possesive + " " + item
     when 30
-      sentence =  requester + " rejected " + gifter_possesive + " request for " + possesive + " " + item
+      sentence =  gifter + " rejected " + requester_possesive + " request for " + possesive + " " + item
     when 31
       sentence =  person + " completed the action of receiving your " + item
     when 32
@@ -597,7 +597,7 @@ module PagesHelper
     when 69 #ACCEPT SHAREAGE REQUESTER
       sentence = other_person + " accepted your request for their " + item
     when 70 #REJECT SHAREAGE REQUESTER
-      sentence
+      sentence = other_person + " rejected your request for their " + item
     when 71 #COLLECTED SHAREAGE GIFTER
       sentence = "Your " + item + " is now in shareage with " + requester
     when 72 #COLLECTED SHAREAGE REQUESTER
@@ -616,11 +616,11 @@ module PagesHelper
     when 78 #CANCEL RECALL SHAREAGE REQUESTER
       sentence = other_person + " cancelled the recall of their " + item
     when 79 #ACKNOWLEDGE SHAREAGE GIFTER
-      sentence = "You acknowledged " + requester_possesive + " request to return your " + item
+      sentence = other_person + " acknowledged your request for your " +item
     when 80 #ACKNOWLEDGE SHAREAGE REQUESTER
-      sentence = other_person + " acknowledged your request to return their " +item
+      sentence = "You acknowledged " + requester_possesive + " request for their " + item
     when 81 #RETURNED SHAREAGE GIFTER
-      sentence = "Your " + item + " has been returned by " + requester
+      sentence = requester + " returned your  " + item
     when 82 #RETURNED SHAREAGE REQUESTER
       sentence = "You returned " + other_person_possesive + " " +item
     when 83 #CANCEL RETURN SHAREAGE GIFTER
@@ -641,7 +641,7 @@ module PagesHelper
     item = activity_log.action_object
     unless activity_log.secondary_full_name.nil? || item.nil?
 
-      unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 32, 34, 36, 38].include?(activity_log.event_type_id.to_i) # event types where roles are reversed  
+      unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
         requester           = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
         requester_possesive = (activity_log.secondary == current_user.person) ? "your" : activity_log.secondary_full_name.possessive
 
@@ -806,7 +806,7 @@ module PagesHelper
     when 64
       action = activity_log.related.accepted? ? " action " : " request "
       sentence = person + " commented on the " + action + " involving their " + item
-    when 65 #SHAREAGE REQUEST GIFTER
+   when 65 #SHAREAGE REQUEST GIFTER
       sentence = person + " requested your " + item + " for shareage"
     when 66 #SHAREAGE REQUEST REQUESTER
       sentence = "You requested " + other_person_possesive + " " + item + " for shareage"
@@ -817,7 +817,7 @@ module PagesHelper
     when 69 #ACCEPT SHAREAGE REQUESTER
       sentence = other_person + " accepted your request for their " + item
     when 70 #REJECT SHAREAGE REQUESTER
-      sentence
+      sentence = other_person + " rejected your request for their " + item
     when 71 #COLLECTED SHAREAGE GIFTER
       sentence = "Your " + item + " is now in shareage with " + requester
     when 72 #COLLECTED SHAREAGE REQUESTER
@@ -836,11 +836,11 @@ module PagesHelper
     when 78 #CANCEL RECALL SHAREAGE REQUESTER
       sentence = other_person + " cancelled the recall of their " + item
     when 79 #ACKNOWLEDGE SHAREAGE GIFTER
-      sentence = "You acknowledged " + requester_possesive + " request to return your " + item
+      sentence = other_person + " acknowledged your request for your " +item
     when 80 #ACKNOWLEDGE SHAREAGE REQUESTER
-      sentence = other_person + " acknowledged your request to return their " +item
+      sentence = "You acknowledged " + requester_possesive + " request for their " + item
     when 81 #RETURNED SHAREAGE GIFTER
-      sentence = "Your " + item + " has been returned by " + requester
+      sentence = requester + " returned your  " + item
     when 82 #RETURNED SHAREAGE REQUESTER
       sentence = "You returned " + other_person_possesive + " " +item
     when 83 #CANCEL RETURN SHAREAGE GIFTER

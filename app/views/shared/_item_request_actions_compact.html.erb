@@ -85,7 +85,7 @@
 	<%= requester_and_gifter_only(req) do %>
       	<li>
       <% if !req.item.is_owner?(current_person) -%>
-					<%= link_to "cancel return", cancel_recall_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
+					<%= link_to "cancel return", cancel_return_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
       <% else -%>
          <%= link_to "acknowledge", acknowledge_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put %>
       <% end -%>

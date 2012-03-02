@@ -642,7 +642,7 @@ class EventType < ActiveRecord::Base
     return_only_id ? 70 : EventType.find(70)
   end
 
-  def shareage_rejected_gifter?
+  def shareage_rejected_requester?
     self.id == EventType.shareage_rejected_requester
   end
 
@@ -761,7 +761,7 @@ class EventType < ActiveRecord::Base
   end
 
   def cancel_return_shareage_gifter?
-    self.id == EventType.returned_shareage_gifter
+    self.id == EventType.cancel_return_shareage_gifter
   end
 
   def self.cancel_return_shareage_requester(return_only_id = true)
