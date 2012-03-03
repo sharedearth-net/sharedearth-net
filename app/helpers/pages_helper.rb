@@ -488,9 +488,9 @@ module PagesHelper
     when 13
       sentence = gifter + " completed the action of sharing their " + item + " with " + requester
     when 14
-      sentence = gifter + " canceled the action sharing " + possesive + " " + item + " with " + requester
+      sentence = gifter + " canceled sharing " + possesive + " " + item + " with " + requester
     when 15
-      sentence = gifter + " canceled the action sharing their " + item + " with " + requester
+      sentence = gifter + " canceled sharing their " + item + " with " + requester
     when 16
       sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
     when 17
@@ -530,15 +530,15 @@ module PagesHelper
     when 31
       sentence =  person + " completed the action of receiving your " + item
     when 32
-      sentence =  "You completed the action of receiving " + person_possesive + " " + item
+      sentence =  "You received " + gifter_possesive + " " + item
     when 33
-      sentence =  "You completed the action of gifting your " + item + " to " + person
+      sentence =  "You gifted your " + item + " to " + person
     when 34
-      sentence =  person + " completed the action of gifting their " + item + " to you"
+      sentence =  person + " gifted their " + item + " to you"
     when 35
-      sentence =  "You canceled the action of gifting your " + item + " to " + person 
+      sentence =  "You canceled gifting your " + item + " to " + person 
     when 36
-      sentence = gifter + " canceled the action of gifting their " + item + " to " + requester
+      sentence = gifter + " canceled gifting their " + item + " to " + requester
     when 37
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 38
