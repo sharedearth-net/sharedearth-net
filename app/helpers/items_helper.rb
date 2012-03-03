@@ -7,6 +7,10 @@ module ItemsHelper
     Item::PURPOSES.map{ |item| [item.pop, item.pop]}
   end
   
+  def generic_name item
+    item.name? ? item.name : item.item_type
+  end
+  
   def item_types_with_gift_status(items)
 		item_types = {}
 		items.each do |item|
