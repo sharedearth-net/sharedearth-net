@@ -56,7 +56,7 @@ class Item < ActiveRecord::Base
 
   validates_inclusion_of :purpose, :in => [PURPOSE_SHARE, PURPOSE_GIFT, PURPOSE_SHAREAGE],
                          :message => " must be in #{PURPOSES.values.join ', '}"
-  validates_presence_of  :purpose, :item_type, :name, :owner_id, :owner_type, :status
+  validates_presence_of  :purpose, :item_type, :owner_id, :owner_type, :status
   validates_inclusion_of :status, :in => STATUSES.keys,
                          :message => " must be in #{STATUSES.values.join ', '}"
 

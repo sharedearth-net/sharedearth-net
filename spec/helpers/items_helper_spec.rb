@@ -11,4 +11,16 @@ require 'spec_helper'
 #   end
 # end
 describe ItemsHelper do
+  
+  describe "generic name" do
+    it "should return name of item if name is provided" do
+      item = Factory :item, :name => "Royal Enfield"
+      "Royal Enfield".should == generic_name(item)
+    end
+    
+    it "should return item type of item is name is not provided" do
+      item = Factory :item, :name => "", :item_type => "bike"
+      "bike".should == generic_name(item)
+    end    
+  end
 end

@@ -7,7 +7,7 @@
 					<%= image_tag @item.photo.url(:medium), :class => "thumb" %>
 					<div class="inner-content">
 						<h2>
-							<%=raw auto_link(h(@item.name), :all, :target => "_blank") %>
+							<%=raw auto_link(h(generic_name(@item)), :all, :target => "_blank") %>
 							<br />
 							<span class="item-type">
 								<%= @item.item_type  %>
