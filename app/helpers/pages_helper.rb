@@ -431,7 +431,7 @@ module PagesHelper
     
       gifter_person = nil
 			
-			unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
+			unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84, 87, 89].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
 				requester           = link_to_person activity_log.secondary, :class => "positive"
 				requester_possesive = link_to_person activity_log.secondary, :possessive => true, :downcase_you => true, :class => "positive"
 
@@ -643,9 +643,9 @@ module PagesHelper
     when 85 #SHAREAGE
       sentence = ""
     when 86 #GIFTER CANCEL SHAREAGE GIFTER
-      sentence =  "You canceled the action of placing your " + item + " into shareage with " + person 
+      sentence =  "You canceled placing your " + item + " into shareage with " + person
     when 87 #GIFTER CANCEL SHAREAGE REQUESTER
-      sentence = gifter + " canceled the action of placing their " + item + " into shareage with " + requester
+      sentence = gifter + " canceled placing their " + item + " into shareage with you"
     when 88 #REQUESTER CANCEL SHAREAGE GIFTER
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 89 #REQUESTER CANCEL SHAREAGE REQUESTER
@@ -668,7 +668,7 @@ module PagesHelper
     item = activity_log.action_object
     unless activity_log.secondary_full_name.nil? || item.nil?
 
-      unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
+      unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84, 87].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
         requester           = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
         requester_possesive = (activity_log.secondary == current_user.person) ? "your" : activity_log.secondary_full_name.possessive
 
@@ -877,9 +877,9 @@ module PagesHelper
     when 85 #SHAREAGE
       sentence = ""
     when 86 #GIFTER CANCEL SHAREAGE GIFTER
-      sentence =  "You canceled the action of placing your " + item + " into shareage with " + person 
+      sentence =  "You canceled placing your " + item + " into shareage with " + person
     when 87 #GIFTER CANCEL SHAREAGE REQUESTER
-      sentence = gifter + " canceled the action of placing their " + item + " into shareage with " + requester
+      sentence = gifter + " canceled placing their " + item + " into shareage with you"
     when 88 #REQUESTER CANCEL SHAREAGE GIFTER
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 89 #REQUESTER CANCEL SHAREAGE REQUESTER

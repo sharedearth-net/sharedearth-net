@@ -81,7 +81,7 @@ Feature: Manage Items
     And "Nick" is the owner of item with name "Mobile"
     Given "Maria" has trusted relationship with "Nick"
     And Looking at person page with name "Nick"
-    And I should see "acknowledge trust"
+    And I should see "trust"
     Then I should see "Mobile"
     When I fill in "search" with "Mobile"
     Then I press "Search"

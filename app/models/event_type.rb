@@ -794,7 +794,7 @@ class EventType < ActiveRecord::Base
 
 
   def self.shareage_gifter_canceled_gifter(return_only_id = true)
-    return_only_id ? 86 : EventType.find(8)
+    return_only_id ? 86 : EventType.find(86)
   end
 
   def shareage_gifter_canceled_gifter?
@@ -802,7 +802,7 @@ class EventType < ActiveRecord::Base
   end
 
     def self.shareage_gifter_canceled_requester(return_only_id = true)
-    return_only_id ? 86 : EventType.find(86)
+    return_only_id ? 87 : EventType.find(87)
   end
 
   def shareage_gifter_canceled_requester?

@@ -26,7 +26,7 @@ module PeopleHelper
 	  else
 			image = image_tag("ic-trusted-net-you-orange.png", :class => "icons", :alt => "Untrusted Profile") 
 					if other_person.requested_trusted_relationship?(current_person)
-						 link = "Acknowledge trust request pending"
+						 link = "Trust request pending"
 					else
 					   link = link_to 'Not in your trusted network', (network_person_path(other_person)) 
 					end
