@@ -29,16 +29,19 @@ class HumanNetwork < ActiveRecord::Base
   # end
 
   def self.create_trust!(first_person, second_person)
-		# 2 calls given below should be always happen in conjunction
-		# for update_mutual_network_after_create
-    TrustedNetwork.create!(:entity => first_person, :human => second_person)
-    TrustedNetwork.create!(:entity => second_person, :human => first_person)
-    first_person.reputation_rating.increase_trusted_network_count
-    second_person.reputation_rating.increase_trusted_network_count
-    EventLog.create_trust_established_event_log(first_person, second_person)
-    ActivityLog.create_activity_log(first_person, second_person, nil, EventType.trust_established_other_party, EventType.trust_established_initiator)
+    # this check is to avoid duplicates
+    unless first_person.trusted_network.exists?(second_person.id) || second_person.trusted_network.exists?(first_person.id)
+      # 2 calls given below should be always happen in conjunction
+      # for mutual network updation to be successful
+      TrustedNetwork.create!(:entity => first_person, :human => second_person)
+      TrustedNetwork.create!(:entity => second_person, :human => first_person)
+      first_person.reputation_rating.increase_trusted_network_count
+      second_person.reputation_rating.increase_trusted_network_count
+      EventLog.create_trust_established_event_log(first_person, second_person)
+      ActivityLog.create_activity_log(first_person, second_person, nil, EventType.trust_established_other_party, EventType.trust_established_initiator)
+    end
   end
-  
+
   def update_entity_ids
     self.entity_master_id = self.entity.entity.id
     self.human_entity_id = self.human.entity.id

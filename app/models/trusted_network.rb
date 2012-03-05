@@ -4,8 +4,14 @@ class TrustedNetwork < HumanNetwork
   after_destroy :update_mutual_network_after_destroy
 
   def update_mutual_network_after_create
+
+    # relationship getting converted from Mutual to Trusted
+    if MutualNetwork.where( :entity_id => self.entity_id, :human_id => self.human_id ).exists?
+      MutualNetwork.where( :entity_id => self.entity_id, :human_id => self.human_id ).each { |mn| mn.destroy }
+    end
+
     entity_ids_to_insert = HumanNetwork.find_by_sql("select distinct(human_id) " + #select all mutual_person ids
-      "from human_networks where entity_type = 'Person' and entity_id in " + # person should be friend of
+      "from human_networks where human_network_type = 'TrustedNetwork' and entity_type = 'Person' and entity_id in " + # person should be friend of
       "(select human_id from human_networks where entity_type = 'Person' and entity_id = #{self.entity_id} and human_network_type = 'TrustedNetwork') " + # current person's friend
       "and human_id not in" + # but should not be
       "(select human_id from human_networks where entity_type = 'Person' and entity_id = #{self.entity_id} and human_network_type = 'TrustedNetwork') " + # friend of current person
@@ -21,10 +27,15 @@ class TrustedNetwork < HumanNetwork
 
   def update_mutual_network_after_destroy
 
+    # relationship getting converted from Trusted to Mutual
+    if TrustedNetwork.where( :entity_type => 'Person', :entity_id => TrustedNetwork.where( :entity_id => self.entity_id ).collect { |tn| tn.human_id }, :human_id => self.human_id ).exists?
+      MutualNetwork.create!( :entity_type => self.entity_type, :entity_id => self.entity_id, :human_id => self.human_id )
+    end
+
     human_networks_to_delete = HumanNetwork.destroy_all("entity_type = 'Person' and entity_id = #{self.entity_id} and human_network_type = 'MutualNetwork' " +# delete all mutual friends
       "and human_id not in (" + # except
       "select distinct(human_id) " + #select all mutual_person ids
-      "from human_networks where entity_type = 'Person' and entity_id in " + # person should be friend of
+      "from human_networks where human_network_type = 'TrustedNetwork' and entity_type = 'Person' and entity_id in " + # person should be friend of
       "(select human_id from human_networks where entity_type = 'Person' and entity_id = #{self.entity_id} and human_network_type = 'TrustedNetwork') " + # current person's friend
       "and human_id not in " + # but should not be
       "(select human_id from human_networks where entity_type = 'Person' and entity_id = #{self.entity_id} and human_network_type = 'TrustedNetwork') " + # friend of current person
@@ -34,7 +45,7 @@ class TrustedNetwork < HumanNetwork
     human_networks_to_delete = HumanNetwork.destroy_all("human_id = #{self.entity_id} and human_network_type = 'MutualNetwork' " +# delete all mutual friends
       "and entity_type = 'Person' and entity_id not in (" + # except
       "select distinct(human_id) " + #select all mutual_person ids
-      "from human_networks where entity_type = 'Person' and entity_id in " + # person should be friend of
+      "from human_networks where human_network_type = 'TrustedNetwork' and entity_type = 'Person' and entity_id in " + # person should be friend of
       "(select human_id from human_networks where entity_type = 'Person' and entity_id = #{self.entity_id} and human_network_type = 'TrustedNetwork') " + # current person's friend
       "and human_id not in " + # but should not be
       "(select human_id from human_networks where entity_type = 'Person' and entity_id = #{self.entity_id} and human_network_type = 'TrustedNetwork') " + # friend of current person

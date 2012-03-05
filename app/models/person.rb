@@ -156,17 +156,17 @@ class Person < ActiveRecord::Base
   end
 
   def searchable_core_of_friends
-    ids = self.human_networks.trusted_personal_network.map { |n| n.human_id }
+    ids = self.human_networks.trusted_personal_network.map { |n| n.human_id }.uniq
     ids.push( self.id)
     ids = ids.map! { |k| "#{k}" }.join(",")
   end
 
   def personal_network_friends
-		self.human_networks.personal_network.map { |n| n.trusted_person }
+		self.human_networks.personal_network.map { |n| n.trusted_person }.uniq
   end
 
   def trusted_friends
-    self.human_networks.trusted_personal_network.map { |n| n.trusted_person }
+    self.human_networks.trusted_personal_network.uniq.map { |n| n.trusted_person }.uniq
   end
 
   def self.with_items_more_than(items_count)
