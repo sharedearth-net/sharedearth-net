@@ -4,7 +4,7 @@ class HumanNetwork < ActiveRecord::Base
 
   belongs_to :entity, :polymorphic => true
   belongs_to :human, :class_name => "Person"
-  
+
   set_inheritance_column "human_network_type"
 
   belongs_to :person, :foreign_key => :entity_id, :conditions => [ "entity_type = ", "Person" ]
@@ -17,13 +17,16 @@ class HumanNetwork < ActiveRecord::Base
   scope :trusted_personal_network, where(:human_network_type => "TrustedNetwork")
   scope :mutual_network, where(["human_network_type = ?", "MutualNetwork"])
   scope :personal_network, where(["human_network_type = ? or human_network_type = ?", "TrustedNetwork", "MutualNetwork"])
+  scope :village_members, lambda { |village| where("entity_id = ? AND entity_type = ? AND human_network_type = ?", village.id, "Village", "Member")}
+  scope :village_admins, lambda { |village| where("entity_id = ? AND entity_type = ? AND human_network_type = ?", village.id, "Village", "GroupAdmin")}
+  scope :member, lambda { |member| where(:human_id => member.id, :human_type => "Person")}
 
   validates_presence_of :entity_id, :entity_type, :human_id
 
   # def requester?(person)
   #   self.person == person
   # end
-  # 
+  #
   # def trusted_person?(person)
   #   self.trusted_person == person
   # end
@@ -38,7 +41,7 @@ class HumanNetwork < ActiveRecord::Base
     EventLog.create_trust_established_event_log(first_person, second_person)
     ActivityLog.create_activity_log(first_person, second_person, nil, EventType.trust_established_other_party, EventType.trust_established_initiator)
   end
-  
+
   def update_entity_ids
     self.entity_master_id = self.entity.entity.id
     self.human_entity_id = self.human.entity.id
