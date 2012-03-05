@@ -113,12 +113,6 @@ ActiveRecord::Schema.define(:version => 20120302132016) do
 
   add_index "entities", ["specific_entity_type", "specific_entity_id"], :name => "index_entities_on_specific_entity_type_and_specific_entity_id"
 
-  create_table "entity_types", :force => true do |t|
-    t.string   "entity_type_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "event_displays", :force => true do |t|
     t.integer  "type_id"
     t.integer  "person_id"
