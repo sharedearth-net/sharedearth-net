@@ -424,45 +424,12 @@ module PagesHelper
 
   #Mature for refactoring!
 
-  def recent_activity_sentence(activity_log)
-    gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
-    item = activity_log.action_object
-    unless activity_log.secondary_full_name.nil? || item.nil?
-    
-      gifter_person = nil
-			
-			unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84, 87, 89].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
-				requester           = link_to_person activity_log.secondary, :class => "positive"
-				requester_possesive = link_to_person activity_log.secondary, :possessive => true, :downcase_you => true, :class => "positive"
+  def build_recent_activity_sentence(activity_log, gifter, gifter_possesive, person, person_possesive, requester, requester_possesive, possesive, item, other_person, other_person_possesive)
 
-				gifter              = link_to_person activity_log.primary, :class => "positive"
-				gifter_possesive    = link_to_person activity_log.primary, :possessive => true, :downcase_you => true, :class => "positive"
-
-        gifter_person       = activity_log.primary
-			else
-        gifter              = link_to_person activity_log.secondary, :class => "positive"
-				gifter_possesive    = link_to_person activity_log.secondary, :possessive => true, :downcase_you => true, :class => "positive"
-
-				requester           = link_to_person activity_log.primary, :class => "positive"
-				requester_possesive = link_to_person activity_log.primary, :possessive => true, :downcase_you => true, :class => "positive"
-
-        gifter_person = activity_log.secondary
-			end
-
-      possesive = ( gifter_person == current_user.person ) ? "your" : "their"
-    end
-    item                = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
-    unless activity_log.secondary.nil?
-      person              = link_to_person activity_log.secondary, :check_current_user => false, :class => "positive"
-      other_person        = link_to_person activity_log.secondary, :check_current_user => false, :class => "positive"
-      other_person_possesive        = link_to_person activity_log.secondary, :check_current_user => false, :possessive => true, :class => "positive"
-      person_possesive    = link_to_person activity_log.primary, :check_current_user => false, :possessive => true, :class => "positive"
-    end
-    
-    sentence = ""
+	  sentence = ""
     case activity_log.event_type_id
     when 1
-      sentence = "You are " + verb_from_purpose(activity_log.action_object) + " your " + item 
+      sentence = "You are " + verb_from_purpose(activity_log.action_object) + " your " + item
     when 2
       sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
     when 3
@@ -495,9 +462,9 @@ module PagesHelper
       sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
     when 17
       sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
-      
-      
-      
+
+
+
     when 18
       sentence =  ""
     when 19
@@ -517,8 +484,8 @@ module PagesHelper
     when 26
       sentence =  ""
 
-      
-      
+
+
     when 27
       sentence =  gifter + " accepted " + requester_possesive + " request for " + possesive + " " + item
     when 28
@@ -536,15 +503,15 @@ module PagesHelper
     when 34
       sentence =  person + " gifted their " + item + " to you"
     when 35
-      sentence =  "You canceled gifting your " + item + " to " + person 
+      sentence =  "You canceled gifting your " + item + " to " + person
     when 36
       sentence = gifter + " canceled gifting their " + item + " to " + requester
     when 37
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 38
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
-    
-    #Check if sentence underneath are according to documentation, maybe they have changed  
+
+    #Check if sentence underneath are according to documentation, maybe they have changed
     when 39
       sentence =  "You connected to sharedearth.net"
     when 40
@@ -615,7 +582,6 @@ module PagesHelper
       sentence = "Your " + item + " is now in shareage with " + requester
     when 72 #COLLECTED SHAREAGE REQUESTER
       sentence = "You have collected " + other_person_possesive + " " + item + " for shareage"
-
     when 73 #RETURN SHAREAGE GIFTER
       sentence = requester + " would like to return your " + item
     when 74 #RETURN SHAREAGE REQUESTER
@@ -657,244 +623,75 @@ module PagesHelper
     else
       #
     end
-    
     sentence.html_safe
-     
+  end
+
+  def recent_activity_sentence(activity_log)
+    gifter, gifter_possesive, person, person_possesive, requester, requester_possesive = "", "", "", "", "", ""
+    item = activity_log.action_object
+    unless activity_log.secondary_full_name.nil? || item.nil?
+      gifter_person = nil
+			
+	  unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84, 87, 89].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
+	    requester           = link_to_person activity_log.secondary, :class => "positive"
+	    requester_possesive = link_to_person activity_log.secondary, :possessive => true, :downcase_you => true, :class => "positive"
+        gifter              = link_to_person activity_log.primary, :class => "positive"
+		gifter_possesive    = link_to_person activity_log.primary, :possessive => true, :downcase_you => true, :class => "positive"
+        gifter_person       = activity_log.primary
+      else
+        gifter              = link_to_person activity_log.secondary, :class => "positive"
+        gifter_possesive    = link_to_person activity_log.secondary, :possessive => true, :downcase_you => true, :class => "positive"
+		requester           = link_to_person activity_log.primary, :class => "positive"
+		requester_possesive = link_to_person activity_log.primary, :possessive => true, :downcase_you => true, :class => "positive"
+
+        gifter_person = activity_log.secondary
+      end
+
+      possesive = ( gifter_person == current_user.person ) ? "your" : "their"
+    end
+
+    item = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
+
+    unless activity_log.secondary.nil?
+      person                  = link_to_person activity_log.secondary, :check_current_user => false, :class => "positive"
+      other_person            = link_to_person activity_log.secondary, :check_current_user => false, :class => "positive"
+      other_person_possesive  = link_to_person activity_log.secondary, :check_current_user => false, :possessive => true, :class => "positive"
+      person_possesive        = link_to_person activity_log.primary, :check_current_user => false, :possessive => true, :class => "positive"
+    end
+
+    build_recent_activity_sentence(activity_log, gifter, gifter_possesive, person, person_possesive, requester, requester_possesive, possesive, item, other_person, other_person_possesive)
   end
 
   def notify_recent_activity_sentence(activity_log, current_user)
-  
-    gifter, gifter_possesive, person, person_possesive, person_full, requester, requester_possesive = "", "", "", "", "", "", ""
+    gifter, gifter_possesive, person, person_possesive, requester, requester_possesive = "", "", "", "", "", ""
     item = activity_log.action_object
     unless activity_log.secondary_full_name.nil? || item.nil?
 
       unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84, 87].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
         requester           = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
         requester_possesive = (activity_log.secondary == current_user.person) ? "your" : activity_log.secondary_full_name.possessive
-
-        gifter           =  (activity_log.primary == current_user.person) ? "You" : activity_log.primary.name
-        gifter_possesive = (activity_log.primary == current_user.person) ? "your" : activity_log.primary.name.possessive
+        gifter              =  (activity_log.primary == current_user.person) ? "You" : activity_log.primary.name
+        gifter_possesive    = (activity_log.primary == current_user.person) ? "your" : activity_log.primary.name.possessive
       else
-				gifter              = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
+        gifter              = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
         gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : activity_log.secondary_full_name.possessive
-
         requester           = (activity_log.primary == current_user.person) ? "You" : activity_log.primary.name
         requester_possesive = (activity_log.primary == current_user.person) ? "your" : activity_log.primary.name.possessive
       end
 
       possesive = item.is_owner?(current_user.person) ? "your" : "their"
-
     end
-    item                = activity_log.action_object_type_readable unless activity_log.action_object.nil?
+
+    item = activity_log.action_object_type_readable unless activity_log.action_object.nil?
+
     unless activity_log.secondary.nil?
-      person              = activity_log.secondary_full_name
-      other_person        = activity_log.secondary_full_name
-      person_possesive    = activity_log.secondary_full_name.possessive
-      other_person_possesive = activity_log.secondary_full_name.possessive
+      person                  = activity_log.secondary_full_name
+      other_person            = activity_log.secondary_full_name
+      person_possesive        = activity_log.secondary_full_name.possessive
+      other_person_possesive  = activity_log.secondary_full_name.possessive
     end
-    
-    sentence = ""
-    case activity_log.event_type_id
-    when 1
-      sentence = "You are " + verb_from_purpose(activity_log.action_object) + " your " + item 
-    when 2
-      sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
-    when 3
-      sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
-    when 4
-      sentence = gifter + " accepted " + requester_possesive + " request to borrow " + possesive + " " + item  # Check this one
-    when 5
-      sentence = gifter + " rejected " + requester_possesive + " request to borrow " + possesive + " " +  item  # Check this one
-    when 6
-      sentence = gifter + " accepted " + requester_possesive + " request to borrow " + possesive + " " + item
-    when 7
-      sentence = gifter + " rejected " + requester_possesive + " request to borrow " + possesive + " " + item
-    when 8
-      sentence = requester + " collected " + gifter_possesive + " " + item
-    when 9
-      sentence = requester + " collected " + gifter_possesive + " " +  item
-    when 10
-      sentence = requester + " completed the action of borrowing " + possesive + " " + item
-    when 11
-      sentence = requester + " completed the action of borrowing " + gifter_possesive + " " + item
-    when 12
-      sentence = gifter + " completed the action of sharing " + possesive + " " + item + " with " + requester
-    when 13
-      sentence = gifter + " completed the action of sharing their " + item + " with " + requester
-    when 14
-      sentence = gifter + " canceled the action sharing " + possesive + " " + item + " with " + requester
-    when 15
-      sentence = gifter + " canceled the action sharing their " + item + " with " + requester
-    when 16
-      sentence = requester + " canceled the request to borrow " + possesive + " " + item
-    when 17
-      sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
-      
-      
-      
-    when 18
-      sentence =  ""
-    when 19
-      sentence =  "You are " + verb_from_purpose(activity_log.action_object) + " your " + item
-    when 20
-      sentence =  ""
-    when 21
-      sentence =  ""
-    when 22
-      sentence =  ""
-    when 23
-      sentence =  ""
-    when 24
-      sentence =  "Your " + item + " is damaged!" #this is duplicate of - 51
-    when 25
-      sentence =  "Your " + item + " is repaired!" #this is duplicate of - 52
-    when 26
-      sentence =  ""
-
-      
-      
-    when 27
-      sentence =  "You accepted " + person_possesive + " request for your " + item
-    when 28
-      sentence =  "You rejected " + person_possesive + " request for your " + item
-    when 29
-      sentence =  person + " accepted your request for their " + item
-    when 30
-      sentence =  person + " rejected your request for their " +  item
-    when 31
-      sentence =  person + " completed the action of receiving your " + item
-    when 32
-      sentence =  "You completed the action of receiving " + person_possesive + " " + item
-    when 33
-      sentence =  "You completed the action of gifting your " + item + " to " + person
-    when 34
-      sentence =  person + " completed the action of gifting their " + item + " to you"
-    when 35
-      sentence =  "You canceled the action of gifting your " + item + " to " + person 
-    when 36
-      sentence =  person + " canceled the action of gifting their " + item + " to you"
-    when 37
-      sentence =  person + " canceled the request for your " + item
-    when 38
-      sentence =  "You cancelled the request for " + person_possesive + " " + item 
-    
-    #Check if sentence underneath are according to documentation, maybe they have changed  
-    when 39
-      sentence =  "You connected to sharedearth.net"
-    when 40
-      sentence =  "You made a request to borrow " + person_possesive + " " + item  #this is duplicate of - 3, not used at this moment, left for possible future use
-    when 41
-      sentence =  person + " confirmed you have a trusted relationship with them"
-    when 42
-      sentence =  "You confirmed you have a trusted relationship with " + person
-    when 43
-      sentence =  person + " denied you have a trusted relationship with them"
-    when 44
-      sentence =  "You denied you have a trusted relationship with " + person
-    when 45
-      sentence =  "You have withdrawn your trust for " + person
-    when 46
-      sentence =  person + " has withdrawn their trust for you"
-    when 47
-      sentence =  "You cancelled the establishment of a trusted relationship with " + person
-    when 48
-      sentence =  person + " cancelled the establishment of a trusted relationship with you"
-    when 49
-      sentence =  "You lost your " + item + "!"
-    when 50
-      sentence =  "You found your " + item + "!"
-    when 51
-      sentence =  "Your " + item + "is damaged!"    #this is duplicate of - when 24
-    when 52
-      sentence =  "Your " + item + " is repaired!"  #this is duplicate of - when 25
-    when 53
-      sentence =  "You removed your " + item + " from sharedearth.net"
-    when 54
-      sentence =  "You connected to sharedearth.net"
-    when 55
-      sentence =  person + " has left you positive feedback after borrowing your " + item
-    when 56
-      sentence =  person + " has left you positive feedback after sharing their " + item + " with you"
-    when 57
-      sentence =  person + " has left you negative feedback after borrowing your " + item
-    when 58
-      sentence =  person + " has left you negative feedback after sharing their " + item + " with you"
-    when 59
-      sentence =  person + " has left you neutral feedback after borrowing your " + item
-    when 60
-      sentence =  person + " has left you neutral feedback after sharing their " + item + " with you"
-    when 61
-      sentence =  "You have indicated you have a trusted relationship with " + person
-    when 62
-      sentence =  person + " has indicated they have a trusted relationship with you"
-    when 63
-      action = activity_log.related.accepted? ? " action " : " request "
-      sentence = person + " commented on the " + action  + " involving your " +  item
-    when 64
-      action = activity_log.related.accepted? ? " action " : " request "
-      sentence = person + " commented on the " + action + " involving their " + item
-   when 65 #SHAREAGE REQUEST GIFTER
-      sentence = person + " requested your " + item + " for shareage"
-    when 66 #SHAREAGE REQUEST REQUESTER
-      sentence = "You requested " + other_person_possesive + " " + item + " for shareage"
-    when 67 #ACCEPT SHAREAGE GIFTER
-      sentence = "You accepted " + requester_possesive + " request for your " + item
-    when 68 #REJECT SHAREAGE GIFTER
-      sentence
-    when 69 #ACCEPT SHAREAGE REQUESTER
-      sentence = other_person + " accepted your request for their " + item
-    when 70 #REJECT SHAREAGE REQUESTER
-      sentence = other_person + " rejected your request for their " + item
-    when 71 #COLLECTED SHAREAGE GIFTER
-      sentence = "Your " + item + " is now in shareage with " + requester
-    when 72 #COLLECTED SHAREAGE REQUESTER
-      sentence = "You have collected " + other_person_possesive + " " + item + " for shareage"
-
-    when 73 #RETURN SHAREAGE GIFTER
-      sentence = requester + " would like to return your " + item
-    when 74 #RETURN SHAREAGE REQUESTER
-      sentence = "You have requested the return of " + gifter_possesive + " " + item
-    when 75 #RECALL SHAREAGE GIFTER
-      sentence = "You have recalled your " + item + " from " + requester
-    when 76 #RECALL SHAREAGE REQUESTER
-      sentence = person + " requested the return of their " + item
-    when 77 #CANCEL RECALL SHAREAGE GIFTER
-      sentence = "You cancelled the recall of your " + item + " from " + requester
-    when 78 #CANCEL RECALL SHAREAGE REQUESTER
-      sentence = other_person + " cancelled the recall of their " + item
-    when 79 #ACKNOWLEDGE SHAREAGE GIFTER
-      sentence = other_person + " acknowledged your request for your " +item
-    when 80 #ACKNOWLEDGE SHAREAGE REQUESTER
-      sentence = "You acknowledged " + requester_possesive + " request for their " + item
-    when 81 #RETURNED SHAREAGE GIFTER
-      sentence = requester + " returned your  " + item
-    when 82 #RETURNED SHAREAGE REQUESTER
-      sentence = "You returned " + other_person_possesive + " " +item
-    when 83 #CANCEL RETURN SHAREAGE GIFTER
-      sentence = requester + " cancelled the request to return your " + item
-    when 84 #CANCEL RETURN SHAREAGE REQUESTER
-      sentence = "You cancelled the request to return " + gifter_possesive + " " + item
-    when 85 #SHAREAGE
-      sentence = ""
-    when 86 #GIFTER CANCEL SHAREAGE GIFTER
-      sentence =  "You canceled placing your " + item + " into shareage with " + person
-    when 87 #GIFTER CANCEL SHAREAGE REQUESTER
-      sentence = gifter + " canceled placing their " + item + " into shareage with you"
-    when 88 #REQUESTER CANCEL SHAREAGE GIFTER
-      sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
-    when 89 #REQUESTER CANCEL SHAREAGE REQUESTER
-      sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
-    when 90 #ACKNOWLEDGE RETURN SHAREAGE GIFTER
-      sentence = "You acknowledged " + requester_possesive + " request to recall your " + item
-    when 91 #ACKNOWLEDGE RETURN SHAREAGE REQUESTER
-      sentence = other_person + " acknowledged your request to recall their " +item
-    else
-      #
-    end
-
-
-    sentence.html_safe
-     
+	
+    build_recent_activity_sentence(activity_log, gifter, gifter_possesive, person, person_possesive, requester, requester_possesive, possesive, item, other_person, other_person_possesive)
   end
   
   def show_comments(log)
