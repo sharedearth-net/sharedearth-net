@@ -680,7 +680,7 @@ class EventType < ActiveRecord::Base
   end
 
   def self.return_shareage_gifter(return_only_id = true)
-    return_only_id ? 78 : EventType.find(78)
+    return_only_id ? 73 : EventType.find(73)
   end
 
   def return_shareage_gifter?
