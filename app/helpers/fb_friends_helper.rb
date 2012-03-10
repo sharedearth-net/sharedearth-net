@@ -18,7 +18,7 @@ module FbFriendsHelper
       options = { :method => :put, :id => 'confirm_button' }
 
     else
-      text = "acknowledge trust"
+      text = "trust"
       href = network_requests_path(:trusted_person_id => person) 
       options = { :method => :post }
     end

@@ -9,12 +9,12 @@ Feature: Relationship management page
        
    Scenario: Requests trusted relationship
       Given Looking at person page with name "Maria"
-      Then I follow "acknowledge trust"
-      And I should see "Acknowledge trust request pending"
+      Then I follow "trust"
+      And I should see "Trust request pending"
 
    Scenario: Notifications of acceptance of trust request
       Given I am on "Maria"'s profile page
-      And I follow "acknowledge trust"
+      And I follow "trust"
       And "Maria" accepts my trust request
       When I go to the dashboard page
       Then I should see "You have established a trusted relationship with" only once

@@ -17,8 +17,6 @@ describe Item do
 
   it { should validate_presence_of(:item_type) }
 
-  it { should validate_presence_of(:name) }
-
   it { should validate_presence_of(:status) }
 
   it { should validate_presence_of(:owner_id) }

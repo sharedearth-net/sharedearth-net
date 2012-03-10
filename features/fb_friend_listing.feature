@@ -31,7 +31,7 @@ Feature: FB friends listing
    Scenario: Requesting trust through 'acknowledge trusted relationship' link
       Given me and "Marceline" are friends on FB
       When I go to findtheothers page
-      And I follow "acknowledge trust"
+      And I follow "trust"
       And I go to the dashboard page
       Then I should see "You are establishing a trusted relationship with Marceline"
 

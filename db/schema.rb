@@ -113,12 +113,6 @@ ActiveRecord::Schema.define(:version => 20120302132016) do
 
   add_index "entities", ["specific_entity_type", "specific_entity_id"], :name => "index_entities_on_specific_entity_type_and_specific_entity_id"
 
-  create_table "entity_types", :force => true do |t|
-    t.string   "entity_type_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "event_displays", :force => true do |t|
     t.integer  "type_id"
     t.integer  "person_id"
@@ -245,20 +239,20 @@ ActiveRecord::Schema.define(:version => 20120302132016) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "authorised_account",                                      :default => false
-    t.boolean  "accepted_tc",                                             :default => false
-    t.decimal  "tc_version",               :precision => 10, :scale => 0, :default => 1
-    t.decimal  "pp_version",               :precision => 10, :scale => 0, :default => 1
+    t.boolean  "authorised_account",       :default => false
+    t.boolean  "accepted_tc",              :default => false
+    t.decimal  "tc_version",               :default => 1.0
+    t.decimal  "pp_version",               :default => 1.0
     t.string   "location"
     t.text     "description"
-    t.boolean  "accepted_pp",                                             :default => false
+    t.boolean  "accepted_pp",              :default => false
     t.string   "email"
-    t.boolean  "accepted_tr",                                             :default => false
-    t.boolean  "has_reviewed_profile",                                    :default => false
+    t.boolean  "accepted_tr",              :default => false
+    t.boolean  "has_reviewed_profile",     :default => false
     t.integer  "invitations_count"
-    t.integer  "email_notification_count",                                :default => 0
+    t.integer  "email_notification_count", :default => 0
     t.datetime "last_notification_email"
-    t.boolean  "smart_notifications",                                     :default => true
+    t.boolean  "smart_notifications",      :default => true
   end
 
   create_table "person_gift_act_ratings", :force => true do |t|
@@ -301,7 +295,6 @@ ActiveRecord::Schema.define(:version => 20120302132016) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "type",             :default => 10
-    t.integer  "owner_type",       :default => 10
   end
 
   create_table "settings", :force => true do |t|
