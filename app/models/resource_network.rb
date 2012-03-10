@@ -12,8 +12,10 @@ class ResourceNetwork < ActiveRecord::Base
 
   validates_presence_of :type
 
-   scope :item, lambda { |entity| where("resource_type_id =? AND resource_id = ?", 2, entity.id) }
-   scope :entity, lambda { |entity| where("entity_id =? AND entity_type_id = ?", entity.id, 1) }
+   scope :item, lambda { |entity| where("resource_type_id =? AND resource_id = ?", EntityType::ITEM_ENTITY, entity.id) }
+   scope :entity, lambda { |entity| where("entity_id =? AND entity_type_id = ?", entity.id, EntityType::PERSON_ENTITY) }
+   scope :village_resources, lambda { |village| where("entity_id =? AND entity_type_id = ?", village.id, EntityType::VILLAGE_ENTITY)}
+   scope :items, lambda { |items| where("resource_type_id=? AND resource_id in (?)", EntityType::ITEM_ENTITY, items)}
    scope :gifter, :conditions => { :type => TYPE_GIFTER }
    scope :possessor, :conditions => { :type => TYPE_POSSESSOR }
    scope :gifter_possessor, :conditions => { :type => TYPE_GIFTER_AND_POSSESSOR }
