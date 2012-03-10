@@ -98,7 +98,17 @@ end
     resources :feedbacks
   end
 
-
+  resources :villages do
+  	member do
+  		put 'join'
+      put 'leave'
+  	end
+  end
+  resources :entities, :only => [:destroy] do
+    collection do
+    	get 'grow'
+    end
+  end
 
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
