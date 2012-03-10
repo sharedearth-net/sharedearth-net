@@ -116,3 +116,12 @@ Factory.define :resource_network do |i|
   i.entity_type_id 1
   i.resource_type_id 2
 end
+
+Factory.define :village do |i|
+  i.name 'Sidney'
+  i.description 'Opera house'
+  i.street 'By the sea'
+  i.country 'Australia'
+  i.sequence(:uid) { |n|  Time.now.to_i.to_s + "#{n}" }
+  i.postcode 200
+end
