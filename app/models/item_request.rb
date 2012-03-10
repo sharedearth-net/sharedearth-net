@@ -425,7 +425,7 @@ class ItemRequest < ActiveRecord::Base
     ActivityLog.create_item_request_activity_log(self, EventType.shareage_accepted_gifter, EventType.shareage_accepted_requester)
   end
 
-  def create_shareage_item_request_rejected_activity_log
+  def create_shareage_request_rejected_activity_log
     ActivityLog.create_item_request_activity_log(self, EventType.shareage_rejected_gifter, EventType.shareage_rejected_requester)
   end
 
