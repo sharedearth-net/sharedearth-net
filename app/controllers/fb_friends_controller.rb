@@ -7,6 +7,7 @@ class FbFriendsController < ApplicationController
   def index
     fb_token = session[:fb_token]
     @people  = FbService.get_my_friends(fb_token).order(:name)
+    @villages = Village.all
   end
 
   def search_fb_friends
