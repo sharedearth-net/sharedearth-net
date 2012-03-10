@@ -1,0 +1,28 @@
+<%= form_for @village do |f| %>
+	<%= render :partial => "shared/error_messages", :locals => { :model => @village } %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :street %><br />
+    <%= f.text_field :street %>
+  </p>
+  <p>
+    <%= f.label :postcode %><br />
+    <%= f.text_field :postcode %>
+  </p>
+  <p>
+    <%= f.label :state %><br />
+    <%= f.text_field :state %>
+  </p>
+  <p>
+    <%= f.label :country %><br />
+    <%= country_select("village", "country") %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
