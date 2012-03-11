@@ -723,7 +723,7 @@ describe ItemRequestsController do
 
         put :acknowledge, :id => "42"
         flash[:alert].should be_blank
-        response.should redirect_to(request_url(mock_item_request))
+        response.should redirect_to(dashboard_path)
       end
 
       it "should redirect other users trying to acknowledge the request" do
@@ -756,7 +756,7 @@ describe ItemRequestsController do
       it "should redirect to dashboard page" do
         put :returned, :id => "42"
         flash[:notice].should eql(nil)
-        response.should redirect_to(dashboard_path)
+        response.should redirect_to(new_request_feedback_path(mock_item_request))
       end
 
       it "should allow only requester to return the request" do
@@ -765,7 +765,7 @@ describe ItemRequestsController do
 
         put :returned, :id => "42"
         flash[:alert].should be_blank # make sure this is not an error redirect
-        response.should redirect_to(dashboard_path)
+        response.should redirect_to(new_request_feedback_path(mock_item_request))
       end
 
       it "should allow gifter mark as returned the request" do
@@ -774,7 +774,7 @@ describe ItemRequestsController do
 
         put :returned, :id => "42"
         flash[:alert].should be_blank
-        response.should redirect_to(dashboard_path)
+        response.should redirect_to(new_request_feedback_path(mock_item_request))
       end
 
       it "should redirect other users trying to return the request" do
