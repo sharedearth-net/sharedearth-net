@@ -122,6 +122,7 @@ Factory.define :village do |i|
   i.description 'Opera house'
   i.street 'By the sea'
   i.country 'Australia'
+  i.state 'Australia'
   i.sequence(:uid) { |n|  Time.now.to_i.to_s + "#{n}" }
   i.postcode 200
 end
