@@ -1,0 +1,17 @@
+one:
+  name: MyString
+  description: MyString
+  street: MyString
+  postcode: MyString
+  state: MyString
+  country: MyString
+  uid: 1
+
+two:
+  name: MyString
+  description: MyString
+  street: MyString
+  postcode: MyString
+  state: MyString
+  country: MyString
+  uid: 1

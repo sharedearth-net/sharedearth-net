@@ -52,7 +52,7 @@ describe HumanNetwork, ".add_item!" do
     @village.add_item!(@other_item)
   end
   it "adds all items of user who joined/created village" do
-    Human = HumanNetwork.village_Humans(@village)
+    Human = ResourceNetwork.village_resources(@village)
     Human.length.should == 1
   end
 end

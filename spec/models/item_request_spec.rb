@@ -322,12 +322,6 @@ describe ItemRequest, ".cancel! for shareage" do
     @item.hidden?.should be_false
   end
 
-  it "should create cancel shareage event log for requester" do
-    @item_request.cancel!(@requester)
-    activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.canceled_shareage_requester).first
-    activity_log.should_not be_nil
-  end
-
   it "should create cancel shareage event log for gifter when gifter canceled" do
     @item_request.cancel!(@gifter)
     activity_log = @item_request.item.activity_logs.where(:event_type_id => EventType.shareage_gifter_canceled_gifter).first
