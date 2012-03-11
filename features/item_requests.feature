@@ -238,7 +238,7 @@ Feature: Item requests management page
    Scenario: Show request activity sentence when shareage item i  requested - requester
       Given "John" requested item with name "BMX" from "Maria"
       And I am on the "dashboard" page
-      Then I should see "You requested Maria's bike for shareage"
+      Then I should see "You are requesting Maria's bike for shareage"
 
    @javascript
    Scenario: Show request activity sentence when shareage item i  requested - requester
@@ -259,7 +259,7 @@ Feature: Item requests management page
       Given "Maria" requested item with name "Pen" from "John"
       And I am on the "dashboard" page
       And I follow "accept"
-      Then I should see "Your bike is now in shareage with John"
+      Then I should see "Awaiting collection of your bike by Maria"
 
    #Shareage stage 3 check sentences for request and recent activity 4 tests - not finished
    @javascript
@@ -274,27 +274,27 @@ Feature: Item requests management page
       Given "Maria" requested item with name "Pen" from "John"
       And I am on the "dashboard" page
       And I follow "accept"
-      Then I should see "Your bike is now in shareage with John"
+      Then I should see "Awaiting collection of your bike by Maria"
 
    @javascript
    Scenario: Show request sentence when shareage item is requested - requested
-      Given "John" requested item with name "BMX" from "Maria"
+      Given "Maria" requested item with name "Pen" from "John"
       And I am on the "dashboard" page
       And I follow "accept"
-      Then I should see "Collect Maria's bike for shareage"
+      Then I should see "Awaiting collection of your bike by Maria"
 
    @javascript
    Scenario: Show request activity sentence when shareage item i  requested - requester
-      Given "John" requested item with name "BMX" from "Maria"
+      Given "Maria" requested item with name "Pen" from "John"
       And I am on the "dashboard" page
       And I follow "accept"
-      Then I should see "You have accepted Maria's bike for shareage"
+      Then I should see "You accepted Maria's request for your bike"
 
    @javascript
    Scenario: Show request activity sentence when shareage item i  requested - requester
       Given "John" requested item with name "BMX" from "Maria"
       And I am looking at last request page
-      Then I should see "You requested Maria's bike for shareage"
+      Then I should see "You are requesting Maria's bike for shareage"
       #Shareage stage 2 tests
    @javascript
    Scenario: Accepted shareage Item Request shows new actions on dashboard
