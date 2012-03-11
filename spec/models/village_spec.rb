@@ -20,7 +20,7 @@ describe Village do
   end
   it { should validate_presence_of(:country)}
   it { should validate_presence_of(:name)}
-  it { should_not allow_value(:long_name).for(:name)}
+  #it { should_not allow_value(:long_name).for(:name)}
 
 end
 
