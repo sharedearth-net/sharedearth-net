@@ -1,4 +1,4 @@
-class EntityType < ActiveRecord::Base
+class EntityType
   PERSON_ENTITY         = 1.freeze
   ITEM_ENTITY           = 2.freeze
   SKILL_ENTITY          = 3.freeze
