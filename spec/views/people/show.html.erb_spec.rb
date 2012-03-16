@@ -8,7 +8,7 @@ describe "people/show.html.erb" do
   ) }
   let(:mock_user) { generate_mock_user_with_person }
   let(:mock_items){ [ stub_model(Item, :name => "Item1", :owner_id => 1, :owner_type => "Person").as_null_object, stub_model(Item, :name => "Item2", :owner_id => 1, :owner_type => "Person").as_null_object ] }
-  
+
   before do
     @person = Factory(:person)
     @item1 = Factory(:item, :owner => @person)
@@ -23,23 +23,23 @@ describe "people/show.html.erb" do
     assign(:items, @person.items)
     assign(:unanswered_requests, [])
   end
-  
+
 
   it "renders person name" do
     render
     rendered.should match(/#{@person.name}/)
   end
-  
+
   it "renders person avatar" do
     render
-    rendered.should match(/#{@person.avatar}/)    
+    rendered.should match(/#{@person.avatar}/)
   end
-  
+
   it "renders a link to edit profile only if showing currently signed in user" do
     render
     rendered.should have_selector("a", :href => edit_person_path(@person))
   end
-  
+
   it "shouldn't render a link to edit profile if viewing someone else's profile" do
     some_other_person = Factory(:person, :name => "Nebojsa")
     #some_other_user = mock_model(User)
@@ -49,19 +49,19 @@ describe "people/show.html.erb" do
     render
     rendered.should_not have_selector("a", :href => edit_person_path(@person))
   end
-  
+
   it "should display person's items" do
     render
     rendered.should have_selector("a", :href => item_path(@person.items.first))
     rendered.should have_selector("a", :href => item_path(@person.items.second))
   end
-  
+
   it "should not render a link to request an item" do
     render
     rendered.should_not have_selector("a", :href => requests_path(:item_id => @person.items.first))
     rendered.should_not have_selector("a", :href => requests_path(:item_id => @person.items.second))
   end
-  
+
   it "should render a link to request an item" do
     some_other_person = Factory(:person, :name => "Nebojsa")
     view.stub!(:current_user).and_return(some_other_person.user)
@@ -69,6 +69,6 @@ describe "people/show.html.erb" do
     rendered.should have_selector("a", :href => requests_path(:item_id => @person.items.first))
     rendered.should have_selector("a", :href => requests_path(:item_id => @person.items.second))
   end
-  
+
   pending "should test Trust Profile request links"
 end

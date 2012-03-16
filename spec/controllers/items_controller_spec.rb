@@ -25,6 +25,7 @@ describe ItemsController do
     before do
       sign_in_as_user(signedin_user)
       signedin_user.person.stub(:authorised?).and_return(true)
+      mock_item.stub(:active_shareage_request).and_return(item_request)
     end
 
     describe "GET index" do
@@ -40,7 +41,7 @@ describe ItemsController do
         Item.stub(:find_by_id).with("37") { mock_item }
         mock_item.stub!(:deleted?).and_return(false)
         mock_item.stub(:hidden?).and_return(false)
-        mock_item.stub_chain(:item_requests, :collected).and_return(item_request)
+        mock_item.stub_chain(:item_requests, :where, :first).and_return(item_request)
       end
 
       it "assigns the requested item as @item" do
@@ -80,7 +81,11 @@ describe ItemsController do
       end
       context "item in shareage" do
         before do
-          mock_item.stub(:is_shareage?).and_return(true)
+          Item.stub(:find_by_id).with("37") { mock_item }
+          mock_item.stub!(:deleted?).and_return(false)
+          mock_item.stub(:hidden?).and_return(false)
+          mock_item.stub_chain(:item_requests, :where, :first).and_return(item_request)
+          mock_item.stub(:is_sharage_owner?).with(signedin_user).and_return(true)
         end
 
 

@@ -23,7 +23,7 @@ describe Item do
 
   it { should validate_presence_of(:owner_type) }
 
-  it { should_not allow_value(Item::PURPOSE_SHAREAGE).for(:purpose) }
+  it { should allow_value(Item::PURPOSE_SHAREAGE).for(:purpose) }
 
   it { should_not allow_value(Item::PURPOSE_COMMUNAL).for(:purpose) }
 
@@ -70,24 +70,51 @@ describe Item do
   # it { should validate_attachment_size(:photo).less_than(1.megabyte) }
 
 end
+describe Item do
+  before do
+    let(:item) {Factory(:item)}
+    let(:requester) {Factory(:person)}
+    let(:other_person) {Factory(:person)}
+  end
+
+end
 describe Item, ".add_owner for shareage" do
   let(:item) {Factory(:item)}
   let(:requester) {Factory(:person)}
+  let(:other_person) {Factory(:person)}
   before do
     File.stub!(:unlink).and_return(true)
   end
 
   it "add new owner to resource network" do
-    item.add_to_resource_network_for(requester)
+    item.add_to_resource_network_for_possessor(requester)
     resource = ResourceNetwork.item(item).entity(requester)
     resource.should_not be_empty
   end
 
   it "remove new owner to resource network" do
-    item.add_to_resource_network_for(requester)
+    item.add_to_resource_network_for_possessor(requester)
     item.remove_from_resource_network_for(requester)
     resource = ResourceNetwork.item(item).entity(requester)
     resource.should be_empty
+  end
+
+  it "check if user is in resource network for shareage" do
+    item.add_to_resource_network_for_possessor(requester)
+    result = item.is_shareage_owner?(requester)
+    result.should be_true
+  end
+
+  it "check if gifter is in resource network for shareage" do
+    item.add_to_resource_network_for_possessor(requester)
+    result = item.is_shareage_owner?(item.owner)
+    result.should be_true
+  end
+
+  it "3rd party is not shareage owner " do
+    item.add_to_resource_network_for_possessor(requester)
+    result = item.is_shareage_owner?(other_person)
+    result.should be_true
   end
 end
 

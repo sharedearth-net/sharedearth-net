@@ -79,6 +79,7 @@ gem 'sass'  #for use in activeadmin
 gem "mail"
 gem "aws-ses", "~> 0.4.3", :require => 'aws/ses'
 gem 'delayed_job' #What you can do today, don't leave for tomorrow
+gem "daemons" #Support for running delayed_job
 
 gem "mocha", :group => :test
 gem 'whenever', :require => false

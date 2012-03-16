@@ -12,7 +12,7 @@ end
 
 describe HumanNetwork do
   it "should be valid" do
-    HumanNetwork.new.should be_valid
+    HumanNetwork.new.should_not be_valid
   end
 
 end

@@ -72,7 +72,7 @@ Factory.define :feedback do |f|
 end
 
 Factory.define :human_network do |p|
-  p.human_network_type "TrustedNetwork"
+  p.network_type "TrustedNetwork"
 end
 
 Factory.define :network_request do |p|

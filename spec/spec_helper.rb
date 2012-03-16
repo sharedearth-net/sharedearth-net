@@ -74,6 +74,13 @@ Spork.each_run do
   Dir["#{Rails.root}/app/models/**/*.rb"].each do |model|
     load model
   end
+	# reload all the controllers
+  Dir["#{Rails.root}/app/controllers/**/*.rb"].each do |controller|
+    load controller
+  end
+
+  Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
 end
 
 #Enable to have coverage tool

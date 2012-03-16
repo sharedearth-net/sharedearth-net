@@ -15,9 +15,6 @@ end
 describe Village do
   let(:long_name) {'i' * 51}
   let(:short_name) {'i' * 1}
-  it "should be valid" do
-    Village.new.should be_valid
-  end
   it { should validate_presence_of(:country)}
   it { should validate_presence_of(:name)}
   #it { should_not allow_value(:long_name).for(:name)}

@@ -9,7 +9,7 @@ module ResourceNetworkHelperSpec
 end
 
 describe ResourceNetwork do
-  it {should validate_presence_of(:owner_type)}
+  it {should validate_presence_of(:type)}
   it "should allow preset values as values for type" do
     ResourceNetwork::TYPES.each do |type|
       should allow_value(type).for(:type)

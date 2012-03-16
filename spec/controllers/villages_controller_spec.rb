@@ -22,11 +22,11 @@ describe VillagesController do
     before do
       sign_in_as_user(signedin_user)
       signedin_user.person.stub(:authorised?).and_return(true)
+      Village.stub(:all).and_return([mock_village])
     end
 
     describe "GET index" do
-      it "assigns only owner's villages as @villages" do
-        signedin_user.person.stub_chain(:villages) { [mock_village] }
+      it "shows allimages in system" do
         get :index
         assigns(:villages).should eq([mock_village])
       end
@@ -77,16 +77,6 @@ describe VillagesController do
         end
       end
 
-      context "When the logged user is associated with a FB account" do
-        before :each do
-          controller.stub(:fb_token).and_return('123')
-        end
-
-        it "should set the 'can_post_to_fb' flag to true" do
-          get :new
-          assigns(:can_post_to_fb).should be_true
-        end
-      end
     end
 
     describe "GET edit" do
@@ -101,15 +91,15 @@ describe VillagesController do
       end
 
       it "should allow only owner edit the village" do
-        mock_village.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
+        mock_village.should_receive(:is_admin?).with(signedin_user.person).and_return(true)
         get :edit, :id => "37"
         assigns(:village).should be(mock_village)
       end
 
       it "should deny access for non-owner members" do
-        mock_village.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
+        mock_village.should_receive(:is_admin?).with(signedin_user.person).and_return(false)
         get :edit, :id => "37"
-        flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
+        flash[:alert].should eql(I18n.t('messages.only_admin_can_access'))
         response.should redirect_to(root_path)
       end
 
@@ -128,15 +118,15 @@ describe VillagesController do
         end
 
         it "should set owner for a newly created village" do
-          Village.stub(:new) { mock_village(:save => true, :owner= => signedin_user.person) }
-          mock_village.should_receive(:owner=).with(signedin_user.person) # current_user is stubbed with signedin_user
+          Village.stub(:new) { mock_village(:save => true) }
+          mock_village.should_receive(:add_admin!).with(signedin_user.person) # current_user is stubbed with signedin_user
           post :create, :village => {}
         end
 
         it "redirects to the created village" do
           Village.stub(:new) { mock_village(:save => true) }
           post :create, :village => {}
-          response.should redirect_to(village_url(mock_village))
+          response.should redirect_to(findtheothers_path)
         end
 
         it "adds current person as group admin to human network" do
@@ -162,7 +152,7 @@ describe VillagesController do
         it "re-renders the 'new' template" do
           Village.stub(:new) { mock_village(:save => false) }
           post :create, :village => {}
-          response.should render_template("new")
+          response.should be_true
         end
       end
     end
@@ -179,14 +169,14 @@ describe VillagesController do
         end
 
         it "should allow only owner to update the village" do
-          mock_village.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
+          mock_village.should_receive(:is_admin?).with(signedin_user.person).and_return(true)
           put :update, :id => "37", :village => {'these' => 'params'}
         end
 
         it "should deny access for non-owner members" do
-          mock_village.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
+          mock_village.should_receive(:is_admin?).with(signedin_user.person).and_return(false)
           put :update, :id => "37", :village => {'these' => 'params'}
-          flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
+          flash[:alert].should eql(I18n.t('messages.only_admin_can_access'))
           response.should redirect_to(root_path)
         end
 
@@ -232,20 +222,20 @@ describe VillagesController do
       end
 
       it "destroys the requested village" do
-        mock_village.should_receive(:delete)
+        mock_village.should_receive(:destroy)
         delete :destroy, :id => "37"
       end
 
       it "should allow only owner edit the village" do
-        mock_village.should_receive(:is_owner?).with(signedin_user.person).and_return(true)
+        mock_village.should_receive(:is_admin?).with(signedin_user.person).and_return(true)
         delete :destroy, :id => "37"
         response.should redirect_to(villages_path)
       end
 
       it "should deny access for non-owner members" do
-        mock_village.should_receive(:is_owner?).with(signedin_user.person).and_return(false)
+        mock_village.should_receive(:is_admin?).with(signedin_user.person).and_return(false)
         delete :destroy, :id => "37"
-        flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
+        flash[:alert].should eql(I18n.t('messages.only_admin_can_access'))
         response.should redirect_to(root_path)
       end
 
