@@ -23,7 +23,7 @@ class EntitiesController < ApplicationController
         if variable.save
           variable.add_admin!(current_person)
           variable.add_items!(current_person)
-          format.html { redirect_to(grow_entities_path) }
+          format.html { redirect_to(findtheothers_path) }
           format.xml  { render :xml => variable, :status => :created, :location => variable }
         else
           format.html { render :action => "new" }
