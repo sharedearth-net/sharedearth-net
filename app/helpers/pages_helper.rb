@@ -370,11 +370,11 @@ module PagesHelper
     when 67
       current_person
     when 68
-      person
+      current_person
     when 69
       person
     when 70
-      current_person
+      person
     when 71
       person
     when 72
@@ -573,7 +573,7 @@ module PagesHelper
     when 67 #ACCEPT SHAREAGE GIFTER
       sentence = "You accepted " + requester_possesive + " request for your " + item
     when 68 #REJECT SHAREAGE GIFTER
-      sentence
+      sentence = "You rejected " + other_person_possesive + " request for your " + item
     when 69 #ACCEPT SHAREAGE REQUESTER
       sentence = other_person + " accepted your request for their " + item
     when 70 #REJECT SHAREAGE REQUESTER
