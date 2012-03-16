@@ -42,7 +42,7 @@ module PagesHelper
     when 85
       sentence = shareage_sentence(event_log, person)
     else
-      #
+      sentence = "dummy sentence"
     end
 
     # make first character of sentence capital if starting with you
