@@ -51,6 +51,28 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+	$('a[id*=share_mine]').click(function() {
+		sharing_item = $(this);
+		$.ajax({
+		    type: "POST",
+		    data: "",
+			url: $(this).attr('action'),
+		    dataType: "json",
+		    success: function(data, textStatus) {
+		        if (data.redirect) {
+		            window.location.replace(data.redirect);
+		        }
+		        else {
+					sharing_item.click(false);
+		            sharing_item.replaceWith("item added");
+					sharing_item.css({ 'color': '9c9e9c'});
+		        }
+		    }
+		});
+	});	
+});
+
 ////////////////////////////////////////////////////////////////////////
 // All code above should eventually be ported to Dojo
 

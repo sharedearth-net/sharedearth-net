@@ -714,7 +714,7 @@ module PagesHelper
         when 'SHARING'
           res = "<li>#{link_to "view action", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
         when 'ADD ITEM'
-          res = "<li>#{link_to "view item", item_path(log.action_object_id)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+          res = links_for_add_item(log, comments)
         when 'NEGATIVE FEEDBACK'
           res = "<li>#{link_to "view feedback", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
         when 'GIFTING'
@@ -751,6 +751,13 @@ module PagesHelper
 			verb = "now sharing"
 		end
 		verb
+  end
+ 
+ private
+  def links_for_add_item(log, comments)
+    share_mine_link = ""
+    share_mine_link = "<li>#{link_to "share mine", "#", :action => share_mine_item_path(log.action_object_id), :remote => 'true',  :id => "share_mine_#{log.action_object_id}"}</li>" unless log.involved_as_requester?current_user.person
+    "<li>#{link_to "view item", item_path(log.action_object_id)}</li>#{share_mine_link}<li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
   end
 
 end
