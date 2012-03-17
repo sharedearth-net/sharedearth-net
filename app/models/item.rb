@@ -94,6 +94,14 @@ class Item < ActiveRecord::Base
   def has_photo?
     !self.photo_file_name.nil?
   end
+  
+  def self.quick_add(item_type, person)
+   item = Item.new(:item_type => item_type, :purpose => PURPOSE_SHARE)
+   item.owner = person
+   item.status = STATUS_NORMAL
+   item.save
+   item
+  end
 
   def self.search(search, person_id, filter_item_type = nil)
     unless search.empty?
@@ -275,6 +283,10 @@ class Item < ActiveRecord::Base
   def deleted?
     !deleted_at.nil?  or deleted
   end
+  
+  def generic?
+    name.blank?
+  end
 
   #ResourceNetwork related methods
 
@@ -305,6 +317,7 @@ class Item < ActiveRecord::Base
     resource = ResourceNetwork.item(self).entity(person).first
     resource.destroy
   end
+  
 
   private
 

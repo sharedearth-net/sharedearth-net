@@ -238,3 +238,20 @@ describe Item, '.search' do
     Item.search('hidden', items_requester.id).should be_empty
   end
 end
+
+  
+describe "quick_add" do
+  it "should add an item based on type, owner keeping other as defaults" do
+      owner = Factory(:person)
+      Item.where(:item_type => 'bike').count.should == 0
+      Item.quick_add('bike', owner)
+      Item.where(:item_type => 'bike').count.should == 1
+  end
+end
+
+describe "generic" do
+  it "should identify generic items" do
+    Factory.build(:item, :item_type => 'Bike', :name => nil).should be_generic
+    Factory.build(:item, :item_type => 'Bike', :name => 'Passion').should_not be_generic
+  end
+end
