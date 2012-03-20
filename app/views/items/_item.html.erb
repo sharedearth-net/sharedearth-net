@@ -65,6 +65,20 @@
 			</li>
 			<% end -%>
 			<% end -%>
+			<% if action_list.include?(:recall) %>
+			<% if item.is_owner?(current_person) && !request.nil? -%>
+			<li>
+         <%= link_to "Recall", recall_request_path(request, :html), :method => :put %>
+			</li>
+			<% end -%>
+			<% end -%>
+      <% if action_list.include?(:return) %>
+			<% if !item.is_owner?(current_person) && !request.nil? -%>
+			<li>
+         <%= link_to "Return", return_request_path(request, :html), :method => :put %>
+			</li>
+			<% end -%>
+			<% end -%>
 		</ul>
 
 

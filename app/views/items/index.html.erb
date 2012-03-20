@@ -39,7 +39,8 @@
 					
 					<ul class="clearfix">
 						<% @items.each do |item| %>
-						  <%= render "items/item", :item => item, :action_list => [:show, :edit, :unhide, :hide, :delete, :recall, :return].to_set  %>
+              <% request = @item_requests[[item.id,2]] if @item_requests.has_key?([item.id,2])%>
+						  <%= render "items/item", :item => item, :request => request, :action_list => [:show, :edit, :unhide, :hide, :delete, :recall, :return, :canel_recall, :cancel_return].to_set  %>
 						<% end if !@items.nil?%>
 					</ul>
 					
