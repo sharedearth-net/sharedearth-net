@@ -17,7 +17,7 @@ module Sharedearthapp
      # config.autoload_paths += %W(#{config.root}/app/middlewares)
     config.autoload_paths += %W(#{Rails.root}/lib/workers)
     config.autoload_paths += %W(#{config.root}/lib/base)
-    config.load_paths += Dir["#{RAILS_ROOT}/app/models/*"].find_all { |f| File.stat(f).directory? }
+    config.autoload_paths += Dir["#{Rails.root}/app/models/*"].find_all { |f| File.stat(f).directory? }
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
