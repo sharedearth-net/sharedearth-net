@@ -334,7 +334,8 @@ Feature: Item requests management page
       And I should see "collected"
       And I should not see "completed"
       When I follow "collected"
-      Then I should see "view action"
+      Then I should not see "view action"
+      Then I follow "manage"
       And I should see "recall item"
 
    @javascript
@@ -347,7 +348,8 @@ Feature: Item requests management page
       And I should see "collected"
       And I should not see "completed"
       When I follow "collected"
-      Then I should see "view action"
+      Then I should not see "view action"
+      Then I follow "manage"
       And I should see "recall item"
       When I follow "recall item"
       Then I should see "cancel recall"
