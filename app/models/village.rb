@@ -31,12 +31,12 @@ class Village < ActiveRecord::Base
   end
 
   def join!(entity)
-    entity.items.each { |item| ResourceNetwork.create!(:entity_id => self.id, :entity_type_id => EntityType::VILLAGE_ENTITY, :resource_id => item.id, :resource_type_id => EntityType::ITEM_ENTITY) }
-    Member.create!(:human => entity, :entity => self)
+    self.add_items!(entity)
+    Member.create!(:person_id => entity.id, :entity => self)
   end
 
   def add_admin!(entity)
-    GroupAdmin.create!(:human => entity, :entity => self)
+    GroupAdmin.create!(:person_id => entity.id, :entity => self)
   end
 
   def add_items!(entity)
@@ -53,9 +53,16 @@ class Village < ActiveRecord::Base
   end
 
   def leave!(entity)
-    ResourceNetwork.village_resources(self).items(entity.items).each {|r| r.delete}
     HumanNetwork.village_members(self).member(entity).each{ |n| n.delete }
+    self.remove_items!(entity)
   end
+
+  def remove_items!(entity)
+    ResourceNetwork.village_resources(self).items(entity.items).each {|r| r.delete}
+  end
+
+  handle_asynchronously :add_items!
+  handle_asynchronously :remove_items!
 
   private
 
