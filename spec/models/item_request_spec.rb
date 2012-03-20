@@ -463,7 +463,7 @@ describe ItemRequest, ".collected! for shareage" do
   end
 
   it "should update status to collected" do
-    @item_request.status.should == ItemRequest::STATUS_COLLECTED
+    @item_request.status.should == ItemRequest::STATUS_SHAREAGE
   end
 
   it "should update item status to shareage" do
@@ -543,7 +543,7 @@ describe ItemRequest, ".recall!" do
   end
 
   it "should update status to recalled" do
-    expect { @item_request.recall! }.to change { @item_request.status }.from(ItemRequest::STATUS_COLLECTED).to(ItemRequest::STATUS_RECALL)
+    expect { @item_request.recall! }.to change { @item_request.status }.from(ItemRequest::STATUS_SHAREAGE).to(ItemRequest::STATUS_RECALL)
   end
 
   it "should save the request object" do
@@ -552,7 +552,7 @@ describe ItemRequest, ".recall!" do
 
   it "should raise exception if request object is cannot be saved" do
     # invalid object attrs
-    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_COLLECTED)
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_SHAREAGE)
     expect { @item_request.recall! }.to raise_error
   end
 
@@ -585,7 +585,7 @@ describe ItemRequest, ".return!" do
   end
 
   it "should update status to return" do
-    expect { @item_request.return! }.to change { @item_request.status }.from(ItemRequest::STATUS_COLLECTED).to(ItemRequest::STATUS_RETURN)
+    expect { @item_request.return! }.to change { @item_request.status }.from(ItemRequest::STATUS_SHAREAGE).to(ItemRequest::STATUS_RETURN)
   end
 
   it "should save the request object" do
@@ -594,7 +594,7 @@ describe ItemRequest, ".return!" do
 
   it "should raise exception if request object is cannot be saved" do
     # invalid object attrs
-    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_COLLECTED)
+    @item_request = ItemRequest.new(:status => ItemRequest::STATUS_SHAREAGE)
     expect { @item_request.return! }.to raise_error
   end
 
@@ -627,11 +627,11 @@ describe ItemRequest, ".cancel_recall!" do
   end
 
   it "should update status to cancel recall" do
-    expect { @item_request.cancel_recall! }.to change { @item_request.status }.from(ItemRequest::STATUS_RECALL).to(ItemRequest::STATUS_COLLECTED)
+    expect { @item_request.cancel_recall! }.to change { @item_request.status }.from(ItemRequest::STATUS_RECALL).to(ItemRequest::STATUS_SHAREAGE)
   end
 
   it "should save the request object" do
-    expect { @item_request.cancel_recall! }.to change { @item_request.status }.to(ItemRequest::STATUS_COLLECTED)
+    expect { @item_request.cancel_recall! }.to change { @item_request.status }.to(ItemRequest::STATUS_SHAREAGE)
   end
 
   it "should raise exception if request object is cannot be saved" do
@@ -670,11 +670,11 @@ describe ItemRequest, ".cancel_return!" do
   end
 
   it "should update status to cancel return" do
-    expect { @item_request.cancel_return! }.to change { @item_request.status }.from(ItemRequest::STATUS_RETURN).to(ItemRequest::STATUS_COLLECTED)
+    expect { @item_request.cancel_return! }.to change { @item_request.status }.from(ItemRequest::STATUS_RETURN).to(ItemRequest::STATUS_SHAREAGE)
   end
 
   it "should save the request object" do
-    expect { @item_request.cancel_return! }.to change { @item_request.status }.to(ItemRequest::STATUS_COLLECTED)
+    expect { @item_request.cancel_return! }.to change { @item_request.status }.to(ItemRequest::STATUS_SHAREAGE)
   end
 
   it "should raise exception if request object is cannot be saved" do
