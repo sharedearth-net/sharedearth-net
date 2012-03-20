@@ -10,7 +10,8 @@ class ItemRequest < ActiveRecord::Base
   STATUS_RECALL    = 70.freeze
   STATUS_RETURN    = 80.freeze
   STATUS_ACKNOWLEDGED = 90.freeze
-  STATUS_RETURNED      = 100.freeze
+  STATUS_RETURNED     = 100.freeze
+  STATUS_SHAREAGE     = 110.freeze
 
   STATUSES = {
     STATUS_REQUESTED  => 'requested',
@@ -22,7 +23,8 @@ class ItemRequest < ActiveRecord::Base
     STATUS_RECALL    => 'recalled',
     STATUS_RETURN    => 'return',
     STATUS_ACKNOWLEDGED => 'acknowledged',
-    STATUS_RETURNED      => 'returned'
+    STATUS_RETURNED      => 'returned',
+    STATUS_SHAREAGE   => 'shareage'
   }
 
   ACTIVE_STATUSES = [ STATUS_REQUESTED, STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_RECALL, STATUS_RETURN, STATUS_ACKNOWLEDGED ]
@@ -43,6 +45,7 @@ class ItemRequest < ActiveRecord::Base
   scope :answered_gifter, lambda { |entity| where("gifter_id = ? AND gifter_type = ? and status IN (?)", entity.id, entity.class.to_s, [STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_COMPLETED]) }
   scope :active, where("status IN (#{ACTIVE_STATUSES.join(",")})")
   scope :unanswered, where(:status => STATUS_REQUESTED)
+  scope :shareage, where(:status => STATUS_SHAREAGE)
   scope :answered, where(:status => [STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_COMPLETED])
   scope :older_than_2_weeks, where("created_at > ? and created_at < ? and status = ?",15.days.ago, 14.days.ago, STATUS_COMPLETED)
   scope :requested_item, lambda { |entity| where("item_id = ? and status IN (?)", entity.id, [STATUS_REQUESTED]) }
@@ -114,7 +117,6 @@ class ItemRequest < ActiveRecord::Base
       else
          #
     end
-    #self.item.share? ? create_item_request_accepted_activity_log : create_gift_request_accepted_activity_log
     self.item.in_use!
     self.item.owner.reputation_rating.increase_requests_answered_count
   end
@@ -184,14 +186,14 @@ class ItemRequest < ActiveRecord::Base
   end
 
   def recall!
-    return if !(self.status == STATUS_COLLECTED)
+    return if !(self.status == STATUS_SHAREAGE)
     self.status = STATUS_RECALL
     save!
     create_shareage_request_recall_activity_log
   end
 
   def return!
-    return if !(self.status == STATUS_COLLECTED)
+    return if !(self.status == STATUS_SHAREAGE)
     self.status = STATUS_RETURN
     save!
     create_shareage_request_return_activity_log
@@ -199,14 +201,14 @@ class ItemRequest < ActiveRecord::Base
 
   def cancel_recall!
     return if !(self.status == STATUS_RECALL)
-    self.status = STATUS_COLLECTED
+    self.status = STATUS_SHAREAGE
     save!
     create_shareage_request_cancel_recall_activity_log
   end
 
   def cancel_return!
     return if !(self.status == STATUS_RETURN)
-    self.status = STATUS_COLLECTED
+    self.status = STATUS_SHAREAGE
     save!
     create_shareage_request_cancel_return_activity_log
   end
@@ -302,6 +304,10 @@ class ItemRequest < ActiveRecord::Base
     self.status == STATUS_RETURNED
   end
 
+  def shareage?
+    self.status == STATUS_SHAREAGE
+  end
+
   def has_left_feedback?(person_id)
     !Feedback.exists_for?(self.id, person_id)
   end
@@ -331,7 +337,7 @@ class ItemRequest < ActiveRecord::Base
       create_gift_request_completed_activity_log
       create_gifting_event_log
     when Item::PURPOSE_SHAREAGE
-      self.status = STATUS_COLLECTED
+      self.status = STATUS_SHAREAGE
       create_shareage_request_collected_activity_log
     else
       #
