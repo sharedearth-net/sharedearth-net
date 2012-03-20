@@ -325,8 +325,13 @@ dojo.declare("sen.page.dashboard", [sen.Page], {
 							requestHtml = data.request_html,
 							requestNodeRemove = nodeList.parents("li.content-box"),
 							requestNode = requestNodeRemove.prev(),
-							activityNode = dojo.query("ul.dashboard-recent-activity").children().first(),
-							redirectToFeedback = false;
+							activityNode = dojo.query("ul.dashboard-recent-activity").children().first();
+            if(data.feedback == "true"){
+							var redirectToFeedback = true;
+            }else{
+              var redirectToFeedback = false;
+						}
+         
 						
 						// Make sure we have an element, otherwise just find the parent and stick it in as the first element
 						// Remove the activity node and put the new one in
@@ -341,8 +346,6 @@ dojo.declare("sen.page.dashboard", [sen.Page], {
 									//dojo.place('<li class="content-box clearfix">'+requestHtml+'</li>', node, "first");
 									dojo.place(requestHtml, node, "first");
 								});
-							} else {
-								redirectToFeedback = true;
 							}
 							
 							// Hide the requests green area box if it's empty
@@ -360,8 +363,6 @@ dojo.declare("sen.page.dashboard", [sen.Page], {
 							if (String(requestHtml) !== "") {
 								//requestNode.after('<li class="content-box clearfix">'+requestHtml+'</li>');
 								requestNode.after(requestHtml);
-							} else {
-								redirectToFeedback = true;
 							}
 							
 							// Hide the requests box if it's empty
