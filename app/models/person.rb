@@ -6,7 +6,7 @@ class Person < ActiveRecord::Base
   has_human_network :trusted_network, :class_name => "TrustedNetwork"
   has_human_network :mutual_network, :class_name => "MutualNetwork"
   has_human_network :member, :class_name => "Member"
-  has_human_network :personal_network, :conditions => [ "human_network_type = ? OR human_network_type = ?", "TrustedNetwork", "MutualNetwork" ]
+  has_human_network :personal_network, :conditions => [ "network_type = ? OR network_type = ?", "TrustedNetwork", "MutualNetwork" ]
 
   belongs_to :user
   has_many :items, :as => :owner
@@ -19,7 +19,7 @@ class Person < ActiveRecord::Base
   #has_many :human_networks
   has_many :received_human_networks,
            :class_name => "HumanNetwork",
-           :foreign_key => "human_id"
+           :foreign_key => "person_id"
 
   has_many :activity_logs, :as => :primary
   has_many :activity_logs_as_secondary, :as => :secondary, :class_name => "ActivityLog"
@@ -61,7 +61,7 @@ class Person < ActiveRecord::Base
 	end
 
 	def trusted_network_activity
-    my_people_id = self.human_networks.trusted_personal_network.collect { |n| n.human_id }
+    my_people_id = self.human_networks.trusted_personal_network.collect { |n| n.person_id }
     my_people_id << id
 
     EventDisplay.select('DISTINCT event_log_id').
@@ -71,7 +71,7 @@ class Person < ActiveRecord::Base
   end
 
   def network_activity
-    my_people_id = self.human_networks.personal_network.collect { |n| n.human_id }
+    my_people_id = self.human_networks.personal_network.collect { |n| n.person_id }
     my_people_id << id
 
     EventDisplay.select('DISTINCT event_log_id').
@@ -157,7 +157,7 @@ class Person < ActiveRecord::Base
   end
 
   def searchable_core_of_friends
-    ids = self.human_networks.trusted_personal_network.map { |n| n.human_id }.uniq
+    ids = self.human_networks.trusted_personal_network.map { |n| n.person_id }.uniq
     ids.push( self.id)
     ids = ids.map! { |k| "#{k}" }.join(",")
   end
@@ -223,7 +223,7 @@ class Person < ActiveRecord::Base
   end
 
   def extended_network_size
-    people_ids = self.human_networks.trusted_personal_network.map{|i| i["human_id"]}
+    people_ids = self.human_networks.trusted_personal_network.map{|i| i["person_id"]}
     friends = Person.find(:all, :conditions => ["id IN (?)", people_ids])
     size = 0
     friends.each { |person| size += person.human_networks.trusted_personal_network.count }
@@ -273,12 +273,12 @@ class Person < ActiveRecord::Base
 		ee = Arel::Table.new(EventEntity.table_name.to_sym)
     pn = Arel::Table.new(HumanNetwork.table_name.to_sym)
 
-    pn_network = pn.project(pn[:human_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:entity_id].eq(self_id)).where(pn[:entity_type].eq("Person"))
+    pn_network = pn.project(pn[:person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:entity_id].eq(self_id)).where(pn[:entity_type].eq("Person"))
 
     query = ee.project(Arel.sql("#{ee.name}.event_log_id as event_log_id"), Arel.sql("SUM(trusted_relationship_value) as total_relationship_value"))
-    query = query.join(Arel.sql("LEFT JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.human_id AND #{ee.name}.entity_type = 'Person' AND user_only = 'false'"))
+    query = query.join(Arel.sql("LEFT JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.person_id AND #{ee.name}.entity_type = 'Person' AND user_only = 'false'"))
     query = query.group(ee[:event_log_id], ee[:created_at]).order("#{ee.name}.created_at DESC").take(25)
-    query = query.where(Arel.sql("human_id IS NOT NULL or (#{ee.name}.entity_type = 'Person' and #{ee.name}.entity_id = #{self_id})"))
+    query = query.where(Arel.sql("person_id IS NOT NULL or (#{ee.name}.entity_type = 'Person' and #{ee.name}.entity_id = #{self_id})"))
 
     event_log_ids = EventEntity.find_by_sql(query.to_sql)
 
