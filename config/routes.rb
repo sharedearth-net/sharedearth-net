@@ -61,6 +61,7 @@ end
       put "mark_as_damaged"
 			put "mark_as_hidden"
       put "mark_as_unhidden"
+      post "share_mine"
     end
   end
 

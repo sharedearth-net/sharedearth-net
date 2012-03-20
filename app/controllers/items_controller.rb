@@ -113,6 +113,16 @@ class ItemsController < ApplicationController
     @item.unhide!
     redirect_to item_path(@item)
   end
+  
+  def share_mine
+    existing_item = Item.find_by_id(params[:id])
+    @item = Item.quick_add(existing_item.item_type, current_user.person)
+    if existing_item.generic?
+      render :json => {:result => 'success'}  
+    else
+      render :json => {:result => 'success',  :redirect => edit_item_path(@item) } 
+    end
+  end
 
   private
 
