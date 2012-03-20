@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
                                      :mark_as_normal, :mark_as_lost, :mark_as_damaged, :mark_as_hidden, :mark_as_unhidden]
   before_filter :only_owner!, :only => [:edit, :update, :destroy,
                                         :mark_as_normal, :mark_as_lost, :mark_as_damaged, :mark_as_hidden, :mark_as_unhidden]
+  before_filter :only_shareage_owner!, :only => [:show]
   before_filter :actions_completed?, :only => [:mark_as_lost, :mark_as_damaged, :mark_as_hidden]
   before_filter :check_if_item_is_deleted, :only => [:edit, :update, :destroy,
                                                      :mark_as_normal, :mark_as_lost,
@@ -11,7 +12,9 @@ class ItemsController < ApplicationController
   before_filter :check_if_item_is_hidden, :only => [:show]
   before_filter :check_if_user_has_fb_account, :only => [:new, :create]
   def index
-    @items = current_user.person.items.without_deleted
+    @items = current_person.items.without_deleted
+    @items += additional_resource_network_items
+    @item_requests = return_active_shareage_requests(@items)
 
     respond_to do |format|
       format.html { render :action => 'search' if params[:search] }
@@ -141,6 +144,10 @@ class ItemsController < ApplicationController
     redirect_to(root_path, :alert => I18n.t('messages.only_owner_can_access')) and return unless @item.is_owner?(current_user.person)
   end
 
+  def only_shareage_owner!
+    redirect_to(root_path, :alert => I18n.t('messages.only_owner_can_access')) and return unless @item.is_shareage_owner?(current_user.person)
+  end
+
   def post_new_item_on_fb(item)
     case item.purpose
     	when Item::PURPOSE_SHARE
@@ -156,4 +163,25 @@ class ItemsController < ApplicationController
 
     FbService.post_on_my_wall(fb_token, msg, link, :append_name => false)
   end
+
+  def return_active_shareage_requests(items)
+    @item_requests = Hash.new
+    items.each do |item|
+      active_shareage_request = item.active_shareage_request if item.is_shareage?
+    	unless active_shareage_request.nil?
+        @item_requests[[item.id,2]] = active_shareage_request
+      end
+    end  
+    @item_requests	
+  end
+
+  def additional_resource_network_items
+  	resources = ResourceNetwork.entity(current_person).only_items.possessor
+    items = []
+    unless resources.nil?  
+		  resources.each { |r| items.push(Item.find(r.resource_id)) }	
+    end
+    items
+  end
+
 end
