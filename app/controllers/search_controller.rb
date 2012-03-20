@@ -38,8 +38,8 @@ class SearchController < ApplicationController
   
   def group_items_by_network(items)
 		@current_person_id = current_person.id
-		@trusted_people_ids = current_person.human_networks.trusted_personal_network.select("human_id").collect { |r| r.human_id }.to_set
-		@mutual_people_ids = current_person.human_networks.mutual_network.select("human_id").collect { |r| r.human_id }.to_set
+		@trusted_people_ids = current_person.human_networks.trusted_personal_network.select("person_id").collect { |r| r.person_id }.to_set
+		@mutual_people_ids = current_person.human_networks.mutual_network.select("person_id").collect { |r| r.person_id }.to_set
 		
 		groups = { :trusted => [], :mutual => [], :other => [] }
 		
@@ -64,8 +64,8 @@ class SearchController < ApplicationController
   end
   
   def group_people_by_network(people)
-		@trusted_people_ids = current_person.human_networks.trusted_personal_network.select("human_id").collect { |r| r.human_id }.to_set
-		@mutual_people_ids = current_person.human_networks.mutual_network.select("human_id").collect { |r| r.human_id }.to_set
+		@trusted_people_ids = current_person.human_networks.trusted_personal_network.select("person_id").collect { |r| r.person_id }.to_set
+		@mutual_people_ids = current_person.human_networks.mutual_network.select("person_id").collect { |r| r.person_id }.to_set
 
 		groups = { :trusted => [], :mutual => [], :other => [] }
 
