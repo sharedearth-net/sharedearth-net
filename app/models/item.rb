@@ -87,6 +87,10 @@ class Item < ActiveRecord::Base
     self.owner == entity
   end
 
+  def is_shareage_owner?(entity)
+    ResourceNetwork.gifter.entity(entity) || ResourceNetwork.possessor.entity(entity)
+  end
+
   def item_event_log
     EventLog.create_news_event_log(self.owner, nil,  self , EventType.add_item, self)
   end
@@ -304,6 +308,10 @@ class Item < ActiveRecord::Base
   def remove_from_resource_network_for(person)
     resource = ResourceNetwork.item(self).entity(person).first
     resource.destroy
+  end
+
+  def active_shareage_request
+    self.item_requests.shareage.first
   end
 
   private
