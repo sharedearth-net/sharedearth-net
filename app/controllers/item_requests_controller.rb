@@ -113,11 +113,14 @@ class ItemRequestsController < ApplicationController
 
     respond_to do |format|
       if @item_request.item.purpose != Item::PURPOSE_GIFT
+        item_request_box = ''
+        item_request_box = item_request_html(@item_request) unless @item_request.shareage?
+ 
         format.html { redirect_to_back }
         format.json do
           render :json => { :success => true,
                             :share   => true,
-                            :request_html  => item_request_html(@item_request),
+                            :request_html  => item_request_box,
                             :activity_html => last_activity_log_html_for(current_person) }
         end
       else
@@ -130,6 +133,7 @@ class ItemRequestsController < ApplicationController
           render :json => { :success => true,
                             :share   => 'false',
                             :request_html  => '',
+                            :feedback => 'true',
                             :activity_html => last_activity_log_html_for(current_person),
                             :people_helped => people_helped_count,
                             :gift_actions => gift_actions_count,
@@ -152,6 +156,7 @@ class ItemRequestsController < ApplicationController
         render :json => { :success => true,
                           :share   => 'false',
                           :request_html  => '',
+                          :feedback => 'true',
                           :activity_html => last_activity_log_html_for(current_person),
                           :people_helped => people_helped_count,
                           :gift_actions => gift_actions_count,
@@ -197,7 +202,7 @@ class ItemRequestsController < ApplicationController
       format.html { redirect_to_back }
       format.json do
         render :json => { :success => true,
-                          :request_html  => item_request_html(@item_request),
+                          :request_html  => '',
                           :activity_html => last_activity_log_html_for(current_person) }
       end
     end
@@ -212,7 +217,7 @@ class ItemRequestsController < ApplicationController
       format.html { redirect_to_back }
       format.json do
         render :json => { :success => true,
-                          :request_html  => item_request_html(@item_request),
+													:request_html => '',
                           :activity_html => last_activity_log_html_for(current_person) }
       end
     end
