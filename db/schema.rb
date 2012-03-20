@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120302132016) do
+ActiveRecord::Schema.define(:version => 20120315113106) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -169,20 +169,18 @@ ActiveRecord::Schema.define(:version => 20120302132016) do
   end
 
   create_table "human_networks", :force => true do |t|
-    t.integer  "entity_id"
-    t.integer  "human_id"
+    t.integer  "specific_entity_id"
+    t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "entity_type"
-    t.integer  "entity_master_id"
-    t.string   "human_network_type"
-    t.string   "human_type",         :default => "Person"
-    t.integer  "human_entity_id"
+    t.integer  "entity_id"
+    t.string   "network_type"
   end
 
-  add_index "human_networks", ["entity_id", "entity_type"], :name => "index_human_networks_on_entity_id_and_entity_type"
-  add_index "human_networks", ["entity_master_id"], :name => "index_human_networks_on_entity_master_id"
-  add_index "human_networks", ["human_id"], :name => "index_human_networks_on_human_id"
+  add_index "human_networks", ["entity_id"], :name => "index_human_networks_on_entity_master_id"
+  add_index "human_networks", ["person_id"], :name => "index_human_networks_on_human_id"
+  add_index "human_networks", ["specific_entity_id", "entity_type"], :name => "index_human_networks_on_entity_id_and_entity_type"
 
   create_table "invitations", :force => true do |t|
     t.integer  "inviter_person_id"
