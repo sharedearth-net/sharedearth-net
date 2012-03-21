@@ -324,7 +324,7 @@ class Item < ActiveRecord::Base
   
 
   def active_shareage_request
-    self.item_requests.shareage.first
+    self.item_requests.active_shareage.first
   end
 
   private
