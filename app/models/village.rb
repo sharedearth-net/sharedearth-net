@@ -61,8 +61,8 @@ class Village < ActiveRecord::Base
     ResourceNetwork.village_resources(self).items(entity.items).each {|r| r.delete}
   end
 
-  handle_asynchronously :add_items!
-  handle_asynchronously :remove_items!
+  #handle_asynchronously :add_items!
+  #handle_asynchronously :remove_items!
 
   private
 
