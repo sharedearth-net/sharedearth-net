@@ -46,6 +46,7 @@ class ItemRequest < ActiveRecord::Base
   scope :active, where("status IN (#{ACTIVE_STATUSES.join(",")})")
   scope :unanswered, where(:status => STATUS_REQUESTED)
   scope :shareage, where(:status => STATUS_SHAREAGE)
+  scope :active_shareage, where("status IN (?)", [STATUS_SHAREAGE, STATUS_RETURN, STATUS_RECALL])
   scope :answered, where(:status => [STATUS_ACCEPTED, STATUS_COLLECTED, STATUS_COMPLETED])
   scope :older_than_2_weeks, where("created_at > ? and created_at < ? and status = ?",15.days.ago, 14.days.ago, STATUS_COMPLETED)
   scope :requested_item, lambda { |entity| where("item_id = ? and status IN (?)", entity.id, [STATUS_REQUESTED]) }
