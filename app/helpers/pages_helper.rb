@@ -617,9 +617,9 @@ module PagesHelper
     when 89 #REQUESTER CANCEL SHAREAGE REQUESTER
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 90 #ACKNOWLEDGE RETURN SHAREAGE GIFTER
-      sentence = "You acknowledged " + requester_possesive + " request to recall your " + item
+      sentence = "You acknowledged " + requester_possesive + " request to return your " + item
     when 91 #ACKNOWLEDGE RETURN SHAREAGE REQUESTER
-      sentence = other_person + " acknowledged your request to recall their " +item
+      sentence = other_person + " acknowledged your request to return their " +item
     else
       #
     end
