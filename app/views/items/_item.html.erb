@@ -68,28 +68,28 @@
 			<% if action_list.include?(:recall) %>
 			<% if item.is_owner?(current_person) && !request.nil? && request.shareage? -%>
 			<li>
-         <%= link_to "Recall", recall_request_path(request, :html), :method => :put %>
+         <%= link_to "recall item", recall_request_path(request, :html), :method => :put %>
 			</li>
 			<% end -%>
 			<% end -%>
       <% if action_list.include?(:return) %>
 			<% if !item.is_owner?(current_person) && !request.nil? && request.shareage?-%>
 			<li>
-         <%= link_to "Return", return_request_path(request, :html), :method => :put %>
+         <%= link_to "return item", return_request_path(request, :html), :method => :put %>
 			</li>
 			<% end -%>
 			<% end -%>
 			<% if action_list.include?(:cancel_recall) %>
 			<% if item.is_owner?(current_person) && !request.nil? && request.recall? -%>
 			<li>
-         <%= link_to "Cancel recall", cancel_recall_request_path(request, :html), :method => :put %>
+         <%= link_to "cancel recall", cancel_recall_request_path(request, :html), :method => :put %>
 			</li>
 			<% end -%>
 			<% end -%>
       <% if action_list.include?(:cancel_return) %>
 			<% if !item.is_owner?(current_person) && !request.nil? && request.in_return?-%>
 			<li>
-         <%= link_to "Cancel return", cancel_return_request_path(request, :html), :method => :put %>
+         <%= link_to "cancel return", cancel_return_request_path(request, :html), :method => :put %>
 			</li>
 			<% end -%>
 			<% end -%>
