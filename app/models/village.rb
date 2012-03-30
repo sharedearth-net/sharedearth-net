@@ -40,7 +40,11 @@ class Village < ActiveRecord::Base
   end
 
   def add_items!(entity)
-    entity.items.each { |item| ResourceNetwork.create!(:entity_id => self.id, :entity_type_id => EntityType::VILLAGE_ENTITY, :resource_id => item.id, :resource_type_id => EntityType::ITEM_ENTITY) }
+    worker = AddResource.new
+    worker.entity_id = self.id
+    worker.entity_type_id = EntityType::VILLAGE_ENTITY
+    worker.items = entity.items
+    Rails.env.test? ? worker.run_local : worker.queue
   end
 
   def add_item!(item)
@@ -58,7 +62,10 @@ class Village < ActiveRecord::Base
   end
 
   def remove_items!(entity)
-    ResourceNetwork.village_resources(self).items(entity.items).each {|r| r.delete}
+    worker = RemoveResource.new
+    worker.entity_id = self.id
+    worker.items = entity.items
+    Rails.env.test? ? worker.run_local : worker.queue
   end
 
   #handle_asynchronously :add_items!
