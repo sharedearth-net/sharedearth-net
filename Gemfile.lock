@@ -138,6 +138,15 @@ GEM
       formtastic (>= 0.9.8)
       inherited_resources (>= 1.0.6)
       will_paginate (>= 2.3.12)
+    iron_worker (2.3.13)
+      bundler
+      bundler
+      rest
+      rest
+      rest-client
+      rest-client
+      zip
+      zip
     json (1.5.3)
     json_pure (1.6.5)
     launchy (2.0.3)
@@ -242,6 +251,9 @@ GEM
     rake (0.9.2)
     rcov (0.9.9)
     responders (0.6.4)
+    rest (0.2.0)
+      rest-client
+      rest-client
     rest-client (1.6.3)
       mime-types (>= 1.16)
     rspec (2.6.0)
@@ -280,13 +292,6 @@ GEM
       rubyzip
     shoulda (2.11.3)
     shoulda-matchers (1.0.0)
-    simple_worker (2.0.2)
-      rest-client
-      rest-client
-      typhoeus
-      typhoeus
-      zip
-      zip
     simplecov (0.4.2)
       simplecov-html (~> 0.4.4)
     simplecov-html (0.4.5)
@@ -302,8 +307,6 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    typhoeus (0.3.2)
-      mime-types
     tzinfo (0.3.29)
     warden (1.0.4)
       rack (>= 1.0)
@@ -341,6 +344,7 @@ DEPENDENCIES
   ffaker
   guard-rspec
   heroku_san
+  iron_worker
   mail
   mocha
   mysql2
@@ -358,7 +362,6 @@ DEPENDENCIES
   sass
   shoulda (~> 2.11)
   shoulda-matchers
-  simple_worker
   simplecov
   spork (~> 0.9.0.rc)
   sqlite3-ruby

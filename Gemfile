@@ -83,4 +83,4 @@ gem "daemons" #Support for running delayed_job
 
 gem "mocha", :group => :test
 gem 'whenever', :require => false
-gem 'simple_worker'
+gem 'iron_worker' #Deprecated gem 'simple_worker'
