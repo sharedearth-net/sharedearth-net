@@ -44,7 +44,7 @@ class Village < ActiveRecord::Base
     worker.entity_id = self.id
     worker.entity_type_id = EntityType::VILLAGE_ENTITY
     worker.items = entity.items
-    Rails.env.test? ? worker.run_local : worker.queue
+    (Rails.env.test? || Rails.env.development?) ? worker.run_local : worker.queue
   end
 
   def add_item!(item)
@@ -65,7 +65,7 @@ class Village < ActiveRecord::Base
     worker = RemoveResource.new
     worker.entity_id = self.id
     worker.items = entity.items
-    Rails.env.test? ? worker.run_local : worker.queue
+    (Rails.env.test? || Rails.env.development?) ? worker.run_local : worker.queue
   end
 
   #handle_asynchronously :add_items!
