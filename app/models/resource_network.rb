@@ -16,7 +16,7 @@ class ResourceNetwork < ActiveRecord::Base
    scope :only_items, where(:resource_type_id => EntityType::ITEM_ENTITY)
    scope :entity, lambda { |entity| where("entity_id =? AND entity_type_id = ?", entity.id, EntityType::PERSON_ENTITY) }
    scope :entity_items, lambda { |entity| where("entity_id =? AND entity_type_id = ? AND resource_type_id =?", entity.id, EntityType::PERSON_ENTITY, EntityType::ITEM_ENTITY) }
-   scope :village_resources, lambda { |village| where("entity_id =? AND entity_type_id = ?", village.id, EntityType::VILLAGE_ENTITY)}
+   scope :village_resources, lambda { |village_id | where("entity_id =? AND entity_type_id = ?", village_id, EntityType::VILLAGE_ENTITY)}
    scope :items, lambda { |items| where("resource_type_id=? AND resource_id in (?)", EntityType::ITEM_ENTITY, items)}
    scope :gifter, :conditions => { :type => TYPE_GIFTER }
    scope :possessor, :conditions => { :type => TYPE_POSSESSOR }
