@@ -1,4 +1,4 @@
-class TestWorker < SimpleWorker::Base
+class TestWorker < IronWorker::Base
 
   def run
     log 'running notifications...'
