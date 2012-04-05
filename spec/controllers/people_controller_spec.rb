@@ -269,6 +269,7 @@ describe PeopleController do
         get :my_network, :id => "37", :type => "trusted"
       end
 
+      it "should return list of items in my network without hidden" do
       it "should return list of items in my network withouth hidden" do
         assigns(:items).should == mock_person.trusted_friends_items("trusted").without_hidden.sort_by{|i| i.item_type.downcase}
       end
