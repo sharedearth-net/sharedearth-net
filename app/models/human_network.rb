@@ -19,7 +19,11 @@ class HumanNetwork < ActiveRecord::Base
   scope :personal_network, where(["network_type = ? or network_type = ?", "TrustedNetwork", "MutualNetwork"])
   scope :village_members, lambda { |village| where("entity_id = ? AND entity_type = ? AND network_type = ?", village.id, "Village", "Member")}
   scope :village_admins, lambda { |village| where("entity_id = ? AND entity_type = ? AND network_type = ?", village.id, "Village", "GroupAdmin")}
+  scope :part_of_village, lambda { |person| where("person_id = ? AND entity_type =? AND (network_type = ? OR network_type = ?)", person.id, "Village", "GroupAdmin", "Member")}
+  scope :entity_types, lambda { |entity_types| where("entity_type IN (?)", entity_types) }
   scope :member, lambda { |member| where(:person_id => member.id)}
+  scope :entity_network, lambda { |entity_type| where(:network_type => entity_type) }
+
 
   validates_presence_of :entity_id, :entity_type, :person_id
 
