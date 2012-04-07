@@ -6,6 +6,8 @@ describe PagesController do
   let(:mock_item_request) { mock_model(ItemRequest).as_null_object }
   let(:mock_person) { Factory(:person) }
   let(:signedin_user) { Factory(:person).user }
+  let(:mock_villages) {[mock_model(Village).as_null_object, mock_model(Village).as_null_object]}
+  let(:mock_villages_id) {[1001,1002]}
 
   it_should_require_signed_in_user_for_actions :dashboard
 
@@ -86,6 +88,51 @@ describe PagesController do
      		get :dashboard
         signedin_user.person.email_notifications_count?.should eql(0)
     end
+    end
+
+    describe "GET 'network'" do
+      before do
+        #Member.stub(:person_villages).with(mock_person).and_return(mock_villages)
+        Village.stub(:belongs_to_person).with(mock_person).and_return(mock_villages_id)
+      end
+
+      it "should be successful" do
+        get :network
+        response.should render_template("pages/network")
+      end
+
+      it "should be successful" do
+        get :network
+        response.should be_success
+      end
+
+      it "should be successful" do
+        get :network
+        assigns(:villages).should eq(mock_villages)
+      end
+
+      it "assigns the current person's items as @items" do
+        mock_items = [Factory(:item), Factory(:item)]
+        signedin_user.stub(:person).and_return(Factory(:person))
+        signedin_user.person.stub(:items) { mock_items }
+        signedin_user.person.stub(:events) { [] }
+        get :network
+        assigns(:items).should eq(mock_items)
+      end
+
+    end
+
+    describe "GET my_network" do
+      before do
+        mock_person.chain_stub(:trusted_friends_items, :sort_by).and_return{mock_items}
+        signedin_user.stub(:network_activity).and_return{mock_event}
+        Person.stub(:find_by_id).with("37").and_return{mock_person}
+        get :network, :id => "37", :type => "trusted"
+      end
+
+      it "should return list of items in my network withouth hidden" do
+        assigns(:items).should == mock_person.trusted_friends_items("trusted").without_hidden.sort_by{|i| i.item_type.downcase}
+      end
     end
   end
 end
