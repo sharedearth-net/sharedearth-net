@@ -1,0 +1,136 @@
+<div id="community-page" class="clearfix">
+
+	<div id="sidebar-left">
+		 <% if params[:type].nil? -%>
+		    <%= image_tag("your_network.png", :class => "thumb", :alt => "Your Network")  %> <!-- Your Network image -->
+		  <% elsif trusted_network-%>
+		  <%= image_tag("trusted_icon_yourself.png", :class => "thumb", :alt => "Trusted Network")  %> <!-- Trusted Network picture -->
+		  <% end -%>
+		<ul>
+			<li class="all <%= 'selected' if params[:type] == 'own' %>">
+        <%= link_to 'Your Network', network_path(:type => 'own') %>
+			</li>
+			<li class="trusted <%= 'selected' if trusted_network %>">
+			  <%= link_to 'Trusted Network', network_path(:type => 'trusted') %>
+			</li>
+      <% @entities.each do |entity| -%>
+      <li><%= link_to entity.specific_entity.name, network_path(:entity_id => entity.id) %></li>
+      <% end unless @entities.empty? -%>
+			<!--
+			<li class="extend">
+				<a href="#">Extended network</a>
+			</li>
+
+			<li class="separator">
+				&nbsp;
+			</li>
+			<li class="community">
+				<a href="#">Evolver Sydney</a>
+			</li>
+			<li class="community">
+				<a href="#">Sydney Java Community</a>
+			</li>
+			<li class="village">
+				<a href="#">Sydney</a>
+			</li>
+			<li class="village">
+				<a href="#">Newtown</a>
+			</li>
+			-->
+		</ul>
+
+	</div><!--	/sidebar-left	-->
+
+	<div id="content">
+
+		<div class="content-box-holder no-bg">
+			<ul>
+				<li class="content-box clearfix">
+
+					<div class="inner-content">
+						<h2>
+							<% if params[:type].nil? -%>
+								Your Network
+							<% elsif trusted_network-%>
+								Trusted Network
+							<% end -%>
+						</h2>
+
+						<p class="description">
+						<% if params[:type].nil? -%>
+							The people from your trusted network, communities and villages. <a class="trusted" href=" /findtheothers">Find the others.</a>
+						<% elsif trusted_network-%>
+							The family, friends and people you trust unreservedly, and share willingly with.
+							<br />
+							<a class="trusted" href=" /findtheothers">Find the others.</a>
+				       <% end -%>
+						</p>
+
+					</div>
+
+				</li>
+			</ul>
+
+
+			<!--
+
+			-->
+
+			<%= render "items/item_list" %>
+
+			<!--
+
+			-->
+
+			<!-- <div class="<%= (@items.count < 8) ? 'items-expanded' : 'items-list'%> clearfix">
+
+						<h3>Items</h3>
+
+						<ul class="clearfix">
+						<% @items.each do |item| %>
+							<li class="item clearer">
+								<div class="item-image-holder">
+									<%= link_to image_tag(item.photo.url(:square), :class => "thumb"), item_path(item) %>
+								</div>
+								<div>
+									<p>
+										<%= link_to item.name, item_path(item), :class => "positive" %>&nbsp;&nbsp;&nbsp;
+										<%= link_to item.item_type, "#" %>&nbsp;&nbsp;&nbsp;
+										<%= item.purpose? %>
+									</p>
+
+									<ul class="action-list">
+										<li class="person-name">
+											<%= link_to_person(item.owner, :class => "positive capitalize") %>
+										</li>
+										<li>
+											<%= link_to "view item", item_path(item) %>
+										</li>
+
+										<%unless item.active_request_by?(current_user) || item.is_owner?(current_user.person)%>
+										<li>
+											<%= link_to "request", requests_path(:item_id => item.id), :method => :post %>
+										</li>
+										<% end -%>
+
+									</ul>
+
+
+								</div>
+							</li>
+		              		<% end if !@items.nil?%>
+						</ul>
+
+					</div> --><!--	/items-expanded	-->
+
+		</div><!-- /content-box-holder  -->
+
+	</div><!--	/content -->
+
+	<div id="sidebar">
+		<%#= render :partial => "shared/latest_activity_person", :locals => { :person => @person } %>
+		<% title = trusted_network ? 'Trusted Network Activity' : 'Your Network Activity' %>
+		<%= render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => title } %>
+	</div><!-- /sidebar	-->
+
+</div><!-- /community-page -->
