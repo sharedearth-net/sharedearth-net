@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def index
     if current_user.nil? or current_user.person.nil?
       render
-    elsif Settings.invitations == 'true' and not current_user.person.authorised? 
+    elsif Settings.invitations == 'true' and not current_user.person.authorised?
       render
     else
       redirect_to dashboard_path
@@ -13,7 +13,7 @@ class PagesController < ApplicationController
 
   def dashboard
     @active_item_requests     = current_user.person.active_item_requests
-    @network_requests  = current_user.person.received_network_requests + 
+    @network_requests  = current_user.person.received_network_requests +
                                 current_user.person.network_requests
     @requests = @active_item_requests + @network_requests
 
@@ -26,6 +26,21 @@ class PagesController < ApplicationController
     current_user.record_last_activity!
     current_user.person.news_feed
     @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
+  end
+
+  def network
+    @entities = Entity.groups_with_person(current_person)
+    entity = Entity.find_by_id(params[:entity_id]) unless params[:entity_id].nil?
+    if params[:type] = 'trusted'
+      @items = current_person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+	    @events = current_user.trusted_network_activity.paginate(:page => params[:page], :per_page => 25)
+    elsif !entity.nil?
+      @items = ResourceNetwork.items_belong_to(entity.specific_entity)
+      @events = entity.specific_entity.network_activity.paginate(:page => params[:page], :per_page => 25)
+    else
+      @items = current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+	    @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
+    end
   end
 
   def about
@@ -41,7 +56,7 @@ class PagesController < ApplicationController
   def no_javascript
     render :layout => 'welcome'
   end
-  
+
   def collect_email
 		render :layout => nil
   end
