@@ -8,6 +8,8 @@ class Village < ActiveRecord::Base
   validates_presence_of  :country
   validates_presence_of  :state
 
+  has_human_network :human_networks
+
   before_create :generate_key
   after_create :create_entity_for_village
 
@@ -66,6 +68,20 @@ class Village < ActiveRecord::Base
     worker.entity_id = self.id
     worker.items = entity.items
     (Rails.env.test? || Rails.env.development?) ? worker.run_local : worker.queue
+  end
+
+  def self.belongs_to_person(person)
+    HumanNetwork.part_of_village(person).map(&:entity_id)
+  end
+
+  def network_activity
+    my_people_id = self.human_networks.entity_network(self.class.name).collect { |n| n.person_id }
+    my_people_id << id
+
+    EventDisplay.select('DISTINCT event_log_id').
+                 where(:person_id => my_people_id).
+                 order('event_log_id DESC').
+                 includes(:event_log)
   end
 
   #handle_asynchronously :add_items!
