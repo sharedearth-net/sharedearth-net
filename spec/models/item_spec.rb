@@ -241,10 +241,10 @@ end
 
   
 describe "quick_add" do
-  it "should add an item based on type, owner keeping other as defaults" do
+  it "should add an item based on type, owner and purpose keeping others as defaults" do
       owner = Factory(:person)
       Item.where(:item_type => 'bike').count.should == 0
-      Item.quick_add('bike', owner)
+      Item.quick_add('bike', owner, Item::PURPOSE_SHAREAGE)
       Item.where(:item_type => 'bike').count.should == 1
   end
 end

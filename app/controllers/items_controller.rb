@@ -116,7 +116,7 @@ class ItemsController < ApplicationController
   
   def share_mine
     existing_item = Item.find_by_id(params[:id])
-    @item = Item.quick_add(existing_item.item_type, current_user.person)
+    @item = Item.quick_add(existing_item.item_type, current_user.person, Item::PURPOSE_SHARE)
     if existing_item.generic?
       render :json => {:result => 'success'}  
     else
