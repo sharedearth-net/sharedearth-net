@@ -115,6 +115,7 @@ end
   match "/signout" => "sessions#destroy", :as => :signout
 
   match "/dashboard", :to => "pages#dashboard"
+  match "/network", :to => "pages#network"
   match "/principles", :to => "terms#principles"
   match '/about' => 'pages#about'
   match '/contribute' => 'pages#contribute'
