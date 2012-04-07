@@ -75,6 +75,11 @@ Factory.define :human_network do |p|
   p.network_type "TrustedNetwork"
 end
 
+Factory.define :new_village_network, :class => HumanNetwork do |p|
+  p.network_type "Member"
+  p.entity_type "Village"
+end
+
 Factory.define :network_request do |p|
 end
 
