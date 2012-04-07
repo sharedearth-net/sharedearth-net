@@ -67,6 +67,8 @@ class PeopleController < ApplicationController
     end
   end
 
+  # Filter view network items and activity based on entity type, action is deprecated will be removed
+
   def my_network
     case params[:type]
       when 'trusted'
