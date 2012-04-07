@@ -41,6 +41,12 @@ Given /^"(.*)" requested item with name "(.*)" from "(.*)"$/ do |person1,item, p
     @item_request = Factory(:item_request, :requester => person1, :gifter => person2, :item => item)
 end
 
+Given /^"(.*)" is part of village "(.*)"$/ do |person, village|
+    person  = Person.find_by_name("#{person}")
+    village = Village.find_by_name("#{village}")
+    village.join!(person)
+end
+
 Given /^I requested item with name "(.*)" from person with name "(.*)"$/ do |item, person|
     person = Person.find_by_name("#{person}")
     me = Person.find_by_name("John")
