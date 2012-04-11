@@ -23,4 +23,20 @@ describe ItemsHelper do
       "bike".should == generic_name(item)
     end    
   end
+  
+  describe "truncate" do 
+    it "should not truncate item types under 23 characters" do
+      short_item_type = "shortstring"
+      truncated_item_type = truncate(short_item_type)
+      truncated_item_type.should == short_item_type
+	end 
+	
+    it "should truncate item types over 23 characters" do
+      long_item_type = "thisisastringthatisover23characters"
+      truncated_item_type = truncate(long_item_type)
+      long_item_type[0..20].should == truncated_item_type[0..20]
+      truncated_item_type[21..22].should == ".."
+      truncated_item_type.length.should == 23
+    end
+  end
 end
