@@ -23,4 +23,12 @@ module ItemsHelper
 		end
 		item_types_array.sort_by { |item_type| item_type[:type] }
 	end
+
+  def truncate(genericNameString)
+	  if genericNameString.length > 23
+		  genericNameString[0..20] + ".."
+	  else
+		  genericNameString
+	  end
+  end
 end
