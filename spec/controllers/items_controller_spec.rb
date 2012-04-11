@@ -505,18 +505,18 @@ describe ItemsController do
     
     describe "share mine" do
       it "should add item successfully and redirect to edit item path for non generic items" do
-        existing_item = Factory.build(:item, :name => "some name") 
+        existing_item = Factory.build(:item, :name => "some name", :purpose => Item::PURPOSE_SHAREAGE) 
         Item.stub(:find_by_id).with("37") { existing_item }
-        Item.should_receive(:quick_add).with(existing_item.item_type, signedin_user.person).and_return(item_one)
+        Item.should_receive(:quick_add).with(existing_item.item_type, signedin_user.person, Item::PURPOSE_SHARE).and_return(item_one)
         xhr :post, :share_mine, :id => "37"
         response.should be_success
         response.body.should == {:result => 'success', :redirect => edit_item_path(item_one)}.to_json
       end
       
       it "should add item successfully and stay on same page for generic items" do
-          existing_item = Factory.build(:item, :name => nil) 
+          existing_item = Factory.build(:item, :name => nil, :purpose => Item::PURPOSE_SHAREAGE) 
           Item.stub(:find_by_id).with("37") {existing_item}
-          Item.should_receive(:quick_add).with(existing_item.item_type, signedin_user.person).and_return(item_one)
+          Item.should_receive(:quick_add).with(existing_item.item_type, signedin_user.person, Item::PURPOSE_SHARE).and_return(item_one)
           xhr :post, :share_mine, :id => "37"
           response.should be_success
           response.body.should == {:result => 'success'}.to_json

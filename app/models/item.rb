@@ -99,8 +99,8 @@ class Item < ActiveRecord::Base
     !self.photo_file_name.nil?
   end
   
-  def self.quick_add(item_type, person)
-   item = Item.new(:item_type => item_type, :purpose => PURPOSE_SHARE)
+  def self.quick_add(item_type, person, purpose)
+   item = Item.new(:item_type => item_type, :purpose => purpose)
    item.owner = person
    item.status = STATUS_NORMAL
    item.save
