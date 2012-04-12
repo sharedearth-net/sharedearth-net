@@ -15,6 +15,12 @@ Nebojsa Zoric		- primary developer
 
 Juan Hawa Fernandez - developer
 
+Amit Ambardekar - developer
+
+Ankit Bansal - developer
+
+Laura Kuchar - developer
+
 Dwight M		- AJAX development
 
 
