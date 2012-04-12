@@ -49,11 +49,15 @@
 
 					<div class="inner-content">
 						<h2>
-							<% if params[:type].nil? -%>
-								Your Network
-							<% elsif trusted_network-%>
-								Trusted Network
-							<% end -%>
+              <% unless @entity.nil? -%>
+                <%= @entity.specific_entity.name %>
+              <% else -%>
+		            <% if params[:type].nil? -%>
+									Your Network
+								<% elsif trusted_network-%>
+									Trusted Network
+								<% end -%>
+              <% end -%>
 						</h2>
 
 						<p class="description">
