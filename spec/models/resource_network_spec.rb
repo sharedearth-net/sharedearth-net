@@ -52,3 +52,16 @@ describe ResourceNetwork do
   end
 
 end
+
+describe "Scopes" do
+
+    describe "#group scope" do
+      before :each do
+      end
+
+      it "should return a list of comments ordered by creation date" do
+#        users = User.unactive
+#        users.should == [@second_user]
+      end
+    end
+end

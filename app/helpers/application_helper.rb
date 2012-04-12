@@ -65,6 +65,8 @@ module ApplicationHelper
     link_to pluralize(person.trusted_network_size, 'person') + " in your trusted network", network_person_path(person, :only_path => only_path), link_options
   end
 
+  #N: Check this method
+
   def network_status_personal_network(person = nil, only_path = true, link_options = {})
     person ||= current_person
     link_to pluralize(person.personal_network_size, 'person') + " in your entire network", my_network_person_path(person, :only_path => only_path), link_options

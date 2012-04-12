@@ -75,7 +75,7 @@ class Village < ActiveRecord::Base
   end
 
   def network_activity
-    my_people_id = self.human_networks.entity_network(self.class.name).collect { |n| n.person_id }
+    my_people_id = self.human_networks.specific_entity_network(self).collect { |n| n.person_id }
     my_people_id << id
 
     EventDisplay.select('DISTINCT event_log_id').

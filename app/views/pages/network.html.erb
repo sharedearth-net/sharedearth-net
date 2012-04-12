@@ -7,14 +7,14 @@
 		  <%= image_tag("trusted_icon_yourself.png", :class => "thumb", :alt => "Trusted Network")  %> <!-- Trusted Network picture -->
 		  <% end -%>
 		<ul>
-			<li class="all <%= 'selected' if params[:type] == 'own' %>">
-        <%= link_to 'Your Network', network_path(:type => 'own') %>
+			<li class="all <%= 'selected' if params[:type].nil? && @entity.nil? %>">
+        <%= link_to 'Your Network', network_path %>
 			</li>
 			<li class="trusted <%= 'selected' if trusted_network %>">
 			  <%= link_to 'Trusted Network', network_path(:type => 'trusted') %>
 			</li>
       <% @entities.each do |entity| -%>
-      <li><%= link_to entity.specific_entity.name, network_path(:entity_id => entity.id) %></li>
+      <li class="<%= 'selected' if entity.id == @entity.try(:id) %>"><%= link_to entity.specific_entity.name, network_path(:entity_id => entity.id ) %></li>
       <% end unless @entities.empty? -%>
 			<!--
 			<li class="extend">
