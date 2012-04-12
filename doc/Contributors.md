@@ -1,7 +1,7 @@
 #sharedearth.net contributors
 
 #major
-Dan Gooden 		- founder
+Dan Gooden   	- founder
 
 Andrea Guerrini		- idea development & feedback
 
@@ -14,6 +14,12 @@ Predrag Tomcanji	- css\html creation
 Nebojsa Zoric		- primary developer
 
 Juan Hawa Fernandez - developer
+
+Amit Ambardekar - developer
+
+Ankit Bansal - developer
+
+Laura Kuchar - developer
 
 Dwight M		- AJAX development
 
