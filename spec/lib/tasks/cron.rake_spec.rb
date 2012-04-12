@@ -5,7 +5,7 @@ describe "cron rake tasks" do
   before do
     @rake = Rake::Application.new
     Rake.application = @rake
-    Rake.application.rake_require "lib/tasks/cron"
+    #Rake.application.rake_require "#{Rails.root}/lib/tasks"
     Rake::Task.define_task(:environment)
   end
 

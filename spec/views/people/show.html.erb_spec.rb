@@ -22,6 +22,7 @@ describe "people/show.html.erb" do
     assign(:person, @person)
     assign(:items, @person.items)
     assign(:unanswered_requests, [])
+    view.stub!(:params).and_return {{"id"=>"1"}}
   end
 
 

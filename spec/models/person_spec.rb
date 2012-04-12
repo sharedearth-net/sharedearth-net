@@ -195,6 +195,7 @@ describe Person, ".network_activity" do
   end
 
   before :each do
+    person.stub_chain(:human_networks).and_return([maria])
     person.stub!(:trusted_friends).and_return([maria])
   end
 

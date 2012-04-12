@@ -13,7 +13,7 @@ describe FbFriendsController do
 
   describe "GET 'index'" do
     before :each do
-      FbService.stub(:get_my_friends).and_return([juan])
+      FbService.stub_chain(:get_my_friends, :order).and_return([juan])
     end
 
     it "should be successful" do
@@ -24,7 +24,7 @@ describe FbFriendsController do
     it "should list all my fb friends" do
       get :index
       response.body.should match juan.name
-    end 
+    end
   end
 
   describe "GET 'search'" do
