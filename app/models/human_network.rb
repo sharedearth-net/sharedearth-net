@@ -7,7 +7,6 @@ class HumanNetwork < ActiveRecord::Base
 
   set_inheritance_column "network_type"
 
-  belongs_to :person, :foreign_key => :entity_id, :conditions => [ "entity_type = ", "Person" ]
   belongs_to :trusted_person, :class_name => "Person", :foreign_key => "person_id"
 
   scope :involves_as_trusted_person, lambda { |person| where(:person_id => person) }
