@@ -74,16 +74,6 @@ class Village < ActiveRecord::Base
     HumanNetwork.part_of_village(person).map(&:entity_id)
   end
 
-  def network_activity
-    my_people_id = self.human_networks.specific_entity_network(self).collect { |n| n.person_id }
-    my_people_id << id
-
-    EventDisplay.select('DISTINCT event_log_id').
-                 where(:person_id => my_people_id).
-                 order('event_log_id DESC').
-                 includes(:event_log)
-  end
-
   #handle_asynchronously :add_items!
   #handle_asynchronously :remove_items!
 
