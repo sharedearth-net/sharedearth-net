@@ -15,7 +15,7 @@ class Entity < ActiveRecord::Base
   end
 
   def network_activity
-    my_people_id = self.specific_entity.human_networks.specific_entity_network(self.specific_entity).collect { |n| n.person_id }
+    my_people_id = self.specific_entity.human_networks.collect { |n| n.person_id }
     my_people_id << id
 
     EventDisplay.select('DISTINCT event_log_id').
