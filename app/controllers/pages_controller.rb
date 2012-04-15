@@ -40,7 +40,8 @@ class PagesController < ApplicationController
       @events = @entity.network_activity.paginate(:page => params[:page], :per_page => 25)
     else
       @items = ResourceNetwork.all_items_from(@entities).sort_by{|i| i.item_type.downcase}
-      #@items = current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+      @items ||= []
+      @items += current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
 	    @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
     end
   end
