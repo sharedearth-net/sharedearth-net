@@ -46,6 +46,9 @@ GEM
     activesupport (3.0.7)
     acts_as_commentable (3.0.1)
     addressable (2.2.4)
+    airbrake (3.0.9)
+      activesupport
+      builder
     archive-tar-minitar (0.5.2)
     arel (2.0.10)
     attr_required (0.0.3)
@@ -329,6 +332,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   acts_as_commentable
+  airbrake
   autotest
   aws-s3
   aws-ses (~> 0.4.3)
@@ -343,6 +347,7 @@ DEPENDENCIES
   fb_graph
   ffaker
   guard-rspec
+  heroku
   heroku_san
   iron_worker
   mail
