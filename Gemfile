@@ -71,6 +71,8 @@ group :development, :test do
 end
 group :production do
   gem 'thin'
+  gem "airbrake"
+  gem "heroku"
 end
 gem "simplecov", :require => false, :group => :test
 gem 'activeadmin'
