@@ -19,7 +19,6 @@ Feature: Items management page
     And "Maria" is the owner of item with name "Mountain"
     When I fill in "search" with "Mountain"
     Then I press "Search"
-    And I should see "bike"
     And I should see "Mountain"
     And I follow "People"
     And I should not see "Maria"
