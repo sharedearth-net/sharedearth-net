@@ -3,9 +3,10 @@ require 'spec_helper'
 describe "pages/dashboard.html.erb" do
 
   let(:signedin_user)  { generate_mock_user_with_person }
-  let(:current_person) { Factory(:person, :name => "Current Person") }
+  let(:current_person) { mock_model(Person).as_null_object }
 
   before(:each) do
+    view.stub(:current_person).and_return(current_person)
     view.stub(:current_user).and_return(signedin_user)
     view.current_user.stub(:person).and_return(current_person)
     current_person.stub(:user).and_return(signedin_user)
@@ -38,35 +39,36 @@ describe "pages/dashboard.html.erb" do
       :requester => current_person,
       :gifter_id => gifter.id,
       :gifter_type => "Person",
-      :gifter => gifter, 
+      :gifter => gifter,
       :item_id => item.id,
       :item => item,
       :description => "CurrentPersonActsAsRequester",
       :status => ItemRequest::STATUS_REQUESTED,
       :created_at => Time.now
     ).as_null_object
-    
+
     current_person_gift = stub_model(ItemRequest,
       :requester_id => requester.id,
       :requester_type => "Person",
       :requester => requester,
       :gifter_id => current_person.id,
       :gifter_type => "Person",
-      :gifter => current_person, 
+      :gifter => current_person,
       :item_id => item.id,
       :item => item,
       :description => "CurrentPersonActsAsRequester",
       :status => ItemRequest::STATUS_REQUESTED,
       :created_at => Time.now
     ).as_null_object
-    
+
     @requests = assign(:requests, [current_person_request, current_person_gift])
   end
 
   it "renders a list of active requests" do
     first_request = @requests.first
     second_request = @requests.second
-    
+    @events = []
+
     render
     # first request
     rendered.should have_selector("a", :href => person_path(first_request.gifter))

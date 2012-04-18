@@ -13,6 +13,7 @@ Spork.prefork do
   require "shoulda-matchers"
   require 'factory_girl'
   require 'ffaker'
+  require 'ruby-debug'
 
 
   # Requires supporting ruby files with custom matchers and macros, etc,

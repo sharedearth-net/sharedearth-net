@@ -182,6 +182,8 @@ describe Person, ".network_activity" do
 
   let(:mr_t) { Factory(:person) }
 
+  let(:human_network) { Factory(:human_network, :entity => person, :person_id => maria.id)}
+
   let(:my_event_displays) do
     FactoryGirl.create_list(:event_display, 5, :person_id => person.id, :event_log_id => 1)
   end
@@ -195,7 +197,7 @@ describe Person, ".network_activity" do
   end
 
   before :each do
-    person.stub_chain(:human_networks).and_return([maria])
+    person.stub_chain(:human_networks, :personal_network).and_return([human_network])
     person.stub!(:trusted_friends).and_return([maria])
   end
 

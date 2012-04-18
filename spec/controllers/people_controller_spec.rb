@@ -261,18 +261,5 @@ describe PeopleController do
       end
     end
 
-    describe "GET my_network, this is DEPRECATED" do
-      before do
-        mock_person.chain_stub(:trusted_friends_items, :sort_by).and_return{mock_items}
-        signedin_user.stub(:network_activity).and_return{mock_event}
-        Person.stub(:find_by_id).with("37").and_return{mock_person}
-        get :my_network, :id => "37", :type => "trusted"
-      end
-
-      it "should return list of items in my network withouth hidden" do
-        #Deprecated
-        #assigns(:items).should == mock_person.trusted_friends_items("trusted").without_hidden.sort_by{|i| i.item_type.downcase}
-      end
-    end
   end
 end

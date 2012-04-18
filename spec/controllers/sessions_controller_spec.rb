@@ -73,6 +73,9 @@ describe SessionsController do
       do_get
       @user.person.email_notification_count.should eql(0)
     end
+    after do
+      @user.destroy
+    end
   end
 
 end
