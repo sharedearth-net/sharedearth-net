@@ -45,23 +45,24 @@ Feature: Viewing someone else's trusted network and my own
     Then I should see "Sidney"
     And I should see "Belgrade"
 
+    @javascript
   Scenario: I should see the list of my items only
-    And I follow "view network"
-    Then I should see "Mobile"
+    Then I follow "view network"
+    And I should see "Mobile"
+    And I should see "Pen"
+
+    @javascript
+  Scenario: I should see the list of items belong to specific group only
+    Then I follow "view network"
+    Then I follow "Belgrade"
+    And I should see "Mobile"
     And I should not see "Pen"
 
-  Scenario: I should see the list of items belong to specific group only
-    And I follow "view network"
-    And I should not see "Mobile"
-    And I should not see "Pen"
+  Scenario: I should see the list of items belong to specific group only not the other
+    Then I follow "view network"
     Then I follow "Sidney"
     And I should see "Mobile"
     And I should see "Pen"
 
-  Scenario: I should see the list of items belong to specific group only not the other
-    And I follow "view network"
-    And I should not see "Mobile"
-    And I should not see "Pen"
-    Then I follow "Belgrade"
-    And I should see "Mobile"
-    And I should not see "Pen"
+  Scenario:Check if there are duplicated items
+    Then I should see there are no duplicated items

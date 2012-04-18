@@ -1,6 +1,6 @@
 Given /^"(.*)" is the owner of item with name "(.*)"$/ do |name, item|
     person = Person.find_by_name("#{name}")
-    Factory(:item, :owner => person, :name => item)
+    Factory(:item, :owner => person, :name => item, :item_type => item)
 end
 
 Given /^"(.*)" is the owner of hidden item with name "(.*)"$/ do |name, item|
@@ -10,12 +10,12 @@ end
 
 Given /^I am the owner of item with name "(.*)"$/ do |item|
     person = Person.find_by_name("John")
-    Factory(:item, :owner => person, :name => item)
+    Factory(:item, :owner => person, :name => item, :item_type => item)
 end
 
 Given /^I am the owner of shareage item with name "([^"]*)"$/ do |item|
     person = Person.find_by_name("John")
-    Factory(:item, :owner => person, :name => item, :purpose => Item::PURPOSE_SHAREAGE)
+    Factory(:item, :owner => person, :name => item, :item_type => item, :purpose => Item::PURPOSE_SHAREAGE)
 end
 
 Given /^I am the owner of gift item with name "([^"]*)"$/ do |item|

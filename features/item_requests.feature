@@ -244,7 +244,7 @@ Feature: Item requests management page
    Scenario: Show request activity sentence when shareage item i  requested - requester
       Given "John" requested item with name "BMX" from "Maria"
       And I am looking at last request page
-      Then I should see "You requested Maria's bike for shareage"
+      Then I should see "You are requesting Maria's bike for shareage"
 
    #Shareage stage 2 check sentences for request and recent activity 4 tests
    @javascript
