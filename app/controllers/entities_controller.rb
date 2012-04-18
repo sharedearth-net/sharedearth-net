@@ -1,10 +1,6 @@
 class EntitiesController < ApplicationController
   before_filter :get_instances
 
-  def grow
-    @villages = Village.all
-  end
-
 	protected
 
   def index
