@@ -46,7 +46,7 @@ class Village < ActiveRecord::Base
     worker.entity_id = self.id
     worker.entity_type_id = EntityType::VILLAGE_ENTITY
     worker.items = entity.items
-    (Rails.env.test? || Rails.env.development?) ? worker.run_local : worker.queue
+    ENV['ENABLE_IRON_WORKER'].nil? ? worker.run_local : worker.queue
   end
 
   def add_item!(item)
@@ -67,7 +67,7 @@ class Village < ActiveRecord::Base
     worker = RemoveResource.new
     worker.entity_id = self.id
     worker.items = entity.items
-    (Rails.env.test? || Rails.env.development?) ? worker.run_local : worker.queue
+    ENV['ENABLE_IRON_WORKER'].nil? ? worker.run_local : worker.queue
   end
 
   def self.belongs_to_person(person)
