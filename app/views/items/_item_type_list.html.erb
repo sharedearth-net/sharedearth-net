@@ -1,0 +1,21 @@
+<ul class="clearfix">
+	<% if !items.nil? %>
+		<% 
+			item_types = item_types_with_gift_status(items)
+			item_types_length = item_types.length
+			column_size = (item_types_length / 3)
+			last_row_size = item_types_length % 3
+		%>
+		<% (0..(item_types_length-1)).each do |i| %>
+			<%
+				# adding items to display from left to right and top to bottom
+				# but selecting items from array such that they get displayed
+				# with ordering with top to bottom and left to right
+				column_index = i % 3
+				tranformed_i = column_index * column_size + (i / 3) + ( last_row_size > column_index ? column_index : last_row_size )
+				item_type = item_types[tranformed_i]
+			%>
+			<%= render "items/item_type", :item_type => item_type[:type], :is_gift => item_type[:is_gift] %>
+		<% end%>
+	<% end %>
+</ul>

@@ -3,7 +3,6 @@ define("sen/Page", ["dojo", "dojo/fx", "dojo/NodeList-fx", "dojo/NodeList-traver
 dojo.declare("sen.Page", null, {
     
 	constructor: function(params){
-        
 	},
 	
 	showNotice: function () {

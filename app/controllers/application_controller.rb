@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   if Rails.env.production?
     # Render 404's
     rescue_from ActiveRecord::RecordNotFound, :with => :missing_record_error
+    rescue_from ActionController::RoutingError, :with => :missing_page  #Rails 3.0/3.1 can't catch this error still
 
     # Render 501's
     rescue_from ActiveRecord::StatementInvalid, :with => :generic_error
@@ -19,6 +20,12 @@ class ApplicationController < ActionController::Base
     rescue_from FbGraph::Unauthorized, :with => :facebook_login
   end
 
+  def missing_route(exception = nil)
+    respond_to do |format|
+      format.html {render_404}
+    end
+  end
+
   private
 
   def fb_token
@@ -26,12 +33,10 @@ class ApplicationController < ActionController::Base
   end
 
   def next_policy_path
-    if not current_user.person.accepted_tc?
-      terms_path
-    elsif not current_user.person.accepted_tr?
-      transparency_index_path
+    if not current_user.person.accepted_tc? || current_user.person.accepted_tr?
+      legal_notices_path
     elsif not current_user.person.accepted_pp?
-      principles_terms_path
+      principles_legal_notices_path
     else
       current_person.has_reviewed_profile? ? dashboard_path : edit_person_path(current_person)
     end
@@ -100,11 +105,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def missing_page(exception = nil)
-    respond_to do |format|
-      format.html {render_404}
-    end
-  end
+
 
   #Error 501
   def generic_error(exception, message = "OK that didn't work. Try something else.")
@@ -113,6 +114,12 @@ class ApplicationController < ActionController::Base
       format.json do
         render :json => {:error => message}
       end
+    end
+  end
+
+  def missing_page(exception = nil)
+    respond_to do |format|
+      format.html {render_404}
     end
   end
 

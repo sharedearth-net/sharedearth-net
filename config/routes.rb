@@ -18,7 +18,7 @@ Sharedearthapp::Application.routes.draw do
 end
 
 
-  
+
   resources :terms, :only => [:index] do
     collection do
       put 'accept_tc'
@@ -26,16 +26,24 @@ end
       get 'principles'
     end
   end
-  
+
+  resources :legal_notices, :only => [:index] do
+    collection do
+      put 'accept_legal_notice'
+      put 'accept_pp'
+      get 'principles'
+    end
+  end
+
    resources :requested_invitations, :only => [:create]
-  
+
   #resources :requested_invitations, :only => [ :create ]
     #post "reguested_invitations/create"
-  
+
   resources :comments, :only => [:create]
 
   resources :invitations, :except => [:destroy, :edit, :show, :new]
-  
+
   get "invitations/validate"
   get "invitations/purge"
   get "invitations/preview"
@@ -51,25 +59,28 @@ end
       put "mark_as_normal"
       put "mark_as_lost"
       put "mark_as_damaged"
+			put "mark_as_hidden"
+      put "mark_as_unhidden"
+      post "share_mine"
     end
   end
 
   resources :people, :only => [:show, :edit, :update, :index, :destroy] do
-    member do 
+    member do
       get :network
       get :my_network
     end
   end
-    
-  resources :people_network_requests, :only => [:create, :destroy] do
+
+  resources :network_requests, :only => [:create, :destroy] do
     member do
       put "confirm"
       put "deny", :action => :destroy
     end
   end
 
-  resources :people_network, :only => [ :destroy ]
-  
+  resources :human_network, :only => [ :destroy ]
+
   resources :item_requests, :except => [:index, :destroy, :edit], :path => "requests", :as => "requests" do
     member do
       put "accept"
@@ -77,21 +88,39 @@ end
       put "complete"
       put "cancel"
       put "collected"
+      put "recall"
+      put "return"
+      put "acknowledge"
+      put "cancel_recall"
+      put "cancel_return"
+      put "returned"
       post 'new_comment'
     end
     resources :feedbacks
   end
-  
 
-  
+  resources :villages do
+  	member do
+  		put 'join'
+      put 'leave'
+  	end
+  end
+  resources :entities, :only => [:destroy] do
+    collection do
+    	get 'grow'
+    end
+  end
+
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
 
   match "/dashboard", :to => "pages#dashboard"
+  match "/network", :to => "pages#network"
   match "/principles", :to => "terms#principles"
   match '/about' => 'pages#about'
   match '/contribute' => 'pages#contribute'
   match '/no_javascript' => 'pages#no_javascript'
+  match '/collect_email' => 'pages#collect_email'
 
   root :to => "pages#index"
 
@@ -151,4 +180,6 @@ end
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+
+  match '*a', :to => 'application#missing_route'   #Catch wrong route problem
 end

@@ -2,16 +2,20 @@ Factory.define :user do |u|
   u.provider "Facebook"
   u.sequence(:uid) { |n|  Time.now.to_i.to_s + "#{n}" }
   u.token '111'
+  u.last_activity Time.now
 end
 
 Factory.define :person do |p|
   p.name "John"
+  p.email "john@doe.com"
+  p.location "Australia"
   p.association :user, :factory => :user
   p.association :reputation_rating, :factory => :reputation_rating
   p.authorised_account true
   p.accepted_tc true
   p.accepted_pp true
-  p.accepted_tr true 
+  p.accepted_tr true
+  p.email_notification_count 0
 end
 
 Factory.define :new_person, :class => Person do |p|
@@ -44,6 +48,7 @@ Factory.define :item do |i|
   i.association :owner, :factory => :person
   i.status Item::STATUS_NORMAL
   i.purpose Item::PURPOSE_SHARE
+  i.available true
   i.photo_file_name "test.jpg"
   i.photo_content_type "image/jpeg"
   i.photo_file_size 100000
@@ -66,17 +71,22 @@ Factory.define :feedback do |f|
   f.feedback Feedback::FEEDBACK_POSITIVE
 end
 
-Factory.define :people_network do |p|
-  p.entity_type_id 7
+Factory.define :human_network do |p|
+  p.network_type "TrustedNetwork"
 end
 
-Factory.define :people_network_request do |p|
+Factory.define :new_village_network, :class => HumanNetwork do |p|
+  p.network_type "Member"
+  p.entity_type "Village"
+end
+
+Factory.define :network_request do |p|
 end
 
 Factory.define :event_log do |i|
   i.association :primary, :factory => :person
   i.primary_short_name 'Shary'
-  i.primary_full_name 'Shary Demo'  
+  i.primary_full_name 'Shary Demo'
 end
 
 Factory.define :event_display do |e|
@@ -103,8 +113,21 @@ Factory.define :invitation do |i|
   i.invitation_active true
 end
 
-Factory.define :comment do |comment|
+Factory.define :comment do |i|
+  i.comment "My awesome comment"
 end
 
-Factory.define :resource_network do |res_network|
+Factory.define :resource_network do |i|
+  i.entity_type_id 1
+  i.resource_type_id 2
+end
+
+Factory.define :village do |i|
+  i.name 'Sidney'
+  i.description 'Opera house'
+  i.street 'By the sea'
+  i.country 'Australia'
+  i.state 'Australia'
+  i.sequence(:uid) { |n|  Time.now.to_i.to_s + "#{n}" }
+  i.postcode 200
 end

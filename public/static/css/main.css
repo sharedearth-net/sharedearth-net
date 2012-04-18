@@ -138,6 +138,8 @@ a:hover {
 				float: none;
 				line-height: 12px;
 				margin: 0;
+				text-align:center;
+				width:96px;
 			}
 		
 			.button-holder-connect h2 {
@@ -146,13 +148,24 @@ a:hover {
 				text-indent: -1000em;
 			}
 		
-			.button-holder-connect a:link,
-			.button-holder-connect a:visited {
+			.button-holder-connect h2 a:link,
+			.button-holder-connect h2 a:visited {
 				display: block;
 				background: url('../graphics/bt-connect.png') no-repeat top left;
 				width: 96px;
 				height: 42px;
 				overflow: hidden;
+			}
+			
+			.button-holder-connect p a:link,
+			.button-holder-connect p a:visited {
+				width: auto;
+				font-size: 10px;
+				font-family: verdana, arial, sans-serif;
+				float: none;
+				line-height: 12px;
+				margin: 0;
+				color:inherit;
 			}
 			
 			
@@ -176,7 +189,7 @@ a:hover {
 		#footer {
 			clear: both;
 			text-align: left;
-			padding-top: 205px;
+			padding-top: 190px;
 		}
 		
 			#footer p {
@@ -184,7 +197,50 @@ a:hover {
 				color: #949479;
 				font-family: verdana, arial, sans-serif;
 				margin-left: 11px;
+				width: 600px;
+				float: left;
+				margin-top: 15px;
 			}
+			
+			#footer ul {
+				width: 92px;
+				float: right;
+				margin-right: 9px;
+			}
+			
+				#footer ul li {
+					text-indent: -1000em;
+					display: block;
+					float: left;
+				}
+				
+					#footer ul li a:link,
+					#footer ul li a:visited {
+						display: block;
+						background: url('../graphics/sp-social.png') no-repeat bottom left;
+						width: 40px;
+						height: 40px;
+						overflow: hidden;
+					}
+					
+					#footer ul li a:hover {
+						background-position: top left;
+					}
+					
+				#footer ul li.facebook {
+					margin-left: 12px;
+				}
+					
+					#footer ul li.facebook a:link,
+					#footer ul li.facebook a:visited {
+						background-position: bottom right;
+					}
+					
+					#footer ul li.facebook a:hover {
+						background-position: top right;
+					}
+					
+					
 
 			
 /* invitation page */

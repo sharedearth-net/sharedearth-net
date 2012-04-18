@@ -90,7 +90,7 @@
 			
 		</div>
 	
-		<% unless @comments.nil?%>
+		<% unless @comments.nil? || !@item_request.involved?(current_person) %>
 		<div class="content-box-holder">
 			<ul>
 				<li class="content-box clearfix">

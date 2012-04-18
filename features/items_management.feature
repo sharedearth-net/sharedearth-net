@@ -2,11 +2,11 @@ Feature: Manage Items
    In order to share my belongings
    As a logged user
    I want to create and manage items
-  
+
   Background:
     Given the user is logged in
     Given a person exists with name: "Maria"
-  
+@javascript
   Scenario: Adding new item for gifting
     Given I am on the new item page
     When I fill in the following:
@@ -18,7 +18,7 @@ Feature: Manage Items
     And I should see "Samsung"
     And I should see "Nice mobile phone"
     And I should see "phone"
-  
+
   Scenario: Adding new item for sharing
     Given I am on the new item page
     Given a person exists
@@ -31,7 +31,20 @@ Feature: Manage Items
     And I should see "Samsung"
     And I should see "Nice mobile phone"
     And I should see "phone"
-    
+
+  Scenario: Adding new item for shareage
+    Given I am on the new item page
+    Given a person exists
+    When I fill in the following:
+     | Item type   | phone               |
+     | Name        | Samsung             |
+     | Description | Nice mobile phone   |
+    And I choose "shareage"
+    Then I press "Save"
+    And I should see "Samsung"
+    And I should see "Nice mobile phone"
+    And I should see "phone"
+
   Scenario: Adding new item for gifting
     Given I am on the new item page
     When I fill in the following:
@@ -46,7 +59,7 @@ Feature: Manage Items
     And Looking at person page with name "John"
     Then I follow "view item"
     And I should see "Samsung"
-    
+
   Scenario: Item is searched and found record in trusted network
     Given "Maria" has trusted relationship with "John"
     And "Maria" is the owner of item with name "Mountainbike"
@@ -55,12 +68,12 @@ Feature: Manage Items
     And I should see "withdraw trust"
     Then I should see "bike"
     When I fill in "search" with "bike"
-    Then I press "Search" 
+    Then I press "Search"
     And I should see "bike"
     And I should see "Mountainbike"
     Then I should see "view item"
-    And I should see "From your trusted network"
-    
+    And I should see "From sharedearth.net network"
+
   Scenario: Item is searched and found record in extended network
     Given "Maria" has trusted relationship with "John"
     And "Maria" is the owner of item with name "Plane"
@@ -68,21 +81,22 @@ Feature: Manage Items
     And "Nick" is the owner of item with name "Mobile"
     Given "Maria" has trusted relationship with "Nick"
     And Looking at person page with name "Nick"
-    And I should see "acknowledge trust"
+    And I should see "trust"
     Then I should see "Mobile"
     When I fill in "search" with "Mobile"
-    Then I press "Search" 
-    And I should not see "Mobile"
-    Then I should not see "view item"
-    And I should not see "From your extended network"
-    
+    Then I press "Search"
+    And I should see "Mobile"
+    Then I should see "view item"
+    And I should see "From sharedearth.net network"
+  @javascript
   Scenario: Item is searched but it belongs to someone that is not in my trusted nor extended network
     And "Maria" is the owner of item with name "Bike"
     And Looking at person page with name "Maria"
     Then I should see "Bike"
     When I fill in "search" with "Bike"
-    Then I press "Search" 
-    Then I should see "Search term not found"
+    Then I press "Search"
+    And I should see "From sharedearth.net network"
+    And I should see "Bike"
 
    Scenario: Creating an Item without a purpose
       Given I am on the new item page
@@ -107,8 +121,9 @@ Feature: Manage Items
       And I fill in "Item type" with "Bmw"
       And I choose "shareage"
       And I press "Save"
-      Then I should not have a new Item
-      And I should see "prohibited this item from being saved"
+      Then I should see "bmw"
+      And I should see "A nice ride"
+      And I should see "shareage"
 
    Scenario: Create Item without description
       Given I am on the new item page
@@ -132,7 +147,7 @@ Feature: Manage Items
       When I go to the show page of that item
       Then I should not see any of the action links
       And I should see "This item has been deleted"
-   
+
    Scenario: Editing a deleted item
       Given an item exist
       And the logged person is the owner
@@ -156,3 +171,25 @@ Feature: Manage Items
     Given I am on the new item page
     When I press "Save"
     Then I should see "Post this item on Facebook"
+
+  @javascript
+  Scenario: Show 'hidden' tag on own profile page
+    Given "John" is the owner of hidden item with name "Mobile"
+    Given Looking at my person page
+    Then I should see "hidden"
+    And I should see "Mobile"
+
+  @javascript
+  Scenario: Don't show 'hidden' tag on own profile page
+    Given "John" is the owner of item with name "Mobile"
+    Given Looking at my person page
+    Then I should not see "hidden"
+    And I should see "Mobile"
+  @javascript
+  Scenario: Hide one of my items
+    Given "John" is the owner of item with name "Mobile"
+    Given Looking at my person page
+    Then I should not see "hidden"
+    Then I follow "Mobile"
+    And I follow "hide"
+    And I should see "hidden"

@@ -1,15 +1,15 @@
-<div class="inner-content">
-	<p>
-		<%= render :partial => "shared/activity_log_sentence.html.erb", :locals => { :activity_log => activity_log } %>
-	</p>
 
-	<div class="action clearfix">
-		<ul>
-			<li><%= time_ago_in_words activity_log.created_at %> ago</li>
-			<li>
-				<%= render :partial => "shared/activity_log_actions_compact.html.erb", :locals => { :activity_log => activity_log } %>
-			</li>
-		</ul>
-	</div>
+<p>
+	<%= render :partial => "shared/activity_log_sentence.html.erb", :locals => { :activity_log => activity_log } %>
+</p>
+
+<div class="action clearfix">
+	<ul>
+		<li class="time-since"><%= time_ago_in_words activity_log.created_at %> ago</li>
+		<li>
+			<%= render :partial => "shared/activity_log_actions_compact.html.erb", :locals => { :activity_log => activity_log } %>
+		</li>
+	</ul>
 </div>
+
 

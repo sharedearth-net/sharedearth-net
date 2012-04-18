@@ -8,13 +8,19 @@ class AddEntityTypeNames < ActiveRecord::Migration
                       {:id => 4, :name => 'Village'},
                       {:id => 5, :name => 'Community'},
                       {:id => 6, :name => 'Project'},
-                      {:id => 7, :name => 'Trusted Person'}
+                      {:id => 7, :name => 'Trusted Person'},
+                      {:id => 8, :name => 'Mutual Person'}
                       ]
-     entity_types.each do |entity|
-       et = EntityType.new(:entity_type_name => entity[:name])
-       et.id = entity[:id]
-       et.save!
-     end
+                      
+     begin
+       entity_types.each do |entity|
+         et = EntityType.new(:entity_type_name => entity[:name])
+         et.id = entity[:id]
+         et.save!
+       end
+    rescue
+      puts "Could not seed EntityType table"
+    end
   end
 
   def self.down

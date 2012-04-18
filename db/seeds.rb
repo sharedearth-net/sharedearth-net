@@ -9,3 +9,4 @@
 AdminUser.create!(:email    => 'admin@senlocal.heroku.net', 
                   :password => 'password', 
                   :password_confirmation => 'password')
+

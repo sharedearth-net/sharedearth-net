@@ -26,14 +26,15 @@ en:
       marked_as_lost: "Item has been marked as lost."
       marked_as_damaged: "Item has been marked as damaged."
       is_deleted: "That Item has been deleted!"
+      is_not_available: "This is item is currently not available."
       in_use: "Can't do that. Item is currently in use."
     people:
       requested_trusted_relationship: "Created request to acknowledge trusted relationship."
       only_own_network: "Sorry. You can only see your own network"
-    people_network_request:
+    network_request:
       request_confirmed: "Trust request has been accepted."
       destroy: "Cancelled request to acknowledge trusted relationship."
-    people_network:
+    human_network:
       destroy: "You withdrew your trust in this person."
     invitations:
       wrong_data: "Please enter correct data in fields"

@@ -15,6 +15,10 @@ module Sharedearthapp
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
      # config.autoload_paths += %W(#{config.root}/app/middlewares)
+    config.autoload_paths += %W(#{Rails.root}/lib/workers)
+    config.autoload_paths += %W(#{config.root}/lib/base)
+    config.autoload_paths += Dir["#{Rails.root}/app/models/*"].find_all { |f| File.stat(f).directory? }
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

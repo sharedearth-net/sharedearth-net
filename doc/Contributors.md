@@ -1,7 +1,7 @@
 #sharedearth.net contributors
 
 #major
-Dan Gooden 		- founder
+Dan Gooden   	- founder
 
 Andrea Guerrini		- idea development & feedback
 

@@ -1,4 +1,4 @@
-<li class="<%= cycle :even, ''  %> clearfix" style="width:430px;">
+<li class="<%= cycle :even, ''  %> clearfix">
   <div class="comment-box">
 
     <%=form_for Comment.new, 
@@ -18,7 +18,6 @@
                          :cols => '13', 
                          :id => :comment, 
                          :class => 'new-comment-text', 
-                         :style => 'width:418px;',
                          :'data-default' => 'Private discussion...',
                          :value => 'Private discussion...' %>
         </div>

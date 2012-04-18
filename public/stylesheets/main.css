@@ -117,12 +117,12 @@ a.normal:visited {
 			width: 920px;
 			margin-left: 21px;
 			float: left;
-			margin-top: 10px;
+			margin-top: 6px;
 		}
 
 			.logo-type-holder {
-				width: 216px;
-				height: 24px;
+				width: 244px;
+				height: 28px;
 				text-indent: -1000em;
 				overflow: hidden;
 			}
@@ -132,15 +132,15 @@ a.normal:visited {
 				overflow: hidden;
 				display: block;
 				background: url('../images/logo-type.png') no-repeat top left;
-				width: 216px;
-				height: 24px;
+				width: 244px;
+				height: 28px;
 			}
 				
 			.status-holder {
 				width: 300px;
 				float: right;
 				text-align: right;
-				margin-top: 3px;
+				margin-top: 7px;
 			}
 			
 				.status-holder ul {
@@ -453,6 +453,10 @@ a.normal:visited {
 								float: left;
 								margin-right: 17px;
 							}
+							
+							.inner-content .action ul li.last {
+								margin-right: 0;
+							}
 	
 
 	/* global - sidebar */
@@ -603,14 +607,12 @@ a.normal:visited {
 				margin-bottom: 10px;
 			}
 
-				.items-list ul li .thumb {
-					max-height: 50px;
+				.items-list ul li .item-image-holder {
 					float: left;
-					margin-right: 10px;
-					margin-top: 3px;
+					width: 60px;
 				}
 
-				.items-list ul li div {
+				.items-list ul li .item-info {
 					width: 430px;
 					float: left;
 				}
@@ -637,6 +639,10 @@ a.normal:visited {
 						    float: left;
 							margin: 0 0 6px 0;
 							line-height: 14px;
+						}
+						
+						.gift-item {
+							color:#127e0e !important;
 						}
 							
 		
@@ -798,6 +804,10 @@ a.normal:visited {
 		width: 516px;
 	}
 	
+	#dashboard-page .loader {
+	    margin-top: 20px;
+	}
+	
 	#dashboard-page #content p {
 		margin-bottom: 0;
 	}
@@ -820,6 +830,10 @@ a.normal:visited {
 	
 		#dashboard-page .content-box .thumb {
 			width: 50px;
+		}
+		
+		#dashboard-page .dashboard-recent-activity .content-box .thumb {
+			width: 41px;
 		}
 		
 			#dashboard-page .inner-content {
@@ -857,7 +871,38 @@ a.normal:visited {
 					color: #127e0e;
 				}
 				
-	
+
+		/* dashboard - content - network status info */
+		
+		#dashboard-page .network-status-info {
+			width:456px;
+		}
+
+			#dashboard-page .network-status-info>img {
+				width:456px;
+			}
+			
+			#dashboard-page .network-status-info li.status-line {
+				padding:12px 15px 0 0;
+				width:426px;
+			}
+
+			#dashboard-page .network-status-info a.view-network {
+				float:right;
+				color: #81927B;
+				font-size: 11px;
+				padding-right:10px;
+			}
+			
+			#dashboard-page .network-status-info li.content-box:last-child {
+				padding-bottom:2px;
+			}
+
+			#dashboard-page .network-status-info li p {
+				line-height:20px;
+			}
+		
+
 		/* dashboard - content - comments */
 		
 		#dashboard-page #content ul.comment-list {
@@ -894,8 +939,22 @@ a.normal:visited {
 	
 	#dashboard-page #sidebar {
 		margin-left: 30px;
+		margin-top: 0px;
 		width: 456px;
 	}
+	
+		#dashboard-page #sidebar .network_status_divider {
+			width:456px;
+		}
+		
+		#dashboard-page #sidebar .network-activity {
+			margin-top:10px;
+		}
+	
+		#dashboard-page #sidebar h2 {
+			line-height: 14px;
+			margin-top: 20px;
+		}
 	
 		#dashboard-page img.empty-village {
 			display: none;
@@ -1008,6 +1067,12 @@ a.normal:visited {
 	}
 	
 	
+		#profile-page  #content .items-title {
+			padding-left: 165px;
+			padding-right: 0;
+			width: 451px;
+		}
+	
 		/* profile page - content - items-list */
 
 		#profile-page  #content .items-list {
@@ -1111,11 +1176,17 @@ a.normal:visited {
 			    margin-top: 0;
 			}
 			
-				#profile-page #content .items-list .requests ul li {
-
+				#profile-page #content .items-list .requests ul li.item {
+					margin-bottom: 9px;
+				}
+				
+				#profile-page .items-list .requests ul li div.avatar-holder {
+					float: left;
+				    width: 60px;
 				}
 			
 					#profile-page .items-list .requests ul li div {
+						float: left;
 					}
 			
 			
@@ -1185,10 +1256,12 @@ a.normal:visited {
 			margin-top: 9px;
 		}	
 		
-		#profile-page #sidebar .trust-reputation-box h2.rhs-link {
+		#profile-page #sidebar .trust-reputation-box .rhs-link {
+			/*
 			float: right;
-			text-align: right;
 			font-size: 14px;
+			*/
+			position:absolute;right:0px;bottom:2px;text-align: right;
 		}
 				
 		.trust-reputation-box h3 {
@@ -1215,6 +1288,10 @@ a.normal:visited {
 					float: left;
 					margin-right: 17px;
 					font-size: 11px;
+				}
+				
+				ul.action-list li.last {
+					margin-right: 0;
 				}
 				
 				
@@ -1482,6 +1559,7 @@ a.normal:visited {
 	/* request-page - content */
 		
 	#request-page #content {
+		width: 616px;
 	}
 		
 		#request-page #content .content-box-holder {
@@ -1489,12 +1567,12 @@ a.normal:visited {
 		}
 		
 			#request-page #content .content-box {
-				width: 524px;
+				width: 616px;
 			}
 		
 				#request-page #content .inner-content {
 		  			overflow: hidden;
-					width: 359px;
+					width: 451px;
 				}
 		
 					#request-page #content .action-buttons-list {
@@ -1521,8 +1599,8 @@ a.normal:visited {
 			}
 		
 			#request-page #content .discussion-holder {
-				width: 359px;
-				margin: 0 0 0 165px;
+				width: 466px;
+				margin: 0 0 0 150px;
 				overflow: hidden;
 			}
 		
@@ -1533,7 +1611,7 @@ a.normal:visited {
 			color: #127E0E;
 		    float: none;
 		    font-size: 12px;
-			width: 351px;
+			width: 458px;
 			background: #f4f9eb;
 		}
 		
@@ -1552,19 +1630,20 @@ a.normal:visited {
 				color: #127E0E;
 			}
 	
-			#request-page #content ul.comment-list .time-ago {
+			#request-page #content ul.comment-list span.time-ago {
 				float: right;
-			    width: 80px;
 				color: #838683;
 				font-size: 11px;
-				margin-top: 18px;
+				text-align: right;
+				display: auto;
+				height: auto;
 			}
 	
 				#request-page #content ul.comment-list p {
 					clear: none;
 					padding-top: 4px;
 					padding-right: 4px;
-					width: 227px;
+					width: 414px;
 					color: #333;
 					font-size: 12px;
 				}
@@ -1583,7 +1662,7 @@ a.normal:visited {
 				}
 				
 				#request-page #content .comment-box textarea {
-					width: 349px;
+					width: 456px;
 					color: #838683;
 					font-size: 11px;
 				}
@@ -1596,6 +1675,10 @@ a.normal:visited {
 
 	/* request - sidebar */	
 	
+	#request-page #sidebar {
+		margin-left: 30px; 
+	}
+	
 	#request-page #sidebar h2 {
 		padding-left: 16px;
 	}
@@ -1605,14 +1688,12 @@ a.normal:visited {
 			padding-left: 0;
 			float: left;
 			width: 50%;
-			height: 17px;
-		    margin-top: 9px;
+			height: 23px;
+		  margin-top: 7px;
 		}	
 	
-		#request-page #sidebar .trust-reputation-box h2.rhs-link {
-			float: right;
-			text-align: right;
-			font-size: 14px;
+		#request-page #sidebar .trust-reputation-box .rhs-link {
+			position:absolute;right:0px;bottom:2px;
 		}
 		
 		
@@ -2057,6 +2138,10 @@ a.normal:visited {
 			font-size: 11px;
 			color: #127E0E;
 		}
+		
+			#search-page #content h3.default-title {
+				margin-bottom: 9px;
+			}
 
 			#search-page #content h2 img {
 				display: inline;
@@ -2074,11 +2159,9 @@ a.normal:visited {
 				margin-bottom: 4px;
 			}
 
-				#search-page .items-list ul li .thumb {
-				    float: left;
-				    margin-right: 10px;
-				    margin-top: 3px;
-				    max-height: 50px;
+				#search-page .items-list ul li .item-image-holder {
+					float: left;
+					width: 60px;
 				}
 
 				#search-page a.communities:link,
@@ -2113,7 +2196,7 @@ a.normal:visited {
 			}
 
 			#search-page #content ul li.people-holder p {
-			    padding-top: 17px;
+			    padding-top: 9px;
 			}
 			
 			
@@ -2134,6 +2217,13 @@ a.normal:visited {
 				#search-page #content ul li.people-holder p.action-link a:link,
 				#search-page #content ul li.people-holder p.action-link a:visited {
 					font-size: 11px;
+					color: #62775a;
+				}
+				
+				
+				#search-page #content ul li.people-holder div {
+				    float: left;
+					width: 480px;
 				}
 				
 
@@ -2473,14 +2563,12 @@ a.normal:visited {
 		float: left;
 		padding-left: 0;
 		width: 50%;
-		height: 17px;
-		margin-top: 9px;
+		height: 23px;
+		margin-top: 7px;
 	}
 
-	#items-page #sidebar .trust-reputation-box h2.rhs-link {
-	    float: right;
-	    font-size: 14px;
-	    text-align: right;
+	#items-page #sidebar .trust-reputation-box .rhs-link {
+		position:absolute;right:0px;bottom:2px;
 	}
 
 			
@@ -2557,10 +2645,8 @@ a.normal:visited {
 				margin-top: 9px;
 			}
 
-				#item-profile-form-page #sidebar .trust-reputation-box h2.rhs-link {
-					float: right;
-				    font-size: 14px;
-				    text-align: right;
+				#item-profile-form-page #sidebar .trust-reputation-box .rhs-link {
+					position:absolute;right:0px;bottom:2px;
 					display: none;
 				}
 
@@ -2973,32 +3059,51 @@ a.normal:visited {
 
 	#terms-conditions-page #content {
 		width: 100%;
+        font-family: verdana, tahoma, arial, sans-serif;
 	}
 
 		#terms-conditions-page img.main-pic {
 			width: 351px;
-			margin: 0 auto;
+			margin: 0px auto 19px auto;
 			display: block;
 		}
 
-		#terms-conditions-page #content h2 {
-			color: #127e0e;
-			text-align: center;
-			font-weight: bold;
+		#terms-conditions-page #content h1 {
+			color: #5c5c5c;
 			font-size: 15px;
-			line-height: 39px;
-			margin-top: 12px;
-			font-family: verdana, tahoma, arial, sans-serif;
+			line-height: 16px;
+			margin: 30px 0 12px 0;
+			font-weight: bold;
+            text-align: center;
+		}
+
+		#terms-conditions-page #content h1.green {
+			color: #127e0e;
+		}
+
+		#terms-conditions-page #content h2 {
+			color: #62775a;
+			font-size: 14px;
+			margin-bottom: 10px;
+			line-height: 15px;
+			margin-top: 18px;
+			font-weight: bold;
+            text-align: center;
+		}
+
+
+		#terms-conditions-page #content h2.green {
+			color: #127e0e;
 		}
 
 		#terms-conditions-page #content h3 {
 			color: #5c5c5c;
-			font-size: 15px;
+			font-size: 14px;
+			margin-bottom: 10px;
+			line-height: 15px;
+			margin-top: 13px;
 			font-weight: bold;
-			font-family: verdana, tahoma, arial, sans-serif;
-			line-height: 20px;
-			text-align: center;
-			margin: 19px 0 31px 0;
+            text-align: center;
         }
 
 			#terms-conditions-page #content h3 span {
@@ -3006,25 +3111,18 @@ a.normal:visited {
 			}
 
         #terms-conditions-page #content h3.bottom-title {
-                font-size: 14px;
-                color: #5c5c5c;
-                font-weight: bold;
-                margin: 0 0 13px 0;
-                line-height: 15px;
-                text-align: center;
-                font-family: verdana, tahoma, arial, sans-serif;
-                margin-top: 27px;
-
-        }
+			margin-top: 20px;
+            font-size: 13px;
+			margin-bottom: 13px;        }
 
 
 		#terms-conditions-page #content h4 {
 			color: #5c5c5c;
-			font-size: 12px;
-			line-height: 16px;
-			margin: 19px 0 12px 0;
+			font-size: 11px;
+			line-height: 15px;
+			margin-top: 13px;
+            margin-bottom: 13px;
 			font-weight: bold;
-			font-family: verdana, tahoma, arial, sans-serif;
 		}
 
 		#terms-conditions-page #content h5 {
@@ -3033,7 +3131,6 @@ a.normal:visited {
 			line-height: 15px;
 			margin-top: 13px;
 			font-weight: bold;
-			font-family: verdana, tahoma, arial, sans-serif;
 		}
 
 		#terms-conditions-page #content h5.bottom-separated {
@@ -3047,19 +3144,126 @@ a.normal:visited {
 			text-align: center;
 		}
 
+		#terms-conditions-page #content h6 {
+			color: #62775a;
+			font-size: 13px;
+			line-height: 19px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+		}
+
 		#terms-conditions-page #content p {
 			color: #9C9C9C;
 			font-size: 11px;
 			line-height: 12px;
 			margin: 0;
-			font-family: verdana, tahoma, arial, sans-serif;
+		}
+
+
+		#terms-conditions-page #content p.principles {
+			color: #62775a;
+			font-size: 13px;
+			line-height: 19px;
+			margin: 0;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+		}
+
+		#terms-conditions-page #content p.top-separated {
+			color: #838683;
+			font-size: 11px;
+			line-height: 15px;
+			margin-top: 13px;
+			font-weight: bold;
 		}
 
 		#terms-conditions-page #content .buttons-holder {
-			width: 150px;
+			width:153px;
 			padding-top: 3px;
 			margin: 0 auto;
+            text-align: center;
 		}
+
+        /* Contribute Page */
+        #terms-conditions-page #content p.principles span.contribute {
+            display:inline;
+            text-decoration: none;
+            color: #127e0e;
+		}
+
+        /* Principles Page */
+		#terms-conditions-page.principles #content h3 {
+			color: #EDA162;
+			font-size: 14px;
+			margin-bottom: 10px;
+			line-height: 15px;
+			margin-top: 13px;
+			font-weight: bold;
+            text-align: center;
+        }
+
+        #terms-conditions-page.principles #content .buttons-holder {
+            width: 167px;
+            margin: auto;
+        }
+
+        #terms-conditions-page.principles .buttons-holder ul {
+			position: relative;
+        }
+
+            #terms-conditions-page.principles .buttons-holder ul li {
+                width: 77px;
+                height: 24px;
+                display: block;
+                float: left;
+                margin-right: 13px;
+                text-indent: -1000em;
+            }
+
+            #terms-conditions-page.principles .buttons-holder ul li.no {
+                margin-right: 0;
+            }
+
+                #terms-conditions-page.principles .buttons-holder ul li a:link,
+                #terms-conditions-page.principles .buttons-holder ul li a:visited {
+                    display: block;
+                    background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
+                    width: 77px;
+                    height: 24px;
+                }
+
+
+                #terms-conditions-page.principles .buttons-holder ul li.no a:link,
+                #terms-conditions-page.principles .buttons-holder ul li.no a:visited {
+                    background: url('../images/bg-bt-no-tc.png') no-repeat top left;
+                }
+
+				#terms-conditions-page.principles .buttons-holder ul li input[type="submit"] {
+					display: block;
+                    background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
+                    width: 77px;
+                    height: 24px;
+					border: none;
+					overflow: hidden;
+					cursor: pointer;
+					text-indent: -1000em;
+				}
+
+				#terms-conditions-page.principles .post-to-wall {
+					font-family: verdana,tahoma,arial,sans-serif;
+					font-size: 13px;
+					color: #9c939c;
+				    font-weight: normal;
+					margin-top: 13px;
+					position: absolute;
+					top: 25px;
+					left: -125px;
+					text-indent: 0;
+					width: 500px;
+				}
+
 
 
 /*............Static Pages (e.g. loged out, 404, 501) ............*/
@@ -3071,7 +3275,30 @@ a.normal:visited {
 	#static-page #content {
 		float: none;
 		width: 100%;
+		text-align: center;
 	}
+	
+	#static-page #content #columns-holder {
+		#position: relative;
+		#top: -50%;
+		width: 1002px;
+	}
+	
+	
+	#static-page #content .vertical-positioner-outside {
+		display: table;
+		height: 488px;
+		#position: relative;
+		overflow: hidden;
+	}
+	
+	#static-page #content .vertical-positioner-inside {
+		#position: absolute;
+		#top: 50%;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	
 	
 		#static-page #content h4 {
 			font-size: 26px;
@@ -3082,215 +3309,13 @@ a.normal:visited {
 		#static-page #content p {
 			font-size: 22px;
 			color: #5c5c5c;
+			text-align: center;
 		}
 		
 			#static-page #content p a:link,
 			#static-page #content p a:visited {
 				color: #62775a;
 			}
-
-
-
-/*............Site Information Pages (e.g. About, Transparency, Principles)............*/
-	
-#site-information-pages {
-
-}
-
-	#site-information-pages #content {
-		width: 80%;
-        margin-left: 100px;
-        font-family: arial, sans-serif;
-	}
-
-		#site-information-pages img.main-pic {
-			width: 351px;
-			margin: 0 auto;
-			display: block;
-		}
-
-		#site-information-pages #content h2 {
-			color: #127e0e;
-			text-align: center;
-			font-weight: bold;
-			font-size: 15px;
-			line-height: 39px;
-			margin-top: 12px;
-            margin-bottom: 2px;
-			font-family: verdana, tahoma, arial, sans-serif;
-		}
-
-		#site-information-pages #content h3 {
-                font-size: .813em;
-				color: #127e0e;
-				font-weight: normal;
-				margin: 0 0 13px 0;
-				line-height: 15px;
-                text-align: center;
-		}
-
-			#site-information-pages #content h3 span {
-				text-decoration: underline;
-			}
-
-			#site-information-pages #content h3.bottom-title {
-				margin-top: 27px;
-				font-size: 14px;
-                font-weight: bold;
-                font-family: verdana, tahoma, arial, sans-serif;
-
-			}
-
-		#site-information-pages #content h4 {
-			color: #5c5c5c;
-			font-size: 15px;
-			line-height: 16px;
-			margin: 19px 0 12px 0;
-			font-weight: bold;
-			font-family: verdana, tahoma, arial, sans-serif;
-            text-align: center;
-		}
-
-		#site-information-pages #content h5 {
-			color: #5c5c5c;
-			font-size: 14px;
-			margin-bottom: 10px;
-			line-height: 15px;
-			margin-top: 13px;
-			font-weight: bold;
-			font-family: verdana, tahoma, arial, sans-serif;
-            text-align: center;
-		}
-
-		#site-information-pages #content h5.bottom-separated {
-			margin-top: 0;
-			margin-bottom: 13px;
-		}
-
-		#site-information-pages #content h5.centered {
-			margin-top: 26px;
-			margin-bottom: 13px;
-			text-align: center;
-		}
-
-		#site-information-pages #content p {
-			color: #9C9C9C;
-			font-size: 13px;
-			line-height: 19px;
-			margin: 0;
-			font-family: verdana, tahoma, arial, sans-serif;
-            margin-top: 10px;
-            text-align: center;
-		}
-
-		#site-information-pages #content p.top-separated {
-			margin-top: 15px;
-		}
-
-
-        /* About Page */
-
-		#site-information-pages #content h3.about {
-			color: #9c9c9c;
-		}
-
-		#site-information-pages #content h5.about {
-			font-size: 15px;
-		}
-
-        /* Contribute Page */
-        #site-information-pages #content h3 span.contribute {
-                text-decoration: none;
-                color: #127e0e;
-			}
-
-        /* Transparency Page */
-
-        #site-information-pages.transparency #content h5 {
-            font-size: 13px;
-        }
-
-		#site-information-pages.transparency #content h3.bottom-title {
-				color: #5c5c5c;
-		}
-
-
-		#site-information-pages.transparency #content .buttons-holder {
-			width: 150px;
-			padding-top: 3px;
-			margin: 0 auto;
-		}
-
-
-
-        /* Principles Page */
-        #site-information-pages.principles #content {
-            width: 100%;
-            margin-left: 0px;
-        }
-
-
-
-        #site-information-pages.principles #content .buttons-holder {
-            width: 167px;
-            margin: auto;
-        }
-
-        #site-information-pages.principles .buttons-holder ul {
-			position: relative;
-        }
-
-            #site-information-pages.principles .buttons-holder ul li {
-                width: 77px;
-                height: 24px;
-                display: block;
-                float: left;
-                margin-right: 13px;
-                text-indent: -1000em;
-            }
-
-            #site-information-pages.principles .buttons-holder ul li.no {
-                margin-right: 0;
-            }
-
-                #site-information-pages.principles .buttons-holder ul li a:link,
-                #site-information-pages.principles .buttons-holder ul li a:visited {
-                    display: block;
-                    background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
-                    width: 77px;
-                    height: 24px;
-                }
-
-
-                #site-information-pages.principles .buttons-holder ul li.no a:link,
-                #site-information-pages.principles .buttons-holder ul li.no a:visited {
-                    background: url('../images/bg-bt-no-tc.png') no-repeat top left;
-                }
-				
-				#site-information-pages.principles .buttons-holder ul li input[type="submit"] {
-					display: block;
-                    background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
-                    width: 77px;
-                    height: 24px;
-					border: none;
-					overflow: hidden;
-					cursor: pointer;
-					text-indent: -1000em;
-				}
-
-				#site-information-pages.principles .post-to-wall {
-					font-family: "Lucida Grande",verdana,tahoma,arial,sans-serif;
-					font-size: 12px;
-					color: #62775A;
-				    font-weight: bold;
-					margin-top: 13px;
-					position: absolute;
-					top: 25px;
-					left: -125px;
-					text-indent: 0;
-					width: 500px;
-				}
-
 
 						
 /* misc */
@@ -3350,6 +3375,16 @@ a.normal:visited {
 		#dashboard-page p a.trusted:visited {
 			color: #127e0e;
 		}
+		
+		
+		#dashboard-page .read-recent-activity p {
+			color: #62755a;
+		}
+		
+			#dashboard-page .read-recent-activity p a:link,
+			#dashboard-page .read-recent-activity p a:visited {
+				color: #62755a;
+			}
 	
 	
 	/* Event sentences in News Feed (on dashboard) and Latest Activity (on profile pages) */
@@ -3431,18 +3466,20 @@ a.normal:visited {
 	}
 	
 	
+	
+	
 	/* Main action shortcuts shown in near headers (e.g. 'establish trust', 'edit profile' etc) */
 
 	h2 span a:link,
 	h2 span a:visited,
-	#sidebar h2.rhs-link a:link,
-	#sidebar h2.rhs-link a:visited {
+	#sidebar .rhs-link a:link,
+	#sidebar .rhs-link a:visited {
 		color: #127e0e;
 		font-size: 12px;
 	}
 	
-	#sidebar h2.rhs-link a.withdraw:link,
-	#sidebar h2.rhs-link a.withdraw:visited {
+	#sidebar .rhs-link a.withdraw:link,
+	#sidebar .rhs-link a.withdraw:visited {
 		color: #62775a;
 		font-size: 10px;
 	}
@@ -3488,8 +3525,27 @@ a.normal:visited {
 		#request-page #content .no-bg h2.trusted a:visited {
 			color: #127e0e;
 		}
-			
-			
+		
+		/* Top bar with name+location and action link */
+		
+		#sidebar .trust-reputation-box .top-bar {
+			width:100%;
+			height:100%;
+			padding-top:10px;
+			margin-bottom:-4px;
+		}
+
+		#sidebar .trust-reputation-box .top-bar .relative_container {
+			height:100%;
+			width:100%;
+			position:relative;
+			padding:0;
+			margin:0;
+			border:0;
+			line-height:85%;
+			min-height:15px;
+		}
+
 		/* Name on top of T&R box */
 
 		#sidebar .trust-reputation-box h2,
@@ -3499,22 +3555,32 @@ a.normal:visited {
 			color: #62775a;
 			font-size: 13px;
 		}
+
+		/* Location below name */
+		#sidebar .trust-reputation-box h2 .location,
+		#sidebar-left .trust-reputation-box h2 .location {
+			display:block;
+			padding:0;
+			margin-top:-2px;
+			font-size:11px;
+            color: #838683;
+		}
 		
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-confirm:link,
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-confirm:visited {
+			#sidebar .trust-reputation-box .rhs-link a.trust-confirm:link,
+			#sidebar .trust-reputation-box .rhs-link a.trust-confirm:visited {
 				color: #127e0e;
 				font-size: 11px;
 			}
 		
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-cancel:link,
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-cancel:visited {
+			#sidebar .trust-reputation-box .rhs-link a.trust-cancel:link,
+			#sidebar .trust-reputation-box .rhs-link a.trust-cancel:visited {
 				font-size: 10px;
 			}
 			
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-acknowledge:link,
-			#sidebar .trust-reputation-box h2.rhs-link a.trust-acknowledge:visited,
-			#sidebar .trust-reputation-box h2.edit-profile-link a:link,
-			#sidebar .trust-reputation-box h2.edit-profile-link a:visited {
+			#sidebar .trust-reputation-box .rhs-link a.trust-acknowledge:link,
+			#sidebar .trust-reputation-box .rhs-link a.trust-acknowledge:visited,
+			#sidebar .trust-reputation-box .edit-profile-link a:link,
+			#sidebar .trust-reputation-box .edit-profile-link a:visited {
 				font-size: 11px;
 				color: #127e0e;
 			}
@@ -3606,9 +3672,14 @@ a.normal:visited {
 		color: #333;
 	}
 		
+		
 		#content ul p a.item-type:link,
 		#content ul p a.item-type:visited {
 			color: #62775a;
+		}
+		
+		#content .items-expanded ul p a.item-type {
+			text-transform: lowercase;
 		}
 	
 	/* for an item request sentence */
@@ -3641,7 +3712,12 @@ a.normal:visited {
 	
 		
 		/* for an item listing - for the person name underneath: 12 #333 (unless name of person is in trusted network, then #127e0e) */
-		
+		#content .items-expanded ul .person-name a.positive:link,
+		#content .items-expanded ul .person-name a.positive:visited,
+		#content .items-list ul .person-name a.positive:link,
+		#content .items-list ul .person-name a.positive:visited {
+			color: #62775a;
+		}
 		
 		/* Search Filter box (e.g. "All results", "Items", etc): */ 
 		
@@ -3694,7 +3770,7 @@ a.normal:visited {
 
 #notification-overlay {
 	display: none;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	overflow: hidden;
@@ -3789,4 +3865,8 @@ a.normal:visited {
 
 #loading-box > img {
 	display:block;
+}
+
+a.trusted {
+	color:#127e0e !important;
 }

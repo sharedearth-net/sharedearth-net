@@ -9,8 +9,12 @@ Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require "paperclip/matchers"
+	require 'shoulda'
+  require "shoulda-matchers"
   require 'factory_girl'
   require 'ffaker'
+  require 'ruby-debug'
+
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -46,6 +50,19 @@ Spork.prefork do
     config.include Paperclip::Shoulda::Matchers
     config.include(ControllerMacros, :type => :controller)
     config.include(UserMocks)
+
+		config.before(:suite) do
+		  DatabaseCleaner.strategy = :transaction
+		  DatabaseCleaner.clean_with(:truncation)
+		end
+
+		config.before(:each) do
+		  DatabaseCleaner.start
+		end
+
+		config.after(:each) do
+		  DatabaseCleaner.clean
+		end
   end
 
 end
@@ -53,6 +70,18 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   #Load all factories and report if there is duplicate definition
+	
+	# reload all the models
+  Dir["#{Rails.root}/app/models/**/*.rb"].each do |model|
+    load model
+  end
+	# reload all the controllers
+  Dir["#{Rails.root}/app/controllers/**/*.rb"].each do |controller|
+    load controller
+  end
+
+  Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
 end
 
 #Enable to have coverage tool

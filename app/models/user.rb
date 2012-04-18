@@ -5,8 +5,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :provider, :uid
   validates_uniqueness_of :uid, :scope => :provider
+  scope :unactive, where("last_activity < ?", Time.now - 12.hours)
 
   delegate :network_activity, :to => :person
+  delegate :trusted_network_activity, :to => :person
 
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -75,6 +77,15 @@ class User < ActiveRecord::Base
   def lock!
     self.lockout = Time.now
     save!
+  end
+
+  def record_last_activity!
+    self.last_activity = Time.now
+    save!
+  end
+
+  def last_activity?
+    self.last_activity
   end
 
   private

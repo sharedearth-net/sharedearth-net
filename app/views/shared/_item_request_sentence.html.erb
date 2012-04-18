@@ -1,9 +1,21 @@
+<% sentence_ending, full_sentence = "", ""%>
+<% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
+<% gifter = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
+<% gifter_non_possessive = link_to_person(req.gifter, :downcase_you => true, :possessive => false, :class => "capitalize positive") %>
+<% requester = link_to_person(req.requester, {:class => "positive" }) %>
 <% if req.requested? %>
     <% if req.item.share? -%>
 			  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 			  <% sentence = "made a request to borrow" %>
 			  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
 			  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
+    <% elsif req.item.is_shareage? -%>
+        <% if req.requester?(current_user.person) -%>
+            <% join_sentence = req.requester?(current_person) ? "are requesting" : "is requesting"%>
+            <% full_sentence = "You " + join_sentence + " " + gifter + " " + item + " for shareage" %>  
+        <% else %>
+            <% full_sentence = requester + " is requesting " + gifter + " " + item + " for shareage" %> 
+        <% end -%>
 	  <% else %>
 	    <% if req.requester?(current_user.person) -%>
 	        <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
@@ -15,7 +27,7 @@
 			    <% sentence = "has requested" %>
 			    <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
 			    <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
-	    <% end -%>    
+	    <% end -%>
 	  <% end %>
 <% elsif req.accepted? %>
   <% if req.item.share? -%>
@@ -29,6 +41,12 @@
 		  <% sentence = "is sharing" %>
 		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
 		  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
+	  <% end %>
+  <% elsif req.item.is_shareage? -%>
+    <% if req.requester?(current_user.person) %>
+      <% full_sentence = "Collect " + gifter + " " + item + " for shareage"%>
+	  <% else %>
+      <% full_sentence = "Awaiting collection of your " + item + " by " + requester %>
 	  <% end %>
   <% else %>
     <% if req.requester?(current_user.person) %>
@@ -44,19 +62,62 @@
 	  <% end %>
   <% end %>
 <% elsif req.collected? %>
+  <% if req.item.is_shareage? -%>
+    <% if req.requester?(current_user.person) %>
+      <% full_sentence = item + " is now in shareage"%>
+	  <% else %>
+      <% full_sentence = "Your " + item + " is now in shareage" %>
+	  <% end %>
+  <% else %>
 		  <% person_one = link_to_person(req.requester, {:class => "positive" }) %>
 		  <% sentence = "collected" %>
 		  <% person_two = link_to_person(req.gifter, :downcase_you => true, :possessive => true, :class => "capitalize positive") %>
 		  <% item = link_to req.item.item_type, item_path(req.item), :class => "item-link" %>
+   <% end %>
+<% elsif req.recall? %>
+   <% if req.gifter?(current_person) -%>
+      <% full_sentence = "You are requesting the return of your " + item + " from " + requester %>
+   <% else -%>
+       <% full_sentence = gifter_non_possessive + " is requesting the return of their " + item %>
+   <% end -%>
+<% elsif req.in_return? %>
+   <% if req.gifter?(current_person) -%>
+      <% full_sentence = requester + " would like to return your " + item %>
+   <% else -%>
+      <% full_sentence = "Requesting return of  " + gifter + " " + item %>
+   <% end -%>
+<% elsif req.acknowledged? %>
+   <% if req.gifter?(current_person) -%>
+      <% full_sentence = "Awaiting return of your " + item + " from " +requester %>
+   <% else -%>
+      <% full_sentence = "You need to return " + gifter + " " + item %>
+   <% end -%>
+<% elsif false %>
+   <% if req.gifter?(current_person) -%>
+      <% full_sentence = "Awaiting return of your " + item +" from " + requester %>
+   <% else -%>
+      <% full_sentence = "Return the " + item + " to " + gifter%>
+   <% end -%>
 <% end %>
 
 <% if dashboard -%>
-  <%= (person_one + " " + sentence+ " " + person_two + " " + item).html_safe unless person_one.nil? && sentence.nil? if !person_one.nil? && !person_two.nil? && !sentence.nil?%>
-<% elsif !person_one.nil? && !person_two.nil? && !sentence.nil? -%>
+  <% if req.item.is_shareage? -%>
+    <%= full_sentence.html_safe %>
+  <% else -%>
+    <%= (person_one + " " + sentence+ " " + person_two + " " + item + sentence_ending).html_safe unless person_one.nil? && sentence.nil? if !person_one.nil? && !person_two.nil? && !sentence.nil?%>	
+  <% end -%>
+  
+<% elsif !person_one.nil? && !person_two.nil? && !sentence.nil? && !sentence.nil? -%>
    <h2>
 		<span>
 			<%= person_one %>
 			<%= (sentence + " "  + person_two).html_safe %> <%= item %>
+		</span>
+	</h2>
+<% elsif !full_sentence.nil? -%>
+   <h2>
+		<span>
+			<%= full_sentence.html_safe %>
 		</span>
 	</h2>
 <% end -%>

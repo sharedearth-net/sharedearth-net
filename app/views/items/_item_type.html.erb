@@ -1,0 +1,5 @@
+<li class="item" >
+	<p>
+		<%= link_to truncate(item_type), params.merge({ :filter_type => item_type }), :class => is_gift ? "gift-item" : "" %>
+	</p>
+</li>

@@ -12,6 +12,22 @@
         <%= render 'people_list', :people => @people %>
       <% end -%>
 
+      <h2>Create a...</h2>
+			<%= link_to 'New village', new_village_path %> | 
+			<%= link_to 'New community', '#' %>
+			<hr />
+      <% unless @villages.nil? -%>
+			Join a group
+      <hr />
+			<ul class="list">
+				<% for village in @villages %>
+				<li><%= village.name%> - <%= link_to 'Join', join_village_path(village), :method => :put unless village.is_member_or_admin?(current_person)%> <%= link_to 'Leave', leave_village_path(village), :method => :put if village.is_member?(current_person)%></li>
+				<% end -%>
+			</ul>
+      	
+      <% end -%>
+			<hr />
+
     </div>
   </div>
 </div>

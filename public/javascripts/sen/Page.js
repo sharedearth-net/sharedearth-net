@@ -20,7 +20,7 @@ dojo.declare("sen.Page", null, {
 	 * Set up event and inFlight arrays ready for use
 	 */
 	constructor: function () {
-        
+		
 		// Events connected on this page, kept for reference so that we can
 		// disconnect them when the page unloads
 		this.events = {
@@ -39,9 +39,7 @@ dojo.declare("sen.Page", null, {
 			dashboard: [],
 			comments: []
 		};
-		
-		// Connect any events we're going to need
-		this.initEvents();
+
 	},
 	
 	/**
@@ -183,7 +181,7 @@ dojo.declare("sen.Page", null, {
 				display: "block",
 				left: ( windowBox.w - dojo.style("notification-box", "width") ) / 2 + "px",
 				top: ( (windowBox.h - dojo.style("notification-box", "height") ) / 2) - 20 + "px",
-				position: "absolute"
+				position: "fixed"
 			});
 			
 			// Set the window background for the overlay. i.e the body becomes darker
@@ -228,7 +226,7 @@ dojo.declare("sen.Page", null, {
 		// Set the properties of the overlay box, the left and top positions
 		dojo.style("loading-box", {
 			display: "block",
-			left: ( windowBox.w - dojo.style("loading-box", "width") ) / 2 + "px",
+			left: ( windowBox.w - dojo.style("loading-box", "width") ) / 2 - 60 + "px",
 			top: ( (windowBox.h - dojo.style("loading-box", "height") ) / 2) - 20 + "px",
 			position: "absolute"
 		});

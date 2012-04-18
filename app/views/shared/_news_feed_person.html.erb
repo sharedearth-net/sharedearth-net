@@ -1,5 +1,4 @@
 <div class="network-activity">
-  <h2><%= title ||= 'Your Network Activity' %></h2>
     <ul>
       <% events.each do |event| %>
 		  <% event_sentence = event_log_sentence(event.event_log, nil, 
@@ -15,25 +14,7 @@
              </div>
          </div>
 			
-			<% comments = event.event_log.comments%>				
-			<div class="inner-content">
-
-				<ul class="comment-list <%= comments.count.zero? ? 'comment-list-hidden' : '' %> ">
-				<% comments.each do |c| -%>
-				  <% person = c.user.person %>
-				  <li class="clearfix">	
-						<%= image_tag person.avatar(:square), :class => "thumb" %>
-						<p>
-							<strong><%= link_to person.name, person_path(person) %></strong> <%= c.comment %>
-							<span><%= time_ago_in_words(c.created_at) %> ago</span>
-						</p>
-					</li> 
-				<% end unless comments.empty? -%>
-
-					<%= render :partial => 'comments/new', :locals => { :commentable => event.event_log } %>
-
-				</ul>
-			</div><!-- /inner-content -->	
+      <%= render :partial => '/comments/comment_box', :locals => {:object => event.event_log} %>
 							
 		</li>
 			    
@@ -43,7 +24,7 @@
 	
 	<!-- PREV - NEXT links -->
 	<!--
-		<%= will_paginate @events, :page_links=>false unless @events.nil?%> 
+		<%#= will_paginate @events, :page_links=>false unless @events.empty?%> 
 		<a href="#more_news" class="button-more">
 			more
 		</a>

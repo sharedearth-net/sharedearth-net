@@ -23,6 +23,8 @@ module ItemRequestsHelper
         html = "#{gifter} shared their #{item} with #{requester}"
       when Item::PURPOSE_GIFT
         html = "#{gifter} gifted their #{item} to #{requester}"
+      when Item::PURPOSE_SHAREAGE
+        html = "#{gifter} shareaged their #{item} to #{requester}"
       else
         html = ""
     end

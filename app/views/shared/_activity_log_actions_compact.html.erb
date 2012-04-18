@@ -10,11 +10,11 @@
 <% end %>
 
 <% if activity_log.related_type == "ItemRequest"%>
-<% if activity_log.related.completed? && activity_log.related.has_left_feedback?(current_user.person.id) %>
+<% if (activity_log.related.completed? || activity_log.related.returned?) && activity_log.related.has_left_feedback?(current_user.person.id) %>
 	<li>
 	  <%= link_to "show feedback", request_path(activity_log.related) %>
 	</li>
-<% elsif activity_log.related.completed? %>
+<% elsif activity_log.related.completed? || activity_log.related.returned? %>
     <li>
       <%= link_to "leave feedback", new_request_feedback_path(activity_log.related) %>
     </li>

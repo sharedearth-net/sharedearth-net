@@ -10,8 +10,8 @@
 
    * Clone sharedearth.net repository: `git clone git@github.com:sharedearth-net/sharedearth-net.git`
    * Create database.yml (example database.yml uses sqlite): `cp config/database.yml-sample config/database.yml`
-   * Install required gems: `bundle install`
-   * Migrate database: `rake db:migrate` (for development)
+   * Install required gems: `bundle install --path vendor/bundle --without production`
+   * Migrate database: `rake db:migrate` (for development) (note if you have issues you may need to run a command like `sudo ln -s /usr/local/mysql/lib/libmysqlclient.16.dylib /usr/lib/libmysqlclient.16.dylib`, modified to accomodate your installed version of mySQL)
    * Start server: `rails server`
    * Open [http://senlocal.heroku.com:3000/](http://senlocal.heroku.com:3000/) in your browser
 
@@ -51,3 +51,6 @@ Please setup environment variables accordingly, then reset terminal or system to
  heroku config:add SEN_SES_KEY=8N029N81 SEN_SES_SECRET=9s83109d3+583493190
  
 * note this is just example usage
+
+##Running tests note
+  On Ubuntu firefox version 3.6.x can run tests. Upgrading it to new version 8 will not execute cucumber tests properly, as selenium-webdriver changed

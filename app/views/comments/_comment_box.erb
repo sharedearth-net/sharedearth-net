@@ -1,0 +1,14 @@
+<% new_comment ||= false %>
+			<div class="inner-content">
+
+				<ul class="comment-list <%= object.comments.count.zero? && !new_comment ? 'comment-list-hidden' : '' %> ">
+				<% object.comments.each do |c| -%>
+
+				  <%= render :partial => '/comments/comment.html.erb', :locals => {:c => c} %>
+
+				<% end unless object.comments.empty? -%>
+
+				<%= render :partial => 'comments/new.html.erb', :locals => { :commentable => object } %>
+
+				</ul>
+			</div><!-- /inner-content -->	

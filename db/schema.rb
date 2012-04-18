@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111011144607) do
+ActiveRecord::Schema.define(:version => 20120315113106) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_type_id"
+    t.boolean  "read",                        :default => false
+    t.integer  "email_notification_id"
   end
 
   add_index "activity_logs", ["event_code"], :name => "index_activity_logs_on_event_code"
@@ -95,18 +97,21 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
-  create_table "entities", :force => true do |t|
-    t.integer  "entity_type_id"
-    t.integer  "specific_entity_id"
+  create_table "email_notifications", :force => true do |t|
+    t.integer  "person_id"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "entity_types", :force => true do |t|
-    t.string   "entity_type_name"
+  create_table "entities", :force => true do |t|
+    t.integer  "specific_entity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "specific_entity_type"
   end
+
+  add_index "entities", ["specific_entity_type", "specific_entity_id"], :name => "index_entities_on_specific_entity_type_and_specific_entity_id"
 
   create_table "event_displays", :force => true do |t|
     t.integer  "type_id"
@@ -163,6 +168,20 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
     t.integer  "feedback"
   end
 
+  create_table "human_networks", :force => true do |t|
+    t.integer  "specific_entity_id"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "entity_type"
+    t.integer  "entity_id"
+    t.string   "network_type"
+  end
+
+  add_index "human_networks", ["entity_id"], :name => "index_human_networks_on_entity_master_id"
+  add_index "human_networks", ["person_id"], :name => "index_human_networks_on_human_id"
+  add_index "human_networks", ["specific_entity_id", "entity_type"], :name => "index_human_networks_on_entity_id_and_entity_type"
+
   create_table "invitations", :force => true do |t|
     t.integer  "inviter_person_id"
     t.integer  "invitation_unique_key"
@@ -203,6 +222,14 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
     t.integer  "purpose"
     t.boolean  "available"
     t.boolean  "deleted",            :default => false
+    t.boolean  "hidden",             :default => false
+  end
+
+  create_table "network_requests", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "trusted_person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "people", :force => true do |t|
@@ -210,33 +237,20 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "authorised_account",   :default => false
-    t.boolean  "accepted_tc",          :default => false
-    t.decimal  "tc_version",           :default => 1.0
-    t.decimal  "pp_version",           :default => 1.0
+    t.boolean  "authorised_account",                                      :default => false
+    t.boolean  "accepted_tc",                                             :default => false
+    t.decimal  "tc_version",               :precision => 10, :scale => 0, :default => 1
+    t.decimal  "pp_version",               :precision => 10, :scale => 0, :default => 1
     t.string   "location"
     t.text     "description"
-    t.boolean  "accepted_pp",          :default => false
+    t.boolean  "accepted_pp",                                             :default => false
     t.string   "email"
-    t.boolean  "accepted_tr",          :default => false
-    t.boolean  "has_reviewed_profile", :default => false
+    t.boolean  "accepted_tr",                                             :default => false
+    t.boolean  "has_reviewed_profile",                                    :default => false
     t.integer  "invitations_count"
-  end
-
-  create_table "people_network_requests", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "trusted_person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "people_networks", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "trusted_person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "entity_id"
-    t.integer  "entity_type_id"
+    t.integer  "email_notification_count",                                :default => 0
+    t.datetime "last_notification_email"
+    t.boolean  "smart_notifications",                                     :default => true
   end
 
   create_table "person_gift_act_ratings", :force => true do |t|
@@ -278,6 +292,8 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
     t.integer  "resource_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "type",             :default => 10
+    t.integer  "owner_type",       :default => 10
   end
 
   create_table "settings", :force => true do |t|
@@ -299,6 +315,19 @@ ActiveRecord::Schema.define(:version => 20111011144607) do
     t.string   "token"
     t.datetime "lockout"
     t.integer  "validations_failed", :default => 0
+    t.datetime "last_activity"
+  end
+
+  create_table "villages", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "street"
+    t.string   "postcode"
+    t.string   "state"
+    t.string   "country"
+    t.integer  "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

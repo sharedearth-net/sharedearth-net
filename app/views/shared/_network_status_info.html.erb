@@ -1,0 +1,21 @@
+<div class="network-status-info">
+	<ul>
+		<li class="clearfix">
+      <%= link_to 'grow network', findtheothers_path, :class => 'view-network' %>
+			<a href="<%= network_path %>" class="view-network">view network</a>
+			<h2>Your Network</h2>
+		</li>
+		<li class="clearfix status-line">
+			<%= image_tag "ic-trusted-community.png", :class => "icons", :align => "left", :alt => "Trusted Network" %>
+			<p>&nbsp;<%= network_status_trusted_network %></p>
+		</li>
+		<li class="clearfix status-line">
+			<%= image_tag "ic-people-community.png", :class => "icons", :align => "left", :alt => "Personal Network" %>
+			<p>&nbsp;<%= network_status_personal_network %></p>
+		</li>
+		<li class="clearfix status-line">
+			<%= image_tag "ic-items-community.png", :class => "icons", :align => "left", :alt => "Items" %>
+			<p>&nbsp;<%= network_status_items %></p>
+		</li>
+	</ul>
+</div>

@@ -8,19 +8,12 @@ class InvitationsController < ApplicationController
     
     redirect_to new_admin_invitation_path, :notice => I18n.t('messages.invitations.wrong_data') and return if (invitations <= 0  || items < 0)
     people = Person.with_items_more_than(items)
-      @invites = []
-      invitations.times do |inv|
         unless people.empty?
-          @invites += people.collect { |person| Invitation.new(:inviter_person_id => person.id, :invitation_active => true) }
+          people.collect { |person| invitations.times {Invitation.create!(:inviter_person_id => person.id, :invitation_active => true)} }
         else
-          @invites.push(Invitation.new(:inviter_person_id => nil, :invitation_active => true))
+          Invitation.create!(:inviter_person_id => nil, :invitation_active => true)
         end
-      end
-      if @invites.each(&:save!)
-        redirect_to admin_invitations_path, :notice =>  I18n.t('messages.invitations.successfully_created')
-      else
-        redirect_to new_admin_invitation_path
-      end
+     redirect_to admin_invitations_path, :notice =>  I18n.t('messages.invitations.successfully_created')
   end
   
   def preview
@@ -42,10 +35,13 @@ class InvitationsController < ApplicationController
     if Settings.invitations == 'false'
        Settings.invitations = 'true'
        authorised = Person.all
-       authorised.each { |person| person.authorise! }
+       authorised.each { |person| person.authorise! if person.has_email?}
     else 
        authorised = Person.all
-       authorised.each { |person| person.authorise! }
+       authorised.each do |person| 
+         person.authorise! if person.has_email?
+         puts "Person " + person.name + " authorised"
+       end
        Settings.invitations = 'false'
     end
     redirect_to admin_dashboard_path

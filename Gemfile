@@ -48,8 +48,9 @@ gem "acts_as_commentable"
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-	gem "shoulda", "~> 2.11"
   gem "rspec-rails", "~> 2.5"
+	gem "shoulda", "~> 2.11"
+  gem "shoulda-matchers"
 	gem "autotest"
 	gem "guard-rspec"
 	gem "webrat"
@@ -62,10 +63,16 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'pickle'
-  gem 'ruby-debug'
   gem 'heroku_san'
   gem 'nifty-generators'
+  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem "escape_utils"
 #  gem 'pg'
+end
+group :production do
+  gem 'thin'
+  gem "airbrake"
+  gem "heroku"
 end
 gem "simplecov", :require => false, :group => :test
 gem 'activeadmin'
@@ -74,5 +81,9 @@ gem 'sass'  #for use in activeadmin
 gem "mail"
 gem "aws-ses", "~> 0.4.3", :require => 'aws/ses'
 gem 'delayed_job' #What you can do today, don't leave for tomorrow
+gem "daemons" #Support for running delayed_job
 
 gem "mocha", :group => :test
+gem 'whenever', :require => false
+gem 'iron_worker' #Deprecated gem 'simple_worker'
+gem 'typhoeus'

@@ -1,0 +1,3 @@
+class MutualNetwork < HumanNetwork
+  
+end

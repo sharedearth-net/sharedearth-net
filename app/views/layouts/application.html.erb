@@ -34,7 +34,7 @@
 							</li>
 							<li class="giftact-rating">
 								<% if !current_user.nil? -%>
-									<%= link_to current_user.person.mutural_friends_count(current_user.person), network_person_path(current_user.person), :title => "Number of people in your trusted network" %>
+									<%= link_to current_user.person.trusted_network_size, network_person_path(current_user.person), :title => "Number of people in your trusted network" %>
 								<% else -%>
 								  <%= link_to "0", "#", :title => "Number of people in your trusted network" %>
 								<% end -%>
@@ -107,7 +107,7 @@
 								<%= link_to "manage", items_path %>
 							</li>
 							<li class="last">
-								<%= link_to "view network", my_network_person_path(current_user.person) unless current_user.nil?%>
+								<%= link_to "view network", network_path %>
 							</li>
 						</ul>
 					</div>
@@ -132,7 +132,7 @@
 			<%= link_to "About", "/about" %>&nbsp;&nbsp;
 		</li>
 		<li>
-			<%= link_to "Principles", "/terms/principles" %>&nbsp;&nbsp;
+			<%= link_to "Principles", "/legal_notices/principles" %>&nbsp;&nbsp;
 		</li>
 		<li>
 			<%= link_to "Transparency", "/transparency" %>&nbsp;&nbsp;

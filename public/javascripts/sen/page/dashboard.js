@@ -17,14 +17,12 @@ dojo.require("dojo.NodeList-manipulate");
 dojo.declare("sen.page.dashboard", [sen.Page], {
 	
 	constructor: function () {
-		// Call our parent constructor
-        this.inherited(arguments);
 	},
 	
 	init: function() {
 		
 		this.inherited(arguments);
-		
+
 		// In flight data for requests
 		this.inFlight.completeAction = false;
 	},
@@ -70,7 +68,7 @@ dojo.declare("sen.page.dashboard", [sen.Page], {
 	},
 	
 	connectCommentEvents: function() {
-		
+
 		var self = this;
 		
 		// Comment form
@@ -171,100 +169,107 @@ dojo.declare("sen.page.dashboard", [sen.Page], {
 		var self = this,
 			commentId = targetNode.query(".new-comment-commentable-id").first().attr("value"),
 			comment = targetNode.query(".new-comment-text").first().attr("value");
-		
+
 		// Make sure we're not already adding a comment for this item
 		if (this.inFlight.comments[commentId] !== true && comment != "") {
-		
-			// Show our loader
-			dojo.style(e.target, "display", "none");
-			targetNode.before('<div class="loader"></div>');
 			
-			// This request is in flight, don't allow any more
-			this.inFlight.comments[commentId] = true;
-			
-			// POST for forms
-			dojo.xhrPost({
-				url: ajaxUrl,
-				handleAs: "json",
-				content: {
-					"comment[commentable_id]": commentId,
-					"comment[commentable_type]": targetNode.query(".new-comment-commentable-type").first().attr("value"),
-					"comment[comment]": comment,
-					"authenticity_token": dojo.global.AUTH_TOKEN,
-					"utf8": "✓"
-				},
+			// Make sure comment length is maximum 420
+			if ( comment.toString().length > 420 ){
+				self.notify({ title: "Oops!", body: "Comment is too long (maximum 420 characters)" });
+			}
+			else
+			{
+				// Show our loader
+				dojo.style(e.target, "display", "none");
+				targetNode.before('<div class="loader"></div>');
 				
-				load: function(data) {
+				// This request is in flight, don't allow any more
+				this.inFlight.comments[commentId] = true;
+				
+				// POST for forms
+				dojo.xhrPost({
+					url: ajaxUrl,
+					handleAs: "json",
+					content: {
+						"comment[commentable_id]": commentId,
+						"comment[commentable_type]": targetNode.query(".new-comment-commentable-type").first().attr("value"),
+						"comment[comment]": comment,
+						"authenticity_token": dojo.global.AUTH_TOKEN,
+						"utf8": "✓"
+					},
 					
-					// Successful request?
-					if (data.success && data.success == false) {
+					load: function(data) {
 						
-						self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
-						
-					} else {
-						var comment = String(data.comment_html).replace(/\"clearfix\"/, "\"clearfix new-comment\" style=\"opacity:0;\"");
-						
-						// Add the comment dom node and fade it in
-						targetNode.parents(".comment-list").children("li.no-bg").before(comment);
-						targetNode.parents(".comment-list").children("li.new-comment").fadeIn({auto: true, duration: 800});
-						
-						// Current number of comments text
-						//var currentText = "";
-						
-						// Might be in the sidebar, might be in the actions area
-						if (targetNode.parents("li.sidebar-box").length > 0) {
-							var commentCountNode = targetNode.parents("li.sidebar-box").query("a.comments-show-hide").first();
-							//currentText = targetNode.parents("li.sidebar-box").query("a.comments-show-hide").first().attr("innerHTML");
-						} else if (targetNode.parents("li.content-box").length > 0) {
-							var commentCountNode = targetNode.parents("li.content-box").query("a.action-comments-show-hide").first();
-							//currentText = targetNode.parents("li.content-box").query("a.action-comments-show-hide").first().attr("innerHTML");
-						}
-						
-						// Then find the text listing the number of comments, and increment the count
-						var currentText = commentCountNode.attr("innerHTML");
-							regExp = /([0-9]+)/g,
-							currentCount = String(currentText).match(regExp);
-						
-						// TODO: This doesn't work for request action comments - selectors will change, implement that
-						
-						// Write the count back to the dom node
-						var newComment = String(currentText).replace(regExp, parseInt(currentCount) + 1);
-						commentCountNode.attr("innerHTML", newComment);
-						
-						// Might be in the sidebar, might be in the actions area
-						/*if (targetNode.parents("li.sidebar-box").length > 0) {
+						// Successful request?
+						if (data.success && data.success == false) {
+							
+							self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
+							
+						} else {
+							var comment = String(data.comment_html).replace(/\"clearfix\"/, "\"clearfix new-comment\" style=\"opacity:0;\"");
+							
+							// Add the comment dom node and fade it in
+							targetNode.parents(".comment-list").children("li.no-bg").before(comment);
+							targetNode.parents(".comment-list").children("li.new-comment").fadeIn({auto: true, duration: 800});
+							
+							// Current number of comments text
+							//var currentText = "";
+							
+							// Might be in the sidebar, might be in the actions area
+							if (targetNode.parents("li.sidebar-box").length > 0) {
+								var commentCountNode = targetNode.parents("li.sidebar-box").query("a.comments-show-hide").first();
+								//currentText = targetNode.parents("li.sidebar-box").query("a.comments-show-hide").first().attr("innerHTML");
+							} else if (targetNode.parents("li.content-box").length > 0) {
+								var commentCountNode = targetNode.parents("li.content-box").query("a.action-comments-show-hide").first();
+								//currentText = targetNode.parents("li.content-box").query("a.action-comments-show-hide").first().attr("innerHTML");
+							}
+							
+							// Then find the text listing the number of comments, and increment the count
+							var currentText = commentCountNode.attr("innerHTML");
+								regExp = /([0-9]+)/g,
+								currentCount = String(currentText).match(regExp);
+							
+							// TODO: This doesn't work for request action comments - selectors will change, implement that
+							
+							// Write the count back to the dom node
+							var newComment = String(currentText).replace(regExp, parseInt(currentCount) + 1);
 							commentCountNode.attr("innerHTML", newComment);
-						} else if (targetNode.parents("li.content-box").length > 0) {
-							targetNode.parents("li.content-box").query("a.action-comments-show-hide").first().attr("innerHTML", newComment);
-						}*/
-						
-						// Blank out the textarea
-						targetNode.query("textarea").attr("value", "");
+							
+							// Might be in the sidebar, might be in the actions area
+							/*if (targetNode.parents("li.sidebar-box").length > 0) {
+								commentCountNode.attr("innerHTML", newComment);
+							} else if (targetNode.parents("li.content-box").length > 0) {
+								targetNode.parents("li.content-box").query("a.action-comments-show-hide").first().attr("innerHTML", newComment);
+							}*/
+							
+							// Blank out the textarea
+							targetNode.query("textarea").attr("value", "");
+							
+							// Show the textarea again and hide the loader
+							dojo.style(e.target, "display", null);
+							targetNode.parent().query("div.loader").remove();
+							
+							// Finally, we're no longer in flight
+							self.inFlight.comments[commentId] = false;
+						}
+					},
+					
+					error: function(err, ioArgs){
+						// again, ioArgs is useful, but not in simple cases
+						//console.error(err); // display the error
+						//console.error("Oops! Something went wrong.");
+						//alert("Oops! Something went wrong.");
+						self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
 						
 						// Show the textarea again and hide the loader
 						dojo.style(e.target, "display", null);
 						targetNode.parent().query("div.loader").remove();
 						
-						// Finally, we're no longer in flight
+						// We're no longer in flight
 						self.inFlight.comments[commentId] = false;
 					}
-				},
-				
-				error: function(err, ioArgs){
-					// again, ioArgs is useful, but not in simple cases
-					//console.error(err); // display the error
-					//console.error("Oops! Something went wrong.");
-					//alert("Oops! Something went wrong.");
-					self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
-					
-					// Show the textarea again and hide the loader
-					dojo.style(e.target, "display", null);
-					targetNode.parent().query("div.loader").remove();
-					
-					// We're no longer in flight
-					self.inFlight.comments[commentId] = false;
-				}
-			});
+				});
+			}
 		}
 		
 		return;
@@ -320,8 +325,13 @@ dojo.declare("sen.page.dashboard", [sen.Page], {
 							requestHtml = data.request_html,
 							requestNodeRemove = nodeList.parents("li.content-box"),
 							requestNode = requestNodeRemove.prev(),
-							activityNode = dojo.query("ul.dashboard-recent-activity").children().first(),
-							redirectToFeedback = false;
+							activityNode = dojo.query("ul.dashboard-recent-activity").children().first();
+            if(data.feedback == "true"){
+							var redirectToFeedback = true;
+            }else{
+              var redirectToFeedback = false;
+						}
+         
 						
 						// Make sure we have an element, otherwise just find the parent and stick it in as the first element
 						// Remove the activity node and put the new one in
@@ -336,8 +346,6 @@ dojo.declare("sen.page.dashboard", [sen.Page], {
 									//dojo.place('<li class="content-box clearfix">'+requestHtml+'</li>', node, "first");
 									dojo.place(requestHtml, node, "first");
 								});
-							} else {
-								redirectToFeedback = true;
 							}
 							
 							// Hide the requests green area box if it's empty
@@ -355,8 +363,6 @@ dojo.declare("sen.page.dashboard", [sen.Page], {
 							if (String(requestHtml) !== "") {
 								//requestNode.after('<li class="content-box clearfix">'+requestHtml+'</li>');
 								requestNode.after(requestHtml);
-							} else {
-								redirectToFeedback = true;
 							}
 							
 							// Hide the requests box if it's empty

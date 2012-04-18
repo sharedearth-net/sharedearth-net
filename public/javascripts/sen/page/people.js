@@ -17,8 +17,6 @@ dojo.require("dojo.NodeList-manipulate");
 dojo.declare("sen.page.people", [sen.Page], {
     
 	constructor: function () {
-		// Call our parent constructor
-        this.inherited(arguments);
 	},
 	
 	initUi: function() {
@@ -199,73 +197,81 @@ dojo.declare("sen.page.people", [sen.Page], {
 		
 		// Make sure we're not already adding a comment for this item
 		if (this.inFlight.comments[commentId] !== true && comment != "") {
+			
+			// Make sure comment length is maximum 420
+			if ( comment.toString().length > 420 ){
+				self.notify({ title: "Oops!", body: "Comment is too long (maximum 420 characters)" });
+			}
+			else
+			{
 		
-			// Show our loader
-			dojo.style(e.target, "display", "none");
-			targetNode.before('<div class="loader"></div>');
-			
-			// This request is in flight, don't allow any more
-			this.inFlight.comments[commentId] = true;
-			
-			// POST for forms
-			dojo.xhrPost({
-				url: ajaxUrl,
-				handleAs: "json",
-				content: {
-					"comment[commentable_id]": commentId,
-					"comment[commentable_type]": targetNode.query(".new-comment-commentable-type").first().attr("value"),
-					"comment[comment]": comment,
-					"authenticity_token": dojo.global.AUTH_TOKEN,
-					"utf8": "✓"
-				},
+				// Show our loader
+				dojo.style(e.target, "display", "none");
+				targetNode.before('<div class="loader"></div>');
 				
-				load: function(data) {
+				// This request is in flight, don't allow any more
+				this.inFlight.comments[commentId] = true;
+				
+				// POST for forms
+				dojo.xhrPost({
+					url: ajaxUrl,
+					handleAs: "json",
+					content: {
+						"comment[commentable_id]": commentId,
+						"comment[commentable_type]": targetNode.query(".new-comment-commentable-type").first().attr("value"),
+						"comment[comment]": comment,
+						"authenticity_token": dojo.global.AUTH_TOKEN,
+						"utf8": "✓"
+					},
 					
-					// Successful request?
-					if (data.success && data.success == false) {
+					load: function(data) {
 						
+						// Successful request?
+						if (data.success && data.success == false) {
+							
+							self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
+							
+						} else {
+							var comment = String(data.comment_html).replace(/\"clearfix\"/, "\"clearfix new-comment\" style=\"opacity:0;\"");
+							
+							// Add the comment dom node and fade it in
+							targetNode.parents(".comment-list").children("li.no-bg").before(comment);
+							targetNode.parents(".comment-list").children("li.new-comment").fadeIn({auto: true, duration: 800});
+							
+							// Then find the text listing the number of comments, and increment the count
+							var commentCountNode = targetNode.parents("div.inner-content").prev().query("a.comments-show-hide").first(),
+								currentText = commentCountNode.attr("innerHTML");
+								regExp = /([0-9]+)/g,
+								currentCount = String(currentText).match(regExp);
+							
+							// Write the count back to the dom node
+							var newComment = String(currentText).replace(regExp, parseInt(currentCount) + 1);
+							commentCountNode.attr("innerHTML", newComment);
+							
+							// Blank out the textarea
+							targetNode.query("textarea").attr("value", "");
+							
+							// Show the textarea again and hide the loader
+							dojo.style(e.target, "display", null);
+							targetNode.parent().query("div.loader").remove();
+							
+							// Finally, we're no longer in flight
+							self.inFlight.comments[commentId] = false;
+						}
+					},
+					
+					error: function(err, ioArgs){
 						self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
-						
-					} else {
-						var comment = String(data.comment_html).replace(/\"clearfix\"/, "\"clearfix new-comment\" style=\"opacity:0;\"");
-						
-						// Add the comment dom node and fade it in
-						targetNode.parents(".comment-list").children("li.no-bg").before(comment);
-						targetNode.parents(".comment-list").children("li.new-comment").fadeIn({auto: true, duration: 800});
-						
-						// Then find the text listing the number of comments, and increment the count
-						var commentCountNode = targetNode.parents("div.inner-content").prev().query("a.comments-show-hide").first(),
-							currentText = commentCountNode.attr("innerHTML");
-							regExp = /([0-9]+)/g,
-							currentCount = String(currentText).match(regExp);
-						
-						// Write the count back to the dom node
-						var newComment = String(currentText).replace(regExp, parseInt(currentCount) + 1);
-						commentCountNode.attr("innerHTML", newComment);
-						
-						// Blank out the textarea
-						targetNode.query("textarea").attr("value", "");
 						
 						// Show the textarea again and hide the loader
 						dojo.style(e.target, "display", null);
 						targetNode.parent().query("div.loader").remove();
 						
-						// Finally, we're no longer in flight
+						// We're no longer in flight
 						self.inFlight.comments[commentId] = false;
 					}
-				},
-				
-				error: function(err, ioArgs){
-					self.notify({ title: "Oops!", body: "Something went wrong. Please try again." });
-					
-					// Show the textarea again and hide the loader
-					dojo.style(e.target, "display", null);
-					targetNode.parent().query("div.loader").remove();
-					
-					// We're no longer in flight
-					self.inFlight.comments[commentId] = false;
-				}
-			});
+				});
+			}
 		}
 		
 		return;

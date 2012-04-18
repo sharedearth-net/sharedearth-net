@@ -6,29 +6,19 @@ end %>
 <div id="terms-conditions-page">
 
 	<div id="content">
-		<%= image_tag "terms-conditions-main-pic.jpg", :class => "main-pic", :alt => "sharedearth.net - from ego to wego", :title => "sharedearth.net - from ego to wego"  %>
-		<h2>
-			sharedearth.net is designed for a world where we each take complete responsibility for
-			<br />
-			ourselves
-			<br />
-			each other
-			<br />
-			our community
-			<br />
-			our planet
-		</h2>
-		
-		<h3>
-			Unfortunately until that culture is established, you are required to read and
-			<br />
-			accept the following Terms and Conditions.
-		</h3>
-		
-		
-		<h4>TERMS AND CONDITIONS</h4>
+		<%= image_tag "terms-conditions-main-pic.jpg", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"  %>
+      <h1>
+          Terms and Conditions
+      </h1>
 
-		<h5 class="bottom-separated">PLEASE READ THESE TERMS AND CONDITIONS OF USE CAREFULLY BEFORE USING THIS WEBSITE.</h5>
+		<h6>
+            sharedearth.net is designed for a world where we each take complete responsibility for our ourselves, each other, our community, and our planet.  That culture is not yet firmly established, so you are required to read and accept the Terms and Conditions.
+		</h6>
+
+
+		<h4>
+          PLEASE READ THESE TERMS AND CONDITIONS OF USE CAREFULLY BEFORE USING THIS WEBSITE.
+        </h4>
 
 		<p>
 			Welcome. If you choose to continue to use our website then we will regard that use as conclusive evidence of your agreement and acceptance our these terms, and our Transparency Policy, governing sharedearth.net’s relationship with you in relation to your use of this website.
@@ -189,22 +179,7 @@ end %>
 		<h3 class="bottom-title">
 			Continued use of the site will be taken as conclusive evidence of your acceptance of the Terms and Conditions.
 		</h3>
-		<% if !current_user.nil? -%>
-		  <% if !current_user.person.accepted_tc? && current_user.person.authorised? -%>
-		    <div class="buttons-holder">
-			    <ul class="action-buttons-list clearfix">
-				    <li>
-					    <%= link_to 'Accept', accept_tc_terms_path, :method => 'put', :class => 'positive' %>
-				    </li>
-				    <li>
-			      	<%= link_to 'Reject', signout_path, :class => 'positive' %>
-				    </li>
-			    </ul>
-		    </div>
-		  <% end -%>
-		<% end -%>
-		
-		
+
 	</div><!--	/content -->
 	
 </div><!--	/terms-conditions-page -->

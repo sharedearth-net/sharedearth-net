@@ -3,11 +3,10 @@ class Invitation < ActiveRecord::Base
   before_create :generate_key
   belongs_to :person
   def generate_key(length=6)
-    alphanumerics = ('0'..'9').to_a
-    self.invitation_unique_key = alphanumerics.sort_by{rand}.to_s[0..length]
-
+    random_number = Random.rand(1-999999)
+    self.invitation_unique_key = random_number
     # Ensure uniqueness of the token..
-    generate_key unless Invitation.find_by_invitation_unique_key(self.invitation_unique_key).nil?
+    generate_key unless Invitation.find_by_invitation_unique_key(random_number).nil?
   end
   
   def active?

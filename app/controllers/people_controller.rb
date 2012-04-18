@@ -5,9 +5,9 @@ class PeopleController < ApplicationController
   before_filter :only_own_network!, :only => [:my_network]
 
   def index
-  
+
     @people = current_user.person.trusted_friends
-    
+
     respond_to do |format|
       format.html { render :action => 'search' if params[:search] }
       format.xml  { render :xml => @people }
@@ -24,9 +24,9 @@ class PeopleController < ApplicationController
       @unanswered_requests = @person.unanswered_requests
     else
       if params[:filter_type].nil?
-        @items = @person.items.without_deleted.visible_to_other_users.sort_by{|i| i.item_type.downcase}
+        @items = @person.items.without_deleted.visible_to_other_users.without_hidden.sort_by{|i| i.item_type.downcase}
       else
-        @items = @person.items.without_deleted.visible_to_other_users.with_type(params[:filter_type])
+        @items = @person.items.without_deleted.visible_to_other_users.without_hidden.with_type(params[:filter_type])
       end
       @unanswered_requests = @person.unanswered_requests(current_user.person)
     end
@@ -36,10 +36,11 @@ class PeopleController < ApplicationController
       format.xml  { render :xml => @item }
     end
   end
-  
+
   def network
     @other, @mutual_friends, @trusted_network, @extended_network = [], [], [], []
     current_person = current_user.person
+    @self = ( current_person.id == @person.id )
     unless params[:type].nil?
       case params[:type]
           when 'mutual'
@@ -66,15 +67,17 @@ class PeopleController < ApplicationController
     end
   end
 
+  # Filter view network items and activity based on entity type, action is deprecated will be removed
+
   def my_network
     case params[:type]
       when 'trusted'
         @items = @person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+        @events = current_user.trusted_network_activity.paginate(:page => params[:page], :per_page => 25)
       else
-        @items = @person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+        @items = @person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+        @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
     end
-
-    @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
   end
 
   def edit
@@ -109,11 +112,11 @@ class PeopleController < ApplicationController
       redirect_to dashboard_path
     end
   end
-  
+
   def only_if_person_is_signed_in!
     redirect_to(root_path, :alert => I18n.t('messages.you_cannot_edit_others')) and return unless @person.belongs_to? current_user
   end
-  
+
   def only_own_network!
     redirect_to(root_path, :alert => I18n.t('messages.people.only_own_network')) and return unless @person.belongs_to? current_user
   end

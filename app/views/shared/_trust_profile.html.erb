@@ -2,43 +2,51 @@
 
 <div class="trust-box-holder <%= 'my-trust-box-holder' if viewing_my_profile %>">
 	<div class="trust-reputation-box <%= 'my-trust-reputation-box' if viewing_my_profile %>">
-		
-		<div class="clearfix">
-			<h2>
-				<%= link_to person.name, person_path(person), :class => "loged-out" if name %> 
-			</h2>
 
-			<% unless viewing_my_profile  %>
+		<div class="clearfix top-bar">
 
-				<% if person.requested_trusted_relationship?(current_user.person) %>
-				<h2 class="rhs-link">
-					<%= link_to "cancel trust request", people_network_request_path(person.requested_trusted_relationship(current_user.person)), :method => :delete, :class => "trust-cancel" %>
-				</h2>
-				<% elsif people_network = current_user.person.trusts?(person) %>
-				<h2 class="rhs-link">
-					<%= link_to "withdraw trust", people_network_path(people_network), :method => :delete, :class => "withdraw" %>
-				</h2>
-				<% elsif current_user.person.requested_trusted_relationship?(person) %>
-				<h2 class="rhs-link">
-				  <%= link_to "confirm trust", confirm_people_network_request_path(current_user.person.requested_trusted_relationship(person)), :id => "confirm_button", :method => :put, :class => "trust-confirm" %>
-				</h2>
-				<% else %>
-				<h2 class="rhs-link">
-					<%= link_to "acknowledge trust", people_network_requests_path(:trusted_person_id => person), :method => :post, :class => "trust-acknowledge" %>
-				</h2>
-				
-				
+			<div class="relative_container" >
+
+				<% if name  %>
+					<%= link_to_person person, :check_current_user => false, :class => "person-name", :style => "font-size:13px;" %>
+					<% if person.has_location? %>
+					<br /><span class="location" style="font-size:11px; color: #838683;"><%= person.location %></span>
+					<% end %>
 				<% end %>
-			<% end %>
-			
-			<% if current_user.person == @person  %>
-			<h2 class="rhs-link edit-profile-link">
-				<%= link_to "edit profile", edit_person_path(@person) %>
-			</h2>
-			<% end %>
-			
+
+				<% unless viewing_my_profile  %>
+
+					<% if person.requested_trusted_relationship?(current_user.person) %>
+					<div class="rhs-link">
+						<%= link_to "cancel trust request", network_request_path(person.requested_trusted_relationship(current_user.person)), :method => :delete, :class => "trust-cancel" %>
+					</div>
+					<% elsif human_network = current_user.person.trusts?(person) %>
+					<div class="rhs-link">
+						<%= link_to "withdraw trust", human_network_path(human_network), :method => :delete, :class => "withdraw" %>
+					</div>
+					<% elsif current_user.person.requested_trusted_relationship?(person) %>
+					<div class="rhs-link">
+						<%= link_to "confirm trust", confirm_network_request_path(current_user.person.requested_trusted_relationship(person)), :id => "confirm_button", :method => :put, :class => "trust-confirm" %>
+					</div>
+					<% else %>
+					<div class="rhs-link">
+						<%= link_to "trust", network_requests_path(:trusted_person_id => person), :method => :post, :class => "trust-acknowledge" %>
+					</div>
+
+
+					<% end %>
+				<% end %>
+
+				<% if current_user.person == @person  %>
+				<div class="rhs-link edit-profile-link" >
+					<%= link_to "edit profile", edit_person_path(@person) %>
+				</div>
+				<% end %>
+
+			</div>
+
 		</div>
-		
+
 		<%= image_tag("devider-trust-profile.png", :class => "devider clearer", :alt => "")  %>
 		<h3>Reputation</h3>
 		<ul class="action-list clearfix">
@@ -61,28 +69,28 @@
 				  <%= in_network?(current_user.person, person )%>
 				</li>
 			<% end %>
-        	
+
 
 			<% if viewing_my_profile %>
 				<li class="last clearfix">
 				  <% trusted_count = person.trusts_me_count %>
-					<%= image_tag("ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile") %>		
+					<%= image_tag("ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile") %>
 
 
 					<p>
 						<% trusted = trusted_count.to_s + ((trusted_count == 1) ? " person " : " people ") + 'in your trusted network' %>
-						<%= link_to trusted, (network_person_path(person))%>		
+						<%= link_to trusted, (network_person_path(person))%>
 					</p>
 				</li>
 			<% end %>
-			
+
 
 			<% unless viewing_my_profile %>
 
 			<li class="second clearfix">
 				<!--
 				 	this image shoulde be active if the number is = 0
-					<%#= image_tag("ic-trusted-net-others-orange.png", :class => "icons", :alt => "Trusted Profile")  %>	
+					<%#= image_tag("ic-trusted-net-others-orange.png", :class => "icons", :alt => "Trusted Profile")  %>
 				-->
 				<% trusted_network = current_user.person.mutural_friends(person).count %>
 				<% if trusted_network > 0 -%>
@@ -91,18 +99,18 @@
 				  <%= image_tag("trusted_network_icon_others_orange.png", :class => "icons", :alt => "Trusted Profile")  %>
 				<% end -%>
 				<p>
-				 <% network = (trusted_network == 1) ? "#{trusted_network} person from your trusted network" : "#{trusted_network} people from your trusted network" %> 
-				  <%= link_to network, (network_person_path(person, :type => 'mutual'))%>					
+				 <% network = (trusted_network == 1) ? "#{trusted_network} person from your trusted network" : "#{trusted_network} people from your trusted network" %>
+				  <%= link_to network, (network_person_path(person, :type => 'mutual'))%>
 				</p>
-			</li>			
+			</li>
 
 			<li class="last clearfix">
 			  <% trusted_count = person.trusts_me_count %>
 				<%= image_tag("trusted_network_icon_others_all.png", :class => "icons", :alt => "Trusted Profile")  %>
-			
+
 				<p>
 					<% trusted = trusted_count.to_s + ((trusted_count == 1) ? " person " : " people ") + 'in their trusted network' %>
-					<%= link_to trusted, (network_person_path(person))%>		
+					<%= link_to trusted, (network_person_path(person))%>
 				</p>
 			</li>
          <% end %>

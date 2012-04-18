@@ -55,12 +55,12 @@
 					<% @requests.each do |req| %>
 						<% if req.is_a? ItemRequest %>
               <%= render :partial => "shared/item_request_content_box", :locals => { :req => req } %>
-						<% elsif req.is_a? PeopleNetworkRequest %>
+						<% elsif req.is_a? NetworkRequest %>
 							<li class="content-box clearfix">
-								<%= image_tag(people_network_request_photo(req, :size => :square), :class => "thumb") %>
+								<%= image_tag(network_request_photo(req, :size => :square), :class => "thumb") %>
 								<div class="inner-content">
 									<p>
-										<%= render :partial => "shared/people_network_request_sentence", :locals => { :req => req } %>
+										<%= render :partial => "shared/network_request_sentence", :locals => { :req => req } %>
 									</p>
 					
 									<div class="action clearfix">
@@ -68,7 +68,7 @@
 											<li>
 												<%= time_ago_in_words req.created_at %> ago
 											</li>
-											<%= render :partial => "shared/people_network_request_actions_compact", :locals => { :req => req } %>
+											<%= render :partial => "shared/network_request_actions_compact", :locals => { :req => req } %>
 										</ul>
 									</div>
 								</div>
@@ -86,7 +86,7 @@
 	
 		<div class="content-box-holder">
 			<%= image_tag("curve-top-content-box.png", :alt => "")  %>
-		
+
 			<ul class="dashboard-recent-activity">
 				<li class="content-box clearfix">
 					<h2>Recent Activity</h2>
@@ -94,6 +94,7 @@
 			
 				<% @recent_activity_logs.each do |activity_log| %>
           <%= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log } %>
+          <% activity_log.is_read! %>
 				<% end unless @recent_activity_logs.nil?%>
 				<!-- Nebojsa-todo - button-more is static  -->
 				<li class="content-box clearfix">
@@ -111,7 +112,9 @@
 	</div><!-- /content  -->
 
 	<div id="sidebar">
-	<% if current_user.person.trusted_network_size == 0 -%>
+	<%= render "shared/network_status_info" %>
+	<%= image_tag "horizontal-divider.png", :class => "network_status_divider" %>
+	<% if current_person.personal_network_size == 0 -%>
     <%= render :partial => 'shared/news_feed_empty' %>
   <% else -%>
     <%= render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } %>

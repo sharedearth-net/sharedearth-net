@@ -20,7 +20,7 @@
 		        </div>
 	      		<% end %>
 			</div>
-		
+
 			<% if (((@items.empty? && items_search) || (@people.empty? && people_search)) && !all_search) || (all_search && @items.empty? && @people.empty? )%>
 			  <h3>Search term not found</h3>
 				<p>
@@ -30,12 +30,14 @@
 			<% unless @items.empty? -%>
 			  <div class="items-list clearfix">
 			  <h3 class="default-title">
-					From your trusted network
+					From sharedearth.net network
 				</h3>
 				<ul class="clearfix">
-				<% @items.each do |item| %>
-          <%= render :partial => "items/item", :locals => {:item => item} %>
-        <% end%>
+				<% @item_in_groups.each do |type, items| %>
+					<% items.each do |item| %>
+						<%= render "items/item", :item => item, :action_list => [:person_name, :view, :request].to_set  %>
+					<% end%>
+				<% end %>
 				</ul>
 				<!--<a href="#" class="button-more">
 					2 more
@@ -72,4 +74,3 @@
 	
 </div><!--	/search-page -->
 			
-

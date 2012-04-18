@@ -9,7 +9,7 @@ describe FbService, ".fb_logout_url" do
   let(:return_url)      { 'www.google.com' }
 
   let(:corret_logout_url) {
-    "http://www.facebook.com/logout.php?" << 
+    "http://www.facebook.com/logout.php?" <<
     "api_key=#{fb_api_key}" <<
     "&session_key=#{fb_session_key}&" <<
     "confirm=1&next=#{return_url}"
@@ -31,7 +31,7 @@ describe FbService, ".get_fb_friends_from" do
   context "When using an invalid access token" do
 
     it "should return an empty list" do
-      expect{FbService.fb_friends_from(token)}.to raise_exception(FbGraph::Unauthorized) 
+      expect{FbService.fb_friends_from(token)}.to raise_exception(FbGraph::Unauthorized)
     end
   end
 
@@ -77,11 +77,15 @@ describe FbService, ".get_my_friends" do
 
   let(:third_fb_friend) { mock 'third_fb_friend' }
 
-  let(:fb_friends) { [first_fb_friend, second_fb_friend, third_fb_friend] }
+  let(:forth_fb_friend) { mock 'third_fb_friend' }
+
+  let(:fb_friends) { [first_fb_friend, second_fb_friend, third_fb_friend, forth_fb_friend] }
 
   let(:jake) { Factory(:person, :name => 'jake') }
 
   let(:joseph) { Factory(:person, :name => 'joseph') }
+
+  let(:alex) { Factory(:person, :name => 'alex') }
 
   let(:bill) { Factory(:person, :name => 'bill', :authorised_account => false) }
 
@@ -89,11 +93,29 @@ describe FbService, ".get_my_friends" do
     first_fb_friend.stub(:identifier).and_return(jake.user.uid)
     second_fb_friend.stub(:identifier).and_return(joseph.user.uid)
     third_fb_friend.stub(:identifier).and_return(bill.user.uid)
+    forth_fb_friend.stub(:identifier).and_return(alex.user.uid)
     FbService.stub(:fb_friends_from).and_return(fb_friends)
   end
 
   it "should return a list of all the authorized people associated with my fb friends" do
     friends = FbService.get_my_friends('123')
-    friends.should == [jake, joseph]
+    friends.should == [alex,jake, joseph]
+  end
+end
+
+describe FbService, ".post_on_my_wall" do
+  let(:first_fb_friend) { mock 'first_fb_friend' }
+
+  let(:second_fb_friend) { mock 'second_fb_friend' }
+
+  let(:fb_friends) { [first_fb_friend, second_fb_friend] }
+
+  let(:first_person) { Factory(:person) }
+
+  let(:second_person) { Factory(:person) }
+  let(:item) {Factory(:item)}
+
+
+  it "should post on facebook wall" do
   end
 end
