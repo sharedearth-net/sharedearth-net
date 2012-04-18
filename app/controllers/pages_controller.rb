@@ -33,8 +33,8 @@ class PagesController < ApplicationController
     @entity = Entity.find_by_id(params[:entity_id]) unless params[:entity_id].nil?
 
     if params[:type] == 'trusted'
-      @items = current_person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-	    @events = current_user.trusted_network_activity.paginate(:page => params[:page], :per_page => 25)
+      @items = current_person.trusted_friends_items(params[:filter_type]).without_hidden.sort_by{|i| i.item_type.downcase}
+	    @events = current_person.trusted_network_activity.paginate(:page => params[:page], :per_page => 25)
     elsif !@entity.nil?
       @items = ResourceNetwork.items_belong_to(@entity.specific_entity)
       @events = @entity.network_activity.paginate(:page => params[:page], :per_page => 25)
@@ -42,7 +42,7 @@ class PagesController < ApplicationController
       @items = ResourceNetwork.all_items_from(@entities).sort_by{|i| i.item_type.downcase}
       @items ||= []
       @items += current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-	    @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
+	    @events = current_person.network_activity.paginate(:page => params[:page], :per_page => 25)
     end
   end
 
