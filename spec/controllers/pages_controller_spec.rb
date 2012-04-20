@@ -122,7 +122,7 @@ describe PagesController do
       end
       context "trusted network" do
         before do
-          mock_person.stub_chain(:trusted_friends_items, :without_hidden, :sort_by).and_return{[mock_item]}
+          mock_person.stub_chain(:trusted_friends_items, :sort_by).and_return{[mock_item]}
           mock_person.stub_chain(:trusted_network_activity, :paginate).and_return{mock_events}
         end
 
