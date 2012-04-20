@@ -84,5 +84,15 @@ module ApplicationHelper
     end
     false
   end
+  
+  def indefiniteArticles(word)
+    if word.end_with?("s")
+      return "" 
+    elsif word.start_with?("a","e","i","o","u")
+      return "an"
+    else 
+      return "a"
+    end 
+  end
 
 end
