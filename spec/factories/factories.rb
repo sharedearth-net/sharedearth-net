@@ -73,11 +73,19 @@ end
 
 Factory.define :human_network do |p|
   p.network_type "TrustedNetwork"
+  p.association :entity, :factory => :person
+  p.association :person, :factory => :person
 end
 
 Factory.define :new_village_network, :class => HumanNetwork do |p|
   p.network_type "Member"
   p.entity_type "Village"
+end
+
+Factory.define :facebook_friend_network, :class => HumanNetwork do |p|
+  p.network_type "FacebookFriend"
+  p.association :entity, :factory => :person
+  p.association :person, :factory => :person
 end
 
 Factory.define :network_request do |p|
@@ -130,4 +138,10 @@ Factory.define :village do |i|
   i.state 'Australia'
   i.sequence(:uid) { |n|  Time.now.to_i.to_s + "#{n}" }
   i.postcode 200
+end
+
+Factory.define :facebook_friends_job do |f|
+  f.association :user, :factory => :user
+  f.status :success
+  
 end

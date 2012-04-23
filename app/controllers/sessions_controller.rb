@@ -8,6 +8,11 @@ class SessionsController < ApplicationController
             User.create_with_omniauth(auth)
     user.token = token
     user.person.authorise! if (Settings.invitations == 'false' && user.person.has_email?)
+    
+    if auth['provider'] == 'facebook' && FacebookFriendsJob.week_since_last_run?(user)
+      enqueue_facebook_friends_job user 
+    end
+    
     user.person.reset_notification_count!
     user.record_last_activity!
     user.save!
@@ -16,6 +21,14 @@ class SessionsController < ApplicationController
     session[:fb_token] = auth["credentials"]["token"] if auth['provider'] == 'facebook'
 
     redirect_to root_path
+  end
+  
+  def enqueue_facebook_friends_job user
+    worker = FacebookFriendJob.new
+    worker.user = user
+    worker.friends = FbService.get_my_friends(user.token)
+    ENV['ENABLE_IRON_WORKER'].nil? ? worker.run_local : worker.queue
+    #worker.queue #(Rails.env.test? || Rails.env.development?) ? worker.run_local : 
   end
 
   def destroy

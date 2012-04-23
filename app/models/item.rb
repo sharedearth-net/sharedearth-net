@@ -103,6 +103,7 @@ class Item < ActiveRecord::Base
    item = Item.new(:item_type => item_type, :purpose => purpose)
    item.owner = person
    item.status = STATUS_NORMAL
+   item.available = true
    item.save
    item
   end
