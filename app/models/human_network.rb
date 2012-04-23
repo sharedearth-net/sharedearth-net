@@ -13,6 +13,7 @@ class HumanNetwork < ActiveRecord::Base
   scope :involves_as_person, lambda { |person| where(:entity_id => person, :entity_type => "Person") }
   scope :involves, lambda { |person| where("( entity_id = ? AND entity_type = 'Person' ) OR person_id = ?", person.id, person.id) }
 
+  scope :facebook_friend, where(:network_type => "FacebookFriend")
   scope :trusted_personal_network, where(:network_type => "TrustedNetwork")
   scope :mutual_network, where(["network_type = ?", "MutualNetwork"])
   scope :personal_network, where(["network_type = ? or network_type = ?", "TrustedNetwork", "MutualNetwork"])
@@ -46,6 +47,13 @@ class HumanNetwork < ActiveRecord::Base
       second_person.reputation_rating.increase_trusted_network_count
       EventLog.create_trust_established_event_log(first_person, second_person)
       ActivityLog.create_activity_log(first_person, second_person, nil, EventType.trust_established_other_party, EventType.trust_established_initiator)
+    end
+  end
+  
+  def self.create_facebook_friends!(first_person, second_person)
+    unless first_person.facebook_friend.where(:person_id => second_person.id).exists?
+      FacebookFriend.create!(:entity => first_person, :person_id =>  second_person.id)
+      FacebookFriend.create!(:entity => second_person, :person_id =>  first_person.id)
     end
   end
 
