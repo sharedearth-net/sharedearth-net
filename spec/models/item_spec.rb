@@ -246,6 +246,9 @@ describe "quick_add" do
       Item.where(:item_type => 'bike').count.should == 0
       Item.quick_add('bike', owner, Item::PURPOSE_SHAREAGE)
       Item.where(:item_type => 'bike').count.should == 1
+      item = Item.where(:item_type => 'bike').first
+      item.status.should == Item::STATUS_NORMAL
+      item.should be_available
   end
 end
 

@@ -56,3 +56,35 @@ describe HumanNetwork, ".add_item!" do
     Human.length.should == 1
   end
 end
+
+describe "Facebook Friends" do
+  it "should find all facebook friends in network" do
+    Factory :human_network
+    Factory :facebook_friend_network
+    HumanNetwork.facebook_friend.count.should == 1
+    HumanNetwork.facebook_friend.first.network_type.should == "FacebookFriend"
+  end
+end
+
+describe "create facebook friends" do
+  it "should create mutual facebook friends" do
+    first = Factory :person
+    second = Factory :person
+    HumanNetwork.facebook_friend.count.should == 0
+    
+    HumanNetwork.create_facebook_friends!(first, second)
+    HumanNetwork.facebook_friend.count.should == 2
+  end
+  
+  it "should not create mutual facebook friends when already exists" do
+    first = Factory :person
+    second = Factory :person
+    Factory :facebook_friend_network, :entity => first, :person => second
+    HumanNetwork.facebook_friend.count.should == 1
+    
+    HumanNetwork.create_facebook_friends!(first, second)
+    HumanNetwork.facebook_friend.count.should == 1
+  end
+end
+
+
