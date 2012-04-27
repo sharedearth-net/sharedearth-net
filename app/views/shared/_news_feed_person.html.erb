@@ -1,6 +1,9 @@
+<%#*TO DO: should only create a public event log if the two parties had a recent interaction that resulted in neutral or negative feedback%>
 <div class="network-activity">
     <ul>
       <% events.each do |event| %>
+<%#This if statement added so that withdraw trust events would not show up on the view network page.%>
+		  <% if event.event_log.event_type_id != 23 %>
 		  <% event_sentence = event_log_sentence(event.event_log, nil, 
                                                 EventDisplay::DASHBOARD_FEED) %>
             <% unless event_sentence.empty? %>
@@ -16,10 +19,10 @@
 			
       <%= render :partial => '/comments/comment_box', :locals => {:object => event.event_log} %>
 							
-		</li>
-			    
+           </li>  
       <% end %>
-		<% end unless @events.nil? %>		
+      <% end %>
+       <% end unless @events.nil? %>		
 	</ul>
 	
 	<!-- PREV - NEXT links -->
