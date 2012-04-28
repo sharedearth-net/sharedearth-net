@@ -77,8 +77,8 @@ describe ItemsController do
         end
 
         it_should_behave_like "requesting a hidden item"
-
       end
+      
       context "item in shareage" do
         before do
           Item.stub(:find_by_id).with("37") { mock_item }

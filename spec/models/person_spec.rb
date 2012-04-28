@@ -197,7 +197,7 @@ describe Person, ".network_activity" do
   end
 
   before :each do
-    person.stub_chain(:human_networks, :personal_network).and_return([human_network])
+    person.stub(:human_networks).and_return([human_network])
     person.stub!(:trusted_friends).and_return([maria])
   end
 
@@ -277,6 +277,14 @@ describe Person, ".accepted_tr?" do
     person = Factory(:person)
     person.update_attributes(:accepted_tc => true)
     person.accepted_tr?.should be_true
+  end
+end
+
+describe "facebook friends" do
+  it "should return facebook friends for the person" do
+    person = Factory(:person)
+    Factory :facebook_friend_network, :entity => person
+    person.facebook_friends.count.should == 1
   end
 end
 
