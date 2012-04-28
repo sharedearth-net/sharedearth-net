@@ -50,7 +50,8 @@ class PeopleController < ApplicationController
           when 'other'
             mutual_friends = @person.mutural_friends(current_user.person)
             trusted_network = @person.trusted_friends
-            @other = trusted_network - mutual_friends
+            facebook_friends = @person.facebook_friends
+            @other = facebook_friends + trusted_network - mutual_friends
             @other.delete_at(@other.index(current_person) || @other.length) unless @person.belongs_to? current_user
           else
             #
@@ -58,7 +59,8 @@ class PeopleController < ApplicationController
     else
       @trusted_network = @person.trusted_friends
       @mutual_friends = @person.mutural_friends(current_user.person)
-      @other = @trusted_network - @mutual_friends
+      facebook_friends = @person.facebook_friends
+      @other = facebook_friends + @trusted_network - @mutual_friends
       @other.delete_at(@other.index(current_person) || @other.length) unless @person.belongs_to? current_user
     end
     respond_to do |format|

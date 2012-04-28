@@ -7,7 +7,6 @@ class Person < ActiveRecord::Base
   has_human_network :mutual_network, :class_name => "MutualNetwork"
   has_human_network :facebook_friend, :class_name => "FacebookFriend"
   has_human_network :member, :class_name => "Member"
-  has_human_network :personal_network, :conditions => [ "network_type = ? OR network_type = ?", "TrustedNetwork", "MutualNetwork" ]
 
   belongs_to :user
   has_many :items, :as => :owner
@@ -73,7 +72,7 @@ class Person < ActiveRecord::Base
   end
 
   def network_activity
-    my_people_id = self.human_networks.personal_network.collect { |n| n.person_id }
+    my_people_id = self.human_networks.collect { |n| n.person_id }
     my_people_id << id
 
     EventDisplay.select('DISTINCT event_log_id').
@@ -151,7 +150,7 @@ class Person < ActiveRecord::Base
   end
 
   def personal_network_size
-    self.human_networks.personal_network.count
+    self.human_networks.collect(&:person_id).uniq.count
   end
 
   def self.search(search)
@@ -165,11 +164,15 @@ class Person < ActiveRecord::Base
   end
 
   def personal_network_friends
-		self.human_networks.personal_network.map { |n| n.trusted_person }.uniq
+		self.human_networks.map { |n| n.trusted_person }.uniq
   end
 
   def trusted_friends
     self.human_networks.trusted_personal_network.uniq.map { |n| n.trusted_person }.uniq
+  end
+  
+  def facebook_friends
+    self.human_networks.facebook_friends.map { |n| n.trusted_person }.uniq
   end
 
   def self.with_items_more_than(items_count)

@@ -7,9 +7,9 @@ describe FacebookFriendJob do
     job = FacebookFriendJob.new
     job.user= user
     job.friends= [friend]
-    HumanNetwork.facebook_friend.count.should == 0
+    HumanNetwork.facebook_friends.count.should == 0
     job.run
-    HumanNetwork.facebook_friend.count.should == 2
+    HumanNetwork.facebook_friends.count.should == 2
     FacebookFriendsJob.where(:user_id => user).count.should == 1
   end
   
