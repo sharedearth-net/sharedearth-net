@@ -143,5 +143,11 @@ end
 Factory.define :facebook_friends_job do |f|
   f.association :user, :factory => :user
   f.status :success
-  
+end
+
+Factory.define :item_type do |i|
+  i.item_type "bike"
+  i.item_count 1
+  i.ask_count 0
+  i.priority_flag false
 end
