@@ -258,3 +258,31 @@ describe "generic" do
     Factory.build(:item, :item_type => 'Bike', :name => 'Passion').should_not be_generic
   end
 end
+
+describe "after_create hook for item type" do
+  it "should create item type if doesn't exists" do
+    ItemType.count.should == 0
+    Factory(:item, :item_type => 'Bike', :name => nil)
+    item_type = ItemType.where(:item_type => 'Bike')
+    item_type.count.should == 1
+    item_type.first.item_count.should == 1
+  end
+  
+  it "should update item type if already exists" do
+    Factory(:item_type, :item_type => 'Bike')
+    Factory(:item, :item_type => 'Bike', :name => nil)
+    item_type = ItemType.where(:item_type => 'Bike')
+    item_type.count.should == 1
+    item_type.first.item_count.should == 2
+  end
+end
+
+describe "before destroy hook for item type" do
+  it "should reduce item count by 1" do
+    item = Factory(:item, :item_type => 'Bike', :name => nil)
+    item_type = ItemType.where(:item_type => 'Bike')
+    item_type.first.item_count.should == 1
+    item.destroy
+    item_type.first.reload.item_count.should == 0
+  end
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120423072028) do
+ActiveRecord::Schema.define(:version => 20120506105311) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -212,6 +212,14 @@ ActiveRecord::Schema.define(:version => 20120423072028) do
     t.datetime "updated_at"
   end
 
+  create_table "item_types", :force => true do |t|
+    t.string  "item_type"
+    t.integer "parent_id"
+    t.integer "item_count",    :default => 0
+    t.integer "ask_count",     :default => 0
+    t.boolean "priority_flag", :default => false
+  end
+
   create_table "items", :force => true do |t|
     t.string   "item_type"
     t.string   "name"
@@ -230,6 +238,7 @@ ActiveRecord::Schema.define(:version => 20120423072028) do
     t.boolean  "available"
     t.boolean  "deleted",            :default => false
     t.boolean  "hidden",             :default => false
+    t.integer  "item_type_id"
   end
 
   create_table "network_requests", :force => true do |t|
@@ -300,7 +309,6 @@ ActiveRecord::Schema.define(:version => 20120423072028) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "type",             :default => 10
-    t.integer  "owner_type",       :default => 10
   end
 
   create_table "settings", :force => true do |t|

@@ -65,6 +65,8 @@ class Item < ActiveRecord::Base
   after_create :create_entity_for_item
   after_create :add_to_resource_network
   after_create :item_event_log
+  after_create :add_to_item_type
+  before_destroy :remove_from_item_type
   #after_save :destroy_original
 
 
@@ -367,5 +369,21 @@ class Item < ActiveRecord::Base
 		self.item_type = self.item_type.strip.downcase unless self.item_type.nil?
 		self.name = self.name.strip unless self.name.nil?
 		self.description = self.description.strip unless self.description.nil?
+  end
+  
+  def add_to_item_type
+    existing_item_type = ItemType.find_by_item_type(self.item_type)
+    if existing_item_type.present? 
+      existing_item_type.increase_item_count
+      self.update_attributes(:item_type_id => existing_item_type.id)
+    else
+      new_item_type = ItemType.create_from_item self
+      self.update_attributes(:item_type_id => new_item_type.id)
+    end
+  end
+  
+  def remove_from_item_type
+    existing_item_type = ItemType.find_by_item_type(self.item_type)
+    existing_item_type.reduce_item_count
   end
 end
