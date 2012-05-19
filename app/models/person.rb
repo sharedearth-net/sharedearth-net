@@ -52,13 +52,6 @@ class Person < ActiveRecord::Base
   scope :notification_candidate, where("(email_notification_count = 0) OR ((email_notification_count in (?)) AND last_notification_email < ?) OR ((email_notification_count in (?)) AND last_notification_email < ?) AND authorised_account = ?", [1,2], Time.now - 78.hours, [3,4], Time.now - 168.hours, true)
   scope :exclude_users, lambda { |entity| where("id not in (?)", entity)}
   scope :include_users, lambda { |entity| where("id in (?)", entity)}
-  
-  WEIGHTAGE = {
-    :trusted => 3,
-    :fb  => 2,
-    :mutual => 1,
-    :group => 1
-  }
 
 	def recent_activity_logs(min_count = 10)
 		logs = activity_logs.where(:read => false).order("#{ActivityLog.table_name}.created_at DESC")
@@ -279,46 +272,27 @@ class Person < ActiveRecord::Base
   end
   
   def news_feed
-    user_network = HumanNetwork.involves_as_person(self) + HumanNetwork.part_of_village(self)
     recent_events = EventEntity.recent_events_for self
   
-    weighted_connection = {}
-    user_network.each do |network|
-      if weighted_connection.key(network.person_id).present? 
-        weighted_connection[network.person_id] += WEIGHTAGE[network.network_type]
-      else
-        weighted_connection[network.person_id] = WEIGHTAGE[network.network_type]
-      end
-    end
-    
-    weighted_events = []
+    weighted_events = {}
     recent_events.each do |event|
-      
+      weightage =  HumanNetwork.weightage(event.network_type) + EventType.weightage(event.event_type_id)
+      weighted_events[event.event_log_id] ||= 0
+      weighted_events[event.event_log_id] += weightage
     end
     
-		ee = Arel::Table.new(EventEntity.table_name.to_sym)
-    pn = Arel::Table.new(HumanNetwork.table_name.to_sym)
-
-    pn_network = pn.project(pn[:person_id], Arel.sql("4 as trusted_relationship_value")).where(pn[:entity_id].eq(self_id)).where(pn[:entity_type].eq("Person"))
-
-    query = ee.project(Arel.sql("#{ee.name}.event_log_id as event_log_id"), Arel.sql("SUM(trusted_relationship_value) as total_relationship_value"))
-    query = query.join(Arel.sql("LEFT JOIN (#{pn_network.to_sql}) AS network ON #{ee.name}.entity_id = network.person_id AND #{ee.name}.entity_type = 'Person' AND user_only = 'false'"))
-    query = query.group(ee[:event_log_id], ee[:created_at]).order("#{ee.name}.created_at DESC").take(25)
-    query = query.where(Arel.sql("person_id IS NOT NULL or (#{ee.name}.entity_type = 'Person' and #{ee.name}.entity_id = #{self_id})"))
-
-    event_log_ids = EventEntity.find_by_sql(query.to_sql)
-
-		# CASHE PREVIOUSLY SHOWN NEWS FEED IF NOT ALREADY CASHED
-		event_log_ids = event_log_ids.reverse
-
-		event_log_ids.each do |e|
-		  conditions = { :type_id =>  EventDisplay::DASHBOARD_FEED,
-                   :person_id => self_id,
-                   :event_log_id => e.event_log_id }
+    sorted_events = weighted_events.sort_by { |k,v| v } 
+    
+    top_events = sorted_events.reverse[0..9]
+    top_events.each do |e|
+      conditions = { :type_id =>  EventDisplay::DASHBOARD_FEED,
+                      :person_id => self.id,
+                      :event_log_id => e[0] }
       EventDisplay.find(:first, :conditions => conditions) || EventDisplay.create(conditions)
-		end
+    end
   end
 
+  # Will remove this once story is approve
   # def news_feed
   #     # Updated SQL to get all events relating to anyone in a user's trusted
   #     # network or to themselves

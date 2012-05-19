@@ -26,6 +26,15 @@ class HumanNetwork < ActiveRecord::Base
 
 
   validates_presence_of :entity_id, :entity_type, :person_id
+  
+  
+  NETWORK_WEIGHTAGE = {
+    'TrustedNetwork' => 3,
+    'FacebookFriend'  => 2,
+    'MutualNetwork' => 1,
+    'GroupAdmin' => 2,
+    'Member' => 2
+  }
 
   # def requester?(person)
   #   self.person == person
@@ -61,5 +70,7 @@ class HumanNetwork < ActiveRecord::Base
     self.entity_id = self.entity.entity.id
   end
 
-
+  def self.weightage network_type
+    NETWORK_WEIGHTAGE[network_type].present? ? NETWORK_WEIGHTAGE[network_type] : 0
+  end
 end

@@ -87,3 +87,14 @@ describe "create facebook friends" do
   end
 end
 
+describe "self.weightage" do
+  it "should return weightage of a network type" do
+    HumanNetwork.weightage('TrustedNetwork').should == 3
+    HumanNetwork.weightage('FacebookFriend').should == 2
+    HumanNetwork.weightage('MutualNetwork').should == 1
+    HumanNetwork.weightage('GroupAdmin').should == 2
+    HumanNetwork.weightage('Member').should == 2
+    HumanNetwork.weightage('AnythingElse').should == 0
+  end
+end
+

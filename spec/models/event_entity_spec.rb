@@ -4,9 +4,13 @@ describe EventEntity do
   describe "recent_events_for" do
     it "should provide recent activity of person" do
       person = Factory :person
-      Factory :event_entity
+      user = Factory :person
+      some_entity = Factory :event_entity
       event_entity = Factory :event_entity, :entity_id => person.id
-      recent_events = EventEntity.recent_events_for person
+      
+      Factory :human_network, :person => user, :entity_id => event_entity.entity_id , :entity_type => event_entity.entity_type
+      
+      recent_events = EventEntity.recent_events_for user
       recent_events.count.should == 1
       recent_events.first.event_log_id.should == event_entity.event_log_id
     end
