@@ -51,6 +51,9 @@ class EventLog < ActiveRecord::Base
     EventEntity.create!(:event_log => event_log, :entity => first_person)
     EventEntity.create!(:event_log => event_log, :entity => second_person)
     
+    EventEntity.create_for_related_groups(first_person, event_log)
+    EventEntity.create_for_related_groups(second_person, event_log)
+    
     event_log
   end
   
@@ -105,10 +108,12 @@ class EventLog < ActiveRecord::Base
     
     if(!first_person.nil?) 
       EventEntity.create!(:event_log => event_log, :entity => first_person)
+      EventEntity.create_for_related_groups(first_person, event_log)
     end
     
     if(!second_person.nil?)
       EventEntity.create!(:event_log => event_log, :entity => second_person)
+      EventEntity.create_for_related_groups(second_person, event_log)
     end
     
     if(!object.nil?)

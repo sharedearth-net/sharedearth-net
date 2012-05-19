@@ -87,4 +87,3 @@ describe "create facebook friends" do
   end
 end
 
-

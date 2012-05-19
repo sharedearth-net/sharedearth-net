@@ -368,5 +368,9 @@ describe Person, ".accepted_pp?" do
       end
     end
   end
+  
+  describe "news_feed" do
+    
+  end
 end
 

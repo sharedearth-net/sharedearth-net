@@ -61,4 +61,5 @@ class HumanNetwork < ActiveRecord::Base
     self.entity_id = self.entity.entity.id
   end
 
+
 end
