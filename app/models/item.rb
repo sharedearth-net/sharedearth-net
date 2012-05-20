@@ -27,6 +27,11 @@ class Item < ActiveRecord::Base
     STATUS_SHAREAGE   => 'shareage'
   }
 
+  state_machine :status, :initial => STATUS_NORMAL do
+    state STATUS_SHAREAGE do
+    end 
+  end
+  
   STATUSES_VISIBLE_TO_OTHER_USERS = [ STATUS_NORMAL, STATUS_DAMAGED ]
   REQUESTABLE_STATUSES = [ STATUS_NORMAL ]
   attr_accessible :photo, :name, :description, :purpose, :item_type

@@ -10,6 +10,7 @@ gem 'omniauth', "~> 0.2.6"
 gem "aws-s3"
 gem "paperclip"
 gem "mysql2"
+gem 'state_machine'
 
 # https://github.com/bclubb/possessive
 gem "possessive"

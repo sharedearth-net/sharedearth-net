@@ -7,6 +7,14 @@ class EventType < ActiveRecord::Base
     GROUP_NEWS_FEED      => 'news feed'
   }
 
+  EVENT_WEIGHTAGE = {
+    18 => 1,
+    19 => 3,
+    20 => 3,
+    21 => 1,
+    85 => 1
+  }
+  
   has_many :activity_logs
   has_many :event_logs
 
@@ -43,6 +51,11 @@ class EventType < ActiveRecord::Base
   # "REQUESTER CANCEL GIFTER", # 16
   # "REQUESTER CANCEL REQUESTER" # 17
 
+  
+  def self.weightage event_type_id
+    EVENT_WEIGHTAGE[event_type_id].present? ? EVENT_WEIGHTAGE[event_type_id] : 0
+  end
+  
   def self.new_item_request_gifter(return_only_id = true)
     return_only_id ? 2 : EventType.find(2)
   end

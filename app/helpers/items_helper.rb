@@ -10,6 +10,10 @@ module ItemsHelper
   def generic_name item
     item.name? ? item.name : item.item_type
   end
+   
+  def owner_only(item, &block)
+    capture(&block) if current_user && item.is_owner?(current_user.person)
+  end
   
   def item_types_with_gift_status(items)
 		item_types = {}

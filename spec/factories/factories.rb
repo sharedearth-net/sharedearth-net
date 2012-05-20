@@ -82,6 +82,13 @@ Factory.define :new_village_network, :class => HumanNetwork do |p|
   p.entity_type "Village"
 end
 
+Factory.define :village_network, :class => HumanNetwork do |p|
+  p.network_type "Member"
+  p.entity_type "Village"
+  p.association :entity, :factory => :village
+  p.association :person, :factory => :person
+end
+
 Factory.define :facebook_friend_network, :class => HumanNetwork do |p|
   p.network_type "FacebookFriend"
   p.association :entity, :factory => :person
@@ -98,6 +105,13 @@ Factory.define :event_log do |i|
 end
 
 Factory.define :event_display do |e|
+end
+
+Factory.define :event_entity do |e|
+  e.entity_type "Person"
+  e.entity_id 1234455
+  e.association :event_log, :factory => :event_log
+  e.user_only false
 end
 
 Factory.define :activity_log do |i|

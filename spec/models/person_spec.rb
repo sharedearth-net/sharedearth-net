@@ -368,5 +368,30 @@ describe Person, ".accepted_pp?" do
       end
     end
   end
+  
+  describe "news_feed" do
+    it "should find top weighted events and create event cache" do
+      person_1 = Factory :person
+      friend_1 = Factory :person
+      friend_2 = Factory :person
+      village_1 = Factory :village
+      event_log_1 = Factory :event_log
+      event_log_2 = Factory :event_log
+      
+      entity = Factory :event_entity 
+      
+      Factory :event_entity, :entity_id => friend_1.id, :entity_type => "Person", :event_log_id => event_log_1.id
+      Factory :event_entity, :entity_id => village_1.id, :entity_type => "Village", :event_log_id => event_log_1.id
+      Factory :event_entity, :entity_id => friend_2.id, :entity_type => "Person", :event_log_id => event_log_2.id
+      
+      Factory :human_network, :person => person_1, :entity_id => friend_1.id , :entity_type => "Person", :network_type => "TrustedNetwork"
+      Factory :human_network, :person => person_1, :entity_id => village_1.id , :entity_type => "Village", :network_type => "Member"
+      Factory :human_network, :person => person_1, :entity_id => friend_2.id , :entity_type => "Person", :network_type => "MutualNetwork"
+      
+      person_1.news_feed
+      
+      EventDisplay.all.count.should == 2
+    end
+  end
 end
 
