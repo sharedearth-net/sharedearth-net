@@ -30,4 +30,31 @@ module ItemRequestsHelper
     end
     html.html_safe
   end
+    
+  def gifter_only(item_request, &block)
+    capture(&block) if current_user && item_request.gifter?(current_user.person)
+  end
+
+  def requester_only(item_request, &block)
+    capture(&block) if current_user && item_request.requester?(current_user.person)
+  end
+
+  def requester_and_gifter_only(item_request, &block)
+    capture(&block) if current_user && (item_request.gifter?(current_user.person) || item_request.requester?(current_user.person))
+  end
+
+  # Returns photo URL of either item being requested or the other user involved in request
+  def item_request_photo(item_request, options = {})
+    defaults = { :size => :medium }
+    options = defaults.merge(options)
+
+    if item_request.item.photo?
+      item_request.item.photo.url(options[:size])
+    elsif item_request.requester?(current_user.person)
+      item_request.gifter.avatar(options[:size])
+    else
+      item_request.requester.avatar(options[:size])
+    end
+  end
+  
 end
