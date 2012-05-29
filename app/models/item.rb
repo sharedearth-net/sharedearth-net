@@ -54,9 +54,10 @@ class Item < ActiveRecord::Base
                    :square => "50x50"
                   },
                  :default_url => "/images/noimage-:style.png"
-
+			   
   validates_length_of    :item_type, :maximum => 30
-  validates_length_of    :name, :maximum => 50
+  validates_length_of :name, :if => :not_book?, :maximum => 50
+  validates_length_of :name, :if => :book?, :maximum => 250
   validates_length_of    :description, :maximum => 400
 
   validates_inclusion_of :purpose, :in => [PURPOSE_SHARE, PURPOSE_GIFT, PURPOSE_SHAREAGE],
@@ -364,7 +365,16 @@ class Item < ActiveRecord::Base
       event_display.destroy
     end
   end
+  
   private
+  
+  def book?
+    item_type == "book" 
+  end
+  
+  def not_book?
+    !book?
+  end 
 
   def destroy_original
     self.photo.destroy
