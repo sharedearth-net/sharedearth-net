@@ -275,6 +275,7 @@ describe "after_create hook for item type" do
     item_type.count.should == 1
     item_type.first.item_count.should == 2
   end
+end
 describe "item names for books" do 
   subject { Item.new(:item_type => "book") } 
 	  
