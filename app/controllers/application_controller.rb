@@ -109,6 +109,7 @@ class ApplicationController < ActionController::Base
 
   #Error 501
   def generic_error(exception, message = "OK that didn't work. Try something else.")
+	notify_airbrake(exception)
     respond_to do |format|
       format.html {render_501}
       format.json do
