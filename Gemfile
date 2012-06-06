@@ -6,12 +6,14 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'omniauth', "~> 0.2.6"
+gem 'omniauth'
 gem "aws-s3"
 gem "paperclip"
-gem "mysql2"
-gem 'state_machine'
+#gem 'mysql2', '< 0.3'
 
+gem 'mysql2'
+gem 'state_machine'
+gem "omniauth-facebook"
 # https://github.com/bclubb/possessive
 gem "possessive"
 
@@ -51,16 +53,16 @@ gem "acts_as_commentable"
 group :development, :test do
   gem "rspec-rails", "~> 2.5"
 	gem "shoulda", "~> 2.11"
+  gem 'pry'
   gem "shoulda-matchers"
 	gem "autotest"
 	gem "guard-rspec"
 	gem "webrat"
-	gem "rcov"
 	gem 'factory_girl_rails'
 	gem 'ffaker'
 	gem 'spork', '~> 0.9.0.rc'
-	gem 'cucumber'
-  gem 'cucumber-rails'
+	gem 'cucumber', '~> 1.1.1'
+        gem 'cucumber-rails' , '~> 1.1.1'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'pickle'
