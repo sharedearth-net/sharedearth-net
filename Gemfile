@@ -50,10 +50,28 @@ gem "acts_as_commentable"
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
-group :development, :test do
+group :development do
   gem "rspec-rails", "~> 2.5"
 	gem "shoulda", "~> 2.11"
   gem 'pry'
+  gem "shoulda-matchers"
+	gem "autotest"
+	gem "guard-rspec"
+	gem "webrat"
+	gem 'factory_girl_rails'
+	gem 'ffaker'
+	gem 'spork', '~> 0.9.0.rc'
+  gem 'database_cleaner'
+  gem 'pickle'
+  gem 'heroku_san'
+  gem 'nifty-generators'
+  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem "escape_utils"
+end
+
+group  :test do
+  gem "rspec-rails", "~> 2.5"
+	gem "shoulda", "~> 2.11"
   gem "shoulda-matchers"
 	gem "autotest"
 	gem "guard-rspec"
@@ -72,6 +90,7 @@ group :development, :test do
   gem "escape_utils"
 #  gem 'pg'
 end
+
 group :production do
   gem 'thin'
   gem "airbrake"
