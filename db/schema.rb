@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506105311) do
+ActiveRecord::Schema.define(:version => 20120610110731) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(:version => 20120506105311) do
     t.string   "entity_type"
     t.integer  "entity_id"
     t.string   "network_type"
+    t.boolean  "reciprocal_trust"
   end
 
   add_index "human_networks", ["entity_id"], :name => "index_human_networks_on_entity_master_id"
