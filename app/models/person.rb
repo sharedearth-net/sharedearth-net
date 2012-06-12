@@ -4,7 +4,7 @@ class Person < ActiveRecord::Base
 
   has_human_network :human_networks
   has_human_network :trusted_network, :class_name => "TrustedNetwork"
-  has_human_network :mutual_network, :class_name => "MutualNetwork"
+  has_human_network :extended_network, :class_name => "ExtendedNetwork"
   has_human_network :facebook_friend, :class_name => "FacebookFriend"
   has_human_network :member, :class_name => "Member"
 

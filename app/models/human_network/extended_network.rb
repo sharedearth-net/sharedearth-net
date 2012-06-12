@@ -1,0 +1,3 @@
+class ExtendedNetwork < HumanNetwork
+  
+end

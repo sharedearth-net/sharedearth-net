@@ -15,7 +15,7 @@ class HumanNetwork < ActiveRecord::Base
 
   scope :facebook_friends, where(:network_type => "FacebookFriend")
   scope :trusted_personal_network, where(:network_type => "TrustedNetwork")
-  scope :mutual_network, where(["network_type = ?", "MutualNetwork"])
+  scope :extended_network, where(["network_type = ?", "ExtendedNetwork"])
   scope :village_members, lambda { |village| where("entity_id = ? AND entity_type = ? AND network_type = ?", village.id, "Village", "Member")}
   scope :village_admins, lambda { |village| where("entity_id = ? AND entity_type = ? AND network_type = ?", village.id, "Village", "GroupAdmin")}
   scope :part_of_village, lambda { |person| where("person_id = ? AND entity_type =? AND (network_type = ? OR network_type = ?)", person.id, "Village", "GroupAdmin", "Member")}
@@ -31,7 +31,7 @@ class HumanNetwork < ActiveRecord::Base
   NETWORK_WEIGHTAGE = {
     'TrustedNetwork' => 3,
     'FacebookFriend'  => 2,
-    'MutualNetwork' => 1,
+    'ExtendedNetwork' => 1,
     'GroupAdmin' => 2,
     'Member' => 2
   }
