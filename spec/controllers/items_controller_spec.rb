@@ -3,6 +3,7 @@ require 'spec_helper'
 describe ItemsController do
 
   let(:signedin_user) { generate_mock_user_with_person }
+  let(:nonsignedin_user) { generate_mock_user_with_person }
   let(:mock_items)    { [ mock_model(Item, :name => "Item1", :owner => signedin_user.person).
                         as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
   let(:item_one) {mock_model(Item)}
@@ -88,12 +89,18 @@ describe ItemsController do
           mock_item.stub(:is_sharage_owner?).with(signedin_user).and_return(true)
         end
 
-
         it "should show to shareage persons" do
           get :show, :id => "37"
           assigns(:item).should be(mock_item)
           response.should be_success
         end
+		
+        it "should not show to non-shareage persons" do 
+          mock_item.should_receive(:is_shareage_owner?).with(signedin_user.person).and_return(false)
+          get :show, :id => "37"
+          flash[:alert].should eql(I18n.t('messages.only_owner_can_access'))
+          response.should redirect_to(root_path)
+		end
 
       end
     end

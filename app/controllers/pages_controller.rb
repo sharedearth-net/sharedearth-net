@@ -7,6 +7,7 @@ class PagesController < ApplicationController
     elsif Settings.invitations == 'true' and not current_user.person.authorised?
       render
     else
+      flash.keep 
       redirect_to dashboard_path
     end
   end

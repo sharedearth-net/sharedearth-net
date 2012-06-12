@@ -96,7 +96,7 @@ class Item < ActiveRecord::Base
   end
 
   def is_shareage_owner?(entity)
-    ResourceNetwork.gifter.entity(entity) || ResourceNetwork.possessor.entity(entity)
+	(ResourceNetwork.entity(entity).item(self)).any?
   end
 
   def item_event_log

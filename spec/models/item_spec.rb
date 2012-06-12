@@ -86,35 +86,41 @@ describe Item, ".add_owner for shareage" do
     File.stub!(:unlink).and_return(true)
   end
 
-  it "add new owner to resource network" do
+  it "should be able to add a new owner to resource network" do
     item.add_to_resource_network_for_possessor(requester)
     resource = ResourceNetwork.item(item).entity(requester)
     resource.should_not be_empty
   end
 
-  it "remove new owner to resource network" do
+  it "should be able to remove new owner from resource network" do
     item.add_to_resource_network_for_possessor(requester)
     item.remove_from_resource_network_for(requester)
     resource = ResourceNetwork.item(item).entity(requester)
     resource.should be_empty
   end
 
-  it "check if user is in resource network for shareage" do
+  it "should check if user is in resource network for shareage" do
     item.add_to_resource_network_for_possessor(requester)
     result = item.is_shareage_owner?(requester)
     result.should be_true
   end
-
-  it "check if gifter is in resource network for shareage" do
+  
+  it "should check if gifter is in resource network for shareage" do
     item.add_to_resource_network_for_possessor(requester)
+    item.change_resource_to_gifter
     result = item.is_shareage_owner?(item.owner)
     result.should be_true
   end
+  
+  it "should verify that gifter_and_possessor is the owner" do 
+	result = item.is_shareage_owner?(item.owner)
+    result.should be_true 
+  end
 
-  it "3rd party is not shareage owner " do
+  it "should verify that 3rd party is not shareage owner " do
     item.add_to_resource_network_for_possessor(requester)
     result = item.is_shareage_owner?(other_person)
-    result.should be_true
+    result.should be_false
   end
 end
 
