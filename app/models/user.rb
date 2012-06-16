@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.create_person(:name  => auth["user_info"]["name"].slice(0..19), 
-                         :email => auth["user_info"]["email"],
+      user.create_person(:name  => auth["info"]["name"].slice(0..19), 
+                         :email => auth["info"]["email"],
                          :authorised_account => false)
 
       user.person.create_reputation_rating(:gift_actions  => 0,:distinct_people => 0, 

@@ -386,7 +386,7 @@ describe Person, ".accepted_pp?" do
       
       Factory :human_network, :person => person_1, :entity_id => friend_1.id , :entity_type => "Person", :network_type => "TrustedNetwork"
       Factory :human_network, :person => person_1, :entity_id => village_1.id , :entity_type => "Village", :network_type => "Member"
-      Factory :human_network, :person => person_1, :entity_id => friend_2.id , :entity_type => "Person", :network_type => "MutualNetwork"
+      Factory :human_network, :person => person_1, :entity_id => friend_2.id , :entity_type => "Person", :network_type => "ExtendedNetwork"
       
       person_1.news_feed
       

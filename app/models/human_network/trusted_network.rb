@@ -1,13 +1,13 @@
 class TrustedNetwork < HumanNetwork
 
-  after_create :update_mutual_network_after_create
-  after_destroy :update_mutual_network_after_destroy
+  after_create :update_extended_network_after_create
+  after_destroy :update_extended_network_after_destroy
 
-  def update_mutual_network_after_create
+  def update_extended_network_after_create
 
     # relationship getting converted from Mutual to Trusted
-    if MutualNetwork.where( :entity_id => self.entity_id, :person_id => self.person_id ).exists?
-      MutualNetwork.where( :entity_id => self.entity_id, :person_id => self.person_id ).each { |mn| mn.destroy }
+    if ExtendedNetwork.where( :entity_id => self.entity_id, :person_id => self.person_id ).exists?
+      ExtendedNetwork.where( :entity_id => self.entity_id, :person_id => self.person_id ).each { |mn| mn.destroy }
     end
 
     entity_ids_to_insert = HumanNetwork.find_by_sql("select distinct(person_id) " + #select all mutual_person ids
@@ -17,22 +17,22 @@ class TrustedNetwork < HumanNetwork
       "(select person_id from human_networks where entity_type = 'Person' and entity_id = #{self.entity_id} and network_type = 'TrustedNetwork') " + # friend of current person
       "and person_id != #{self.entity_id} " + # and not current person
       "and person_id not in" + # and that person is
-      "(select person_id from human_networks where entity_type = 'Person' and entity_id = #{self.entity_id} and network_type = 'MutualNetwork') ") # not already a mutual person
+      "(select person_id from human_networks where entity_type = 'Person' and entity_id = #{self.entity_id} and network_type = 'ExtendedNetwork') ") # not already a mutual person
     entity_ids_to_insert.each do |pi|
-      MutualNetwork.create!( :entity => self.entity, :person_id => pi["person_id"] )
+      ExtendedNetwork.create!( :entity => self.entity, :person_id => pi["person_id"] )
       #creating reverse relation at the same time
-      MutualNetwork.create!( :entity_type => "Person", :entity_id => pi["person_id"], :person_id => self.entity_id )
+      ExtendedNetwork.create!( :entity_type => "Person", :entity_id => pi["person_id"], :person_id => self.entity_id )
     end
   end
 
-  def update_mutual_network_after_destroy
+  def update_extended_network_after_destroy
 
     # relationship getting converted from Trusted to Mutual
     if TrustedNetwork.where( :entity_type => 'Person', :entity_id => TrustedNetwork.where( :entity_id => self.entity_id ).collect { |tn| tn.person_id }, :person_id => self.person_id ).exists?
-      MutualNetwork.create!( :entity_type => self.entity_type, :entity_id => self.entity_id, :person_id => self.person_id )
+      ExtendedNetwork.create!( :entity_type => self.entity_type, :entity_id => self.entity_id, :person_id => self.person_id )
     end
 
-    human_networks_to_delete = HumanNetwork.destroy_all("entity_type = 'Person' and entity_id = #{self.entity_id} and network_type = 'MutualNetwork' " +# delete all mutual friends
+    human_networks_to_delete = HumanNetwork.destroy_all("entity_type = 'Person' and entity_id = #{self.entity_id} and network_type = 'ExtendedNetwork' " +# delete all mutual friends
       "and person_id not in (" + # except
       "select distinct(person_id) " + #select all mutual_person ids
       "from human_networks where network_type = 'TrustedNetwork' and entity_type = 'Person' and entity_id in " + # person should be friend of
@@ -42,7 +42,7 @@ class TrustedNetwork < HumanNetwork
       "and person_id != #{self.entity_id} )") # and not current person
 
     #also delete reverse MUTUAL relations
-    human_networks_to_delete = HumanNetwork.destroy_all("person_id = #{self.entity_id} and network_type = 'MutualNetwork' " +# delete all mutual friends
+    human_networks_to_delete = HumanNetwork.destroy_all("person_id = #{self.entity_id} and network_type = 'ExtendedNetwork' " +# delete all mutual friends
       "and entity_type = 'Person' and entity_id not in (" + # except
       "select distinct(person_id) " + #select all mutual_person ids
       "from human_networks where network_type = 'TrustedNetwork' and entity_type = 'Person' and entity_id in " + # person should be friend of

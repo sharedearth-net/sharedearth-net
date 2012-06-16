@@ -100,7 +100,7 @@ module UserSpecHelper
     {
       "provider" => 'facebook',
       "uid" => '111111111',
-      "user_info" => {
+      "info" => {
         "name" => "Slobodan Kovacevic",
         "email" => "testing@test.net"
       },

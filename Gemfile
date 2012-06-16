@@ -6,12 +6,14 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'omniauth', "~> 0.2.6"
+gem 'omniauth'
 gem "aws-s3"
 gem "paperclip"
-gem "mysql2"
-gem 'state_machine'
+#gem 'mysql2', '< 0.3'
 
+gem 'mysql2'
+gem 'state_machine'
+gem "omniauth-facebook"
 # https://github.com/bclubb/possessive
 gem "possessive"
 
@@ -48,19 +50,37 @@ gem "acts_as_commentable"
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
-group :development, :test do
+group :development do
+  gem "rspec-rails", "~> 2.5"
+	gem "shoulda", "~> 2.11"
+  gem 'pry'
+  gem "shoulda-matchers"
+	gem "autotest"
+	gem "guard-rspec"
+	gem "webrat"
+	gem 'factory_girl_rails'
+	gem 'ffaker'
+	gem 'spork', '~> 0.9.0.rc'
+  gem 'database_cleaner'
+  gem 'pickle'
+  gem 'heroku_san'
+  gem 'nifty-generators'
+  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem "escape_utils"
+end
+
+group  :test do
   gem "rspec-rails", "~> 2.5"
 	gem "shoulda", "~> 2.11"
   gem "shoulda-matchers"
 	gem "autotest"
 	gem "guard-rspec"
 	gem "webrat"
-	gem "rcov"
 	gem 'factory_girl_rails'
 	gem 'ffaker'
 	gem 'spork', '~> 0.9.0.rc'
-	gem 'cucumber'
-  gem 'cucumber-rails'
+	gem 'cucumber', '~> 1.1.1'
+        gem 'cucumber-rails' , '~> 1.1.1'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'pickle'
@@ -70,6 +90,7 @@ group :development, :test do
   gem "escape_utils"
 #  gem 'pg'
 end
+
 group :production do
   gem 'thin'
   gem "airbrake"
