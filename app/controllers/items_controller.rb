@@ -162,8 +162,13 @@ class ItemsController < ApplicationController
 
   def post_new_item_on_fb(item)
     case item.purpose
-    	when Item::PURPOSE_SHARE
-        msg = "Sharing my #{item.name.downcase} on sharedearth.net."
+      when Item::PURPOSE_SHARE
+		case item.name
+		  when ""
+			msg = "Sharing my #{item.item_type.downcase} on sharedearth.net"
+		  else
+			msg = "Sharing my #{item.name.downcase} on sharedearth.net."
+		end
       when Item::PURPOSE_SHAREAGE
         msg = "Seeking to put my #{item.name.downcase} into shareage (i.e. a long term lend!) via sharedearth.net."
       when Item::PURPOSE_GIFT
