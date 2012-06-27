@@ -161,20 +161,21 @@ class ItemsController < ApplicationController
   end
 
   def post_new_item_on_fb(item)
+    if (item.name).blank? 
+	  itemLabel = item.item_type.downcase
+	else 
+	  itemLabel = item.name.downcase
+	end
+	
     case item.purpose
       when Item::PURPOSE_SHARE
-		case item.name
-		  when ""
-			msg = "Sharing my #{item.item_type.downcase} on sharedearth.net"
-		  else
-			msg = "Sharing my #{item.name.downcase} on sharedearth.net."
-		end
+	    msg = "Sharing my #{itemLabel} on sharedearth.net"
       when Item::PURPOSE_SHAREAGE
-        msg = "Seeking to put my #{item.name.downcase} into shareage (i.e. a long term lend!) via sharedearth.net."
+        msg = "Seeking to put my #{itemLabel} into shareage (i.e. a long term lend!) via sharedearth.net."
       when Item::PURPOSE_GIFT
-        msg = "Gifting my #{item.name.downcase} on sharedearth.net."
+        msg = "Gifting my #{itemLabel} on sharedearth.net."
       else
-        msg = "Added my #{item.name.downcase} to sharedearth.net."
+        msg = "Added my #{itemLabel} to sharedearth.net."
     end
     link = item_url(item)
 
