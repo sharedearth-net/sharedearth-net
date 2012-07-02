@@ -24,7 +24,7 @@ html, body {
 }
 
 body{
-	padding-top: 72px;
+
 }
 
 h1 {
@@ -34,11 +34,12 @@ h1 {
 }
 
 html {
-	background: url('../graphics/bg-html.png') repeat-x 0 0;
+	margin: 0;
+	padding: 0;
+	overflow-y: scroll;
 }
 
 body {
-
 	
 }
 
@@ -69,22 +70,24 @@ a:hover {
 /* container */
 
 #container {
-	width: 1024px;
-	height: 698px;
+	width: 960px;
 	margin: 0 auto;
-	background: url('../graphics/bg-body.jpg') no-repeat center 0;
-	text-align: left;
+	min-height: 100%;
+	margin-bottom: -264px;
+	position: relative;
 }
 
 	.logo-holder {
-		width: 309px;
-		margin: 95px 0 0 153px;
+		width: 422px;
+		margin: 0 0 0 0;
 		float: left;
+		background: url('../graphics/separator.png') no-repeat top right;
+		padding: 72px 75px 48px 0;
 	}
 
 		h1 {
-			width: 309px;
-			height: 358px;
+			width: 422px;
+			height: 378px;
 			text-indent: -1000em;
 			background: url('../graphics/logo.png') no-repeat top left;
 		}
@@ -93,8 +96,8 @@ a:hover {
 			h1 a:link,
 			h1 a:visited {
 				background: url('../graphics/logo.png') no-repeat top left;
-				width: 309px;
-				height: 358px;
+				width: 422px;
+				height: 378px;
 				display: block;
 				overflow: hidden;
 			}
@@ -102,50 +105,48 @@ a:hover {
 	/* content */
 
 	#content {
-		width: 413px;
+		width: 463px;
 		float: left;
-		margin: 215px 0 0 0;
-		padding: 0 0 0 70px;
+		padding-top: 72px;
 	}
 
 		#content p {
-			width: 320px;
-			font-size: 15px;
-			line-height: 18px;
-			color: #495943;
-			margin-bottom: 10px;
+
 		}
 		
 		
 		.button-holder-connect {
-			float: left;
-			width: 117px;
-			margin-left: 34px;
+			width: 374px;
+			margin: 0 auto;
+			padding: 26px;
+			box-shadow: 0px 0px 5px #aaa;
 		}
 		
 			#content .button-holder-connect p {
-				width: auto;
-				font-size: 10px;
-				font-family: verdana, arial, sans-serif;
-				float: none;
-				line-height: 12px;
-				margin: 0;
-				text-align:center;
-				width:96px;
+				text-align: center;
+				color: #62775a;
+				font-size: 20px;
+				line-height: 20px;
+				margin: 11px 0 0 0;
 			}
+			
+				#content .button-holder-connect p span {
+					color: #7ab906;
+				}
 		
 			.button-holder-connect h2 {
-				width: 96px;
-				height: 42px;
+				width: 191px;
+				height: 62px;
 				text-indent: -1000em;
+				margin: 0 auto;
 			}
 		
 			.button-holder-connect h2 a:link,
 			.button-holder-connect h2 a:visited {
 				display: block;
 				background: url('../graphics/bt-connect.png') no-repeat top left;
-				width: 96px;
-				height: 42px;
+				width: 191px;
+				height: 62px;
 				overflow: hidden;
 			}
 			
@@ -159,22 +160,55 @@ a:hover {
 				margin: 0;
 				color:inherit;
 			}
+	
+		#content .stats-holder {
+			background: #92908c;
+			padding: 10px;
+			width: 237px;
+			margin: 13px auto 0 auto;
+			border-radius: 3px;
 			
-			
-		.button-holder-host {
-			float: left;
-			text-indent: -1000em;
-			width: 96px;
 		}
-		
-			.button-holder-host a:link,
-			.button-holder-host a:visited {
-				display: block;
-				background: url('../graphics/bt-host.png') no-repeat top left;
-				width: 96px;
-				height: 42px;
-				overflow: hidden;
+
+			#content .stats-holder ul {
+				background: #f5f5f5;
 			}
+		
+				#content .stats-holder ul li {
+					padding: 6px 0 6px 35px;
+					border-bottom: 1px solid #ccc;
+					margin: 0 6px;
+					font-size: 12px;
+					font-family: "PredicateRounded", "Trebuchet MS", arial, sans-serif;
+					background: url('../graphics/sp-stats.png') no-repeat left 2px;
+				}
+				
+				#content .stats-holder ul li.people {
+					background-position: left -32px;
+				}
+				
+				#content .stats-holder ul li.resources-shared {
+					background-position: left -67px;
+				}
+				
+				#content .stats-holder ul li.resources-commoned {
+					background-position: left -102px;
+				}
+				
+				#content .stats-holder ul li.gift {
+					background-position: left -135px;
+					border-bottom: none;
+				}
+				
+			
+					#content .stats-holder ul li a:link,
+					#content .stats-holder ul li a:visited {
+						color: #534741;
+					}
+				
+					#content .stats-holder ul li a:hover {
+
+					}
 
 					
 
@@ -183,20 +217,22 @@ a:hover {
 #footer-holder {
 	clear: both;
 	text-align: left;
-	border-top: 1px solid #000;
-	background: #708e37;
-	height: 232px;
+	background: #fff url('../graphics/bg-footer.png') repeat-x left top;
+	height: 264px;
+	position: relative;
 }
 
 	#footer {
 		width: 980px;
 		margin: 0 auto;
+		height: 264px;
 	}
 
 		#footer ul {
 			float: left;
 			width: 200px;
-			margin: 7px 40px 0 0;
+			margin: 11px 40px 0 0;
+			padding-top: 36px;
 		}
 
 			#footer ul li {
@@ -204,12 +240,12 @@ a:hover {
 				border-bottom: 1px dashed #d0cecf;
 				line-height: 22px;
 				padding: 5px 0 11px 0;
-				text-shadow: 1px 1px #4d6226;
+				text-shadow: 1px 1px #555;
 				font-family: "PredicateRounded";
 			}
 
 			#footer ul li.headline {
-				padding-bottom: 8px;
+				padding-bottom: 6px;
 			}
 
 				#footer ul li h3 {
@@ -227,64 +263,63 @@ a:hover {
 
 				}
 
-		#footer ul.last {
-			width: 260px;
+		#footer .bg-holder {
+			width: 248px;
 			margin-right: 0;
+			float: left;
 		}
-
-			#footer ul.last li {
-
-			}
-			
-			#footer ul.last li.headline {
-				padding-bottom: 8px;
-			}
-
-			#footer ul.last li.post-holder {
-				border: none;
-			}
 
 		#footer p {
 
 		}
 
-		#footer ul.social-links {
-			float: none;
+		#footer ul li.social-links-holder {
+			margin: 0;
+			padding: 5px 0 5px 0;
 		}
 
-			#footer ul.social-links li {
-				text-indent: -1000em;
-				display: block;
-				float: left;
-				border-bottom: none;
+			#footer ul.social-links {
+				float: none;
 				padding: 0;
+				margin: 0;
 			}
 
-				#footer ul.social-links li a:link,
-				#footer ul.social-links li a:visited {
+				#footer ul.social-links li {
+					text-indent: -1000em;
 					display: block;
-					background: url('../graphics/sp-social.png') no-repeat bottom right;
-					width: 26px;
-					height: 26px;
-					overflow: hidden;
+					float: left;
+					border-bottom: none;
+					padding: 0;
+					width: 28px;
+					height: 28px;
+				
 				}
 
-				#footer ul.social-links li a:hover {
+					#footer ul.social-links li a:link,
+					#footer ul.social-links li a:visited {
+						display: block;
+						background: url('../graphics/sp-social.png') no-repeat bottom right;
+						width: 28px;
+						height: 28px;
+						overflow: hidden;
+					}
 
+					#footer ul.social-links li a:hover {
+
+					}
+
+				#footer ul.social-links li.facebook {
+					margin-right: 12px;
 				}
 
-			#footer ul.social-links li.facebook {
-				margin-right: 8px;
-			}
+					#footer ul.social-links li.facebook a:link,
+					#footer ul.social-links li.facebook a:visited {
+						background-position: bottom left;
+					}
 
-				#footer ul.social-links li.facebook a:link,
-				#footer ul.social-links li.facebook a:visited {
-					background-position: bottom left;
-				}
+					#footer ul.social-links li.facebook a:hover {
 
-				#footer ul.social-links li.facebook a:hover {
-
-				}	
+					}
 
 			
 /* invitation page */
