@@ -114,7 +114,6 @@ a:hover {
 
 		}
 		
-		
 		.button-holder-connect {
 			width: 374px;
 			margin: 0 auto;
@@ -204,13 +203,13 @@ a:hover {
 					#content .stats-holder ul li a:link,
 					#content .stats-holder ul li a:visited {
 						color: #534741;
+						display: block;
 					}
 				
 					#content .stats-holder ul li a:hover {
 
 					}
-
-					
+	
 
 /* Footer */
 
