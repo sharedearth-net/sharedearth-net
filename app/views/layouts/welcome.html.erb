@@ -7,12 +7,15 @@
 	<title>sharedearth.net - trust. share. connect.</title>
 	<link rel="stylesheet" href="static/css/reset-min.css" type="text/css" media="screen" title="no title" charset="utf-8" />
 	<link rel="stylesheet" href="static/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="static/css/fonts.css">
+	
 
 	<!--[if lte IE 6]><link type="text/css" rel="stylesheet" href="static/css/ie.css" media="screen" /><![endif]-->
 	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="static/css/ie7.css" media="screen" /><![endif]-->
 
 	<script src="static/js/jquery-1.5.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="static/js/script.js" type="text/javascript" charset="utf-8"></script>
+	
   
   <script>
     $(document).ready(function() {
@@ -34,37 +37,101 @@
 </head>
 <body>
 
-	<div id="container">
+	<div id="container" class="clearfix">
 		
 		<div class="logo-holder">
 		
 			<h1 title="sharedearth.net - from ego to wego">
 				sharedearth.net - from ego to wego
 			</h1>
+			
 		</div>
 
 		<div id="content" class="clearfix">
         	<%= yield(:no_js_msg).empty? ? render('layouts/welcome_msg') : yield(:no_js_msg) %>
 		</div>
+		<!-- #content -->
+		
+	</div>
+	<!-- #container -->
 
-		<div id="footer">
-			<p>
-				<a href="/about">About</a>&nbsp;&nbsp;   <a href="/terms/principles">Principles</a>&nbsp;&nbsp;   <a href="/transparency">Transparency</a>&nbsp;&nbsp;   <a href="/contribute">Contribute</a>&nbsp;&nbsp;   <a href="mailto:info@sharedearth.net">Contact</a>&nbsp;&nbsp;    <a href="/terms">Terms</a>
-			</p>
+	<div id="footer-holder" class="clearfix">
+	
+		<div id="footer" class="clearfix">
 			
 			<ul>
-				<li>
-					<a href="https://twitter.com/sharedearthnet" title="Follow SharedEarth on Twitter" onclick="window.open(this.href); return false;">Follow SharedEarth on Twitter</a>
+				<li class="headline">
+					<h3>Vision</h3>
 				</li>
-				<li class="facebook">
-					<a href="http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts" title="SharedEarth on Facebook" onclick="window.open(this.href); return false;">SharedEarth on Facebook</a>
+				<li>
+					<a href="/about">About</a>
+				</li>
+				<li>
+					<a href="#">Commons</a>
+				</li>
+				<li>
+					<a href="/terms/principles">Principles</a>
+				</li>
+				<li>
+					<a href="#">Platform</a>
 				</li>
 			</ul>
 			
+			<ul>
+				<li class="headline">
+					<h3>sharedearth.net</h3>
+				</li>
+				<li>
+					<a href="/terms">Legal</a>
+				</li>
+				<li>
+					<a href="/transparency">Transparency</a>
+				</li>
+				<li>
+					<a href="/contribute">Contribute</a>
+				</li>
+			</ul>
+			
+			<ul>
+				<li class="headline">
+					<h3>Connect</h3>
+				</li>
+				<li>
+					<a href="mailto:info@sharedearth.net">Contact</a>
+				</li>
+				<li>
+					<a href="#">Blog</a>
+				</li>
+				<li>
+					<ul class="social-links clearfix">
+						<li class="facebook">
+							<a href="http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts" title="SharedEarth on Facebook" onclick="window.open(this.href); return false;">SharedEarth on Facebook</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/sharedearthnet" title="Follow SharedEarth on Twitter" onclick="window.open(this.href); return false;">Follow SharedEarth on Twitter</a>
+						</li>
+						
+					</ul>
+				</li>
+			</ul>
+			
+			<ul class="last">
+				<li class="headline">
+					<h3>Blog Post</h3>
+				</li>
+				<li class="post-holder">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel magna magna. Nunc sed est vitae massa congue malesuada in non enim. Pellentesque adipiscing sem quis ipsum fermentum fermentum. Duis a turpis eu urna rhoncus bibendum sit amet sed diam. 
+					</p>
+				</li>
+			</ul>
+		
 		</div>
-
+		<!-- /#footer -->
+	
 	</div>
-	<!-- #container -->
+	
+	<!-- /#footer-holder -->
 
 </body>
 </html>

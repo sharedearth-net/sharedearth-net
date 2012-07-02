@@ -1,0 +1,46 @@
+/* @license
+ * MyFonts Webfont Build ID 2317816, 2012-07-01T01:52:11-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Predicate Rounded Bold by Haiku Monkey
+ * URL: http://www.myfonts.com/fonts/haiku/predicate-rounded/bold/
+ * Licensed pageviews: 10,000
+ * 
+ * Webfont: Predicate Rounded Bold Italic by Haiku Monkey
+ * URL: http://www.myfonts.com/fonts/haiku/predicate-rounded/bold-italic/
+ * Licensed pageviews: unspecified
+ * 
+ * Webfont: Predicate Rounded Italic by Haiku Monkey
+ * URL: http://www.myfonts.com/fonts/haiku/predicate-rounded/italic/
+ * Licensed pageviews: unspecified
+ * 
+ * Webfont: Predicate Rounded by Haiku Monkey
+ * URL: http://www.myfonts.com/fonts/haiku/predicate-rounded/regular/
+ * Licensed pageviews: unspecified
+ * 
+ * 
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2317816
+ * Webfonts copyright: Copyright (c) 2008 by Alec Julien. All rights reserved.
+ * 
+ * © 2012 Bitstream Inc
+*/
+
+
+
+  
+ @font-face {font-family: 'PredicateRounded-Bold';src: url('../fonts/235DF8_0_0.eot');src: url('../fonts/235DF8_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/235DF8_0_0.woff') format('woff'),url('../fonts/235DF8_0_0.ttf') format('truetype');}
+ 
+  
+ @font-face {font-family: 'PredicateRounded-BoldItalic';src: url('../fonts/235DF8_1_0.eot');src: url('../fonts/235DF8_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/235DF8_1_0.woff') format('woff'),url('../fonts/235DF8_1_0.ttf') format('truetype');}
+ 
+  
+ @font-face {font-family: 'PredicateRounded-Italic';src: url('../fonts/235DF8_2_0.eot');src: url('../fonts/235DF8_2_0.eot?#iefix') format('embedded-opentype'),url('../fonts/235DF8_2_0.woff') format('woff'),url('../fonts/235DF8_2_0.ttf') format('truetype');}
+ 
+  
+ @font-face {font-family: 'PredicateRounded';src: url('../fonts/235DF8_3_0.eot');src: url('../fonts/235DF8_3_0.eot?#iefix') format('embedded-opentype'),url('../fonts/235DF8_3_0.woff') format('woff'),url('../fonts/235DF8_3_0.ttf') format('truetype');}
+ 

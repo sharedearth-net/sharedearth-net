@@ -15,7 +15,7 @@
 /* Common */
 
 
-html,body{
+html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -24,16 +24,17 @@ html,body{
 }
 
 body{
-	background: url('../graphics/bg-body.jpg') no-repeat center center;
+	padding-top: 72px;
 }
 
-h1 {color:#fff;margin:0;padding:0}
-
-
+h1 {
+	color: #fff;
+	margin: 0;
+	padding: 0;
+}
 
 html {
-	background: url('../graphics/bg-html.png') repeat-x 0 0 ;
-
+	background: url('../graphics/bg-html.png') repeat-x 0 0;
 }
 
 body {
@@ -55,30 +56,23 @@ a:visited {
 	color: #949479;
 }
 
-
 a.learn-more:link,
 a.learn-more:visited {
 	text-decoration: underline;
 	color: #495943;
 }
 
-
-
 a:hover {
 	text-decoration: underline;
 }
+
 /* container */
 
 #container {
-	width: 1002px;
+	width: 1024px;
+	height: 698px;
 	margin: 0 auto;
-	position:absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -348px;/* half elements height*/
-	margin-left: -502px;/* half elements width*/
-	height: 688px;
-	overflow: auto;/* allow content to scroll inside element */
+	background: url('../graphics/bg-body.jpg') no-repeat center 0;
 	text-align: left;
 }
 
@@ -104,8 +98,6 @@ a:hover {
 				display: block;
 				overflow: hidden;
 			}
-			
-	
 	
 	/* content */
 
@@ -184,63 +176,115 @@ a:hover {
 				overflow: hidden;
 			}
 
-		/* Footer */
-		
-		#footer {
-			clear: both;
-			text-align: left;
-			padding-top: 190px;
+					
+
+/* Footer */
+
+#footer-holder {
+	clear: both;
+	text-align: left;
+	border-top: 1px solid #000;
+	background: #708e37;
+	height: 232px;
+}
+
+	#footer {
+		width: 980px;
+		margin: 0 auto;
+	}
+
+		#footer ul {
+			float: left;
+			width: 200px;
+			margin: 7px 40px 0 0;
 		}
-		
-			#footer p {
-				font-size: 12px;
-				color: #949479;
-				font-family: verdana, arial, sans-serif;
-				margin-left: 11px;
-				width: 600px;
+
+			#footer ul li {
+				font-size: 14px;
+				border-bottom: 1px dashed #d0cecf;
+				line-height: 22px;
+				padding: 5px 0 11px 0;
+				text-shadow: 1px 1px #4d6226;
+				font-family: "PredicateRounded";
+			}
+
+			#footer ul li.headline {
+				padding-bottom: 8px;
+			}
+
+				#footer ul li h3 {
+					font-size: 18px;
+					font-weight: bold;
+					font-family: "PredicateRounded-Bold", "Trebuchet MS", arial, sans-serif;
+				}
+
+				#footer ul li a:link,
+				#footer ul li a:visited {
+					color: #fff;
+				}
+
+				#footer ul li a:hover {
+
+				}
+
+		#footer ul.last {
+			width: 260px;
+			margin-right: 0;
+		}
+
+			#footer ul.last li {
+
+			}
+			
+			#footer ul.last li.headline {
+				padding-bottom: 8px;
+			}
+
+			#footer ul.last li.post-holder {
+				border: none;
+			}
+
+		#footer p {
+
+		}
+
+		#footer ul.social-links {
+			float: none;
+		}
+
+			#footer ul.social-links li {
+				text-indent: -1000em;
+				display: block;
 				float: left;
-				margin-top: 15px;
+				border-bottom: none;
+				padding: 0;
 			}
-			
-			#footer ul {
-				width: 92px;
-				float: right;
-				margin-right: 9px;
-			}
-			
-				#footer ul li {
-					text-indent: -1000em;
+
+				#footer ul.social-links li a:link,
+				#footer ul.social-links li a:visited {
 					display: block;
-					float: left;
+					background: url('../graphics/sp-social.png') no-repeat bottom right;
+					width: 26px;
+					height: 26px;
+					overflow: hidden;
 				}
-				
-					#footer ul li a:link,
-					#footer ul li a:visited {
-						display: block;
-						background: url('../graphics/sp-social.png') no-repeat bottom left;
-						width: 40px;
-						height: 40px;
-						overflow: hidden;
-					}
-					
-					#footer ul li a:hover {
-						background-position: top left;
-					}
-					
-				#footer ul li.facebook {
-					margin-left: 12px;
+
+				#footer ul.social-links li a:hover {
+
 				}
-					
-					#footer ul li.facebook a:link,
-					#footer ul li.facebook a:visited {
-						background-position: bottom right;
-					}
-					
-					#footer ul li.facebook a:hover {
-						background-position: top right;
-					}
-					
-					
+
+			#footer ul.social-links li.facebook {
+				margin-right: 8px;
+			}
+
+				#footer ul.social-links li.facebook a:link,
+				#footer ul.social-links li.facebook a:visited {
+					background-position: bottom left;
+				}
+
+				#footer ul.social-links li.facebook a:hover {
+
+				}	
 
 			
 /* invitation page */
