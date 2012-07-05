@@ -72,8 +72,7 @@ a:hover {
 #container {
 	width: 960px;
 	margin: 0 auto;
-	min-height: 100%;
-	margin-bottom: -264px;
+	min-height: 500px;
 	position: relative;
 }
 
@@ -226,11 +225,15 @@ a:hover {
 		margin: 0 auto;
 		height: 264px;
 	}
-
-		#footer ul {
+	
+		#footer > div {
 			float: left;
 			width: 200px;
 			margin: 11px 40px 0 0;
+			
+		}
+
+		#footer ul {
 			padding-top: 36px;
 		}
 
@@ -262,10 +265,14 @@ a:hover {
 
 				}
 
-		#footer .bg-holder {
+		#footer  > .bg-holder {
 			width: 248px;
-			margin-right: 0;
+			margin: 0;
 			float: left;
+		}
+		
+		#footer  > .bg-holder img {
+			display: block;
 		}
 
 		#footer p {
