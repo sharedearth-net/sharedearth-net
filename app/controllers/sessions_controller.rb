@@ -7,19 +7,17 @@ class SessionsController < ApplicationController
     user  = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
             User.create_with_omniauth(auth)
     user.token = token
-    user.person.authorise! if (Settings.invitations == 'false' && user.person.has_email?)
-    
+    user.person.authorise! if (Settings.invitations == 'false' || Settings.invitations == nil) && user.person.has_email?
     if auth['provider'] == 'facebook' && FacebookFriendsJob.week_since_last_run?(user)
       enqueue_facebook_friends_job user 
     end
-    
     user.person.reset_notification_count!
     user.record_last_activity!
     user.save!
 
     session[:user_id]  = user.id
     session[:fb_token] = auth["credentials"]["token"] if auth['provider'] == 'facebook'
-
+	  
     redirect_to root_path
   end
   
