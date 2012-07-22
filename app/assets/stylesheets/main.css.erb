@@ -110,7 +110,7 @@ a.normal:visited {
 				width: 61px;
 				height: 59px;
 				overflow: hidden;
-				background: url('../images/logo.png') no-repeat top left;
+				background: url(<%= asset_path 'logo.png' %>) no-repeat top left;
 			}
 			
 		.header-rhs {
@@ -131,7 +131,7 @@ a.normal:visited {
 			.logo-type-holder a:visited {
 				overflow: hidden;
 				display: block;
-				background: url('../images/logo-type.png') no-repeat top left;
+				background: url(<%= asset_path 'logo-type.png' %>) no-repeat top left;
 				width: 244px;
 				height: 28px;
 			}
@@ -172,26 +172,26 @@ a.normal:visited {
 						
 						.status-holder ul li.giftact-rating a:link,
 						.status-holder ul li.giftact-rating a:visited {
-							background: url('../images/ic-gift-act-rating.png') no-repeat top left;
+							background: url(<%= asset_path 'ic-gift-act-rating.png' %>) no-repeat top left;
 							padding-left: 29px;
 							padding-bottom: 4px;
 						}
 						
 						.status-holder ul li.activity-level a:link,
 						.status-holder ul li.activity-level a:visited {
-							background: url('../images/ic-activity-level.png') no-repeat top left;
+							background: url(<%= asset_path 'ic-activity-level.png' %>) no-repeat top left;
 							padding-left: 29px;
 						}
 							
 						.status-holder ul li.people-helped a:link,
 						.status-holder ul li.people-helped a:visited {
-								background: url('../images/ic-person.png') no-repeat top left;
+								background: url(<%= asset_path 'ic-person.png' %>) no-repeat top left;
 								padding-left: 19px;
 						}
 
 						.status-holder ul li.giftactions a:link,
 						.status-holder ul li.giftactions a:visited {
-								background: url('../images/ic-giftactions.png') no-repeat top left;
+								background: url(<%= asset_path 'ic-giftactions.png' %>) no-repeat top left;
 								padding-left: 15px;
 						}
 						
@@ -205,7 +205,7 @@ a.normal:visited {
 			/* green bar */				
 			
 			.bar-holder {
-				background: url('../images/bg-nav.png') no-repeat top left;
+				background: url(<%= asset_path 'bg-nav.png' %>) no-repeat top left;
 				width: 920px;
 				height: 24px;
 				margin-top: 5px;
@@ -260,14 +260,14 @@ a.normal:visited {
 								color: #fff;
 								display: block;
 								padding: 4px 20px 0 5px;
-								/*background:  url('../images/arrow-down.png') no-repeat right 9px;*/
+								/*background:  url(<%= asset_path 'arrow-down.png' %>) no-repeat right 9px;*/
 								height: 20px;
                                 text-decoration: none;
 							}
 							
 							.bar-holder-lhs ul li a:hover {
 								color: #fff;
-								/*background: #6ea801 url('../images/arrow-up.png') no-repeat right 9px;*/
+								/*background: #6ea801 url(<%= asset_path 'arrow-up.png' %>) no-repeat right 9px;*/
 							}
 							
 							.bar-holder-lhs ul li.last a:link,
@@ -354,7 +354,7 @@ a.normal:visited {
 						.search-holder button {
 							float: left;
 							text-indent: -1000em;
-							background: url('../images/bg-search-submit.png') no-repeat top left;
+							background: url(<%= asset_path 'bg-search-submit.png' %>) no-repeat top left;
 							width: 20px;
 							height: 16px;
 							border: none;
@@ -483,7 +483,7 @@ a.normal:visited {
 
 		.trust-box-holder {
 			margin-bottom: 18px;
-			background: transparent url('../images/bg-trust-box.png') no-repeat 0 0;
+			background: transparent url(<%= asset_path 'bg-trust-box.png' %>) no-repeat 0 0;
 			height: 269px;
 		}
 
@@ -551,7 +551,7 @@ a.normal:visited {
 
 					.trust-reputation-box a.giftactions:link,
 					.trust-reputation-box a.giftactions:visited {
-						background: url('../images/ic-giftactions.png') no-repeat top left;
+						background: url(<%= asset_path 'ic-giftactions.png' %>) no-repeat top left;
 					    padding: 4px 0 0 21px;
 						margin: 0 0 0 2px;
 						font-weight: normal;
@@ -559,14 +559,14 @@ a.normal:visited {
 
 					.trust-reputation-box a.people-helped:link,
 					.trust-reputation-box a.people-helped:visited {
-						background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
+						background: url(<%= asset_path 'ic-person-trusted-profile.png' %>) no-repeat 1px 0;
 						padding: 2px 0 0 23px;
 						font-weight: normal;
 					}
 
 					.trust-reputation-box a.feedback-rating:link,
 					.trust-reputation-box a.feedback-rating:visited {
-						background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
+						background: url(<%= asset_path 'ic-feedback-rating-trust-profile.png' %>) no-repeat 2px 2px;
 						padding: 6px 0 3px 22px;
 						font-weight: normal;
 					}
@@ -575,7 +575,7 @@ a.normal:visited {
 			/* trust and reputation box - my trust */
 			
 			.my-trust-box-holder {
-			    background: url("../images/bg-trust-box-my.png") no-repeat 0 0  transparent;
+			    background: url(<%= asset_path "bg-trust-box-my.png" %>) no-repeat 0 0  transparent;
 			    height: 180px;
 			    margin-bottom: 18px;
 			}
@@ -650,20 +650,20 @@ a.normal:visited {
 		
 		a.giftactions:link,
 		a.giftactions:visited {
-			background: url('../images/ic-giftactions.png') no-repeat top left;
+			background: url(<%= asset_path 'ic-giftactions.png' %>) no-repeat top left;
 		    padding: 5px 0 0 21px;
 			margin: 0 0 0 2px;
 		}
 
 		a.people-helped:link,
 		a.people-helped:visited {
-			background: url('../images/ic-person.png') no-repeat 1px 0;
+			background: url(<%= asset_path 'ic-person.png' %>) no-repeat 1px 0;
 			padding: 5px 0 0 23px;
 		}
 
 		a.feedback-rating:link,
 		a.feedback-rating:visited {
-			background: url('../images/ic-feedback-rating-trust-profile.png') no-repeat 2px 2px;
+			background: url(<%= asset_path 'ic-feedback-rating-trust-profile.png' %>) no-repeat 2px 2px;
 			padding: 6px 0 3px 22px;						
 		}
 		
@@ -687,7 +687,7 @@ a.normal:visited {
 				
 					ul.action-buttons-list li a:link,
 					ul.action-buttons-list li a:visited {
-						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+						background: url(<%= asset_path 'bg-bt-request-list.png' %>) repeat-x 0 0;
 						padding: 0 7px;
 						color: #234d4d;
 						display: block;
@@ -715,7 +715,7 @@ a.normal:visited {
 				display: block;
 				color: #858f7c;
 				font-size: 10px;
-				background: url('../images/arrow-down-more.png') no-repeat bottom right;
+				background: url(<%= asset_path 'arrow-down-more.png' %>) no-repeat bottom right;
 				padding-right: 9px;
 				height: 10px;
 				font-weight: bold;
@@ -1338,7 +1338,7 @@ a.normal:visited {
 	
 	#community-page #sidebar-left ul li:hover,
 	#community-page #sidebar-left ul li.selected {
-		background: url("../images/resources-list-hover.png") no-repeat 0 0 transparent;
+		background: url(<%= asset_path "resources-list-hover.png" %>) no-repeat 0 0 transparent;
 	}
 	
 	#community-page #sidebar-left ul li.separator {
@@ -1353,37 +1353,37 @@ a.normal:visited {
 
 	#community-page #sidebar-left ul li.all a:link,
 	#community-page #sidebar-left ul li.all a:visited {
-			background: url('../images/ic-your-network.png') no-repeat 8px 4px;
+			background: url(<%= asset_path 'ic-your-network.png' %>) no-repeat 8px 4px;
 	}
 
 	#community-page #sidebar-left ul li.extended a:link,
 	#community-page #sidebar-left ul li.extended a:visited {
-			background: url('../images/ic-extended-network-user.png') no-repeat 8px 4px;
+			background: url(<%= asset_path 'ic-extended-network-user.png' %>) no-repeat 8px 4px;
 	}
 
 	#community-page #sidebar-left ul li.people a:link,
 	#community-page #sidebar-left ul li.people a:visited {
-			background: url('../images/ic-people-community.png') no-repeat 8px 3px;
+			background: url(<%= asset_path 'ic-people-community.png' %>) no-repeat 8px 3px;
 	}
 
 	#community-page #sidebar-left ul li.trusted a:link,
 	#community-page #sidebar-left ul li.trusted a:visited {
-			background: url('../images/ic-trusted-community.png') no-repeat 8px 3px;
+			background: url(<%= asset_path 'ic-trusted-community.png' %>) no-repeat 8px 3px;
 	}
 
 	#community-page #sidebar-left ul li.extend a:link,
 	#community-page #sidebar-left ul li.extend a:visited {
-			background: url('../images/ic-extend-networks-community.png') no-repeat 8px 3px;
+			background: url(<%= asset_path 'ic-extend-networks-community.png' %>) no-repeat 8px 3px;
 	}
 
 	#community-page #sidebar-left ul li.community a:link,
 	#community-page #sidebar-left ul li.community a:visited {
-			background: url('../images/ic-community-community.png') no-repeat 8px 3px;
+			background: url(<%= asset_path 'ic-community-community.png' %>) no-repeat 8px 3px;
 	}
 	
 	#community-page #sidebar-left ul li.village a:link,
 	#community-page #sidebar-left ul li.village a:visited {
-			background: url('../images/ic-village.png') no-repeat 8px 4px;
+			background: url(<%= asset_path 'ic-village.png' %>) no-repeat 8px 4px;
 	}
 	
 	
@@ -1725,7 +1725,7 @@ a.normal:visited {
 /*............Completed Request............*/							
 	
 #completed-request-page {
-	background: url('../images/bg-item-completed-request-fade.png') no-repeat 273px -70px;
+	background: url(<%= asset_path 'bg-item-completed-request-fade.png' %>) no-repeat 273px -70px;
 }				
 
 	#completed-request-page #sidebar {
@@ -1770,7 +1770,7 @@ a.normal:visited {
 
 			#completed-request-page a.people-helped:link,
 			#completed-request-page a.people-helped:visited {
-				background: url('../images/ic-person-trusted-profile.png') no-repeat 1px 0;
+				background: url(<%= asset_path 'ic-person-trusted-profile.png' %>) no-repeat 1px 0;
 				padding: 5px 0 0 23px;
 			}
 
@@ -1803,29 +1803,29 @@ a.normal:visited {
 
 							ul.trust-list li a.untrusted:link,
 							ul.trust-list li a.untrusted:visited {
-								background: url('../images/ic-untrusted-profile-small.png') no-repeat 1px 0;
+								background: url(<%= asset_path 'ic-untrusted-profile-small.png' %>) no-repeat 1px 0;
 								padding-top: 14px;
 							}
 
 							ul.trust-list li a.trusted:link,
 							ul.trust-list li a.trusted:visited {
-								background: url('../images/ic-trusted-profile-small.png') no-repeat 1px 0;
+								background: url(<%= asset_path 'ic-trusted-profile-small.png' %>) no-repeat 1px 0;
 								padding-top: 14px;
 							}
 
 							ul.trust-list li a.extended:link,
 							ul.trust-list li a.extended:visited {
-								background: url('../images/ic-network-others-green-small.png') no-repeat 1px 0;
+								background: url(<%= asset_path 'ic-network-others-green-small.png' %>) no-repeat 1px 0;
 							}
 
 							ul.trust-list li a.not-in-trusted-network:link,
 							ul.trust-list li a.not-in-trusted-network:visited {
-								background: url('../images/ic-network-others-orange-small.png') no-repeat 1px 0;
+								background: url(<%= asset_path 'ic-network-others-orange-small.png' %>) no-repeat 1px 0;
 							}
 
                      ul.trust-list li a.trusted-others:link,
 							ul.trust-list li a.truested-others:visited {
-								background: url('../images/ic-trusted-network-users-small.png') no-repeat 1px 0;
+								background: url(<%= asset_path 'ic-trusted-network-users-small.png' %>) no-repeat 1px 0;
 							}
 
 							ul.trust-list li.no-icon a:link,
@@ -2032,7 +2032,7 @@ a.normal:visited {
 			
 			ul.feedback-submit li a:link,
 			ul.feedback-submit li a:visited {
-				background: #cce5a0 url("../images/bg-bt-request-list.png") repeat-x 0 0;
+				background: #cce5a0 url(<%= asset_path "bg-bt-request-list.png" %>) repeat-x 0 0;
 			    border: 1px solid #AAB1A9;
 			    color: #234D4D;
 			    height: 22px;
@@ -2048,7 +2048,7 @@ a.normal:visited {
 			ul.feedback-submit li input {
 				font-size: 14px;
 				cursor: pointer;
-				background: #cce5a0 url("../images/bg-bt-request-list.png") repeat-x 0 0;
+				background: #cce5a0 url(<%= asset_path "bg-bt-request-list.png" %>) repeat-x 0 0;
 			    border: 1px solid #AAB1A9;
 			    color: #097b05;
 			    height: 21px;
@@ -2126,7 +2126,7 @@ a.normal:visited {
 			}
 			
 			#search-page .search-holder button {
-				background: url('../images/bg-search-submit-page.png') no-repeat top left;
+				background: url(<%= asset_path 'bg-search-submit-page.png' %>) no-repeat top left;
 				height: 19px;
 			}
 
@@ -2166,7 +2166,7 @@ a.normal:visited {
 
 				#search-page a.communities:link,
 				#search-page a.communities:visited {
-				    background: url("../images/ic-community-community.png") no-repeat left top transparent;
+				    background: url(<%= asset_path "ic-community-community.png" %>) no-repeat left top transparent;
 				    color: #62775A;
 				    font-size: 11px;
 				    font-weight: normal;
@@ -2254,7 +2254,7 @@ a.normal:visited {
 				#search-page #sidebar-left ul li a:visited {
 					display: block;
 					padding: 7px 0px 6px 35px;
-					background:  url('../images/ic-village.png') no-repeat 10px 6px;
+					background:  url(<%= asset_path 'ic-village.png' %>) no-repeat 10px 6px;
 					height: 20px;
                     text-decoration: none;
 					margin-bottom: 5px;
@@ -2262,37 +2262,37 @@ a.normal:visited {
 
 				#search-page #sidebar-left ul li:hover,
 				#search-page #sidebar-left ul li.selected {
-					background: url('../images/resources-list-hover.png') no-repeat 0 0;
+					background: url(<%= asset_path 'resources-list-hover.png' %>) no-repeat 0 0;
 				}
 
 				#search-page #sidebar-left ul li.all a:link,
 				#search-page #sidebar-left ul li.all a:visited {
-						background: url('../images/ic-all-networks-community.png') no-repeat 8px 4px;
+						background: url(<%= asset_path 'ic-all-networks-community.png' %>) no-repeat 8px 4px;
 				}
 
 				#search-page #sidebar-left ul li.items a:link,
 				#search-page #sidebar-left ul li.items a:visited {
-						background: url('../images/ic-items-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-items-community.png' %>) no-repeat 8px 3px;
 				}
 
 				#search-page #sidebar-left ul li.people a:link,
 				#search-page #sidebar-left ul li.people a:visited {
-						background: url('../images/ic-people-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-people-community.png' %>) no-repeat 8px 3px;
 					}
 
 				#search-page #sidebar-left ul li.trusted a:link,
 				#search-page #sidebar-left ul li.trusted a:visited {
-						background: url('../images/ic-trusted-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-trusted-community.png' %>) no-repeat 8px 3px;
 					}
 
 				#search-page #sidebar-left ul li.extend a:link,
 				#search-page #sidebar-left ul li.extend a:visited {
-						background: url('../images/ic-extend-networks-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-extend-networks-community.png' %>) no-repeat 8px 3px;
 					}
 
 				#search-page #sidebar-left ul li.community a:link,
 				#search-page #sidebar-left ul li.community a:visited {
-						background: url('../images/ic-community-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-community-community.png' %>) no-repeat 8px 3px;
 					}							
 
 			#search-page #sidebar-left ul li.separator {
@@ -2425,37 +2425,37 @@ a.normal:visited {
 
 				#user-trusted-page #sidebar-left ul li:hover,
 				#user-trusted-page #sidebar-left ul li.selected {
-					background: url('../images/resources-list-hover.png') no-repeat 0 0;
+					background: url(<%= asset_path 'resources-list-hover.png' %>) no-repeat 0 0;
 				}
 
 				#user-trusted-page #sidebar-left ul li.all a:link,
 				#user-trusted-page #sidebar-left ul li.all a:visited {
-						background: url('../images/ic-trusted-network-user.png') no-repeat 8px 4px;
+						background: url(<%= asset_path 'ic-trusted-network-user.png' %>) no-repeat 8px 4px;
 				}
 
 				#user-trusted-page #sidebar-left ul li.extended a:link,
 				#user-trusted-page #sidebar-left ul li.extended a:visited {
-						background: url('../images/ic-extended-network-user.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-extended-network-user.png' %>) no-repeat 8px 3px;
 				}
 
 				#user-trusted-page #sidebar-left ul li.people a:link,
 				#user-trusted-page #sidebar-left ul li.people a:visited {
-						background: url('../images/ic-people-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-people-community.png' %>) no-repeat 8px 3px;
 					}
 
 				#user-trusted-page #sidebar-left ul li.trusted a:link,
 				#user-trusted-page #sidebar-left ul li.trusted a:visited {
-						background: url('../images/ic-trusted-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-trusted-community.png' %>) no-repeat 8px 3px;
 					}
 
 				#user-trusted-page #sidebar-left ul li.extend a:link,
 				#user-trusted-page #sidebar-left ul li.extend a:visited {
-						background: url('../images/ic-extend-networks-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-extend-networks-community.png' %>) no-repeat 8px 3px;
 					}
 
 				#user-trusted-page #sidebar-left ul li.community a:link,
 				#user-trusted-page #sidebar-left ul li.community a:visited {
-						background: url('../images/ic-community-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-community-community.png' %>) no-repeat 8px 3px;
 					}
 
 
@@ -2510,7 +2510,7 @@ a.normal:visited {
 			#items-page #content .inner-content .request-button-holder a:link,
             #items-page #content .inner-content .request-button-holder a:visited {
                 display: block;
-                background: url('../images/bg-bt-request.png') no-repeat top left;
+                background: url(<%= asset_path 'bg-bt-request.png' %>) no-repeat top left;
                 width: 90px;
                 height: 30px;
             }
@@ -2723,7 +2723,7 @@ a.normal:visited {
 					}
 
 					ul.form-holder li input[type="submit"] {
-						background: url('../images/bg-bt-request-list.png') repeat-x 0 0;
+						background: url(<%= asset_path 'bg-bt-request-list.png' %>) repeat-x 0 0;
 						padding: 0 7px;
 						color: #127e0e;
 						display: block;
@@ -2778,7 +2778,7 @@ a.normal:visited {
 					}
 
 					#item-profile-form-page ul.form-holder li.no-image-uploaded {
-						background: transparent url('../images/bg-upload-img.png') no-repeat top left;
+						background: transparent url(<%= asset_path 'bg-upload-img.png' %>) no-repeat top left;
 						padding-top: 44px;
 					}
 
@@ -2932,7 +2932,7 @@ a.normal:visited {
 
 				#item-profile-form-page ul.action-buttons-list li a:link,
 				#item-profile-form-page ul.action-buttons-list li a:visited {
-					background: #cce5a0 url('../images/bg-bt-request-list.png') repeat-x 0 0;
+					background: #cce5a0 url(<%= asset_path 'bg-bt-request-list.png' %>) repeat-x 0 0;
 					padding: 3px 7px 0 7px;
 					color: #234d4d;
 					display: block;
@@ -3008,7 +3008,7 @@ a.normal:visited {
 				#manage-resources-page #sidebar-left ul li a:visited {
 					display: block;
 					padding: 7px 0px 6px 35px;
-					background:  url('../images/ic-village.png') no-repeat 3px 4px;
+					background:  url(<%= asset_path 'ic-village.png' %>) no-repeat 3px 4px;
 					height: 20px;
 	                text-decoration: none;
 					margin-bottom: 5px;
@@ -3016,37 +3016,37 @@ a.normal:visited {
 
 				#manage-resources-page #sidebar-left ul li:hover,
 				#manage-resources-page #sidebar-left ul li.selected {
-					background: url('../images/resources-list-hover.png') no-repeat 0 0;
+					background: url(<%= asset_path 'resources-list-hover.png' %>) no-repeat 0 0;
 				}
 
 				#manage-resources-page #sidebar-left ul li.all a:link,
 				#manage-resources-page #sidebar-left ul li.all a:visited {
-						background: url('../images/ic-all-networks-community.png') no-repeat 8px 4px;
+						background: url(<%= asset_path 'ic-all-networks-community.png' %>) no-repeat 8px 4px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.items a:link,
 				#manage-resources-page #sidebar-left ul li.items a:visited {
-						background: url('../images/ic-items-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-items-community.png' %>) no-repeat 8px 3px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.people a:link,
 				#manage-resources-page #sidebar-left ul li.people a:visited {
-						background: url('../images/ic-people-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-people-community.png' %>) no-repeat 8px 3px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.trusted a:link,
 				#manage-resources-page #sidebar-left ul li.trusted a:visited {
-						background: url('../images/ic-trusted-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-trusted-community.png' %>) no-repeat 8px 3px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.extend a:link,
 				#manage-resources-page #sidebar-left ul li.extend a:visited {
-						background: url('../images/ic-extend-networks-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-extend-networks-community.png' %>) no-repeat 8px 3px;
 				}
 
 				#manage-resources-page #sidebar-left ul li.community a:link,
 				#manage-resources-page #sidebar-left ul li.community a:visited {
-						background: url('../images/ic-community-community.png') no-repeat 8px 3px;
+						background: url(<%= asset_path 'ic-community-community.png' %>) no-repeat 8px 3px;
 				}
 				
 				
@@ -3230,7 +3230,7 @@ a.normal:visited {
                 #terms-conditions-page.principles .buttons-holder ul li a:link,
                 #terms-conditions-page.principles .buttons-holder ul li a:visited {
                     display: block;
-                    background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
+                    background: url(<%= asset_path 'bg-bt-connect-tc.png' %>) no-repeat top left;
                     width: 77px;
                     height: 24px;
                 }
@@ -3238,12 +3238,12 @@ a.normal:visited {
 
                 #terms-conditions-page.principles .buttons-holder ul li.no a:link,
                 #terms-conditions-page.principles .buttons-holder ul li.no a:visited {
-                    background: url('../images/bg-bt-no-tc.png') no-repeat top left;
+                    background: url(<%= asset_path 'bg-bt-no-tc.png' %>) no-repeat top left;
                 }
 
 				#terms-conditions-page.principles .buttons-holder ul li input[type="submit"] {
 					display: block;
-                    background: url('../images/bg-bt-connect-tc.png') no-repeat top left;
+                    background: url(<%= asset_path 'bg-bt-connect-tc.png' %>) no-repeat top left;
                     width: 77px;
                     height: 24px;
 					border: none;
@@ -3758,7 +3758,7 @@ a.normal:visited {
 	}
 
 	div.loader {
-		background: url('../images/ajax-loader.gif') no-repeat top left;
+		background: url(<%= asset_path 'ajax-loader.gif' %>) no-repeat top left;
 		height: 11px;
 		margin: 0 auto;
 		width: 43px;

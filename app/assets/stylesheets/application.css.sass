@@ -1,0 +1,28 @@
+// require reset-min
+// require main
+
+@import "mixins"
+
+.button-holder-connect
+  h3
+    :margin-bottom 26px
+    a
+      +button
+      & ~ a
+        :margin-left 10px
+  form
+    label
+      :font-size 12px
+    input[type="text"], input[type="password"]
+      :width 240px
+    a
+      :font-size 19px !important
+      :text-decoration underline
+  &.hidden
+    :display none
+
+.field_with_errors
+  +inline-block
+  :color #62775A
+  input
+    :border-color #6b1408
