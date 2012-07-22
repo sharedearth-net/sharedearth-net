@@ -46,9 +46,9 @@ Sharedearthapp::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
-  Sass::Plugin.options[:never_update] = true
-  
+
+  #Sass::Plugin.options[:never_update] = true
+
   config.action_mailer.delivery_method = :ses
   config.action_mailer.default_url_options = { :host => ENV['domain_url'] }
   config.action_mailer.asset_host = "http://" + ENV['domain_url']
