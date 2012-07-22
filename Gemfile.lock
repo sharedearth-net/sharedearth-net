@@ -349,6 +349,7 @@ DEPENDENCIES
   autotest
   aws-s3
   aws-ses (~> 0.4.3)
+  bundler (= 1.2.0.rc)
   capybara
   cucumber (~> 1.1.1)
   cucumber-rails (~> 1.1.1)
