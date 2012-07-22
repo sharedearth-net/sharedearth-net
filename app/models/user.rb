@@ -3,12 +3,23 @@ require 'fb_service'
 class User < ActiveRecord::Base
   has_one :person, :dependent => :destroy
 
-  validates_presence_of :provider, :uid
-  validates_uniqueness_of :uid, :scope => :provider
+  validates :email, :uniqueness => true, :email => true,                            :if => :classic_sing_up_now?
+  validates :password, :presence => true, :length => 6..32, :confirmation => true,  :if => :classic_sing_up_now?
+  validates :name, :length => 3..19, :presence => true,                             :if => :classic_sing_up_now?
+
+  validates_presence_of :provider, :uid,                :unless => :classic_sing_up?
+  validates_uniqueness_of :uid, :scope => :provider,    :unless => :classic_sing_up?
+
+  attr_accessor :password, :password_confirmation, :classic_sing_up, :name
+
   scope :unactive, where("last_activity < ?", Time.now - 12.hours)
 
   delegate :network_activity, :to => :person
   delegate :trusted_network_activity, :to => :person
+
+  before_save :check_classic_sign_up,     :if => :classic_sing_up?
+  after_create  :create_new_person,       :if => :classic_sing_up?
+  after_create  :send_confirmation_email, :if => :classic_sing_up?
 
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -16,17 +27,25 @@ class User < ActiveRecord::Base
       user.uid = auth["uid"]
       user.create_person(:name  => auth["info"]["name"].slice(0..19), 
                          :email => auth["info"]["email"],
-                         :authorised_account => false)
+                         :authorised_account => true)
 
-      user.person.create_reputation_rating(:gift_actions  => 0,:distinct_people => 0, 
-                                           :total_actions => 0, :positive_feedback => 0, 
-                                           :negative_feedback => 0, :neutral_feedback => 0,
-                                           :requests_received => 0, :requests_answered => 0, 
-                                           :trusted_network_count => 0,  :activity_level => 0)
+      user.person.create_staring_reputation_rating!
     end
     User.find_by_uid(auth["uid"])
   end
-  
+
+  def self.try_auth(email, password)
+    where(:email => email, :encrypted_password => encrypt_string(password)).first
+  end
+
+  def classic_sing_up?
+    @classic_sing_up || email.present? && encrypted_password.present?
+  end
+
+  def classic_sing_up_now?
+    classic_sing_up? && new_record?
+  end
+
   # Informs all the authorized user's friends
   def inform_mutural_friends(token)
     if person.authorised_account?
@@ -88,9 +107,42 @@ class User < ActiveRecord::Base
     self.last_activity
   end
 
+  def email_confirmation_code
+    self.class.encrypt_string(encrypted_password)
+  end
+
+  def verify_email!(code)
+    if !verified_email? && code == email_confirmation_code
+      update_attribute(:verified_email, 1)
+      true
+    else
+      false
+    end
+  end
+
   private
 
   def create_fb_event_entity(event_log, person)
     EventEntity.create!(:event_log => event_log, :entity => person, :user_only => true)
+  end
+
+  def check_classic_sign_up
+    self.provider ||= "email_and_password"
+    self.encrypted_password ||= self.class.encrypt_string(password)
+  end
+
+  def create_new_person
+    create_person(:name => self.name, :email => self.email, :authorised_account => true)
+    user.person.create_staring_reputation_rating!
+  end
+
+  def send_confirmation_email
+    if email.present?
+      UserMailer.registration_cofirmation(self).deliver!
+    end
+  end
+
+  def self.encrypt_string(pass)
+    Digest::SHA2.hexdigest(pass)
   end
 end

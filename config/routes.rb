@@ -59,13 +59,13 @@ end
       put "mark_as_normal"
       put "mark_as_lost"
       put "mark_as_damaged"
-			put "mark_as_hidden"
+      put "mark_as_hidden"
       put "mark_as_unhidden"
       post "share_mine"
     end
   end
 
-  resources :people, :only => [:show, :edit, :update, :index, :destroy] do
+  resources :people, :only => [:new, :show, :edit, :update, :index, :destroy] do
     member do
       get :network
       get :my_network
@@ -110,6 +110,14 @@ end
     	get 'grow'
     end
   end
+
+  resources :users do
+    member do
+      get :confirm
+    end
+  end
+
+  resources :sessions, :only => [:new, :create]
 
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout

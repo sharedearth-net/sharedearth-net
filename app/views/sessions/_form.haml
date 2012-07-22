@@ -1,0 +1,17 @@
+%h3 #{link_to "connect with Facebook", "/auth/facebook"}#{link_to "connect with Google", "/auth/google", :onClick => "alert('Not yet'); return false;"}
+
+- if @error
+  %p.error= @error
+
+= form_for User.new, :url => sessions_path do |f|
+  %p
+    = f.label :email
+    = f.text_field :email
+  %p
+    = f.label :password
+    = f.password_field :password
+
+  %p
+    = f.submit "Sign in"
+    or
+    = link_to "register", new_user_path

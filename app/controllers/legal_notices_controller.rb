@@ -15,7 +15,7 @@ class LegalNoticesController < ApplicationController
 
   def accept_pp
     current_user.person.accept_pp!
-    if !params[:facebook].nil? && !current_user.person.has_reviewed_profile?
+    if !params[:facebook].nil? && !current_user.person.has_reviewed_profile? && current_user.provider == "facebook"
       msg  = "has connected to sharedearth.net."
       link = "http://sharedearth.net"
 

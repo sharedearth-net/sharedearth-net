@@ -1,6 +1,7 @@
 class UserMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
-  helper :pages
+  include ApplicationHelper
+
   default :from => "\"sharedearth.net\" <noreply@sharedearth.net>"
 
   def invitation_confirmation(user, code)
@@ -21,6 +22,11 @@ class UserMailer < ActionMailer::Base
     @time = @current_user.last_activity?
 
     mail(:to => "#{email}", :subject => "Recent Activity on sharedearth.net since #{ @time.strftime("#{@time.day.ordinalize} %B %Y") }")
+  end
+
+  def registration_cofirmation(user)
+    @user = user
+    mail(:to => user.email, :subject => "Confirm your email on sharedearth.net")
   end
 
 end

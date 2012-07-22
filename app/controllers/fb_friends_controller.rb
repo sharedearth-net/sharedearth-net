@@ -5,6 +5,9 @@ class FbFriendsController < ApplicationController
   #before_filter :check_facebook_session, :only => [:index, :search_fb_friends]
 
   def index
+    if current_user.provider != 'facebook'
+      return redirect_to :dashboard, :warning => "Facebook not connected"
+    end
     fb_token = session[:fb_token]
     @people  = FbService.get_my_friends(fb_token).order(:name)
     @villages = Village.all

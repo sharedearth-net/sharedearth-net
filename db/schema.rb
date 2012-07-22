@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120610110731) do
+ActiveRecord::Schema.define(:version => 20120722073753) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -332,6 +333,10 @@ ActiveRecord::Schema.define(:version => 20120610110731) do
     t.datetime "lockout"
     t.integer  "validations_failed", :default => 0
     t.datetime "last_activity"
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.integer  "person_id"
+    t.boolean  "verified_email",     :default => false, :null => false
   end
 
   create_table "villages", :force => true do |t|

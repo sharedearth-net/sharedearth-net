@@ -53,6 +53,14 @@ class Person < ActiveRecord::Base
   scope :exclude_users, lambda { |entity| where("id not in (?)", entity)}
   scope :include_users, lambda { |entity| where("id in (?)", entity)}
 
+  def create_staring_reputation_rating!
+    create_reputation_rating(:gift_actions  => 0,:distinct_people => 0,
+                             :total_actions => 0, :positive_feedback => 0,
+                             :negative_feedback => 0, :neutral_feedback => 0,
+                             :requests_received => 0, :requests_answered => 0,
+                             :trusted_network_count => 0,  :activity_level => 0)
+  end
+
 	def recent_activity_logs(min_count = 10)
 		logs = activity_logs.where(:read => false).order("#{ActivityLog.table_name}.created_at DESC")
 		if logs.count < min_count
