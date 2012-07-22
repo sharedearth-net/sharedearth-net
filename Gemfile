@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+ruby '1.9.3'
 gem 'rails', '3.0.7'
 
 # Bundle edge Rails instead:
@@ -9,93 +10,19 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'omniauth'
 gem "aws-s3"
 gem "paperclip"
-#gem 'mysql2', '< 0.3'
 
-gem 'mysql2'
+gem 'mysql2', '0.2.18'
 gem 'state_machine'
 gem "omniauth-facebook"
 # https://github.com/bclubb/possessive
 gem "possessive"
-
-#A full-stack Facebook Graph API wrapper in Ruby. 
+ 
 gem "fb_graph"
 
 gem "will_paginate", "~> 3.0.pre2"
 
 gem 'rake', '0.9.2'
 
-gem "acts_as_commentable"
-
-
-# didn't use rails3_acts_as_paranoid because it uses default_scope causing problems with, for example, item_request.item
-# https://github.com/goncalossilva/rails3_acts_as_paranoid
-# gem "rails3_acts_as_paranoid"
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-# gem 'ruby-debug'
-# gem 'ruby-debug19'
-
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
-
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
-group :development do
-  gem "rspec-rails", "~> 2.5"
-	gem "shoulda", "~> 2.11"
-  gem 'pry'
-  gem "shoulda-matchers"
-	gem "autotest"
-	gem "guard-rspec"
-	gem "webrat"
-	gem 'factory_girl_rails'
-	gem 'ffaker'
-	gem 'spork', '~> 0.9.0.rc'
-  gem 'database_cleaner'
-  gem 'pickle'
-  gem 'heroku_san'
-  gem 'nifty-generators'
-  gem 'ruby-debug19', :require => 'ruby-debug'
-  gem "escape_utils"
-end
-
-group  :test do
-  gem "rspec-rails", "~> 2.5"
-	gem "shoulda", "~> 2.11"
-  gem "shoulda-matchers"
-	gem "autotest"
-	gem "guard-rspec"
-	gem "webrat"
-	gem 'factory_girl_rails'
-	gem 'ffaker'
-	gem 'spork', '~> 0.9.0.rc'
-	gem 'cucumber', '~> 1.1.1'
-        gem 'cucumber-rails' , '~> 1.1.1'
-  gem 'capybara'
-  gem 'database_cleaner'
-  gem 'pickle'
-  gem 'heroku_san'
-  gem 'nifty-generators'
-  gem 'ruby-debug19', :require => 'ruby-debug'
-  gem "escape_utils"
-#  gem 'pg'
-end
-
-group :production do
-  gem 'thin'
-  gem "airbrake"
-  gem "heroku"
-end
 gem "simplecov", :require => false, :group => :test
 gem 'activeadmin'
 gem "rails-settings", :git => "git://github.com/100hz/rails-settings.git"
@@ -109,3 +36,41 @@ gem "mocha", :group => :test
 gem 'whenever', :require => false
 gem 'iron_worker' #Deprecated gem 'simple_worker'
 gem 'typhoeus'
+gem "acts_as_commentable"
+
+test_and_development = Proc.new do
+  gem "rspec-rails", "~> 2.5"
+  gem "shoulda", "~> 2.11"
+  gem "shoulda-matchers"
+  gem "autotest"
+  gem "guard-rspec"
+  gem "webrat"
+  gem 'factory_girl_rails'
+  gem 'ffaker'
+  gem 'spork', '~> 0.9.0.rc'
+  gem 'debugger'
+  gem "escape_utils"
+  gem 'database_cleaner'
+  gem 'pickle'
+  gem 'heroku_san'
+  gem 'nifty-generators'
+  gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
+end
+
+group :development do
+  instance_eval(&test_and_development)
+  gem 'pry'
+end
+
+group  :test do
+  instance_eval(&test_and_development)
+  gem 'cucumber', '~> 1.1.1'
+  gem 'cucumber-rails' , '~> 1.1.1'
+  gem 'capybara'
+end
+
+group :production do
+  gem 'thin'
+  gem "airbrake"
+  gem "heroku"
+end
