@@ -98,8 +98,9 @@ class PeopleController < ApplicationController
     @person.update_attributes(:has_reviewed_profile => true)
 
     respond_to do |format|
+      email_changed = @person.email != params[:person][:email] if params[:person]
       if @person.update_attributes(params[:person])
-        format.html { redirect_to redirect_path }
+        format.html { redirect_to redirect_path, :notice => email_changed ? "We sent you email on new address to confirm changes" : nil }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
