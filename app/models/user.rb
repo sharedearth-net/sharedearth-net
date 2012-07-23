@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
 
   def create_new_person
     create_person(:name => self.name, :email => self.email, :authorised_account => true)
-    user.person.create_staring_reputation_rating!
+    person.create_staring_reputation_rating!
   end
 
   def send_confirmation_email
