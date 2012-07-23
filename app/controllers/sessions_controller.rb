@@ -7,8 +7,12 @@ class SessionsController < ApplicationController
   def create
     if params[:user] && params[:user][:email]
       if @user = User.try_auth(params[:user][:email], params[:user][:password])
-        session[:user_id] = @user.id
-        redirect_to :root, :notice => "Welcome back"
+        if @user.verified_email?
+          session[:user_id] = @user.id
+          redirect_to :root, :notice => "Welcome back"
+        else
+          redirect_to please_activate_email_user_path(@user), :notice => "Your account waiting for confirmation"
+        end
       else
         @error = "Login or password is not correct"
         render :new

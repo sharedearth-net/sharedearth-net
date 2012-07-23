@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates_presence_of :provider, :uid,                :unless => :classic_sing_up?
   validates_uniqueness_of :uid, :scope => :provider,    :unless => :classic_sing_up?
 
-  attr_accessor :password, :password_confirmation, :classic_sing_up, :name
+  attr_accessor :password, :password_confirmation, :classic_sing_up
 
   scope :unactive, where("last_activity < ?", Time.now - 12.hours)
 
@@ -19,7 +19,6 @@ class User < ActiveRecord::Base
   delegate :trusted_network_activity, :to => :person
 
   before_save :check_classic_sign_up,     :if => :classic_sing_up?
-  after_create  :create_new_person,       :if => :classic_sing_up?
   after_create  :send_confirmation_email, :if => :classic_sing_up?
 
   def self.create_with_omniauth(auth)
@@ -122,12 +121,13 @@ class User < ActiveRecord::Base
   end
 
   def email_confirmation_code
-    self.class.encrypt_string(encrypted_password)
+    self.class.encrypt_string("#{encrypted_password}--#{email}")
   end
 
   def verify_email!(code)
     if !verified_email? && code == email_confirmation_code
-      update_attribute(:verified_email, 1)
+      update_attribute(:verified_email, true)
+      make_person!(name, email)
       true
     else
       false
@@ -144,6 +144,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def send_confirmation_email
+    if email.present?
+      UserMailer.registration_cofirmation(self).deliver!
+    end
+  end
+
   private
 
   def create_fb_event_entity(event_log, person)
@@ -153,17 +159,6 @@ class User < ActiveRecord::Base
   def check_classic_sign_up
     self.provider ||= "email_and_password"
     self.encrypted_password ||= self.class.encrypt_string(password)
-  end
-
-  def create_new_person
-    self.person = Person.create(:name  => self.name, :email => self.email, :authorised_account => true)
-    save
-  end
-
-  def send_confirmation_email
-    if email.present?
-      UserMailer.registration_cofirmation(self).deliver!
-    end
   end
 
   def self.encrypt_string(pass)

@@ -1,11 +1,19 @@
 class PeopleController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => :confirm_email_changing
   before_filter :get_person, :except => [:index]
   before_filter :only_if_person_is_signed_in!, :only => [:edit, :update]
   before_filter :only_own_network!, :only => [:my_network]
 
-  def index
+  def confirm_email_changing
+    if @person.verify_email_change!(params[:code])
+      session[:user_id] || @person.user.first.id
+      redirect_to edit_person_path(@person), :notice => "Email changed successfully."
+    else
+      redirect_to :root, :warning => "Something wrong happen during chaning email."
+    end
+  end
 
+  def index
     @people = current_user.person.trusted_friends
 
     respond_to do |format|

@@ -29,4 +29,8 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Confirm your email on sharedearth.net")
   end
 
+  def email_change_cofirmation(person)
+    @person = person
+    mail(:to => person.new_email, :subject => "Confirm your email changing on sharedearth.net")
+  end
 end

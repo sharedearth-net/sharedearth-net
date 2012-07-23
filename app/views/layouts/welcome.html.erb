@@ -15,7 +15,7 @@
 
 	<script src="/static/js/jquery-1.5.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/static/js/script.js" type="text/javascript" charset="utf-8"></script>
-	
+  <%= javascript_include_tag :jquery_ujs %>
   
   <script>
     $(document).ready(function() {
@@ -48,7 +48,10 @@
 		</div>
 
 		<div id="content" class="clearfix">
-        	<%= yield(:no_js_msg).empty? ? yield : yield(:no_js_msg) %>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, :class => "flash #{key}") %>
+      <% end %>
+      <%= yield(:no_js_msg).empty? ? yield : yield(:no_js_msg) %>
 		</div>
 		<!-- #content -->
 		

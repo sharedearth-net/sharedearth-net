@@ -38,11 +38,18 @@ class Person < ActiveRecord::Base
   validates :email, :confirmation => true
   validates_length_of :location, :maximum => 42
   validates_length_of :description, :maximum => 400
-  validates_presence_of :name
 	validates :email, :presence => true, :email => true
 
   after_create :create_entity_for_person
   after_create :create_staring_reputation_rating!
+
+  before_update do |p|
+    if p.email_changed?
+      p.new_email = p.email
+      p.email = p.email_was
+    end
+  end
+  after_save :send_email_changing_confirmation, :if => :new_email_changed?
 
   #default_scope where(:authorised_account => true) if INVITATION_SYS_ON # Turning this on would couse problems
   scope :authorized, where(:authorised_account => true)
@@ -69,6 +76,23 @@ class Person < ActiveRecord::Base
 		end
 		logs
 	end
+
+  def send_email_changing_confirmation
+    UserMailer.email_change_cofirmation(self).deliver!
+  end
+
+  def email_change_confirmation_code
+    Digest::SHA2.hexdigest("#{email}--#{new_email}")
+  end
+
+  def verify_email_change!(code)
+    if code == email_change_confirmation_code
+      Person.update_all({:email => self.new_email, :new_email => ""}, :id => self.id)
+      true
+    else
+      false
+    end
+  end
 
 	def trusted_network_activity
     my_people_id = self.human_networks.trusted_personal_network.collect { |n| n.person_id }
