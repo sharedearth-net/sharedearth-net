@@ -72,7 +72,7 @@ group  :test do
 end
 
 group :production do
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'pg'
   gem 'thin'
   gem "airbrake"
   gem "heroku"
