@@ -30,7 +30,7 @@ gem 'whenever', :require => false
 gem 'iron_worker' #Deprecated gem 'simple_worker'
 gem 'typhoeus'
 gem "acts_as_commentable"
-
+gem "escape_utils"
 gem 'rinku', :require => 'rails_rinku'
 
 group :assets do
@@ -51,7 +51,6 @@ test_and_development = Proc.new do
   gem 'ffaker'
   gem 'spork', '~> 0.9.0.rc'
   gem 'debugger'
-  gem "escape_utils"
   gem 'database_cleaner'
   gem 'pickle'
   gem 'heroku_san'
