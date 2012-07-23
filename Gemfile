@@ -10,6 +10,8 @@ gem "paperclip"
 
 gem 'state_machine'
 gem "omniauth-facebook"
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
 gem "possessive"
 gem "fb_graph"
 

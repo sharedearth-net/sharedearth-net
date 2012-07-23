@@ -5,7 +5,7 @@ class HumanNetwork < ActiveRecord::Base
   belongs_to :entity, :polymorphic => true
   belongs_to :person, :class_name => "Person"
 
-  set_inheritance_column "network_type"
+  self.inheritance_column = "network_type"
 
   belongs_to :trusted_person, :class_name => "Person", :foreign_key => "person_id"
 

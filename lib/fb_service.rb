@@ -9,7 +9,7 @@ module FbService
 
   def self.people_from_fb_friends(fb_friends)
     friends_identifiers =  fb_friends.empty? ? [] : fb_friends.collect(&:identifier)
-    Person.joins(:user).where('users.uid' => friends_identifiers)
+    Person.joins(:users).where('users.uid' => friends_identifiers, 'users.provider' => 'facebook')
   end
 
   def self.get_my_friends(token)

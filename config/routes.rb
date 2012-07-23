@@ -15,8 +15,7 @@ Sharedearthapp::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_scope :admin_user do
     get '/admin/logout', :to => 'active_admin/devise/sessions#destroy'
-end
-
+  end
 
 
   resources :terms, :only => [:index] do
@@ -100,14 +99,14 @@ end
   end
 
   resources :villages do
-  	member do
-  		put 'join'
+    member do
+      put 'join'
       put 'leave'
-  	end
+    end
   end
   resources :entities, :only => [:destroy] do
     collection do
-    	get 'grow'
+      get 'grow'
     end
   end
 

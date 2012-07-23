@@ -8,7 +8,7 @@ class Person < ActiveRecord::Base
   has_human_network :facebook_friend, :class_name => "FacebookFriend"
   has_human_network :member, :class_name => "Member"
 
-  belongs_to :user
+  has_many :users
   has_many :items, :as => :owner
   has_many :item_requests, :as => :requester
   has_many :item_gifts, :as => :gifter, :class_name => "ItemRequest"
@@ -34,14 +34,15 @@ class Person < ActiveRecord::Base
   has_many :invitations
   has_one :reputation_rating
 
-  validates_length_of :name, :maximum => 20
+  validates :name, :presence => true, :length => { :maximum => 20 }
   validates :email, :confirmation => true
   validates_length_of :location, :maximum => 42
   validates_length_of :description, :maximum => 400
-  validates_presence_of :user_id, :name
+  validates_presence_of :name
 	validates :email, :presence => true, :email => true
 
   after_create :create_entity_for_person
+  after_create :create_staring_reputation_rating!
 
   #default_scope where(:authorised_account => true) if INVITATION_SYS_ON # Turning this on would couse problems
   scope :authorized, where(:authorised_account => true)
@@ -90,7 +91,7 @@ class Person < ActiveRecord::Base
   end
 
   def belongs_to?(some_user)
-    user == some_user
+    some_user.person == self
   end
 
   def trusts?(other_person)
@@ -272,7 +273,7 @@ class Person < ActiveRecord::Base
   end
 
   def avatar(avatar_size = nil)
-    self.user.avatar(avatar_size)
+    self.users.first.avatar(avatar_size)
   end
 
   def first_name

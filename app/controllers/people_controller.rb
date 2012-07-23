@@ -116,10 +116,10 @@ class PeopleController < ApplicationController
   end
 
   def only_if_person_is_signed_in!
-    redirect_to(root_path, :alert => I18n.t('messages.you_cannot_edit_others')) and return unless @person.belongs_to? current_user
+    redirect_to(root_path, :alert => I18n.t('messages.you_cannot_edit_others')) and return unless current_user.person == @person
   end
 
   def only_own_network!
-    redirect_to(root_path, :alert => I18n.t('messages.people.only_own_network')) and return unless @person.belongs_to? current_user
+    redirect_to(root_path, :alert => I18n.t('messages.people.only_own_network')) and return unless current_user.person == @person
   end
 end

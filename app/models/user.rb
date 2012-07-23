@@ -1,7 +1,8 @@
 require 'fb_service'
 
 class User < ActiveRecord::Base
-  has_one :person, :dependent => :destroy
+  #has_one :person, :dependent => :destroy
+  belongs_to :person
 
   validates :email, :uniqueness => true, :email => true,                            :if => :classic_sing_up_now?
   validates :password, :presence => true, :length => 6..32, :confirmation => true,  :if => :classic_sing_up_now?
@@ -25,11 +26,7 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.create_person(:name  => auth["info"]["name"].slice(0..19), 
-                         :email => auth["info"]["email"],
-                         :authorised_account => true)
-
-      user.person.create_staring_reputation_rating!
+      user.make_person!(auth["info"]["name"].slice(0..19), auth["info"]["email"])
     end
     User.find_by_uid(auth["uid"])
   end
@@ -67,9 +64,26 @@ class User < ActiveRecord::Base
   # :medium (same as :large)
   def avatar(avatar_size = nil)
     avatar_size = :large if avatar_size == :medium # simulate medium size
-    "http://graph.facebook.com/#{uid}/picture/"+(!avatar_size.blank? ? "?type=#{avatar_size}" : "")
+    if from_facebook?
+      "http://graph.facebook.com/#{uid}/picture/"+(!avatar_size.blank? ? "?type=#{avatar_size}" : "")
+    else
+      size = case avatar_size
+        when :square, :small then 50
+        when :large, :medium then 150
+        else 150
+      end
+      "http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(person.email)}&s=#{size}"
+    end
   end
-  
+
+  def from_facebook?
+    provider == 'facebook'
+  end
+
+  def from_google?
+    provider == 'google'
+  end
+
   def validation_failed!
     self.validations_failed += 1
     save!  
@@ -120,6 +134,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  #TODO make more secure
+  def make_person!(name, email)
+    if existed_person = Person.where(:email => email).first
+      update_attribute(:person_id, existed_person.id)
+    else
+      self.person = Person.create(:name  => name, :email => email, :authorised_account => true)
+      save
+    end
+  end
+
   private
 
   def create_fb_event_entity(event_log, person)
@@ -132,8 +156,8 @@ class User < ActiveRecord::Base
   end
 
   def create_new_person
-    create_person(:name => self.name, :email => self.email, :authorised_account => true)
-    person.create_staring_reputation_rating!
+    self.person = Person.create(:name  => self.name, :email => self.email, :authorised_account => true)
+    save
   end
 
   def send_confirmation_email
