@@ -105,11 +105,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
-
   #Error 501
   def generic_error(exception, message = "OK that didn't work. Try something else.")
-	notify_airbrake(exception)
+    notify_airbrake(exception) if defined?(Airbrake)
+
+    Rails.logger.error "#{exception.class} (#{exception.message})"
+    exception.backtrace[0..10].each do |line|
+      Rails.logger.error "    " + line
+    end
+
     respond_to do |format|
       format.html {render_501}
       format.json do

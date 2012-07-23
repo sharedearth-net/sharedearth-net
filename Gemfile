@@ -74,6 +74,6 @@ end
 group :production do
   gem 'pg'
   gem 'thin'
-  gem "airbrake"
+  gem "airbrake", :require => false
   gem "heroku"
 end

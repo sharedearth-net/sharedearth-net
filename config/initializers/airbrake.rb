@@ -1,4 +1,5 @@
 if Rails.env.production? && ENV['AIRBRAKE_API_KEY']
+  require 'airbrake'
   Airbrake.configure do |config|
     config.api_key = ENV['AIRBRAKE_API_KEY']
   end
