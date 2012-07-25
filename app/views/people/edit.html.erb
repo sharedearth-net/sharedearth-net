@@ -5,16 +5,20 @@
 			<div class="content-box-holder no-bg">
 				<ul>
 					<li class="content-box clearfix">
+            <section class="avatar-and-social-connection">
+              <%= image_tag @person.avatar(:large), :class => "thumb", :alt => @person.name %>
+              <% if connections = @person.users.from_networks.presence %>
+                Linked Accounts: <%= connections.map(&:network_title).join(", ") %>
+              <% end %>
 
-						<%= image_tag @person.avatar(:large), :class => "thumb" %>
+              <% if @person.users.where(:provider => "facebook").empty? %>
+                <%= link_to "Connect with Facebook", "/auth/facebook" %><br>
+              <% end %>
 
-            <% if @person.users.where(:provider => "facebook").empty? %>
-              <%= link_to "Connect with Facebook", "/auth/facebook" %><br>
-            <% end %>
-
-            <% if @person.users.where(:provider => "google_oauth2").empty? %>
-              <%= link_to "Connect with Google", "/auth/google_oauth2" %><br>
-            <% end %>
+              <% if @person.users.where(:provider => "google_oauth2").empty? %>
+                <%= link_to "Connect with Google", "/auth/google_oauth2" %><br>
+              <% end %>
+            </section>
 
 						<div class="inner-content rhs">
 							<h2>Edit Profile</h2>

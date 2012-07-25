@@ -5,7 +5,7 @@
 		<div class="content-box-holder no-bg">
 			<ul>
 				<li class="content-box clearfix">
-					<%= image_tag @person.avatar(:large), :class => "thumb" %>
+					<%= image_tag @person.avatar(:large), :class => "thumb", :alt => @person.name %>
 				
 					<div class="inner-content">
 						<h2 class='<%= trusted_person_class(@person) %>'>

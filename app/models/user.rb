@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   attr_accessor :password, :password_confirmation, :classic_sing_up
 
   scope :unactive, where("last_activity < ?", Time.now - 12.hours)
+  scope :from_networks, where("provider != 'email_and_password'")
 
   delegate :network_activity, :to => :person
   delegate :trusted_network_activity, :to => :person
@@ -32,6 +33,14 @@ class User < ActiveRecord::Base
 
   def self.try_auth(email, password)
     where(:email => email, :encrypted_password => encrypt_string(password)).first
+  end
+
+  def network_title
+    case provider
+      when "github" then "GitHub"
+      when "google_oauth2" then "Google"
+      else provider.capitalize
+    end
   end
 
   def classic_sing_up?
