@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-
+    render :layout => request.xhr? ? "lightbox" : "welcome"
   end
 
   def create

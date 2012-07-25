@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
-    render :layout => "welcome"
+    render :layout => request.xhr? ? "lightbox" : "welcome"
   end
 
   def please_activate_email

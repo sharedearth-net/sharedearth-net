@@ -1,5 +1,5 @@
-.button-holder-connect.first
-  %h2= link_to "connect", '#', :title => "Sign in or register", :onClick => "$('.button-holder-connect.first').addClass('hidden'); $('..button-holder-connect.second').removeClass('hidden'); return false;"
+.button-holder-connect
+  %h2= link_to "connect", new_session_path, :title => "Sign in or register", :interaction => "lightbox"
   %p
     Locate
     %span shared
@@ -7,8 +7,6 @@
     %br/
     %span earth
     and.
-.button-holder-connect.second.hidden
-  = render "sessions/form"
 
 .stats-holder
   %ul

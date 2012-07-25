@@ -90,3 +90,5 @@ dojo.ready(function() {
     var senApp = new sen.app();
     senApp.init();
 });
+
+// =require lightbox

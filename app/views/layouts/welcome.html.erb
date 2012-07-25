@@ -15,11 +15,10 @@
 
 	<script src="/static/js/jquery-1.5.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/static/js/script.js" type="text/javascript" charset="utf-8"></script>
-  <%= javascript_include_tag :jquery_ujs %>
+  <%= javascript_include_tag :jquery_ujs, :lightbox %>
   
   <script>
     $(document).ready(function() {
-      $('.button-holder-connect h2 a').attr('href', "/auth/facebook");
       $("a#no_facebook").click(function(){
 				var width = 400;
 				var height = 230;
@@ -134,7 +133,7 @@
 		<!-- /#footer -->
 	
 	</div>
-	
+	<%= render "shared/lightbox" %>
 	<!-- /#footer-holder -->
 
 </body>
