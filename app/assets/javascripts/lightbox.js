@@ -1,11 +1,5 @@
 // Lightbox
 
-function href_return_to (a) {
-  if (!a.getAttribute('return_to')) return a.href;
-  var r = 'return_to=' + encodeURIComponent(a.getAttribute('return_to'));
-  return a.href.indexOf('?') > -1 ? a.href + '&' + r : a.href + '?' + r;
-}
-
 $(document).ready(function(){
   var lightbox_wrapper = $('#lightbox_wrapper');
 
@@ -39,7 +33,7 @@ $(document).ready(function(){
     setTimeout(function () { lightbox_wrapper.addClass('overlayed'); }, 50);
 
     $.ajax({
-      url: href_return_to(this),
+      url: this.href,
       type: 'get',
       success: function(data, status, xhr) {
         lightbox_wrapper.removeClass('loading');
