@@ -148,7 +148,7 @@ class User < ActiveRecord::Base
     if existed_person = Person.where(:email => email).first
       update_attribute(:person_id, existed_person.id)
     else
-      self.person = Person.create(:name  => name, :email => email, :authorised_account => true)
+      self.person = Person.create(:name  => name, :email => email, :authorised_account => false)
       save
     end
   end
