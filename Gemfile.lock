@@ -377,7 +377,6 @@ GEM
     whenever (0.7.3)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
-    will_paginate (3.0.3)
     xml-simple (1.1.1)
     xpath (0.1.4)
       nokogiri (~> 1.3)
@@ -438,4 +437,3 @@ DEPENDENCIES
   uglifier
   webrat
   whenever
-  will_paginate (~> 3.0.3)

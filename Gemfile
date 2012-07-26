@@ -18,7 +18,7 @@ gem "fb_graph"
 # ActiveAdmin
 gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git', :ref => "5c4e75a6d"
 gem 'kaminari'
-gem "will_paginate", "~> 3.0.3"
+#gem 'will_paginate', "3.0.pre2"
 
 gem "rails-settings", :git => "git://github.com/100hz/rails-settings.git"
 #gem 'sass'  #for use in activeadmin
