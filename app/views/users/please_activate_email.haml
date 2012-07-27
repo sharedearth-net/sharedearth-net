@@ -4,3 +4,6 @@
   %p
     We sent email to address you filled before. Check your email and click the link.
     = link_to "Resent email", resent_activation_user_path(@user), :data => {:method => :post}
+
+  %p
+    = link_to "disconnect", signout_path

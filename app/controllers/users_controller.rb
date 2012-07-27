@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def please_activate_email
     @user = User.find(params[:id])
+    render :layout => "welcome"
   end
 
   def resent_activation
@@ -17,8 +18,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new({:classic_sing_up => true}.merge(params[:user] || {}))
     if @user.save
-      #session[:user_id] = @user.id
-      redirect_to please_activate_email_user_path(@user), :notice => "Thank you. Check emeil for confirmation letter."
+      session[:user_id] = @user.id
+      redirect_to root_path, :notice => "Thank you. Check emeil for confirmation letter."
     else
       render :new
     end

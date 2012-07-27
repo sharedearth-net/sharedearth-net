@@ -19,8 +19,9 @@ class User < ActiveRecord::Base
   delegate :network_activity, :to => :person
   delegate :trusted_network_activity, :to => :person
 
-  before_save :check_classic_sign_up,     :if => :classic_sing_up?
-  after_create :send_confirmation_email,  :if => :classic_sing_up?
+  before_save :check_classic_sign_up,                           :if => :classic_sing_up?
+  after_create :send_confirmation_email,                        :if => :classic_sing_up?
+  after_create Proc.new {|u| u.make_person!(u.name, u.email)},  :if => :classic_sing_up?
 
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -136,7 +137,10 @@ class User < ActiveRecord::Base
   def verify_email!(code)
     if !verified_email? && code == email_confirmation_code
       update_attribute(:verified_email, true)
-      make_person!(name, email)
+      if other = Person.where(:email => email, :authorised_account => true).where("id != ?", person_id).first
+        self.person.destroy
+        self.update_column(:person_id, other.id)
+      end
       true
     else
       false
@@ -146,7 +150,7 @@ class User < ActiveRecord::Base
   #TODO make more secure
   def make_person!(name, email)
     if existed_person = Person.where(:email => email).first
-      update_attribute(:person_id, existed_person.id)
+      update_column(:person_id, existed_person.id)
     else
       self.person = Person.create(:name  => name, :email => email, :authorised_account => false)
       save

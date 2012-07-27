@@ -60,6 +60,8 @@ class ApplicationController < ActionController::Base
           not current_person.accepted_tr? or
           not current_person.accepted_pp?
       redirect_to next_policy_path
+    elsif current_user.provider == "email_and_password" && !current_user.verified_email?
+      redirect_to please_activate_email_user_path(current_user)
     elsif not session[:fb_drop_url].nil?
       url = session[:fb_drop_url]
       url = new_item_path if url == items_path

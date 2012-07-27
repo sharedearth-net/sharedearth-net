@@ -54,12 +54,8 @@ class InvitationsController < ApplicationController
    unless key.empty?
      invitation = Invitation.find_by_invitation_unique_key(key)
      if !invitation.nil? && invitation.active?
-        if current_user.person
-          invitation.update_attributes(:invitee_person_id => current_user.person.try(:id), :accepted_date => Time.now, :invitation_active => false)
-          current_user.person.authorise!
-        else
-          session[:invitation_id] = invitation.id
-        end
+        invitation.update_attributes(:invitee_person_id => current_user.person.id, :accepted_date => Time.now, :invitation_active => false)
+        current_user.person.authorise!
 
         request = RequestedInvitation.find_by_user_id(current_user.id)
         request.accepted! unless request.nil?
