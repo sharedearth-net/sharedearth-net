@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.7'
 gem 'mysql2', '>=0.3'
 gem 'haml'
 gem 'omniauth'
@@ -67,7 +67,7 @@ group  :test do
   instance_eval(&test_and_development)
   gem "mocha"
   gem 'cucumber', '~> 1.1.1'
-  gem 'cucumber-rails' , '~> 1.1.1'
+  gem 'cucumber-rails' , '~> 1.1.1', :require => false
   gem 'capybara'
   gem "simplecov", :require => false
 end
