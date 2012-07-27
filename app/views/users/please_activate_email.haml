@@ -1,9 +1,12 @@
-.button-holder-connect
-  %h2{:style => "text-indent: 0; color: #3e5706; font-size: 23px; height: 45px"} Email verification
+#terms-conditions-page
+  #content
+    = image_tag "terms-conditions-main-pic.jpg", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"
+    = image_tag "logo-type-large.png", :class => "main-pic", :alt => "sharedearth.net", :title => "sharedearth.net"
+    %h1 Email verification
 
-  %p
-    We sent email to address you filled before. Check your email and click the link.
-    = link_to "Resent email", resent_activation_user_path(@user), :data => {:method => :post}
+    %h6
+      We sent email to address you filled before. Check your email and click the link.
 
-  %p
-    = link_to "disconnect", signout_path
+    %ul.clearfix.action-buttons-list{:style => "padding-left: 400px"}
+      %li>= link_to "Resent email", resent_activation_user_path(@user), :data => {:method => :post}, :class => "positive"
+      %li>= link_to "Log out", signout_path
