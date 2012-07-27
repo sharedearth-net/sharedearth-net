@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
       token = auth["credentials"]["token"]
       user  = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
               User.create_with_omniauth(auth)
+      user.person = current_person if current_person
       user.token = token
       user.save
       user.person.authorise! if (Settings.invitations == 'false' || Settings.invitations == nil) && user.person.has_email?
