@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "items/index.html.erb" do
   before(:each) do
-    assign(:items, [Factory(:item), Factory(:item)])
+    assign(:items, [FactoryGirl.create(:item), FactoryGirl.create(:item)])
   end
 
   it "renders a list of items" do

@@ -54,11 +54,17 @@ class InvitationsController < ApplicationController
    unless key.empty?
      invitation = Invitation.find_by_invitation_unique_key(key)
      if !invitation.nil? && invitation.active?
-        invitation.update_attributes(:invitee_person_id => current_user.person.id, :accepted_date => Time.now, :invitation_active => false)
+        if current_user.person
+          invitation.update_attributes(:invitee_person_id => current_user.person.try(:id), :accepted_date => Time.now, :invitation_active => false)
+          current_user.person.authorise!
+        else
+          session[:invitation_id] = invitation.id
+        end
+
         request = RequestedInvitation.find_by_user_id(current_user.id)
         request.accepted! unless request.nil?
-        current_user.person.authorise!
-        current_user.inform_mutural_friends(session[:fb_token])
+
+        current_user.inform_mutural_friends(session[:fb_token]) if current_user.from_facebook?
         redirect_to next_policy_path and return
      end
    end 

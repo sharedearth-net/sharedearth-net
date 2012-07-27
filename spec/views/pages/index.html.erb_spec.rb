@@ -19,7 +19,7 @@ describe "pages/index.html.erb (aka homepage)" do
   describe "for signed in member" do
 
     before do
-      @person = Factory(:person)
+      @person = FactoryGirl.create(:person)
       view.should_receive(:current_user).at_least(:once).and_return(@person.user) # makes sure that we are checking current_user at least once
     end
     

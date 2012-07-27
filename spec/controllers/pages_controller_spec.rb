@@ -5,18 +5,19 @@ describe PagesController do
 
   let(:mock_item_request) { mock_model(ItemRequest).as_null_object }
   #let(:mock_item_requests) {[ mock_model(ItemRequest).as_null_object,  mock_model(ItemRequest).as_null_object] }
-  let(:mock_person) { Factory(:person) }
-  let(:signedin_user) { Factory(:person).user }
+  let(:mock_person) { FactoryGirl.create(:person) }
+  let(:signedin_user) { FactoryGirl.create(:user, :person => FactoryGirl.create(:person)) }
   let(:mock_villages) {[mock_model(Village).as_null_object, mock_model(Village).as_null_object]}
   let(:mock_villages_id) {[1001,1002]}
-  let(:mock_items)    { [ mock_model(Item, :name => "Item1", :owner => signedin_user.person).
-                        as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
-  let(:mock_entities)    { [ mock_model(Entity, :id => 2).as_null_object, mock_model(Entity, :id => 3).as_null_object ] }
-  let(:mock_entity)    { mock_model(Entity).as_null_object }
-  let(:mock_village)    { mock_model(Village).as_null_object }
-  let(:mock_specific_entity)    { mock_model(Village).as_null_object }
-  let(:mock_item)    {  mock_model(Item).as_null_object }
-  let(:mock_events) {mock_model(EventDisplay).as_null_object}
+  #let(:mock_items)    { [ mock_model(Item, :name => "Item1", :owner => signedin_user.person).
+  #                      as_null_object, mock_model(Item, :name => "Item2").as_null_object ] }
+  let(:mock_entities)         { [ mock_model(Entity, :id => 2).as_null_object, mock_model(Entity, :id => 3).as_null_object ] }
+  let(:mock_entity)           { mock_model(Entity).as_null_object }
+  let(:mock_village)          { mock_model(Village).as_null_object }
+  let(:mock_specific_entity)  { mock_model(Village).as_null_object }
+  let(:mock_item)             { FactoryGirl.create(:item) } #mock_model(Item).as_null_object }
+  let(:mock_items)            { [mock_item, mock_item] }
+  let(:mock_events)           { mock_model(EventDisplay).as_null_object}
 
 
   it_should_require_signed_in_user_for_actions :dashboard
@@ -77,8 +78,8 @@ describe PagesController do
       end
 
       it "assigns the current person's active requests as @active_item_requests" do
-        mock_item_requests = [Factory(:item_request), Factory(:item_request)]
-        signedin_user.stub(:person).and_return(Factory(:person))
+        mock_item_requests = [FactoryGirl.create(:item_request), FactoryGirl.create(:item_request)]
+        signedin_user.stub(:person).and_return(FactoryGirl.create(:person))
         signedin_user.person.stub(:active_item_requests) { mock_item_requests }
         signedin_user.person.stub(:received_network_requests) { [] }
         signedin_user.person.stub(:network_requests) { [] }
@@ -89,8 +90,8 @@ describe PagesController do
       end
 
       it "should reset person email notification count" do
-				mock_item_requests = [Factory(:item_request), Factory(:item_request)]
-        signedin_user.stub(:person).and_return(Factory(:person))
+				mock_item_requests = [FactoryGirl.create(:item_request), FactoryGirl.create(:item_request)]
+        signedin_user.stub(:person).and_return(FactoryGirl.create(:person))
         signedin_user.person.stub(:active_item_requests) { mock_item_requests }
         signedin_user.person.stub(:received_network_requests) { [] }
         signedin_user.person.stub(:network_requests) { [] }
@@ -122,8 +123,9 @@ describe PagesController do
       end
       context "trusted network" do
         before do
-          mock_person.stub_chain(:trusted_friends_items, :sort_by).and_return{[mock_item]}
-          mock_person.stub_chain(:trusted_network_activity, :paginate).and_return{mock_events}
+          mock_person.stub_chain(:trusted_friends_items, :sort_by).and_return {Kaminari.paginate_array([mock_item])}
+          mock_person.stub_chain(:trusted_network_activity, :page).and_return{mock_events}
+          mock_person.stub_chain(:trusted_network_activity, :per).and_return{mock_events}
         end
 
         it "should assign items from  trusted network" do
@@ -140,7 +142,8 @@ describe PagesController do
         before do
           Entity.stub(:find_by_id).with("37").and_return(mock_entity)
           ResourceNetwork.stub(:items_belong_to).with(mock_village).and_return([mock_item])
-          mock_entity.stub_chain(:network_activity, :paginate).and_return(mock_events)
+          mock_entity.stub_chain(:network_activity, :page).and_return(mock_events)
+          mock_entity.stub_chain(:network_activity, :per).and_return(mock_events)
         end
 
         it "should be successful" do
@@ -159,7 +162,8 @@ describe PagesController do
         before do
           ResourceNetwork.stub(:all_item_from).with(mock_entities).and_return([mock_item])
           mock_person.stub(:personal_network_items).and_return([mock_item])
-          mock_person.stub_chain(:network_activity, :paginate).and_return(mock_events)
+          mock_person.stub_chain(:network_activity, :page).and_return(mock_events)
+          mock_person.stub_chain(:network_activity, :per).and_return(mock_events)
         end
 
         it "assigns items be successful" do

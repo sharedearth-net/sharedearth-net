@@ -61,6 +61,10 @@ class Person < ActiveRecord::Base
   scope :exclude_users, lambda { |entity| where("id not in (?)", entity)}
   scope :include_users, lambda { |entity| where("id in (?)", entity)}
 
+  def facebook_user
+    users.where(:provider => :facebook).first
+  end
+
   def create_staring_reputation_rating!
     create_reputation_rating(:gift_actions  => 0,:distinct_people => 0,
                              :total_actions => 0, :positive_feedback => 0,
@@ -297,7 +301,7 @@ class Person < ActiveRecord::Base
   end
 
   def avatar(avatar_size = nil)
-    self.users.first.avatar(avatar_size)
+    self.users.first.try(:avatar, avatar_size)
   end
 
   def first_name

@@ -1,6 +1,6 @@
 								<div class="inner-content">
 									<p>
-										<%= render :partial => "shared/item_request_sentence.html.erb", :locals => { :req => req, :dashboard => true } %>
+										<%= render "shared/item_request_sentence", :req => req, :dashboard => true %>
 									</p>
 					
 									<div class="action clearfix">
@@ -8,6 +8,6 @@
 											<li>
 												<%= time_ago_in_words req.created_at %> ago
 											</li>
-											<%= render :partial => "shared/item_request_actions_compact.html.erb", :locals => { :req => req } %>
+											<%= render "shared/item_request_actions_compact", :req => req %>
 										</ul>
 									</div>

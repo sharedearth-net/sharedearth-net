@@ -37,12 +37,12 @@ describe Item do
     File.stub!(:unlink).and_return(true)
   end
   it "should have a 'deleted' flag" do
-    item = Factory(:item)
+    item = FactoryGirl.create(:item)
     item.should respond_to(:deleted)
   end
 
   it "should have the 'deleted' flag default to false" do
-    item = Factory(:item)
+    item = FactoryGirl.create(:item)
     item.should_not be_deleted
   end
 
@@ -72,16 +72,16 @@ describe Item do
 end
 describe Item do
   before do
-    let(:item) {Factory(:item)}
-    let(:requester) {Factory(:person)}
-    let(:other_person) {Factory(:person)}
+    let(:item) {FactoryGirl.create(:item)}
+    let(:requester) {FactoryGirl.create(:person)}
+    let(:other_person) {FactoryGirl.create(:person)}
   end
 
 end
 describe Item, ".add_owner for shareage" do
-  let(:item) {Factory(:item)}
-  let(:requester) {Factory(:person)}
-  let(:other_person) {Factory(:person)}
+  let(:item) {FactoryGirl.create(:item)}
+  let(:requester) {FactoryGirl.create(:person)}
+  let(:other_person) {FactoryGirl.create(:person)}
   before do
     File.stub!(:unlink).and_return(true)
   end
@@ -126,7 +126,7 @@ end
 
 describe Item, ".delete" do
 
-  let(:item) { Factory(:item) }
+  let(:item) { FactoryGirl.create(:item) }
   before(:each) do
     File.stub!(:unlink).and_return(true)
   end
@@ -179,30 +179,30 @@ describe Item, '.search' do
   before(:each) do
     File.stub!(:unlink).and_return(true)
   end
-  let(:items_requester) { Factory(:person) }
+  let(:items_requester) { FactoryGirl.create(:person) }
 
-  let(:items_owner) { Factory(:person) }
+  let(:items_owner) { FactoryGirl.create(:person) }
 
-  let(:item_type_car) { Factory(:item, :item_type => 'car', :owner => items_owner) }
+  let(:item_type_car) { FactoryGirl.create(:item, :item_type => 'car', :owner => items_owner) }
 
-  let(:item_named_stuff) { Factory(:item, :name => 'stuff', :owner => items_owner) }
+  let(:item_named_stuff) { FactoryGirl.create(:item, :name => 'stuff', :owner => items_owner) }
 
-  let(:item_with_description) { Factory(:item, :description => 'Deux', :owner => items_owner) }
+  let(:item_with_description) { FactoryGirl.create(:item, :description => 'Deux', :owner => items_owner) }
 
-  let(:item_deleted) { Factory(:item, :name => 'deleted', :owner => items_owner) }
+  let(:item_deleted) { FactoryGirl.create(:item, :name => 'deleted', :owner => items_owner) }
 
-  let(:item_hidden) { Factory(:item, :name => 'hidden', :owner => items_owner, :hidden => true)}
+  let(:item_hidden) { FactoryGirl.create(:item, :name => 'hidden', :owner => items_owner, :hidden => true)}
 
   before :each do
     HumanNetwork.create_trust!(items_owner, items_requester)
 
     # Create a resource_network for each item
     [item_type_car, item_named_stuff, item_with_description].each do |item|
-      Factory(:resource_network, :resource_id => item.id, :entity_id => items_requester.id)
+      FactoryGirl.create(:resource_network, :resource_id => item.id, :entity_id => items_requester.id)
     end
 
     # Create a 'duplicated' resource_network for testing purposes
-    Factory(:resource_network, :resource_id => item_named_stuff,
+    FactoryGirl.create(:resource_network, :resource_id => item_named_stuff,
             :entity_id => items_requester.id)
 
     item_deleted.delete
@@ -248,7 +248,7 @@ end
   
 describe "quick_add" do
   it "should add an item based on type, owner and purpose keeping others as defaults" do
-      owner = Factory(:person)
+      owner = FactoryGirl.create(:person)
       Item.where(:item_type => 'bike').count.should == 0
       Item.quick_add('bike', owner, Item::PURPOSE_SHAREAGE)
       Item.where(:item_type => 'bike').count.should == 1
@@ -260,23 +260,23 @@ end
 
 describe "generic" do
   it "should identify generic items" do
-    Factory.build(:item, :item_type => 'Bike', :name => nil).should be_generic
-    Factory.build(:item, :item_type => 'Bike', :name => 'Passion').should_not be_generic
+    FactoryGirl.build(:item, :item_type => 'Bike', :name => nil).should be_generic
+    FactoryGirl.build(:item, :item_type => 'Bike', :name => 'Passion').should_not be_generic
   end
 end
 
 describe "after_create hook for item type" do
   it "should create item type if doesn't exists" do
     ItemType.count.should == 0
-    Factory(:item, :item_type => 'Bike', :name => nil)
+    FactoryGirl.create(:item, :item_type => 'Bike', :name => nil)
     item_type = ItemType.where(:item_type => 'Bike')
     item_type.count.should == 1
     item_type.first.item_count.should == 1
   end
   
   it "should update item type if already exists" do
-    Factory(:item_type, :item_type => 'Bike')
-    Factory(:item, :item_type => 'Bike', :name => nil)
+    FactoryGirl.create(:item_type, :item_type => 'Bike')
+    FactoryGirl.create(:item, :item_type => 'Bike', :name => nil)
     item_type = ItemType.where(:item_type => 'Bike')
     item_type.count.should == 1
     item_type.first.item_count.should == 2
@@ -308,7 +308,7 @@ end
 
 describe "before destroy hook for item type" do
   it "should reduce item count by 1" do
-    item = Factory(:item, :item_type => 'Bike', :name => nil)
+    item = FactoryGirl.create(:item, :item_type => 'Bike', :name => nil)
     item_type = ItemType.where(:item_type => 'Bike')
     item_type.first.item_count.should == 1
     item.destroy

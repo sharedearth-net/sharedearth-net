@@ -5,21 +5,24 @@ class FbFriendsController < ApplicationController
   #before_filter :check_facebook_session, :only => [:index, :search_fb_friends]
 
   def index
-    if current_user.provider != 'facebook'
+    if !(fb_user = current_person.facebook_user)
       return redirect_to :dashboard, :warning => "Facebook not connected"
     end
-    fb_token = session[:fb_token]
-    @people  = FbService.get_my_friends(fb_token).order(:name)
+
+    @people  = FbService.get_my_friends(fb_user.token).order(:name)
     @villages = Village.all
   end
 
   def search_fb_friends
-    fb_token     = session[:fb_token]
-    search_terms = params[:search_terms] || ''
-
-    @people = FbService.search_fb_friends(fb_token, search_terms)
-    raise NotActivated if @people.nil?
-    render :index
+    fb_user = current_person.facebook_user
+    if !fb_user
+      return redirect_to :dashboard, :warning => "Facebook not connected"
+    else
+      search_terms = params[:search_terms] || ''
+      @people = FbService.search_fb_friends(fb_user.token, search_terms)
+      raise NotActivated if @people.nil?
+      render :index
+    end
   end
 
   def search_people

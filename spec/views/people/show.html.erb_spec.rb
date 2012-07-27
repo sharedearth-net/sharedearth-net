@@ -10,10 +10,10 @@ describe "people/show.html.erb" do
   let(:mock_items){ [ stub_model(Item, :name => "Item1", :owner_id => 1, :owner_type => "Person").as_null_object, stub_model(Item, :name => "Item2", :owner_id => 1, :owner_type => "Person").as_null_object ] }
 
   before do
-    @person = Factory(:person)
-    @item1 = Factory(:item, :owner => @person)
-    @item2 = Factory(:item, :owner => @person)
-    #@item_request = Factory(:item_request, :owner => @person)
+    @person = FactoryGirl.create(:person)
+    @item1 = FactoryGirl.create(:item, :owner => @person)
+    @item2 = FactoryGirl.create(:item, :owner => @person)
+    #@item_request = FactoryGirl.create(:item_request, :owner => @person)
     #mock_person.stub(:user).and_return(mock_user)
     #mock_person.stub(:items).and_return(mock_items)
     @person.stub!(:trusts?).and_return(false)
@@ -42,7 +42,7 @@ describe "people/show.html.erb" do
   end
 
   it "shouldn't render a link to edit profile if viewing someone else's profile" do
-    some_other_person = Factory(:person, :name => "Nebojsa")
+    some_other_person = FactoryGirl.create(:person, :name => "Nebojsa")
     #some_other_user = mock_model(User)
     #some_other_user.stub(:person).and_return(mock_model(Person))
     some_other_person.stub_chain(:person, :trusts?).and_return(false)
@@ -64,7 +64,7 @@ describe "people/show.html.erb" do
   end
 
   it "should render a link to request an item" do
-    some_other_person = Factory(:person, :name => "Nebojsa")
+    some_other_person = FactoryGirl.create(:person, :name => "Nebojsa")
     view.stub!(:current_user).and_return(some_other_person.user)
     render
     rendered.should have_selector("a", :href => requests_path(:item_id => @person.items.first))

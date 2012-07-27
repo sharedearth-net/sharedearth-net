@@ -164,7 +164,7 @@ describe PeopleController do
       end
 
       it "shouldn't allow users to edit other's persons" do
-        mock_person.should_receive(:belongs_to?).with(signedin_user).and_return(false)
+        Person.stub(:find_by_id).and_return(FactoryGirl.create(:person))
         get :edit, :id => "37"
 
         flash[:alert].should eql(I18n.t('messages.you_cannot_edit_others'))
@@ -208,7 +208,7 @@ describe PeopleController do
         end
 
         it "shouldn't allow users to update other's persons" do
-          mock_person.should_receive(:belongs_to?).with(signedin_user).and_return(false)
+          Person.stub(:find_by_id).and_return(FactoryGirl.create(:person))
           put :update, :id => "37"
 
           flash[:alert].should eql(I18n.t('messages.you_cannot_edit_others'))

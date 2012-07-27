@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   delegate :trusted_network_activity, :to => :person
 
   before_save :check_classic_sign_up,     :if => :classic_sing_up?
-  after_create  :send_confirmation_email, :if => :classic_sing_up?
+  after_create :send_confirmation_email,  :if => :classic_sing_up?
 
   def self.create_with_omniauth(auth)
     create! do |user|

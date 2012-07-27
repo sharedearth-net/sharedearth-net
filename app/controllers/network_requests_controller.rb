@@ -6,7 +6,6 @@ class NetworkRequestsController < ApplicationController
 
   def create
     @trusted_person = Person.find(params[:trusted_person_id])
-    current_person  = current_user.person
 
     if current_person.requested_trusted_relationship?(@trusted_person)
       current_person.requested_trusted_relationship(@trusted_person).confirm!

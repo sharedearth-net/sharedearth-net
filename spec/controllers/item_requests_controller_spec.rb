@@ -155,7 +155,7 @@ describe ItemRequestsController do
       describe "with valid params" do
         before do
           mock_item_request.stub(:save).and_return(true)
-          Item.stub(:find_by_id).and_return(Factory(:item))
+          Item.stub(:find_by_id).and_return(FactoryGirl.create(:item))
         end
 
         it "assigns a newly created item request as @item_request" do
@@ -198,7 +198,7 @@ describe ItemRequestsController do
 
         before do
           mock_item_request.stub(:save).and_return(false)
-          Item.stub(:find_by_id).and_return(Factory(:item))
+          Item.stub(:find_by_id).and_return(FactoryGirl.create(:item))
         end
 
         it "assigns a newly created but unsaved request as @item_request" do

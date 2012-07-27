@@ -14,12 +14,12 @@ module FbService
 
   def self.get_my_friends(token)
     friends_list = fb_friends_from(token)
-    people_from_fb_friends(friends_list).authorized.order(:name)
+    people_from_fb_friends(friends_list).authorized.order('people.name')
   end
 
   def self.search_fb_friends(token, search_term)
     search_term.empty? ? [] : get_my_friends(token).
-                              where("UPPER(name) LIKE UPPER(?)", "%#{search_term}%")
+                              where("UPPER(people.name) LIKE UPPER(?)", "%#{search_term}%")
   end
 
   def self.post_on_my_wall(token, msg, link = '', options = {})

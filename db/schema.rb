@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.string   "specific_entity_type"
   end
 
+  add_index "entities", ["specific_entity_type", "specific_entity_id"], :name => "index_entities_on_specific_entity_type_and_specific_entity_id"
+
   create_table "event_displays", :force => true do |t|
     t.integer  "type_id"
     t.integer  "person_id"
@@ -184,6 +186,10 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.string   "network_type"
     t.boolean  "reciprocal_trust"
   end
+
+  add_index "human_networks", ["entity_id"], :name => "index_human_networks_on_entity_master_id"
+  add_index "human_networks", ["person_id"], :name => "index_human_networks_on_human_id"
+  add_index "human_networks", ["specific_entity_id", "entity_type"], :name => "index_human_networks_on_entity_id_and_entity_type"
 
   create_table "invitations", :force => true do |t|
     t.integer  "inviter_person_id"
@@ -262,6 +268,7 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.integer  "email_notification_count",                                :default => 0
     t.datetime "last_notification_email"
     t.boolean  "smart_notifications",                                     :default => true
+    t.string   "new_email"
   end
 
   create_table "person_gift_act_ratings", :force => true do |t|
@@ -329,9 +336,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.string   "email"
     t.string   "encrypted_password"
     t.integer  "person_id"
-    t.boolean  "verified_email",     :default => false, :null => false
+    t.boolean  "verified_email",     :default => true, :null => false
     t.string   "name"
-    t.string   "new_email"
   end
 
   create_table "villages", :force => true do |t|

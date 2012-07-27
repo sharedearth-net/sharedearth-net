@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Cron do
-  let(:person) { Factory(:person, :user => Factory(:user, :last_activity => Time.now - 13.hours)) }
-  let(:active_person) { Factory(:person) }
-  let(:recent_activity) {Factory(:activity_log)}
+  let(:person) { FactoryGirl.create(:user_with_person, :last_activity => Time.now - 13.hours).person }
+  let(:active_person) { FactoryGirl.create(:person) }
+  let(:recent_activity) {FactoryGirl.create(:activity_log)}
 
 
   describe Cron do
     before do
-      UserMailer.stub(:notify_with_recent_acitivity).with(recent_activity, 'example@temp.com', person.user).and_return(true)
+      UserMailer.stub(:notify_with_recent_acitivity).with(recent_activity, 'example@temp.com', person.users.first).and_return(true)
       Person.stub_chain(:notification_candidate, :with_smart_notifications, :include_users).and_return([person])
     end
 

@@ -1,14 +1,9 @@
 <% unless req.rejected? || req.canceled? %>
   <li class="content-box clearfix"> 
-    <%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), 
-                         request_path(req) %>
-
-    <%= render :partial => "shared/item_request_box.html.erb", :locals => {:req => req} %>	
-  
-    <%= render :partial => '/comments/comment_box', :locals => {:object => req, :new_comment => true,
-																																:is_private     => true} %>
-    			
-    </div>
+    <%= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req) %>
+    <%= render "shared/item_request_box", :req => req %>
+    <%= render '/comments/comment_box', :object => req, :new_comment => true, :is_private => true %>
+    </div> <!-- TODO: wtf? -->
   </li>
 <% end %>
 <!-- -->

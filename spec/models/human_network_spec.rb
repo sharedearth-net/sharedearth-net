@@ -1,12 +1,12 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 module HumanNetworkSpecHelper
   def basic_environment
-    @user = Factory(:user, :uid => '111')
-    @person  = Factory(:person, :user => @user)
-    reputation  = Factory(:reputation_rating, :person_id => @person.id)
-    @item        = Factory(:item, :owner => @person)
-    @other_item  = Factory(:item)
-    @village = Factory(:village)
+    @user = FactoryGirl.create(:user, :uid => '111')
+    @person  = FactoryGirl.create(:person, :users => [@user])
+    reputation  = FactoryGirl.create(:reputation_rating, :person_id => @person.id)
+    @item        = FactoryGirl.create(:item, :owner => @person)
+    @other_item  = FactoryGirl.create(:item)
+    @village = FactoryGirl.create(:village)
   end
 end
 
@@ -59,8 +59,8 @@ end
 
 describe "Facebook Friends" do
   it "should find all facebook friends in network" do
-    Factory :human_network
-    Factory :facebook_friend_network
+    FactoryGirl.create :human_network
+    FactoryGirl.create :facebook_friend_network
     HumanNetwork.facebook_friends.count.should == 1
     HumanNetwork.facebook_friends.first.network_type.should == "FacebookFriend"
   end
@@ -68,8 +68,8 @@ end
 
 describe "create facebook friends" do
   it "should create mutual facebook friends" do
-    first = Factory :person
-    second = Factory :person
+    first = FactoryGirl.create :person
+    second = FactoryGirl.create :person
     HumanNetwork.facebook_friends.count.should == 0
     
     HumanNetwork.create_facebook_friends!(first, second)
@@ -77,9 +77,9 @@ describe "create facebook friends" do
   end
   
   it "should not create mutual facebook friends when already exists" do
-    first = Factory :person
-    second = Factory :person
-    Factory :facebook_friend_network, :entity => first, :person => second
+    first = FactoryGirl.create :person
+    second = FactoryGirl.create :person
+    FactoryGirl.create :facebook_friend_network, :entity => first, :person => second
     HumanNetwork.facebook_friends.count.should == 1
     
     HumanNetwork.create_facebook_friends!(first, second)
