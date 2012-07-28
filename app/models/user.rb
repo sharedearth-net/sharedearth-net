@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   delegate :trusted_network_activity, :to => :person
 
   before_save :check_classic_sign_up,                           :if => :classic_sing_up?
+  before_create {|u| u.verified_email = false; true }
   after_create :send_confirmation_email,                        :if => :classic_sing_up?
   after_create Proc.new {|u| u.make_person!(u.name, u.email)},  :if => :classic_sing_up?
 
