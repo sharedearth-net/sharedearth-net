@@ -3,6 +3,6 @@ class AddLoginAuthorization < ActiveRecord::Migration
     add_column :users, :email, :string
     add_column :users, :encrypted_password, :string
     add_column :users, :person_id, :integer
-    add_column :users, :verified_email, :boolean, :default => true, :null => false
+    add_column :users, :verified_email, :boolean, :default => false, :null => false
   end
 end

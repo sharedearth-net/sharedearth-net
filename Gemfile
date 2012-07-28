@@ -5,6 +5,7 @@ gem 'mysql2', '>=0.3'
 gem 'haml'
 gem 'omniauth'
 gem "aws-s3"
+gem "aws-sdk"
 gem "aws-ses", "~> 0.4.3", :require => 'aws/ses'
 gem "paperclip"
 
