@@ -25,7 +25,7 @@ end %>
         </h3>
 
 		<% if !current_user.nil? -%>
-		  <% if !current_user.person.accepted_tc? && current_user.person.authorised? -%>
+		  <% if !current_user.person.accepted_tc? && (current_user.person.authorised? || Settings.invitations != 'true') %>
 		    <div class="buttons-holder">
 			    <ul class="action-buttons-list clearfix">
 				    <li>
