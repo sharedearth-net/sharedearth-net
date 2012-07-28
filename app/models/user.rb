@@ -138,7 +138,8 @@ class User < ActiveRecord::Base
   def verify_email!(code)
     if !verified_email? && code == email_confirmation_code
       update_attribute(:verified_email, true)
-      if other = Person.where(:email => email, :authorised_account => true).where("id != ?", person_id).first
+      people_scope = Settings.invitations == 'true' ? Person.where(:authorised_account => true) : Person.scoped
+      if other = people_scope.where(:email => email).where("id != ?", person_id).first
         self.person.destroy
         self.update_column(:person_id, other.id)
       end
@@ -153,7 +154,9 @@ class User < ActiveRecord::Base
     if existed_person = Person.where(:email => email).first
       update_column(:person_id, existed_person.id)
     else
-      self.person = Person.create(:name  => name, :email => email, :authorised_account => false)
+      self.person = Person.new(:name  => name, :email => email)
+      self.person.authorised_account = Settings.invitations == 'true' ? false : true
+      self.person.save
       save
     end
   end

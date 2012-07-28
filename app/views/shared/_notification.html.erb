@@ -11,6 +11,7 @@
 			# possible values include: flash-notice and flash-alert
 			# (CSS rules also allow flash-info - which is not used at the moment)
 		%>
+		window.notificationTitle = "<%= name.capitalize %>";
 		window.notificationMessage += "<%=raw escape_javascript( msg ) %><br \/>";
 	<% end %>
 
