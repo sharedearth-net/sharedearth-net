@@ -1,0 +1,14 @@
+%header#page-header
+  .inner
+    %aside.left>
+      %ul>
+        %li>= link_to image_tag('icons/dashboard.png') + "<span>3</span>".html_safe, dashboard_path, :class => "dashboard"
+        %li>= link_to "Community", network_path, :class => "network"
+    %aside.middle
+      = # nothing yet
+    %aside.right
+      %ul>
+        %li>= link_to "trusted", '#', :class => 'trusted'
+        %li>= link_to "actions", '#', :class => 'actions'
+        %li>= link_to "helped", '#', :class => 'helped'
+        %li>= link_to "feedback", '#', :class => 'feedback'
