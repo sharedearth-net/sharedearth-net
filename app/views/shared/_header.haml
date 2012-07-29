@@ -12,3 +12,8 @@
         %li>= link_to "actions", '#', :class => 'actions'
         %li>= link_to "helped", '#', :class => 'helped'
         %li>= link_to "feedback", '#', :class => 'feedback'
+
+%section.logo_connect
+  .inner
+    = link_to image_tag("icons/logo.png"), root_path
+    = link_to "Connect", new_session_path, :title => "Sign in or register", :interaction => "lightbox", :class => "connect"
