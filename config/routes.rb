@@ -67,6 +67,7 @@ Sharedearthapp::Application.routes.draw do
   resources :people, :only => [:new, :show, :edit, :update, :index, :destroy] do
     member do
       get :confirm_email_changing
+      get :please_confirm_email_changing
       get :network
       get :my_network
     end

@@ -1,0 +1,8 @@
+.single-page
+  %h2 Confirm your new email address
+
+  %p
+    We've sent a confirmation message to <strong>#{@person.new_email}</strong>. Please open then message and follow link to continue.
+
+  %p
+    If you do not receive the message in next 10 minutes #{link_to "click link", please_confirm_email_changing_person_path(@person, :resend => true)} to resend. 
