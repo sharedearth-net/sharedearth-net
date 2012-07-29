@@ -14,6 +14,13 @@ class PeopleController < ApplicationController
     end
   end
 
+  def please_confirm_email_changing
+    if params[:resend]
+      @person.send_email_changing_confirmation
+      redirect_to please_confirm_email_changing_person_path(@person), :notice => "Message sent"
+    end
+  end
+
   def index
     @people = current_user.person.trusted_friends
 
@@ -103,7 +110,7 @@ class PeopleController < ApplicationController
       if @person.update_attributes(params[:person])
         format.html do
           if @person.waiting_for_new_email_confirmation?
-            redirect_to edit_person_path(@person), :notice => "We sent you email on new address to confirm changes"
+            redirect_to please_confirm_email_changing_person_path(@person)
           else
             redirect_to redirect_path
           end

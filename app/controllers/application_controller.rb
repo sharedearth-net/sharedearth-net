@@ -53,8 +53,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     if current_person && current_person.waiting_for_new_email_confirmation?
-      if !(request.path == person_path(current_person) && params[:action] == "update") && 
-        request.path != edit_person_path(current_person)
+      if params[:controller] != 'people' || !%w{please_confirm_email_changing update edit}.include?(params[:action])
         redirect_to edit_person_path(current_person), :alert => "You need to confirm new email. Check email and follow link in a letter."
         return false
       end
