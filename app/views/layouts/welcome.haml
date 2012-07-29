@@ -1,0 +1,90 @@
+!!! Strict
+%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title sharedearth.net - trust. share. connect.
+    = stylesheet_link_tag :welcome_layout
+    = favicon_link_tag 'favicon.ico'
+    = #stylesheet_link_tag "/static/css/reset-min.css", "/static/css/main.css", "/static/css/fonts.css"
+    /[if lte IE 6]
+      = stylesheet_link_tag "/static/css/ie.css"
+    /[if IE 7]
+      = stylesheet_link_tag "/static/css/ie7.css"
+
+    = javascript_include_tag "/static/js/jquery-1.5.2.min.js" #, "/static/js/script.js"
+    = javascript_include_tag :jquery_ujs, :lightbox
+
+    :javascript
+      $(document).ready(function() {
+        $("a#no_facebook").click(function(){
+          var width = 400;
+          var height = 230;
+          var left = 400, top = 300;
+          left = ( screen.width / 2) - ( width / 2 );
+          top = ( screen.height / 2 ) - ( height / 2 );
+          page = window.open('/collect_email', 'page', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=' + width + ',height=' + height + ',left = ' + left + ',top = ' + top + '');
+          event.preventDefault();
+        });
+      });
+    
+
+  %body
+    = render "shared/header"
+    #content
+      = yield(:no_js_msg).empty? ? yield : yield(:no_js_msg)
+      = render "shared/side_menu"
+    = render "shared/footer"
+    = render "shared/lightbox"
+
+  .hidden{:style => "display: none"}
+    #container.clearfix
+      .logo-holder
+        %h1{:title => "sharedearth.net - from ego to wego"}
+          sharedearth.net - from ego to wego
+      #content.clearfix
+        - flash.each do |key, value|
+          = content_tag(:div, value, :class => "flash #{key}")
+      / #content
+    / #container
+    #footer-holder
+      #footer
+        %div
+          %ul
+            %li.headline
+              %h3 Vision
+            %li
+              %a{:href => "/about"} About
+            %li
+              %a{:href => "#"} Commons
+            %li
+              %a{:href => "/terms/principles"} Principles
+            %li
+              %a{:href => "#"} Platform
+        %div
+          %ul
+            %li.headline
+              %h3 sharedearth.net
+            %li
+              %a{:href => "/terms"} Legal
+            %li
+              %a{:href => "/transparency"} Transparency
+            %li
+              %a{:href => "/contribute"} Contribute
+        %div
+          %ul
+            %li.headline
+              %h3 Connect
+            %li
+              %a{:href => "mailto:info@sharedearth.net"} Contact
+            %li
+              %a{:href => "#"} Blog
+            %li.social-links-holder
+              %ul.social-links.clearfix
+                %li.facebook
+                  %a{:href => "http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts", :onclick => "window.open(this.href); return false;", :title => "SharedEarth on Facebook"} SharedEarth on Facebook
+                %li
+                  %a{:href => "https://twitter.com/sharedearthnet", :onclick => "window.open(this.href); return false;", :title => "Follow SharedEarth on Twitter"} Follow SharedEarth on Twitter
+        .bg-holder
+          %img{:alt => "", :src => "/static/graphics/bg-footer-pic.png"}/
+      / /#footer
+    / /#footer-holder

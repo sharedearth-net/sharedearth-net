@@ -14,6 +14,5 @@
         %li>= link_to "feedback", '#', :class => 'feedback'
 
 %section.logo_connect
-  .inner
-    = link_to image_tag("icons/logo.png"), root_path
-    = link_to "Connect", new_session_path, :title => "Sign in or register", :interaction => "lightbox", :class => "connect"
+  = link_to image_tag("icons/logo.png", :width => 250, :height => 44), root_path
+  = link_to "Connect", new_session_path, :title => "Sign in or register", :interaction => "lightbox", :class => "connect"

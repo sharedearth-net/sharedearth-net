@@ -1,0 +1,29 @@
+$footer_line: 12px
+footer#page-footer
+  :width 100%
+  :margin 0
+  :background url("/assets/backgrounds/header.png")
+  :padding $footer_line 0
+  > .inner
+    :margin 0 auto
+    :width $page_width
+    :line-height $footer_line
+    > ul
+      :height $footer_line
+      > li
+        +inline-block
+        :padding-right 7px
+        & + li
+          :padding 0 7px
+          :border-left 1px solid #fff
+        > a
+          +inline-block
+          :color #a3a3a3
+          :font
+            :size $footer_line
+            :family arial, sans-serif
+          :line-height $footer_line
+          :text-shadow 0 1px 0 rgba(0, 0, 0, 0.5)
+          +transition(all .3s ease-out)
+          &:hover
+            :color #eee
