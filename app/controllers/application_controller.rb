@@ -52,6 +52,14 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
+    if current_person && current_person.waiting_for_new_email_confirmation?
+      if !(request.path == person_path(current_person) && params[:action] == "update") && 
+        request.path != edit_person_path(current_person)
+        redirect_to edit_person_path(current_person), :alert => "You need to confirm new email. Check email and follow link in a letter."
+        return false
+      end
+    end
+
     if current_user.nil? or current_person.nil?
       redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
     elsif Settings.invitations == 'true' and not current_person.authorised?
