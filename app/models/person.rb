@@ -89,6 +89,10 @@ class Person < ActiveRecord::Base
     Digest::SHA2.hexdigest("#{email}--#{new_email}")
   end
 
+  def waiting_for_new_email_confirmation?
+    new_email.present?
+  end
+
   def verify_email_change!(code)
     if code == email_change_confirmation_code
       Person.update_all({:email => self.new_email, :new_email => ""}, :id => self.id)

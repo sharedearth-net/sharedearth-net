@@ -33,9 +33,9 @@
 							    		<%= f.text_field :name %>
 									</li>
 									<li class="clearfix">
-										<%= f.label "Email"  %>
-
-							    		<%= f.text_field :email %>
+										<%= f.label "Email" %>
+							    	<%= f.text_field :email, :value => @person.new_email.presence || @person.email %>
+							    	<% if @person.new_email.present? %><small>Need confirmation</small><% end %>
 									</li>
 									<li class="clearfix">
 										<%= f.label "Location"  %>
