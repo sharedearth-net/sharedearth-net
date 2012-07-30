@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>sharedearth.net - trust. share. connect.</title>
+	<%= stylesheet_link_tag :application %>
+	<link rel="stylesheet" href="/static/css/reset-min.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<link rel="stylesheet" href="/static/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="/static/css/fonts.css">
+
+	<!--[if lte IE 6]><link type="text/css" rel="stylesheet" href="/static/css/ie.css" media="screen" /><![endif]-->
+	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/static/css/ie7.css" media="screen" /><![endif]-->
+
+	<script src="/static/js/jquery-1.5.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/script.js" type="text/javascript" charset="utf-8"></script>
+  <%= javascript_include_tag :jquery_ujs, :lightbox %>
+  
+  <script>
+    $(document).ready(function() {
+      $("a#no_facebook").click(function(){
+				var width = 400;
+				var height = 230;
+				var left = 400, top = 300;
+				left = ( screen.width / 2) - ( width / 2 );
+				top = ( screen.height / 2 ) - ( height / 2 );
+				page = window.open('/collect_email', 'page', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=' + width + ',height=' + height + ',left = ' + left + ',top = ' + top + '');
+				event.preventDefault();
+			});
+    });
+  </script>
+
+	<%= favicon_link_tag 'favicon.ico' %>
+
+</head>
+<body>
+  <%= render "shared/header" %>
+	<div id="container" class="clearfix">
+		
+		<div class="logo-holder">
+		
+			<h1 title="sharedearth.net - from ego to wego">
+				sharedearth.net - from ego to wego
+			</h1>
+			
+		</div>
+
+		<div id="content" class="clearfix">
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, :class => "flash #{key}") %>
+      <% end %>
+      <%= yield(:no_js_msg).empty? ? yield : yield(:no_js_msg) %>
+		</div>
+		<!-- #content -->
+		
+	</div>
+	<!-- #container -->
+
+	<div id="footer-holder">
+	
+		<div id="footer">
+			
+			<div>
+				<ul>
+					<li class="headline">
+						<h3>Vision</h3>
+					</li>
+					<li>
+						<a href="/about">About</a>
+					</li>
+					<li>
+						<a href="#">Commons</a>
+					</li>
+					<li>
+						<a href="/terms/principles">Principles</a>
+					</li>
+					<li>
+						<a href="#">Platform</a>
+					</li>
+				</ul>
+			</div>
+			
+			
+			<div>
+				<ul>
+					<li class="headline">
+						<h3>sharedearth.net</h3>
+					</li>
+					<li>
+						<a href="/terms">Legal</a>
+					</li>
+					<li>
+						<a href="/transparency">Transparency</a>
+					</li>
+					<li>
+						<a href="/contribute">Contribute</a>
+					</li>
+				</ul>
+			</div>
+			
+			
+			<div>
+				<ul>
+					<li class="headline">
+						<h3>Connect</h3>
+					</li>
+					<li>
+						<a href="mailto:info@sharedearth.net">Contact</a>
+					</li>
+					<li>
+						<a href="#">Blog</a>
+					</li>
+					<li class="social-links-holder">
+						<ul class="social-links clearfix">
+							<li class="facebook">
+								<a href="http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts" title="SharedEarth on Facebook" onclick="window.open(this.href); return false;">SharedEarth on Facebook</a>
+							</li>
+							<li>
+								<a href="https://twitter.com/sharedearthnet" title="Follow SharedEarth on Twitter" onclick="window.open(this.href); return false;">Follow SharedEarth on Twitter</a>
+							</li>
+						
+						</ul>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="bg-holder">
+				<img src="/static/graphics/bg-footer-pic.png" alt="" />
+			</div>
+		
+		</div>
+		<!-- /#footer -->
+	
+	</div>
+	<%= render "shared/lightbox" %>
+	<!-- /#footer-holder -->
+
+</body>
+</html>

@@ -1,23 +1,23 @@
-%section.index-page
-  %section.about
-    = image_tag "icons/star.jpg", :width => 102, :height => 98
-    %h1 About
-    %h2 A World Vibrating with <br/> Trust, Sharing, Love and Interconnection
+.button-holder-connect
+  %h2= link_to "connect", new_session_path, :title => "Sign in or register", :interaction => "lightbox"
+  %p
+    Locate
+    %span shared
+    resources anywhere on
+    %br/
+    %span earth
+    and.
 
-  %section.main
-    %p Sharing anchors community.
-
-    - 3.times do
-      %p= "Sharing anchors community. " * rand(5..30)
-
-    %p
-      Each act of sharing is a transitional step forwards a just and sustainable society.
-
-  %section.green_earth
-    = image_tag 'icons/earth.jpg'
-    %p
-      We, the commoners, are building a beter future.
-      %br
-      Be the change, build the commons.
-      %br
-      %strong Build the commons, change the world.
+.stats-holder
+  %ul
+    %li
+      %a{:href => "#"} 1 earth
+    %li.people
+      %a{:href => "#"} 9999 human beings connected
+    %li.resources-shared
+      %a{:href => "#"} 1411 resources shared
+    %li.resources-commoned
+      %a{:href => "#"} 300 resources commoned
+    %li.gift
+      %a{:href => "#"} 400 gift actions undertaken
+/ /stats-holder

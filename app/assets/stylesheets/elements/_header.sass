@@ -99,10 +99,12 @@ header#page-header
           :margin-left 20px
 
 section.logo_connect
-  :margin 0 auto
-  :width $page_width
+  :width 100%
   :padding 31px 0 29px 0
-  a.connect
-    +inline-block
-    :float right
-    +button
+  > .inner
+    :margin 0 auto
+    :width $page_width
+    a.connect
+      +inline-block
+      :float right
+      +button
