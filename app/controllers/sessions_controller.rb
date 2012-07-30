@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       if @user = User.try_auth(params[:user][:email], params[:user][:password])
         if @user.verified_email?
           session[:user_id] = @user.id
-          redirect_to :root, :notice => "Welcome back"
+          redirect_to :root
         else
           redirect_to please_activate_email_user_path(@user), :notice => "Your account waiting for confirmation"
         end

@@ -8,9 +8,9 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     if @person.verify_email_change!(params[:code])
       session[:user_id] || @person.user.first.id
-      redirect_to edit_person_path(@person), :notice => "Email changed successfully."
+      redirect_to edit_person_path(@person), :notice => I18n.t('messages.people.email_changed')
     else
-      redirect_to :root, :warning => "Something wrong happen during chaning email."
+      redirect_to :root, :warning => I18n.t('messages.people.change_email_wrong')
     end
   end
 
