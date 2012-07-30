@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new({:classic_sing_up => true}.merge(params[:user] || {}))
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, :notice => "Thank you. Check emeil for confirmation letter."
+      redirect_to root_path, :notice => I18n.t('messages.people.thank_you_check_email')
     else
       render :new
     end
@@ -28,9 +28,9 @@ class UsersController < ApplicationController
   def confirm
     @user = User.find(params[:id])
     if @user.verified_email?
-      redirect_to :root, :alert => "Email already verified"
+      redirect_to :root, :alert => I18n.t('messages.people.email_already_verified')
     elsif params[:code] != @user.email_confirmation_code
-      redirect_to :root, :alert => "Confirmation code is not correct"
+      redirect_to :root, :alert => I18n.t('messages.people.confirm_code_incorrect')
     else
       @user.verify_email!(params[:code])
       session[:user_id] = @user.id
