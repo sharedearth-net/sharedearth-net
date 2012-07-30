@@ -106,6 +106,7 @@ class PeopleController < ApplicationController
     @person.update_attributes(:has_reviewed_profile => true)
 
     respond_to do |format|
+      email_changed = @person.email != params[:person][:email] if params[:person]
       if @person.update_attributes(params[:person])
         format.html do
           if @person.waiting_for_new_email_confirmation?

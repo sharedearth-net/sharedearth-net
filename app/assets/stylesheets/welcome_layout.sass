@@ -4,9 +4,6 @@
 
 +global-reset
 $page_width: 941px
-$main_column_with: 646px
-$brown_text_color: #534741
-$baseline: 22px
 
 html, body
   :height 100%
@@ -14,48 +11,11 @@ html, body
   :padding 0
   :font-family "Trebuchet MS", arial, sans-serif
 
-  img.main-pic
-    :width 250px
-    :margin 0 0 25px ($main_column_with - 250px) / 2
-  p
-    :font-size 15px
-    :margin-bottom $baseline
-    :color #62775A
-  h6
-    :font-size 15px
-    :margin-bottom $baseline
-  h1
-    :font
-      :size 23px
-      :family "PredicateRounded-Bold", arial, sans-serif
-      :weight bold
-    :line-height 29px
-    :margin-bottom 18px
-  h2
-    :font
-      :size 18px
-      :family "PredicateRounded-Bold", arial, sans-serif
-    :line-height $baseline
-    :margin-bottom 7px
-
-  .buttons-holder
-    :margin $baseline 0
-    ul
-      :text-align center
-    li
-      +inline-block
-      & + li
-        :margin-left 15px
-    a
-      +button
-
 #content
-  :width $main_column_with
+  :width $page_width
   :margin 0 auto
   :overflow hidden
   :position relative
-  :padding-right $page_width - $main_column_with
-  :margin-bottom 60px
 
 @import "elements/header"
 @import "elements/lightbox"

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def please_activate_email
     @user = User.find(params[:id])
-    render :layout => "welcome"
+    render :layout => "application"
   end
 
   def resent_activation

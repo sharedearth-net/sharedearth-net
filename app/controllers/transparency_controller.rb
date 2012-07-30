@@ -11,7 +11,7 @@ class TransparencyController < ApplicationController
   
   def dynamic_layout
     if current_user.nil?  || !current_user.person.authorised_account
-      'welcome'
+      'shared_earth'
     else
       'application'
     end
