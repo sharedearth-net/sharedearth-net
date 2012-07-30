@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :authenticate_user!, :only => [ :dashboard, :network ]
+  before_filter :authenticate_user!, :only => [ :dashboard ]
 
   def index
     if current_user.nil? or current_user.person.nil?
