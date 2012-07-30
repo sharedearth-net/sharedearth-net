@@ -10,15 +10,10 @@
   > *
     +inline-block
 
-= box-shadow($value, $second: false)
-  @if $second
-    :box-shadow $value, $second
-    :-moz-box-shadow $value, $second
-    :-webkit-box-shadow $value, $second
-  @else
-    :box-shadow $value
-    :-moz-box-shadow $value
-    :-webkit-box-shadow $value
+= box-shadow($value)
+  :box-shadow $value
+  :-moz-box-shadow $value
+  :-webkit-box-shadow $value
 
 $base_transition: all .1s ease-out !default
 
@@ -73,21 +68,14 @@ $main_radius: 3px !default
 
 = button
   +inline-block
-  +gradient(#a2ca4b, #69910e)
-  +border-radius(15px)
+  +gradient(#aacf59, #6c901b)
+  +border-radius(14px)
   :color #3e5706
-  :font
-    :size 14px
-    :weight bold
-    :family arial, sans-serif
-  :line-height 14px
-  :padding 12px 29px 11px 29px
-  +box-shadow(0 1px 1px #bec9a6, inset 0px 1px 1px rgba(255, 255, 255, 0.5))
+  :font-size 15px
+  :line-height 15px
+  :padding 10px 17px
   :text
-    :shadow 0 1px 2px #9fbd5d
+    :shadow 0 0 1px rgba(255, 255, 255, 0.6)
     :decoration none
   &:hover
     :text-decoration none
-  &:active
-    :margin-top 1px
-    :margin-bottom -1px
