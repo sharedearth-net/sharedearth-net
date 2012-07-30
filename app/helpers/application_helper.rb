@@ -65,4 +65,10 @@ module ApplicationHelper
     end 
   end
 
+  def side_menu_item(title, href)
+    active = request.path == url_for(href) && href != '#'
+    content_tag :li, :class => active ? 'active' : nil do
+      link_to title, href
+    end
+  end
 end

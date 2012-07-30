@@ -26,7 +26,7 @@ class LegalNoticesController < ApplicationController
 
   def dynamic_layout
     if current_user.nil? || Settings.invitations != 'true' || !current_user.person.authorised_account
-      'shared_earth'
+      'welcome'
     else
       'application'
     end

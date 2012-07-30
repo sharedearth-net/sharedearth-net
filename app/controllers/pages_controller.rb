@@ -48,12 +48,12 @@ class PagesController < ApplicationController
   end
 
   def about
-    about_layout = ((current_user.nil?  || !current_user.person.authorised_account || !current_user.person.accepted_pp?) ? 'shared_earth' : 'application')
+    about_layout = ((current_user.nil?  || !current_user.person.authorised_account || !current_user.person.accepted_pp?) ? 'welcome' : 'application')
     render :layout => about_layout
   end
 
   def contribute
-    contribute_layout = ((current_user.nil?  || !current_user.person.authorised_account || !current_user.person.accepted_pp?) ? 'shared_earth' : 'application')
+    contribute_layout = ((current_user.nil?  || !current_user.person.authorised_account || !current_user.person.accepted_pp?) ? 'welcome' : 'application')
     render :layout => contribute_layout
   end
 

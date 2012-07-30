@@ -52,13 +52,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    if current_person && current_person.waiting_for_new_email_confirmation?
-      if params[:controller] != 'people' || !%w{please_confirm_email_changing update edit}.include?(params[:action])
-        redirect_to edit_person_path(current_person), :alert => "You need to confirm new email. Check email and follow link in a letter."
-        return false
-      end
-    end
-
     if current_user.nil? or current_person.nil?
       redirect_to root_path, :alert => I18n.t('messages.must_be_signed_in')
     elsif Settings.invitations == 'true' and not current_person.authorised?
@@ -74,6 +67,18 @@ class ApplicationController < ActionController::Base
       url = new_item_path if url == items_path
       session[:fb_drop_url] = nil
       redirect_to url
+    end
+
+    if current_person
+      if current_person.waiting_for_new_email_confirmation?
+        if params[:controller] != 'people' || !%w{please_confirm_email_changing update edit}.include?(params[:action])
+          redirect_to edit_person_path(current_person), :alert => "You need to confirm new email. Check email and follow link in a letter."
+          return false
+        end
+      end
+      if !current_person.has_reviewed_profile? && (params[:controller] != 'people' || !%w{update edit}.include?(params[:action]))
+        redirect_to edit_person_path(current_person)
+      end
     end
   end
 

@@ -1,19 +1,19 @@
 %aside.side_menu
   %h4 Vision
   %ul
-    %li.active= link_to "About", about_path
-    %li= link_to "Commons", '#'
-    %li= link_to "Principles", principles_terms_path
-    %li= link_to "Platform", '#'
+    = side_menu_item("About", :about)
+    = side_menu_item("Commons", '#')
+    = side_menu_item("Principles", :principles_terms)
+    = side_menu_item("Platform", '#')
   %h4 sharedearth.net
   %ul
-    %li= link_to "Legal", terms_path
-    %li= link_to "Transparency", transparency_index_path
-    %li= link_to "Contribute", contribute_path
+    = side_menu_item("Legal", :terms)
+    = side_menu_item("Transparency", :transparency_index)
+    = side_menu_item("Contribute", :contribute)
   %h4 Connect
   %ul
     %li= link_to "Contact", "mailto:info@sharedearth.net"
-    %li= link_to "Blog", '#'
+    = side_menu_item("Blog", '#')
     %li.network-icons>
       %a{:href => "http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts"}>= image_tag("icons/facebook.png")
       %a{:href => "https://twitter.com/sharedearthnet"}>= image_tag("icons/twitter.png")
