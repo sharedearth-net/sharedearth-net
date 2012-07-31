@@ -5,12 +5,13 @@ class UsersController < ApplicationController
   end
 
   def please_activate_email
-    @user = User.find(params[:id])
+    @user = current_user
     render :layout => "application"
   end
 
   def resent_activation
     @user = User.find(params[:id])
+    redirect_to :root and return unless current_user == @user
     @user.send_confirmation_email
     redirect_to please_activate_email_user_path(@user)
   end

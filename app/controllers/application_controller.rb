@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
       redirect_to url
     end
 
-    if current_person
+    if current_person && !response_body
       if current_person.waiting_for_new_email_confirmation?
         if params[:controller] != 'people' || !%w{please_confirm_email_changing update edit}.include?(params[:action])
           redirect_to edit_person_path(current_person), :alert => I18n.t('messages.people.confirm_new_email')
