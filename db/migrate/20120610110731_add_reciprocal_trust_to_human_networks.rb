@@ -3,7 +3,7 @@ class AddReciprocalTrustToHumanNetworks < ActiveRecord::Migration
     add_column :human_networks, :reciprocal_trust, :boolean
     network = HumanNetwork.where(:network_type => "TrustedNetwork")
     network.each do |n|
-      other = TrustedNetwork.where(:entity_id => n.person_id)
+      other = TrustedNetwork.where(:entity_id => n.person_id).first
       if other && n.entity_id == other.person_id
         n.update_attributes(:reciprocal_trust=> true)
       end

@@ -1,0 +1,82 @@
+= loading
+  > .loading
+    :position absolute
+    :left 0
+    :top 0
+    :right 0
+    :bottom 0
+    :background
+      :image url(/assets/ajax-loader.gif)
+      :repeat no-repeat
+      :position center center
+      :color rgba(100, 100, 100, 0.3)
+
+#lightbox_wrapper
+  :position fixed
+  :left 0
+  :top 0
+  :bottom 0
+  :right 0
+  :text-align center
+  :color #62775A
+
+  :z-index 1000
+
+  > .overlay
+    :position absolute
+    :left 0
+    :top 0
+    :bottom 0
+    :right 0
+    :background-color rgba(255, 255, 255, 0.5)
+    +opacity(0, true)
+    +transition(all .3s ease-out)
+    :z-index 1001
+
+  &.hidden
+    :display none
+
+  &.overlayed
+    > .overlay
+      +opacity(1, true)
+    > section.lightbox
+      +opacity(1, true)
+
+  +loading
+
+  > .loading
+    :background
+      :color transparent
+      :image url(/assets/ajax-loader.gif)
+
+  &.loaded
+    .loading
+      :display none
+
+  > section.lightbox
+    :position relative
+    :margin-top 50px
+    :text-align left
+    +inline-block
+    :z-index 1003
+    :background white
+    +box-shadow(0 0 9px rgba(0, 0, 0, 0.4))
+    :padding 9px 20px
+    +opacity(0, true)
+    +transition(all .3s ease-out)
+
+    > .close
+      :position absolute
+      :right 6px
+      :top 4px
+
+      :width 8px
+      :height 8px
+      :background
+        :image url(/assets/closelabel.png)
+      :cursor pointer
+
+    .button-holder-connect
+      +box-shadow(none)
+      p
+        :margin-top 11px

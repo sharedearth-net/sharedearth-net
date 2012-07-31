@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "items/show.html.erb" do
 
-  let(:signedin_user) { Factory(:person) }
+  let(:signedin_user) { FactoryGirl.create(:person) }
   
   def as_item_owner
     view.stub(:current_user).and_return(stub_model(User))
@@ -18,7 +18,7 @@ describe "items/show.html.erb" do
     stub_template "shared/_trust_profile.html.erb" => "Trust profile"
     view.stub(:current_user).and_return(signedin_user.user)
 
-    @item = Factory(:item, :owner => signedin_user)
+    @item = FactoryGirl.create(:item, :owner => signedin_user)
     @item.stub(:available?).and_return(true)
   end
 

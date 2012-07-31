@@ -26,7 +26,7 @@ class PagesController < ApplicationController
     current_user.person.reset_notification_count!
     current_user.record_last_activity!
     current_user.person.news_feed
-    @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
+    @events = current_user.network_activity.page(params[:page]).per(25)
   end
 
   def network
@@ -35,15 +35,15 @@ class PagesController < ApplicationController
 
     if params[:type] == 'trusted'
       @items = current_person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-	    @events = current_person.trusted_network_activity.paginate(:page => params[:page], :per_page => 25)
+	    @events = current_person.trusted_network_activity.page(params[:page]).per(25)
     elsif !@entity.nil?
       @items = ResourceNetwork.items_belong_to(@entity.specific_entity)
-      @events = @entity.network_activity.paginate(:page => params[:page], :per_page => 25)
+      @events = @entity.network_activity.page(params[:page]).per(25)
     else
       @items = ResourceNetwork.all_items_from(@entities).sort_by{|i| i.item_type.downcase}
       @items ||= []
       @items += current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-	    @events = current_person.network_activity.paginate(:page => params[:page], :per_page => 25)
+	    @events = current_person.network_activity.page(params[:page]).per(25)
     end
   end
 

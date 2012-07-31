@@ -14,7 +14,7 @@ class Village < ActiveRecord::Base
   after_create :create_entity_for_village
 
   def generate_key(length=6)
-    random_number = Random.rand(1-999999)
+    random_number = Random.rand(1..999999)
     self.uid = random_number
     # Ensure uniqueness of the token..
     generate_key unless Village.find_by_uid(random_number).nil?

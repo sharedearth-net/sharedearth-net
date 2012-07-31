@@ -42,7 +42,7 @@ describe "item_requests/show.html.erb" do
   before(:each) do
     #stub_template "shared/_trust_profile.html.erb" => "Trust profile"
     #stub_template "item_requests/show.html.erb" => "Trust profile"
-    @item_request = Factory(:item_request)
+    @item_request = FactoryGirl.create(:item_request)
     view.stub!(:current_user).and_return(@item_request.gifter.user)
     view.stub(:item_request_photo).and_return("item_request_photo.png")
 

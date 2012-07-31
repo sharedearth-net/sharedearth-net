@@ -5,8 +5,8 @@ describe ActivityLog do
    it { should have_db_column(:read).of_type(:boolean) }
    describe "#email_not_sent scope" do
      before do
-       activity_email_not_sent = Factory(:activity_log)
-       activity_email_sent = Factory(:activity_log, :email_notification_id => 1)
+       activity_email_not_sent = FactoryGirl.create(:activity_log)
+       activity_email_sent = FactoryGirl.create(:activity_log, :email_notification_id => 1)
      end
      it "should return only activity where email is not sent" do
        activities_not_sent = ActivityLog.email_not_sent
@@ -21,8 +21,8 @@ describe ActivityLog do
 
    describe "#unread scope" do
      before do
-       unread = Factory(:activity_log, :read => false)
-       read = Factory(:activity_log, :read => true)
+       unread = FactoryGirl.create(:activity_log, :read => false)
+       read = FactoryGirl.create(:activity_log, :read => true)
      end
      it "should return only activity where email is not sent" do
        read = ActivityLog.unread

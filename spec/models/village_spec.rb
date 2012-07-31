@@ -1,14 +1,14 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 module VillageSpecHelper
   def basic_environment
-    @user = Factory(:user, :uid => '111')
-    @person  = Factory(:person, :user => @user)
-    @other_user = Factory(:user, :uid => '222')
-    @other_person  = Factory(:person, :user => @other_user)
-    reputation  = Factory(:reputation_rating, :person_id => @person.id)
-    @item        = Factory(:item, :owner => @person)
-    @other_item  = Factory(:item, :owner => @other_person)
-    @village = Factory(:village)
+    @user = FactoryGirl.create(:user, :uid => '111')
+    @person  = FactoryGirl.create(:person, :users => [@user])
+    @other_user = FactoryGirl.create(:user, :uid => '222')
+    @other_person  = FactoryGirl.create(:person, :users => [@other_user])
+    reputation  = FactoryGirl.create(:reputation_rating, :person_id => @person.id)
+    @item        = FactoryGirl.create(:item, :owner => @person)
+    @other_item  = FactoryGirl.create(:item, :owner => @other_person)
+    @village = FactoryGirl.create(:village)
   end
 end
 

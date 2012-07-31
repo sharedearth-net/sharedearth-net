@@ -54,13 +54,13 @@ describe FbService, ".people_from_fb_friends" do
 
   let(:fb_friends) { [first_fb_friend, second_fb_friend] }
 
-  let(:first_person) { Factory(:person) }
+  let(:first_person) { FactoryGirl.create(:person) }
 
-  let(:second_person) { Factory(:person) }
+  let(:second_person) { FactoryGirl.create(:person) }
 
   before :each do
-    first_fb_friend.stub(:identifier).and_return(first_person.user.uid)
-    second_fb_friend.stub(:identifier).and_return(second_person.user.uid)
+    first_fb_friend.stub(:identifier).and_return(first_person.users.first.uid)
+    second_fb_friend.stub(:identifier).and_return(second_person.users.first.uid)
   end
 
   it "should return a list of people based on the provided fb friend list" do
@@ -81,19 +81,19 @@ describe FbService, ".get_my_friends" do
 
   let(:fb_friends) { [first_fb_friend, second_fb_friend, third_fb_friend, forth_fb_friend] }
 
-  let(:jake) { Factory(:person, :name => 'jake') }
+  let(:jake) { FactoryGirl.create(:person, :name => 'jake') }
 
-  let(:joseph) { Factory(:person, :name => 'joseph') }
+  let(:joseph) { FactoryGirl.create(:person, :name => 'joseph') }
 
-  let(:alex) { Factory(:person, :name => 'alex') }
+  let(:alex) { FactoryGirl.create(:person, :name => 'alex') }
 
-  let(:bill) { Factory(:person, :name => 'bill', :authorised_account => false) }
+  let(:bill) { FactoryGirl.create(:person, :name => 'bill', :authorised_account => false) }
 
   before :each do
-    first_fb_friend.stub(:identifier).and_return(jake.user.uid)
-    second_fb_friend.stub(:identifier).and_return(joseph.user.uid)
-    third_fb_friend.stub(:identifier).and_return(bill.user.uid)
-    forth_fb_friend.stub(:identifier).and_return(alex.user.uid)
+    first_fb_friend.stub(:identifier).and_return(jake.users.first.uid)
+    second_fb_friend.stub(:identifier).and_return(joseph.users.first.uid)
+    third_fb_friend.stub(:identifier).and_return(bill.users.first.uid)
+    forth_fb_friend.stub(:identifier).and_return(alex.users.first.uid)
     FbService.stub(:fb_friends_from).and_return(fb_friends)
   end
 
@@ -110,10 +110,10 @@ describe FbService, ".post_on_my_wall" do
 
   let(:fb_friends) { [first_fb_friend, second_fb_friend] }
 
-  let(:first_person) { Factory(:person) }
+  let(:first_person) { FactoryGirl.create(:person) }
 
-  let(:second_person) { Factory(:person) }
-  let(:item) {Factory(:item)}
+  let(:second_person) { FactoryGirl.create(:person) }
+  let(:item) {FactoryGirl.create(:item)}
 
 
   it "should post on facebook wall" do

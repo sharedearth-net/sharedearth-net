@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Feedback, "validations" do
   let(:long_feedback_note) { 'd' * 401 } 
 
-  let(:some_feedback)  { Factory(:feedback) }
+  let(:some_feedback)  { FactoryGirl.create(:feedback) }
 
   it "should not be valid if the feedback note is too long" do
     some_feedback.stub(:neutral_or_negative?).and_return(true)

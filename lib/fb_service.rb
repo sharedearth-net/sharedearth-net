@@ -9,17 +9,17 @@ module FbService
 
   def self.people_from_fb_friends(fb_friends)
     friends_identifiers =  fb_friends.empty? ? [] : fb_friends.collect(&:identifier)
-    Person.joins(:user).where('users.uid' => friends_identifiers)
+    Person.joins(:users).where('users.uid' => friends_identifiers, 'users.provider' => 'facebook')
   end
 
   def self.get_my_friends(token)
     friends_list = fb_friends_from(token)
-    people_from_fb_friends(friends_list).authorized.order(:name)
+    people_from_fb_friends(friends_list).authorized.order('people.name')
   end
 
   def self.search_fb_friends(token, search_term)
     search_term.empty? ? [] : get_my_friends(token).
-                              where("UPPER(name) LIKE UPPER(?)", "%#{search_term}%")
+                              where("UPPER(people.name) LIKE UPPER(?)", "%#{search_term}%")
   end
 
   def self.post_on_my_wall(token, msg, link = '', options = {})

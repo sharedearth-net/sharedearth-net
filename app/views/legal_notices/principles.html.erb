@@ -65,16 +65,18 @@ end %>
             <br>
 		</h2>
 
-		<% if !current_user.nil? -%>
- 		  <% if !current_user.person.accepted_pp? && current_user.person.authorised_account && current_user.person.accepted_tr? && current_user.person.accepted_tc?-%>
+		<% if !current_user.nil? %>
+ 		  <% if !current_user.person.accepted_pp? && (current_user.person.authorised_account || Settings.invitations != 'true') && current_user.person.accepted_tr? && current_user.person.accepted_tc? %>
 		    <div class="buttons-holder">
 			    <ul class="clearfix">
 				    <li>
               <%= form_tag('/legal_notices/accept_pp', :method => :put)  do -%>
-								<div class="post-to-wall">
-									<%= check_box_tag 'facebook', '1', true %>
-									<label for="facebook">Post on my Facebook wall that I've connected to sharedearth.net</label>
-								</div> 
+                <% if current_user.from_facebook? %>
+								  <div class="post-to-wall">
+									  <%= check_box_tag 'facebook', '1', true %>
+									  <label for="facebook">Post on my Facebook wall that I've connected to sharedearth.net</label>
+								  </div>
+								<% end %>
 								<div><%= submit_tag "Connect" %></div>
 							<% end -%>
 					    <%#= link_to 'Connect', accept_pp_terms_path, :method => 'put', :class => 'positive', :id => 'connect' %>

@@ -60,11 +60,25 @@ class ApplicationController < ActionController::Base
           not current_person.accepted_tr? or
           not current_person.accepted_pp?
       redirect_to next_policy_path
+    elsif current_user.provider == "email_and_password" && !current_user.verified_email?
+      redirect_to please_activate_email_user_path(current_user)
     elsif not session[:fb_drop_url].nil?
       url = session[:fb_drop_url]
       url = new_item_path if url == items_path
       session[:fb_drop_url] = nil
       redirect_to url
+    end
+
+    if current_person && !response_body
+      if current_person.waiting_for_new_email_confirmation?
+        if params[:controller] != 'people' || !%w{please_confirm_email_changing update edit}.include?(params[:action])
+          redirect_to edit_person_path(current_person), :alert => I18n.t('messages.people.confirm_new_email')
+          return false
+        end
+      end
+      if !current_person.has_reviewed_profile? && (params[:controller] != 'people' || !%w{update edit}.include?(params[:action]))
+        redirect_to edit_person_path(current_person)
+      end
     end
   end
 
@@ -105,11 +119,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
-
   #Error 501
   def generic_error(exception, message = "OK that didn't work. Try something else.")
-	notify_airbrake(exception)
+    notify_airbrake(exception) if defined?(Airbrake)
+
+    Rails.logger.error "#{exception.class} (#{exception.message})"
+    exception.backtrace[0..10].each do |line|
+      Rails.logger.error "    " + line
+    end
+
     respond_to do |format|
       format.html {render_501}
       format.json do

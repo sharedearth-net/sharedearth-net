@@ -1,0 +1,10 @@
+<h1>Please confirm your email</h1>
+
+<p>
+  Click this link or copy it to browser
+  <%= link_to confirm_user_url(:id => @user.id, :code => @user.email_confirmation_code), confirm_user_url(:id => @user.id, :code => @user.email_confirmation_code) %>
+</p>
+
+<p>
+  sharedearth.net team.
+</p>

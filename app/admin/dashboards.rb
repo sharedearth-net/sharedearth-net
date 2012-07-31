@@ -1,4 +1,4 @@
-ActiveAdmin::Dashboards.build do
+ActiveAdmin.register_page "Dashboard" do
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
@@ -32,35 +32,45 @@ ActiveAdmin::Dashboards.build do
   #   section "Recent User", :priority => 1
   #
   # Will render the "Recent Users" then the "Recent Posts" sections on the dashboard.
-  
-  section "Settings" do
-    ul do
-      render 'settings' # => this will render /app/views/admin/dashboard/_settings.html.erb
+  content :title => "Dashboard" do
+
+    div :class => "blank_slate_container", :id => "dashboard_default_message" do
+      span :class => "blank_slate" do
+        span "Welcome to Active Admin. This is the default dashboard page."
+        small "To add dashboard sections, checkout 'app/admin/dashboards.rb'"
+      end
+    end
+    
+    columns do
+      if ActiveRecord::Base.connection.table_exists?('settings') && Settings.invitations.to_s == 'true'
+        column do
+          panel "Send an invitation via email" do
+             ul do
+               render 'invite'
+             end
+          end
+        end
+      end
+
+      column do
+        panel "Settings" do
+          ul do
+            render 'settings' # => this will render /app/views/admin/dashboard/_settings.html.erb
+          end
+        end
+
+        panel "New 10 Users" do
+          ul do
+            'Feature coming soon'
+          end
+        end
+
+        panel "Top 10 by activity" do
+          ul do
+            'Feature coming soon'
+          end
+        end
+      end
     end
   end
-  
-  section "New 10 Users" do
-       ul do
-         'Feature coming soon'
-       end
-  end
-  
-  section "Top 10 by activity" do
-       ul do
-         'Feature coming soon'
-       end
-  end
-
-  #The only way to make this work on clean install
-  if ActiveRecord::Base.connection.table_exists? 'settings' 
-		if Settings.invitations.to_s == 'true'
-		  section "Send an invitation via email" do
-		     ul do
-		       render 'invite'
-		     end
-		  end
-		end
-  end
-  
-
 end

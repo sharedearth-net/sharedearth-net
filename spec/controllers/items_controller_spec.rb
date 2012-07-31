@@ -172,7 +172,7 @@ describe ItemsController do
     describe "POST create" do
       describe "with valid params" do
         before :each do
-          new_rep_rating = Factory(:reputation_rating)
+          new_rep_rating = FactoryGirl.create(:reputation_rating)
           signedin_user.person.should_receive(:reputation_rating).and_return(new_rep_rating)
           signedin_user.person.should_receive(:items).and_return([mock_item])
         end
@@ -512,7 +512,7 @@ describe ItemsController do
 
     describe "share mine" do
       it "should add item successfully and redirect to edit item path for non generic items" do
-        existing_item = Factory.build(:item, :name => "some name", :purpose => Item::PURPOSE_SHAREAGE)
+        existing_item = FactoryGirl.build(:item, :name => "some name", :purpose => Item::PURPOSE_SHAREAGE)
         Item.stub(:find_by_id).with("37") { existing_item }
         Item.should_receive(:quick_add).with(existing_item.item_type, signedin_user.person, Item::PURPOSE_SHARE).and_return(item_one)
         xhr :post, :share_mine, :id => "37"
@@ -521,7 +521,7 @@ describe ItemsController do
       end
 
       it "should add item successfully and stay on same page for generic items" do
-          existing_item = Factory.build(:item, :name => nil, :purpose => Item::PURPOSE_SHAREAGE)
+          existing_item = FactoryGirl.build(:item, :name => nil, :purpose => Item::PURPOSE_SHAREAGE)
           Item.stub(:find_by_id).with("37") {existing_item}
           Item.should_receive(:quick_add).with(existing_item.item_type, signedin_user.person, Item::PURPOSE_SHARE).and_return(item_one)
           xhr :post, :share_mine, :id => "37"
