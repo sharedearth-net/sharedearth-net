@@ -3,9 +3,9 @@ require 'spec_helper'
 describe FbFriendsController do
   render_views
 
-  let(:signed_user) { Factory(:person).user }
+  let(:signed_user) { FactoryGirl.create(:user, :person => FactoryGirl.create(:person)) } #FactoryGirl.create(:person, :users => [FactoryGirl.create(:user)]).users.first }
 
-  let(:juan) { Factory(:person) }
+  let(:juan) { FactoryGirl.create(:person, :users => [signed_user]) }
 
   before :each do
     sign_in_as_user(signed_user)
@@ -28,11 +28,11 @@ describe FbFriendsController do
   end
 
   describe "GET 'search'" do
-    let(:maria)     { Factory(:person, :name => 'Maria') }
+    let(:maria)     { FactoryGirl.create(:person, :name => 'Maria') }
 
-    let(:marceline) { Factory(:person, :name => 'Marceline') }
+    let(:marceline) { FactoryGirl.create(:person, :name => 'Marceline') }
 
-    let(:pedro)     { Factory(:person, :name => 'Pedro') }
+    let(:pedro)     { FactoryGirl.create(:person, :name => 'Pedro') }
 
     before :each do
       FbService.stub(:search_fb_friends).and_return([marceline])

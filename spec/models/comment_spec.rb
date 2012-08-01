@@ -6,8 +6,8 @@ describe Comment do
 
     describe "#default scope" do
       before :each do
-        @first_comment  = Factory.create(:comment, :created_at => Time.now)
-        @second_comment = Factory.create(:comment, :created_at => (Time.now + 2.days))
+        @first_comment  = FactoryGirl.create(:comment, :created_at => Time.now)
+        @second_comment = FactoryGirl.create(:comment, :created_at => (Time.now + 2.days))
       end
       
       it "should return a list of comments ordered by creation date" do

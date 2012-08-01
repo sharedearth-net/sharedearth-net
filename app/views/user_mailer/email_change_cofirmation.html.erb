@@ -1,0 +1,16 @@
+<h1>Please confirm your email changing</h1>
+
+<p>
+  Old email: <b><%= @person.email %></b><br/>
+  new email: <b><%= @person.new_email %></b>
+</p>
+
+<p>
+  Click this link or copy it to browser
+  <% url = confirm_email_changing_person_url(@person, :code => @person.email_change_confirmation_code) %>
+  <%= link_to url, url %>
+</p>
+
+<p>
+  sharedearth.net team.
+</p>

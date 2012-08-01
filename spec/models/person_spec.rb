@@ -15,15 +15,13 @@ describe Person do
 
   it { should have_db_column(:last_notification_email).of_type(:datetime) }
 
-  it { should belong_to(:user) }
+  it { should have_many(:users) }
 
   it { should have_many(:items) }
 
   it { should have_many(:item_requests) }
 
   it { should have_many(:item_gifts) }
-
-  it { should validate_presence_of(:user_id) }
 
   it { should validate_presence_of(:name) }
 
@@ -36,18 +34,20 @@ describe Person do
   it { should_not allow_value(long_description).for(:description) }
 
   it "should check if it belongs to user" do
-    person = Person.new(:user => user)
+    person = Person.new(:users => [user])
+    user.stub(:person).and_return(person)
     person.belongs_to?(user).should be_true
   end
 
   it "should check if it belongs to user (negative case)" do
     some_other_user = mock_model(User)
-    person = Person.new(:user => user)
+    some_other_user.stub(:person).and_return(nil)
+    person = Person.new(:users => [user])
     person.belongs_to?(some_other_user).should be_false
   end
 
   it "should have a 'has_reviewed_profile' flag with false as default" do
-    person = Factory(:person)
+    person = FactoryGirl.create(:person)
     person.has_reviewed_profile.should be_false
   end
 end
@@ -84,7 +84,7 @@ describe Person, ".avatar" do
 
   it "should return user's avatar" do
     user = mock_model(User, :avatar => "avatar1.jpg")
-    person = Person.new(:user => user)
+    person = Person.new(:users => [user])
     person.avatar.should eql(user.avatar)
   end
 
@@ -95,8 +95,8 @@ describe Person, ".trusted_network_count(other_person)" do
   it "should return user's number friends of friends" do
     first_user = mock_model(User)
     second_user = mock_model(User)
-    first_person = Person.new(:user => first_user)
-    second_person = Person.new(:user => second_user)
+    first_person = Person.new(:users => [first_user])
+    second_person = Person.new(:users => [second_user])
     #TO DO: Finish this test, create more people, and check network count
   end
 
@@ -107,8 +107,8 @@ describe Person, ".trusts_me_count" do
   it "should return number of users who trusts current user" do
     first_user = mock_model(User)
     second_user = mock_model(User)
-    first_person = Person.new(:user => first_user)
-    second_person = Person.new(:user => second_user)
+    first_person = Person.new(:users => [first_user])
+    second_person = Person.new(:users => [second_user])
     #TO DO: Finish this test, create more people, and check trusts me count
   end
 
@@ -126,8 +126,8 @@ describe Person, ".request_trusted_relationship" do
 
 
   it "should create only one person network request on mulitple request attempts" do
-    requester = Factory(:person)
-    requested = Factory(:person)
+    requester = FactoryGirl.create(:person)
+    requested = FactoryGirl.create(:person)
 
     expect {
       requested.request_trusted_relationship(requester)
@@ -176,13 +176,13 @@ end
 
 
 describe Person, ".network_activity" do
-  let(:person) { Factory(:person) }
+  let(:person) { FactoryGirl.create(:person) }
 
-  let(:maria)  { Factory(:person) }
+  let(:maria)  { FactoryGirl.create(:person) }
 
-  let(:mr_t) { Factory(:person) }
+  let(:mr_t) { FactoryGirl.create(:person) }
 
-  let(:human_network) { Factory(:human_network, :entity => person, :person_id => maria.id)}
+  let(:human_network) { FactoryGirl.create(:human_network, :entity => person, :person_id => maria.id)}
 
   let(:my_event_displays) do
     FactoryGirl.create_list(:event_display, 5, :person_id => person.id, :event_log_id => 1)
@@ -228,9 +228,9 @@ describe Person, ".network_activity" do
 end
 
 describe Person, ".trusted_friends_items" do
-  let(:juan) { Factory(:person) }
+  let(:juan) { FactoryGirl.create(:person) }
 
-  let(:golbert) { Factory(:person) }
+  let(:golbert) { FactoryGirl.create(:person) }
 
   let(:golbert_items) { FactoryGirl.create_list(:item, 5, :owner => golbert) }
 
@@ -247,20 +247,20 @@ end
 
 describe Person, ".accepted_tc?" do
   it "should return false if the accepted_tc flag is set to false" do
-    person = Factory(:person)
+    person = FactoryGirl.create(:person)
     person.update_attributes(:accepted_tc => false)
     person.accepted_tc?.should be_false
   end
 
   it "should return false if the tc_version is not the same as the one in the app" do
-    person = Factory(:person)
+    person = FactoryGirl.create(:person)
     person.update_attributes(:accepted_tc => true, :tc_version => 1)
     TC_VERSION = 2
     person.accepted_tc?.should be_false
   end
 
   it "should return true otherwise" do
-    person = Factory(:person)
+    person = FactoryGirl.create(:person)
     person.update_attributes(:accepted_tc => true, :tc_version => TC_VERSION)
     person.accepted_tc?.should be_true
   end
@@ -268,13 +268,13 @@ end
 
 describe Person, ".accepted_tr?" do
   it "should return false if the accepted_tr flag is set to false" do
-    person = Factory(:person)
+    person = FactoryGirl.create(:person)
     person.update_attributes(:accepted_tr => false)
     person.accepted_tr?.should be_false
   end
 
   it "should return true otherwise" do
-    person = Factory(:person)
+    person = FactoryGirl.create(:person)
     person.update_attributes(:accepted_tc => true)
     person.accepted_tr?.should be_true
   end
@@ -282,43 +282,43 @@ end
 
 describe "facebook friends" do
   it "should return facebook friends for the person" do
-    person = Factory(:person)
-    Factory :facebook_friend_network, :entity => person
+    person = FactoryGirl.create(:person)
+    FactoryGirl.create :facebook_friend_network, :entity => person
     person.facebook_friends.count.should == 1
   end
 end
 
 describe Person, ".accepted_pp?" do
   it "should return false if the accepted_pp flag is set to false" do
-    person = Factory(:person)
+    person = FactoryGirl.create(:person)
     person.update_attributes(:accepted_pp => false)
     person.accepted_pp?.should be_false
   end
 
   it "should return false if the tc_version is not the same as the one in the app" do
-    person = Factory(:person)
+    person = FactoryGirl.create(:person)
     person.update_attributes(:accepted_pp => true, :pp_version => 1)
     PP_VERSION = 2
     person.accepted_pp?.should be_false
   end
 
   it "should return true otherwise" do
-    person = Factory(:person)
+    person = FactoryGirl.create(:person)
     person.update_attributes(:accepted_pp => true, :pp_version => PP_VERSION)
     person.accepted_pp?.should be_true
   end
   describe Person do
     describe "#notification_candidate scope" do
       before :each do
-        @first_person = Factory(:person, :authorised_account => false)
-        @second_person = Factory(:person)
-        @third_person = Factory(:person, :email_notification_count => 1, :last_notification_email => Time.now - 60.hours )
-        @forth_person = Factory(:person, :email_notification_count => 3, :last_notification_email => Time.now - 120.hours )
-        @fifth_person = Factory(:person, :email_notification_count => 1, :last_notification_email => Time.now - 80.hours )
-        @sixth_person = Factory(:person, :email_notification_count => 3, :last_notification_email => Time.now - 170.hours )
-        @seventh_person = Factory(:person, :email_notification_count => 5, :last_notification_email => Time.now - 120.hours )
-        @eight_person = Factory(:person, :email_notification_count => 3, :last_notification_email => Time.now - 60.hours )
-        @nine_person = Factory(:person, :email_notification_count => 2, :last_notification_email => Time.now - 120.hours )
+        @first_person = FactoryGirl.create(:person, :authorised_account => false)
+        @second_person = FactoryGirl.create(:person)
+        @third_person = FactoryGirl.create(:person, :email_notification_count => 1, :last_notification_email => Time.now - 60.hours )
+        @forth_person = FactoryGirl.create(:person, :email_notification_count => 3, :last_notification_email => Time.now - 120.hours )
+        @fifth_person = FactoryGirl.create(:person, :email_notification_count => 1, :last_notification_email => Time.now - 80.hours )
+        @sixth_person = FactoryGirl.create(:person, :email_notification_count => 3, :last_notification_email => Time.now - 170.hours )
+        @seventh_person = FactoryGirl.create(:person, :email_notification_count => 5, :last_notification_email => Time.now - 120.hours )
+        @eight_person = FactoryGirl.create(:person, :email_notification_count => 3, :last_notification_email => Time.now - 60.hours )
+        @nine_person = FactoryGirl.create(:person, :email_notification_count => 2, :last_notification_email => Time.now - 120.hours )
       end
 
       it "should return only authorised users, when users are inactive with certain conditions" do
@@ -350,8 +350,8 @@ describe Person, ".accepted_pp?" do
 
       describe "Only active users" do
         before do
-          @active_user = Factory(:user)
-          @unactive_user = Factory(:user, :last_activity => Time.now - 13.hours)
+          @active_user = FactoryGirl.create(:user)
+          @unactive_user = FactoryGirl.create(:user, :last_activity => Time.now - 13.hours)
         end
 
         it "person scope should return only unactive user" do
@@ -371,22 +371,22 @@ describe Person, ".accepted_pp?" do
   
   describe "news_feed" do
     it "should find top weighted events and create event cache" do
-      person_1 = Factory :person
-      friend_1 = Factory :person
-      friend_2 = Factory :person
-      village_1 = Factory :village
-      event_log_1 = Factory :event_log
-      event_log_2 = Factory :event_log
+      person_1 = FactoryGirl.create :person
+      friend_1 = FactoryGirl.create :person
+      friend_2 = FactoryGirl.create :person
+      village_1 = FactoryGirl.create :village
+      event_log_1 = FactoryGirl.create :event_log
+      event_log_2 = FactoryGirl.create :event_log
       
-      entity = Factory :event_entity 
+      entity = FactoryGirl.create :event_entity 
       
-      Factory :event_entity, :entity_id => friend_1.id, :entity_type => "Person", :event_log_id => event_log_1.id
-      Factory :event_entity, :entity_id => village_1.id, :entity_type => "Village", :event_log_id => event_log_1.id
-      Factory :event_entity, :entity_id => friend_2.id, :entity_type => "Person", :event_log_id => event_log_2.id
+      FactoryGirl.create :event_entity, :entity_id => friend_1.id, :entity_type => "Person", :event_log_id => event_log_1.id
+      FactoryGirl.create :event_entity, :entity_id => village_1.id, :entity_type => "Village", :event_log_id => event_log_1.id
+      FactoryGirl.create :event_entity, :entity_id => friend_2.id, :entity_type => "Person", :event_log_id => event_log_2.id
       
-      Factory :human_network, :person => person_1, :entity_id => friend_1.id , :entity_type => "Person", :network_type => "TrustedNetwork"
-      Factory :human_network, :person => person_1, :entity_id => village_1.id , :entity_type => "Village", :network_type => "Member"
-      Factory :human_network, :person => person_1, :entity_id => friend_2.id , :entity_type => "Person", :network_type => "ExtendedNetwork"
+      FactoryGirl.create :human_network, :person => person_1, :entity_id => friend_1.id , :entity_type => "Person", :network_type => "TrustedNetwork"
+      FactoryGirl.create :human_network, :person => person_1, :entity_id => village_1.id , :entity_type => "Village", :network_type => "Member"
+      FactoryGirl.create :human_network, :person => person_1, :entity_id => friend_2.id , :entity_type => "Person", :network_type => "ExtendedNetwork"
       
       person_1.news_feed
       

@@ -7,7 +7,7 @@ describe User do
     @user = User.new
   end
 
-  it { should have_one(:person) }
+  it { should belong_to(:person) }
 
   it "should be valid" do
     @user.attributes = valid_user_attributes
@@ -77,22 +77,22 @@ describe User, ".avatar" do
 end
 
 describe User, ".inform_mutual_friends" do
-  let(:juan)  { Factory(:person) }
+  let(:juan)  { FactoryGirl.create(:person) }
 
-  let(:maria) { Factory(:person) }
+  let(:maria) { FactoryGirl.create(:person) }
 
-  let(:pedro) { Factory(:person) }
+  let(:pedro) { FactoryGirl.create(:person) }
 
-  let(:jose) { Factory(:person, :authorised_account => false) }
+  let(:jose) { FactoryGirl.create(:person, :authorised_account => false) }
 
   let(:token) { '123abc' }
 
   before :each do
     # I hate using mocks, but it seems there's no other way around this =/
-    fb_pedro_user = mock('fb_pedro_user', { :identifier => pedro.user.uid })
-    fb_juan_user  = mock('fb_juan_user',  { :identifier => juan.user.uid })
-    fb_maria_user = mock('fb_maria_user', { :identifier => maria.user.uid })
-    fb_jose_user = mock('fb_jose_user',   { :identifier => jose.user.uid })
+    fb_pedro_user = mock('fb_pedro_user', { :identifier => pedro.users.first.uid })
+    fb_juan_user  = mock('fb_juan_user',  { :identifier => juan.users.first.uid })
+    fb_maria_user = mock('fb_maria_user', { :identifier => maria.users.first.uid })
+    fb_jose_user = mock('fb_jose_user',   { :identifier => jose.users.first.uid })
 
     fb_registered_user = mock('fb_registered_user')
     fb_registered_user.stub(:friends).and_return([fb_pedro_user, fb_maria_user, fb_jose_user ])
@@ -102,12 +102,12 @@ describe User, ".inform_mutual_friends" do
 
   context "Authorized User" do
     before :each do
-      juan.user.inform_mutural_friends(token)
+      juan.users.first.inform_mutural_friends(token)
     end
 
     it "should create only one Event Log that relates to this event" do
       expect {
-        juan.user.inform_mutural_friends(token)
+        juan.users.first.inform_mutural_friends(token)
       }.to change { EventLog.count }.by(1)
     end
 
@@ -126,8 +126,8 @@ describe "Scopes" do
 
     describe "#unactive scope" do
       before :each do
-        @first_user  = Factory.create(:user, :last_activity => Time.now)
-        @second_user = Factory.create(:user, :last_activity => (Time.now - 13.hours))
+        @first_user  = FactoryGirl.create(:user, :last_activity => Time.now)
+        @second_user = FactoryGirl.create(:user, :last_activity => (Time.now - 13.hours))
       end
 
       it "should return a list of comments ordered by creation date" do

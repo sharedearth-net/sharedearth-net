@@ -8,7 +8,7 @@ class Person < ActiveRecord::Base
   has_human_network :facebook_friend, :class_name => "FacebookFriend"
   has_human_network :member, :class_name => "Member"
 
-  belongs_to :user
+  has_many :users
   has_many :items, :as => :owner
   has_many :item_requests, :as => :requester
   has_many :item_gifts, :as => :gifter, :class_name => "ItemRequest"
@@ -34,14 +34,17 @@ class Person < ActiveRecord::Base
   has_many :invitations
   has_one :reputation_rating
 
-  validates_length_of :name, :maximum => 20
+  validates :name, :presence => true, :length => { :maximum => 20 }
   validates :email, :confirmation => true
   validates_length_of :location, :maximum => 42
   validates_length_of :description, :maximum => 400
-  validates_presence_of :user_id, :name
-	validates :email, :presence => true, :email => true
+  validates :email, :presence => true, :email => true
 
   after_create :create_entity_for_person
+  after_create :create_staring_reputation_rating!
+
+  before_update :handle_email_changing
+  after_save :send_email_changing_confirmation, :if => :new_email_changed?
 
   #default_scope where(:authorised_account => true) if INVITATION_SYS_ON # Turning this on would couse problems
   scope :authorized, where(:authorised_account => true)
@@ -53,15 +56,60 @@ class Person < ActiveRecord::Base
   scope :exclude_users, lambda { |entity| where("id not in (?)", entity)}
   scope :include_users, lambda { |entity| where("id in (?)", entity)}
 
-	def recent_activity_logs(min_count = 10)
-		logs = activity_logs.where(:read => false).order("#{ActivityLog.table_name}.created_at DESC")
-		if logs.count < min_count
-			logs = activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(min_count)
-		end
-		logs
-	end
+  def facebook_user
+    users.where(:provider => :facebook).first
+  end
 
-	def trusted_network_activity
+  def create_staring_reputation_rating!
+    create_reputation_rating(:gift_actions  => 0,:distinct_people => 0,
+                             :total_actions => 0, :positive_feedback => 0,
+                             :negative_feedback => 0, :neutral_feedback => 0,
+                             :requests_received => 0, :requests_answered => 0,
+                             :trusted_network_count => 0,  :activity_level => 0)
+  end
+
+  def recent_activity_logs(min_count = 10)
+    logs = activity_logs.where(:read => false).order("#{ActivityLog.table_name}.created_at DESC")
+    if logs.count < min_count
+      logs = activity_logs.order("#{ActivityLog.table_name}.created_at DESC").limit(min_count)
+    end
+    logs
+  end
+
+  def handle_email_changing
+    if email_changed?
+      self.new_email = p.email
+      self.email = p.email_was
+    end
+
+    if new_email == email
+      self.new_email = nil
+    end
+    true
+  end
+
+  def send_email_changing_confirmation
+    UserMailer.email_change_cofirmation(self).deliver! if new_email.present?
+  end
+
+  def email_change_confirmation_code
+    Digest::SHA2.hexdigest("#{email}--#{new_email}")
+  end
+
+  def waiting_for_new_email_confirmation?
+    new_email.present?
+  end
+
+  def verify_email_change!(code)
+    if code == email_change_confirmation_code
+      Person.update_all({:email => self.new_email, :new_email => nil}, :id => self.id)
+      true
+    else
+      false
+    end
+  end
+
+  def trusted_network_activity
     my_people_id = self.human_networks.trusted_personal_network.collect { |n| n.person_id }
     my_people_id << id
 
@@ -82,7 +130,7 @@ class Person < ActiveRecord::Base
   end
 
   def belongs_to?(some_user)
-    user == some_user
+    some_user.person == self
   end
 
   def trusts?(other_person)
@@ -100,7 +148,7 @@ class Person < ActiveRecord::Base
   end
 
   def has_email?
-  	self.email?
+    self.email?
   end
 
   def accept_tc!
@@ -133,7 +181,7 @@ class Person < ActiveRecord::Base
   end
 
   def has_reviewed_profile?
-  	self.has_reviewed_profile == true
+    self.has_reviewed_profile == true
   end
 
   def reviewed_profile!
@@ -154,7 +202,7 @@ class Person < ActiveRecord::Base
   end
 
   def self.search(search)
-		search.empty? ? '' : authorized.where("UPPER(name) LIKE UPPER(?)", "%#{search}%")
+    search.empty? ? '' : authorized.where("UPPER(name) LIKE UPPER(?)", "%#{search}%")
   end
 
   def searchable_core_of_friends
@@ -164,7 +212,7 @@ class Person < ActiveRecord::Base
   end
 
   def personal_network_friends
-		self.human_networks.map { |n| n.trusted_person }.uniq
+    self.human_networks.map { |n| n.trusted_person }.uniq
   end
 
   def trusted_friends
@@ -180,7 +228,7 @@ class Person < ActiveRecord::Base
   end
 
   def personal_network_items_count(type = nil)
-		items_count = 0
+    items_count = 0
     if type.nil?
       self.personal_network_friends.map{ |f| items_count += f.items.without_deleted.without_hidden.count }
     else
@@ -200,7 +248,7 @@ class Person < ActiveRecord::Base
   end
 
   def trusted_friends_items_count(type = nil)
-		items_count = 0
+    items_count = 0
     if type.nil?
       self.trusted_friends.map{ |f| items_count += f.items.without_deleted.without_hidden.count }
     else
@@ -264,7 +312,7 @@ class Person < ActiveRecord::Base
   end
 
   def avatar(avatar_size = nil)
-    self.user.avatar(avatar_size)
+    self.users.first.try(:avatar, avatar_size)
   end
 
   def first_name
@@ -324,7 +372,7 @@ class Person < ActiveRecord::Base
   def news_feed_cashe(event_log_ids)
     news_event_logs = event_log_ids.map{|e| e.event_log_id}
     event_displays = EventDisplay.find(:all, :conditions => ["type_id=? and person_id=? and event_log_id not in (?)",
-    		                                     EventDisplay::DASHBOARD_FEED, self.id, news_event_logs], :order => 'event_log_id DESC').take(25)
+                                             EventDisplay::DASHBOARD_FEED, self.id, news_event_logs], :order => 'event_log_id DESC').take(25)
     news_cashe_event_logs = event_displays.map{|e| e.event_log_id}
     EventLog.find(:all, :conditions => ["id IN (?)", news_cashe_event_logs], :order => 'created_at DESC')
   end
@@ -428,7 +476,7 @@ class Person < ActiveRecord::Base
 
   def increase_email_notification_count!
      self.email_notification_count += 1
-  	 save!
+     save!
   end
 
   def log_email_notification_time!

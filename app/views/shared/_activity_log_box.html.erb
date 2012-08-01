@@ -2,7 +2,6 @@
   <%= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb" %>
 
   <div class="inner-content">
-    <%= render :partial => "shared/activity_log_entry.html.erb", 
-               :locals  => { :activity_log => activity_log } %>
+    <%= render "shared/activity_log_entry", :activity_log => activity_log %>
   </div>
 </li>

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe FacebookFriendJob do
   it "should create bidirectional relationship for facebook friends of current user" do
-    user = Factory :user, :person => Factory(:person)
-    friend = Factory :person
+    user = FactoryGirl.create(:user, :person => FactoryGirl.create(:person))
+    friend = FactoryGirl.create(:person)
     job = FacebookFriendJob.new
     job.user= user
     job.friends= [friend]
@@ -14,9 +14,9 @@ describe FacebookFriendJob do
   end
   
   it "should update facebook friends job status if already ran once for user" do
-    user = Factory :user, :person => Factory(:person)
-    Factory :facebook_friends_job, :user => user, :updated_at => 8.days.ago, :status => "Failure"
-    friend = Factory :person
+    user = FactoryGirl.create(:user, :person => FactoryGirl.create(:person))
+    FactoryGirl.create(:facebook_friends_job, :user => user, :updated_at => 8.days.ago, :status => "Failure")
+    friend = FactoryGirl.create(:person)
     job = FacebookFriendJob.new
     job.user=user
     job.friends=[friend]

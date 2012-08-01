@@ -2,45 +2,45 @@ require 'spec_helper'
 
 module ItemRequestSpecHelper
   def setup_item_request_helper_environment
-    @requester_user = Factory(:user)
-    @requester      = Factory(:person, :user => @requester_user)
-    reputation  = Factory(:reputation_rating, :person_id => @requester.id)
-    @gifter_user = Factory(:user, :uid => '111')
-    @gifter      = Factory(:person, :user => @gifter_user)
-    reputation  = Factory(:reputation_rating, :person_id => @gifter.id)
-    @item        = Factory(:item, :owner => @gifter)
-    @item_request = Factory(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
+    @requester_user = FactoryGirl.create(:user)
+    @requester      = FactoryGirl.create(:person, :users => [@requester_user])
+    reputation  = FactoryGirl.create(:reputation_rating, :person_id => @requester.id)
+    @gifter_user = FactoryGirl.create(:user, :uid => '111')
+    @gifter      = FactoryGirl.create(:person, :users => [@gifter_user])
+    reputation  = FactoryGirl.create(:reputation_rating, :person_id => @gifter.id)
+    @item        = FactoryGirl.create(:item, :owner => @gifter)
+    @item_request = FactoryGirl.create(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
   end
 
   def setup_many_item_requests
-    requester      = Factory(:person)
-    requester1      = Factory(:person)
-    gifter      = Factory(:person)
-    item        = Factory(:item, :owner => gifter)
-    @ir1 = Factory(:item_request, :requester => requester, :gifter => gifter, :item => item, :status => ItemRequest::STATUS_REQUESTED)
-    @ir2 = Factory(:item_request, :requester => requester1, :gifter => gifter, :item => item, :status => ItemRequest::STATUS_REQUESTED)
+    requester      = FactoryGirl.create(:person)
+    requester1      = FactoryGirl.create(:person)
+    gifter      = FactoryGirl.create(:person)
+    item        = FactoryGirl.create(:item, :owner => gifter)
+    @ir1 = FactoryGirl.create(:item_request, :requester => requester, :gifter => gifter, :item => item, :status => ItemRequest::STATUS_REQUESTED)
+    @ir2 = FactoryGirl.create(:item_request, :requester => requester1, :gifter => gifter, :item => item, :status => ItemRequest::STATUS_REQUESTED)
   end
 
   def setup_shareage_environment
-    @requester_user = Factory(:user)
-    @requester      = Factory(:person, :user => @requester_user)
-    reputation  = Factory(:reputation_rating, :person_id => @requester.id)
-    @gifter_user = Factory(:user, :uid => '111')
-    @gifter      = Factory(:person, :user => @gifter_user)
-    reputation  = Factory(:reputation_rating, :person_id => @gifter.id)
-    @item        = Factory(:item, :owner => @gifter, :purpose => Item::PURPOSE_SHAREAGE)
-    @item_request = Factory(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
+    @requester_user = FactoryGirl.create(:user)
+    @requester      = FactoryGirl.create(:person, :users => [@requester_user])
+    reputation  = FactoryGirl.create(:reputation_rating, :person_id => @requester.id)
+    @gifter_user = FactoryGirl.create(:user, :uid => '111')
+    @gifter      = FactoryGirl.create(:person, :users => [@gifter_user])
+    reputation  = FactoryGirl.create(:reputation_rating, :person_id => @gifter.id)
+    @item        = FactoryGirl.create(:item, :owner => @gifter, :purpose => Item::PURPOSE_SHAREAGE)
+    @item_request = FactoryGirl.create(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
   end
 
   def setup_gift_environment
-    @requester_user = Factory(:user)
-    @requester      = Factory(:person, :user => @requester_user)
-    reputation  = Factory(:reputation_rating, :person_id => @requester.id)
-    @gifter_user = Factory(:user, :uid => '111')
-    @gifter      = Factory(:person, :user => @gifter_user)
-    reputation  = Factory(:reputation_rating, :person_id => @gifter.id)
-    @item        = Factory(:item, :owner => @gifter, :purpose => Item::PURPOSE_GIFT)
-    @item_request = Factory(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
+    @requester_user = FactoryGirl.create(:user)
+    @requester      = FactoryGirl.create(:person, :users => [@requester_user])
+    reputation  = FactoryGirl.create(:reputation_rating, :person_id => @requester.id)
+    @gifter_user = FactoryGirl.create(:user, :uid => '111')
+    @gifter      = FactoryGirl.create(:person, :users => [@gifter_user])
+    reputation  = FactoryGirl.create(:reputation_rating, :person_id => @gifter.id)
+    @item        = FactoryGirl.create(:item, :owner => @gifter, :purpose => Item::PURPOSE_GIFT)
+    @item_request = FactoryGirl.create(:item_request, :requester => @requester, :gifter => @gifter, :item => @item, :status => ItemRequest::STATUS_REQUESTED)
   end
 
   def delete_item_request_helper_environment

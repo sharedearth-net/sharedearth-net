@@ -25,11 +25,11 @@ module UserMocks
   
   def mock_person(stubs = {})
     defaults = {:authorised_account => true, :accepted_tc => true, :accepted_tr => true, :accepted_pp => true}
-    Factory(:person, defaults.merge(stubs))
+    FactoryGirl.create(:person, defaults.merge(stubs))
   end
 
   def mock_new_person(stubs = {})
     defaults = {:authorised_account => true, :accepted_tc => false, :accepted_tr => false, :accepted_pp => false}
-    Factory(:person, defaults.merge(stubs))
+    FactoryGirl.create(:person, defaults.merge(stubs))
   end
 end

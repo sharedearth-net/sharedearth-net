@@ -1,11 +1,27 @@
 class PeopleController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :get_person, :except => [:index]
+  before_filter :authenticate_user!, :except => :confirm_email_changing
+  before_filter :get_person, :except => [:index, :confirm_email_changing]
   before_filter :only_if_person_is_signed_in!, :only => [:edit, :update]
   before_filter :only_own_network!, :only => [:my_network]
 
-  def index
+  def confirm_email_changing
+    @person = Person.find(params[:id])
+    if @person.verify_email_change!(params[:code])
+      session[:user_id] || @person.user.first.id
+      redirect_to edit_person_path(@person), :notice => I18n.t('messages.people.email_changed')
+    else
+      redirect_to :root, :warning => I18n.t('messages.people.change_email_wrong')
+    end
+  end
 
+  def please_confirm_email_changing
+    if params[:resend]
+      @person.send_email_changing_confirmation
+      redirect_to please_confirm_email_changing_person_path(@person), :notice => "Message sent"
+    end
+  end
+
+  def index
     @people = current_user.person.trusted_friends
 
     respond_to do |format|
@@ -75,10 +91,10 @@ class PeopleController < ApplicationController
     case params[:type]
       when 'trusted'
         @items = @person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-        @events = current_user.trusted_network_activity.paginate(:page => params[:page], :per_page => 25)
+        @events = current_user.trusted_network_activity.page(params[:page]).per(25)
       else
         @items = @person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-        @events = current_user.network_activity.paginate(:page => params[:page], :per_page => 25)
+        @events = current_user.network_activity.page(params[:page]).per(25)
     end
   end
 
@@ -91,7 +107,13 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        format.html { redirect_to redirect_path }
+        format.html do
+          if @person.waiting_for_new_email_confirmation?
+            redirect_to please_confirm_email_changing_person_path(@person)
+          else
+            redirect_to redirect_path
+          end
+        end
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -116,10 +138,10 @@ class PeopleController < ApplicationController
   end
 
   def only_if_person_is_signed_in!
-    redirect_to(root_path, :alert => I18n.t('messages.you_cannot_edit_others')) and return unless @person.belongs_to? current_user
+    redirect_to(root_path, :alert => I18n.t('messages.you_cannot_edit_others')) and return unless current_user.person == @person
   end
 
   def only_own_network!
-    redirect_to(root_path, :alert => I18n.t('messages.people.only_own_network')) and return unless @person.belongs_to? current_user
+    redirect_to(root_path, :alert => I18n.t('messages.people.only_own_network')) and return unless current_user.person == @person
   end
 end

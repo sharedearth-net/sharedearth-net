@@ -1,14 +1,14 @@
 <noscript>
   <meta http-equiv="refresh" content="0;url=/no_javascript">
-</noscript>  
+</noscript>
 
-<%= stylesheet_link_tag :all %>
+<%= stylesheet_link_tag :'reset-min', :application, :main %>
 
-<%= javascript_include_tag 'dojo-release-1.6.1-src/dojo/dojo', :djConfig => 'parseOnLoad: true, isDebug: true' %>
-<%= javascript_include_tag :defaults %>
+<%= javascript_include_tag '/javascripts/dojo-release-1.6.1-src/dojo/dojo', :djConfig => 'parseOnLoad: true, isDebug: true' %>
+<%= javascript_include_tag :'jquery', :jquery_ujs, :application %>
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 <%= csrf_meta_tag %>
-<%= favicon_link_tag 'favicon.ico' %>
+<%= favicon_link_tag '/favicon.ico' %>
 
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 

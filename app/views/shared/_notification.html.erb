@@ -1,6 +1,6 @@
 <!-- Handle flash messages here as they are displayed in notification -->
 
-<% if flash.length > 0 %>
+<% if !flash.empty? %>
 	<script>
 	window.notificationTitle = window.notificationTitle || "Notice";
 	window.notificationMessage = window.notificationMessage || "";
@@ -11,6 +11,7 @@
 			# possible values include: flash-notice and flash-alert
 			# (CSS rules also allow flash-info - which is not used at the moment)
 		%>
+		window.notificationTitle = "<%= name.capitalize %>";
 		window.notificationMessage += "<%=raw escape_javascript( msg ) %><br \/>";
 	<% end %>
 
@@ -24,7 +25,7 @@
 		<tr id="notification-header">
 			<td>
 				<span id="notification-title"> This is test</span>
-				<img id="notification-close" src="/images/closelabel.png" style="float:right;">
+				<%= image_tag 'closelabel.png', :style => "float:right;", :id => "notification-close" %>
 			</td>
 		</tr>
 		<tr>
