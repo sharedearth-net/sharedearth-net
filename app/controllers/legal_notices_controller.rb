@@ -1,5 +1,6 @@
 class LegalNoticesController < ApplicationController
   layout :dynamic_layout
+  before_filter :check_pending_actions, :except => [:accept_legal_notice, :accept_pp]
 
   def index
   end
