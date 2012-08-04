@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_filter :check_pending_actions, :except => :destroy
 
   def new
     render :layout => request.xhr? ? "lightbox" : "welcome"

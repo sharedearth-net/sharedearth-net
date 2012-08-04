@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
   #before_filter :authenticate_user!, :only => [:purge]
+  before_filter :check_pending_actions, :except => :validate
   before_filter :allowed_to_invite?, :only => [:invite]
     
   def create    
