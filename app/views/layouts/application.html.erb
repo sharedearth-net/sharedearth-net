@@ -3,153 +3,83 @@
 <head>
   <title>sharedearth.net</title>
   <%= render :partial => "layouts/meta_header" %>
+    <script type="text/javascript">
+function settingPopup(){
+  $(".setting_popup").css("display","block");
+}
+</script>
 </head>
 
 <body>
-  <div id="container">
-
-    <div id="header" class="<%= yield(:hide_on_policy_class)%>">
-	   <div class="header-lhs">
-		  <%= link_to "sharedearth.net", dashboard_path, 
-                    :title => "sharedearth.net - trust. share. connect." %>
-       </div>
-
-			<div class="header-rhs" >
-				<div class="clearfix">
-					<div class="status-holder">
-						<ul>
-							<li class="feedback-rating">
-							  <% feedback_rating = current_user.person.reputation_rating.feedback_rating? if !current_user.nil?%>
-								<%= link_to !current_user.nil? ? (feedback_rating.nil? ? "n/a" : (feedback_rating.to_s) + "%") : "0%", "#", :title => "Positive Feedback Rating" %>
-							</li>
-							<li class="people-helped">
-  							<% if !current_user.nil? -%>
-  								<%= link_to current_user.person.reputation_rating.distinct_people_count.to_s, network_person_path(current_user.person), :title => "People Helped" %>
-  							<% else -%>
-    							<%= link_to "0", "#", :title => "People Helped" %>
-  							<% end -%>
-							</li>
-							<li class="giftactions">
-								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.gift_actions_count.to_s : "0", "#", :title => "Gift Actions" %>
-							</li>
-							<li class="giftact-rating">
-								<% if !current_user.nil? -%>
-									<%= link_to current_user.person.trusted_network_size, network_person_path(current_user.person), :title => "Number of people in your trusted network" %>
-								<% else -%>
-								  <%= link_to "0", "#", :title => "Number of people in your trusted network" %>
-								<% end -%>
-							  
-							</li>
-							<li class="activity-level">
-							<% if !current_user.nil? -%>
-							  <% current_user.person.reputation_rating.activity_level? %>
-							<% end -%>		  
-								<%= link_to !current_user.nil? ? current_user.person.reputation_rating.activity_level_count.to_s : "0", "#", :title => "Activity Level" %>
-							</li>
-						</ul>
-					</div>
-
-					<div class="logo-type-holder <%= yield(:hide_on_policy_class)%>">
-						<%= link_to "sharedearth.net", root_path, 
-                              :title => "sharedearth.net - trust. share. connect." %>
-					</div>
-
+  <wrapper>
+  <%if current_user %>
+    
+	<header>
+		<div class="header">
+			<div class="wid1000">
+				<div class="head_left fl">
+					<%=link_to "","/dashboard",:class=>"fl community_icon" %>
+					<span class="count">3</span>
+					<%=image_tag "line.png",:class=>"fl separation" %>
+					<%=link_to "Community","/network",:class=>"fl community_txt"%>
 				</div>
-
-				<div class="bar-holder">
-
-
-					<div class="bar-holder-rhs">
-						<ul>
-							<li>
-								<% if current_user %>
-								  	<%= link_to "disconnect", signout_path %>
-								<% end %>
-							</li>
-							<li>
-								<% if current_user %>
-									<%= link_to current_user.person.name, person_path(current_user.person) %>
-								<% else %>
-									<%= link_to "Sign in with Facebook", '/auth/facebook' %>
-								<% end %>
-							</li>
-
-						</ul>
+				<div class="fl counter_container">
+					<div class="fl icon_box mT10">
+						<span><%=current_user.person.trusted_network_size%></span>
+						<%=link_to (image_tag "first_menu.png"),network_person_path(current_user.person), :title => "Number of people in your trusted network" %>
 					</div>
-
-					<div class="search-holder clearfix">
-					  <%= form_tag search_index_path, :method => 'get' do %>
-					<div class="search-bg-holder-first clearfix">
-              			<div class="search-bg-holder-second clearfix">
-	                		<%= text_field_tag :search, params[:search] %>
-	                		<button type="submit" title="Search">Search</button>
-	              		</div>
+					<div class="fl icon_box mT10">
+						<span><%=current_user.person.reputation_rating.gift_actions_count.to_s%></span>
+						<%=image_tag "gift.png",:title => "Gift Actions"%>
 					</div>
-            <% end %>
+					<div class="fl icon_box mrT2">
+						<span><%=current_user.person.share_item%></span>
+						<%=image_tag "leaf.png",:class=>"pdL11"%>
 					</div>
-
-					<div class="bar-holder-home <%= yield(:hide_on_policy_class)%>">
-						<ul>				
-	                        <li>
-								<% if current_user %>
-							      <%= link_to image_tag("home.png"), dashboard_path, :title => "home" %>
-								<% end %>
-							</li>
-	                    </ul>
+					<div class="fl icon_box mT10">
+						<span>20</span>
+						<%=image_tag "da_vinci.png"%>
 					</div>
-
-					<div class="bar-holder-lhs <%= yield(:hide_on_policy_class)%>">
-						<ul>
-							<li>
-								<%= link_to "share", new_item_path %>
-							</li>
-							<li>
-								<%= link_to "manage", items_path %>
-							</li>
-							<li class="last">
-								<%= link_to "view network", network_path %>
-							</li>
-						</ul>
+					<div class="fl icon_box mT10">
+						<% feedback_rating = current_user.person.reputation_rating.feedback_rating? if !current_user.nil?%>
+						<span><%=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s)%></span>
+						<%=image_tag "feedback_icon.png",:class=>"pdL7",:title => "Positive Feedback Rating" %>
 					</div>
-
 				</div>
-
+				
+				<div class="fr header_right">
+					<div class="fl mtR">
+					    <%=link_to current_user.person.name,person_path(current_user.person)%>
+						<a id="settings" onClick="settingPopup();" href="#"></a>
+					</div>
+					<%= link_to (image_tag current_user.person.avatar(:small)),person_path(current_user.person), :class => "fl", :alt => current_user.person.name %>
+					
+				</div>
+				<div class="clear"></div>
+				<div class="setting_popup">
+					<ul>
+						<li class="setting"><a href="#">Settings</a></li>
+						<li class="edit_pro"><%=link_to "Edit profile",edit_person_path(current_user.person)%></li>
+						<li class="disconnect"><%=link_to "Disconnect",signout_path%></li>
+					</ul>
+				</div>
 			</div>
-
 		</div>
+	</header>
+
 		<!-- #header -->
+<%end%>
 
-
-<div id="wrapper" class="clearfix" <%= yield(:hide_on_policy_top_margin)%>>
+<section>
 	
 	<%= yield %>
 
-</div>
+</section>
 
-<div id="footer" class="clearfix">
-	<ul>
-		<li>
-			<%= link_to "About", "/about" %>&nbsp;&nbsp;
-		</li>
-		<li>
-			<%= link_to "Principles", "/legal_notices/principles" %>&nbsp;&nbsp;
-		</li>
-		<li>
-			<%= link_to "Transparency", "/transparency" %>&nbsp;&nbsp;
-		</li>
-		<li>
-			<%= link_to "Contribute", "/contribute" %>&nbsp;&nbsp;
-		</li>
-		<li>
-			<%= link_to "Contact", "mailto:info@sharedearth.net" %>&nbsp;&nbsp;
-		</li>
-
-		<li>
-			<%= link_to "Terms", "/terms" %>
-		</li>
-	</ul>
+<footer>
+ <%= render "shared/footer" %>	
 	
-</div>
+</footer>
 <!-- #footer -->
 
 </div>
@@ -158,6 +88,6 @@
 <%= render "shared/notification" %>
 
 <%= render "shared/loading" %>
-
+</wrapper>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <body>
 
 	<div id="container">
+<%if !current_user.nil?%>
 <div id="header">
 
 			<div class="header-lhs">
@@ -80,20 +81,17 @@
 		</div>
 		<!-- #header -->
 
-
+<%end%>
 <div id="wrapper" class="clearfix">
 	
 	<%= yield %>
 
 </div>
 
-<div id="footer" class="clearfix">
-	<ul>
-		<li>
-		</li>
-	</ul>
+<footer>
+ <%= render "shared/footer" %>	
 	
-</div>
+</footer>
 <!-- #footer -->
 
 </div>
