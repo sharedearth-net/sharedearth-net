@@ -1,16 +1,26 @@
 %article
   .main_content
+    - if !current_user.nil? 
+      .setting_popup
+        %ul{:class=>"setting_popup_list"}
+          %li{:class=>"edit_pro"}
+            =link_to "Edit profile",edit_person_path(current_user.person)
+          %li{:class=>"disconnect"}
+            =link_to "Disconnect",signout_path
+        
     .fl.logo
       = link_to (image_tag "logo.png")
     .connect_section.fr
-      = link_to "",new_item_path,:class=>"fl connect_buttons share_button"
-      = link_to "","#",:class=>"fl connect_buttons ask_button"
-      = link_to "","#",:class=>"fl connect_buttons connect_button"
-      .fl
-        = form_tag search_index_path, :method => 'get' do
-          .fl.page_searchbox
-            = text_field_tag :search, "Search"
-          = button_tag "",:class=>"fl search_icon mt11"
+      - if !current_user.nil? 
+        = link_to "",new_item_path,:class=>"fl connect_buttons share_button"
+        = link_to "","#",:class=>"fl connect_buttons ask_button"
+      = link_to " ",new_session_path, :title => "Sign in or register", :interaction => "lightbox",:class=>"fl connect_buttons connect_button"
+      - if !current_user.nil? 
+        .fl
+          = form_tag search_index_path, :method => 'get' do
+            .fl.page_searchbox
+              = text_field_tag :search, "Search"
+            = button_tag "",:class=>"fl search_icon mt11"
           
       
     .clear

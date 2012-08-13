@@ -9,6 +9,6 @@
     %li= link_to "Contact","mailto:info@sharedearth.net"
     .clear
   .fr.social_icons
-    = image_tag "tweet.png",:class=>"fl tweet"
-    = image_tag "fb.png",:class=>"fl"
+    = link_to (image_tag "tweet.png"),"https://twitter.com/sharedearthnet", :onclick => "window.open(this.href); return false;", :title => "SharedEarth on Facebook",:class=>"fl tweet"
+    = link_to (image_tag "fb.png"),"http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts", :onclick => "window.open(this.href); return false;", :title => "SharedEarth on Facebook",:class=>"fl tweet"
   .clear

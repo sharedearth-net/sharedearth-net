@@ -3,14 +3,54 @@
 <head>
   <title>sharedearth.net</title>
   <%= render :partial => "layouts/meta_header" %>
-    <script type="text/javascript">
+
+ <script type="text/javascript">
 function settingPopup(){
   $(".setting_popup").css("display","block");
 }
+
+$("html").click(function (e)
+{
+var $event = $(e.target);
+var  x = $event.parents('div').attr('class');
+
+    if ((x == "settingOuter")){
+       $(".setting_popup").css("display","block");
+  }
+    else
+  {
+    $(".setting_popup").css("display","none");
+  }
+});            
 </script>
+<!--[if IE 7]>
+  <style>
+	.Bordernone {
+		height: 15px;
+	}
+	.setting_popup ul li a {
+		padding-top:10px!important
+	}
+  </style>
+ <![endif]-->
+ <!--[if IE 9]>
+  <style>
+	.setting_popup ul li a {
+	padding-top:8px!important
+	}
+  </style>
+ <![endif]-->
+  <!--[if IE 8]>
+  <style>
+	.setting_popup ul li a {
+	padding-top:8px!important
+	}
+  </style>
+ <![endif]-->
 </head>
 
-<body>
+
+<body id="html">
   <wrapper>
   <%if current_user %>
     
@@ -25,44 +65,46 @@ function settingPopup(){
 				</div>
 				<div class="fl counter_container">
 					<div class="fl icon_box mT10">
-						<span><%=current_user.person.trusted_network_size%></span>
-						<%=link_to (image_tag "first_menu.png"),network_person_path(current_user.person), :title => "Number of people in your trusted network" %>
+						<%=link_to network_person_path(current_user.person),:title => "Number of people in your trusted network" do %>
+						    <span><%=current_user.person.trusted_network_size%></span>
+						    <%=image_tag "first_menu.png"%>
+						<%end%>
 					</div>
 					<div class="fl icon_box mT10">
+					  <%=link_to "#",:title => "Gift Actions" do %>
 						<span><%=current_user.person.reputation_rating.gift_actions_count.to_s%></span>
-						<%=image_tag "gift.png",:title => "Gift Actions"%>
+						<%=image_tag "gift.png"%>
+					  <%end%>	
 					</div>
 					<div class="fl icon_box mrT2">
+				      <%=link_to "#" do %>		
 						<span><%=current_user.person.share_item%></span>
-						<%=image_tag "leaf.png",:class=>"pdL11"%>
+						<%=image_tag "leaf.png"%>
+					  <%end%>	
 					</div>
 					<div class="fl icon_box mT10">
 						<span>20</span>
 						<%=image_tag "da_vinci.png"%>
 					</div>
 					<div class="fl icon_box mT10">
+					  <%=link_to "#",:title => "Positive Feedback Rating" do %>	
 						<% feedback_rating = current_user.person.reputation_rating.feedback_rating? if !current_user.nil?%>
 						<span><%=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s)%></span>
-						<%=image_tag "feedback_icon.png",:class=>"pdL7",:title => "Positive Feedback Rating" %>
+						<%=image_tag "feedback_icon.png" %>
+				        <%end%>		
 					</div>
 				</div>
 				
 				<div class="fr header_right">
 					<div class="fl mtR">
 					    <%=link_to current_user.person.name,person_path(current_user.person)%>
-						<a id="settings" onClick="settingPopup();" href="#"></a>
+						<div class="settingOuter"><a id="settings" onClick="settingPopup();" href="#"></a></div>
 					</div>
 					<%= link_to (image_tag current_user.person.avatar(:small)),person_path(current_user.person), :class => "fl", :alt => current_user.person.name %>
 					
 				</div>
 				<div class="clear"></div>
-				<div class="setting_popup">
-					<ul>
-						<li class="setting"><a href="#">Settings</a></li>
-						<li class="edit_pro"><%=link_to "Edit profile",edit_person_path(current_user.person)%></li>
-						<li class="disconnect"><%=link_to "Disconnect",signout_path%></li>
-					</ul>
-				</div>
+				
 			</div>
 		</div>
 	</header>
