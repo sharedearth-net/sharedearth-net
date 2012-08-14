@@ -3,10 +3,10 @@
 <head>
   <title>sharedearth.net</title>
   <%= render :partial => "layouts/meta_header" %>
-
- <script type="text/javascript">
+</head>
+<script type="text/javascript">
 function settingPopup(){
-  $(".setting_popup").css("display","block");
+	$(".setting_popup").css("display","block");
 }
 
 $("html").click(function (e)
@@ -16,12 +16,23 @@ var  x = $event.parents('div').attr('class');
 
     if ((x == "settingOuter")){
        $(".setting_popup").css("display","block");
-  }
+	}
     else
-  {
-    $(".setting_popup").css("display","none");
-  }
+	{
+		$(".setting_popup").css("display","none");
+	}
 });            
+$(document).ready(function(){
+
+	$(".edit_pro").hover(function(){
+		$(".setting_popup_list").addClass("pd3");
+		$(".edit_pro").addClass("bgHover");
+	},function(){
+		$(".setting_popup_list").removeClass("pd3");
+		$(".edit_pro").removeClass("bgHover");
+	});
+	
+});
 </script>
 <!--[if IE 7]>
   <style>
@@ -47,80 +58,84 @@ var  x = $event.parents('div').attr('class');
 	}
   </style>
  <![endif]-->
-</head>
 
 
-<body id="html">
-  <wrapper>
-  <%if current_user %>
-    
-	<header>
-		<div class="header">
-			<div class="wid1000">
-				<div class="head_left fl">
-					<%=link_to "","/dashboard",:class=>"fl community_icon" %>
-					<span class="count">3</span>
-					<%=image_tag "line.png",:class=>"fl separation" %>
-					<%=link_to "Community","/network",:class=>"fl community_txt"%>
+<body>
+<!-- #header -->
+<%if current_user %>
+<header>
+  <div class="header">
+     <div class="wid1000">
+        <div class="head_left fl">
+             <%=link_to "","/dashboard",:class=>"fl community_icon" %>
+             <span class="count">3</span>
+             <%=image_tag "line.png",:class=>"fl separation" %>
+             <%=link_to "Community","/network",:class=>"fl community_txt"%>
+        </div>
+        <div class="fl counter_container">
+           <div class="fl icon_box mT10">
+                <%=link_to network_person_path(current_user.person),:title => "Number of people in your trusted network" do %>
+                   <span><%=current_user.person.trusted_network_size%></span>
+                   <%=image_tag "first_menu.png"%>
+                <%end%>
+            </div>
+            <div class="fl icon_box mT10">
+                <%=link_to "#",:title => "Gift Actions" do %>
+                   <span><%=current_user.person.reputation_rating.gift_actions_count.to_s%></span>
+                   <%=image_tag "gift.png"%>
+                <%end%>	
+            </div>
+            <div class="fl icon_box mrT2">
+                <%=link_to "#" do %>	
+                    <span><%=current_user.person.share_item%></span>
+                    <%=image_tag "leaf.png"%>
+                <%end%>	
+            </div>
+            <div class="fl icon_box mT10">
+                <%=link_to "#" do %>	
+                   <span>0</span>
+                   <%=image_tag "da_vinci.png"%>
+                <%end%>
+            </div>
+            <div class="fl icon_box mT10">
+               <%=link_to "#",:title => "Positive Feedback Rating" do %>	
+                   <% feedback_rating = current_user.person.reputation_rating.feedback_rating? if !current_user.nil?%>
+                   <span><%=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s)%></span>
+                   <%=image_tag "feedback_icon.png" %>
+                <%end%>	
+            </div>
+        </div>
+        <div class="fr header_right">
+            <div class="fl mtR">
+                 <%=link_to current_user.person.name,person_path(current_user.person)%>
+                 <div class="settingOuter"><%=link_to "","#",:id=>"settings",:onClick=>"settingPopup();"%></div>
+            </div>
+            <%= link_to (image_tag current_user.person.avatar(:small)),person_path(current_user.person), :class => "fl", :alt => current_user.person.name %>
+        </div>
+        <div class="setting_popup">
+					<ul class="setting_popup_list">
+						<li class="edit_pro"><%=link_to "Edit profile",edit_person_path(current_user.person)%></li>
+						<li class="disconnect"><%=link_to "Disconnect",signout_path%></li>
+					</ul>
 				</div>
-				<div class="fl counter_container">
-					<div class="fl icon_box mT10">
-						<%=link_to network_person_path(current_user.person),:title => "Number of people in your trusted network" do %>
-						    <span><%=current_user.person.trusted_network_size%></span>
-						    <%=image_tag "first_menu.png"%>
-						<%end%>
-					</div>
-					<div class="fl icon_box mT10">
-					  <%=link_to "#",:title => "Gift Actions" do %>
-						<span><%=current_user.person.reputation_rating.gift_actions_count.to_s%></span>
-						<%=image_tag "gift.png"%>
-					  <%end%>	
-					</div>
-					<div class="fl icon_box mrT2">
-				      <%=link_to "#" do %>		
-						<span><%=current_user.person.share_item%></span>
-						<%=image_tag "leaf.png"%>
-					  <%end%>	
-					</div>
-					<div class="fl icon_box mT10">
-						<span>20</span>
-						<%=image_tag "da_vinci.png"%>
-					</div>
-					<div class="fl icon_box mT10">
-					  <%=link_to "#",:title => "Positive Feedback Rating" do %>	
-						<% feedback_rating = current_user.person.reputation_rating.feedback_rating? if !current_user.nil?%>
-						<span><%=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s)%></span>
-						<%=image_tag "feedback_icon.png" %>
-				        <%end%>		
-					</div>
-				</div>
-				
-				<div class="fr header_right">
-					<div class="fl mtR">
-					    <%=link_to current_user.person.name,person_path(current_user.person)%>
-						<div class="settingOuter"><a id="settings" onClick="settingPopup();" href="#"></a></div>
-					</div>
-					<%= link_to (image_tag current_user.person.avatar(:small)),person_path(current_user.person), :class => "fl", :alt => current_user.person.name %>
-					
-				</div>
-				<div class="clear"></div>
-				
-			</div>
-		</div>
-	</header>
-
-		<!-- #header -->
+        <div class="clear"></div>
+    </div>
+  </div>
+</header>
 <%end%>
+<!-- #header -->
 
-<section>
-	
-	<%= yield %>
+  <div id="container">
 
-</section>
+    
+<div id="wrapper" class="clearfix" <%= yield(:hide_on_policy_top_margin)%>>
 
+<%= yield %>
+
+</div>
+<!-- #footer -->
 <footer>
- <%= render "shared/footer" %>	
-	
+   <%= render "shared/footer" %>	
 </footer>
 <!-- #footer -->
 
@@ -130,6 +145,6 @@ var  x = $event.parents('div').attr('class');
 <%= render "shared/notification" %>
 
 <%= render "shared/loading" %>
-</wrapper>
+
 </body>
 </html>

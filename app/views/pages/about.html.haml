@@ -1,13 +1,5 @@
 %article
   .main_content
-    - if !current_user.nil? 
-      .setting_popup
-        %ul{:class=>"setting_popup_list"}
-          %li{:class=>"edit_pro"}
-            =link_to "Edit profile",edit_person_path(current_user.person)
-          %li{:class=>"disconnect"}
-            =link_to "Disconnect",signout_path
-        
     .fl.logo
       = link_to (image_tag "logo.png")
     .connect_section.fr
@@ -84,10 +76,11 @@
               %li= link_to "Contact","mailto:info@sharedearth.net"
               %li= link_to "Blog","#"
               %li
-                %a{:href => ""}
-                  %img.fl.mrL5{:src => "assets/fb_button.png"}/
-                  %img.fl.mrL5{:src => "assets/tweet_button.png"}/
-                  .clear
+                %a{:href => "http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts",:class=>"fl hoverNone mrL5"}
+                  %img.fl{:src => "assets/fb_button.png"}/
+                %a{:href => "https://twitter.com/sharedearthnet",:class=>"fl hoverNone mrL5"}   
+                  %img.fl{:src => "assets/tweet_button.png"}/
+                .clear
         .right_menu_bottom
       .clear
     .clear
