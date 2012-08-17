@@ -1,87 +1,70 @@
-%article
-  .main_content
-    .fl.logo
-      = link_to (image_tag "logo.png")
-    .connect_section.fr
-      - if !current_user.nil? 
-        = link_to "",new_item_path,:class=>"fl connect_buttons share_button"
-        = link_to "","#",:class=>"fl connect_buttons ask_button"
-      = link_to " ",new_session_path, :title => "Sign in or register", :interaction => "lightbox",:class=>"fl connect_buttons connect_button"
-      - if !current_user.nil? 
-        .fl
-          = form_tag search_index_path, :method => 'get' do
-            .fl.page_searchbox
-              = text_field_tag :search, "Search"
-            = button_tag "",:class=>"fl search_icon mt11"
-          
-      
-    .clear
-    .about_content.fl
-      
-      .about_text
-        .about_img
-          = image_tag "about_img.png" ,:class=>"fl"
-          .fl.mt20
-            %h1.title About
-            %p
-              A World Vibrating with
-              Trust, Sharing, Love and Interconnection
+.wid1000
+  %section
+    %article
+      .about_content.fl
+        .about_text
+          .about_img
+            = image_tag "about_img.png" ,:class=>"fl"
+            .fl.mt20
+              %h1.title About
+              %p
+                A World Vibrating with
+                Trust, Sharing, Love and Interconnection
           .clear
-        .mid_text
-          %p Sharing anchors community.
-          %p
-            In tribal societies, gifts and shared goods create a common bond and sense of belonging.
-            We revive these experiences on special occasions like religious ceremonies, weddings
-            and birthdays.
-          %p
-            sharedearth.net celebrates a world where where we can enjoy this sense of belonging
-            every day. It's a platform for friends and communities to build trust, share resources and
-            contribute to the commons.
-          %p
-            On sharedearth.net you can share resources or place them into the commons. Shared
-            resources are consciously shared at your discretion and subject to return. Goods placed in
-            the commons are freely exchanged amongst the people who build and preserve the
-            commons.
-          %p
-            Using the rich reputation information gathered on each member of the sharedearth.net
-            community, we can consciously decide with whom to share, and thereby build a commons
-            culture where acts of kindness and love are rewarded through deeper trust, greater
-            collaboration and stronger community.
-          %p
-            By practising sharing and commoning, we are breaking cultural patterns of ego-centric
-            separation and exclusive property rights and rewriting our cultural and economic stories
-            to reflect our emerging experience of universal interconnection
-          %p Each act of sharing is a transitional step towards a just and sustainable society.
-        = image_tag "bottom_img.png",:class=>"comment"
-    .menu.fr
-      - if current_user.nil?
-        = link_to " ",new_session_path, :title => "Sign in or register", :interaction => "lightbox",:class=>"fr connect_button"
-      .fr.right_menu
-        .right_menu_top
-        .right_menu_mid
-          .menu_mid
-            %h1 Vision
-            %ul.menu_list
-              %li= link_to "About","#",:class=>"active"
-              %li= link_to "Commons","#"
-              %li= link_to "Principles","/legal_notices/principles"
-              %li= link_to "Platform","#"
-            %h1 sharedearth.net
-            %ul.menu_list
-              %li= link_to "Legal","#"
-              %li= link_to "Transparency","/transparency"
-              %li= link_to "Contribute","/contribute"
-            %h1 Connect
-            %ul.menu_list
-              %li= link_to "Contact","mailto:info@sharedearth.net"
-              %li= link_to "Blog","#"
-              %li
-                %a{:href => "http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts",:class=>"fl hoverNone mrL5"}
-                  %img.fl{:src => "assets/fb_button.png"}/
-                %a{:href => "https://twitter.com/sharedearthnet",:class=>"fl hoverNone mrL5"}   
-                  %img.fl{:src => "assets/tweet_button.png"}/
-                .clear
-        .right_menu_bottom
+          .mid_text
+            %p Sharing anchors community.
+            %p
+              In tribal societies, gifts and shared goods create a common bond and sense of belonging.
+              We revive these experiences on special occasions like religious ceremonies, weddings
+              and birthdays.
+            %p
+              sharedearth.net celebrates a world where where we can enjoy this sense of belonging
+              every day. It's a platform for friends and communities to build trust, share resources and
+              contribute to the commons.
+            %p
+              On sharedearth.net you can share resources or place them into the commons. Shared
+              resources are consciously shared at your discretion and subject to return. Goods placed in
+              the commons are freely exchanged amongst the people who build and preserve the
+              commons.
+            %p
+              Using the rich reputation information gathered on each member of the sharedearth.net
+              community, we can consciously decide with whom to share, and thereby build a commons
+              culture where acts of kindness and love are rewarded through deeper trust, greater
+              collaboration and stronger community.
+            %p
+              By practising sharing and commoning, we are breaking cultural patterns of ego-centric
+              separation and exclusive property rights and rewriting our cultural and economic stories
+              to reflect our emerging experience of universal interconnection
+            %p Each act of sharing is a transitional step towards a just and sustainable society.
+          = image_tag "bottom_img.png",:class=>"comment"
+      .menu.fr
+        - if current_user.nil?
+          = link_to " ",new_session_path, :title => "Sign in or register", :interaction => "lightbox",:class=>"fr connect_button"
+        .fr.right_menu
+          .right_menu_top
+          .right_menu_mid
+            .menu_mid
+              %h1 Vision
+              %ul.menu_list
+                %li= link_to "About","#",:class=>"active"
+                %li= link_to "Commons","#"
+                %li= link_to "Principles","/legal_notices/principles"
+                %li= link_to "Platform","#"
+              %h1 sharedearth.net
+              %ul.menu_list
+                %li= link_to "Legal","#"
+                %li= link_to "Transparency","/transparency"
+                %li= link_to "Contribute","/contribute"
+              %h1 Connect
+              %ul.menu_list
+                %li= link_to "Contact","mailto:info@sharedearth.net"
+                %li= link_to "Blog","#"
+                %li
+                  %a{:href => "http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts",:class=>"fl hoverNone mrL5"}
+                    %img.fl{:src => "assets/fb_button.png"}/
+                  %a{:href => "https://twitter.com/sharedearthnet",:class=>"fl hoverNone mrL5"}   
+                    %img.fl{:src => "assets/tweet_button.png"}/
+                  .clear
+          .right_menu_bottom
       .clear
     .clear
-= render "shared/lightbox" 

@@ -86,20 +86,6 @@ $(document).ready(function() {
 	});	
 });
 
-/* Hover on setting icon*/
-$(document).ready(function(){
-
-  $(".edit_pro").hover(function(){
-    $(".setting_popup_list").addClass("pd3");
-    $(".edit_pro").addClass("bgHover");
-  },function(){
-    $(".setting_popup_list").removeClass("pd3");
-    $(".edit_pro").removeClass("bgHover");
-  });
-  
-});
-
-
 ////////////////////////////////////////////////////////////////////////
 // All code above should eventually be ported to Dojo
 

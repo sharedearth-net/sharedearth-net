@@ -21,18 +21,8 @@ var  x = $event.parents('div').attr('class');
 	{
 		$(".setting_popup").css("display","none");
 	}
-});            
-$(document).ready(function(){
+}); 
 
-	$(".edit_pro").hover(function(){
-		$(".setting_popup_list").addClass("pd3");
-		$(".edit_pro").addClass("bgHover");
-	},function(){
-		$(".setting_popup_list").removeClass("pd3");
-		$(".edit_pro").removeClass("bgHover");
-	});
-	
-});
 </script>
 <!--[if IE 7]>
   <style>
@@ -65,9 +55,9 @@ $(document).ready(function(){
 <%if current_user %>
 <header>
   <div class="header">
-     <div class="wid1000">
+     <div class="wid1000 ht140">
         <div class="head_left fl">
-             <%=link_to "","/dashboard",:class=>"fl community_icon" %>
+             <%=link_to image_tag("community_icon.png"),"/dashboard",:class=>"fl community_icon" %>
              <span class="count">3</span>
              <%=image_tag "line.png",:class=>"fl separation" %>
              <%=link_to "Community","/network",:class=>"fl community_txt"%>
@@ -112,11 +102,30 @@ $(document).ready(function(){
             </div>
             <%= link_to (image_tag current_user.person.avatar(:small)),person_path(current_user.person), :class => "fl", :alt => current_user.person.name %>
         </div>
+        <div class="clear"></div>
+				<div class="fl logo">
+					<%=link_to image_tag("logo.png")%>
+				</div>
+				<div class="connect_section fr">
+					<%=link_to "",new_item_path,:class=>"fl connect_buttons share_button" %>
+					<%=link_to "","#",:class=>"fl connect_buttons ask_button"%>
+					<%=link_to "",new_session_path,:title => "Sign in or register", :interaction => "lightbox",:class=>"fl connect_buttons connect_button"%>
+					<div class="fl">
+						<%= form_tag search_index_path, :method => 'get' do%>
+						<div class="fl page_searchbox">
+							<%=text_field_tag :search, "Search"%>
+						</div>
+						<%=button_tag "",:class=>"fl search_icon mt11"%>
+						<%end%>
+					</div>
+				</div>
         <div class="setting_popup">
+        	        <div class="dropDown_top">Setting</div>
 					<ul class="setting_popup_list">
-						<li class="edit_pro"><%=link_to "Edit profile",edit_person_path(current_user.person)%></li>
+						<li class="edit_pro"><%=link_to "Edit Profile",edit_person_path(current_user.person)%></li>
 						<li class="disconnect"><%=link_to "Disconnect",signout_path%></li>
 					</ul>
+					<div class="dropDown_bottom"></div>
 				</div>
         <div class="clear"></div>
     </div>
@@ -125,7 +134,7 @@ $(document).ready(function(){
 <%end%>
 <!-- #header -->
 
-  <div id="container">
+<div id="container">
 
     
 <div id="wrapper" class="clearfix" <%= yield(:hide_on_policy_top_margin)%>>
@@ -145,6 +154,6 @@ $(document).ready(function(){
 <%= render "shared/notification" %>
 
 <%= render "shared/loading" %>
-
+<%== render "shared/lightbox" %>
 </body>
 </html>

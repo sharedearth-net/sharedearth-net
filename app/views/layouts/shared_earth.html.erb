@@ -80,7 +80,19 @@
 
 		</div>
 		<!-- #header -->
-
+<%else%>
+   <header>
+      <div class="header" style="background:none !important;">
+        <div class="wid1000 ht140">
+                <div class="fl logo">
+					<%=link_to image_tag("logo.png")%>
+				</div>
+				<div class="connect_section fr">
+		          <%=link_to "",new_session_path,:title => "Sign in or register", :interaction => "lightbox",:class=>"fl connect_buttons connect_button"%>
+				</div>      
+		</div>
+	  </div>
+	</header>  			
 <%end%>
 <div id="wrapper" class="clearfix">
 	
@@ -96,6 +108,6 @@
 
 </div>
 <!-- #container -->
-
+<%= render "shared/lightbox" %>
 </body>
 </html>
