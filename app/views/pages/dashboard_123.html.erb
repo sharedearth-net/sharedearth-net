@@ -9,8 +9,6 @@
 		<%= render :partial => 'people/new_person' if current_user.person.reputation_rating.activity_level_count.zero? || current_user.person.gift_act_rating.zero? %>
 		
 		
-		
-		
 <% if Settings.invitations.to_s == 'true' && (!current_user.person.invitations_count.nil?) -%>
 		<!--div class="content-box-holder">
 			<%= image_tag("curve-top-content-box.png", :alt => "")  %>

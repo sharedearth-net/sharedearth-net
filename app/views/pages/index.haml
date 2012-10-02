@@ -1,23 +1,31 @@
-.button-holder-connect
-  %h2= link_to "connect", new_session_path, :title => "Sign in or register", :interaction => "lightbox"
-  %p
-    Locate
-    %span shared
-    resources anywhere on
-    %br/
-    %span earth
-    and.
+.container-fluid
+  .row-fluid
+    .span6
+      .stats-holder
+        %ul
+          %li
+            = link_to '<span class="bold-style">1 earth</span>'.html_safe, "#"
+          %li.people
+            = link_to '<span class="bold-style">9999 human </span> beings connected'.html_safe, "#"
+          %li.resources-shared
+            = link_to '<span class="bold-style">1411 resources </span>shared'.html_safe, "#"
+          %li.resources-commoned
+            = link_to '<span class="bold-style">300 resources </span>commoned'.html_safe, "#"
+          %li.gift
+            = link_to '<span class="bold-style">400 gift </span> actions undertaken'.html_safe, "#"
 
-.stats-holder
-  %ul
-    %li
-      %a{:href => "#"} 1 earth
-    %li.people
-      %a{:href => "#"} 9999 human beings connected
-    %li.resources-shared
-      %a{:href => "#"} 1411 resources shared
-    %li.resources-commoned
-      %a{:href => "#"} 300 resources commoned
-    %li.gift
-      %a{:href => "#"} 400 gift actions undertaken
-/ /stats-holder
+  .row-fluid
+    .span9
+      .tag-line
+        %strong
+          %p
+            Locate
+            %span shared
+            resources anywhere on          
+            %span earth
+
+  .row-fluid
+    .span1
+    .span6
+      .button-holder-connect
+        %h2= link_to image_tag("/static/graphics/bt-connect.png"), new_session_path, :title => "Sign in or register"

@@ -16,6 +16,10 @@ gem 'omniauth-google-oauth2'
 gem "possessive"
 gem "fb_graph"
 
+gem 'less'
+gem 'less-rails-bootstrap'
+gem "twitter-bootstrap-rails"
+
 # ActiveAdmin
 gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git', :ref => "5c4e75a6d"
 gem 'kaminari'

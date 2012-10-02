@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.integer  "author_id"
     t.string   "author_type"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "namespace"
   end
 
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.string   "secondary_full_name"
     t.integer  "related_id"
     t.string   "related_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.integer  "event_type_id"
     t.boolean  "read",                        :default => false
     t.integer  "email_notification_id"
@@ -52,18 +52,18 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
   add_index "activity_logs", ["primary_id", "primary_type"], :name => "index_activity_logs_on_primary_id_and_primary_type"
 
   create_table "admin_users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
   end
 
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -101,14 +101,14 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
   create_table "email_notifications", :force => true do |t|
     t.integer  "person_id"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "entities", :force => true do |t|
     t.integer  "specific_entity_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.string   "specific_entity_type"
   end
 
@@ -118,16 +118,16 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.integer  "type_id"
     t.integer  "person_id"
     t.integer  "event_log_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "event_entities", :force => true do |t|
     t.integer  "event_log_id"
     t.integer  "entity_id"
     t.string   "entity_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.boolean  "user_only",    :default => false
   end
 
@@ -149,38 +149,38 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.integer  "related_id"
     t.string   "related_type"
     t.integer  "event_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "event_types", :force => true do |t|
     t.string   "name"
     t.integer  "group"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "facebook_friends_jobs", :force => true do |t|
     t.integer  "user_id"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "feedbacks", :force => true do |t|
     t.integer  "item_request_id"
     t.integer  "person_id"
     t.text     "feedback_note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "feedback"
   end
 
   create_table "human_networks", :force => true do |t|
     t.integer  "specific_entity_id"
     t.integer  "person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "entity_type"
     t.integer  "entity_id"
     t.string   "network_type"
@@ -197,8 +197,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.boolean  "invitation_active"
     t.date     "accepted_date"
     t.integer  "invitee_person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.string   "invitee_email"
   end
 
@@ -210,8 +210,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.integer  "item_id"
     t.text     "description"
     t.integer  "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "item_types", :force => true do |t|
@@ -228,8 +228,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.text     "description"
     t.integer  "owner_id"
     t.string   "owner_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -246,36 +246,36 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
   create_table "network_requests", :force => true do |t|
     t.integer  "person_id"
     t.integer  "trusted_person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "people", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.string   "name"
-    t.boolean  "authorised_account",                                      :default => false
-    t.boolean  "accepted_tc",                                             :default => false
-    t.decimal  "tc_version",               :precision => 10, :scale => 0, :default => 1
-    t.decimal  "pp_version",               :precision => 10, :scale => 0, :default => 1
+    t.boolean  "authorised_account",       :default => false
+    t.boolean  "accepted_tc",              :default => false
+    t.decimal  "tc_version",               :default => 1.0
+    t.decimal  "pp_version",               :default => 1.0
     t.string   "location"
     t.text     "description"
-    t.boolean  "accepted_pp",                                             :default => false
+    t.boolean  "accepted_pp",              :default => false
     t.string   "email"
-    t.boolean  "accepted_tr",                                             :default => false
-    t.boolean  "has_reviewed_profile",                                    :default => false
+    t.boolean  "accepted_tr",              :default => false
+    t.boolean  "has_reviewed_profile",     :default => false
     t.integer  "invitations_count"
-    t.integer  "email_notification_count",                                :default => 0
+    t.integer  "email_notification_count", :default => 0
     t.datetime "last_notification_email"
-    t.boolean  "smart_notifications",                                     :default => true
+    t.boolean  "smart_notifications",      :default => true
     t.string   "new_email"
   end
 
   create_table "person_gift_act_ratings", :force => true do |t|
     t.integer  "person_id"
     t.float    "gift_act_rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "reputation_ratings", :force => true do |t|
@@ -289,16 +289,16 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.integer  "requests_answered"
     t.integer  "trusted_network_count"
     t.integer  "activity_level"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "neutral_feedback",      :default => 0
   end
 
   create_table "requested_invitations", :force => true do |t|
     t.integer  "user_id"
     t.date     "invitation_sent_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.boolean  "sent"
     t.boolean  "accepted"
   end
@@ -308,8 +308,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.integer  "entity_type_id"
     t.integer  "resource_id"
     t.integer  "resource_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "type",             :default => 10
   end
 
@@ -318,8 +318,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.text     "value"
     t.integer  "thing_id"
     t.string   "thing_type", :limit => 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   add_index "settings", ["thing_type", "thing_id", "var"], :name => "index_settings_on_thing_type_and_thing_id_and_var", :unique => true
@@ -327,8 +327,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
   create_table "users", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "token"
     t.datetime "lockout"
     t.integer  "validations_failed", :default => 0
@@ -336,7 +336,7 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.string   "email"
     t.string   "encrypted_password"
     t.integer  "person_id"
-    t.boolean  "verified_email",     :default => true, :null => false
+    t.boolean  "verified_email",     :default => false, :null => false
     t.string   "name"
   end
 
@@ -348,8 +348,8 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.string   "state"
     t.string   "country"
     t.integer  "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end

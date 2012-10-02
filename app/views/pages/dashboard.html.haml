@@ -1,0 +1,61 @@
+-if current_user.person.trusted_network_size == 0
+	-dashboard_class = "empty clearfix"
+-else
+	-dashboard_class = "clearfix"
+
+.container-fluid
+	.row-fluid
+		.span9
+			#dashboard-page.dashboard_class
+				#content
+					=render 'people/new_person' if current_user.person.reputation_rating.activity_level_count.zero? || current_user.person.gift_act_rating.zero?
+
+					-unless @requests.count.zero?
+						.content-box-holder
+							=image_tag("curve-top-content-box.png", :alt => '')
+
+							%ul
+								-@requests.each do |req|
+									-if req.is_a? ItemRequest
+										=render :partial => "shared/item_request_content_box", :locals => { :req => req }
+									-elsif req.is_a? NetworkRequest
+										%li{:class => "content-box clearfix"}
+											=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
+											.inner-content
+												.action.clearfix
+													%ul
+														%li
+															= "#{time_ago_in_words req.created_at} ago"
+														= render "shared/network_request_actions_compact", :locals => { :req => req }
+
+							= image_tag("curve-bottom-content-box.png", :alt => "")
+
+					.content-box-holder
+						= image_tag("curve-top-content-box.png", :alt => "")
+						%ul(class = "dashboard-recent-activity")
+							%li{:class => "content-box clearfix"}
+								%h2 Recent Activity
+
+							-@recent_activity_logs.each do |activity_log|
+								= render 'shared/activity_log_box', :locals => { :activity_log => activity_log }
+								-activity_log.is_read!
+							- end unless @recent_activity_logs.nil?
+
+							%li{:class => "content-box clearfix"}
+								=link_to "more", "#", :class => "button-more"
+						= image_tag("curve-bottom-content-box.png", :alt => "")
+
+			.span3
+				#sidebar
+					=render 'shared/network_status_info'
+					=image_tag "horizontal-divider.png", :class => "network_status_divider"
+
+					-if current_person.personal_network_size == 0
+						=render 'shared/news_feed_empty'
+					-else
+						=render "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } 
+					= image_tag("bg-empty-village.png", :alt => "", :class => "empty-village")
+
+
+
+    

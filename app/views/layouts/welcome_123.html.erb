@@ -19,15 +19,15 @@
   
   <script>
     $(document).ready(function() {
-      $("a#no_facebook").click(function(){
-				var width = 400;
-				var height = 230;
-				var left = 400, top = 300;
-				left = ( screen.width / 2) - ( width / 2 );
-				top = ( screen.height / 2 ) - ( height / 2 );
-				page = window.open('/collect_email', 'page', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=' + width + ',height=' + height + ',left = ' + left + ',top = ' + top + '');
-				event.preventDefault();
-			});
+		$("a#no_facebook").click(function(){
+			var width = 400;
+			var height = 230;
+			var left = 400, top = 300;
+			left = ( screen.width / 2) - ( width / 2 );
+			top = ( screen.height / 2 ) - ( height / 2 );
+			page = window.open('/collect_email', 'page', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=' + width + ',height=' + height + ',left = ' + left + ',top = ' + top + '');
+			event.preventDefault();
+		});
     });
   </script>
 
@@ -47,10 +47,10 @@
 		</div>
 
 		<div id="content" class="clearfix">
-      <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, :class => "flash #{key}") %>
-      <% end %>
-      <%= yield(:no_js_msg).empty? ? yield : yield(:no_js_msg) %>
+	      <% flash.each do |key, value| %>
+	        <%= content_tag(:div, value, :class => "flash #{key}") %>
+	      <% end %>
+      	<%= yield(:no_js_msg).empty? ? yield : yield(:no_js_msg) %>
 		</div>
 		<!-- #content -->
 		

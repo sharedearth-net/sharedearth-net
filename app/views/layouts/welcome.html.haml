@@ -1,0 +1,100 @@
+!!! Strict
+
+%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+
+	%head
+		%meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+		%title sharedearth.net - trust. share. connect.
+		= stylesheet_link_tag :application
+
+
+		%script{:charset => "utf-8", :src => "/static/js/jquery-1.5.2.min.js", :type => "text/javascript"}
+
+		%script{:charset => "utf-8", :src => "/static/js/script.js", :type => "text/javascript"}
+
+		= javascript_include_tag :jquery_ujs, :lightbox
+
+		:javascript
+			$(document).ready(function() {
+				$("a#no_facebook").click(function(){
+					var width = 400;
+					var height = 230;
+					var left = 400, top = 300;
+					left = ( screen.width / 2) - ( width / 2 );
+					top = ( screen.height / 2 ) - ( height / 2 );
+					page = window.open('/collect_email', 'page', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=' + width + ',height=' + height + ',left = ' + left + ',top = ' + top + '');
+					event.preventDefault();
+					});
+			});
+	  
+
+		= favicon_link_tag 'favicon.ico'
+
+	%body
+		.container-fluid
+			.row-fluid
+				.span6
+					#container.clearfix
+						.logo-holder
+							%h1{:title => "sharedearth.net - from ego to wego"}
+								sharedearth.net - from ego to wego
+				.span6
+					#content.clearfix
+						-flash.each do |key, value|
+							= content_tag(:div, value, :class => "flash #{key}")
+						= yield(:no_js_msg).empty? ? yield : yield(:no_js_msg)
+			/ .row-fluid
+			/ 	.connect-button-bg
+			/ 		.span6
+			/ 			.slogan
+			/ 		.span6
+			/ 			.span3
+			/ 			.span9
+			/ 				.connect-button
+			/ 					%h2= link_to "Connect", new_session_path, :class => "btn-custom", :title => "Sign in or register", :interaction => "lightbox"
+
+
+			
+		#footer-holder
+			#footer
+				.span3
+					%ul
+						%li{:class => "headline"}
+							%h4 Vision
+						%li
+							=link_to "About", about_path
+						%li
+							=link_to "Commons", "#"
+						%li
+							=link_to "Principles", "#"
+						%li
+							=link_to "Platform", "#"
+				.span3
+					%ul
+						%li{:class => "headline"}
+							%h4 sharedearth.net
+						%li
+							=link_to "Legal", terms_path
+						%li
+							=link_to "Transparency", "#"
+						%li
+							=link_to "Contribute", contribute_path
+				.span3
+					%ul
+						%li{:class => "headline"}
+							%h4 Connect
+						%li
+							%a{:href => "mailto:info@sharedearth.net"} Contact
+						%li
+							=link_to "Blog", "#"
+						%li{:class => "social-links clearfix"}
+							%ul(class="social-links clearfix")
+								%li{:class => "facebook"}
+									%a{:href => "http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts", :onclick => "window.open(this.href); return false;", :title => "SharedEarth on Facebook"} 
+										%img{:src => "/static/graphics/sp-social-facebook.png"}
+								%li
+									%a{:href => "https://twitter.com/sharedearthnet", :onclick => "window.open(this.href); return false;", :title => "Follow SharedEarth on Twitter"}
+										%img{:src => "/static/graphics/sp-social-twitter.png"}
+				.bg-holder
+					=image_tag "/static/graphics/bg-footer-pic.png" , :class => "test"
+				= render "shared/lightbox"
