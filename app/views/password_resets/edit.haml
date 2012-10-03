@@ -1,0 +1,14 @@
+- for msg in @user.errors.full_messages
+  %p.error= msg
+
+= form_for @user, :url => "/password_reset/#{params[:id]}/update" do |f| 
+  %p
+    = f.label :password 
+    = f.password_field :password
+  
+  %p
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+ 
+  %p
+    = f.submit "Update Password" 

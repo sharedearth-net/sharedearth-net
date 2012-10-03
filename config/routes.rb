@@ -5,7 +5,10 @@ Sharedearthapp::Application.routes.draw do
     end
   end
 
-  resource :password_resets
+  resource :password_resets 
+
+  match "/password_reset/:id/edit" => "password_resets#edit"
+  match "/password_reset/:id/update" => "password_resets#update"
 
   ActiveAdmin.routes(self)
 

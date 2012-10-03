@@ -179,6 +179,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def reset_password new_password
+    self.salt = self.class.salt
+    self.encrypted_password = self.class.encrypt_string(salt, new_password)
+  end
+
   private
 
   def create_fb_event_entity(event_log, person)
