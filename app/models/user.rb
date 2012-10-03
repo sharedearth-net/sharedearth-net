@@ -34,7 +34,12 @@ class User < ActiveRecord::Base
   end
 
   def self.try_auth(email, password)
-    where(:email => email, :encrypted_password => encrypt_string(password)).first
+    user = where(:email => email).first
+    if user.present? && user.encrypted_password == self.encrypt_string(user.salt, password)
+      user
+    else
+      nil
+    end 
   end
 
   def network_title
@@ -132,7 +137,7 @@ class User < ActiveRecord::Base
   end
 
   def email_confirmation_code
-    self.class.encrypt_string("#{encrypted_password}--#{email}")
+    self.class.encrypt_string(self.salt, "#{encrypted_password}--#{email}")
   end
 
   def verify_email!(code)
@@ -175,10 +180,15 @@ class User < ActiveRecord::Base
 
   def check_classic_sign_up
     self.provider ||= "email_and_password"
-    self.encrypted_password ||= self.class.encrypt_string(password)
+    self.salt ||= self.class.salt
+    self.encrypted_password ||= self.class.encrypt_string(salt, password)
   end
 
-  def self.encrypt_string(pass)
-    Digest::SHA2.hexdigest(pass)
+  def self.salt
+    SecureRandom.base64(8)
+  end
+
+  def self.encrypt_string(salt, pass)
+    Digest::SHA2.hexdigest(salt + pass)
   end
 end
