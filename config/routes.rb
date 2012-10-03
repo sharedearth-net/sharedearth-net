@@ -5,6 +5,8 @@ Sharedearthapp::Application.routes.draw do
     end
   end
 
+  resource :password_resets
+
   ActiveAdmin.routes(self)
 
   resources :fb_friends, :only => [:index]

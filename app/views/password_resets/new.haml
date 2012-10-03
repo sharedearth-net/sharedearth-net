@@ -1,0 +1,14 @@
+.button-holder-connect
+  %h2{:style => "text-indent: 0; color: #3e5706; font-size: 23px; height: 45px"} Forgot Password
+
+  - if @error
+    %p.error= @error
+
+  = form_tag password_resets_path, :method => :post do 
+    %p
+      = label_tag :email
+      = text_field_tag :email, params[:email]
+    %p
+      = submit_tag "Reset Password"
+
+
