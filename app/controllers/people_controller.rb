@@ -99,6 +99,7 @@ class PeopleController < ApplicationController
   end
 
   def edit
+    @person.update_attributes(:has_reviewed_profile => true)
   end
 
   def update
