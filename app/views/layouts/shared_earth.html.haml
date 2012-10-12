@@ -1,0 +1,19 @@
+!!!
+%html
+	%head
+		%title sharedearth.net
+		=render :partial => "layouts/meta_header"
+	%body
+		.container-fluid
+			.row-fluid
+				.span4
+					=image_tag "sharedearth_logo_beta.png"
+				.span5
+
+				.span2
+					%h2= link_to image_tag("/static/graphics/bt-connect-small.png"),new_session_path, :interaction => "lightbox"
+		%br
+				
+		=yield
+
+		=render "layouts/footer"

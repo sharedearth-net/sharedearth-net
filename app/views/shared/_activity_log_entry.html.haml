@@ -1,0 +1,9 @@
+%p
+	= render "shared/activity_log_sentence", :activity_log => activity_log
+
+.action.clearfix
+	%ul
+		%li{:class => "time-since"}
+			="#{time_ago_in_words activity_log.created_at} ago"
+		%li
+			= render "shared/activity_log_actions_compact", :activity_log => activity_log

@@ -1,0 +1,7 @@
+.inner-content
+	%p
+		=render "shared/item_request_sentence", :req => req, :dashboard => true
+	.action.clearfix
+		%ul
+			%li= "#{time_ago_in_words req.created_at} ago"
+			= render "shared/item_request_actions_compact", :req => req

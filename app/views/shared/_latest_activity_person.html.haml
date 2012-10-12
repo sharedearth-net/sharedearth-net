@@ -1,0 +1,44 @@
+.latest-activity
+	%h2 Latest Activity
+	%ul
+		-feed = Array.new()
+
+		-person.public_events.each do |event_log|
+			-sentence = event_log_sentence(event_log, person, EventDisplay::RECENT_ACTIVITY_FEED)
+			-time = event_log.created_at
+			-feed.push({"value" => sentence, "time" => time, "log" => event_log })
+		-end unless person.public_events.empty?
+
+		-person.public_activities(current_user).each do |activity_log|
+			-sentence = recent_activity_sentence(activity_log)
+			-time = activity_log.created_at
+			-feed.push({"value" => sentence, "time" => time, "log" => activity_log })
+		-end unless person.public_activities(current_user).empty?
+
+		-feed = feed.sort_by { |feed| feed["time"] }.last(7).reverse
+		-feed.each do |sentence|
+			-log = sentence["log"]
+			-event = log.class.name == "EventLog" ? true : false
+			%li{:class => "sidebar-box clearfix"}
+				.inner-content
+					%p
+						= sentence["value"]
+					.action.clearfix
+						%ul
+							%li
+								= '#{time_ago_in_words sentence["time"]} ago'
+							-if event
+								%li
+									=link_to "comments #{log.comments.count}", "#", :class => "comments-show-hide"
+									/ %a.comments-show-hide{:href => "#"}
+									/ 	comments("#{log.comments.count}")
+
+			-if event
+				= render :partial => '/comments/comment_box', :locals => {:object => log}
+		-end unless feed.empty?
+
+		-if feed.empty?
+			%li{:class => "sidebar-box clearfix"}
+				.inner-content
+					%p
+						This person doesn't have any activity yet

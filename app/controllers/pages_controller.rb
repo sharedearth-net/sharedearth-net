@@ -9,6 +9,7 @@ class PagesController < ApplicationController
     else
       flash.keep 
       redirect_to dashboard_path
+      # flash[:notice] = "Welcome to sharedearth.net!. Get started by adding your items via the share button above."
     end
   end
 
@@ -20,8 +21,13 @@ class PagesController < ApplicationController
 
     @requests.sort! { |a,b| b.created_at <=> a.created_at }
 
+    @request_dates = @requests.group_by {|r| r.updated_at.strftime("%B %d")}
+
+    @item_types = ItemType.all
+
     unless current_user.person.activity_logs.empty?
       @recent_activity_logs = current_user.person.recent_activity_logs
+      @recent_activity_dates = @recent_activity_logs.group_by {|r| r.updated_at.strftime("%B %d")}
 		end
     current_user.person.reset_notification_count!
     current_user.record_last_activity!
@@ -29,7 +35,7 @@ class PagesController < ApplicationController
     @events = current_user.network_activity.page(params[:page]).per(25)
   end
 
-  def network
+  def community
     @entities = Entity.groups_with_person(current_person)
     @entity = Entity.find_by_id(params[:entity_id]) unless params[:entity_id].nil?
 

@@ -1,0 +1,13 @@
+!!!
+%html
+	%head
+		%title sharedearth.net
+		= render :partial => "layouts/meta_header"
+	%body
+
+		=render "layouts/header"
+		
+		.container-fluid
+			=yield
+
+		=render "layouts/footer"

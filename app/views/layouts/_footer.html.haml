@@ -1,9 +1,21 @@
-.container-fluid.clearfix#footer
-	.row-fluid
-		%ul
-			%li=link_to "About", about_path
-			%li=link_to "Principles", principles_legal_notices_path
-			%li=link_to "Transparency", transparency_path
-			%li=link_to "Contribute", contribute_path
-			%li=link_to "Contact", "mailto:info@sharedearth.net"
-			%li=link_to "Terms", terms_path
+.container-fluid.clearfix
+	#footer-shared-earth
+		.row-fluid
+			.span9
+				%ul
+					%li=link_to "About |", about_path
+					%li=link_to "Commons |", "#"
+					%li=link_to "Legal |", "#"
+					%li=link_to "Transparency |", "#"
+					%li=link_to "Blog |", "#"
+					%li=link_to "Contribute |", contribute_path
+					%li=link_to "Contact", "mailto:info@sharedearth.net"
+					
+			.span3
+				%ul
+					%li
+						%script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}
+						%fb:like{:layout => "button_count", :show_faces => "false", :width => "450"}
+					%li
+						%a.twitter-share-button.left{"data-count" => "horizontal", "data-via" => "sharedearth", :href => "http://twitter.com/share"} Tweet
+						%script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}

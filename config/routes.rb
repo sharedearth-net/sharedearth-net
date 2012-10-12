@@ -126,7 +126,7 @@ Sharedearthapp::Application.routes.draw do
   match "/signout" => "sessions#destroy", :as => :signout
 
   match "/dashboard", :to => "pages#dashboard"
-  match "/network", :to => "pages#network"
+  match "/community", :to => "pages#community"
   match "/principles", :to => "terms#principles"
   match '/about' => 'pages#about'
   match '/contribute' => 'pages#contribute'

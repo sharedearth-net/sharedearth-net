@@ -7,6 +7,12 @@
 		%title sharedearth.net - trust. share. connect.
 		= stylesheet_link_tag :application
 
+		/ %link{:charset => "utf-8", :href => "/static/css/reset-min.css", :media => "screen", :rel => "stylesheet", :title => "no title", :type => "text/css"}
+
+		/ %link{:charset => "utf-8", :href => "/static/css/main.css", :media => "screen", :rel => "stylesheet", :title => "no title", :type => "text/css"}
+
+		/ %link{:href => "/static/css/fonts.css", :rel => "stylesheet", :type => "text/css"}
+
 
 		%script{:charset => "utf-8", :src => "/static/js/jquery-1.5.2.min.js", :type => "text/javascript"}
 
@@ -31,7 +37,7 @@
 		= favicon_link_tag 'favicon.ico'
 
 	%body
-		.container-fluid
+		.container-fluid.welcome-page
 			.row-fluid
 				.span6
 					#container.clearfix
@@ -96,5 +102,5 @@
 									%a{:href => "https://twitter.com/sharedearthnet", :onclick => "window.open(this.href); return false;", :title => "Follow SharedEarth on Twitter"}
 										%img{:src => "/static/graphics/sp-social-twitter.png"}
 				.bg-holder
-					=image_tag "/static/graphics/bg-footer-pic.png" , :class => "test"
+					=image_tag "/static/graphics/bg-footer-pic.png" 
 				= render "shared/lightbox"

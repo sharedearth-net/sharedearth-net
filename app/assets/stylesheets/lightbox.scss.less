@@ -1,0 +1,88 @@
+// @import "mixins.scss";
+
+// @mixin loading {
+//   > .loading {
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     right: 0;
+//     bottom: 0;
+//     background: url(/assets/ajax-loader.gif) no-repeat center center;
+//     background-color: rgba(100,100,100,0.3);
+//     // background: {
+//     //   repeat: no-repeat;
+//     //   position: center center;
+//     //   color: rgba(100, 100, 100, 0.3);
+//     // };
+//   }
+// }
+
+#lightbox_wrapper {
+  position: fixed;
+  left: 30%;
+  top: 0;
+  bottom: 30%;
+  right: 29%;
+  text-align: center;
+  color: #62775a;
+  z-index: 1000;
+  > .overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    @include opacity(0, true);
+    @include transition(all 0.3s ease-out);
+    z-index: 1001;
+  }
+  &.hidden {
+    display: none;
+  }
+  &.overlayed {
+    > .overlay {
+      @include opacity(1, true);
+    }
+    > section.lightbox {
+      @include opacity(1, true);
+    }
+  }
+  @include loading;
+  > .loading {
+    background-color: transparent;
+    background: url(/assets/ajax-loader.gif);
+  }
+  &.loaded {
+    .loading {
+      display: none;
+    }
+  }
+  > section.lightbox {
+    position: relative;
+    margin-top: 50px;
+    text-align: left;
+    @include inline-block;
+    z-index: 1003;
+    background: white;
+    @include box-shadow(0 0 9px rgba(0, 0, 0, 0.4));
+    padding: 9px 20px;
+    @include opacity(0, true);
+    @include transition(all 0.3s ease-out);
+    > .close {
+      position: absolute;
+      right: 6px;
+      top: 4px;
+      width: 8px;
+      height: 8px;
+      background: url(/assets/closelabel.png);
+      cursor: pointer;
+    }
+    .button-holder-connect {
+      @include box-shadow(none);
+      p {
+        margin-top: 11px;
+      }
+    }
+  }
+}

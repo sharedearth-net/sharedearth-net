@@ -1,0 +1,6 @@
+.inner-content
+	%p
+		= render :partial => "shared/event_log_sentence", :locals => { :event_log => event_log }
+
+	.action.clearfix
+		= render :partial => "shared/event_log_actions_compact", :locals => { :event_log => event_log }

@@ -1,4 +1,4 @@
-.container-fluid
+.container-fluid.clearfix.welcome-page
   .row-fluid
     .span6
       .stats-holder
@@ -28,4 +28,6 @@
     .span1
     .span6
       .button-holder-connect
-        %h2= link_to image_tag("/static/graphics/bt-connect.png"), new_session_path, :title => "Sign in or register"
+        / = link_to image_tag("/static/graphics/bt-connect.png"), new_session_path, {'data-toggle' => 'modal', 'data-target' => "#myModal", 'data-backdrop' => true, 'data-keyboard' => true} 
+        / %a.btn{"data-toggle" => "modal", :href => "#myModal", :role => "button"} Launch demo modal
+        %h2= link_to image_tag("/static/graphics/bt-connect.png"), new_session_path,  :interaction => "lightbox"

@@ -51,7 +51,29 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function(){
+	$('.my-activity').click(function(e){
+		e.preventDefault();
+		$(this).addClass('active');
+		$('.actions').removeClass('active');
+		$('.my-activity-click').removeClass('hidden-class');
+		$('.my-action-click').addClass('hidden-class');
+	});
+
+	$('.actions').click(function(e){
+		e.preventDefault();
+		$(this).addClass('active');
+		$('.my-activity').removeClass('active');
+		$('.my-action-click').removeClass('hidden-class');
+		$('.my-activity-click').addClass('hidden-class');
+	});
+});
+
+
+
 $(document).ready(function() {
+
+	// $('#myModal').modal('show')
 	$('a[id*=share_mine]').click(function() {
 		sharing_item = $(this);
 		$.ajax({

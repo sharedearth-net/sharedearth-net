@@ -1,13 +1,27 @@
 .border-radius (@radius) {
-  border-radius: @radius;
+
+	border-radius: @radius;
   -moz-border-radius: @radius;
   -webkit-border-radius: @radius;
 }
 
 .border-radius-bottom (@radius) {
--moz-border-radius-bottomright: @radius;
--moz-border-radius-bottomleft: @radius;
 
--webkit-border-bottom-right-radius: @radius;
--webkit-border-bottom-left-radius: @radius;
+	border-radius: 0 0 @radius @radius;
+  -moz-border-radius: 0 0 @radius @radius;
+  -webkit-border-radius: 0 0 @radius @radius;
+}
+
+.border-radius-top (@radius){
+
+	border-radius: @radius @radius 0 0;
+  -moz-border-radius: @radius @radius 0 0;
+  -webkit-border-radius: @radius @radius 0 0;
+}
+
+.border-radius-left (@radius){
+
+	border-radius: @radius 0 0 @radius;
+  -moz-border-radius: @radius 0 0 @radius;
+  -webkit-border-radius: @radius 0 0 @radius;
 }

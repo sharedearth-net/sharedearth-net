@@ -1,0 +1,59 @@
+.container-fluid.header-after-login
+	.row-fluid
+		.span5
+			%ul
+				%li=link_to "Notification", "#"
+				%li Community
+		.span4.header-middle-icons.clearfix
+			%ul
+				=current_user.person.trusted_network.size
+				%li=image_tag"connection_icon.png"
+				=current_user.person.reputation_rating.gift_actions_count.to_s.to_s
+				%li=image_tag"gift_icon.png"
+				=current_user.person.items.count
+				%li=image_tag"leaf_icon.png"
+				%li
+				-feedback_rating = current_user.person.reputation_rating.feedback_rating?
+				=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%")
+				%li=image_tag"thumb_icon.png"
+
+		.span3.setting-icon.clearfix
+			.span9
+				.row-fluid
+					=current_user.name
+				.row-fluid
+					=link_to image_tag("setting_icon.png"), "#"
+			.span1
+			.span2
+				= image_tag current_user.avatar(:square), :class => "thumb"
+
+.container-fluid.header-bottom
+	.row-fluid
+		.span5
+			=link_to image_tag("sharedearth_logo_beta.png"), root_url
+
+		/ .span7
+		/ 	%ul
+		/ 		%li=link_to image_tag("share.png"), "#"
+		/ 		%li=link_to image_tag("ask.png"), "#"
+		/ 		%li=link_to image_tag("connect.png"), "#"
+		/ 		%li{:class=>"search-holder clearfix"}
+		/ 			=form_tag search_index_path, :method => 'get' , :class => "search-form" do
+		/ 				.search-bg-holder-first.clearfix
+		/ 					=text_field_tag :search, params[:search], :placeholder => "Search", :class => "rounded"
+		/ 					%button{:title => "Search", :type => "submit"} Search
+
+
+		.span4.header-buttons
+			=link_to image_tag("share.png"), new_item_path
+			=link_to image_tag("ask.png"), "#"
+			=link_to image_tag("connect.png"), "#"
+			/ .search-holder.clearfix
+		.span3
+			.search-holder.clearfix
+				=form_tag search_index_path, :method => 'get' , :class => "search-form" do
+					.search-bg-holder-first.clearfix
+						=text_field_tag :search, params[:search], :placeholder => "Search", :class => "rounded"
+						%button{:title => "Search", :type => "submit"} Search
+
+/ TO DO :- text is flowing out of it's div element 

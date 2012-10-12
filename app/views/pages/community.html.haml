@@ -1,0 +1,45 @@
+#community-page.clearfix
+	#sidebar-left
+		-if params[:type].nil?
+			= image_tag("your_network.png", :class => "thumb", :alt => "Your Network")
+		-elsif
+			= image_tag("trusted_icon_yourself.png", :class => "thumb", :alt => "Trusted Network")
+
+		%ul
+			%li{:class => "all #{'selected' if params[:type].nil? && @entity.nil?}"}
+				=link_to 'Your Network', network_path
+			%li{:class => "trusted #{'selected' if trusted_network}"}
+				= link_to 'Trusted Network', network_path(:type => 'trusted')
+			-@entities.each do |entity|
+				%li{:class => "#{'selected' if entity.id == @entity.try(:id)}"}
+					=link_to entity.specific_entity.name, network_path(:entity_id => entity.id )
+			-end unless @entities.empty?
+
+	#content
+		.content-box-holder.no-bg
+			%ul
+				%li{:class => "content-box clearfix"}
+					.inner-content
+						%h2
+							-unless @entity.nil?
+								=@entity.specific_entity.name
+							-else
+								-if params[:type].nil?
+									Your Network
+								-elsif
+									Trusted Network
+
+						%p.description
+							-if params[:type].nil?
+								The people from your trusted network, communities and villages.
+								=link_to "Find the others.", findtheothers_path, :class => "trusted"
+							-elsif trusted_network
+								The family, friends and people you trust unreservedly, and share willingly with.
+								%br
+								=link_to "Find the others.", findtheothers_path, :class => "trusted"
+
+			= render "items/item_list"
+
+	#sidebar
+		-title = trusted_network ? 'Trusted Network Activity' : 'Your Network Activity'
+		=render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => title}

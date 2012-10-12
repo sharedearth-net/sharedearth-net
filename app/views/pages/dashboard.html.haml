@@ -3,59 +3,93 @@
 -else
 	-dashboard_class = "clearfix"
 
-.container-fluid
+.dashboard-page
 	.row-fluid
-		.span9
-			#dashboard-page.dashboard_class
-				#content
-					=render 'people/new_person' if current_user.person.reputation_rating.activity_level_count.zero? || current_user.person.gift_act_rating.zero?
+		.span9.activity-action
+			.row-fluid
+				.span4
+					%span.my-activity.active
+						=link_to "MY ACTIVITY", "#"
+					%span.actions
+						=link_to "ACTIONS", "#"
+			.row-fluid
+				.span10.activity-action-click
+					.inner-items
+						.my-activity-click
+							%ul(class="my-activity-1")
+								-unless @requests.count.zero?
+									.content-box-holder
+										%ul
+											-@request_dates.each do |date,requests|
+												.date-style
+													-if date == Date.today.strftime("%B %d")
+														Today
+													-else
+														=date
 
-					-unless @requests.count.zero?
-						.content-box-holder
-							=image_tag("curve-top-content-box.png", :alt => '')
+												-requests.each do |req|
+													-if req.is_a? ItemRequest
+														=render :partial => "shared/item_request_content_box", :locals => { :req => req }
+													-elsif req.is_a? NetworkRequest
+														%li{:class => "content-box clearfix"}
+															.span1
+																=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
+															.inner-content
+																.action.clearfix
+																	%ul
+																		.row-fluid
+																			= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
+																		.row-fluid
+																			= "#{time_ago_in_words req.created_at} ago"
 
-							%ul
-								-@requests.each do |req|
-									-if req.is_a? ItemRequest
-										=render :partial => "shared/item_request_content_box", :locals => { :req => req }
-									-elsif req.is_a? NetworkRequest
-										%li{:class => "content-box clearfix"}
-											=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
-											.inner-content
-												.action.clearfix
-													%ul
-														%li
-															= "#{time_ago_in_words req.created_at} ago"
-														= render "shared/network_request_actions_compact", :locals => { :req => req }
-
-							= image_tag("curve-bottom-content-box.png", :alt => "")
-
-					.content-box-holder
-						= image_tag("curve-top-content-box.png", :alt => "")
-						%ul(class = "dashboard-recent-activity")
-							%li{:class => "content-box clearfix"}
-								%h2 Recent Activity
-
-							-@recent_activity_logs.each do |activity_log|
-								= render 'shared/activity_log_box', :locals => { :activity_log => activity_log }
-								-activity_log.is_read!
-							- end unless @recent_activity_logs.nil?
-
-							%li{:class => "content-box clearfix"}
-								=link_to "more", "#", :class => "button-more"
-						= image_tag("curve-bottom-content-box.png", :alt => "")
-
-			.span3
-				#sidebar
-					=render 'shared/network_status_info'
-					=image_tag "horizontal-divider.png", :class => "network_status_divider"
-
-					-if current_person.personal_network_size == 0
-						=render 'shared/news_feed_empty'
-					-else
-						=render "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } 
-					= image_tag("bg-empty-village.png", :alt => "", :class => "empty-village")
+							
+						.my-action-click.hidden-class
+							%ul(class="my-action")
+								-@recent_activity_dates.each do |date, recent_activity_logs|
+									.date-style
+										-if date == Date.today.strftime("%B %d")
+											Today
+										-else
+											=date
+									-recent_activity_logs.each do |activity_log|
+										%li
+											= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
+											-activity_log.is_read!
+									- end unless @recent_activity_logs.nil?
 
 
-
-    
+		.span3.test
+			.row-fluid
+				.row-fluid.building-commons
+					
+					.span12
+						
+						.building-commons-top
+					
+						.building-commons-details
+							.building-commons-details-background
+								-@item_types.each do |item|
+									.row-fluid.item-type.bottom-border
+										.span8
+											=item.item_type
+										.span4
+											=link_to image_tag("share-mine.png"), "#"
+					
+						.building-commons-bottom
+							.view-more
+								=link_to "VIEW MORE", "#"
+							
+			.row-fluid
+				.row-fluid.my-community-box
+					.span12
+						.network-status-info
+							=render "shared/network_status_info"
+						.my-community-details
+							.my-community-details-background
+								-if current_person.personal_network_size == 0
+									=render 'shared/news_feed_empty'
+								-else
+									=render "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } 
+						.my-community-box-bottom
+							.view-more
+								=link_to "VIEW MORE", community_path

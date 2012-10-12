@@ -1,0 +1,21 @@
+.latest-activity
+	%h2 Latest Activity
+	%ul
+		-item_activities = item.public_activities
+		-item_activities.each do |al|
+			%li{:class => "sidebar-box clearfix"}
+				.inner-content
+					%p
+						=recent_activity_sentence(al)
+					.action.clearfix
+						%ul
+							%li="#{time_ago_in_words al.created_at} ago"
+							%li
+								%a.comments-show-hide{:href => "#"} comments(0)
+		-end unless item_activities.empty?
+
+		-if item_activities.empty?
+			%li{:class => "sidebar-box clearfix"}
+				.inner-content
+					%p
+						This item doesn't have any activity yet

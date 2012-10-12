@@ -1,18 +1,31 @@
-%h3 #{link_to "connect with Facebook", "/auth/facebook"}#{link_to "connect with Google", "/auth/google_oauth2"}
-- #link_to "connect with Github", "/auth/github"
+.container-fluid
+  .span9.login-form
+    .row-fluid.login-image
+      .span8
+        / =image_tag("sharedearth_login_header.png")
+        =image_tag("sharedearth_icon.png")
+    .row-fluid.other-login-option
+      .span8
+        .span8
+          CONNECT WITH 
+        .span4
+          =link_to image_tag("facebook_icon_sharedearth.png"), '/auth/facebook'
+          =link_to image_tag("google_icon_sharedearth.png"), '/auth/google_oauth2'
+    .row-fluid
+      - if @error
+        %p.error= @error
+    %br
+    .row-fluid
+      = form_for User.new, :url => sessions_path do |f|
+        .row-fluid
+          / = f.label :email
+          = f.text_field :email, :placeholder => "Email"
+        .row-fluid
+          / = f.label :password
+          = f.password_field :password, :placeholder => "Password"
 
-- if @error
-  %p.error= @error
-
-= form_for User.new, :url => sessions_path do |f|
-  %p
-    = f.label :email
-    = f.text_field :email
-  %p
-    = f.label :password
-    = f.password_field :password
-
-  %p
-    = f.submit "Sign in"
-    or
-    = link_to "register", new_user_path, :interaction => "lightbox"
+        .row-fluid
+          = link_to "Register for an account", new_user_path, :interaction => "lightbox"
+          or
+          = f.submit "Sign in"
+  / .modal-footer

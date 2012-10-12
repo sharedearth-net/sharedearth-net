@@ -1,0 +1,80 @@
+.container-fluid
+	.row-fluid
+		.span9.about-us-text
+			.row-fluid
+				.span1
+					=image_tag "logo.png"
+				.span9
+					%h2 About
+					A World Vibrating with
+					%br
+					Trust, Sharing, Love and Interconnection
+
+			%br
+			.row-fluid
+				%p
+					Sharing anchors community,
+				%br
+
+				%p
+					In tribal societies, gifts and shared goods create a common bond and sense of belonging.We revieve these experiences on special occasions like religious ceremonies, weddings 
+					%br
+					and birthdays.
+				%br
+
+				%p
+					sharedearth.net celebrates a world where we can enjoy this sense of belonging every day.It's a platform for friends and communities to build trust, share resources and contribute to the commons.
+				%br
+
+
+				%p
+					On sharedearth.net you can share resources or place them into the commons. Shared resources are consciously shared at your discretion and subject to return. Goods placed in the commons are freely exchanged amongst the people who build and preserve the commons. 
+				%br
+
+
+				%p
+					Using the rich reputation information gathered on each member of the sharedearth.net community, we can consciously decide with whome to share, and thereby build a commons culture where acts of kindness and love are rewarded through deeper trust, greater collaboration and stronger community.
+				%br
+
+
+				%p
+					By practising sharing and commoning, we are breaking the cultural patterns of ego-centric separation and exclusive property rights and rewriting our cultural and economic stories to reflect our emerging experience of universal interconnection.
+				%br
+
+				Each act of sharing is a traditional step towards a just and sustainable society.  
+
+		.span2.about-menu
+			.row-fliud
+			%p
+				Vision
+			%ul
+				%li=link_to "About", about_path
+				%li=link_to "Commans", "#"
+				%li=link_to "Principles", "#"
+				%li=link_to "Platform", "#"
+			.row-fluid
+			%p
+				sharedearth.net
+			%ul
+				%li=link_to "Legal", "#"
+				%li=link_to "Transparency", "#"
+				%li=link_to "Contribute", "#"
+			.row-fluid
+			%p
+				Connect
+			%ul
+				%li=link_to "Contact", "#"
+				%li=link_to "Blog", "#"
+				%li
+					%ul(class="social-links clearfix")
+						%li{:class => "facebook"}
+							%a{:href => "http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts", :onclick => "window.open(this.href); return false;", :title => "SharedEarth on Facebook"} 
+								%img{:src => "/static/graphics/sp-social-facebook.png"}
+						%li
+							%a{:href => "https://twitter.com/sharedearthnet", :onclick => "window.open(this.href); return false;", :title => "Follow SharedEarth on Twitter"}
+								%img{:src => "/static/graphics/sp-social-twitter.png"}
+
+	%br
+	.row-fluid.about-slogan-img
+		.span7
+			=image_tag "about-slogan.png"
