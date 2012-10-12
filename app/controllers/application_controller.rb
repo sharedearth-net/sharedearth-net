@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
       elsif current_user.provider == "email_and_password" && !current_user.verified_email?
         redirect_if_different please_activate_email_user_path(current_user)
       # if did not reviewed his profile
-      elsif !current_person.has_reviewed_profile? && (params[:controller] != 'people' || !%w{update edit}.include?(params[:action]))
+      elsif !current_person.has_reviewed_profile? && (params[:controller] != 'people' || !%w{update edit cancel}.include?(params[:action]))
         redirect_if_different edit_person_path(current_person)
       # if need to confirm email changing
       elsif current_person.waiting_for_new_email_confirmation?
