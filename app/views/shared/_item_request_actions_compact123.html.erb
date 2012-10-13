@@ -17,10 +17,10 @@
 
 	<%= gifter_only(req) do %>
 		<li>
-			<%= link_to "accept", accept_request_path(req, ActionFormat::FORMAT), :id => "accept_button", :class => "dashboard-action-link", :method => :put %>
+			<%= link_to image_tag("thumbs_up.png"), accept_request_path(req, ActionFormat::FORMAT), :id => "accept_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
 		<li>
-			<%= link_to "reject", reject_request_path(req, ActionFormat::FORMAT), :id => "reject_button", :class => "dashboard-action-link", :method => :put %>
+			<%= link_to image_tag("thumbs_down.png"), reject_request_path(req, ActionFormat::FORMAT), :id => "reject_button", :class => "dashboard-action-link", :method => :put %>
 		</li>
 		
 		

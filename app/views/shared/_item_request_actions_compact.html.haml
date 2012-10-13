@@ -1,0 +1,68 @@
+-if [ItemRequest::STATUS_ACCEPTED, ItemRequest::STATUS_COLLECTED, ItemRequest::STATUS_COMPLETED].include? req.status
+	%li
+		= link_to 'view action', request_path(req), :id => "request_#{req.id}"
+-else
+	%li
+		= link_to 'view request', request_path(req), :id => "request_#{req.id}"
+
+-if req.status == ItemRequest::STATUS_REQUESTED
+	= gifter_only(req) do
+		.span1
+			= link_to image_tag("thumbs_up.png"), accept_request_path(req, ActionFormat::FORMAT), :id => "accept_button", :class => "dashboard-action-link", :method => :put
+		.span1
+			= link_to image_tag("thumbs_down.png"), reject_request_path(req, ActionFormat::FORMAT), :id => "reject_button", :class => "dashboard-action-link", :method => :put
+	= requester_only(req) do
+		%li
+			= link_to "cancel", cancel_request_path(req, ActionFormat::FORMAT), :id => "cancel_button", :class => "dashboard-action-link", :method => :put
+
+-elsif req.status == ItemRequest::STATUS_ACCEPTED
+	= requester_and_gifter_only(req) do
+
+		-if req.item.purpose == Item::PURPOSE_GIFT || req.item.purpose == Item::PURPOSE_SHAREAGE
+			%li
+				= link_to "cancel", cancel_request_path(req, ActionFormat::FORMAT), :id => "cancel_button", :class => "dashboard-action-link", :method => :put
+		%li
+			= link_to "collected", collected_request_path(req, ActionFormat::FORMAT), :id => "collected_button", :class => "dashboard-action-link", :method => :put
+
+		-if req.item.purpose != Item::PURPOSE_GIFT && req.item.purpose != Item::PURPOSE_SHAREAGE
+			%li
+				= link_to "complete", complete_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put
+
+-elsif req.status == ItemRequest::STATUS_COLLECTED
+	= requester_and_gifter_only(req) do
+		-unless req.item.purpose == Item::PURPOSE_SHAREAGE
+			%li
+				= link_to "complete", complete_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put
+		-else
+			%li
+				-if !req.item.is_owner?(current_person)
+					= link_to "return", return_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put
+				-else
+					= link_to "recall", recall_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put
+
+-elsif req.status == ItemRequest::STATUS_RECALL
+	= requester_and_gifter_only(req) do
+		%li
+			-if !req.item.is_owner?(current_person)
+				= link_to "acknowledge", acknowledge_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put
+			-else
+				= link_to "cancel recall", cancel_recall_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put
+
+-elsif req.status == ItemRequest::STATUS_RETURN
+	= requester_and_gifter_only(req) do
+		%li
+			-if !req.item.is_owner?(current_person)
+				= link_to "cancel return", cancel_return_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put
+			-else
+				= link_to "acknowledge", acknowledge_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put
+
+-elsif req.status == ItemRequest::STATUS_ACKNOWLEDGED
+	= requester_and_gifter_only(req) do
+		%li
+			= link_to "item returned", returned_request_path(req, ActionFormat::FORMAT), :id => "complete_button", :class => "dashboard-action-link", :method => :put
+
+/ -comments = req.comments.count
+
+/ %li{:class => "last"}
+/ 	%a.action-comments-show-hide{:href => "#"}
+/ 		comments(#{comments ||= 0})

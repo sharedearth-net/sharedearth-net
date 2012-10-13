@@ -1,21 +1,39 @@
 .container-fluid.header-after-login
 	.row-fluid
-		.span5
-			%ul
-				%li=link_to "Notification", "#"
-				%li Community
+		.span5.dashboard-background
+
+			.span2.nuron-image
+				=link_to image_tag("nuron.png"), dashboard_path
+			.span2.community-link
+				%strong=link_to "Community", community_path
 		.span4.header-middle-icons.clearfix
-			%ul
-				=current_user.person.trusted_network.size
-				%li=image_tag"connection_icon.png"
-				=current_user.person.reputation_rating.gift_actions_count.to_s.to_s
-				%li=image_tag"gift_icon.png"
-				=current_user.person.items.count
-				%li=image_tag"leaf_icon.png"
-				%li
-				-feedback_rating = current_user.person.reputation_rating.feedback_rating?
-				=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%")
-				%li=image_tag"thumb_icon.png"
+			.row-fluid
+				.span1
+					.row-fluid
+						%strong=current_user.person.trusted_network.size
+					.row-fluid
+						=image_tag"connection_icon.png"
+				.span1
+					.row-fluid
+						%strong=current_user.person.reputation_rating.gift_actions_count.to_s.to_s
+					.row-fluid
+						=image_tag"gift_icon.png"
+				.span1
+					.row-fluid
+						%strong=current_user.person.items.count
+					.row-fluid
+						=image_tag"leaf_icon.png"
+				.span1
+					.row-fluid
+						%strong=current_user.person.reputation_rating.distinct_people_count.to_s
+					.row-fluid
+						=image_tag"hand.png"
+				.span1
+					.row-fluid
+						-feedback_rating = current_user.person.reputation_rating.feedback_rating?
+						%strong=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%")
+					.row-fluid
+						=image_tag"thumb_icon.png"
 
 		.span3.setting-icon.clearfix
 			.span9

@@ -13,12 +13,12 @@
 					%span.actions
 						=link_to "ACTIONS", "#"
 			.row-fluid
-				.span10.activity-action-click
+				.span12.activity-action-click
 					.inner-items
 						.my-activity-click
 							%ul(class="my-activity-1")
 								-unless @requests.count.zero?
-									.content-box-holder
+									.content-box-holder123
 										%ul
 											-@request_dates.each do |date,requests|
 												.date-style
@@ -31,7 +31,7 @@
 													-if req.is_a? ItemRequest
 														=render :partial => "shared/item_request_content_box", :locals => { :req => req }
 													-elsif req.is_a? NetworkRequest
-														%li{:class => "content-box clearfix"}
+														%li{:class => "clearfix"}
 															.span1
 																=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
 															.inner-content
@@ -39,8 +39,6 @@
 																	%ul
 																		.row-fluid
 																			= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
-																		.row-fluid
-																			= "#{time_ago_in_words req.created_at} ago"
 
 							
 						.my-action-click.hidden-class
