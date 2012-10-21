@@ -30,6 +30,8 @@ class Item < ActiveRecord::Base
   state_machine :status, :initial => STATUS_NORMAL do
     state STATUS_SHAREAGE do
     end 
+    state STATUS_LOST do 
+    end
   end
   
   STATUSES_VISIBLE_TO_OTHER_USERS = [ STATUS_NORMAL, STATUS_DAMAGED ]
