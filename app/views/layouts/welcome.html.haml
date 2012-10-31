@@ -39,16 +39,10 @@
 	%body
 		.container-fluid.welcome-page
 			.row-fluid
-				.span6
-					#container.clearfix
-						.logo-holder
-							%h1{:title => "sharedearth.net - from ego to wego"}
-								sharedearth.net - from ego to wego
-				.span6
-					#content.clearfix
-						-flash.each do |key, value|
-							= content_tag(:div, value, :class => "flash #{key}")
-						= yield(:no_js_msg).empty? ? yield : yield(:no_js_msg)
+				#content.clearfix
+					-flash.each do |key, value|
+						= content_tag(:div, value, :class => "flash #{key}")
+					= yield(:no_js_msg).empty? ? yield : yield(:no_js_msg)
 			/ .row-fluid
 			/ 	.connect-button-bg
 			/ 		.span6
@@ -61,46 +55,40 @@
 
 
 			
-		#footer-holder
-			#footer
-				.span3
-					%ul
-						%li{:class => "headline"}
-							%h4 Vision
-						%li
-							=link_to "About", about_path
-						%li
-							=link_to "Commons", "#"
-						%li
-							=link_to "Principles", "#"
-						%li
-							=link_to "Platform", "#"
-				.span3
-					%ul
-						%li{:class => "headline"}
-							%h4 sharedearth.net
-						%li
-							=link_to "Legal", terms_path
-						%li
-							=link_to "Transparency", "#"
-						%li
-							=link_to "Contribute", contribute_path
-				.span3
-					%ul
-						%li{:class => "headline"}
-							%h4 Connect
-						%li
-							%a{:href => "mailto:info@sharedearth.net"} Contact
-						%li
-							=link_to "Blog", "#"
-						%li{:class => "social-links clearfix"}
-							%ul(class="social-links clearfix")
-								%li{:class => "facebook"}
-									%a{:href => "http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts", :onclick => "window.open(this.href); return false;", :title => "SharedEarth on Facebook"} 
-										%img{:src => "/static/graphics/sp-social-facebook.png"}
-								%li
-									%a{:href => "https://twitter.com/sharedearthnet", :onclick => "window.open(this.href); return false;", :title => "Follow SharedEarth on Twitter"}
-										%img{:src => "/static/graphics/sp-social-twitter.png"}
-				.bg-holder
-					=image_tag "/static/graphics/bg-footer-pic.png" 
-				= render "shared/lightbox"
+		%footer.wrapper
+			%footer.wrapper
+				%div.container
+					%div.quarter
+						%h2 Vision
+						%ul
+							%li
+								%a{:href=>"#"} About
+							%li
+								%a{:href=>"#"} Commons
+							%li
+								%a{:href=>"#"} Principles
+							%li
+								%a{:href=>"#"} Platform
+					%div.quarter
+						%h2 sharedearth.net
+						%ul
+							%li
+								%a{:href=>"#"} Legal
+							%li
+								%a{:href=>"#"} Transparency
+							%li
+								%a{:href=>"#"} Contribute
+					%div.quarter
+						%h2 Connect
+						%ul
+							%li
+								%a{:href=>"#"} Contact
+							%li
+								%a{:href=>"#"} Blog
+							%li.networks
+								%a{:href=>"#", :class=>"social button fb"} 
+									%img{:src=>"/assets/img/icons/facebook.png", :alt=>"Like us on Facebook"}
+								%a{:href=>"#", :class=>"social button twitter"}
+									%img{:src=>"/assets/img/icons/twitter.png", :alt=>"Follow us on Twitter"}
+					=image_tag "img/rock.png", :class => "rock"
+					/ %img{:src=>"img/rock.png", :alt=>"SharedEarth rock", :class=>"rock"}

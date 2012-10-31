@@ -1,0 +1,136 @@
+@import "general.less";
+
+.landing-left, .landing-right {
+	padding-top: 20px;
+}
+.landing-left {
+	position: relative;
+	height: 489px;
+	&:after {
+		content: "";
+		display: block;
+		width: 16px;
+		height: 489px;
+		background: url(/assets/img/vertical-shadow.png) no-repeat;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+.logo-big {
+	display: block;
+	margin: 0 auto;
+	color: @lightGreen;
+	text-decoration: none;
+	img, h1, h2 {
+		display: block;
+		text-align: center;
+		margin: 0 auto;
+	}
+	h1 {
+		font-size: 44px;
+		line-height: 60px;
+		font-family: "Century Gothic";
+		font-weight: normal;
+	}
+	h2 {
+		font-size: 20px;
+		line-height: 20px;
+		font-weight: bold;
+		text-transform: uppercase;
+		margin-top: 20px;
+	}
+	.imp {
+		color: @darkGreen;
+	}
+}
+.landing-right {
+	text-align: center;
+	ul {
+		text-align: left;
+	}
+	h1 {
+		font-size: 20px;
+		line-height: 36px;
+		font-weight: bold;
+		color: @greyishGreen;
+		margin: 50px 0 20px;
+		.imp {
+			color: @lightGreen;
+		}
+	}
+	.button {
+		margin: 0 auto;
+		font-size: 25px;
+		padding: 20px 40px;
+		margin-top: 20px;
+		color: #3e5706;
+		.rounded(25px);
+		text-shadow: 0px 1px 1px rgba(255,255,255,0.22);
+	}
+}
+.sidebar-block {
+	width: 264px;
+	margin: 0 auto;
+	ul {
+		padding: 6px;
+	}
+	li {
+		border-bottom: 1px solid #cccccc;
+		padding: 8px 0 8px 30px;
+		&:last-child {
+			border-bottom: none;
+		}
+		&.earth {
+			background: url(/assets/img/icons/globe.png) no-repeat left center;
+		}
+		&.human {
+			background: url(/assets/img/icons/proportions.png) no-repeat left center;
+		}
+		&.resources-shared {
+			background: url(/assets/img/icons/leaf.png) no-repeat left center;
+		}
+		&.resources-commoned {
+			background: url(/assets/img/icons/resources.png) no-repeat left center;
+		}
+		&.gift {
+			background: url(/assets/img/icons/gift.png) no-repeat left center;
+		}
+	}
+}
+footer.wrapper {
+	background: #688848 url(/assets/img/footer-pattern.png) repeat-x;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 20px;
+	text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+	.container{
+		height: 227px;
+	}
+	h2 {
+		font-size: 18px;
+		line-height: 24px;
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+		&:hover {
+			
+			text-decoration: underline;
+		}
+	}
+	ul {
+		list-style: none;
+	}
+	li {
+		border-bottom: 1px dashed #ffffff;
+		padding: 8px 0;
+	}
+}
+
+.rock {
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	right: 0;
+}

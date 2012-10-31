@@ -1,33 +1,47 @@
-.container-fluid.clearfix.welcome-page
-  .row-fluid
-    .span6
-      .stats-holder
-        %ul
-          %li
-            = link_to '<span class="bold-style">1 earth</span>'.html_safe, "#"
-          %li.people
-            = link_to '<span class="bold-style">9999 human </span> beings connected'.html_safe, "#"
-          %li.resources-shared
-            = link_to '<span class="bold-style">1411 resources </span>shared'.html_safe, "#"
-          %li.resources-commoned
-            = link_to '<span class="bold-style">300 resources </span>commoned'.html_safe, "#"
-          %li.gift
-            = link_to '<span class="bold-style">400 gift </span> actions undertaken'.html_safe, "#"
-
-  .row-fluid
-    .span9
-      .tag-line
-        %strong
-          %p
-            Locate
-            %span shared
-            resources anywhere on          
-            %span earth
-
-  .row-fluid
-    .span1
-    .span6
-      .button-holder-connect
-        / = link_to image_tag("/static/graphics/bt-connect.png"), new_session_path, {'data-toggle' => 'modal', 'data-target' => "#myModal", 'data-backdrop' => true, 'data-keyboard' => true} 
-        / %a.btn{"data-toggle" => "modal", :href => "#myModal", :role => "button"} Launch demo modal
-        %h2= link_to image_tag("/static/graphics/bt-connect.png"), new_session_path,  :interaction => "lightbox"
+!!! 5
+%html
+  %head
+    %title= @page_title
+    
+    %link{:type=>"text/css", :href=>"less/landing.less", :rel=>"stylesheet/less"}
+    %script{:type=>"text/javascript", :src=>"js/modernizr.js"}
+    %script{:type=>"text/javascript", :src=>"js/less.js"}
+    %script{:type=>"text/javascript", :src=>"js/jquery.js"}
+    %script{:type=>"text/javascript", :src=>"js/jqui.js"}
+    %script{:type=>"text/javascript", :src=>"js/functions.js"}
+  %body
+    %div.wrapper
+      %div.container
+        %div.half.landing-left
+          %a{:href=>"#", :title=>"Sharedearth", :class=>"logo-big"}
+            =image_tag"img/logo.png"
+            / %img{:src=>"/assets/images/img/logo.png", :alt=>"SharedEarth logo"}
+            %h1
+              shared
+              %span.imp>< earth.net
+            %h2
+              Build the commons 
+              %span.imp Change the world
+        %div.half.landing-right
+          %div.sidebar-block
+            %ul.block-list
+              %li.earth 
+                %b 1 earth.
+              %li.human 
+                %b 9999 human 
+                beings connected
+              %li.resources-shared 
+                %b 1411 resources 
+                shared
+              %li.resources-commoned 
+                %b 300 resources 
+                commoned
+              %li.gift 
+                %b 400 gift 
+                actions undertaken
+          %h1 
+            Locate 
+            %span.imp shared 
+            resources anywhere on 
+            %span.imp earth
+          %a{:href=>"#", :title=>"Sign up now", :class=>"button"} Connect
