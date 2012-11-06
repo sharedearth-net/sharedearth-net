@@ -1,0 +1,63 @@
+- viewing_my_profile = (person == current_user.person)
+
+
+-if name
+	= link_to_person person, :check_current_user => false, :class => "person-name"
+
+	-if person.has_location?
+		= person.location
+
+-unless viewing_my_profile
+
+	-if person.requested_trusted_relationship?(current_user.person)
+		
+		= link_to "cancel trust request", network_request_path(person.requested_trusted_relationship(current_user.person)), :method => :delete
+
+	-elsif human_network = current_user.person.trusts?(person)
+		= link_to "withdraw trust", human_network_path(human_network), :method => :delete
+
+	-elsif current_user.person.requested_trusted_relationship?(person)
+		= link_to "confirm trust", confirm_network_request_path(current_user.person.requested_trusted_relationship(person)), :id => "confirm_button", :method => :put
+
+	-else
+		= link_to "trust", network_requests_path(:trusted_person_id => person), :method => :post
+
+%ul
+	-unless viewing_my_profile
+
+		%li
+			= in_network?(current_user.person, person )
+
+	-if viewing_my_profile
+
+		%li
+			-trusted_count = person.trusts_me_count
+			%p
+				-trusted = trusted_count.to_s + ((trusted_count == 1) ? " person " : " people ") + 'in your trusted network'
+				= link_to trusted, (network_person_path(person))
+
+	-unless viewing_my_profile
+
+		%li
+			-trusted_network = current_user.person.mutural_friends(person).count
+
+			-if trusted_network > 0
+				= image_tag("trusted_network_icon_others_green.png", :class => "icons", :alt => "Trusted Profile")
+
+			-else
+				= image_tag("trusted_network_icon_others_orange.png", :class => "icons", :alt => "Trusted Profile")
+
+
+			%p
+				-network = (trusted_network == 1) ? "#{trusted_network} person from your trusted network" : "#{trusted_network} people from your trusted network"
+
+				= link_to network, (network_person_path(person, :type => 'mutual'))
+
+		%li
+			-trusted_count = person.trusts_me_count
+			= image_tag("trusted_network_icon_others_all.png", :class => "icons", :alt => "Trusted Profile")
+
+			%p
+				-trusted = trusted_count.to_s + ((trusted_count == 1) ? " person " : " people ") + 'in their trusted network'
+
+				= link_to trusted, (network_person_path(person))

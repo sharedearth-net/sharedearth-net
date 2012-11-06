@@ -1,0 +1,12 @@
+-if current_user.person == @person
+	= link_to "edit profile", edit_person_path(@person)
+
+%li.gift-actions
+	= link_to person.reputation_rating.gift_actions_count.to_s + " gift actions", "#", :title => "Gift Actions"
+
+%li.humans-helped
+	= link_to person.reputation_rating.distinct_people_count.to_s + " humans helped", "#", :title => "People Helped"
+
+%li.feedback-score
+	-feedback_rating = person.reputation_rating.feedback_rating?
+	= link_to feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%"), "#", :title => "Positive Feedback Rating"

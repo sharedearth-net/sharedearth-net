@@ -1,4 +1,4 @@
-.latest-activity
+%div.story.clearfix
 	%h2 Latest Activity
 	%ul
 		-feed = Array.new()
@@ -19,19 +19,19 @@
 		-feed.each do |sentence|
 			-log = sentence["log"]
 			-event = log.class.name == "EventLog" ? true : false
-			%li{:class => "sidebar-box clearfix"}
-				.inner-content
-					%p
-						= sentence["value"]
-					.action.clearfix
-						%ul
-							%li
-								= '#{time_ago_in_words sentence["time"]} ago'
-							-if event
-								%li
-									=link_to "comments #{log.comments.count}", "#", :class => "comments-show-hide"
-									/ %a.comments-show-hide{:href => "#"}
-									/ 	comments("#{log.comments.count}")
+			%li
+				
+				%div.story-main
+					= sentence["value"]
+				
+				%ul
+					%li
+						= '#{time_ago_in_words sentence["time"]} ago'
+					-if event
+						%li
+							=link_to "comments #{log.comments.count}", "#", :class => "comments-show-hide"
+							/ %a.comments-show-hide{:href => "#"}
+							/ 	comments("#{log.comments.count}")
 
 			-if event
 				= render :partial => '/comments/comment_box', :locals => {:object => log}
