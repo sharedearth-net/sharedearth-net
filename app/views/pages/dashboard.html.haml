@@ -47,48 +47,26 @@
 						
 						%div.feed-content.actions#tabs-2
 							%div.story.clearfix
-								%ul
-									-@recent_activity_dates.each do |date, recent_activity_logs|
-										%li
-											%div.story.timestamp
-												-if date == Date.today.strftime("%B %d")
-													Today
-												-else
-													=date
+								-@recent_activity_dates.each do |date, recent_activity_logs|
+									%div.story.timestamp
+										-if date == Date.today.strftime("%B %d")
+											Today
+										-else
+											=date
+									-recent_activity_logs.each do |activity_log|
+										
+										= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
+										-activity_log.is_read!
+										%br
+									- end unless @recent_activity_logs.nil?
+							/ %div.story.clearfix
+							/ 	-@recent_activity_dates.each do |date, recent_activity_logs|
+							/ 		-recent_activity_logs.each do |activity_log|
+							/ 			= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
+							/ 			-activity_log.is_read!
+							/ 		- end unless @recent_activity_logs.nil?
 
-											-recent_activity_logs.each do |activity_log|
-												= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
-												-activity_log.is_read!
-											- end unless @recent_activity_logs.nil?
 
-						/ 		%div.user-avatar
-						/ 			%img{:src=>"/assets/img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
-						/ 		%div.story-main
-						/ 			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
-						/ 		%div.story-status
-						/ 			%div.feedback-buttons
-						/ 				%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
-						/ 				%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
-						/ 	%div.story.clearfix
-						/ 		%div.user-avatar
-						/ 			%img{:src=>"/assets/img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
-						/ 		%div.story-main
-						/ 			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
-						/ 		%div.story-status
-						/ 			%div.feedback-buttons
-						/ 				%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
-						/ 				%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike	
-						/ 	%div.story.timestamp
-						/ 		%h2 August 13th
-						/ 	%div.story.clearfix
-						/ 		%div.user-avatar
-						/ 			%img{:src=>"/assets/img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
-						/ 		%div.story-main
-						/ 			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
-						/ 		%div.story-status
-						/ 			%div.feedback-buttons
-						/ 				%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
-						/ 				%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
 				%aside.dashboard-sidebar.sidebar
 					%div.block.sidebar-block
 						%hgroup

@@ -1,5 +1,5 @@
 %div.story-main
-	= render "shared/activity_log_sentence", :activity_log => activity_log	
-
-="#{time_ago_in_words activity_log.created_at} ago"
-= render "shared/activity_log_actions_compact", :activity_log => activity_log
+	= render "shared/activity_log_sentence", :activity_log => activity_log
+%div.date
+	="#{time_ago_in_words activity_log.created_at} ago"
+	= render "shared/activity_log_actions_compact", :activity_log => activity_log

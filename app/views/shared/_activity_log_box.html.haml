@@ -1,6 +1,12 @@
 / %li{:class => "clearfix #{activity_log.is_read? ? 'read-recent-activity' : ''}"}
 
-%div.user-avatar
-	= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb"
+/ %div.user-avatar
+/ 	= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb"
 
-= render "shared/activity_log_entry", :activity_log => activity_log
+/ = render "shared/activity_log_entry", :activity_log => activity_log
+
+%li{:class => "clearfix"}
+	%div.user-avatar
+		= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb"
+	
+	= render "shared/activity_log_entry", :activity_log => activity_log
