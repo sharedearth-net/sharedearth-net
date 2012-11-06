@@ -49,7 +49,7 @@
 		%div.right
 			%div.buttons
 				-if !current_user.blank?
-					=link_to "Share", "#", :class => "button"
+					=link_to "Share", new_item_path, :class => "button"
 					=link_to "Ask", "#", :class => "button"
 				=link_to "Connect", "#", :class => "button"
 			%div.search-form
