@@ -46,7 +46,7 @@
 								%a{:href=>"#", :title=>"Disconnect"} Disconnect
 						
 			%div.user-avatar
-				%img{:src=>"/assets/img/avatar-pidov.jpg", :alt=>"Dan Gooden avatar"}
+				= image_tag current_user.avatar(:square), :class => "thumb"
 %div.wrapper.subheader
 	%div.container
 		%div.left
