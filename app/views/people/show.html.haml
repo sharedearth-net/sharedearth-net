@@ -1,0 +1,200 @@
+!!! 5
+%html
+	%head
+		%title= @page_title
+		
+		%link{:type=>"text/css", :href=>"less/profile.less", :rel=>"stylesheet/less"}
+
+		%script{:type=>"text/javascript", :src=>"js/modernizr.js"}
+		%script{:type=>"text/javascript", :src=>"js/less.js"}
+		%script{:type=>"text/javascript", :src=>"js/jquery.js"}
+		%script{:type=>"text/javascript", :src=>"js/jquery.ui.1.9.1.js"}
+
+		%script{:type=>"text/javascript", :src=>"js/jquery.rating.js"}
+		%script{:type=>"text/javascript", :src=>"js/jquery.screwdefaultbuttonsV2.min.js"}
+		%script{:type=>"text/javascript", :src=>"js/functions.js"}
+		
+		%script{:type=>"text/javascript", :src=>"js/modal.js"}
+	%body 
+		%header.wrapper
+			%div.container
+				%div.community
+					%div.community-buttons.row
+						%a{:href=>"#", :class=>"community-button community-logo"} 
+							%img{:src=>"img/icons/community-logo.png", :alt=>"SharedEarth Community"}
+							%div.notification-bubble 3
+						%a{:href=>"#", :class=>"community-button community-link"} Community
+				%div.resource-list
+					%div.resource-container
+						%a{:href=>"#", :title=>"Human", :class=>"resource resource-human"}21						
+					%div.resource-container
+						%a{:href=>"#", :title=>"Human", :class=>"resource resource-gift"}534						
+					%div.resource-container
+						%a{:href=>"#", :title=>"Human", :class=>"resource resource-collect"}321						
+					%div.resource-container
+						%a{:href=>"#", :title=>"Human", :class=>"resource resource-davinci"}3 						
+					%div.resource-container
+						%a{:href=>"#", :title=>"Human", :class=>"resource  resource-thumbsup"}54
+				%div.profile-settings
+					%div.profile-left
+						%div.row
+							%a{:href=>"#", :title=>"Dan Gooden", :class=>"user-name"} Dan Gooden
+						%div.row
+							%a{:href=>"#", :title=>"settings", :class=>"settings-button", :id=>"settings-menu"} Settings
+							%div.settings-dd#settings-dd
+								%ul
+									%li
+										%a{:href=>"#", :title=>"settings"} Settings
+									%li
+										%a{:href=>"#", :title=>"Edit Profile"} Edit Profile
+									%li
+										%a{:href=>"#", :title=>"Disconnect"} Disconnect
+								
+					%div.user-avatar
+						%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Gooden avatar"}
+		%div.wrapper.subheader
+			%div.container
+				%div.left
+					%a{:href=>"#", :title=>"SharedEarth", :class=>"logo"} SharedEarth
+				%div.right
+					%div.buttons
+						%a{:href=>"#", :title=>"Share", :class=>"button"} Share
+						%a{:href=>"#", :title=>"Ask", :class=>"button"} Ask
+						%a{:href=>"#", :title=>"Connect", :class=>"button"} Connect
+					%div.search-form
+						%form
+							%input{:type=>"text", :placeholder=>"Search", :class=>"search-input"}
+							%input{:type=>"button", :value=>"Search", :class=>"search-button"}
+		%div.wrapper
+			%div.container
+				%section.community-feed.page-content.clearfix
+					%section.community-page-header.clearfix
+						%div.community-avatar
+							%img{:src=>"img/community-avatar.png", :alt=>"My Community Avatar"}
+						%div.community-content
+							%h1 Dan Gooden's Reputation
+							%h2 A human being from planet earth
+							%p Committed to the realisation of a conscious, supportive and connected society. Committed to the realisation of a conscious, Committed to the realisation of a conscious, supportive and.	
+						%hr.row
+						%form.row
+							%textarea Post to community discussion board
+					%div.feed#tabs
+						%ul.feed-tabs
+							%li
+								%a{:href=>"#tabs-1", :title=>"",:id=>""}>< My Activity		
+							%li
+								%a{:href=>"#tabs-2", :title=>"", :class=>"active",  :id=>""}>< Resources
+							%li
+								%a{:href=>"#tabs-3", :title=>"", :id=>""}>< Asks
+						%div.feed-content.activity#tabs-1
+							%div.story.timestamp
+								%h2 Today
+							%div.story.clearfix
+								%div.user-avatar
+									%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
+								%div.story-main
+									%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
+								%div.story-status
+									%div.feedback-buttons
+										%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
+										%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
+							%div.story.clearfix
+								%div.user-avatar
+									%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
+								%div.story-main
+									%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
+								%div.story-status
+									%div.feedback-buttons
+										%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
+										%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike	
+							%div.story.timestamp
+								%h2 August 13th
+							%div.story.clearfix
+								%div.user-avatar
+									%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
+								%div.story-main
+									%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
+								%div.story-status
+									%div.feedback-buttons
+										%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
+										%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
+						%div.feed-content.resources#tabs-2
+							%div.third
+								%ul
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+							%div.third
+								%ul
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+							%div.third
+								%ul
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+				

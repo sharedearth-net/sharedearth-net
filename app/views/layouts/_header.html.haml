@@ -9,49 +9,43 @@
 		%div.resource-list
 			%div.resource-container
 				.resource
-					=current_user.person.trusted_network.size
-				/ %a{:href=>"#", :title=>"Human", :class=>"resource resource-human"}21						
+					=current_user.person.trusted_network.size					
 			%div.resource-container
 				.resource.resource-gift
 					=current_user.person.reputation_rating.gift_actions_count.to_s.to_s
-				/ %a{:href=>"#", :title=>"Human", :class=>"resource resource-gift"}534						
 			%div.resource-container
 				.resource.resource-collect
-					=current_user.person.items.count	
-				/ %a{:href=>"#", :title=>"Human", :class=>"resource resource-collect"}321						
+					=current_user.person.items.count
 			%div.resource-container
 				.resource.resource-davinci
 					=current_user.person.reputation_rating.distinct_people_count.to_s
-				/ %a{:href=>"#", :title=>"Human", :class=>"resource resource-davinci"}3 						
 			%div.resource-container
 				.resource.resource-thumbsup
 					-feedback_rating = current_user.person.reputation_rating.feedback_rating?
 					=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%")
-				/ %a{:href=>"#", :title=>"Human", :class=>"resource  resource-thumbsup"}54
 		%div.profile-settings
 			%div.profile-left
 				%div.row
 					.user-name
 						=current_user.name
-					/ %a{:href=>"#", :title=>"Dan Gooden", :class=>"user-name"} Dan Gooden
 				%div.row
 					=link_to "Settings", "#", :class => "settings-button", :id => "settings-menu"
-					/ %a{:href=>"#", :title=>"settings", :class=>"settings-button", :id=>"settings-menu"} Settings
+					
 					%div.settings-dd#settings-dd
 						%ul
 							%li
-								%a{:href=>"#", :title=>"settings"} Settings
+								=link_to "Settings", "#"
 							%li
-								%a{:href=>"#", :title=>"Edit Profile"} Edit Profile
+								=link_to "Edit Profile", "#"
 							%li
-								%a{:href=>"#", :title=>"Disconnect"} Disconnect
+								=link_to "Disconnect", "#"
 						
 			%div.user-avatar
 				= image_tag current_user.avatar(:square), :class => "thumb"
 %div.wrapper.subheader
 	%div.container
 		%div.left
-			%a{:href=>"#", :title=>"SharedEarth", :class=>"logo"} SharedEarth
+			=link_to "SharedEarth", root_url, :class => "logo"
 		%div.right
 			%div.buttons
 				-if !current_user.blank?
