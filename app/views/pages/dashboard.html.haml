@@ -3,12 +3,12 @@
 	%head
 		%title= @page_title
 		
-		%link{:type=>"text/css", :href=>"less/dashboard.less", :rel=>"stylesheet/less"}
-		%script{:type=>"text/javascript", :src=>"js/modernizr.js"}
-		%script{:type=>"text/javascript", :src=>"js/less.js"}
-		%script{:type=>"text/javascript", :src=>"js/jquery.js"}
-		%script{:type=>"text/javascript", :src=>"js/jquery.ui.1.9.1.js"}
-		%script{:type=>"text/javascript", :src=>"js/functions.js"}
+		/ %link{:type=>"text/css", :href=>"less/dashboard.less", :rel=>"stylesheet/less"}
+		/ %script{:type=>"text/javascript", :src=>"js/modernizr.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/less.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.ui.1.9.1.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/functions.js"}
 	%body 
 		
 		%div.wrapper.notification
@@ -93,16 +93,3 @@
 						-else
 							=render "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } 
 						%a{:href=>"#", :title=>"View more", :class=>"more"} View More
-		%footer.wrapper
-			%div.container
-				%nav.left 
-					%a{:href=>"#", :title=>"About"} About
-					%a{:href=>"#", :title=>"About"} Commons
-					%a{:href=>"#", :title=>"About"} Legal
-					%a{:href=>"#", :title=>"About"} Transparency
-					%a{:href=>"#", :title=>"About"} Blog
-					%a{:href=>"#", :title=>"About"} Contribute
-					%a{:href=>"#", :title=>"About"} Contact
-				%div.right.social-links
-					%div.fb
-					%div.tw

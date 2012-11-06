@@ -35,7 +35,8 @@
 						=current_user.name
 					/ %a{:href=>"#", :title=>"Dan Gooden", :class=>"user-name"} Dan Gooden
 				%div.row
-					%a{:href=>"#", :title=>"settings", :class=>"settings-button", :id=>"settings-menu"} Settings
+					=link_to "Settings", "#", :class => "settings-button", :id => "settings-menu"
+					/ %a{:href=>"#", :title=>"settings", :class=>"settings-button", :id=>"settings-menu"} Settings
 					%div.settings-dd#settings-dd
 						%ul
 							%li
@@ -53,9 +54,10 @@
 			%a{:href=>"#", :title=>"SharedEarth", :class=>"logo"} SharedEarth
 		%div.right
 			%div.buttons
-				%a{:href=>"#", :title=>"Share", :class=>"button"} Share
-				%a{:href=>"#", :title=>"Ask", :class=>"button"} Ask
-				%a{:href=>"#", :title=>"Connect", :class=>"button"} Connect
+				-if !current_user.blank?
+					=link_to "Share", "#", :class => "button"
+					=link_to "Ask", "#", :class => "button"
+				=link_to "Connect", "#", :class => "button"
 			%div.search-form
 				%form
 					%input{:type=>"text", :placeholder=>"Search", :class=>"search-input"}
