@@ -1,16 +1,8 @@
-.span1
-
-.span6
-
+%div.story-meta
+	= "#{time_ago_in_words req.created_at} ago"
 	-if req.requester?(current_user.person)
-		%li
-			= link_to "cancel", network_request_path(req), :id => "cancel_button", :method => :delete
+		= link_to "cancel", network_request_path(req), :id => "cancel_button", :method => :delete
 	-else
-		%li
-			= link_to "view profile", person_path(req.person)
-		%li
-			= link_to "confirm", confirm_network_request_path(req), :id => "confirm_button", :method => :put
-		%li
-			= link_to "deny", deny_network_request_path(req), :id => "deny_button", :method => :put
-	.time-since
-		= "#{time_ago_in_words req.created_at} ago"
+		= link_to "view profile", person_path(req.person)
+		= link_to "confirm", confirm_network_request_path(req), :id => "confirm_button", :method => :put
+		= link_to "deny", deny_network_request_path(req), :id => "deny_button", :method => :put

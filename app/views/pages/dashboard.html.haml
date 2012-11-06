@@ -1,93 +1,130 @@
--if current_user.person.trusted_network_size == 0
-	-dashboard_class = "empty clearfix"
--else
-	-dashboard_class = "clearfix"
-
-.dashboard-page
-	.row-fluid
-		.span9.activity-action
-			.row-fluid
-				.span4
-					%span.my-activity.active
-						=link_to "MY ACTIVITY", "#"
-					%span.actions
-						=link_to "ACTIONS", "#"
-			.row-fluid
-				.span12.activity-action-click
-					.inner-items
-						.my-activity-click
-							%ul(class="my-activity-1")
-								-unless @requests.count.zero?
-									.content-box-holder123
-										%ul
-											-@request_dates.each do |date,requests|
-												.date-style
-													-if date == Date.today.strftime("%B %d")
-														Today
-													-else
-														=date
-
-												-requests.each do |req|
-													-if req.is_a? ItemRequest
-														=render :partial => "shared/item_request_content_box", :locals => { :req => req }
-													-elsif req.is_a? NetworkRequest
-														%li{:class => "clearfix"}
-															.span1
-																=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
-															.inner-content
-																.action.clearfix
-																	%ul
-																		.row-fluid
-																			= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
-
-							
-						.my-action-click.hidden-class
-							%ul(class="my-action")
-								-@recent_activity_dates.each do |date, recent_activity_logs|
-									.date-style
+!!! 5
+%html
+	%head
+		%title= @page_title
+		
+		%link{:type=>"text/css", :href=>"less/dashboard.less", :rel=>"stylesheet/less"}
+		%script{:type=>"text/javascript", :src=>"js/modernizr.js"}
+		%script{:type=>"text/javascript", :src=>"js/less.js"}
+		%script{:type=>"text/javascript", :src=>"js/jquery.js"}
+		%script{:type=>"text/javascript", :src=>"js/jquery.ui.1.9.1.js"}
+		%script{:type=>"text/javascript", :src=>"js/functions.js"}
+	%body 
+		
+		%div.wrapper.notification
+			%div.container
+				%span Welcome to sharedearth.net! Get started by adding your items via the share button above.
+				%button.close +
+		%div.wrapper
+			%div.container
+				%section.dashboard-feed.page-content
+					%div.feed#tabs
+						%ul.feed-tabs
+							%li
+								%a{:href=>"#tabs-1", :title=>"", :class=>"", :id=>""}><
+									My activity
+									%div.notification-bubble 15
+							%li
+								%a{:href=>"#tabs-2", :title=>"", :id=>""}>< Actions
+							%li
+								%a{:href=>"#tabs-3", :title=>"", :id=>""}>< Third
+						%div.feed-content.activity#tabs-1
+							%div.story.clearfix
+								-@request_dates.each do |date,requests|
+									%div.story.timestamp
 										-if date == Date.today.strftime("%B %d")
 											Today
 										-else
 											=date
-									-recent_activity_logs.each do |activity_log|
-										%li
-											= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
-											-activity_log.is_read!
-									- end unless @recent_activity_logs.nil?
 
-
-		.span3.test
-			.row-fluid
-				.row-fluid.building-commons
-					
-					.span12
+									-requests.each do |req|
+										-if req.is_a? ItemRequest
+											=render :partial => "shared/item_request_content_box", :locals => { :req => req }
+										-elsif req.is_a? NetworkRequest
+											%div.user-avatar
+												=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
+											= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
 						
-						.building-commons-top
-					
-						.building-commons-details
-							.building-commons-details-background
-								-@item_types.each do |item|
-									.row-fluid.item-type.bottom-border
-										.span8
-											=item.item_type
-										.span4
-											=link_to image_tag("share-mine.png"), "#"
-					
-						.building-commons-bottom
-							.view-more
-								=link_to "VIEW MORE", "#"
-							
-			.row-fluid
-				.row-fluid.my-community-box
-					.span12
-						.network-status-info
-							=render "shared/network_status_info"
-						.my-community-details
-							.my-community-details-background
-								-if current_person.personal_network_size == 0
-									=render 'shared/news_feed_empty'
-								-else
-									=render "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } 
-						.my-community-box-bottom
-							.view-more
-								=link_to "VIEW MORE", community_path
+						%div.feed-content.actions#tabs-2
+							%div.story.clearfix
+								%ul
+									-@recent_activity_dates.each do |date, recent_activity_logs|
+										%li
+											%div.story.timestamp
+												-if date == Date.today.strftime("%B %d")
+													Today
+												-else
+													=date
+
+											-recent_activity_logs.each do |activity_log|
+												= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
+												-activity_log.is_read!
+											- end unless @recent_activity_logs.nil?
+
+						/ 		%div.user-avatar
+						/ 			%img{:src=>"/assets/img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
+						/ 		%div.story-main
+						/ 			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
+						/ 		%div.story-status
+						/ 			%div.feedback-buttons
+						/ 				%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
+						/ 				%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
+						/ 	%div.story.clearfix
+						/ 		%div.user-avatar
+						/ 			%img{:src=>"/assets/img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
+						/ 		%div.story-main
+						/ 			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
+						/ 		%div.story-status
+						/ 			%div.feedback-buttons
+						/ 				%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
+						/ 				%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike	
+						/ 	%div.story.timestamp
+						/ 		%h2 August 13th
+						/ 	%div.story.clearfix
+						/ 		%div.user-avatar
+						/ 			%img{:src=>"/assets/img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
+						/ 		%div.story-main
+						/ 			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
+						/ 		%div.story-status
+						/ 			%div.feedback-buttons
+						/ 				%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
+						/ 				%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
+				%aside.dashboard-sidebar.sidebar
+					%div.block.sidebar-block
+						%hgroup
+							%h1 building the commons
+							%h2 Do you own the following?
+						%ul.block-list
+							-@item_types.each do |item|
+								%li
+									%span.resource
+										=item.item_type
+									=link_to "Share Mine", "#", :class => "button medium"
+						%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+					%div.block.sidebar-block
+						%h1.community-header
+							My Community
+						%div.community-info
+							%span.people
+								= network_status_personal_network
+							%span.resources 
+								= network_status_items
+						/ %ul.block-list
+						-if current_person.personal_network_size == 0
+							=render 'shared/news_feed_empty'
+						-else
+							=render "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } 
+						%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+		%footer.wrapper
+			%div.container
+				%nav.left 
+					%a{:href=>"#", :title=>"About"} About
+					%a{:href=>"#", :title=>"About"} Commons
+					%a{:href=>"#", :title=>"About"} Legal
+					%a{:href=>"#", :title=>"About"} Transparency
+					%a{:href=>"#", :title=>"About"} Blog
+					%a{:href=>"#", :title=>"About"} Contribute
+					%a{:href=>"#", :title=>"About"} Contact
+				%div.right.social-links
+					%div.fb
+					%div.tw

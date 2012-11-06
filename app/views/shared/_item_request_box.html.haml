@@ -1,10 +1,4 @@
-.inner-content
-	.span8
-		
-		=render "shared/item_request_sentence", :req => req, :dashboard => true
-		.time-since
-			= "#{time_ago_in_words req.created_at} ago"
-	.span4
-		.action.clearfix
-			%ul
-				= render "shared/item_request_actions_compact", :req => req
+=render "shared/item_request_sentence", :req => req, :dashboard => true
+%div.story-meta
+	= "#{time_ago_in_words req.created_at} ago"
+	= render "shared/item_request_actions_compact", :req => req

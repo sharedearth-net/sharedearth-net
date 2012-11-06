@@ -1,0 +1,107 @@
+@import "general.less";
+
+
+.notification {
+	.container {
+		position: relative;
+	}
+	.gradient(#e5f2e0, #e5f2e0, #f3f3f3);
+	border-top: 1px solid @lightGreen;
+	border-bottom: 1px solid @lightGreen;
+	.close {
+		display: inline;
+		position: absolute;
+		right: 15px;
+		font-weight: bold;
+		border: none;
+		background: transparent;
+		font-size: 30px;
+		line-height: 19px;
+		font-family: "Century Gothic";
+		.rotation(45deg);
+		color: #8e8e8e;
+	}
+}
+
+.feed {
+	background: #99b856;
+	padding: 21px 11px 31px;
+	margin-top: 40px;
+	.border-radius(5px, 5px, 5px, 0);
+	position: relative;
+}
+.feed-content {
+	background: #e7f4dd;
+}
+.actions {
+	.story {
+		margin-left: 50px;
+		border-bottom: none;
+		position: relative;
+		&:before {
+			content: "";
+			position: absolute;
+			top: 25px;
+			left: -30px;
+			display: block;
+			width: 14px;
+			height: 14px;
+			background: #f0fbe8;
+			.rounded(50px);
+			.box-shadow(0px 1px 1px rgba(153,184,86,.75));
+		}
+		&.timestamp {
+			h2 {
+				color: @lightGreen;
+				font-size: 14px;
+				a {
+					text-decoration: none;
+					&:hover {
+						color: @darkGreen;
+					}
+				}
+			}
+			&:before {
+				top: 12px;
+			}
+		}
+	}
+}
+
+.feedback-buttons {
+	margin: 0 auto;
+	text-align: center;
+	a {
+		display: inline-block;
+		width: 19px;
+		height: 22px;
+		text-indent: -9999em;
+		margin: 0 5px;
+	}
+	.like-button {
+		background: url(/assets/img/icons/like.png) no-repeat;
+		&:hover {
+			background: url(/assets/img/icons/like-active.png) no-repeat;
+		}
+	}
+	.dislike-button{
+		background: url(/assets/img/icons/dislike.png) no-repeat;
+		&:hover {
+			background: url(/assets/img/icons/dislike-active.png) no-repeat;
+		}
+	}
+}
+
+.comment {
+	textarea {
+		max-width: 100%;
+		width: 100%;
+		border: 1px solid #99b856;
+	}
+}
+
+.profile-highlight {
+	color: @lightGreen;
+	font-weight: bold;
+}
+

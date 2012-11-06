@@ -1,5 +1,7 @@
-.action.clearfix
-	%ul
-		%li
-			="#{time_ago_in_words(event_log.created_at)} ago"
-			=event_actions(event_log) unless event_log.event_type.nil?
+/ %div.story-meta
+/ 	%span.date
+
+%div.story-meta
+	%span.date
+		="#{time_ago_in_words(event_log.created_at)} ago"
+	=event_actions(event_log) unless event_log.event_type.nil?

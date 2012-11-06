@@ -1,7 +1,7 @@
 -unless req.rejected? || req.canceled?
 	%li{:class => "clearfix"}
-		.span1
+		%div.user-avatar
 			= link_to image_tag(item_request_photo(req, :size => :square), :class => "thumb"), request_path(req)
-		.span11
-			= render "shared/item_request_box", :req => req
-			/ = render '/comments/comment_box', :object => req, :new_comment => true, :is_private => true
+		
+		= render "shared/item_request_box", :req => req
+		/ = render '/comments/comment_box', :object => req, :new_comment => true, :is_private => true
