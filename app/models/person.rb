@@ -60,6 +60,10 @@ class Person < ActiveRecord::Base
     users.where(:provider => :facebook).first
   end
 
+  # def current_person(user)
+  #   Person.find(user.id)
+  # end
+
   def create_staring_reputation_rating!
     create_reputation_rating(:gift_actions  => 0,:distinct_people => 0,
                              :total_actions => 0, :positive_feedback => 0,
