@@ -2,6 +2,7 @@ class VillagesController < EntitiesController
   before_filter :authenticate_user!
   before_filter :find_entity, :only => [:show, :edit, :update, :destroy, :leave, :join]
   before_filter :only_admin!, :only => [:edit, :update, :destroy]
+  
   def index
     @villages = Village.all
   end

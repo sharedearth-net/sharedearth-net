@@ -13,8 +13,8 @@ module FbFriendsHelper
 
     elsif current_person.requested_trusted_relationship?(person)
       text = "confirm trust"
-      href = confirm_human_network_request_path(
-             current_person.requested_trusted_relationship(person))
+      # href = confirm_human_network_request_path(
+      #        current_person.requested_trusted_relationship(person))
       options = { :method => :put, :id => 'confirm_button' }
 
     else

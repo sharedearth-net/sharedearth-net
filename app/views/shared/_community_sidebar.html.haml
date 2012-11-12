@@ -6,7 +6,7 @@
 			= network_status_personal_network
 		%span.resources 
 			= network_status_items
-	/ %ul.block-list
+	
 	-if current_person.personal_network_size == 0
 		=render 'shared/news_feed_empty'
 	-else

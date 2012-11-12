@@ -32,7 +32,7 @@ class PagesController < ApplicationController
     current_user.person.reset_notification_count!
     current_user.record_last_activity!
     current_user.person.news_feed
-    @events = current_user.network_activity.page(params[:page]).per(25)
+    @events = current_user.network_activity.page(params[:page]).per(5)
   end
 
   def community

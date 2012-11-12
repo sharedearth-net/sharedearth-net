@@ -1,0 +1,178 @@
+!!! 5
+%html
+	%head
+		%title= @page_title
+		
+		/ %link{:type=>"text/css", :href=>"less/connect.less", :rel=>"stylesheet/less"}
+
+		/ %script{:type=>"text/javascript", :src=>"js/modernizr.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/less.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.ui.1.9.1.js"}
+
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.rating.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.screwdefaultbuttonsV2.min.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/functions.js"}
+		
+		/ %script{:type=>"text/javascript", :src=>"js/modal.js"}
+	%body 
+		%div.wrapper
+			%section.container.connect-search.subheader
+				%h1 Connect
+				%div.row
+					%div.search-form
+						%form
+							%input{:type=>"text", :placeholder=>"Search villages, groups or people", :class=>"search-input"}
+							%input{:type=>"button", :value=>"Search", :class=>"search-button"}
+					%div.buttons.right
+						%button.button.create-village{:onclick=>"overlay()"} Create Village
+					%div#overlay
+						%section.modal.create-village
+							%header.row
+								%h1.village Create Village
+								%button.close{:onclick=>"overlay()"} Close
+							%div.content.row
+								%form
+									%fieldset
+										%label{:for=>"name"} Name
+										%input{:type=>"text", :id=>"name", :name=>"name", :placeholder=>"Name"}
+									%fieldset
+										%label{:for=>"description"} name
+										%textarea{:id=>"description", :name=>"description"} Description
+									%fieldset
+										%label{:for=>"Country"} Country
+										%input{:type=>"text", :id=>"Country", :name=>"Country", :placeholder=>"Country"}
+									%fieldset
+										%label{:for=>"dtate"} State
+										%input{:type=>"text", :id=>"state", :name=>"state", :placeholder=>"State"}
+									%fieldset
+										%label{:for=>"city"} City (optional)
+										%input{:type=>"text", :id=>"city", :name=>"city", :placeholder=>"City"}
+									%fieldset
+										%label{:for=>"postcode"} Postcode (optional)
+										%input{:type=>"text", :id=>"postcode", :name=>"postcode", :placeholder=>"Postcode"}
+									%fieldset
+										%label{:for=>"street"} Street (optional)
+										%input{:type=>"text", :id=>"street", :name=>"street", :placeholder=>"Street"}
+									%fieldset
+										%input{:type=>"submit", :value=>"Create Village", :class=>"button"}
+		%div.wrapper
+			%div.container
+				%section.page-content.clearfix
+					%div.suggestions
+						%div.row.suggest
+							%h1.communities-block Suggested Communities
+							%a.refresh-button{:href=>"#"} Refresh
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+					%div.suggestions
+						%div.row.suggest
+							%h1.people-block People I May Know
+							%a.refresh-button{:href=>"#"} Refresh
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+						%div.community-box
+							%div.single-community
+								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								%div.content
+									%h1 Musicians in the..
+									%span.meta Newtown, NSW, Australia
+									%a.button.ui-switch{:href=>"#"} Join
+				%aside.dashboard-sidebar.sidebar
+					%div.block.sidebar-block
+						%hgroup
+							%h1.suggest-side-header musicians in the inner west
+						%div.block-list
+							%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\
+						%ul.block-list
+							%li
+								%div.trusted-block
+									%strong 15 people
+									from your trusted network
+							%li
+								%div.communities-block
+									%strong 15 people
+									from your trusted network
+							%li
+								%div.people-block
+									%strong 350 people
+									in this group
+							%li
+								%div.items-block 
+									%strong 15 people
+									from your trusted network
+						%a{:href=>"#", :title=>"View more", :class=>"more"} View More

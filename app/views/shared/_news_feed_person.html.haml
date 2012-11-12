@@ -1,12 +1,11 @@
-/ TO DO: should only create a public event log if the two parties had a recent interaction that resulted in neutral or negative feedback
 %ul.block-list
 	-@events.each do |event|
 		-if event.event_log.event_type_id != 23
 			-event_sentence = event_log_sentence(event.event_log, nil, EventDisplay::DASHBOARD_FEED)
 			-unless event_sentence.empty?
-				=event_sentence
+				%p
+					=event_sentence
 				
 				= render :partial => "shared/event_log_actions_compact", :locals => { :event_log => event.event_log }
 				/ = render :partial => '/comments/comment_box', :locals => {:object => event.event_log}
-
 	-end unless @events.nil?

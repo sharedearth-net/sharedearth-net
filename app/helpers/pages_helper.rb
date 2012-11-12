@@ -6,15 +6,15 @@ module PagesHelper
     person||= current_user.person
     (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "normal" : text_class = ""
 
-    @item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => text_class unless event_log.action_object_type_readable.nil?
+    @item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id) unless event_log.action_object_type_readable.nil?
 
-    @requester           = link_to_person event_log.primary, :downcase_you => true, :class => text_class  unless event_log.primary.nil?
-  	@requester_possesive = link_to_person event_log.primary, :downcase_you => true, :possessive => true, :class => text_class unless event_log.primary.nil?
-    @gifter              = link_to_person event_log.secondary, :downcase_you => true, :class => text_class unless event_log.secondary.nil?
-  	@gifter_possesive    = link_to_person event_log.secondary, :downcase_you => true, :possessive => true, :class => text_class unless event_log.secondary.nil?
+    @requester           = link_to_person event_log.primary, :downcase_you => true  unless event_log.primary.nil?
+  	@requester_possesive = link_to_person event_log.primary, :downcase_you => true, :possessive => true unless event_log.primary.nil?
+    @gifter              = link_to_person event_log.secondary, :downcase_you => true unless event_log.secondary.nil?
+  	@gifter_possesive    = link_to_person event_log.secondary, :downcase_you => true, :possessive => true unless event_log.secondary.nil?
 
-    @first_person_full  = link_to_person event_log.primary, :check_current_user => false, :downcase_you => true, :class => text_class unless event_log.primary.nil?
-    @second_person_full = link_to_person event_log.secondary, :check_current_user => false, :downcase_you => true, :class => text_class unless event_log.secondary.nil?
+    @first_person_full  = link_to_person event_log.primary, :check_current_user => false, :downcase_you => true unless event_log.primary.nil?
+    @second_person_full = link_to_person event_log.secondary, :check_current_user => false, :downcase_you => true unless event_log.secondary.nil?
 
     sentence = nil
 
@@ -712,23 +712,23 @@ module PagesHelper
     begin
       case log.event_type.name
         when 'SHARING'
-          res = "<li>#{link_to "view action", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+          res = "#{link_to "view action", request_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"
         when 'ADD ITEM'
           res = links_for_add_item(log, comments)
         when 'NEGATIVE FEEDBACK'
-          res = "<li>#{link_to "view feedback", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+          res = "#{link_to "view feedback", request_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"
         when 'GIFTING'
-          res = "<li>#{link_to "view action", request_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+          res = "#{link_to "view action", request_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"
         when 'TRUST ESTABLISHED'
-          res = "<li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+          res = "<a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"
         when 'TRUST WITHDRAWN'
-          res = "<li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+          res = "<a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"
         when 'ITEM DAMAGED'
-          res = "<li>#{link_to "view item", item_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"  
+          res = "#{link_to "view item", item_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"  
         when 'ITEM REPAIRED'
-            res = "<li>#{link_to "view item", item_path(log.related)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"  
+            res = "#{link_to "view item", item_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"  
         when 'FB FRIEND JOIN'
-          res = "<li>#{link_to "view profile", person_path(log.primary)}</li><li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"  
+          res = "#{link_to "view profile", person_path(log.primary)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"  
         else
           res = ""
       end

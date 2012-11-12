@@ -1,0 +1,153 @@
+@import "general.less";
+
+.item-rating {
+	margin-left: 50px;
+}
+
+.community-item {
+	background: #f2fcd7;
+	width: 100%;
+	border-bottom: 1px solid #bdcfaf;
+	padding: 10px;
+	.item-picture, .item-information, .owner-information, .item-actions {
+		float: left;
+	}
+	.item-picture {
+		width: 8%;
+		margin-right: 5%;
+		img {
+			width: 100%;
+		}
+	}
+	.item-information{
+		width: 42%;
+		.item-type {
+			color: @lightGreen;
+			float:left;
+			margin-right: 10px;
+		}
+		.item-rating{
+			float: left;
+		}
+	}
+	.owner-information {
+		width: 30%;
+	}
+	.item-actions {
+		width: 15%;
+	}
+}
+
+.owner-info {
+	.clearfix;
+	li {
+		display: block;
+		margin: 0 5px 0 0;
+		padding: 0px;
+		float: left;
+		text-indent: -9999em;
+		display: table;
+		height: 30px;
+		
+		.vCenter {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+	.globe {
+		width: 16px;
+		height: 16px;
+		background: url(/assets/img/icons/globe-sprite.png) no-repeat;
+		&:hover, &.active{
+			background-position: 0 -18px;	
+		}
+	}
+	.community {
+		width: 24px;
+		height: 18px;
+		margin: 0;
+		background: url(/assets/img/icons/community-sprite.png) no-repeat;
+		&:hover, &.active{
+			background-position: 0 -20px;	
+		}
+	}
+	.trusted {
+		width: 20px;
+		height: 20px;
+		background: url(/assets/img/icons/trusted-sprite.png) no-repeat;
+		&:hover, &.active{
+			background-position: 0 -22px;	
+		}
+	}
+	.village {
+		width: 25px;
+		height: 12px;
+		background: url(/assets/img/icons/house-sprite.png) no-repeat;
+		&:hover, &.active{
+			background-position: 0 -14px;	
+		}
+	}
+	.group {
+		width: 14px;
+		height: 17px;
+		background: url(/assets/img/icons/group-sprite.png) no-repeat;
+		&:hover, &.active{
+			background-position: 0 -19px;	
+		}
+	}
+}
+.feed-tabs {
+	li {
+		a {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+}
+
+/* SMALL RATING STYLING */
+/* jQuery.Rating Plugin CSS - http://www.fyneworks.com/jquery/star-rating/ */
+div.rating-cancel,
+div.star-rating  {
+	float:left;
+	width:17px;
+	height:16px;
+	text-indent:-999em;
+	cursor:pointer;
+	display:block;
+	background:transparent;
+	overflow:hidden
+}
+
+
+div.star-rating,
+div.star-rating a{
+	background: url(/assets/img/icons/star-rating-small.png) no-repeat 0 0px
+}
+
+div.rating-cancel a,
+div.star-rating a{
+	display:block;
+	width: 17px;
+	height: 16px;
+	background-position: 0 0px;
+	border:0
+}
+div.star-rating-on a{
+	background-position:0 -17px !important
+}
+
+div.star-rating-hover a{
+	background-position:0 -17px
+}
+
+/* Read Only CSS */
+div.star-rating-readonly a{
+	cursor:default !important
+}
+
+/* Partial Star CSS */
+div.star-rating{
+	background:transparent!important;
+	overflow:hidden!important
+}

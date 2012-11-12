@@ -26,7 +26,7 @@
 				
 				%ul
 					%li
-						= '#{time_ago_in_words sentence["time"]} ago'
+						= "#{time_ago_in_words(sentence["time"])} ago"
 					-if event
 						%li
 							=link_to "comments #{log.comments.count}", "#", :class => "comments-show-hide"
@@ -38,7 +38,6 @@
 		-end unless feed.empty?
 
 		-if feed.empty?
-			%li{:class => "sidebar-box clearfix"}
-				.inner-content
-					%p
-						This person doesn't have any activity yet
+			%li
+				%p
+					This person doesn't have any activity yet

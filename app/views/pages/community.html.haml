@@ -1,45 +1,409 @@
-#community-page.clearfix
-	#sidebar-left
-		-if params[:type].nil?
-			= image_tag("your_network.png", :class => "thumb", :alt => "Your Network")
-		-elsif
-			= image_tag("trusted_icon_yourself.png", :class => "thumb", :alt => "Trusted Network")
+!!! 5
+%html
+	%head
+		%title= @page_title
+		
+		/ %link{:type=>"text/css", :href=>"less/community.less", :rel=>"stylesheet/less"}
 
-		%ul
-			%li{:class => "all #{'selected' if params[:type].nil? && @entity.nil?}"}
-				=link_to 'Your Network', network_path
-			%li{:class => "trusted #{'selected' if trusted_network}"}
-				= link_to 'Trusted Network', network_path(:type => 'trusted')
-			-@entities.each do |entity|
-				%li{:class => "#{'selected' if entity.id == @entity.try(:id)}"}
-					=link_to entity.specific_entity.name, network_path(:entity_id => entity.id )
-			-end unless @entities.empty?
+		/ %script{:type=>"text/javascript", :src=>"js/modernizr.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/less.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.ui.1.9.1.js"}
 
-	#content
-		.content-box-holder.no-bg
-			%ul
-				%li{:class => "content-box clearfix"}
-					.inner-content
-						%h2
-							-unless @entity.nil?
-								=@entity.specific_entity.name
-							-else
-								-if params[:type].nil?
-									Your Network
-								-elsif
-									Trusted Network
-
-						%p.description
-							-if params[:type].nil?
-								The people from your trusted network, communities and villages.
-								=link_to "Find the others.", findtheothers_path, :class => "trusted"
-							-elsif trusted_network
-								The family, friends and people you trust unreservedly, and share willingly with.
-								%br
-								=link_to "Find the others.", findtheothers_path, :class => "trusted"
-
-			= render "items/item_list"
-
-	#sidebar
-		-title = trusted_network ? 'Trusted Network Activity' : 'Your Network Activity'
-		=render :partial => "shared/news_feed_person", :locals => { :events => @events, :title => title}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.rating.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.screwdefaultbuttonsV2.min.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/functions.js"}
+		
+		/ %script{:type=>"text/javascript", :src=>"js/modal.js"}
+	%body
+		%div.wrapper
+			%div.container
+				%section.community-feed.page-content.clearfix
+					%section.community-page-header.clearfix
+						%div.community-avatar
+							= image_tag current_user.avatar(:square)
+						%div.community-content
+							%h1 Your Community
+							%h2 The people you are connected to
+							%p We are interdepedent on those who surround us. We are individuals who are part of a larger social organism.
+							%div.community-header-links
+								%a{:href=>"#", :class=>"people"} 12040 people
+								%a{:href=>"#", :class=>"trusted"} 15 people that I trust
+								%a{:href=>"#", :class=>"items"} 170 items available
+						%hr.row
+						%form.row
+							%textarea Post to community discussion board
+					%div.feed#tabs
+						%ul.feed-tabs
+							%li
+								%a{:href=>"#tabs-1", :title=>"", :class=>"", :id=>""}><
+									Activity
+							%li
+								%a{:href=>"#tabs-2", :title=>"", :id=>""}>< Resources
+							%li
+								%a{:href=>"#tabs-3", :title=>"", :id=>""}>< Asks
+							%li
+								%a{:href=>"#tabs-4", :title=>"", :id=>""}>< Humans
+							%li
+								%a{:href=>"#tabs-5", :title=>"", :id=>""}>< Search
+						%div.feed-content.activity#tabs-1
+							%div.story.timestamp
+								%h2 Today
+							%div.story.clearfix
+								%div.user-avatar
+									%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
+								%div.story-main
+									%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
+								%div.story-status
+									%div.feedback-buttons
+										%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
+										%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
+							%div.story.clearfix
+								%div.user-avatar
+									%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
+								%div.story-main
+									%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
+								%div.story-status
+									%div.feedback-buttons
+										%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
+										%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike	
+							%div.story.timestamp
+								%h2 August 13th
+							%div.story.clearfix
+								%div.user-avatar
+									%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
+								%div.story-main
+									%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
+								%div.story-status
+									%div.feedback-buttons
+										%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
+										%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
+						%div.feed-content.resources#tabs-2
+							%div.third
+								%ul
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+							%div.third
+								%ul
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+							%div.third
+								%ul
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+									%li
+										%a{:href=>"#"} Lorem ipsum
+						%div.feed-content.activity#tabs-5
+							%section.content-box
+								%div.content-head
+									%h1 search results for lock
+									%div.search-form
+										%form
+											%input{:type=>"text", :placeholder=>"Search", :class=>"search-input"}
+											%input{:type=>"button", :value=>"Search", :class=>"search-button"}
+								%div.search-result.clearfix
+									%div.people 11 people found
+								%div.search-result.clearfix
+									%div.villages 3 villages found
+								%div.search-result.clearfix
+									%div.groups 7 groups found
+							%section.content-box
+								%div.content-head
+									%h1 52 items found in your community
+								%div.community-item.clearfix
+									%div.item-picture
+										%img{:src=>"img/item.png", :alt=>"Shelter"}
+									%div.item-information
+										%div.row
+											Coleman Gazebo Shelter
+										%div.row
+											%div.item-type
+												commoned
+											%div.item-rating
+												%form
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+									%div.owner-information
+										%div.row.owner-name
+											Johnson John
+										%div.row
+											%ul.owner-info
+												%li
+													%div.vCenter
+														%div.globe Globe?
+												%li
+													%div.vCenter
+														%div.community Community
+												%li
+													%div.vCenter
+														%div.trusted Trusted
+												%li
+													%div.vCenter
+														%div.village Villages
+												%li
+													%div.vCenter
+														%div.group Groups
+									%div.item-actions
+										%button.button.ui-switch Request
+								%div.community-item.clearfix
+									%div.item-picture
+										%img{:src=>"img/item.png", :alt=>"Shelter"}
+									%div.item-information
+										%div.row
+											Coleman Gazebo Shelter
+										%div.row
+											%div.item-type
+												commoned
+											%div.item-rating
+												%form
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+									%div.owner-information
+										%div.row.owner-name
+											Johnson John
+										%div.row
+											%ul.owner-info
+												%li
+													%div.vCenter
+														%div.globe Globe?
+												%li
+													%div.vCenter
+														%div.community Community
+												%li
+													%div.vCenter
+														%div.trusted Trusted
+												%li
+													%div.vCenter
+														%div.village Villages
+												%li
+													%div.vCenter
+														%div.group Groups
+									%div.item-actions
+										%button.button.ui-switch Request
+								%div.community-item.clearfix
+									%div.item-picture
+										%img{:src=>"img/item.png", :alt=>"Shelter"}
+									%div.item-information
+										%div.row
+											Coleman Gazebo Shelter
+										%div.row
+											%div.item-type
+												commoned
+											%div.item-rating
+												%form
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+									%div.owner-information
+										%div.row.owner-name
+											Johnson John
+										%div.row
+											%ul.owner-info
+												%li
+													%div.vCenter
+														%div.globe Globe?
+												%li
+													%div.vCenter
+														%div.community Community
+												%li
+													%div.vCenter
+														%div.trusted Trusted
+												%li
+													%div.vCenter
+														%div.village Villages
+												%li
+													%div.vCenter
+														%div.group Groups
+									%div.item-actions
+										%button.button.ui-switch Request
+								%div.community-item.clearfix
+									%div.item-picture
+										%img{:src=>"img/item.png", :alt=>"Shelter"}
+									%div.item-information
+										%div.row
+											Coleman Gazebo Shelter
+										%div.row
+											%div.item-type
+												commoned
+											%div.item-rating
+												%form
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+									%div.owner-information
+										%div.row.owner-name
+											Johnson John
+										%div.row
+											%ul.owner-info
+												%li
+													%div.vCenter
+														%div.globe Globe?
+												%li
+													%div.vCenter
+														%div.community Community
+												%li
+													%div.vCenter
+														%div.trusted Trusted
+												%li
+													%div.vCenter
+														%div.village Villages
+												%li
+													%div.vCenter
+														%div.group Groups
+									%div.item-actions
+										%button.button.ui-switch Request
+								%div.community-item.clearfix
+									%div.item-picture
+										%img{:src=>"img/item.png", :alt=>"Shelter"}
+									%div.item-information
+										%div.row
+											Coleman Gazebo Shelter
+										%div.row
+											%div.item-type
+												commoned
+											%div.item-rating
+												%form
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+													%input{:type=>"radio", :name=>"rating", :class=>"star"}
+									%div.owner-information
+										%div.row.owner-name
+											Johnson John
+										%div.row
+											%ul.owner-info
+												%li
+													%div.vCenter
+														%div.globe Globe?
+												%li
+													%div.vCenter
+														%div.community Community
+												%li
+													%div.vCenter
+														%div.trusted Trusted
+												%li
+													%div.vCenter
+														%div.village Villages
+												%li
+													%div.vCenter
+														%div.group Groups
+									%div.item-actions
+										%button.button.ui-switch Request
+						
+				%aside.dashboard-sidebar.sidebar
+					%div.block.sidebar-block
+						%hgroup
+							%h1 building the commons
+							%h2 Do you own the following?
+						%ul.block-list
+							%li
+								%span.resource plunger
+								%a{:href=>"#", :title=>"plunger", :class=>"button medium"} Share Mine
+							%li
+								%span.resource hammer
+								%a{:href=>"#", :title=>"hammer", :class=>"button medium"} Share Mine
+							%li
+								%span.resource vacuum cleaner
+								%a{:href=>"#", :title=>"vacuum cleaner", :class=>"button medium"} Share Mine
+							%li
+								%span.resource hot water urn
+								%a{:href=>"#", :title=>"hot water urn", :class=>"button medium"} Share Mine
+							%li
+								%span.resource folding table
+								%a{:href=>"#", :title=>"folding table", :class=>"button medium"} Share Mine
+							%li
+								%span.resource fuse box
+								%a{:href=>"#", :title=>"fuse box", :class=>"button medium"} Share Mine
+						%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+					%div.block.sidebar-block
+						%h1 filter by
+						%h2.filter.heading my community
+						%ul.block-list.filters
+							%li.filter
+								%a.village.active{:href=>"#"} Villages
+							%li.filter
+								%a.trusted.active{:href=>"#"} Trusted Network
+							%li.filter
+								%a.groups.active{:href=>"#"} Groups
+							%li.filter
+								%a.village{:href=>"#"} Villages
+							%li.filter
+								%a.trusted{:href=>"#"} Trusted Network
+							%li.filter
+								%a.groups{:href=>"#"} Groups
+						%a{:href=>"#", :title=>"View more", :class=>"more"} View More
