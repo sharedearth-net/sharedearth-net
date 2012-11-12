@@ -6,20 +6,6 @@
 	-if person.has_location?
 		= person.location
 
--unless viewing_my_profile
-
-	-if person.requested_trusted_relationship?(current_user.person)
-		= link_to "cancel trust request", network_request_path(person.requested_trusted_relationship(current_user.person)), :method => :delete
-
-	-elsif human_network = current_user.person.trusts?(person)
-		= link_to "withdraw trust", human_network_path(human_network), :method => :delete
-
-	-elsif current_user.person.requested_trusted_relationship?(person)
-		= link_to "confirm trust", confirm_network_request_path(current_user.person.requested_trusted_relationship(person)), :id => "confirm_button", :method => :put
-
-	-else
-		= link_to "trust", network_requests_path(:trusted_person_id => person), :method => :post
-
 
 -unless viewing_my_profile
 

@@ -63,7 +63,7 @@
 									
 				%aside.dashboard-sidebar.sidebar
 					%div.block.sidebar-block.reputation
-					
+
 						%header.user-header
 							%div.user-avatar
 								= image_tag @person.avatar(:large), :class => "square", :alt => @person.name
@@ -80,7 +80,9 @@
 					%div.block.sidebar-block.trust-status
 						%div.heading
 							%h1 trust profile
-							%span.status.trusted Trusted
+							%span.status.trusted
+								=render :partial => "shared/trust_status", :locals => { :person => @person, :name => false}
+
 						%ul.block-list.trust-list
 							= render :partial => "shared/trust_profile", :locals => { :person => @person, :name => false}
 
