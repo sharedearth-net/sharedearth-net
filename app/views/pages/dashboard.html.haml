@@ -59,13 +59,6 @@
 											-activity_log.is_read!
 											%br
 										- end unless @recent_activity_logs.nil?
-							/ %div.story.clearfix
-							/ 	-@recent_activity_dates.each do |date, recent_activity_logs|
-							/ 		-recent_activity_logs.each do |activity_log|
-							/ 			= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
-							/ 			-activity_log.is_read!
-							/ 		- end unless @recent_activity_logs.nil?
-
 
 				%aside.dashboard-sidebar.sidebar
 					%div.block.sidebar-block

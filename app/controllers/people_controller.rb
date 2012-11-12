@@ -31,6 +31,7 @@ class PeopleController < ApplicationController
   end
 
   def show
+    @events = @person.network_activity.page(params[:page]).per(5)
     if @person.belongs_to? current_user
       if params[:filter_type].nil?
         @items = @person.items.without_deleted.sort_by{|i| i.item_type.downcase}
