@@ -5,3 +5,6 @@ jQuery ->
 	$('.actions').click (e) ->
 		$('.actions').addClass('.active')
 		$('.my-activity').removeClass('.active')
+
+	# $('.close').click (e) ->
+	# 	$('.notification').hide()

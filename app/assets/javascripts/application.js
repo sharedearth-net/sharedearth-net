@@ -10,6 +10,13 @@ $(document).ready(function() {
 	});
 });
 
+$(document).ready(function() {
+	$('.close').click(function() {
+		$('.notification').hide();
+	});	
+});
+
+
 
 /* textbox class on request-page */
 
