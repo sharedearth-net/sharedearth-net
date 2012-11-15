@@ -1,0 +1,33 @@
+#search-page.clearfix
+	= render :partial => "shared/search_sidebar"
+
+	#content
+		.content-box-holder.no-bg
+			.search-holder
+				= form_tag items_path, :method => 'get' do
+					%div
+						= text_field_tag :search, params[:search]
+						%button{:type => "submit", :title => "search"} Search
+			%h2
+				= link_to image_tag('ic-person.png', :alt => "People", :title => "People")
+				People in 
+				= link_to image_tag('ic-village-comm.png', :alt => "Village", :title => "Village")
+				Sydney
+
+			.items-list.clearfix
+				-if @people.empty?
+					Sorry, nothing matches your search criteria
+				%h3.default-title
+					Frome your trusted network
+
+				%ul.clearfix
+					-@people.each do |person|
+						%li.item.clearer
+							%a{:href => "/items/1"}
+  								%img.thumb{:alt => "", :src => "http://graph.facebook.com/100002086303869/picture/"}
+  							%div
+  								%p
+  									= link_to person.name, person_path(person)
+  					-end if !@people.nil?
+
+

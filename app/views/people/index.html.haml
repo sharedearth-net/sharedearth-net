@@ -1,0 +1,13 @@
+%h1 My friends
+
+%table
+	%tr
+		%th	Name
+		%th	
+
+-@people.each do |person|
+	%tr
+		%td 
+			= link_to person.name, person_path(person)
+
+-end if !@people.nil?
