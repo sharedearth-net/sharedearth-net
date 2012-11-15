@@ -27,9 +27,10 @@
 							%h2 The people you are connected to
 							%p We are interdepedent on those who surround us. We are individuals who are part of a larger social organism.
 							%div.community-header-links
-								%a{:href=>"#", :class=>"people"} 12040 people
-								%a{:href=>"#", :class=>"trusted"} 15 people that I trust
-								%a{:href=>"#", :class=>"items"} 170 items available
+								= link_to "#{@people.count} People", "#", :class => "people"
+								= link_to "#{current_user.person.trusted_network.size} people that I trust", "#", :class => "trusted"
+								= link_to "#{@items.count} items available", "#", :class => "items"
+									
 						%hr.row
 						%form.row
 							%textarea Post to community discussion board
@@ -47,37 +48,24 @@
 							%li
 								%a{:href=>"#tabs-5", :title=>"", :id=>""}>< Search
 						%div.feed-content.activity#tabs-1
-							%div.story.timestamp
-								%h2 Today
-							%div.story.clearfix
-								%div.user-avatar
-									%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
-								%div.story-main
-									%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
-								%div.story-status
-									%div.feedback-buttons
-										%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
-										%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
-							%div.story.clearfix
-								%div.user-avatar
-									%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
-								%div.story-main
-									%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
-								%div.story-status
-									%div.feedback-buttons
-										%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
-										%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike	
-							%div.story.timestamp
-								%h2 August 13th
-							%div.story.clearfix
-								%div.user-avatar
-									%img{:src=>"img/avatar-pidov.jpg", :alt=>"Dan Mcgoo avastar"}
-								%div.story-main
-									%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod,
-								%div.story-status
-									%div.feedback-buttons
-										%a{:href=>"#", :title=>"Like this story", :class=>"like-button"}Like
-										%a{:href=>"#", :title=>"Dislike this story", :class=>"dislike-button"}Dislike
+							-@request_dates.each do |date,requests|
+								%div.story.timestamp
+									%div.story.timestamp
+										-if date == Date.today.strftime("%B %d")
+											%h2 Today
+										-else
+											%h2 
+												=date
+									
+								%div.story.clearfix
+									-requests.each do |req|
+										-if req.is_a? ItemRequest
+											=render :partial => "shared/item_request_content_box", :locals => { :req => req }
+										-elsif req.is_a? NetworkRequest
+											%div.user-avatar
+												=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
+											= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
+
 						%div.feed-content.resources#tabs-2
 							%div.third
 								%ul
@@ -85,78 +73,7 @@
 										%a{:href=>"#"} Lorem ipsum
 									%li
 										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-							%div.third
-								%ul
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-							%div.third
-								%ul
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
-									%li
-										%a{:href=>"#"} Lorem ipsum
+									
 						%div.feed-content.activity#tabs-5
 							%section.content-box
 								%div.content-head
@@ -176,7 +93,7 @@
 									%h1 52 items found in your community
 								%div.community-item.clearfix
 									%div.item-picture
-										%img{:src=>"img/item.png", :alt=>"Shelter"}
+										%img{:src=>"/assets/img/item.png", :alt=>"Shelter"}
 									%div.item-information
 										%div.row
 											Coleman Gazebo Shelter
@@ -366,30 +283,9 @@
 										%button.button.ui-switch Request
 						
 				%aside.dashboard-sidebar.sidebar
-					%div.block.sidebar-block
-						%hgroup
-							%h1 building the commons
-							%h2 Do you own the following?
-						%ul.block-list
-							%li
-								%span.resource plunger
-								%a{:href=>"#", :title=>"plunger", :class=>"button medium"} Share Mine
-							%li
-								%span.resource hammer
-								%a{:href=>"#", :title=>"hammer", :class=>"button medium"} Share Mine
-							%li
-								%span.resource vacuum cleaner
-								%a{:href=>"#", :title=>"vacuum cleaner", :class=>"button medium"} Share Mine
-							%li
-								%span.resource hot water urn
-								%a{:href=>"#", :title=>"hot water urn", :class=>"button medium"} Share Mine
-							%li
-								%span.resource folding table
-								%a{:href=>"#", :title=>"folding table", :class=>"button medium"} Share Mine
-							%li
-								%span.resource fuse box
-								%a{:href=>"#", :title=>"fuse box", :class=>"button medium"} Share Mine
-						%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+					
+					=render :partial => "shared/commons_sidebar"
+
 					%div.block.sidebar-block
 						%h1 filter by
 						%h2.filter.heading my community

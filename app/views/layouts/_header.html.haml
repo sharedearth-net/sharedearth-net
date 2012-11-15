@@ -5,7 +5,8 @@
 				%a{:href=>"#", :class=>"community-button community-logo"} 
 					%img{:src=>"/assets/img/icons/community-logo.png", :alt=>"SharedEarth Community"}
 					%div.notification-bubble 3
-				%a{:href=>"#", :class=>"community-button community-link"} Community
+				=link_to "Community", community_path, :class => "community-button community-link"
+				
 		%div.resource-list
 			%div.resource-container
 				.resource.resource-human
@@ -54,5 +55,7 @@
 				=link_to "Connect", "#", :class => "button"
 			%div.search-form
 				%form
-					%input{:type=>"text", :placeholder=>"Search", :class=>"search-input"}
-					%input{:type=>"button", :value=>"Search", :class=>"search-button"}
+					=form_tag search_index_path, :method => 'get' , :class => "search-form" do
+						=text_field_tag :search, params[:search], :placeholder => "Search", :class => "search-input"
+						%button{:title => "Search", :type => "submit", :class => "search-button"} Search
+					

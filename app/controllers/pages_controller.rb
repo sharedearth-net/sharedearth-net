@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!, :only => [ :dashboard, :network ]
+  before_filter :activity, :only => [:community, :dashboard]
 
   def index
     if current_user.nil? or current_user.person.nil?
@@ -14,17 +15,6 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @active_item_requests     = current_user.person.active_item_requests
-    @network_requests  = current_user.person.received_network_requests +
-                                current_user.person.network_requests
-    @requests = @active_item_requests + @network_requests
-
-    @requests.sort! { |a,b| b.created_at <=> a.created_at }
-
-    @request_dates = @requests.group_by {|r| r.updated_at.strftime("%B %d")}
-
-    @item_types = ItemType.all
-
     unless current_user.person.activity_logs.empty?
       @recent_activity_logs = current_user.person.recent_activity_logs
       @recent_activity_dates = @recent_activity_logs.group_by {|r| r.updated_at.strftime("%B %d")}
@@ -69,5 +59,20 @@ class PagesController < ApplicationController
 
   def collect_email
 		render :layout => nil
+  end
+
+  def activity
+    @active_item_requests     = current_user.person.active_item_requests
+    @network_requests  = current_user.person.received_network_requests +
+                                current_user.person.network_requests
+    @requests = @active_item_requests + @network_requests
+
+    @requests.sort! { |a,b| b.created_at <=> a.created_at }
+
+    @request_dates = @requests.group_by {|r| r.updated_at.strftime("%B %d")}
+
+    @item_types = ItemType.all
+    @items = Item.all
+    @people = Person.all
   end
 end

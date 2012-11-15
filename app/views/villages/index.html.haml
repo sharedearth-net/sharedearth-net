@@ -1,0 +1,41 @@
+%ul.list
+	-for village in @villages
+		%li
+			=village.name
+			=link_to 'Join', join_village_path(village)
+
+%table
+	%tr
+		%th Name
+		%th Description
+		%th Street
+		%th Postcode
+		%th State
+		%th Country
+		%th Uid
+
+	-for village in @villages
+		%tr
+			%td
+				=village.name
+			%td
+				=village.description
+			%td
+				=village.street
+			%td
+				=village.postcode
+			%td
+				=village.state
+			%td
+				=village.country
+			%td
+				=village.uid
+			%td
+				=link_to "Show", village
+			%td
+				=link_to "Edit", edit_village_path(village)
+			%td
+				=link_to "Destroy", village, :confirm => "Are you sure?", :method => :delete
+
+%p
+	= link_to "New Village", new_village_path

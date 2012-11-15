@@ -1,0 +1,29 @@
+%div
+	%section.modal.create-village
+		%header.row
+			%h1.village Create Village
+			%button.close{:onclick=>"overlay()"} Close
+		%div.content.row
+			%form
+				= form_for @village do |f|
+					= render :partial => "shared/error_messages", :locals => { :model => @village }
+
+					=f.label :name
+					=f.text_field :name, :placeholder => "Name"
+
+					=f.label :description
+					=f.text_field :description, :placeholder => "Description"
+				
+					=f.label :street
+					=f.text_field :street, :placeholder => "Street"
+
+					=f.label :postcode
+					=f.text_field :postcode, :placeholder => "Postcode"
+
+					=f.label :state
+					=f.text_field :state, :placeholder => "State"
+
+					=f.label :country
+					=country_select("village", "country")
+				
+					=f.submit :value => "Create Village", :class => "button"

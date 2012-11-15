@@ -8,7 +8,7 @@ Sharedearthapp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :fb_friends, :only => [:index]
-  get 'findtheothers'     => "fb_friends#index"
+  get 'connect'     => "fb_friends#index"
   get 'search_fb_friends' => "fb_friends#search_fb_friends"
   get 'search_people'     => "fb_friends#search_people"
 

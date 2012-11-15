@@ -20,137 +20,47 @@
 			%section.container.connect-search.subheader
 				%h1 Connect
 				%div.row
-					%div.search-form
-						%form
-							%input{:type=>"text", :placeholder=>"Search villages, groups or people", :class=>"search-input"}
-							%input{:type=>"button", :value=>"Search", :class=>"search-button"}
+					=render "search_box"
 					%div.buttons.right
-						%button.button.create-village{:onclick=>"overlay()"} Create Village
-					%div#overlay
-						%section.modal.create-village
-							%header.row
-								%h1.village Create Village
-								%button.close{:onclick=>"overlay()"} Close
-							%div.content.row
-								%form
-									%fieldset
-										%label{:for=>"name"} Name
-										%input{:type=>"text", :id=>"name", :name=>"name", :placeholder=>"Name"}
-									%fieldset
-										%label{:for=>"description"} name
-										%textarea{:id=>"description", :name=>"description"} Description
-									%fieldset
-										%label{:for=>"Country"} Country
-										%input{:type=>"text", :id=>"Country", :name=>"Country", :placeholder=>"Country"}
-									%fieldset
-										%label{:for=>"dtate"} State
-										%input{:type=>"text", :id=>"state", :name=>"state", :placeholder=>"State"}
-									%fieldset
-										%label{:for=>"city"} City (optional)
-										%input{:type=>"text", :id=>"city", :name=>"city", :placeholder=>"City"}
-									%fieldset
-										%label{:for=>"postcode"} Postcode (optional)
-										%input{:type=>"text", :id=>"postcode", :name=>"postcode", :placeholder=>"Postcode"}
-									%fieldset
-										%label{:for=>"street"} Street (optional)
-										%input{:type=>"text", :id=>"street", :name=>"street", :placeholder=>"Street"}
-									%fieldset
-										%input{:type=>"submit", :value=>"Create Village", :class=>"button"}
+						%button.button.create-village{:onclick=>"overlay()"} 
+							=link_to "Create Village", new_village_path
+
 		%div.wrapper
 			%div.container
 				%section.page-content.clearfix
 					%div.suggestions
 						%div.row.suggest
 							%h1.communities-block Suggested Communities
-							%a.refresh-button{:href=>"#"} Refresh
+							=link_to "Refresh", "#", :class => "refresh-button"
 						%div.community-box
 							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
+								-unless @villages.nil?
+									%ul
+										-for village in @villages
+											%li
+												%div.content
+													%h1 
+														=village.name
+													%span.meta
+														="#{village.street} #{village.state} #{village.country}"
+													=link_to "Join", join_village_path(village), :method => :put, :class => "button ui-switch" unless village.is_member_or_admin?(current_person)
+													=link_to "Leave", leave_village_path(village), :method => :put if village.is_member?(current_person)
+					
 					%div.suggestions
 						%div.row.suggest
 							%h1.people-block People I May Know
-							%a.refresh-button{:href=>"#"} Refresh
+							=link_to "Refresh", "#", :class => "refresh-button" 
+							
 						%div.community-box
 							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
+								/ %img{:src=>"/assets/img/picture.png", :alt=>""}
 								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
-						%div.community-box
-							%div.single-community
-								%img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									%h1 Musicians in the..
-									%span.meta Newtown, NSW, Australia
-									%a.button.ui-switch{:href=>"#"} Join
+									-if @people.empty?
+										= params[:search_terms] ? 'Search term not found' : 'Enter search term'
+									-else
+										%span.meta
+											= render 'people_list', :people => @people
+									
 				%aside.dashboard-sidebar.sidebar
 					%div.block.sidebar-block
 						%hgroup

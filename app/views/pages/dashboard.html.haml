@@ -29,13 +29,14 @@
 							%li
 								%a{:href=>"#tabs-3", :title=>"", :id=>""}>< Third
 						%div.feed-content.activity#tabs-1
-							%div.story.clearfix
-								-@request_dates.each do |date,requests|
-									%div.story.timestamp
-										-if date == Date.today.strftime("%B %d")
-											Today
-										-else
+							-@request_dates.each do |date,requests|
+								%div.story.timestamp
+									-if date == Date.today.strftime("%B %d")
+										%h2 Today
+									-else
+										%h2
 											=date
+								%div.story.clearfix
 
 									-requests.each do |req|
 										-if req.is_a? ItemRequest
@@ -61,16 +62,7 @@
 										- end unless @recent_activity_logs.nil?
 
 				%aside.dashboard-sidebar.sidebar
-					%div.block.sidebar-block
-						%hgroup
-							%h1 building the commons
-							%h2 Do you own the following?
-						%ul.block-list
-							-@item_types.each do |item|
-								%li
-									%span.resource
-										=item.item_type
-									=link_to "Share Mine", "#", :class => "button medium"
-						%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+					
+					=render :partial => "shared/commons_sidebar"
 					
 					=render :partial => "shared/community_sidebar"

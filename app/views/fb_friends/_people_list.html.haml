@@ -1,7 +1,4 @@
-.items-list.clearfix
-	%h3.default-title
-		= @searching_people ? 'In the network' : 'Facebook friends on sharedearth.net'
+= @searching_people ? 'In the network' : 'Facebook friends on sharedearth.net'
 
-	%ul.clearfix
-		-people.each do |person|
-			= render :partial => "person", :locals => {:person => person} 
+-people.each do |person|
+	= render :partial => "person", :locals => {:person => person} 

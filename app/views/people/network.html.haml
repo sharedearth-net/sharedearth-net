@@ -1,0 +1,89 @@
+#user-trusted-page
+	#sidebar-left
+		= image_tag @person.avatar(:medium), :class => "thumb"
+		%ul
+
+			%li.all
+				= link_to 'All', network_person_path(@person)
+
+			-unless @self
+
+				%li= link_to 'Mutual', network_person_path(@person, :type => 'mutual')
+
+				%li= link_to 'Others', network_person_path(@person, :type => 'other')
+
+	#content
+		.content-box-holder
+			= "#{@person.name} Network"
+
+			-unless @self
+				%ul
+					%li{:class => "clearfix"}
+						= in_network?(current_user.person, @person )
+
+			-if !@mutual_friends.empty?
+
+				.network-holder.clearfix
+					.lhs
+						%ul
+							-@mutual_friends.each do |p|
+								%li
+									= image_tag p.avatar(:square), :class => "thumb"
+								%p
+									= link_to p.name, person_path(p), :class => trusted_person_class(p)
+
+					.rhs.clearfix
+						= image_tag(!@self ? "ic-trusted-net-others-green-large.png" : "ic-trusted-net-you-green.png", :class => "icons", :alt => "Trusted Profile")
+
+						%h4
+							= !@self ? "mutual networks" : "trusted network"
+
+						%p
+							%a{:href => "#"}
+								= trusted_network = @person.mutural_friends_count(current_user.person)
+
+							= (trusted_network == 1) ? " person " : " people "
+							in your #{!@self ? "mutual" : "trusted"} network
+
+							
+
+			-elsif mutual_friends
+				%h3 This user has no mutual friends with you
+
+
+			-if !@other.empty?
+				.network-holder
+
+					.lhs
+						%ul
+							-@other.each do |p|
+								%li
+									= image_tag p.avatar(:square), :class => "thumb"
+								%p
+									= link_to p.name, person_path(p)
+
+					.rhs.clearfix
+						= image_tag("ic-others-large.png", :class => "icons", :alt => "Others")
+						%h4 Others
+						%p
+							%a{:href => "#"}
+								= other_count = @other.count
+
+							= (other_count == 1) ? " other " : " others "
+
+			-elsif other_friends
+				%h3 This user has no other friends in network
+
+
+			-if params[:type].nil? && !@self
+
+				%ul
+					%li.clearfix
+						= image_tag("ic-trusted-network.png", :class => "icons", :alt => "Trusted Network")
+
+					
+					%a{:href => "#"}
+						= trusts_me = @person.trusts_me_count
+						=(trusts_me == 1) ? "person in their trusted network" : "people in their trusted network" 
+						
+

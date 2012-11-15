@@ -1,0 +1,11 @@
+%div.block.sidebar-block
+	%hgroup
+		%h1 building the commons
+		%h2 Do you own the following?
+	%ul.block-list
+		-@item_types.each do |item|
+			%li
+				%span.resource
+					=item.item_type
+				=link_to "Share Mine", "#", :class => "button medium"
+	%a{:href=>"#", :title=>"View more", :class=>"more"} View More
