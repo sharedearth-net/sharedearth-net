@@ -10,7 +10,6 @@ class PagesController < ApplicationController
     else
       flash.keep 
       redirect_to dashboard_path
-      # flash[:notice] = "Welcome to sharedearth.net!. Get started by adding your items via the share button above."
     end
   end
 
