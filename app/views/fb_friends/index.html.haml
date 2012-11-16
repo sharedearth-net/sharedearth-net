@@ -2,19 +2,6 @@
 %html
 	%head
 		%title= @page_title
-		
-		/ %link{:type=>"text/css", :href=>"less/connect.less", :rel=>"stylesheet/less"}
-
-		/ %script{:type=>"text/javascript", :src=>"js/modernizr.js"}
-		/ %script{:type=>"text/javascript", :src=>"js/less.js"}
-		/ %script{:type=>"text/javascript", :src=>"js/jquery.js"}
-		/ %script{:type=>"text/javascript", :src=>"js/jquery.ui.1.9.1.js"}
-
-		/ %script{:type=>"text/javascript", :src=>"js/jquery.rating.js"}
-		/ %script{:type=>"text/javascript", :src=>"js/jquery.screwdefaultbuttonsV2.min.js"}
-		/ %script{:type=>"text/javascript", :src=>"js/functions.js"}
-		
-		/ %script{:type=>"text/javascript", :src=>"js/modal.js"}
 	%body 
 		%div.wrapper
 			%section.container.connect-search.subheader
@@ -22,8 +9,7 @@
 				%div.row
 					=render "search_box"
 					%div.buttons.right
-						%button.button.create-village{:onclick=>"overlay()"} 
-							=link_to "Create Village", new_village_path
+						=link_to "Create Village", new_village_path, :class => "button create-village", :onclick => "overlay()"
 
 		%div.wrapper
 			%div.container

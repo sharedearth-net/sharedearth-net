@@ -736,9 +736,7 @@ module PagesHelper
     rescue Exception => e
       res = ""
     end
-    
     res.html_safe
-    
   end
   
   protected

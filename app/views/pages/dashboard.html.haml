@@ -2,13 +2,6 @@
 %html
 	%head
 		%title= @page_title
-		
-		/ %link{:type=>"text/css", :href=>"less/dashboard.less", :rel=>"stylesheet/less"}
-		/ %script{:type=>"text/javascript", :src=>"js/modernizr.js"}
-		/ %script{:type=>"text/javascript", :src=>"js/less.js"}
-		/ %script{:type=>"text/javascript", :src=>"js/jquery.js"}
-		/ %script{:type=>"text/javascript", :src=>"js/jquery.ui.1.9.1.js"}
-		/ %script{:type=>"text/javascript", :src=>"js/functions.js"}
 	%body 
 		
 		%div.wrapper.notification
@@ -37,7 +30,6 @@
 										%h2
 											=date
 								%div.story.clearfix
-
 									-requests.each do |req|
 										-if req.is_a? ItemRequest
 											=render :partial => "shared/item_request_content_box", :locals => { :req => req }

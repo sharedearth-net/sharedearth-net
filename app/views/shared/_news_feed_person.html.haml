@@ -5,7 +5,6 @@
 			-unless event_sentence.empty?
 				%p
 					=event_sentence
-				
 				= render :partial => "shared/event_log_actions_compact", :locals => { :event_log => event.event_log }
 				/ = render :partial => '/comments/comment_box', :locals => {:object => event.event_log}
 	-end unless @events.nil?
