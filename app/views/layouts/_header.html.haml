@@ -52,7 +52,7 @@
 				-if !current_user.blank?
 					=link_to "Share", new_item_path, :class => "button"
 					=link_to "Ask", "#", :class => "button"
-				=link_to "Connect", "#", :class => "button"
+				=link_to "Connect", connect_path, :class => "button"
 			%div.search-form
 				%form
 					=form_tag search_index_path, :method => 'get' , :class => "search-form" do
