@@ -6,8 +6,8 @@ module ApplicationHelper
 		options[:class] ||= ""
 		options[:class] += trusted_person_class(person)
 
-    if options[:check_current_user] && current_user.person == person
-      person_name = options[:possessive] ? "Your" : "You"
+    if options[:check_current_user] && person.user == current_user
+      person_name = options[:possessive] ? "My" : "I"
       person_name.downcase! if options[:downcase_you]
       options[:no_link] = true
     else
