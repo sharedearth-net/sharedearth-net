@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :check_pending_actions, :except => :confirm
   def new
     @user = User.new
-    render :layout => request.xhr? ? "lightbox" : "welcome"
+    render :layout => request.xhr? ? nil : "welcome"
   end
 
   def please_activate_email

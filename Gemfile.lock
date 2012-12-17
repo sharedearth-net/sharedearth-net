@@ -144,6 +144,9 @@ GEM
     excon (0.15.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    facebox-rails (0.1.2)
+      railties (~> 3.0)
+      thor (~> 0.14)
     factory_girl (3.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (3.5.0)
@@ -426,6 +429,7 @@ DEPENDENCIES
   debugger
   delayed_job
   escape_utils
+  facebox-rails
   factory_girl_rails
   fb_graph
   ffaker
@@ -434,6 +438,7 @@ DEPENDENCIES
   heroku
   heroku_san
   iron_worker
+  jquery-rails
   kaminari
   less
   less-rails-bootstrap

@@ -1,25 +1,4 @@
 .button-holder-connect
   %h2{:style => "text-indent: 0; color: #3e5706; font-size: 23px; height: 45px"} Registration
 
-  - for msg in @user.errors.full_messages
-    %p.error= msg
-
-  = form_for @user do |f|
-    %p
-      = f.label :name
-      = f.text_field :name
-    %p
-      = f.label :email
-      = f.text_field :email
-
-    %p
-      = f.label :password
-      = f.password_field :password
-
-    %p
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation
-
-    %p
-      = f.submit "Sign up!"
-      = link_to "already have account?", new_session_path, :interaction => "lightbox"
+  = render partial: 'form', locals: {user: User.new}

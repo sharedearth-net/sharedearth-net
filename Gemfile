@@ -8,6 +8,8 @@ gem "aws-s3"
 gem "aws-sdk"
 gem "aws-ses", "~> 0.4.3", :require => 'aws/ses'
 gem "paperclip"
+gem "jquery-rails"
+gem 'facebox-rails'
 
 gem 'state_machine'
 gem "omniauth-facebook"
