@@ -24,11 +24,13 @@
 	color: @lightGreen;
 	text-decoration: none;
 	img, h1, h2 {
+	  opacity:1 !important;
 		display: block;
 		text-align: center;
 		margin: 0 auto;
 	}
 	h1 {
+	 
 		font-size: 44px;
 		line-height: 60px;
 		font-family: "Century Gothic";
@@ -42,7 +44,7 @@
 		margin-top: 20px;
 	}
 	.imp {
-		color: @darkGreen;
+		color: @lightGreen;
 	}
 }
 .landing-right {
@@ -51,23 +53,31 @@
 		text-align: left;
 	}
 	h1 {
+	  opacity:1 !important;
 		font-size: 20px;
 		line-height: 36px;
 		font-weight: bold;
-		color: @greyishGreen;
+		color: @lightGreen;
 		margin: 50px 0 20px;
 		.imp {
 			color: @lightGreen;
 		}
 	}
 	.button {
+	  text-decoration: none;
+	  
 		margin: 0 auto;
 		font-size: 25px;
 		padding: 20px 40px;
 		margin-top: 20px;
 		color: #3e5706;
-		.rounded(25px);
+		.rounded(25px);		
 		text-shadow: 0px 1px 1px rgba(255,255,255,0.22);
+		
+		&:hover{
+		  background:  #52a732;
+		  
+		}
 	}
 }
 .sidebar-block {
@@ -114,6 +124,7 @@ footer.wrapper {
 		height: 227px;
 	}
 	h2 {
+	  
 		font-size: 18px;
 		line-height: 24px;
 		padding-bottom:10px;
