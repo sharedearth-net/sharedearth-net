@@ -32,6 +32,7 @@ class ActivityLog < ActiveRecord::Base
   #validates_presence_of :related_id, :related_type
 
   scope :gift_actions, lambda { |entity| where("(primary_id = ? and event_type_id IN (?) ) ", entity.id, EventType.completed_request_ids) }
+  scope :all_gift_actions, where("(event_type_id IN (?) ) ", EventType.completed_request_ids)   
   scope :involves, lambda { |entity| where("(primary_id = ? AND primary_type = ?) OR (secondary_id = ? AND secondary_type = ?) ", entity.id, entity.class.to_s, entity.id, entity.class.to_s) }
   scope :completed_requests, lambda { |entity| where("event_type_id IN (?)", EventType.completed_request_ids) }
   scope :personal_actions, lambda { |entity| where("event_type_id IN (?)", EventType.personal_actions) }

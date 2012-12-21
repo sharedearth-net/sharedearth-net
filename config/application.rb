@@ -42,5 +42,8 @@ module Sharedearthapp
     
     #Change :defaults to load jQuery insted of Prototype
     config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
+    
+    puts "enabling cache"
+    config.action_controller.perform_caching = true
   end
 end

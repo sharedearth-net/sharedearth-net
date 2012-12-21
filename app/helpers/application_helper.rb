@@ -65,4 +65,30 @@ module ApplicationHelper
     end 
   end
 
+  def authorized_persons_count
+    #caching
+    
+    Rails.cache.fetch "authorized_persons_count",:expires_in  => 12.hours do
+      puts "people"
+       Person.authorized.count.to_s
+      #Rails.cache.write("authorized_persons_count",value)      
+    end
+    #value
+  end
+
+  def resources_shared_count
+    #caching
+    Rails.cache.fetch "resources_shared_count", :expires_in  => 12.hours do  
+      puts "resources"    
+     ResourceNetwork.all.count.to_s
+    end
+  end
+  def gift_actions_count
+    #caching
+    Rails.cache.fetch "gift_actions_count", :expires_in  => 12.hours do    
+      puts "gift"        
+      ActivityLog.all_gift_actions.count.to_s
+    end
+  end
+  
 end

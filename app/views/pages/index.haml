@@ -28,17 +28,21 @@
               %li.earth 
                 %b 1 earth.
               %li.human 
-                %b 9999 human 
+                %b 
+                  =authorized_persons_count
+                  
                 beings connected
               %li.resources-shared 
-                %b 1411 resources 
-                shared
+                %b 
+                  =resources_shared_count 
+                resources shared
               %li.resources-commoned 
-                %b 300 resources 
-                commoned
+                %b 300  
+                resources commoned
               %li.gift 
-                %b 400 gift 
-                actions undertaken
+                %b 
+                  =gift_actions_count 
+                gift actions undertaken
           %h1 
             Locate 
             %span.imp shared 
