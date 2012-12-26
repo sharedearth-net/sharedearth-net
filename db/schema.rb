@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723145120) do
+ActiveRecord::Schema.define(:version => 20121003194059) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -331,13 +331,19 @@ ActiveRecord::Schema.define(:version => 20120723145120) do
     t.datetime "updated_at",                            :null => false
     t.string   "token"
     t.datetime "lockout"
-    t.integer  "validations_failed", :default => 0
+    t.integer  "validations_failed",     :default => 0
     t.datetime "last_activity"
     t.string   "email"
     t.string   "encrypted_password"
     t.integer  "person_id"
+
     t.boolean  "verified_email",     :default => false, :null => false
+
+
     t.string   "name"
+    t.string   "salt"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   create_table "villages", :force => true do |t|

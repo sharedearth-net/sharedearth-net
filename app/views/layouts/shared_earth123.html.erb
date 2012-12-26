@@ -7,6 +7,7 @@
 <body>
 
 	<div id="container">
+<%if !current_user.nil?%>
 <div id="header">
 
 			<div class="header-lhs">
@@ -79,25 +80,34 @@
 
 		</div>
 		<!-- #header -->
-
-
+<%else%>
+   <header>
+      <div class="header" style="background:none !important;">
+        <div class="wid1000 ht63">
+                <div class="fl logo">
+					<%=link_to image_tag("logo.png")%>
+				</div>
+				<div class="connect_section fr">
+		          <%=link_to "",new_session_path,:title => "Sign in or register", :interaction => "lightbox",:class=>"fl connect_buttons connect_button"%>
+				</div>      
+		</div>
+	  </div>
+	</header>  			
+<%end%>
 <div id="wrapper" class="clearfix">
 	
 	<%= yield %>
 
 </div>
 
-<div id="footer" class="clearfix">
-	<ul>
-		<li>
-		</li>
-	</ul>
+<footer>
+ <%= render "shared/footer" %>	
 	
-</div>
+</footer>
 <!-- #footer -->
 
 </div>
 <!-- #container -->
-
+<%= render "shared/lightbox" %>
 </body>
 </html>

@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     unless current_user.person.activity_logs.empty?
       @recent_activity_logs = current_user.person.recent_activity_logs
       @recent_activity_dates = @recent_activity_logs.group_by {|r| r.updated_at.strftime("%B %d")}
-		end
+    end
     current_user.person.reset_notification_count!
     current_user.record_last_activity!
     current_user.person.news_feed
@@ -30,7 +30,7 @@ class PagesController < ApplicationController
 
     if params[:type] == 'trusted'
       @items = current_person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-	    @events = current_person.trusted_network_activity.page(params[:page]).per(25)
+      @events = current_person.trusted_network_activity.page(params[:page]).per(25)
     elsif !@entity.nil?
       @items = ResourceNetwork.items_belong_to(@entity.specific_entity)
       @events = @entity.network_activity.page(params[:page]).per(25)
@@ -38,7 +38,7 @@ class PagesController < ApplicationController
       @items = ResourceNetwork.all_items_from(@entities).sort_by{|i| i.item_type.downcase}
       @items ||= []
       @items += current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-	    @events = current_person.network_activity.page(params[:page]).per(25)
+      @events = current_person.network_activity.page(params[:page]).per(25)
     end
   end
 
@@ -57,7 +57,7 @@ class PagesController < ApplicationController
   end
 
   def collect_email
-		render :layout => nil
+    render :layout => nil
   end
 
   def activity

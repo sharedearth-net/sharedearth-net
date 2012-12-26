@@ -487,5 +487,7 @@ class Person < ActiveRecord::Base
   def has_location?
     !(self.location.nil? || self.location.empty?)
   end
-
+  def share_item
+    EventLog.find(:all, :conditions => ["primary_id=? and event_type_id=?", self.id,19]).count
+  end
 end

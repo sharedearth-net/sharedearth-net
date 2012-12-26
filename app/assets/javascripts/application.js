@@ -133,6 +133,19 @@ $(document).ready(function() {
 	});	
 });
 
+/* Remove default search box value on click  */
+
+$(document).ready(function() {
+	$('#search').click(function(e) {
+		if ($(this).attr("value")=="Search")
+		{	
+		  $(this).attr("value","")
+		  $(this).focus();
+          e.preventDefault();
+	    }
+	});	
+});
+
 ////////////////////////////////////////////////////////////////////////
 // All code above should eventually be ported to Dojo
 

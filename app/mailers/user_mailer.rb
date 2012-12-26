@@ -15,6 +15,11 @@ class UserMailer < ActionMailer::Base
     mail(:to => "#{email}", :subject => "Your sharedearth.net invitation")
   end
 
+  def password_reset(user)
+    @user = user
+    mail(:to => user.email, :subject => "Password Reset")
+  end
+
   def notify_with_recent_activity(recent_activity_logs, email, current_user)
  
     @recent_activity_logs = recent_activity_logs

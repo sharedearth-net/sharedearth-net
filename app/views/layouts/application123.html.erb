@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
   <title>sharedearth.net</title>
@@ -38,7 +37,7 @@
 								<% else -%>
 								  <%= link_to "0", "#", :title => "Number of people in your trusted network" %>
 								<% end -%>
-							  
+
 							</li>
 							<li class="activity-level">
 							<% if !current_user.nil? -%>
@@ -121,7 +120,7 @@
 
 
 <div id="wrapper" class="clearfix" <%= yield(:hide_on_policy_top_margin)%>>
-	
+
 	<%= yield %>
 
 </div>
@@ -150,7 +149,7 @@
 			<%= link_to "Terms", "/terms" %>
 		</li>
 	</ul>
-	
+
 </div>
 <!-- #footer -->
 
@@ -163,3 +162,4 @@
 
 </body>
 </html>
+

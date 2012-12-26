@@ -1,0 +1,14 @@
+.footer
+  %ul.fl.footer_menu
+    %li= link_to "About","/about",:class=>"borderNone"
+    %li= link_to "Commons","#"
+    %li= link_to "Legal","#"
+    %li= link_to "Transparency","/transparency"
+    %li= link_to "Blog","#"
+    %li= link_to "Contribute","/contribute"
+    %li= link_to "Contact","mailto:info@sharedearth.net"
+    .clear
+  .fr.social_icons
+    = link_to (image_tag "tweet.png"),"https://twitter.com/sharedearthnet", :onclick => "window.open(this.href); return false;", :title => "SharedEarth on Facebook",:class=>"fl tweet"
+    = link_to (image_tag "fb.png"),"http://www.facebook.com/pages/sharedearthnet/263473190379196?ref=ts", :onclick => "window.open(this.href); return false;", :title => "SharedEarth on Facebook",:class=>"fl tweet"
+  .clear
