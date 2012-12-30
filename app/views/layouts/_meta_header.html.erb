@@ -3,10 +3,10 @@
 <%= stylesheet_link_tag :'reset-min', :application, :main %>
 
 <%= javascript_include_tag '/javascripts/dojo-release-1.6.1-src/dojo/dojo', :djConfig => 'parseOnLoad: true, isDebug: true' %>
-<%= javascript_include_tag :'jquery', :jquery_ujs, :application,:lightbox %>
+<%= javascript_include_tag "jquery-1.4.3.min.js"%>
+<%= javascript_include_tag :'jquery', :jquery_ujs, :application, :"jquery.ui.1.9.1.js", :"jquery.screwdefaultbuttonsV2.min.js", :"less.js",  %>
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 <%= javascript_include_tag "html5.js"%>
-<%= javascript_include_tag "jquery-1.4.3.min.js"%>
 
 <%= csrf_meta_tag %>
 <%= favicon_link_tag '/favicon.ico' %>
@@ -16,6 +16,7 @@
 <% if need_gcf_check %>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
   <style>
+  
    /* 
     CSS rules to use for styling the overlay:
       .chromeFrameOverlayContent
