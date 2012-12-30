@@ -27,7 +27,7 @@
 		%div.profile-settings
 			%div.profile-left
 				%div.row
-					.user-name
+					#user-name.user-name
 						=current_user.person.name
 				%div.row
 					=link_to "Settings", "#", :class => "settings-button", :id => "settings-menu"
@@ -56,6 +56,6 @@
 			%div.search-form
 				%form
 					=form_tag search_index_path, :method => 'get' , :class => "search-form" do
-						=text_field_tag :search, params[:search], :placeholder => "Search", :class => "search-input"
+						=text_field_tag :search, params[:search], :placeholder => "Search", :id=>"search-input", :class => "search-input", :style=>" border-radius: 8px 8px 8px 8px;height:37px;width:180px;"
 						%button{:title => "Search", :type => "submit", :class => "search-button"} Search
 					

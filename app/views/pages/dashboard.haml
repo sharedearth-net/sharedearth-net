@@ -1,0 +1,51 @@
+%div.wrapper.notification
+	%div.container
+		%span#spantextbar Welcome to sharedearth.net! Get started by adding your items via the share button above.
+		%button.close +
+%div.wrapper
+	#cont.container
+		%section#sec.dashboard-feed.page-content
+			%div.feed#tabs
+				%ul#feed-tabs.feed-tabs
+					%li
+						%a{:href=>"#tabs-1", :title=>"", :class=>"", :id=>""}><
+							My activity
+							%div.notification-bubble 15
+					%li
+						%a{:href=>"#tabs-2", :title=>"", :id=>""}>< Actions
+				%div.feed-content.activity#tabs-1
+					-debugger				
+					-@request_dates.each do |date,requests|
+						%div.story.timestamp
+							-if date == Date.today.strftime("%B %d")
+								%h2 Today
+							-else
+								%h2
+									=date						
+						%div.story.clearfix
+							-requests.each do |req|								
+								-if req.is_a? ItemRequest
+									=render :partial => "shared/item_request_content_box", :locals => { :req => req }
+								-elsif req.is_a? NetworkRequest
+									%div.user-avatar
+										=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
+									= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
+					
+				%div.feed-content.actions#tabs-2
+					-unless @recent_activity_dates.blank?
+						-@recent_activity_dates.each do |date, recent_activity_logs|
+							%div.story.timestamp
+								-if date == Date.today.strftime("%B %d")
+									Today
+								-else
+									=date
+									%div.story.clearfix
+										-recent_activity_logs.each do |activity_log|
+											= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
+											-activity_log.is_read!
+											%br
+										- end unless @recent_activity_logs.nil?
+
+		%aside.dashboard-sidebar.sidebar
+			=render :partial => "shared/commons_sidebar"
+			=render :partial => "shared/community_sidebar"

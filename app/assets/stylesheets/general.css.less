@@ -98,7 +98,7 @@
     position: absolute;
     right: 3px;
     top: 3px;
-    background: url(../img/icons/switch.png) no-repeat;
+    background: url(/assets/img/icons/switch.png) no-repeat;
   }
 }
 /***** Grid ******/
@@ -207,7 +207,7 @@ div.block-list{
       color: #729620;
       text-decoration: none;
       padding: 4px 20px 4px 0;
-      background: url(../img/icons/refresh.png) no-repeat center right;
+      background: url(/assets/img/icons/refresh.png) no-repeat center right;
       &:hover {
         text-decoration: underline;
       }
@@ -227,7 +227,7 @@ div.block-list{
   padding: 0;
   &.heading {
     color: #fff;
-    background: #afc878 url(../img/icons/my-community.png) no-repeat 10px center;
+    background: #afc878 url(/assets/img/icons/my-community.png) no-repeat 10px center;
     padding: 15px 7px 15px 62px;
     font-size: 18px;
     font-weight: bold;
@@ -237,21 +237,21 @@ div.block-list{
     padding: 11px 7px 11px 55px;
     display: block;
     &.village {
-      background: url(../img/icons/house-big-inactive.png) no-repeat left center;
+      background: url(/assets/img/icons/house-big-inactive.png) no-repeat left center;
       &.active {
-        background: url(../img/icons/house-big-active.png) no-repeat left center;
+        background: url(/assets/img/icons/house-big-active.png) no-repeat left center;
       }
     }
     &.groups {
-      background: url(../img/icons/group-big-inactive.png) no-repeat 11px center; 
+      background: url(/assets/img/icons/group-big-inactive.png) no-repeat 11px center; 
       &.active {
-        background: url(../img/icons/group-big-active.png) no-repeat 11px center;
+        background: url(/assets/img/icons/group-big-active.png) no-repeat 11px center;
       }
     }
     &.trusted {
-      background: url(../img/icons/trusted-big-inactive.png) no-repeat 5px center;  
+      background: url(/assets/img/icons/trusted-big-inactive.png) no-repeat 5px center;  
       &.active {
-        background: url(../img/icons/trusted-big-active.png) no-repeat 5px center;
+        background: url(/assets/img/icons/trusted-big-active.png) no-repeat 5px center;
       }
     }
   }
@@ -269,10 +269,10 @@ div.block-list{
       font-weight: bold;
       line-height: 26px;
       &.trusted {
-        background: url(../img/icons/check.png) no-repeat left center;
+        background: url(/assets/img/icons/check.png) no-repeat left center;
       }
       &.untrusted {
-        background: url(../img/icons/x.png) no-repeat left center;
+        background: url(/assets/img/icons/x.png) no-repeat left center;
       }
     }
   }
@@ -281,13 +281,13 @@ div.block-list{
       padding: 20px 30px 20px 70px;
       position: relative;
       &.i-trust {
-        background: url(../img/icons/i-trust.png) no-repeat 15px center;
+        background: url(/assets/img/icons/i-trust.png) no-repeat 15px center;
       }
       &.network-trust {
-        background: url(../img/icons/network-trust.png) no-repeat 15px center;
+        background: url(/assets/img/icons/network-trust.png) no-repeat 15px center;
       }
       &.others-trust {
-        background: url(../img/icons/others-trust.png) no-repeat 15px center;
+        background: url(/assets/img/icons/others-trust.png) no-repeat 15px center;
       }
     }
     .remove {
@@ -297,7 +297,7 @@ div.block-list{
       display: block;
       width: 14px;
       height: 14px;
-      background: url(../img/icons/close-small-sprite.png) no-repeat ;
+      background: url(/assets/img/icons/close-small-sprite.png) no-repeat ;
       text-indent: -9999em;
       &:hover {
         background-position: 0 -16px;
@@ -308,9 +308,10 @@ div.block-list{
 .logo {
   display: block;
   width: 252px;
-  height: 45px;
+  height: 56px;
   text-indent: -999em;
-  background: url(../img/logo-normal.png) no-repeat;
+  margin-left:84px;
+  background: url(/assets/img/logo-normal.png) no-repeat;
 }
 
 input[type=text], textarea, input[type=password] {
@@ -340,36 +341,46 @@ a {
 }
 
 .profile-settings {
+  
   float: right;
   height: 60px;
   width: 200px;
   .user-avatar {
     float: right;
     margin-left: 5px;
+    
     img {
       height: 60px;
       width: auto;
+      margin-right:100px;
     }
   }
   .profile-left {
     float: left;
     position: relative;
     .user-name {
-      display: block;
+      
+     position:absolute;
+      display: -moz-box;
       text-align: right;
       color: #bfd988;
       font-size: 16px;
       font-weight: bold;
+     margin-left:-45px;
       text-decoration: none;
       text-shadow: 0px -2px 2px rgba(0,0,0,.75);
     }
+    
     .settings-button {
-      margin-top: 16px;
+      position:relative;
+      right:-61%;
+     margin-left:32px;
+      margin-top: 34px;
       float: right;
       display: block !important;
       width: 32px;
       height: 25px;
-      background: url(../img/icons/settings.png) no-repeat;
+      background: url(/assets/img/icons/settings.png) no-repeat;
       text-indent: -9999px;
       line-height: 0;
     }
@@ -377,6 +388,8 @@ a {
 }
 
 .community {
+  position:relative;
+  left:7.5%;
   width: 196px;
   margin-top: 10px;
   padding: 3px;
@@ -385,6 +398,7 @@ a {
   .community-button {
     .gradient(#302c27,#302c27,#4e473f);
     height: 39px;
+    color:#FFFFFF;
     line-height: 39px;
     float: left;
     position: relative;
@@ -439,43 +453,43 @@ header {
   }
 
   .resource-human {
-    background: url(../img/icons/human-icon.png) no-repeat center bottom;
+    background: url(/assets/img/icons/human-icon.png) no-repeat center bottom;
     width: 25px;
     &:hover {
       width: 29px;
-      background: url(../img/icons/human-icon-hover.png) no-repeat center bottom;
+      background: url(/assets/img/icons/human-icon-hover.png) no-repeat center bottom;
     }
   }
   .resource-gift {
-    background: url(../img/icons/gift-icon.png) no-repeat center bottom;
+    background: url(/assets/img/icons/gift-icon.png) no-repeat center bottom;
     width: 26px;
     &:hover {
       width: 30px;
-      background: url(../img/icons/gift-icon-hover.png) no-repeat center bottom;
+      background: url(/assets/img/icons/gift-icon-hover.png) no-repeat center bottom;
     }
   }
   .resource-collect {
-    background: url(../img/icons/collect-icon.png) no-repeat center bottom;
+    background: url(/assets/img/icons/collect-icon.png) no-repeat center bottom;
     width: 27px;
     &:hover {
       width: 34px;
-      background: url(../img/icons/collect-icon-hover.png) no-repeat center bottom;
+      background: url(/assets/img/icons/collect-icon-hover.png) no-repeat center bottom;
     }
   }
   .resource-davinci {
-    background: url(../img/icons/davinci-icon.png) no-repeat center bottom;
+    background: url(/assets/img/icons/davinci-icon.png) no-repeat center bottom;
     width: 24px;
     &:hover {
       width: 28px;
-      background: url(../img/icons/davinci-icon-hover.png) no-repeat center bottom;
+      background: url(/assets/img/icons/davinci-icon-hover.png) no-repeat center bottom;
     }
   }
   .resource-thumbsup {
-    background: url(../img/icons/thumbsup-icon.png) no-repeat center bottom;
+    background: url(/assets/img/icons/thumbsup-icon.png) no-repeat center bottom;
     width: 24px;
     &:hover {
       width: 28px;
-      background: url(../img/icons/thumbsup-icon-hover.png) no-repeat center bottom;
+      background: url(/assets/img/icons/thumbsup-icon-hover.png) no-repeat center bottom;
     }
   }
 }
@@ -524,27 +538,41 @@ header {
     float: right;
   }
   .buttons {
+    position:relative;
+    right:81%;
     .button {
       width: 115px;
-      height: 37px;
+      height:37px;
       line-height: 37px;
       text-align: center;
       font-size: 14px;  
       font-weight: bold;
+      
       padding: 0px;
       color: #3e5706;
       .rounded(12px);
       text-shadow: 0px 1px 1px rgba(255,255,255,0.22);
+      text-decoration:none;
+      &:hover{
+        background:#FABD1E;
+      }
     }
   }
 }
 .search-form {
-  position: relative;
+  position: absolute;
   line-height: normal;
+  margin-left:69px;
+  width:185px;
 }
-.search-input {
+#search-input{
+  color:#999999;
+  background: none repeat scroll 0 0 #FBFBFA;
+}
+.search-input{
   height: 37px;
-  .rounded(12px);
+  
+  .rounded(15px);
   margin-left: 5px;
   padding-right: 45px;
   &:focus {
@@ -559,7 +587,7 @@ header {
   right: 0;
   top: 0;
   border-left: 1px solid #e0e0e0;
-  background: url(../img/icons/magnifier.png) no-repeat center;
+  background: url(/assets/img/icons/magnifier.png) no-repeat center;
   text-indent: -9999em;
   .border-radius(12px, 12px, 0, 0);
 }
@@ -578,9 +606,11 @@ header {
   .rounded(3px);
   .box-shadow(0 0 5px 2px rgba(255,255,190,.89));
 }
+
 .feed-tabs {
   position: absolute;
-  top: -23px;
+  top: -36px;
+  margin-left:0px;
   left: 0;
   li {
     float: left;
@@ -679,7 +709,7 @@ header {
   .clearfix;
 }
 header.wrapper {
-  background: #39352f url(../img/header-pattern.png) repeat;
+  background: #39352f url(/assets/img/header-pattern.png) repeat;
   border-bottom: 1px solid #d1d1d1;
   .box-shadow(0px 2px 5px rgba(0,0,0,.29));
   color: #fff;
@@ -733,7 +763,9 @@ header.wrapper {
     .box-shadow(0 -2px 5px rgba(0,0,0,0.08));
   }
 }
-.sidebar-block {
+.sidebar-block1 {
+  position:relative;
+  width:300px;
   margin-bottom: 20px;
   padding: 11px;
   background: #c7c5c5;
@@ -742,6 +774,7 @@ header.wrapper {
   &.reputation{
     background: #ddd7c8;
   }
+  
   h1 {
     font-size: 18px;
     line-height: 26px;
@@ -787,6 +820,90 @@ header.wrapper {
     }
   }
 }
+
+
+.sidebar-block2 {
+   position:relative;
+  width:300px;
+  margin-bottom: 20px;
+  padding: 11px;
+  background: #c7c5c5;
+  border-radius: 5px;
+  border: 1px solid #84aa30;
+  &.reputation{
+    background: #ddd7c8;
+  }
+  
+  h1 {
+    font-size: 18px;
+    line-height: 26px;
+    color: #fff;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+  }
+  h2 {
+    font-size: 14px;
+    line-height: 18px;
+    color: #534741;
+    font-weight: normal;
+  }
+  .more {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+    margin-top: 10px;
+  }
+  .user-header {
+    .clearfix;
+    .user-avatar, .user-info  {
+      float: left;
+    }
+    .user-avatar {
+      width: 25%;
+      margin-right: 5%;
+    }
+    .user-info {
+      width: 70%;
+    }
+    .name {
+      color: #729427;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .location{
+      color: #6b6969;
+      font-size: 14px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .reputation {
   hr {
     border-top: 1px solid #84aa30;
@@ -812,7 +929,7 @@ header.wrapper {
   height: 41px;
   line-height: 41px !important;
   padding-left: 50px;
-  background: url(../img/icons/my-community.png) no-repeat left center;
+  background: url(/assets/img/icons/my-community.png) no-repeat left center;
 }
 
 .community-info {
@@ -845,12 +962,12 @@ header.wrapper {
   .people {
     height: 25px;
     line-height: 25px ;
-    background: url(../img/icons/human-icon.png) no-repeat left center;
+    background: url(/assets/img/icons/human-icon.png) no-repeat left center;
   }
   .resources {
     height: 27px;
     line-height: 27px;
-    background: url(../img/icons/collect-icon.png) no-repeat 8px center;
+    background: url(/assets/img/icons/collect-icon.png) no-repeat 8px center;
     margin-top: 10px;
   }
   color: #fff;
@@ -948,7 +1065,7 @@ footer {
     font-weight: normal;
     color: #fff;
     &.village {
-      background: url(../img/icons/village.png) no-repeat left center;
+      background: url(/assets/img/icons/village.png) no-repeat left center;
       padding-left: 50px;
     }
   }
@@ -956,7 +1073,7 @@ footer {
     float: right;
     width: 20px;
     height: 20px;
-    background: url(../img/icons/close-sprite.png) no-repeat;
+    background: url(/assets/img/icons/close-sprite.png) no-repeat;
     text-indent: -9999em;
     border: 0;
     margin-top: 12px;

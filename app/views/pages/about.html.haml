@@ -53,7 +53,107 @@
               %h1 sharedearth.net
               %ul.menu_list
                 %li= link_to "Legal","#"
-                %li= link_to "Transparency","/transparency"
+                %li= link_to "Transparency","/transparency"!!! 5
+%html
+	%head
+		%title= @page_title
+		
+		/ %link{:type=>"text/css", :href=>"less/about.less", :rel=>"stylesheet/less"}
+		/ %script{:type=>"text/javascript", :src=>"js/modernizr.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/less.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/jquery.ui.1.9.1.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/functions.js"}
+		/ %script{:type=>"text/javascript", :src=>"js/modal.js"}
+	%body 
+		
+		/ %div.wrapper.subheader
+		/ 	%div.container
+		/ 		%div.left
+		/ 			%a{:href=>"#", :title=>"SharedEarth", :class=>"logo"} SharedEarth
+		/ 		%div.right
+		/ 			%div.buttons
+		/ 				%button.button{:onclick=>"overlay()"} Connect
+		/ 				%div#overlay
+		/ 					%section.modal.register#modal
+		/ 						%header.row
+		/ 							%a{:href=>"#", :title=>"SharedEarth", :class=>"logo-small"} SharedEarth
+		/ 						%div.content.row
+		/ 							%form
+		/ 								%fieldset
+		/ 									%label{:for=>"name"} Name
+		/ 									%input{:type=>"text", :id=>"name", :name=>"emanameil", :placeholder=>"Name"}
+		/ 								%fieldset
+		/ 									%label{:for=>"email"} Email
+		/ 									%input{:type=>"text", :id=>"email", :name=>"email", :placeholder=>"Email"}
+		/ 								%fieldset
+		/ 									%label{:for=>"password"} Password
+		/ 									%input{:type=>"password", :id=>"password", :name=>"password", :placeholder=>"Password"}
+		/ 								%fieldset
+		/ 									%label{:for=>"password-conf"} Password Confirmation
+		/ 									%input{:type=>"password", :id=>"password-conf", :name=>"password-conf", :placeholder=>"Password Confirmation"}
+		/ 								%fieldset
+		/ 									%a{:href=>"#", :title=>"Register", :class=>"switch-action"}Already have account?
+		/ 									%input{:type=>"submit", :value=>"Sign Up", :class=>"button"}
+		%div.wrapper
+			%div.container
+				%section.page-content.article-page
+					%header.page-header.row
+						%div.logo
+						%hgroup
+							%h1 About
+							%h2 A world vibrating  with 
+							%h2 Trust, Sharing, Love and Interconnection
+					%article
+						%p Sharing anchors community.In tribal societies, gifts and shared goods create a common bond and sense of belonging. We revive these experiences on special occasions like religious ceremonies, weddings and 
+						%br 
+						birthdays. sharedearth.net celebrates a world where where we can enjoy this sense of belonging every day. It’s a platform for friends and communities to build trust, share resources and contribute to the commons.
+						%br 
+						%br 
+						On sharedearth.net you can share resources or place them into the commons. Shared resources are consciously shared at your discretion and subject to return. Goods placed in the commons are freely 
+						%br 
+						%br 
+						exchanged amongst the people who build and preserve the commons. Using the rich reputation information gathered on each member of the sharedearth.net community, we can consciously decide with whom to share, and thereby build a commons culture where acts of kindness and love are rewarded through deeper trust, greater collaboration and stronger community.By practising sharing and commoning, we are breaking cultural patterns of ego-centric separation and 
+						%br 
+						%br 
+						exclusive property rights and rewriting our cultural and economic stories to reflect our emerging experience of universal interconnectionEach act of sharing is a transitional step towards a just and sustainable society.
+					%div.mission
+						%p We, the commoners, are building a better future. Be the change, build the commons. Build the commons, change the world.
+				%aside.sidebar
+					%div.block.sidebar-block
+						%div.sidebar-links
+							%h1 Vision
+							%ul
+								%li
+									%a{:href=>"#", :title=>"About"} About
+								%li
+									%a{:href=>"#", :title=>"Commons"} Commons
+								%li
+									%a{:href=>"#", :title=>"Priniples"} Priniples
+								%li
+									%a{:href=>"#", :title=>"Platform"} Platform
+						%div.sidebar-links
+							%h1 Sharedearth.net
+							%ul
+								%li
+									%a{:href=>"#", :title=>"Legal"} Legal
+								%li
+									%a{:href=>"#", :title=>"Transpareny"} Transpareny
+								%li
+									%a{:href=>"#", :title=>"Contribute"} Contribute
+						%div.sidebar-links
+							%h1 Connect
+							%ul
+								%li
+									=link_to "Contact", "#"
+								%li
+									=link_to "Blog", "#"
+									
+								%li.networks
+									%a{:href=>"#", :class=>"social button fb"} 
+										%img{:src=>"/assets/img/icons/facebook.png", :alt=>"Like us on Facebook"}
+									%a{:href=>"#", :class=>"social button twitter"}
+										%img{:src=>"/assets/img/icons/twitter.png", :alt=>"Follow us on Twitter"}
                 %li= link_to "Contribute","/contribute"
               %h1 Connect
               %ul.menu_list
