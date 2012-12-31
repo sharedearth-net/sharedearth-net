@@ -39,6 +39,7 @@ gem 'typhoeus'
 gem "acts_as_commentable"
 gem "escape_utils"
 gem 'rinku', :require => 'rails_rinku'
+gem 'libv8'
 
 group :assets do
   gem 'sass-rails'
