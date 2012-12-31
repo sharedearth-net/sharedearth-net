@@ -1,9 +1,9 @@
 %ul.block-list
-	%li
-		-@events.each do |event|
+	-@events.each do |event|
 			-if event.event_log.event_type_id != 23
 				-event_sentence = event_log_sentence(event.event_log, nil, EventDisplay::DASHBOARD_FEED)
 				-unless event_sentence.empty?
+				%li
 					%p
 						=event_sentence
 					= render :partial => "shared/event_log_actions_compact", :locals => { :event_log => event.event_log }
