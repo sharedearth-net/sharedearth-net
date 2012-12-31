@@ -237,6 +237,7 @@ GEM
       less (~> 2.2.0)
     less-rails-bootstrap (2.2.0)
       less-rails (~> 2.2.0)
+    libv8 (3.11.8.4)
     libwebsocket (0.1.7.1)
       addressable
       websocket
@@ -460,6 +461,7 @@ DEPENDENCIES
   kaminari
   less
   less-rails-bootstrap
+  libv8
   linecache19!
   mocha
   mysql2 (>= 0.3)
