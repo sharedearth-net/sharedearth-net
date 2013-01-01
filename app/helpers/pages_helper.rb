@@ -1,7 +1,7 @@
 module PagesHelper
   #USE SAME METHOD TO DISPLAY MY EVENTS TO ME, AND MY EVENTS TO OTHER PERSON - SECOND PARAMETER INDICATES IF IT IS SHOWN TO OTHER PERSON IF NOT NIL
   def event_log_sentence(event_log, person, feed)
-
+     
     @same_person = (person.nil? || (current_user.person == person)) ? true : false
     person||= current_user.person
     (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "normal" : text_class = ""
@@ -51,7 +51,7 @@ module PagesHelper
     else
       return sentence
     end
-
+      
   end
   
   def add_item_sentence(event_log, person)
@@ -714,7 +714,9 @@ module PagesHelper
         when 'SHARING'
           res = "#{link_to "view action", request_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"
         when 'ADD ITEM'
+          
           res = links_for_add_item(log, comments)
+          puts res
         when 'NEGATIVE FEEDBACK'
           res = "#{link_to "view feedback", request_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"
         when 'GIFTING'
@@ -724,9 +726,9 @@ module PagesHelper
         when 'TRUST WITHDRAWN'
           res = "<a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"
         when 'ITEM DAMAGED'
-          res = "#{link_to "view item", item_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"  
+          res = "#{link_to "view item1", item_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"  
         when 'ITEM REPAIRED'
-            res = "#{link_to "view item", item_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"  
+            res = "#{link_to "view item2", item_path(log.related)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"  
         when 'FB FRIEND JOIN'
           res = "#{link_to "view profile", person_path(log.primary)} <a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a>"  
         else
@@ -754,8 +756,8 @@ module PagesHelper
  private
   def links_for_add_item(log, comments)
     share_mine_link = ""
-    share_mine_link = "<li>#{link_to "share mine", "#", :action => share_mine_item_path(log.action_object_id), :remote => 'true',  :id => "share_mine_#{log.action_object_id}"}</li>" unless log.involved_as_requester?current_user.person
-    "<li>#{link_to "view item", item_path(log.action_object_id)}</li>#{share_mine_link}<li><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></li>"
+     share_mine_link = "<td>#{link_to "share mine", "#", :action => share_mine_item_path(log.action_object_id), :remote => 'true',  :id => "share_mine_#{log.action_object_id}"}</td>" unless log.involved_as_requester?current_user.person
+    "<table><tr><td>#{link_to "abc" , item_path(log.action_object_id)}</td>#{share_mine_link}<td><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></td></td></table>"
   end
 
 end

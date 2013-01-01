@@ -1,10 +1,11 @@
-%ul.block-list
+%ul.block-list#block-list
 	-@events.each do |event|
 		-if event.event_log.event_type_id != 23
 			-event_sentence = event_log_sentence(event.event_log, nil, EventDisplay::DASHBOARD_FEED)
 			-unless event_sentence.empty?
-				%p
-					=event_sentence
-				= render :partial => "shared/event_log_actions_compact", :locals => { :event_log => event.event_log }
-				/ = render :partial => '/comments/comment_box', :locals => {:object => event.event_log}
+				%li
+					%p#paragraph-text
+						=event_sentence
+					= render :partial => "shared/event_log_actions_compact", :locals => { :event_log => event.event_log }
+					/ = render :partial => '/comments/comment_box', :locals => {:object => event.event_log}
 	-end unless @events.nil?

@@ -1,4 +1,8 @@
 %div.story-meta
 	%span.date
-		="#{time_ago_in_words(event_log.created_at)} ago"
-	=event_actions(event_log) unless event_log.event_type.nil?
+		%table
+			%tr
+				%td.table-cells-links
+					="#{time_ago_in_words(event_log.created_at)} ago"
+				%td.actionlist
+					=event_actions(event_log) unless event_log.event_type.nil?
