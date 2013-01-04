@@ -49,3 +49,26 @@
 		%aside.dashboard-sidebar.sidebar
 			=render :partial => "shared/commons_sidebar"
 			=render :partial => "shared/community_sidebar"
+
+
+
+
+
+
+
+
+
+
+
+	%div.story.timestamp
+								-if date == Date.today.strftime("%B %d")
+									
+								-else
+									
+									%div.story.clearfix
+										%ul
+											-recent_activity_logs.each do |activity_log|
+												= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
+												-activity_log.is_read!
+												%br
+											- end unless @recent_activity_logs.nil?

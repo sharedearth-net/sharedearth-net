@@ -1,7 +1,7 @@
 %div.wrapper.notification
 	
 	%div.container
-		%span#spantextbar Welcome to sharedearth.net! Get started by adding your items via the share button above.
+		%span#spantextbar Welcome to <span id="text1">shared</span><span id="text2">earth.net!</span> Get started by adding your items via the share button above.
 		%button.close +
 %div.wrapper
 	#cont.container
@@ -11,17 +11,33 @@
 					%li
 						%a{:href=>"#tabs-1", :title=>"", :class=>"", :id=>""}><
 							My activity
-							%div.notification-bubble 15
+							
 					%li
-						%a{:href=>"#tabs-2", :title=>"", :id=>""}>< Actions
+						%a{:href=>"#tabs-2", :title=>"", :id=>""}>< 
+							Actions
+							%div.notification-bubble 15
 				%div.feed-content.activity#tabs-1
-					-debugger				
+					-unless @recent_activity_dates.blank?
+						%div.story.clearfix
+							%ul.storybox
+								-@recent_activity_dates.each do |date, recent_activity_logs|
+							
+								
+									-recent_activity_logs.each do |activity_log|
+										= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
+										-activity_log.is_read!
+										
+									- end unless @recent_activity_logs.nil?
+
+							
+										
+				%div.feed-content.actions#tabs-2
 					-@request_dates.each do |date,requests|
 						%div.story.timestamp
 							-if date == Date.today.strftime("%B %d")
-								%h2 Today
+								%h2#bullet Today
 							-else
-								%h2
+								%h2#bullet
 									=date						
 						%div.story.clearfix
 							-requests.each do |req|								
@@ -31,21 +47,6 @@
 									%div.user-avatar
 										=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
 									= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
-					
-				%div.feed-content.actions#tabs-2
-					-unless @recent_activity_dates.blank?
-						-@recent_activity_dates.each do |date, recent_activity_logs|
-							%div.story.timestamp
-								-if date == Date.today.strftime("%B %d")
-									Today
-								-else
-									=date
-									%div.story.clearfix
-										-recent_activity_logs.each do |activity_log|
-											= render :partial => 'shared/activity_log_box', :locals => { :activity_log => activity_log }
-											-activity_log.is_read!
-											%br
-										- end unless @recent_activity_logs.nil?
 
 		%aside.dashboard-sidebar.sidebar
 			=render :partial => "shared/commons_sidebar"

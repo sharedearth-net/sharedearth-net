@@ -23,7 +23,7 @@
 			%div.resource-container
 				.resource.resource-thumbsup
 					-feedback_rating = current_user.person.reputation_rating.feedback_rating?
-					=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "%")
+					=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "")
 		%div.profile-settings
 			%div.profile-left
 				%div.row
@@ -56,6 +56,6 @@
 			%div.search-form
 				%form
 					=form_tag search_index_path, :method => 'get' , :class => "search-form" do
-						=text_field_tag :search, params[:search], :placeholder => "Search", :id=>"search-input", :class => "search-input", :style=>" border-radius: 8px 8px 8px 8px;height:37px;width:180px;"
+						=text_field_tag :search, params[:search], :placeholder => "Search", :id=>"search-input", :class => "search-input", :style=>" border-radius: 8px 8px 8px 8px;height:37px;width:231px;"
 						%button{:title => "Search", :type => "submit", :class => "search-button"} Search
 					

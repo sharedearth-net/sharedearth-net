@@ -109,6 +109,7 @@ class ItemRequestsController < ApplicationController
   end
 
   def collected
+    debugger
     @item_request.collected!
 
     respond_to do |format|

@@ -1,17 +1,30 @@
+ <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+ 
+ 
  <footer class='wrapper1'>
       <div class='container1'>
         <nav class='left1'>
+         <b>	
           <a href='#' title='About'>About</a>
           <a href='#' title='About'>Commons</a>
           <a href='#' title='About'>Legal</a>
           <a href='#' title='About'>Transparency</a>
           <a href='#' title='About'>Blog</a>
           <a href='#' title='About'>Contribute</a>
-          <a href='#' title='About'>Contact</a>
+          <a href='#' id="last" title='About'>Contact</a>
+          </b>
         </nav>
         <div class='right social-links'>
-          <div class='fb'></div>
-          <div class='tw'></div>
+          <div class='fb'><div class="fb-like" data-send="false" data-layout="button_count" data-width="460" data-show-faces="true"></div></div>
+          <div id='tw'><a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
         </div>
       </div>
     </footer>

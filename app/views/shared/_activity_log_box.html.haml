@@ -5,7 +5,7 @@
 
 / = render "shared/activity_log_entry", :activity_log => activity_log
 
-%li{:class => "clearfix"}
+%li{:class => "clearfix",:id=>"clearfix1"}
 	%div.user-avatar
 		= image_tag recent_activity_avatar(activity_log).avatar(:square), :class => "thumb"
 	
