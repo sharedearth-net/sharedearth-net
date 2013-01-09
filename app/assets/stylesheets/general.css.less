@@ -4,6 +4,120 @@
 @greyishGreen: #62775a;
 @darkGreen: #097b05;
 
+
+
+
+
+
+.owner-information{
+  .owner-name{
+    margin-left: 400px;
+    margin-top: -41px;
+  }
+  button{
+     margin-left: 527px;
+   
+    margin-top: -12px;
+    position: absolute;
+  }
+}
+
+
+.share-facebox-html{
+  display:none;
+}
+
+
+
+#community-tabs{
+  margin-right:107px;
+  margin-left:88px;
+  margin-top:-29px;
+}
+#line{
+  margin-left:92px;
+  top:5%;
+  width:639px;
+}
+#community-feed-tabs{
+  li{
+    a{
+      padding:12px 29px 7px 32px;
+    }
+  }
+}
+#feed-search-form{
+  margin-left:383px;
+  #community-search-input{
+   height:38px;
+   margin-top:-13px;
+   border-radius:11px 11px 11px 11px;
+   width:253px;
+   margin-left:-41px;
+    
+  }
+  #community-search-button{
+    background: url("/assets/img/icons/magnifier.png") no-repeat scroll center center padding-box transparent;
+    border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color #E0E0E0;
+    border-radius: 0 12px 12px 0;
+    border-style: none none none solid;
+    border-width: medium medium medium 1px;
+    position: absolute;
+    margin-top:-10px;
+    text-indent: -9999em;
+     margin-right:25px;
+    width: 37px;
+  }
+}
+#search-header{
+  margin-left:-7px;
+  margin-top:-2px;
+  font-size:22px;
+  #lock{
+    color:#6A8E1B;
+  }
+}
+#content-head{
+  width:627px;
+}
+#community-clearfix{
+  margin-left:-10px;
+  padding-bottom:0px;
+}
+#sec-p{
+  margin-top:-15px;
+}
+#textarea-row{
+  margin-left:89px;
+  margin-top:-12px;
+  width:646px;
+  textarea{
+    border-radius:13px 13px 13px 13px;
+      background-color: #FBFBFA; 
+      color: #999999;
+  }
+}
+
+
+
+/*    Community share popup  */
+#popup-sections{
+  margin-left:-6px;
+}
+.modal{
+ margin: -11px 0 0 -11px !important;
+    position: inherit !important;
+}
+
+#facebox .content{
+  width:560px !important;
+  padding-bottom: 1px !important;
+    padding-right: 0px !important;
+}
+
+#facebox .popup{
+  width:566px !important;
+}
 /***** Mixins *******/
 
 .gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
@@ -245,7 +359,7 @@ div.block-list{
   padding: 0;
   &.heading {
     color: #fff;
-    background: #afc878 url(/assets/img/icons/my-community.png) no-repeat 10px center;
+   // background: #afc878 url(/assets/img/icons/my-community.png) no-repeat 10px center;
     padding: 15px 7px 15px 62px;
     font-size: 18px;
     font-weight: bold;
@@ -254,6 +368,10 @@ div.block-list{
   a {
     padding: 11px 7px 11px 55px;
     display: block;
+    &.comm{
+      background: url(/assets/img/icons/my-community.png) no-repeat left center;
+    
+    }
     &.village {
       background: url(/assets/img/icons/house-big-inactive.png) no-repeat left center;
       &.active {
@@ -802,7 +920,10 @@ header.wrapper {
     .box-shadow(0 -2px 5px rgba(0,0,0,0.08));
   }
 }
-.sidebar-block1 {
+
+
+/*   Dashboard Side bar Blocks  */
+.sidebar-block1, .community-sidebar-block1  {
   position:relative;
   width:300px;
   margin-left:8px;
@@ -859,14 +980,87 @@ header.wrapper {
       font-size: 14px;
     }
   }
+  &.community-sidebar-block1
+  {
+    margin-left:-113px;
+    width:300px;
+  }
 }
 
 
-.sidebar-block2 {
+.sidebar-block2, .community-sidebar-block2 {
    position:relative;
   width:300px;
   margin-bottom: 20px;
   margin-left:8px;
+  padding: 11px;
+  background: #c7c5c5;
+  border-radius: 5px;
+  border: 1px solid #84aa30;
+  &.reputation{
+    background: #ddd7c8;
+  }
+  
+  h1 {
+    font-size: 18px;
+    line-height: 26px;
+    color: #fff;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+  }
+  h2 {
+    font-size: 14px;
+    line-height: 18px;
+    color: #534741;
+    font-weight: normal;
+  }
+  .more {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+    margin-top: 10px;
+  }
+  .user-header {
+    .clearfix;
+    .user-avatar, .user-info  {
+      float: left;
+    }
+    .user-avatar {
+      width: 25%;
+      margin-right: 5%;
+    }
+    .user-info {
+      width: 70%;
+      
+    }
+    .name {
+      color: #729427;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .location{
+      color: #6b6969;
+      font-size: 14px;
+    }
+  }
+  &.community-sidebar-block2{
+    margin-left:-112px;
+    width:300px;
+  }
+}
+
+
+
+/*   Community side bar blocks  */
+/*
+.community-sidebar-block1 {
+  position:relative;
+  width:300px;
+  margin-left:-111px;
+  margin-bottom: 20px;
   padding: 11px;
   background: #c7c5c5;
   border-radius: 5px;
@@ -923,10 +1117,66 @@ header.wrapper {
 
 
 
+.community-sidebar-block2 {
+   position:relative;
+  width:300px;
+  margin-bottom: 20px;
+  margin-left:-110px;
+  padding: 11px;
+  background: #c7c5c5;
+  border-radius: 5px;
+  border: 1px solid #84aa30;
+  &.reputation{
+    background: #ddd7c8;
+  }
+  
+  h1 {
+    font-size: 18px;
+    line-height: 26px;
+    color: #fff;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+  }
+  h2 {
+    font-size: 14px;
+    line-height: 18px;
+    color: #534741;
+    font-weight: normal;
+  }
+  .more {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+    margin-top: 10px;
+  }
+  .user-header {
+    .clearfix;
+    .user-avatar, .user-info  {
+      float: left;
+    }
+    .user-avatar {
+      width: 25%;
+      margin-right: 5%;
+    }
+    .user-info {
+      width: 70%;
+    }
+    .name {
+      color: #729427;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .location{
+      color: #6b6969;
+      font-size: 14px;
+    }
+  }
+}
 
-
-
-
+*/
 
 
 
@@ -1096,6 +1346,8 @@ footer {
     background: #6f941e;
     color: #fff;
     padding: 0 15px;
+    margin-left:0px;
+    margin-top:0px;
   }
   h1 {
     float: left;
@@ -1114,7 +1366,7 @@ footer {
     float: right;
     width: 20px;
     height: 20px;
-    background: url(/assets/img/icons/close-sprite.png) no-repeat;
+    background: url(/assets/img/icons/close-sprite.png) no-repeat ;
     text-indent: -9999em;
     border: 0;
     margin-top: 12px;
@@ -1336,6 +1588,7 @@ div.rating-cancel {
     display: block;
     width: 100%;
     height: 80px;
+    text-align:center;
   }
   .imgHolder {
     height: 120px;
@@ -1351,10 +1604,23 @@ div.rating-cancel {
   .quarter {
     margin: 0;
     width: 25%;
+   
     border-right: 1px solid #ccc;
     padding: 10px;
     text-align: left;
     color: #7b7b7b;
+    #check1, #check2, #check3, #check4{
+       
+     margin-left: 107px;
+    
+    }
+    #check1{
+      margin-left: 60px;
+    }
+    #check-default{
+      margin-top:21px;
+      color:#7DBC18;
+    }
     &:last-child {
       border-right: none;
       .border-radius(0, 10px, 0, 0)
@@ -1364,6 +1630,11 @@ div.rating-cancel {
       border: 2px solid #a5a5a5;
       padding: 8px;
       .box-shadow(0px 0px 8px 2px rgba(0,0,0,.3));
+      h1{
+        color:#11120D;
+      }
+      margin-top:-10px;
+      height:467px;
     }
     header {
       background: transparent;
@@ -1461,6 +1732,8 @@ div.rating-cancel {
     border: 3px solid #84aa30;
     .rounded(5px);
     margin-right: 20px;
+    margin-left:87px;
+    line-height:60px;
     float: left;
     img {
       width: 100%;
@@ -1469,6 +1742,7 @@ div.rating-cancel {
   .community-content{
     width: 490px;
     float: left;
+    margin-top:-9px;
     color: #a0a0a0;
   }
   h1 {
@@ -1477,13 +1751,14 @@ div.rating-cancel {
     line-height: 40px;
   }
   h2 {
-    color: #534741;
-    font-size: 18px;
-    line-height: 24px;
+    color: #7E7571;
+    font-size: 16px;
+    line-height: 6px;
   }
   .community-header-links {
     width :100%;
     margin: 10px 0;
+   
     a{
       color: #534741;
       display: inline-block;
@@ -1496,16 +1771,16 @@ div.rating-cancel {
       }
     }
     .people {
-      padding-left: 25px;
-      background: url(../img/icons/proportions.png) no-repeat 0px center;
+      padding-left: 30px;
+      background: url(/assets/img/icons/proportions.png) no-repeat 0px center;
     }
     .trusted {
-      padding-left: 28px;
-      background: url(../img/icons/trusted-grey.png) no-repeat 0px center;
+      padding-left: 34px;
+      background: url(/assets/img/icons/trusted-grey.png) no-repeat 0px center;
     }
     .items {
-      padding-left: 14px;
-      background: url(../img/icons/leaf.png) no-repeat 0px center;
+      padding-left: 18px;
+      background: url(/assets/img/icons/leaf.png) no-repeat 0px center;
     }
 
 
@@ -1536,6 +1811,15 @@ div.rating-cancel {
   }
 }
 
+#search-result-comm1{
+  width:121.5%;
+}
+#search-result-comm2{
+  width:121.5%;
+}
+#search-result-com3{
+  width:121.5%;
+}
 .search-result{
   background: #f2fcd7;
   width: 100%;
@@ -1545,13 +1829,13 @@ div.rating-cancel {
     padding: 15px 15px 15px 70px;
   }
   .people {
-    background: url(../img/icons/search-people.png) no-repeat 18px center;
+    background: url(/assets/img/icons/search-people.png) no-repeat 18px center;
   }
   .villages {
-    background: url(../img/icons/search-villages.png) no-repeat 10px center;
+    background: url(/assets/img/icons/search-villages.png) no-repeat 10px center;
   }
   .groups {
-    background: url(../img/icons/search-groups.png) no-repeat 20px center;
+    background: url(/assets/img/icons/search-groups.png) no-repeat 20px center;
   }
 }
 .white-heading {
@@ -1600,5 +1884,47 @@ div.rating-cancel {
   background: url(../img/icons/refresh-button.png) no-repeat;
   &:hover {
     background: url(../img/icons/refresh-button-hover.png) no-repeat;
+  }
+}
+
+
+#row1{
+  margin-left: 82px;
+    margin-top: -41px;
+}
+#item-picture{
+  img{
+      margin-left: 8px;
+    margin-top: 7px;
+  }
+}
+
+#content-items-head{
+   height: 56px;
+    margin-top: -11.51px;
+    width: 626px;
+    h1{
+     font-size: 22px;
+    margin-left: -6px;
+    margin-top: 1px;
+    span{
+       color:#6A8E1B;
+    }
+    }
+}
+
+
+
+
+/*          Rating starts   */
+#rating-row{
+  .item-type{
+      margin-left: 112px;
+    margin-top: -14px;
+    color:#6E921C;
+  }
+  .item-rating{
+     margin-left: 248px;
+    margin-top: -20px;
   }
 }

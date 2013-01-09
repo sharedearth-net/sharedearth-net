@@ -1,3 +1,37 @@
+:javascript
+	$(document).ready(function() {
+		$("#share-facebox").click(function (){
+		
+		var html= $(".share-facebox-html").html();
+		$.facebox(html);
+		
+		
+		
+		
+		
+		
+		
+		});
+	});
+	function check1(){
+	document.getElementById("checkbox-no").value=1;
+	}	
+	function check2(){
+	
+	document.getElementById("checkbox-no").value=2;
+	alert(document.getElementById("checkbox-no").value);	
+	
+	}
+	function check3(){
+	document.getElementById("checkbox-no").value=3;
+	}
+	function check4(){
+	
+  
+	document.getElementById("checkbox-no").value=4;
+	}
+  
+
 %header.wrapper
 	%div.container
 		%div.community
@@ -50,7 +84,7 @@
 		%div.right
 			%div.buttons
 				-if !current_user.blank?
-					=link_to "Share", new_item_path, :class => "button"
+					=link_to "Share", "#", :class => "button", :id=>"share-facebox"
 					=link_to "Ask", "#", :class => "button"
 				=link_to "Connect", connect_path, :class => "button"
 			%div.search-form
@@ -58,4 +92,5 @@
 					=form_tag search_index_path, :method => 'get' , :class => "search-form" do
 						=text_field_tag :search, params[:search], :placeholder => "Search", :id=>"search-input", :class => "search-input", :style=>" border-radius: 8px 8px 8px 8px;height:37px;width:231px;"
 						%button{:title => "Search", :type => "submit", :class => "search-button"} Search
-					
+					= render :partial => "shared/community_share"
+					%input{:type=>"hidden", :id=>"checkbox-no"}
