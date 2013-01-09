@@ -1,0 +1,140 @@
+:javascript
+	$(document).ready(function() {
+		$("#community-tabs").tabs();
+	});
+	
+%div.wrapper
+	%div.container
+		%section.community-feed.page-content.clearfix
+			%section.community-page-header.clearfix
+				%div.community-avatar
+					%img{:src=>"/assets/img/community-avatar.png", :alt=>"My Community Avatar"}
+				%div.community-content
+					%h1 Your Community
+					%h2 The people you are connected to
+					%p We are interdepedent on those who surround us. We are 
+					%p#sec-p individuals who are part of a larger social organism.
+					%div.community-header-links
+						%a{:href=>"#", :class=>"people"} 12040 people
+						%a{:href=>"#", :class=>"trusted"} 15 people that I trust
+						%a{:href=>"#", :class=>"items"} 170 items available
+				%hr.row#line
+				%form.row#textarea-row
+					%textarea Post to community discussion board
+			%div.feed#community-tabs
+				%ul.feed-tabs#community-feed-tabs
+					%li
+						%a{:href=>"#tabs-1", :title=>"", :class=>"", :id=>""}><
+							Activity
+					%li
+						%a{:href=>"#tabs-2", :title=>"", :id=>""}>< Resources
+					%li
+						%a{:href=>"#tabs-3", :title=>"", :id=>""}>< Asks
+					%li
+						%a{:href=>"#tabs-4", :title=>"", :id=>""}>< Humans
+					%li
+						%a{:href=>"#tabs-5", :title=>"", :id=>""}>< Search
+				%div.feed-content.activity#tabs-1
+					-@request_dates.each do |date,requests|
+						%div.story.clearfix#community-clearfix
+							-requests.each do |req|
+								-if req.is_a? ItemRequest
+									=render :partial => "shared/item_request_content_box", :locals => { :req => req }
+								-elsif req.is_a? NetworkRequest
+									%div.user-avatar
+										=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
+									= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
+
+				%div.feed-content.resources#tabs-2
+					%div.story.clearfix
+						%ul
+							%li
+								%a{:href=>"#"} Lorem ipsum
+							%li
+								%a{:href=>"#"} Lorem ipsum
+				%div.feed-content.humans#tabs-4			
+				%div.feed-content.activity#tabs-5
+					%section.content-box
+						%div.content-head#content-head
+							%h1#search-header search results for <span id="lock">lock</span>
+							%div.search-form#feed-search-form
+								%form
+									%input{:type=>"text", :placeholder=>"Search", :class=>"search-input", :id=>"community-search-input"}
+									%input{:type=>"button", :value=>"Search", :class=>"search-button", :id=>"community-search-button"}
+						%div.search-result#search-result-comm1.clearfix
+							%div.people 11 people found
+						%div.search-result#search-result-comm2.clearfix
+							%div.villages 3 villages found
+						%div.search-result#search-result-comm3.clearfix
+							%div.groups 7 groups found
+					%section.content-box
+						%div.content-head#content-items-head
+							%h1 <span>52 items</span> found in your community
+						%div.community-item.clearfix
+							%div.item-picture#item-picture
+								%img{:src=>"/assets/img/item.png", :alt=>"Shelter"}
+							%div.item-information
+								%div.row#row1
+									Coleman Gazebo Shelter
+								%div.row#rating-row
+									%div.item-type
+										commoned
+									%div.item-rating
+										%form
+											%input{:type=>"radio", :name=>"rating", :class=>"star"}
+											%input{:type=>"radio", :name=>"rating", :class=>"star"}
+											%input{:type=>"radio", :name=>"rating", :class=>"star"}
+											%input{:type=>"radio", :name=>"rating", :class=>"star"}
+											%input{:type=>"radio", :name=>"rating", :class=>"star"}
+							%div.owner-information
+								%div.owner-name
+									Johnson John
+								%div.row
+									%ul.owner-info
+										
+								%button.button.ui-switch Request
+				
+		%aside.dashboard-sidebar.sidebar
+			%div.block.community-sidebar-block1
+				%hgroup
+					%h1 building the commons
+					%h2 Do you own the following?
+				%ul.block-list
+					%li
+						%span.resource plunger
+						%a{:href=>"#", :title=>"plunger", :class=>"button medium"} Share Mine
+					%li
+						%span.resource hammer
+						%a{:href=>"#", :title=>"hammer", :class=>"button medium"} Share Mine
+					%li
+						%span.resource vacuum cleaner
+						%a{:href=>"#", :title=>"vacuum cleaner", :class=>"button medium"} Share Mine
+					%li
+						%span.resource hot water urn
+						%a{:href=>"#", :title=>"hot water urn", :class=>"button medium"} Share Mine
+					%li
+						%span.resource folding table
+						%a{:href=>"#", :title=>"folding table", :class=>"button medium"} Share Mine
+					%li
+						%span.resource fuse box
+						%a{:href=>"#", :title=>"fuse box", :class=>"button medium"} Share Mine
+				%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+			%div.block.community-sidebar-block2
+				%h1 filter by
+				%h2.filter.heading
+				%ul.block-list.filters
+					%li.filter
+						%a.comm.active{:href=>"#"} my community
+					%li.filter
+						%a.village.active{:href=>"#"} Villages
+					%li.filter
+						%a.trusted.active{:href=>"#"} Trusted Network
+					%li.filter
+						%a.groups.active{:href=>"#"} Groups
+					%li.filter
+						%a.village{:href=>"#"} Villages
+					%li.filter
+						%a.trusted{:href=>"#"} Trusted Network
+					%li.filter
+						%a.groups{:href=>"#"} Groups
+				%a{:href=>"#", :title=>"View more", :class=>"more"} View More
