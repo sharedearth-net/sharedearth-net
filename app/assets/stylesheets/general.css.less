@@ -9,6 +9,19 @@
 
 
 
+
+
+
+
+
+
+
+
+.share-small-popup{
+  display:none;
+}
+
+
 .owner-information{
   .owner-name{
     margin-left: 400px;
@@ -104,9 +117,13 @@
 #popup-sections{
   margin-left:-6px;
 }
+
 .modal{
  margin: -11px 0 0 -11px !important;
     position: inherit !important;
+    #share-guide-input{
+      width:300px !important;
+    }
 }
 
 #facebox .content{
@@ -118,6 +135,88 @@
 #facebox .popup{
   width:566px !important;
 }
+
+
+/*    share input popup  */
+
+.modal{
+ .share-guide-input{
+  width:300px !important;
+}
+
+
+}
+
+#textarea-input{
+ 
+   margin-left: 22px;
+    margin-top: 20px;
+    width: 402px;
+    #share-text{
+     background-color: #FBFBFA;
+    border-radius: 10px 10px 10px 10px;
+    color: #999999;
+    height: 36px !important;
+  }
+  #change{
+   color: #B9B9B8;
+    font-size: 12px;
+    margin-left: 357px;
+    text-decoration: underline;
+  }
+  #share-facebox1{
+     height: 32px;
+    line-height: 10px;
+    text-decoration: none;
+    width: 107px;
+     &:hover{
+       background-color:#FABD1E;
+     }   
+  }
+}
+
+#share-change{
+  margin-top:-1px;
+}
+#share-footer{
+    background-color: #DED8C8;
+    height: 26px;
+     margin-left: -23px !important;
+    margin-top: 0px;
+    width: 450px;
+    margin-bottom: -20px !important;
+    #down-arrow{
+      background: url("/assets/img/icons/down_arrow.png") no-repeat;
+      margin-left: 213px;
+      width:25px;
+      height:25px;
+    }
+    #up-arrow{
+       background: url("/assets/img/icons/up_arrow.png") no-repeat;
+      margin-left: 213px;
+      width:25px;
+      height:25px;
+    }
+}
+
+#share-in-details{
+  //display:none;
+}
+
+
+#main-footer{
+  margin-bottom:0px;
+}
+
+
+
+
+
+
+
+
+
+
 /***** Mixins *******/
 
 .gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {

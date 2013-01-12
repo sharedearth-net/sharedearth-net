@@ -1,36 +1,119 @@
 :javascript
 	$(document).ready(function() {
+		/*      Main facebox   (i.e. sections)  */
 		$("#share-facebox").click(function (){
+		$('#facebox .popup').css("cssText", "width: 566px !important;");	
+		$('#facebox .content').css("cssText", "width: 560px !important;");	
+		$('#facebox .content').css("cssText", "padding-right: 0px !important;");
+		$('#facebox .content').css("cssText", "padding-bottom: 1px !important;");
+		$('.modal').css("cssText", "margin: -11px 0px 0px -11px !important;");
+		$('.modal').css("cssText", "position: inherit !important;");
 		
 		var html= $(".share-facebox-html").html();
+	
 		$.facebox(html);
 		
-		
+	
 		
 		
 		
 		
 		
 		});
+						
 	});
+	
 	function check1(){
+	
+	
+	
+	
 	document.getElementById("checkbox-no").value=1;
+	
+	faceboxcode();
+	
 	}	
 	function check2(){
-	
-	document.getElementById("checkbox-no").value=2;
-	alert(document.getElementById("checkbox-no").value);	
-	
+	document.getElementById("checkbox-no").value=2;		
+	faceboxcode();
 	}
 	function check3(){
 	document.getElementById("checkbox-no").value=3;
+	faceboxcode();	
 	}
 	function check4(){
-	
-  
 	document.getElementById("checkbox-no").value=4;
+	faceboxcode();	
+  
+	
+	}
+	function faceboxcode(){
+	$('#facebox .body').css("cssText", "width: 450px !important;");
+	$('#facebox .body').css("border-radius","10px 10px 10px 10px");
+	$('#facebox .popup').css("cssText", "width: 450px !important;");
+	$('#facebox .popup').css("border-radius","10px 10px 10px 10px");
+	$('#facebox .content').css("cssText", "width: 450px !important;");
+	$('#facebox .content').css("border-radius","10px 10px 10px 10px");
+	$('.modal').css("cssText", "width: 450px !important;");
+	$('.modal').css("border-radius","10px 10px 10px 10px");
+	
+	
+	
+	$("#detailed-sharing").html(" ");
+		$("#main-footer").html("<div id='share-footer' onClick='DetailSharing();'><div id='down-arrow' ></div></div>");
+	
+	var sec=$(".share-small-popup").html();
+	$.facebox(sec);		
+	
 	}
   
+  
+  
+	function DetailSharing(){
+		
+		
+			
+	$('#facebox .body').css("cssText", "height: 693px !important;width: 450px !important;");
+	$('#facebox .popup').css("cssText", "height: 693px !important;width: 450px !important;");
+	$('#facebox .content').css("cssText", "height: 693px !important;width: 450px !important;");
+	$('.modal').css("cssText", "height: 693px !important;width: 450px !important;");
+	
+	$("#share-facebox1").css("cssText"," height: 32px !important; line-height: 10px !important; text-decoration: none !important; width: 107px !important;");
+	$("#change").css("cssText"," color: #B9B9B8 !important; font-size: 12px !important; margin-left: 357px !important; text-decoration: underline !important;")
+	
+		$("#remove-change").html("");
+		$("#main-footer").html("<div id='share-footer' style='margin-left:0px !important;'onClick='Sharing();'><div id='up-arrow'></div></div>");
+		
+		$("#detailed-sharing").html($("#share-in-details").html());
+		
+		var DetailHtml= $(".share-small-popup").html();
+		alert(DetailHtml);
+		$(".content:eq(1)").html(DetailHtml);
+	
+	
+			
+	
+	}  
+	function Sharing(){
+	$('#facebox .body').css("cssText", "width: 450px !important;");
+	$('#facebox .body').css("border-radius","10px 10px 10px 10px");
+	$('#facebox .popup').css("cssText", "width: 450px !important;");
+	$('#facebox .popup').css("border-radius","10px 10px 10px 10px");
+	$('#facebox .content').css("cssText", "width: 450px !important;");
+	$('#facebox .content').css("border-radius","10px 10px 10px 10px");
+	$('.modal').css("cssText", "width: 450px !important;");
+	$('.modal').css("border-radius","10px 10px 10px 10px");
+	
+	
+	/*$("#remove-change").html("<a href='#' id='change'>change</a>");*/
+	$("#detailed-sharing").html(" ");
+	$("#main-footer").html("<div id='share-footer' onClick='DetailSharing();'><div id='down-arrow' ></div></div>");
+	var DetailHtml= $(".share-small-popup").html();
+	
+	$(".content:eq(1)").html(DetailHtml);
+	
+	
+	}
 
 %header.wrapper
 	%div.container
@@ -94,3 +177,4 @@
 						%button{:title => "Search", :type => "submit", :class => "search-button"} Search
 					= render :partial => "shared/community_share"
 					%input{:type=>"hidden", :id=>"checkbox-no"}
+					= render :partial => "shared/community_share_input_popup"					
