@@ -1,5 +1,11 @@
+
+
+
 <%- if current_user -%>	
 	window.location = "<%= people_edit_path(@people)%>";
 <% else -%>
+
 	$.facebox("<%= escape_javascript(render partial: 'form', locals: {user: User.new}) -%>");
+	$('#facebox .popup').css("cssText", "width: 370px !important;");	
+		$('#facebox .content').css("cssText", "width: 370px !important;");	
 <% end -%>
