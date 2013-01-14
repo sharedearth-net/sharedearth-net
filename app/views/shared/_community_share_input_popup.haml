@@ -1,0 +1,105 @@
+%div.share-small-popup
+	%section.modal.share-guide#share-guide-section
+		%header.row
+			%h1.village What?
+		- @item = Item.new  
+	
+		= form_for(@item, :html => { :multipart => true},:id=>"textarea-input",:class=>"row" ) do |f| 	
+			
+			 
+			=	f.text_field :description, :id=>"share-text"
+			
+			
+			%div#detailed-sharing
+			
+			
+			
+			
+			
+			= f.submit "share", :onClick=>"SetCheckBoxes();", :id=>"share-facebox1"
+			
+			%div#remove-change
+				%a{:href=>"#", :id=>"change"}><change
+			%div#main-footer
+			
+			
+			
+			
+			%div#share-in-details
+				%div#item-profile-form-page.new
+					%div.item-new-page
+				
+				
+				
+						 
+							
+						- render :partial => "shared/error_messages", :locals => { :model => @item } 
+						
+						- if @item.photo? 
+						
+							= image_tag item.photo.url(:medium), :class => "item-pic" 
+				
+						- else 
+						
+							= image_tag("bt-upload-image.png", :alt => "Upload Image")  
+							= f.file_field :photo, :class => 'realupload' 
+				    		
+			
+								
+											
+						- f.label :Purpose 
+						- if @item.purpose_update_available? || @item.new_record? 
+							= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :id => :share 
+							= f.label :Share, "Share", :class => "radio-labels-holder" 
+							= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift 
+							= f.label :Gift, "Gift", :class => "radio-labels-holder" 
+							= f.radio_button :purpose, Item::PURPOSE_SHAREAGE,:id => :shareage,:disabled => false
+							= f.label :Share, "Shareage", :class => "radio-labels-holder radio-labels-holder-off" 
+							= f.radio_button :purpose, Item::PURPOSE_COMMUNAL,:id => :communal,:disabled => true
+							= f.label :Gift, "Communal", :class => "radio-labels-holder radio-labels-holder-off" 
+			
+			
+											
+							
+						- else 
+							= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled", :id => :share  
+							= f.label :Share, :class => "radio-labels-holder radio-labels-holder-off" 
+							= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled", :id => :gift   
+							= f.label :Gift, :class => "radio-labels-holder radio-labels-holder-off" 
+						 
+						
+						= f.label :item_type 
+						= f.text_field :item_type 
+						
+						= f.label :name 
+						= f.text_field :name 
+						 
+						
+			
+						-# if @can_post_to_fb 
+						
+						
+						= f.label :post_it_on_fb, 'Post this item on Facebook' 
+						= f.check_box :post_it_on_fb, :checked => true 
+						
+						 
+					
+							
+						
+									
+						
+
+			
+				
+					
+		
+			
+		
+	
+	
+				
+		
+
+
+
+
