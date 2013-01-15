@@ -14,7 +14,7 @@
 					%li#tab2
 						%a{:href=>"#tabs-2", :title=>"", :id=>""}>< Actions
 				%div.feed-content.activity#tabs-1
-					-debugger				
+									
 					-@request_dates.each do |date,requests|
 						%div.story.timestamp
 							-if date == Date.today.strftime("%B %d")
