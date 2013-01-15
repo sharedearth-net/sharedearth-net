@@ -1,117 +1,124 @@
-<% @item = Item.new if @item.nil? %>
-<%= form_for(@item, :html => { :multipart => true} ) do |f| %>
-	<%= render :partial => "shared/error_messages", :locals => { :model => @item } %>
-<div id="content">
-	<div class="lhs">
-		<ul class="form-holder">
-			<% if @item.photo? %>
-				<li id="item-pic-holder" class="clearfix">
-					<%= image_tag @item.photo.url(:medium), :class => "item-pic" %>
-				</li>
-			<% else %>
-				<li id="item-pic-holder" class="no-image-uploaded clearfix">
-				</li>
-			<% end %>
-			<li class="button-holder">
-				<%= image_tag("bt-upload-image.png", :alt => "Upload Image")  %>
-	    		<%= f.file_field :photo, :class => 'realupload' %>
-			</li>
-			
-		
+<div >
+	<div id="item-profile-form-page" class="new">
+		<div class="item-new-page">
 
-		</ul>
-	</div>
-		
-  <div class="rhs">
-	<h2 class="edit">Edit Item</h2>
-	<h2 class="new">Add Item</h2>
-	<ul class="form-holder">
-		<li class="clearfix">
-			<%= f.label :Purpose %>
-		    <% if @item.purpose_update_available? || @item.new_record? %>
-    		  <%= f.radio_button :purpose, 
-                              Item::PURPOSE_SHARE, 
-                              :checked => @item.share?, 
-                              :id => :share %> 
-          <%= f.label :Share, "Share", :class => "radio-labels-holder" %>
-    		  <%= f.radio_button :purpose, 
-                              Item::PURPOSE_GIFT, 
-                              :checked => @item.gift?, 
-                              :id => :gift %> 
-           <%= f.label :Gift, "Gift", :class => "radio-labels-holder" %>
+			<%#= form_for(@item, :html => { :multipart => true} ) do |f| %>
+			<% @item = Item.new if @item.nil? %>
+<%	 form_for(@item, :html => { :multipart => true},:id=>"textarea-input",:class=>"row" ) do |f|%>
+			<%= render :partial => "shared/error_messages", :locals => { :model => @item } %>
+			<div id="content">
+				<div class="lhs">
+					<ul class="form-holder">
+						<% if @item.photo? %>
+						<li id="item-pic-holder" class="clearfix">
+							<%= image_tag item.photo.url(:medium), :class => "item-pic" %>
+						</li>
+						<% else %>
+						<li id="item-pic-holder" class="no-image-uploaded clearfix"></li>
+						<% end %>
+						<li class="button-holder">
+							<%= image_tag("bt-upload-image.png", :alt => "Upload Image")  %>
+							<%= f.file_field :photo, :class => 'realupload' %>
 
-<!-- these buttons are not functional (shareage, communal) -->
-		    	<%= f.radio_button :purpose, 
-                               Item::PURPOSE_SHAREAGE, 
-                               :id => :shareage,
-                               :disabled => false %> 
-           <%= f.label :Share, "Shareage", :class => "radio-labels-holder radio-labels-holder-off" %>
-			
-        		<%= f.radio_button :purpose, 
-                               Item::PURPOSE_COMMUNAL, 
-                               :id => :communal,
-                               :disabled => true %> 
-           <%= f.label :Gift, "Communal", :class => "radio-labels-holder radio-labels-holder-off" %>
+						</li>
 
+					</ul>
+				</div>
 
-				<p class="description under-radio">
-              		<span>What is this?</span>
-		            <span>What is this?</span>
-				</p>
-<!-- these buttons are not functional (shareage, communal) -->
-				
+				<div class="rhs">
+					<h2 class="edit">Edit Item</h2>
+					<h2 class="new">Add Item</h2>
+					<ul class="form-holder">
+						<li class="clearfix">
+							<div style="display:none">
 
-    		<% else %>
-	    		<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled", :id => :share  %>
-				<%= f.label :Share, :class => "radio-labels-holder radio-labels-holder-off" %>
-    		  	
-				<%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled", :id => :gift   %>
-				<%= f.label :Gift, :class => "radio-labels-holder radio-labels-holder-off" %>
-    		<% end %>
-		</li>
-    	<li class="clearfix">
-			<%= f.label :item_type %>
-    		<%= f.text_field :item_type %>
-			<p class="description">
-				A generic term describing the item, e.g. 
-				<br />
-				bike, television, toaster, amplifier, etc
-			</p>
-		</li>
-    	<li class="clearfix">
-    		<%= f.label :name %>
-    		<%= f.text_field :name %>
-			<p class="description">
-				A short descriptive name for the item, e.g. Trek 21 
-				<br />
-				Speed Road Bike, 2 Slice Toaster, etc.
-			</p>
-		</li>
-    	<li class="clearfix">
-    		<%= f.label :description %>
-    		<%= f.text_area :description,
-                         :default_description =>  "A description of the item, and your expectations, e.g. My spare bike is available to those in-between bikes, or new to the area. I do use it occasionally and like to share it around, so would prefer short-term sharing or daily loans" %>
-		</li>
+								<%= f.label :Purpose %>
+								<% if @item.purpose_update_available? || @item.new_record? %>
+								<%= f.radio_button :purpose,
+                  Item::PURPOSE_SHARE,
+                  :checked => @item.share?,
+                  :id => :share %>
+								<%= f.label :Share, "Share", :class => "radio-labels-holder" %>
+								<%= f.radio_button :purpose,
+                  Item::PURPOSE_GIFT,
+                  :checked => @item.gift?,
+                  :id => :gift %>
+								<%= f.label :Gift, "Gift", :class => "radio-labels-holder" %>
 
-    <% if @can_post_to_fb %>
-      <li class="checkbox-holder clearfix">
-        <%= f.label :post_it_on_fb, 'Post this item on Facebook' %>
-        <%= f.check_box :post_it_on_fb, :checked => true %>
-      </li>
-    <% end %>
-	
+								<!-- these buttons are not functional (shareage, communal) -->
+								<%= f.radio_button :purpose,
+                  Item::PURPOSE_SHAREAGE,
+                  :id => :shareage,
+                  :disabled => false %>
+								<%= f.label :Share, "Shareage", :class => "radio-labels-holder radio-labels-holder-off" %>
 
-		<li class="clearfix">
-			<ul class="action-buttons-list clearfix">
-				<li>
-					<%= f.submit 'Save' %>
-				</li>
-				<li>
-					<%= link_to 'Cancel', items_path %>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</div>
-</div>
+								<%= f.radio_button :purpose,
+  Item::PURPOSE_COMMUNAL,
+  :id => :communal,
+  :disabled => true %>
+								<%= f.label :Gift, "Communal", :class => "radio-labels-holder radio-labels-holder-off" %>
+
+								<p class="description under-radio">
+									<span>What is this?</span>
+									<span>What is this?</span>
+								</p>
+							</div>
+							<!-- these buttons are not functional (shareage, communal) -->
+
+							<% else %>
+							<%= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled", :id => :share  %>
+							<%= f.label :Share, :class => "radio-labels-holder radio-labels-holder-off" %>
+
+							<%= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled", :id => :gift   %>
+							<%= f.label :Gift, :class => "radio-labels-holder radio-labels-holder-off" %>
+							<% end %>
+						</li>
+						<li class="clearfix">
+							<%= f.label :item_type %>
+							<%= f.text_field :item_type %>
+							<p class="description" id="description">
+								A generic term describing the item, e.g.
+								<br />
+								bike, television, toaster, amplifier, etc
+							</p>
+						</li>
+						<li class="clearfix">
+							<%= f.label :name %>
+							<%= f.text_field :name %>
+							<p class="description">
+								A short descriptive name for the item, e.g. Trek 21
+								<br />
+								Speed Road Bike, 2 Slice Toaster, etc.
+							</p>
+						</li>
+						<li class="clearfix" style="display:none;" >
+							<%= f.label :description %>
+							<%= f.text_area :description,
+                :default_description =>  "A description of the item, and your expectations, e.g. My spare bike is available to those in-between bikes, or new to the area. I do use it occasionally and like to share it around, so would prefer short-term sharing or daily loans" %>
+						</li>
+
+						<% if @can_post_to_fb %>
+						<li class="checkbox-holder clearfix">
+							<%= f.label :post_it_on_fb, 'Post this item on Facebook' %>
+							<%= f.check_box :post_it_on_fb, :checked => true %>
+						</li>
+						<% end %>
+
+						<li class="clearfix">
+							<ul class="action-buttons-list clearfix">
+								<li>
+
+								</li>
+								<li  style="display:none;">
+									<%= f.submit "share" %>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
 <% end %>
+		</div>
+	</div>
+</div>
+
