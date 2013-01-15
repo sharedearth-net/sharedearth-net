@@ -24,65 +24,81 @@
 	});
 	
 	function check1(){
+		
 	
-	
-	
-	
-	document.getElementById("checkbox-no").value=1;
-	
+	$("#purpose-type").val(10);
+	$("#hid").val("share");
 	faceboxcode();
 	
 	}	
 	function check2(){
+	$("#purpose-type").val(20);
 	document.getElementById("checkbox-no").value=2;		
 	faceboxcode();
 	}
 	function check3(){
+	$("#purpose-type").val(30);
 	document.getElementById("checkbox-no").value=3;
 	faceboxcode();	
 	}
 	function check4(){
+	$("#purpose-type").val(40);
 	document.getElementById("checkbox-no").value=4;
 	faceboxcode();	
   
 	
 	}
 	function faceboxcode(){
-	$('#facebox .body').css("cssText", "width: 450px !important;");
+	/*$('#facebox .body').css("cssText", "width: 450px !important;height:200px !important;");
 	$('#facebox .body').css("border-radius","10px 10px 10px 10px");
-	$('#facebox .popup').css("cssText", "width: 450px !important;");
+	$('#facebox .popup').css("cssText", "width: 450px !important;height:200px !important;");
 	$('#facebox .popup').css("border-radius","10px 10px 10px 10px");
-	$('#facebox .content').css("cssText", "width: 450px !important;");
+	$('#facebox .content').css("cssText", "width: 450px !important;height:200px !important;");
 	$('#facebox .content').css("border-radius","10px 10px 10px 10px");
-	$('.modal').css("cssText", "width: 450px !important;");
+	$('.modal').css("cssText", "width: 450px !important;height:200px !important;");
 	$('.modal').css("border-radius","10px 10px 10px 10px");
 	
 	
 	
 	$("#detailed-sharing").html(" ");
-		$("#main-footer").html("<div id='share-footer' onClick='DetailSharing();'><div id='down-arrow' ></div></div>");
+	$("#main-footer").html("<div id='share-footer' style='position:relative;bottom:15px;' onClick='DetailSharing();'><div  id='down-arrow' ></div></div>");
+
+	
+	
+	
+		
 	
 	var sec=$(".share-small-popup").html();
-	$.facebox(sec);		
+	$.facebox(sec);	
+
 	
+	var sec=$(".share-small-popup").html();
+	$.facebox(sec);*/
+
+	$("#purpose-type").val(10);	
+	$("#item-type").val("share");
+
+
+	Sharing(1);	
+
 	}
   
   
   
 	function DetailSharing(){
 		
-		
+	$("#hid").val("share");		
 			
-	$('#facebox .body').css("cssText", "height: 693px !important;width: 450px !important;");
-	$('#facebox .popup').css("cssText", "height: 693px !important;width: 450px !important;");
-	$('#facebox .content').css("cssText", "height: 693px !important;width: 450px !important;");
-	$('.modal').css("cssText", "height: 693px !important;width: 450px !important;");
+	$('#facebox .body').css("cssText", "height: 450px !important;width: 450px !important;");
+	$('#facebox .popup').css("cssText", "height: 450px !important;width: 450px !important;");
+	$('#facebox .content').css("cssText", "height: 450px !important;width: 450px !important;");
+	$('.modal').css("cssText", "height: 450px !important;width: 450px !important;");
 	
-	$("#share-facebox1").css("cssText"," height: 32px !important; line-height: 10px !important; text-decoration: none !important; width: 107px !important;");
-	$("#change").css("cssText"," color: #B9B9B8 !important; font-size: 12px !important; margin-left: 357px !important; text-decoration: underline !important;")
+
 	
-		$("#remove-change").html("");
-		$("#main-footer").html("<div id='share-footer' style='margin-left:0px !important;'onClick='Sharing();'><div id='up-arrow'></div></div>");
+	
+	
+		$("#main-footer").html("<div id='share-footer' style='position:relative;bottom:-294px;'onClick='Sharing(0);'><div id='up-arrow'></div></div>");
 		
 		$("#detailed-sharing").html($("#share-in-details").html());
 		
@@ -94,25 +110,60 @@
 			
 	
 	}  
-	function Sharing(){
-	$('#facebox .body').css("cssText", "width: 450px !important;");
+	function Sharing(v){
+	$('#facebox .body').css("cssText", "width: 450px !important;height:200px !important;");
 	$('#facebox .body').css("border-radius","10px 10px 10px 10px");
-	$('#facebox .popup').css("cssText", "width: 450px !important;");
+	$('#facebox .popup').css("cssText", "width: 450px !important;height:200px !important;");
 	$('#facebox .popup').css("border-radius","10px 10px 10px 10px");
-	$('#facebox .content').css("cssText", "width: 450px !important;");
+	$('#facebox .content').css("cssText", "width: 450px !important;height:200px !important;");
 	$('#facebox .content').css("border-radius","10px 10px 10px 10px");
-	$('.modal').css("cssText", "width: 450px !important;");
+	$('.modal').css("cssText", "width: 450px !important;height:200px !important;");
 	$('.modal').css("border-radius","10px 10px 10px 10px");
 	
+
 	
-	/*$("#remove-change").html("<a href='#' id='change'>change</a>");*/
 	$("#detailed-sharing").html(" ");
-	$("#main-footer").html("<div id='share-footer' onClick='DetailSharing();'><div id='down-arrow' ></div></div>");
+	$("#main-footer").html("<div id='share-footer' style='position:relative;bottom:-44px;' onClick='DetailSharing();'><div  id='down-arrow' ></div></div>");
 	var DetailHtml= $(".share-small-popup").html();
 	
-	$(".content:eq(1)").html(DetailHtml);
+	if (v==1)
+	{
+	$.facebox(DetailHtml);
+	}
+	else
+	{
+	//$(".content:eq(1)").html(DetailHtml);
+	$.facebox(DetailHtml);
+	}
+	
+	}
 	
 	
+	
+	
+	function SetCheckBoxes(){
+		if ($("#checkbox-no").val()==1)
+		{
+			
+		
+			alert($("#item-type").val());
+			
+		}
+		if	(document.getElementById("checkbox-no").value==2)
+		{
+		
+		document.getElementById("gift").checked=true;
+		}
+		if (document.getElementById("checkbox-no").value==3)
+		{
+		
+		document.getElementById("shareage").checked=true;
+		}
+		if (document.getElementById("checkbox-no").value==4)
+		{
+		
+		document.getElementById("communal").checked=true;
+		}
 	}
 
 %header.wrapper
