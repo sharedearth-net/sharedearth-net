@@ -43,23 +43,21 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
     @item.owner = current_user.person
     @item.status = Item::STATUS_NORMAL
-    @item.available = true
-
+    @item.available = true    
      respond_to do |format|
-      if @item.save
+       
+      if @item.save       
         @item.create_new_item_event_log
         @item.create_new_item_activity_log
-
         if current_user.person.items.count == 1
           current_user.person.reputation_rating.update_attributes(:activity_level => 1)
         end
-
         post_new_item_on_fb(@item) if params[:item][:post_it_on_fb] == "1"
 
         format.html { redirect_to @item }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
-      else
-        format.html { render :action => "new" }
+      else              
+        format.html { redirect_to :controller=>"pages", :action => "community" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end
     end
