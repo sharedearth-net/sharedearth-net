@@ -46,6 +46,7 @@
 		<!-- Please rate your experience sharing your bike with <%= link_to 'Josh', '#', :class => "positive" %> -->
 		Please rate your experience sharing 
 	</p>
+	
 	<%= form_for @feedback, :url => request_feedbacks_path(@request) do |f| %>
 	  <%= render :partial => "shared/error_messages", :locals => { :model => @feedback } %>
 		<ul class="feedback-buttons clearfix">
