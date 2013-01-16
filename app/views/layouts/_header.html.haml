@@ -12,7 +12,7 @@
 		var html= $(".share-facebox-html").html();
 	
 		$.facebox(html);
-		
+		$(".close_image").attr("src","/assets/img/icons/close-sprite-black.png");
 	
 		
 		
@@ -212,7 +212,7 @@
 			%div.user-avatar
 				= image_tag current_user.avatar(:square), :class => "thumb"
 %div.wrapper.subheader
-	%div.container
+	%div.container{:style=>"min-width:1200px;"}
 		%div.left
 			=link_to "SharedEarth", root_url, :class => "logo"
 		%div.right

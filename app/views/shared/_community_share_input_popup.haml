@@ -2,27 +2,29 @@
 	%section.modal.share-guide#share-guide-section
 		%header.row
 			%h1.village What?
-		- @item = Item.new  
+			 
+		- @item = Item.new if @item.is_a? String or @item.nil? 
 	
 		= form_for(@item, :html => { :multipart => true},:id=>"textarea-input",:class=>"row" ) do |f| 	
-			
-			 
-			=	f.text_field :description, :id=>"share-text"
-			
-			
-			%div#detailed-sharing
-			
-			
-			
-			
-			
-			= f.submit "share", :onClick=>"SetCheckBoxes();", :id=>"share-facebox1"
-			
-			%div#remove-change
-				%a{:href=>"#", :id=>"change"}><change
-			%div#main-footer
-			
-			
+			%div.row#textarea-input
+				%input{:type=>"hidden", :name=>"item[purpose]", :id=>"purpose-type"} 
+				%input{:type=>"hidden", :id=>"items-type"}
+				%input{:type=>"hidden",:name=>"item[item_type]", :id=>"hid"}
+				=	f.text_field :description, :id=>"share-text", :placeholder=>"e,g.hammer"
+				
+				
+				%div#detailed-sharing
+				
+				
+				
+				
+				
+				= f.submit "share", :id=>"share-facebox1", :class=>"button"
+				
+				
+				%div#main-footer
+				
+				
 			
 			
 			%div#share-in-details
@@ -34,54 +36,66 @@
 						 
 							
 						- render :partial => "shared/error_messages", :locals => { :model => @item } 
-						
-						- if @item.photo? 
-						
-							= image_tag item.photo.url(:medium), :class => "item-pic" 
-				
-						- else 
-						
-							= image_tag("bt-upload-image.png", :alt => "Upload Image")  
-							= f.file_field :photo, :class => 'realupload' 
-				    		
-			
+						%div#content
+							%div.lhs
+								%ul.form-holder
 								
+								- if @item.photo? 
+									%li.clearfix#item-pic-holder
+										= image_tag item.photo.url(:medium), :class => "item-pic" 
+					
+								- else 
+									%li#item-pic-holder.no-image-uploaded.clearfix
+								%li.button-holder
+									= image_tag("bt-upload-image.png", :alt => "Upload Image")  
+									=# f.file_field :photo, :class => 'realupload' 
+							%div.rhs
+								%h2.edit Edit Item
+								%h2.new New Item
+								%ul.form-holder
+									%li.clearfix													    		
 											
-						- f.label :Purpose 
-						- if @item.purpose_update_available? || @item.new_record? 
-							= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :id => :share 
-							= f.label :Share, "Share", :class => "radio-labels-holder" 
-							= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift 
-							= f.label :Gift, "Gift", :class => "radio-labels-holder" 
-							= f.radio_button :purpose, Item::PURPOSE_SHAREAGE,:id => :shareage,:disabled => false
-							= f.label :Share, "Shareage", :class => "radio-labels-holder radio-labels-holder-off" 
-							= f.radio_button :purpose, Item::PURPOSE_COMMUNAL,:id => :communal,:disabled => true
-							= f.label :Gift, "Communal", :class => "radio-labels-holder radio-labels-holder-off" 
-			
-			
-											
+									
+									%div#radio-boxes					
+										- f.label :Purpose 
+										- if @item.purpose_update_available? || @item.new_record? 
+											= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :id => :share 
+											= f.label :Share, "Share", :class => "radio-labels-holder" 
+											= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :id => :gift 
+											= f.label :Gift, "Gift", :class => "radio-labels-holder" 
+											= f.radio_button :purpose, Item::PURPOSE_SHAREAGE,:id => :shareage,:disabled => false
+											= f.label :Share, "Shareage", :class => "radio-labels-holder radio-labels-holder-off" 
+											= f.radio_button :purpose, Item::PURPOSE_COMMUNAL,:id => :communal,:disabled => true
+											= f.label :Gift, "Communal", :class => "radio-labels-holder radio-labels-holder-off" 
 							
-						- else 
-							= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled", :id => :share  
-							= f.label :Share, :class => "radio-labels-holder radio-labels-holder-off" 
-							= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled", :id => :gift   
-							= f.label :Gift, :class => "radio-labels-holder radio-labels-holder-off" 
-						 
-						
-						= f.label :item_type 
-						= f.text_field :item_type 
-						
-						= f.label :name 
-						= f.text_field :name 
-						 
-						
-			
-						-# if @can_post_to_fb 
-						
-						
-						= f.label :post_it_on_fb, 'Post this item on Facebook' 
-						= f.check_box :post_it_on_fb, :checked => true 
-						
+							
+															
+											
+										- else 
+											= f.radio_button :purpose, Item::PURPOSE_SHARE, :checked => @item.share?, :disabled => "disabled", :id => :share  
+											= f.label :Share, :class => "radio-labels-holder radio-labels-holder-off" 
+											= f.radio_button :purpose, Item::PURPOSE_GIFT, :checked => @item.gift?, :disabled => "disabled", :id => :gift   
+											= f.label :Gift, :class => "radio-labels-holder radio-labels-holder-off" 
+									%li.clearfix
+									
+										=# f.label :item_type 
+										=# f.text_field :item_type 
+										%p.description#description  A generic term describing the item, e.g. </br>bike, television, toaster, amplifier, etc
+							
+									%li.clearfix
+																	
+										= f.label :name 
+										= f.text_field :name 
+										%p.description A short descriptive name for the item, e.g. Trek 21 </br> Speed Road Bike, 2 Slice Toaster, etc.
+							
+				
+									- if @can_post_to_fb 
+							
+										%li.clearfix.checkbox-holder
+																	
+											= f.label :post_it_on_fb, 'Post this item on Facebook' 
+											= f.check_box :post_it_on_fb, :checked => true 
+								
 						 
 					
 							

@@ -13,7 +13,12 @@
 
 
 
-
+#my-comm{
+   background-color: #AFC878;
+    color: #FFFFFF;
+    font-size: 19.5px;
+    font-weight: bold;
+}
 
 
 
@@ -108,6 +113,7 @@
     border-radius:13px 13px 13px 13px;
       background-color: #FBFBFA; 
       color: #999999;
+      font-weight:bold;
   }
 }
 
@@ -121,19 +127,22 @@
 .modal{
  margin: -11px 0 0 -11px !important;
     position: inherit !important;
+    border-radius: 15px 15px 15px 15px !important;
     #share-guide-input{
       width:300px !important;
     }
 }
 
 #facebox .content{
-  width:560px !important;
+  border-radius: 15px 15px 15px 15px !important;
+  width:614px !important;
   padding-bottom: 1px !important;
     padding-right: 0px !important;
 }
 
 #facebox .popup{
-  width:566px !important;
+  border-radius: 15px 15px 15px 15px !important;
+  width:620px !important;
 }
 
 
@@ -439,6 +448,10 @@ div.block-list{
     }
     .button, .share-details {
       float: right;
+          
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
     }
     .share-details {
       color: #729620;
@@ -474,6 +487,8 @@ div.block-list{
     padding: 11px 7px 11px 55px;
     display: block;
     &.comm{
+          text-decoration: none;
+           color: #FFFFFF !important;
       background: url(/assets/img/icons/my-community.png) no-repeat left center;
     
     }
@@ -585,7 +600,7 @@ a {
   
   float: right;
   height: 60px;
-  width: 200px;
+  min-width: 300px;
   .user-avatar {
     float: right;
     margin-left: 5px;
@@ -599,17 +614,18 @@ a {
   }
   .profile-left {
     float: left;
-    position: relative;
-    margin-left:52px;
+    
+    margin-left:51px;
     .user-name {
       
-     position:absolute;
+    
       display: -moz-box;
+      float:right;
       text-align: right;
       color: #bfd988;
       font-size: 16px;
       font-weight: bold;
-     margin-left:-45px;
+     margin-left:68px;
       text-decoration: none;
       text-shadow: 0px -2px 2px rgba(0,0,0,.75);
     }
@@ -617,9 +633,9 @@ a {
     .settings-button {
       position:relative;
       right:-61%;
-     margin-left:32px;
-      margin-top: 34px;
-      float: right;
+     margin-left:60px;
+      margin-top: 17px;
+      
       display: block !important;
       width: 32px;
       height: 25px;
@@ -668,6 +684,7 @@ a {
 header {
   .container {
     padding: 5px 15px;
+    min-width:1220px;
   }
 }
 .resource-list{
@@ -784,6 +801,7 @@ header {
     position:relative;
     right:81%;
     .button {
+      border-radius:17px 17px 17px 17px !important;
       width: 115px;
       height:37px;
       line-height: 37px;
@@ -970,6 +988,8 @@ header.wrapper {
   background: #39352f url(/assets/img/header-pattern.png) repeat;
   border-bottom: 1px solid #d1d1d1;
   .box-shadow(0px 2px 5px rgba(0,0,0,.29));
+  min-width:1220px;
+  margin-left:-20px;
   color: #fff;
   .community {
     float: left;
@@ -1053,6 +1073,15 @@ header.wrapper {
     color: #534741;
     font-weight: normal;
   }
+  h3{
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: -20px;
+    margin-top: -5px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+
   .more {
     display: block;
     text-align: center;
@@ -1112,12 +1141,15 @@ header.wrapper {
     color: #fff;
     text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
   }
+  
+  
   h2 {
     font-size: 14px;
     line-height: 18px;
     color: #534741;
     font-weight: normal;
   }
+
   .more {
     display: block;
     text-align: center;
@@ -1465,6 +1497,8 @@ footer {
     &.village {
       background: url(/assets/img/icons/village.png) no-repeat left center;
       padding-left: 50px;
+      margin-bottom: -5px;
+    margin-top: 3px;
     }
   }
   .close {
@@ -1664,7 +1698,7 @@ div.rating-cancel {
 }
 
 .share-guide {
-  width: 600px;
+  width: 614px !important;
   .shareOnFb {
     margin: 10px 15px 0 0;
     float: right;
@@ -1856,9 +1890,10 @@ div.rating-cancel {
     line-height: 40px;
   }
   h2 {
-    color: #7E7571;
-    font-size: 16px;
+     color: #685D58;
+    font-size: 20px;
     line-height: 6px;
+    font-weight:normal;
   }
   .community-header-links {
     width :100%;
