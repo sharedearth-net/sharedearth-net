@@ -98,7 +98,7 @@
 	
 	
 	
-		$("#main-footer").html("<div id='share-footer' style='position:relative;bottom:-294px;'onClick='Sharing(0);'><div id='up-arrow'></div></div>");
+		$("#main-footer").html("<div id='share-footer' style='position:relative;bottom:-316px;'onClick='Sharing(0);'><div id='up-arrow'></div></div>");
 		
 		$("#detailed-sharing").html($("#share-in-details").html());
 		
@@ -123,7 +123,7 @@
 
 	
 	$("#detailed-sharing").html(" ");
-	$("#main-footer").html("<div id='share-footer' style='position:relative;bottom:-44px;' onClick='DetailSharing();'><div  id='down-arrow' ></div></div>");
+	$("#main-footer").html("<div id='share-footer' style='position:relative;bottom:-65px;' onClick='DetailSharing();'><div  id='down-arrow' ></div></div>");
 	var DetailHtml= $(".share-small-popup").html();
 	
 	if (v==1)
@@ -166,7 +166,7 @@
 		}
 	}
 
-%header.wrapper
+%header.wrapper{:style=>"font-family:HelveticaRegular;"}
 	%div.container
 		%div.community
 			%div.community-buttons
@@ -211,7 +211,7 @@
 						
 			%div.user-avatar
 				= image_tag current_user.avatar(:square), :class => "thumb"
-%div.wrapper.subheader
+%div.wrapper.subheader{:style=>"font-family:HelveticaRegular;"}
 	%div.container{:style=>"min-width:1200px;"}
 		%div.left
 			=link_to "SharedEarth", root_url, :class => "logo"
