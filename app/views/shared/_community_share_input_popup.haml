@@ -5,12 +5,11 @@
 			 
 		- @item = Item.new if @item.is_a? String or @item.nil? 
 	
-		= form_for(@item, :html => { :multipart => true},:id=>"textarea-input",:class=>"row" ) do |f| 	
+		= form_for(@item, :html => { :multipart => true},:id=>"textarea-input",:class=>"row"  ) do |f| 	
 			%div.row#textarea-input
 				%input{:type=>"hidden", :name=>"item[purpose]", :id=>"purpose-type"} 
-				%input{:type=>"hidden", :id=>"items-type"}
-				%input{:type=>"hidden",:name=>"item[item_type]", :id=>"hid"}
-				=	f.text_field :description, :id=>"share-text", :placeholder=>"e,g.hammer"
+				
+				=	f.text_field :description, :id=>"share_text", :placeholder=>"e,g.hammer" ,:name=>"item[item_type]"
 				
 				
 				%div#detailed-sharing
@@ -19,7 +18,9 @@
 				
 				
 				
-				= f.submit "share", :id=>"share-facebox1", :class=>"button"
+				= f.submit "share", :id=>"share-facebox1", :class=>"button" , :onClick=>"return validate(this.form.share_text.value);"
+				%a{:href=>"#",:id=>"change"}><change
+				%p#msj 
 				
 				
 				%div#main-footer
@@ -42,13 +43,15 @@
 								
 								- if @item.photo? 
 									%li.clearfix#item-pic-holder
-										= image_tag item.photo.url(:medium), :class => "item-pic" 
+										=# image_tag item.photo.url(:medium), :class => "item-pic" 
 					
 								- else 
 									%li#item-pic-holder.no-image-uploaded.clearfix
 								%li.button-holder
-									= image_tag("bt-upload-image.png", :alt => "Upload Image")  
-									=# f.file_field :photo, :class => 'realupload' 
+									= image_tag("bt-upload-image.png", :alt => "Upload Image", :onclick=>"OpenBrowse(document.forms[5].share_text.value,document.forms[5].item_name[0].value);")
+									%div#browse_option 
+										 
+										 
 							%div.rhs
 								%h2.edit Edit Item
 								%h2.new New Item
