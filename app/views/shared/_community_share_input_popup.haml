@@ -7,7 +7,9 @@
 	
 		= form_for(@item, :html => { :multipart => true},:id=>"textarea-input",:class=>"row"  ) do |f| 	
 			%div.row#textarea-input
+				
 				%input{:type=>"hidden", :name=>"item[purpose]", :id=>"purpose-type"} 
+				%input{:type=>"hidden", :id=>"hid"}
 				
 				=	f.text_field :description, :id=>"share_text", :placeholder=>"e,g.hammer" ,:name=>"item[item_type]"
 				

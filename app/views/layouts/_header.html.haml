@@ -27,7 +27,7 @@
 		
 	
 	$("#purpose-type").val(10);
-	$("#hid").val("share");
+	
 	faceboxcode();
 	
 	}	
@@ -61,15 +61,15 @@
   
   
 	function DetailSharing(){
-		
-	$("#hid").val("share");		
+	
 			
 	$('#facebox .body').css("cssText", "height: 450px !important;width: 450px !important;");
 	$('#facebox .popup').css("cssText", "height: 450px !important;width: 450px !important;");
 	$('#facebox .content').css("cssText", "height: 450px !important;width: 450px !important;");
 	$('.modal').css("cssText", "height: 450px !important;width: 450px !important;");
 	
-
+		$("#msj").html("");
+		$("#msj").css("cssText","margin-top:-9px;")
 	
 		$('#change').css("cssText", "display:none !important;");
 	
@@ -86,6 +86,7 @@
 	
 	}  
 	function Sharing(v,e){
+	
 	$('#facebox .body').css("cssText", "width: 450px !important;height:200px !important;");
 	$('#facebox .body').css("border-radius","10px 10px 10px 10px");
 	$('#facebox .popup').css("cssText", "width: 450px !important;height:200px !important;");
@@ -112,7 +113,7 @@
 	$(".content:eq(1)").html(DetailHtml);
 	//$.facebox(DetailHtml);
 	}
-	
+	document.forms[5].hid.value="small";
 	}
 	
 	
@@ -123,11 +124,18 @@
 	function validate(text){
 	
 	if (text==""){
-		
-		$("#msj").html("fill above field");
+		if (document.forms[5].hid.value=="small"){
+		$("#msj").html("Please fill above field");
 		$("#msj").css("cssText","margin-top:-29px;")
 		var LessHtml= $(".share-small-popup").html();
 		$(".content:eq(1)").html(LessHtml);
+		}
+		else{
+		
+		$("#msj").css("cssText","position:absolute;bottom:87px; !important;");
+		$("#msj").html("");
+		DetailSharing();
+		}
 		return false;
 	}
 	else 
