@@ -68,7 +68,7 @@
   li{
     a{
       padding:12px 29px 7px 26px;
-      font-size:13.5;
+      font-size:14px;
     }
   }
 }
@@ -605,6 +605,17 @@ a {
   float: left;
 }
 
+.row-up {
+  width: 100%;
+  float: left;
+}
+
+.row-down {
+  margin-right: 57px;
+  float: right;
+  clear: both;
+}
+
 .profile-settings {
   
   float: right;
@@ -665,9 +676,9 @@ a {
   .rounded(5px);
   .community-button {
     .gradient(#302c27,#302c27,#4e473f);
-    height: 39px;
+    height: 40px;
     color:#FFFFFF;
-    line-height: 39px;
+    line-height: 40px;
     float: left;
     position: relative;
     &:hover {
@@ -675,13 +686,13 @@ a {
     }
   }
   .community-logo {
-    width: 30%;
+    width: 39%;
     .border-radius(0, 0, 3px, 3px);
     border-right: 1px solid #302d2d; 
     text-align: center;
   }
   .community-link{
-    width: 70%;
+    width: 61%;
     .border-radius(3px, 3px, 0, 0);
     border-left: 1px solid #4e463f;
     text-align: center;
@@ -712,7 +723,7 @@ header {
     height: 50px;
     display: block;
     color: #99b856;
-    font-size: 16px;
+    font-size: 16.24px;
     font-weight: bold;
     text-decoration: none;
     text-align: center;
@@ -768,7 +779,7 @@ header {
   min-width: 150px;
   position: absolute;
   top: 85px;
-  right: -56px;
+  right: 40px;
   z-index: 10000;
   text-align: left;
   border: 1px solid #ededed;
@@ -785,6 +796,10 @@ header {
     left: 50%;
     margin-left: -11px; /* Half the width */
     background: url(../img/icons/dd-arrow.png) no-repeat;
+  }
+  ul{
+    
+    margin-left:0px;
   }
   
   a {
@@ -891,13 +906,15 @@ header {
   margin-top:-5px;
 }
 .feed-tabs {
+  
+  
   position: absolute;
-  top: -36px;
+  top: -35px;
   margin-left:0px;
   left: 0;
   li {
     float: left;
-    line-height:43px;
+    line-height:42.5px;
     a {
       position: relative;
       margin-right: 7px;
@@ -914,11 +931,19 @@ header {
         background: #99b856;
       }
     }
-    &.ui-state-active {
+    &.ui-state-active {            
       a {
+        
+        padding-top:10px !important;
         background: #99b856;
         padding: 20px 40px 15px 40px;
         top:-1px;
+           
+        border: 1px solid;
+         border-bottom: none;
+        border-color: #8C8F81;
+         z-index:-1;              
+
       }
     }
   }
@@ -1400,7 +1425,9 @@ header.wrapper {
   .people {
     height: 25px;
     line-height: 25px ;
+    color: #fff;
     background: url(/assets/img/icons/human-icon.png) no-repeat left center;
+    
   }
   .resources {
     height: 27px;
