@@ -3,7 +3,7 @@
 		My Community
 	%div.community-info
 		%span.people
-			= network_status_personal_network
+			= network_status_personal_network(nil,nil,{:style=>"color:#fff;text-decoration:none;"})
 		%span.resources 
 			= network_status_items
 	-if current_person.personal_network_size == 0
