@@ -184,7 +184,7 @@
 	%div.container
 		%div.community
 			%div.community-buttons
-				%a{:href=>"#", :class=>"community-button community-logo"} 
+				%a{:href=>"/dashboard", :class=>"community-button community-logo"} 
 					%img{:src=>"/assets/img/icons/community-logo.png", :alt=>"SharedEarth Community"}
 					%div.notification-bubble 3
 				=link_to "Community", community_path, :class => "community-button community-link"
@@ -208,10 +208,10 @@
 					=feedback_rating.nil? ? "n/a" : (feedback_rating.to_s + "")
 		%div.profile-settings
 			%div.profile-left
-				%div.row
+				%div.row-up
 					#user-name.user-name
 						=current_user.person.name
-				%div.row
+				%div.row-down
 					=link_to "Settings", "#", :class => "settings-button", :id => "settings-menu"
 					
 					%div.settings-dd#settings-dd
