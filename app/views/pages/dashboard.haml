@@ -16,6 +16,7 @@
 				%div.feed-content.activity#tabs-1
 									
 					-@request_dates.each do |date,requests|
+						
 						%div.story.timestamp
 							-if date == Date.today.strftime("%B %d")
 								%h2 Today
@@ -23,11 +24,14 @@
 								%h2
 									=date						
 						%div.story.clearfix
+							
 							-requests.each do |req|								
 								-if req.is_a? ItemRequest
 									=render :partial => "shared/item_request_content_box", :locals => { :req => req }
 								-elsif req.is_a? NetworkRequest
+									
 									%div.user-avatar
+										
 										=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
 									= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
 					

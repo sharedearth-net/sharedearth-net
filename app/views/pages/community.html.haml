@@ -42,6 +42,7 @@
 									=render :partial => "shared/item_request_content_box", :locals => { :req => req }
 								-elsif req.is_a? NetworkRequest
 									%div.user-avatar
+										-debugger
 										=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
 									= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
 
@@ -133,9 +134,9 @@
 					%li.filter
 						%a.groups.active{:href=>"#"} Groups
 					%li.filter
-						%a.village{:href=>"#"} Villages
+						%a.village{:href=>"#", :style=>" color: #698E19 !important;"} Villages
 					%li.filter
 						%a.trusted{:href=>"#"} Trusted Network
 					%li.filter
-						%a.groups{:href=>"#"} Groups
+						%a.groups{:href=>"#",:style=>" color: #698E19 !important;" } Groups
 				%a{:href=>"#", :title=>"View more", :class=>"more"} View More

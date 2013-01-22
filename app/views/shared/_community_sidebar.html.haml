@@ -5,7 +5,8 @@
 		%span.people
 			= network_status_personal_network(nil,nil,{:style=>"color:#fff;text-decoration:none;"})
 		%span.resources 
-			= network_status_items
+			%span.reources-text
+				= network_status_items
 	-if current_person.personal_network_size == 0
 		=render 'shared/news_feed_empty'
 	-else
