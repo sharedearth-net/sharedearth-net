@@ -287,8 +287,7 @@ module PagesHelper
       person
     when 17
       current_person
-       
-      
+             
     when 27
       current_person
     when 28
