@@ -94,7 +94,8 @@ class User < ActiveRecord::Base
         when :large, :medium then 150
         else 150
       end
-      "http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(person.email)}&s=#{size}"
+      "/assets/images/default_avatar.gif"
+      #"http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(person.email)}&s=#{size}"
     end
   end
 
