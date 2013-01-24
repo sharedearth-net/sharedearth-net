@@ -1,11 +1,3 @@
-<h3 class="items-title">
-	<strong>
-		<%= link_to 'Items', params.merge({ :filter_type => nil }), :style => "color: #315859;" %>
-		<span>
-			<%= ' > ' + params[:filter_type] unless params[:filter_type].nil? %>
-		</span>
-	</strong>
-</h3>
 
 <% unless @items.count.zero? -%>
 
