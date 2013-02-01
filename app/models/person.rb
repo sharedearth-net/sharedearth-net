@@ -258,6 +258,7 @@ class Person < ActiveRecord::Base
   end
 
   def trusted_friends_items(type = nil)
+    
     items = []
     if type.nil?
       self.trusted_friends.map{ |f| f.items.without_deleted.without_hidden.map{|i|items.push(i)}}
@@ -339,7 +340,38 @@ class Person < ActiveRecord::Base
       EventDisplay.find(:first, :conditions => conditions) || EventDisplay.create(conditions)
     end
   end
-
+  
+  def villages_items(type = nil)
+    items = []
+    if type.nil?
+      self.villages_items_newtorks.map{ |f| f.items.without_deleted.without_hidden.map{|i|items.push(i)}}
+    else
+      self.villages_items_networks.map{ |f| f.items.without_deleted.without_hidden.with_type(type).map{|i|items.push(i)}}
+    end
+    
+    items
+  end
+  def villages_items_newtorks
+    self.human_networks.person_items_in_villages.uniq.map { |n| n.trusted_person }.uniq
+  end
+  
+  def groups_items(type = nil)
+     items = []
+    if type.nil?
+      self.groups_items_newtorks.map{ |f| f.items.without_deleted.without_hidden.map{|i|items.push(i)}}
+    else
+      self.groups_items_networks.map{ |f| f.items.without_deleted.without_hidden.with_type(type).map{|i|items.push(i)}}
+    end
+    
+    items
+  end
+  def groups_items_newtorks
+    self.human_networks.person_items_in_groups.uniq.map { |n| n.trusted_person }.uniq
+  end
+  
+  
+  
+  
   # Will remove this once story is approve
   # def news_feed
   #     # Updated SQL to get all events relating to anyone in a user's trusted

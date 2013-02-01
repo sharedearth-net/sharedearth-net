@@ -56,7 +56,8 @@ class ItemsController < ApplicationController
 
         format.html { redirect_to @item }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
-      else              
+      else
+        debugger              
         format.html { redirect_to :controller=>"pages", :action => "community" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end

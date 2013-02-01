@@ -29,8 +29,24 @@ class PagesController < ApplicationController
     @entity = Entity.find_by_id(params[:entity_id]) unless params[:entity_id].nil?
 
     if params[:type] == 'trusted'
+      
       @items = current_person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
       @events = current_person.trusted_network_activity.page(params[:page]).per(25)
+    elsif params[:type] == 'village'
+      @items = current_person.villages_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+      @events= current_person.villages_activity.page(params[:page]).per(25)
+    elsif params[:type] == 'Groups'
+      @items = current_person.groups_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+      @events= current_person.groups_activity.page(params[:page]).per(25)
+      
+      
+    
+    
+    
+    
+    
+    
+    
     elsif !@entity.nil?
       @items = ResourceNetwork.items_belong_to(@entity.specific_entity)
       @events = @entity.network_activity.page(params[:page]).per(25)
