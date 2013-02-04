@@ -148,11 +148,13 @@
 					
 					%li{:class=>classes}
 						%a.trusted-net{:href=>community_path(:type=>'trusted')} Trusted Network
-					-@villages.each do |v|
-						- if params[:type] == 'trusted'
-							-classes = ["filter","selected-filter"]
-						-else
-							-classes = ["filter","non-selected-filter"]
 					
-							
+					-@villages.each do |v|
+						-classes = ["filter","non-selected-filter"]
+					
+						%li{:class=>classes}																	
+						
+							%a.sub-village{:href=>community_path(:type=>'village', :id=>v.id)}
+								= v.name
+						
 					
