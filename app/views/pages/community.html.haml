@@ -121,19 +121,38 @@
 			%div.block.community-sidebar-block2
 				%h1 filter by
 				
-				%ul.block-list.filters
-					%li.filter#my-comm
-						%a.comm.active{:href=>"#", :style=>" color: #FFFFFF !important;"} my community
-					%li.filter
-						%a.village.active{:href=>"#", :style=>" color: #534741 !important;"} Villages
-					%li.filter
-						%a.trusted.active{:href=>"#", :style=>" color: #534741 !important;"} Trusted Network
-					%li.filter
-						%a.groups.active{:href=>"#", :style=>" color: #534741 !important;"} Groups
-					%li.filter
-						%a.village{:href=>"#", :style=>" color: #534741 !important;"} Villages
-					%li.filter
-						%a.trusted{:href=>"#", :style=>" color: #534741 !important;"} Trusted Network
-					%li.filter
-						%a.groups{:href=>"#",:style=>" color: #534741 !important;" } Groups
 				
+				%ul.block-list
+					-# classes = ["filter","selected-filter"]
+					-if params[:type].nil?
+						-classes = ["filter","selected-filter"]
+					-else
+						-classes = ["filter","non-selected-filter"]
+					
+					%li{:class=>classes}
+						%a.comm{:href=>community_path} my community
+										
+					-if params[:type] == 'village'
+						-classes = ["filter","selected-filter"]
+					-else
+						-classes = ["filter","non-selected-filter"]
+
+
+					%li{:class=>classes}
+						%a.village{:href=>community_path(:type=>'village')} Villages
+					
+					- if params[:type] == 'trusted'
+						-classes = ["filter","selected-filter"]
+					-else
+						-classes = ["filter","non-selected-filter"]
+					
+					%li{:class=>classes}
+						%a.trusted-net{:href=>community_path(:type=>'trusted')} Trusted Network
+					-@villages.each do |v|
+						- if params[:type] == 'trusted'
+							-classes = ["filter","selected-filter"]
+						-else
+							-classes = ["filter","non-selected-filter"]
+					
+							
+					

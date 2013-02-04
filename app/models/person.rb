@@ -109,6 +109,23 @@ class Person < ActiveRecord::Base
     end
   end
 
+
+
+
+
+
+  def villages_activity
+    my_people_id = self.human_networks.person_items_in_villages.collect { |n| n.person_id }
+    my_people_id << id
+
+    EventDisplay.select('DISTINCT event_log_id').
+                 where(:person_id => my_people_id).
+                 order('event_log_id DESC').
+                 includes(:event_log)
+  end
+
+
+
   def trusted_network_activity
     my_people_id = self.human_networks.trusted_personal_network.collect { |n| n.person_id }
     my_people_id << id
@@ -347,8 +364,7 @@ class Person < ActiveRecord::Base
       self.villages_items_newtorks.map{ |f| f.items.without_deleted.without_hidden.map{|i|items.push(i)}}
     else
       self.villages_items_networks.map{ |f| f.items.without_deleted.without_hidden.with_type(type).map{|i|items.push(i)}}
-    end
-    
+    end    
     items
   end
   def villages_items_newtorks

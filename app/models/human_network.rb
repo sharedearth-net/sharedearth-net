@@ -26,8 +26,7 @@ class HumanNetwork < ActiveRecord::Base
   scope :member, lambda { |member| where(:person_id => member.id)}
   scope :entity_network, lambda { |entity_type| where(:network_type => entity_type) }
   scope :specific_entity_network, lambda { |entity| where(:entity_type => entity.class.name, :entity_id => entity.id) }
-
-
+  
   validates_presence_of :entity_id, :entity_type, :person_id
   
   

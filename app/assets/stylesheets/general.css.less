@@ -535,33 +535,77 @@ div.block-list{
     text-shadow: 0px 1px 1px rgba(58,57,57,.39);
     
     color: #534741 ;
+    
+    
+    
   }
-  a {
-    padding: 11px 7px 11px 55px;
-    display: block;
-    
-    &.comm{
-          text-decoration: none;
-           color: #FFFFFF !important;
-      background: url(/assets/img/icons/my-community.png) no-repeat left center;
-    
+  
+  &.selected-filter{
+      background: #99B856;
+                  
+      
+      a {
+        color: #FFFFFF !important;
+        padding: 11px 7px 11px 55px;
+        display: block;
+        text-decoration: none;              
+        font-size: 19.5px;
+        font-weight: bold;
+        
+        &.comm{
+                     
+          background: url(/assets/img/icons/my-community.png) no-repeat left center;
+        
+        }
+        
+        &.village {
+            background: url(/assets/img/icons/village-white.png) no-repeat left center;
+        
+        }
+        &.groups {
+            background: url(/assets/img/icons/group-big-inactive.png) no-repeat 11px center;
+        
+        }
+        &.trusted-net {
+            background: url(/assets/img/icons/trusted-network-white.png) no-repeat 5px center;
+        
+        }
+      }
+          
+          
+        
+      
     }
-    &.village {
-      background: url(/assets/img/icons/house-big-inactive.png) no-repeat left center;
-      &.active {
+    
+  
+  &.non-selected-filter{
+  
+    
+    a {
+      
+      color: #534741;
+      
+      padding: 11px 7px 11px 55px;
+      display: block;
+      
+      &.comm{
+            text-decoration: none;
+             
+        background: url(/assets/img/icons/community-black.png) no-repeat left center;
+      
+      }
+      
+      &.village {
         background: url(/assets/img/icons/house-big-active.png) no-repeat left center;
+       
       }
-    }
-    &.groups {
-      background: url(/assets/img/icons/group-big-inactive.png) no-repeat 11px center; 
-      &.active {
-        background: url(/assets/img/icons/group-big-active.png) no-repeat 11px center;
+      &.groups {
+        background: url(/assets/img/icons/group-big-active.png) no-repeat 11px center; 
+       
       }
-    }
-    &.trusted {
-      background: url(/assets/img/icons/trusted-big-inactive.png) no-repeat 5px center;  
-      &.active {
-        background: url(/assets/img/icons/trusted-big-active.png) no-repeat 5px center;
+      &.trusted-net {
+        background: url(/assets/img/icons/trusted-big-active.png) no-repeat 5px center;  
+       
       }
     }
   }

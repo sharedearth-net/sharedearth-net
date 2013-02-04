@@ -73,6 +73,10 @@ class Village < ActiveRecord::Base
   def self.belongs_to_person(person)
     HumanNetwork.part_of_village(person).map(&:entity_id)
   end
+  
+  def self.person_villages(person)    
+    Village.where("id IN (#{belongs_to_person(person).join(',')})")
+  end
 
   #handle_asynchronously :add_items!
   #handle_asynchronously :remove_items!
