@@ -132,7 +132,7 @@
 					%li{:class=>classes}
 						%a.comm{:href=>community_path} my community
 										
-					-if params[:type] == 'village'
+					-if params[:type] == 'village' and  params[:id].nil?
 						-classes = ["filter","selected-filter"]
 					-else
 						-classes = ["filter","non-selected-filter"]
@@ -150,7 +150,11 @@
 						%a.trusted-net{:href=>community_path(:type=>'trusted')} Trusted Network
 					
 					-@villages.each do |v|
-						-classes = ["filter","non-selected-filter"]
+
+						-if params[:type] == 'village' and  !params[:id].nil?
+							-classes = ["filter","selected-filter"]
+						-else
+							-classes = ["filter","non-selected-filter"]
 					
 						%li{:class=>classes}																	
 						

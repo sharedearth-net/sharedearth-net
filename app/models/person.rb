@@ -114,8 +114,14 @@ class Person < ActiveRecord::Base
 
 
 
-  def villages_activity
-    my_people_id = self.human_networks.person_items_in_villages.collect { |n| n.person_id }
+  def villages_activity(village_id = nil)
+    
+    if village_id.nil?
+      my_people_id = self.human_networks.person_items_in_villages.collect { |n| n.person_id }
+    else
+      my_people_id = self.human_networks.person_items_in_specific_village(village_id).collect { |n| n.person_id }
+    end
+    
     my_people_id << id
 
     EventDisplay.select('DISTINCT event_log_id').
@@ -358,15 +364,26 @@ class Person < ActiveRecord::Base
     end
   end
   
-  def villages_items(type = nil)
+  def villages_items(type = nil, village_id = nil)
     items = []
-    if type.nil?
+    if type.nil?      
       self.villages_items_newtorks.map{ |f| f.items.without_deleted.without_hidden.map{|i|items.push(i)}}
     else
-      self.villages_items_networks.map{ |f| f.items.without_deleted.without_hidden.with_type(type).map{|i|items.push(i)}}
+      if village_id.nil?
+        self.villages_items_networks.map{ |f| f.items.without_deleted.without_hidden.with_type(type).map{|i|items.push(i)}}
+      else
+        self.specific_villages_items_newtorks(village_id).map{ |f| f.items.without_deleted.without_hidden.with_type(type).map{|i|items.push(i)}}
+      end
+      
     end    
     items
   end
+  
+  def specific_villages_items_newtorks(id)
+    self.human_networks.person_items_in_specific_village(id).uniq.map { |n| n.trusted_person }.uniq
+  end
+  
+  
   def villages_items_newtorks
     self.human_networks.person_items_in_villages.uniq.map { |n| n.trusted_person }.uniq
   end

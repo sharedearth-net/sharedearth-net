@@ -17,6 +17,9 @@ class HumanNetwork < ActiveRecord::Base
   scope :trusted_personal_network, where(:network_type => "TrustedNetwork")
   scope :extended_network, where(["network_type = ?", "ExtendedNetwork"])
   scope :person_items_in_villages,where(:network_type => "Village")
+  
+  scope :person_items_in_specific_village  , lambda { |village_id| where(:network_type => "Village", :specific_entity_id=>village_id)} 
+  
   scope :person_items_in_groups,where(:network_type => "Groups")
   
   scope :village_members, lambda { |village| where("entity_id = ? AND entity_type = ? AND network_type = ?", village.id, "Village", "Member")}
