@@ -17,9 +17,10 @@ class SessionsController < ApplicationController
     else
       auth  = request.env["omniauth.auth"]
       token = auth["credentials"]["token"]
-      user  = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) && 
+      user  = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
               User.create_with_omniauth(auth)
-     
+      
+      debugger     
       user.person = current_person if current_person
       user.token = token
       user.save
