@@ -164,8 +164,10 @@ class User < ActiveRecord::Base
 
   #TODO make more secure
   def make_person!(name, email)
+    
+    debugger
     if existed_person = Person.where(:email => email).first
-      update_column(:person_id, existed_person.id)
+      update_attribute(:person_id, existed_person.id)
     else
       self.person = Person.new(:name  => name, :email => email)
       self.person.authorised_account = Settings.invitations == 'true' ? false : true
