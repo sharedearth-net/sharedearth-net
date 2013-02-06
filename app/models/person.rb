@@ -403,7 +403,45 @@ class Person < ActiveRecord::Base
   end
   
   
+  ###########
+  #counts for community page
+  #############
   
+  def people_count_array(type = nil, vid = nil)
+     array = []
+     
+     if type.nil?    
+      array = HumanNetwork.entities_network(HumanNetwork.person_entities(self).uniq.map(&:entity_id).join(",")).map(&:person_id).uniq  + HumanNetwork.specific_entity_id_network(self).map(&:person_id)          
+     
+     elsif type == 'trusted' and vid.nil?
+     
+      array = HumanNetwork.specific_entity_id_trusted_network(self).map(&:person_id)
+     
+     elsif type == 'village' and vid.nil?
+      #my village     
+      array = HumanNetwork.entities_network(HumanNetwork.member_village(self).uniq.map(&:entity_id).join(",")).map(&:person_id)      
+     elsif type == 'village' and !vid.nil?     
+      #specific village
+      array = HumanNetwork.village_members(Village.find(vid)).map(&:person_id)
+     end          
+    array = array -  [self.id]
+    
+    array  
+  end
+  
+  def people_count(type = nil, vid=nil)     
+    array = people_count_array(type , vid)
+    array.uniq.count     
+  end
+  
+  def trusted_people_count(type = nil, vid=nil)
+    
+    people_array = people_count_array(type,vid)    
+    trusted_persons = HumanNetwork.person_trusted_network(self)    
+    
+    array = people_array & trusted_persons
+    array.uniq.count
+  end
   
   # Will remove this once story is approve
   # def news_feed

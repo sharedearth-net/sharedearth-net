@@ -29,6 +29,20 @@ class HumanNetwork < ActiveRecord::Base
   scope :member, lambda { |member| where(:person_id => member.id)}
   scope :entity_network, lambda { |entity_type| where(:network_type => entity_type) }
   scope :specific_entity_network, lambda { |entity| where(:entity_type => entity.class.name, :entity_id => entity.id) }
+
+  #for counts on community
+
+
+  scope :specific_entity_id_trusted_network, lambda { |entity| where(:entity_type => entity.class.name, :specific_entity_id => entity.id, :network_type=>'TrustedNetwork') } 
+  
+  scope :specific_entity_id_network, lambda { |entity| where(:entity_type => entity.class.name, :specific_entity_id => entity.id) } 
+  scope :entities_network, lambda { |ids| where("entity_id IN(#{ids})") }  
+  scope :person_entities,  lambda { |person| where(:person_id => person.id).uniq }
+  
+  scope :member_village, lambda { |member| where(:person_id => member.id, :entity_type => 'Village').uniq}
+ 
+  scope :person_trusted_network, lambda { |person| where(:person_id => person.id, :entity_type => 'Person', :network_type=>'TrustedNetwork').uniq}
+  
   
   validates_presence_of :entity_id, :entity_type, :person_id
   

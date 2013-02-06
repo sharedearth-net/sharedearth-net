@@ -28,22 +28,31 @@ class PagesController < ApplicationController
     @entities = Entity.groups_with_person(current_person)
     @entity = Entity.find_by_id(params[:entity_id]) unless params[:entity_id].nil?
     
-    @villages = Village.person_villages(current_person)
-
-
+    @villages = Village.person_villages(current_person)  
+    @people_count = current_person.people_count
+    @trusted_people_count = current_person.trusted_people_count        
+    
     if params[:type] == 'trusted'
+      @people_count = current_person.people_count(params[:type])        
+      @trusted_people_count = current_person.trusted_people_count(params[:type])        
+      
       
       @items = current_person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
       @events = current_person.trusted_network_activity.page(params[:page]).per(25)
-    
-    elsif params[:type] == 'village'      
-      unless params[:id].nil?
-        @items = current_person.villages_items(params[:filter_type], params[:id]).sort_by{|i| i.item_type.downcase}
-        @events= current_person.villages_activity(params[:id]).page(params[:page]).per(25)
-        
-      else
+     
+    elsif params[:type] == 'village'                              
+      if params[:id].nil?
+        @people_count = current_person.people_count(params[:type])        
+        @trusted_people_count = current_person.trusted_people_count(params[:type])        
+                
         @items = current_person.villages_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
         @events= current_person.villages_activity.page(params[:page]).per(25)        
+      else        
+        @people_count = current_person.people_count(params[:type], params[:id] )
+        @trusted_people_count = current_person.trusted_people_count(params[:type], params[:id])
+                        
+        @items = current_person.villages_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+        @events= current_person.villages_activity(params[:id]).page(params[:page]).per(25)        
       end
       
     

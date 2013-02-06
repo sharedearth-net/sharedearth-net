@@ -15,8 +15,12 @@
 					%p We are interdepedent on those who surround us. We are 
 					%p#sec-p individuals who are part of a larger social organism.
 					%div.community-header-links
-						%a{:href=>"#", :class=>"people"} 12040 people
-						%a{:href=>"#", :class=>"trusted"} 15 people that I trust
+						%a{:href=>"#", :class=>"people"} 
+							= @people_count 
+							people
+						%a{:href=>"#", :class=>"trusted"} 
+							= @trusted_people_count 
+							people that I trust
 						%a{:href=>"#", :class=>"items"} 170 items available
 				%hr.row#line
 				%form.row#textarea-row
@@ -42,7 +46,7 @@
 									=render :partial => "shared/item_request_content_box", :locals => { :req => req }
 								-elsif req.is_a? NetworkRequest
 									%div.user-avatar
-										-debugger
+										
 										=image_tag(network_request_photo(req, :size => :square), :class => "thumb")
 									= render :partial => "shared/network_request_actions_compact", :locals => { :req => req }
 
