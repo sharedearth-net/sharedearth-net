@@ -532,7 +532,8 @@ div.block-list{
 }
 .filter {
   padding: 0;
-  
+  cursor:pointer;
+    
   &.heading {
     color: #fff;
    // background: #afc878 url(/assets/img/icons/my-community.png) no-repeat 10px center;
@@ -547,15 +548,17 @@ div.block-list{
     
   }
   
-  &.selected-filter{
+  
+    &.non-selected-filter:hover{
+        
       background: #99B856;
                   
       
       a {
         
-      padding: 0px 7px 0px 55px;
-      display: block;
-      line-height: 30px;
+        padding: 0px 7px 0px 55px;
+        display: block;
+        line-height: 30px;
 
         color: #FFFFFF !important;
         
@@ -581,7 +584,55 @@ div.block-list{
         }
         &.trusted-net {
             background: url(/assets/img/icons/trusted-network-white.png) no-repeat 5px center;
+            background-size: 30px;
         
+        }
+        
+        &.sub-village{
+            background: url(/assets/img/icons/house-big-inactive.png) no-repeat 5px center;
+        
+        }
+        
+        
+      }
+    }  
+
+  
+  &.selected-filter{
+      background: #99B856;
+                  
+      
+      a {
+        
+        padding: 0px 7px 0px 55px;
+        display: block;
+        line-height: 30px;
+
+        color: #FFFFFF !important;
+        
+        
+        display: block;
+        text-decoration: none;              
+        font-size: 19.5px;
+        font-weight: bold;
+        
+        &.comm{
+                     
+          background: url(/assets/img/icons/my-community.png) no-repeat left center;
+        
+        }
+        
+        &.village {
+            background: url(/assets/img/icons/village-white.png) no-repeat left center;
+        
+        }
+        &.groups {
+            background: url(/assets/img/icons/group-big-inactive.png) no-repeat 11px center;
+        
+        }
+        &.trusted-net {
+            background: url(/assets/img/icons/trusted-network-white.png) no-repeat 5px center;
+            background-size: 30px;
         }
         
         &.sub-village{
@@ -631,7 +682,7 @@ div.block-list{
       }
       &.trusted-net {
         background: url(/assets/img/icons/trusted-big-active.png) no-repeat 5px center;  
-       
+        background-size: 30px;
       }
       &.sub-village{
             background: url(/assets/img/icons/house-big-inactive.png) no-repeat 5px center;
