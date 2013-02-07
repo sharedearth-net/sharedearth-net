@@ -30,18 +30,38 @@ class PagesController < ApplicationController
     
     @villages = Village.person_villages(current_person)  
     @people_count = current_person.people_count
-    @trusted_people_count = current_person.trusted_people_count        
+    @trusted_people_count = current_person.trusted_people_count            
+    
+    @title = "My Community"
+    @subtitle = "The people you are connected to."
+    @description = "We are interdepedent on those who surround us. We are individuals who are part of a larger social organism."
+    
+    
     
     if params[:type] == 'trusted'
       @people_count = current_person.people_count(params[:type])        
       @trusted_people_count = current_person.trusted_people_count(params[:type])        
       
+      @title = "My Trusted Network"    
+      @subtitle = "People we trust."
+      @description = "We live embedded in webs of trust and care. To trust one another is to build social capital."
+    
+    
       
       @items = current_person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
       @events = current_person.trusted_network_activity.page(params[:page]).per(25)
      
-    elsif params[:type] == 'village'                              
+    elsif params[:type] == 'village'
+      @title = "My Villages"    
+      @subtitle = "People we live with."
+      @description = "We live with family, flatmates, and neighbours. The healthier these relationships, the more at home we feel in the world."
+
+      
+      
+                                    
       if params[:id].nil?
+        
+        
         @people_count = current_person.people_count(params[:type])        
         @trusted_people_count = current_person.trusted_people_count(params[:type])        
                 
@@ -50,6 +70,9 @@ class PagesController < ApplicationController
       else        
         @people_count = current_person.people_count(params[:type], params[:id] )
         @trusted_people_count = current_person.trusted_people_count(params[:type], params[:id])
+        
+        v =  Village.find(params[:id])          
+        @subtitle = v.name + " " + v.postcode + " " + v.state + ", " + v.country if v
                         
         @items = current_person.villages_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
         @events= current_person.villages_activity(params[:id]).page(params[:page]).per(25)        
@@ -68,7 +91,7 @@ class PagesController < ApplicationController
       @items ||= []
       @items += current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
       @events = current_person.network_activity.page(params[:page]).per(25)
-    end
+    end        
   end
 
   def about

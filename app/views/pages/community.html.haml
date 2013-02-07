@@ -10,10 +10,12 @@
 				%div.community-avatar
 					%img{:src=>"/assets/img/community-avatar.png", :alt=>"My Community Avatar"}
 				%div.community-content
-					%h1 Your Community
-					%h2 The people you are connected to
-					%p We are interdepedent on those who surround us. We are 
-					%p#sec-p individuals who are part of a larger social organism.
+					%h1 
+						= @title 
+					%h2 
+						= @subtitle
+					%p#p-desc
+						= @description
 					%div.community-header-links
 						%a{:href=>"#", :class=>"people"} 
 							= @people_count 
@@ -21,7 +23,9 @@
 						%a{:href=>"#", :class=>"trusted"} 
 							= @trusted_people_count 
 							people that I trust
-						%a{:href=>"#", :class=>"items"} 170 items available
+						%a{:href=>"#", :class=>"items"} 
+							= @items.map(&:item_type).uniq.count 
+							items available
 				%hr.row#line
 				%form.row#textarea-row
 					%textarea{:placeholder=>"Post to community discussion board"}
@@ -121,7 +125,7 @@
 					%li
 						%span.resource fuse box
 						%a{:href=>"#", :title=>"fuse box", :class=>"button medium"} Share Mine
-				%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+				%a{:href=>"#", :title=>"View more", :class=>"more"} view more
 			%div.block.community-sidebar-block2
 				%h1 filter by
 				

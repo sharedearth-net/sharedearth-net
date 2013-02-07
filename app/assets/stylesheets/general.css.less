@@ -13,6 +13,12 @@
   margin-left:-36px;
 }
 
+#p-desc{
+  width:400px;
+  color: #a0a0a0;
+  
+}
+
 
 #list2{
    margin-left: 231px;
@@ -526,6 +532,7 @@ div.block-list{
 }
 .filter {
   padding: 0;
+  
   &.heading {
     color: #fff;
    // background: #afc878 url(/assets/img/icons/my-community.png) no-repeat 10px center;
@@ -545,8 +552,14 @@ div.block-list{
                   
       
       a {
+        
+      padding: 0px 7px 0px 55px;
+      display: block;
+      line-height: 30px;
+
         color: #FFFFFF !important;
-        padding: 11px 7px 11px 55px;
+        
+        
         display: block;
         text-decoration: none;              
         font-size: 19.5px;
@@ -590,10 +603,16 @@ div.block-list{
     
     a {
       
+      
+      padding: 0px 7px 0px 55px;
+      display: block;
+      line-height: 30px;
+      text-decoration: none;
+      
+      
+      
       color: #534741;
       
-      padding: 11px 7px 11px 55px;
-      display: block;
       
       &.comm{
             text-decoration: none;
@@ -2050,6 +2069,7 @@ div.rating-cancel {
 .community-page-header{
   overflow: hidden;
   margin-bottom: 80px;
+  min-width:800px;
   .community-avatar {
     width: 120px;
     border: 3px solid #84aa30;
@@ -2070,12 +2090,12 @@ div.rating-cancel {
   }
   h1 {
     color: #6a8b1e;
-    font-size: 34px;
+    font-size: 30px;
     line-height: 40px;
   }
   h2 {
-     color: #685D58;
-    font-size: 20px;
+     color: #534741;
+    font-size: 18px;
     line-height: 6px;
     font-weight:normal;
   }
@@ -2084,7 +2104,8 @@ div.rating-cancel {
     margin: 10px 0;
    
     a{
-      color: #534741;
+      color: #534741 !important;
+      font-size:14px;
       display: inline-block;
       height: 27px;
       line-height: 27px;
