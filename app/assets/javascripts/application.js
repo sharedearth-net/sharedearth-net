@@ -3,6 +3,199 @@
 //= require jquery.facebox
 //= require lightbox
 
+
+
+
+	$(document).ready(function() {
+		/*      Main facebox   (i.e. sections)  */
+	/*	$("#share-facebox").click(function (){
+		$('#facebox .popup').css("cssText", "width: 566px !important;");	
+		$('#facebox .content').css("cssText", "width: 560px !important;");	
+		$('#facebox .content').css("cssText", "padding-right: 0px !important;");
+		$('#facebox .content').css("cssText", "padding-bottom: 1px !important;");
+		$('.modal').css("cssText", "margin: -11px 0px 0px -11px !important;");
+		$('.modal').css("cssText", "position: inherit !important;");
+		
+		var html= $(".share-facebox-html").html();
+	
+		$.facebox(html);
+		$(".close_image")./attr("src","/assets/img/icons/close-sprite-black.png");
+	
+		*/
+		
+		
+			$('a[rel*=facebox]').facebox();
+		
+		
+	//	});
+						
+	});
+	
+	function check1(){
+		
+	
+		$("#purpose-type").val(10);
+	
+		faceboxcode();
+	
+	}	
+	function check2(){
+	$("#purpose-type").val(20);
+	document.getElementById("checkbox-no").value=2;		
+	faceboxcode();
+	}
+	function check3(){
+	$("#purpose-type").val(30);
+	document.getElementById("checkbox-no").value=3;
+	faceboxcode();	
+	}
+	function check4(){
+	$("#purpose-type").val(40);
+	document.getElementById("checkbox-no").value=4;
+	faceboxcode();	
+  
+	
+	}
+	function faceboxcode(){
+	
+	$("#purpose-type").val(10);	
+	$("#item-type").val("share");
+
+
+	Sharing(1,0);	
+
+	}
+  
+  
+  
+	function DetailSharing(){
+	
+			
+	$('#facebox .body').css("cssText", "height: 450px !important;width: 450px !important;");
+	$('#facebox .popup').css("cssText", "height: 450px !important;width: 450px !important;");
+	$('#facebox .content').css("cssText", "height: 450px !important;width: 450px !important;");
+	$('.modal').css("cssText", "height: 450px !important;width: 450px !important;");
+	
+		$("#msj").html("");
+		$("#msj").css("cssText","margin-top:-9px;")
+	
+		$('#change').css("cssText", "display:none !important;");
+	
+		$("#main-footer").html("<div id='share-footer' style='position:relative;bottom:-316px;'onClick='Sharing(0);'><div id='up-arrow'></div></div>");
+		
+		$("#detailed-sharing").html($("#share-in-details").html());
+		
+		var DetailHtml= $(".share-small-popup").html();
+		
+		$(".content:eq(1)").html(DetailHtml);
+	
+	
+			
+	
+	}  
+	function Sharing(v,e){
+	
+/*	$('#facebox .body').css("cssText", "width: 450px !important;height:200px !important;");
+	$('#facebox .body').css("border-radius","10px 10px 10px 10px");
+	$('#facebox .popup').css("cssText", "width: 450px !important;height:200px !important;");
+	$('#facebox .popup').css("border-radius","10px 10px 10px 10px");
+	$('#facebox .content').css("cssText", "width: 450px !important;height:200px !important;");
+	$('#facebox .content').css("border-radius","10px 10px 10px 10px");
+	$('.modal').css("cssText", "width: 450px !important;height:200px !important;");
+	$('.modal').css("border-radius","10px 10px 10px 10px");
+	
+	$('#change').css("cssText", "display:block !important;");
+	
+	$("#detailed-sharing").html(" ");
+	$("#main-footer").html("<div id='share-footer' style='position:relative;bottom:-6px;' onClick='DetailSharing();'><div  id='down-arrow' ></div></div>");
+	
+	var DetailHtml= $(".share-small-popup").html();
+	
+	
+	
+		
+		if (v==1)
+		{
+		
+		$.facebox(DetailHtml);
+		}
+		else
+		{
+		
+			$(".content:eq(1)").html(DetailHtml);
+			//$.facebox(DetailHtml);
+		}
+		
+		*/
+
+	$.facebox({div: '#share-small-popup'});
+	
+	document.forms[5].hid.value="small";
+	}
+	
+	
+	
+	
+	
+	/*    Validation */
+	function validate(text){
+	
+	if (text==""){
+		if (document.forms[5].hid.value=="small"){
+		$("#msj").html("Please fill above field");
+		$("#msj").css("cssText","margin-top:-29px;")
+		var LessHtml= $(".share-small-popup").html();
+		$(".content:eq(1)").html(LessHtml);
+		}
+		else{
+		
+		$("#msj").css("cssText","position:absolute;bottom:87px; !important;");
+		$("#msj").html("");
+		DetailSharing();
+		}
+		return false;
+	}
+	else 
+	{
+		
+		return true;
+	}
+	}
+	
+	/*   Upload photos  */
+	function OpenBrowse(text,name){
+	$("#browse_option").html("<input class='realupload' id='item_photo' name='item[photo]' type='file'>");
+	$("#item_photo").css("cssText","margin-top:50px;")
+	
+	
+	
+	
+	
+	
+	var DetailHtmlPhoto= $(".share-small-popup").html();
+	
+	$(".content:eq(1)").html(DetailHtmlPhoto);
+	document.forms[5].share_text.value=text;
+	
+	
+	document.forms[5].item_name[0].value=name;
+	
+	
+	
+	}
+	
+	/*  Dashboard text bar onclick for close button */
+	function SetMainContainer(){
+	
+	$("#main-wrapper-container").css("cssText","margin-top:-15px !important;");
+	}
+
+
+
+
+
+
+
 $(document).ready(function() {
 	$('#sidebar-left ul li').hover(function() {
 		$('#sidebar-left ul li.selected').addClass('selected-leave');
