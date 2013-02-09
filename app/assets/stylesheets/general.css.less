@@ -587,7 +587,7 @@ div.block-list{
         }
         
         &.sub-village{
-            background: url(/assets/img/icons/house-big-inactive.png) no-repeat 5px center;
+            background: url(/assets/img/icons/village-white.png) no-repeat 0px center;
         
         }
         
@@ -634,7 +634,7 @@ div.block-list{
         }
         
         &.sub-village{
-            background: url(/assets/img/icons/house-big-inactive.png) no-repeat 5px center;
+            background: url(/assets/img/icons/village-white.png) no-repeat 0px center;
         
         }
         
@@ -683,13 +683,30 @@ div.block-list{
         background-size: 30px;
       }
       &.sub-village{
-            background: url(/assets/img/icons/house-big-inactive.png) no-repeat 5px center;
+            background: url(/assets/img/icons/house-big-inactive.png) no-repeat 0px center;
         
         }
 
     }
   }
 }
+/*
+#facebox .close {
+	opacity: 1 !important;
+	img {
+    opacity: 1 !important;
+	background-image:  url(/assets/img/icons/close-small-sprite.png) !important;
+
+		 &:hover {
+			opacity: 1 !important;
+		    
+			background-position: 0 -16px !important;
+		  }
+	}
+}
+*/
+
+
 .trust-status {
   .heading {
     position: relative;
@@ -1967,26 +1984,31 @@ div.rating-cancel {
 }
 
 .share-guide {
-  width: 614px !important;
+  width: 647px !important;
+  font-size:13px;
+
   .shareOnFb {
     margin: 10px 15px 0 0;
     float: right;
-    background: #7a9cc6;
-    .rounded(50px);
+    //background: #7a9cc6;
+    //.rounded(50px);
     height: 20px;
     line-height: 20px;
-    padding: 0 10px;
+    padding: 0 70px;
     text-transform: uppercase;
     color: #2a4972;
     font-weight: bold;
     text-shadow: 0px 1px 0px rgba(255,255,255,0.48);
-    .box-shadow(~"0px 1px 1px rgba(255,255,255,.85), inset 0px 1px 1px rgba(0,0,0,.20)");
+    //.box-shadow(~"0px 1px 1px rgba(255,255,255,.85), inset 0px 1px 1px rgba(0,0,0,.20)");
     .on {
       color: #07820a;
     }
     .off {
       color: #820707;
     }
+	img{
+		border-radius: 20px 20px;
+	}
   }
   .content {
     padding: 0 0;
@@ -1998,6 +2020,15 @@ div.rating-cancel {
     height: 80px;
     text-align:center;
   }
+
+	.thirdHeight-last{
+    display: block;
+    width: 100%;
+    height: 57px;
+    text-align:center;
+
+	}
+
   .imgHolder {
     height: 120px;
     width: 100%;
