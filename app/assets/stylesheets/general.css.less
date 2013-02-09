@@ -217,8 +217,9 @@
  
    margin-left: 22px;
     margin-top: 20px;
-    width: 402px;
+    width: 429px;
     #share_text{
+      
      background-color: #FBFBFA;
     border-radius: 10px 10px 10px 10px;
     color: #999999;
@@ -227,7 +228,7 @@
   #change{
    color: #B9B9B8;
     font-size: 12px;
-    margin-left: 357px;
+    margin-left: 385px;
     text-decoration: underline;
   }
   #share-facebox1{
@@ -237,7 +238,7 @@
     text-decoration: none;
     width: 115px;
      &:hover{
-       background-color:#FABD1E;
+      background-color:#45600A;
      }   
   }
 }
@@ -248,20 +249,14 @@
 #share-footer{
     cursor:pointer;
     background-color: #DED8C8;
-    height: 26px;
+    height: 30px;
     margin-bottom: 0 !important;
     margin-left: -22px !important;
     margin-top: 0;
     width: 495px;
     #down-arrow{
       background: url("/assets/img/icons/down_arrow.png") no-repeat 0 5px;
-      margin-left: 213px;
-      width:25px;
-      height:25px;
-    }
-    #up-arrow{
-       background: url("/assets/img/icons/up_arrow.png") no-repeat;
-      margin-left: 213px;
+      margin-left: 220px;
       width:25px;
       height:25px;
     }
@@ -368,8 +363,8 @@
   border: none;
   .box-shadow(~"0px 1px 1px rgba(0,0,0,.29), inset 0px 1px 1px rgba(255,255,255,.44)");
   &:hover {
-    
-    color: #573606;
+    color: #ffffff;
+    background: #45600A;
   }
 }
 
@@ -1021,11 +1016,13 @@ header {
       text-shadow: 0px 1px 1px rgba(255,255,255,0.22);
       text-decoration:none;
       &:hover{
-        background:#FABD1E;
+        background:#45600A;
       }
     }
   }
 }
+
+
 .search-form {
   position: absolute;
   line-height: normal;
@@ -1736,25 +1733,28 @@ footer {
   .rounded(10px);
   .box-shadow(0 0 5px 2px rgba(0,0,0,0.25));
   header {
-    background: #6f941e;
-    color: #fff;
-    padding: 0 15px;
-    margin-left:0px;
-    margin-top:0px;
+      background: none repeat scroll 0 0 #6F941E;
+    color: #FFFFFF;
+    
+    margin-left: 0;
+    margin-top: 0;
+    padding: 1px 15px;
+    
+    &.row{
+    height: 50px;
+    }
   }
   h1 {
+    color: #FFFFFF;
     float: left;
+    font-size: 18px;
+    font-weight: bold;
     height: 42px;
     line-height: 42px;
-    font-size: 18px;
-    text-shadow: 0px 1px 1px rgba(0,0,0,.5);
-    font-weight: normal;
-    color: #fff;
+    
     &.village {
-      background: url(/assets/img/icons/village.png) no-repeat left center;
-      padding-left: 50px;
       margin-bottom: -5px;
-    margin-top: 3px;
+      margin-top: 3px;
     }
   }
   .close {
@@ -1779,17 +1779,30 @@ footer {
   .content {
     padding: 20px 15px;
   }
+  
+  
+  
   .button {
-    float: right;
-    border: 1px solid #a29f9f;
-    .box-shadow(inset -1px 1px 1px rgba(255,255,255,.44));
-    text-align: center;
-    font-size: 14px;  
-    font-weight: bold;
-    padding: 10px 20px;
-    color: #3e5706;
-    .rounded(12px);
-    text-shadow: 0px 1px 1px rgba(255,255,255,0.22);
+        
+      float: right;
+    
+      border-radius:17px 17px 17px 17px !important;
+      width: 115px;
+      height:37px;
+      line-height: 37px;
+      text-align: center;
+      font-size: 14px;  
+      font-weight: bold;
+      margin-left:7px;
+      margin-top:12px;
+      color: #3e5706;
+      .rounded(12px);
+      text-shadow: 0px 1px 1px rgba(255,255,255,0.22);
+      text-decoration:none;
+      &:hover{
+        background:#45600A;
+      }
+    
   }
   button.expand {
     background:  #dfd8c9 url(../img/icons/expand.png) center no-repeat;
@@ -2328,4 +2341,11 @@ div.rating-cancel {
      margin-left: 248px;
     margin-top: -20px;
   }
+}
+
+
+
+.button:hover{
+  
+  background: #45600A;
 }

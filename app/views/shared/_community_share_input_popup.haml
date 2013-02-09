@@ -55,8 +55,6 @@
 										 
 										 
 							%div.rhs
-								%h2.edit Edit Item
-								%h2.new New Item
 								%ul.form-holder
 									%li.clearfix													    		
 											
@@ -90,7 +88,7 @@
 									%li.clearfix
 																	
 										= f.label :name 
-										= f.text_field :name 
+										= f.text_field :name ,:name=>"item[name]"
 										%p.description A short descriptive name for the item, e.g. Trek 21 </br> Speed Road Bike, 2 Slice Toaster, etc.
 							
 				
@@ -100,25 +98,3 @@
 																	
 											= f.label :post_it_on_fb, 'Post this item on Facebook' 
 											= f.check_box :post_it_on_fb, :checked => true 
-								
-						 
-					
-							
-						
-									
-						
-
-			
-				
-					
-		
-			
-		
-	
-	
-				
-		
-
-
-
-
