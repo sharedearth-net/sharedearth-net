@@ -1,30 +1,35 @@
-#wraper-login{:style=> "width:92%; margin:0px auto;margin-left:7px;"}
-  #container-login{:style=> "width:100%; margin:20px auto; border:1px solid #b8b8b8; border-radius:10px; color:#80a52d;"}
+#wraper-login{}
+  #container-login{:style=> "width:313px; border:1px solid #b8b8b8; border-radius:10px; color:#80a52d;"}
     #header-login{:style=> "background:url(assets/background.png) repeat-x; width:100%; height:62px; margin:0px auto; border-top-left-radius:10px; border-top-right-radius:10px;"}
       .logo-login{:style=>"margin:0px auto; width:190px;"}
         %img{:src=>"/assets/login_logo.png", :style=>"margin:12px 0px;", :alt=> "Shared Earth"}
     .container-middel-login{:style=>"width:100%;"}  
       #connect_with{:style=>"background:url(assets/background_connect.png) repeat-x; width:100%; height:39px;"}
-        %span{:style=>"float: left;line-height: 39px;padding-left: 20px; width: 90%; font-family:HelveticaNeue_Bold,Times,serif;"}
-          CONNECT WITH
-          #icons{:style=>"float:right;"}
-            %a{:href=>"/auth/facebook"}
-              %img{:src=>"/assets/facebook_icon_sharedearth.png"}
-                %span.line
-                  %a{:href=>"/auth/google_oauth2"}
-                    %img{:src=>"/assets/google_icon_sharedearth.png"}
-      #pad{:style=>"padding:20px"}
+        %span{:style=>"float: left;line-height: 39px;padding-left: 17px; color: #B4C295;"}			
+          %b 
+            CONNECT WITH
+          
+        #icons{:style=>"float:right; padding-right: 16px; padding-top: 3px;"}
+          %a{:href=>"/auth/facebook"}
+            %img{:src=>"/assets/facebook_icon_sharedearth.png"}
+              %span.line
+                %a{:href=>"/auth/google_oauth2"}
+                  %img{:src=>"/assets/google_icon_sharedearth.png"}
+
+     
+      #pad{:style=>"padding:15px"}
+        %p{:style=>"font-size: 12px; font-weight: bold; color: #B4C295;"} OR LOGIN    
         - if @error
           %p= @error     
         = form_for User.new, :url => sessions_path, :id=>"new_user" do |f|
-          = f.text_field :email, :placeholder => "Email" ,:style=>"width:89%; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#80a52d; margin:10px 0px ;"
-          = f.password_field :password, :placeholder => "Password" ,:style=>"width:89%; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#80a52d; margin:10px 0px ;"        
-          = f.submit "" , :style=>"position:relative; left:207px; bottom:-7px; background:url(assets/login.png); border:none; width:85px; height:33px;"
-          =link_to "Register for an account!",new_user_path,:style=>"position:absolute; bottom:65px; left:40px; color:#80a52d;", :remote=>true 
+          = f.text_field :email, :placeholder => "Email" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ; font-family: Helvetica !important;"
+          = f.password_field :password, :placeholder => "Password" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ;font-family: Helvetica  !important;"        
+          = f.submit "" , :style=>"position:relative; left:200px; bottom:-17px; background:url(assets/login.png); border:none; width:85px; height:33px;"
+          =link_to "Register for an account",new_user_path,:style=>"position:absolute; bottom:40px; left:40px; color:#80a52d;", :remote=>true 
         .text-login{:style=>"width:70%; float:left; margin:10px 0px; line-height:32px;"} 
           %a{:href=> "",:style=>"text-decoration:none; color:#80a52d;"}
-          %a{:style=>"position:absolute; bottom:75px; color:#c3c5c0;"} Forgot password?
-          %img{:src=>"/assets/icon_pencil.png", :style=>"position:absolute; left:25px; bottom:70px;"}
+          %a{:style=>"position:absolute; bottom:65px; color:#c3c5c0;"} Forgot password?
+          %img{:src=>"/assets/icon_pencil.png", :style=>"position:absolute; left:25px; bottom:45px;"}
         
       
       %div{:style=>"clear:both;"}                               

@@ -690,22 +690,28 @@ div.block-list{
     }
   }
 }
-/*
-#facebox .close {
+
+.font #facebox .close {
+	background: none !important;
+	
+//	background:  url(/assets/img/icons/close-white.png) no-repeat !important;
+
 	opacity: 1 !important;
 	img {
-    opacity: 1 !important;
-	background-image:  url(/assets/img/icons/close-small-sprite.png) !important;
-
-		 &:hover {
-			opacity: 1 !important;
-		    
-			background-position: 0 -16px !important;
-		  }
+		margin-top: -4px;
+		opacity: 1 !important;
+		background:  url(/assets/img/icons/close-white.png) no-repeat;
+		 
 	}
 }
-*/
 
+.font #facebox .close:hover {
+			img{
+				opacity: 0 !important;
+			}
+			border: none;
+			background:  url(/assets/img/icons/close-black.png) no-repeat !important;
+		  }
 
 .trust-status {
   .heading {
@@ -1088,8 +1094,6 @@ header {
   .rounded(3px);
   .box-shadow(0 0 5px 2px rgba(255,255,190,.89));
 }
-
-
 
 #tab2
 {
@@ -1782,7 +1786,7 @@ footer {
     text-indent: -9999em;
     border: 0;
     margin-top: 12px;
-    &:hover {
+    &:hover {	
       background-position: 0 -22px;
     }
   }
@@ -1984,7 +1988,7 @@ div.rating-cancel {
 }
 
 .share-guide {
-  width: 647px !important;
+  width: 652px !important;
   font-size:13px;
 
   .shareOnFb {

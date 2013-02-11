@@ -6,8 +6,8 @@
 
 $(document).ready(function() {		
 		$('a[rel*=facebox]').facebox();
-		$('.close_image').attr("src", "/assets/img/icons/close-sprite-black.png")
-				
+		$('.close_image').attr("src", "/assets/img/icons/close-white.png");
+//		$.facebox.settings.closeImage = "/assets/img/icons/close-white.png";
 								
 });
 

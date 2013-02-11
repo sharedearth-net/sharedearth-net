@@ -1,5 +1,5 @@
 #wraper-login{:style=> "width:100%; margin:0px auto;"}
-	#container-login{:style=> "width:100%; margin:20px auto; border:1px solid #b8b8b8; border-radius:10px; color:#80a52d;"}
+	#container-login{:style=> "width:313px; border:1px solid #b8b8b8; border-radius:10px; color:#80a52d;"}
 		#header-login{:style=> "background:url(assets/background.png) repeat-x; width:100%; height:62px; margin:0px auto; border-top-left-radius:10px; border-top-right-radius:10px;"}
 			.logo-login{:style=>"margin:0px auto; width:190px;"}
 				%img{:src=>"/assets/login_logo.png", :style=>"margin:12px 0px;", :alt=> "Shared Earth"}
@@ -7,9 +7,9 @@
 			- for msg in @user.errors.full_messages
 				%p.error= msg
 			= form_for @user do |f|
-				= f.text_field :name, :placeholder => "Name" ,:style=>"width:89%; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#80a52d; margin:10px 0px ;"
-				= f.text_field :email, :placeholder => "Email" ,:style=>"width:89%; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#80a52d; margin:10px 0px ;"
-				= f.password_field :password, :placeholder => "Password" ,:style=>"width:89%; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#80a52d; margin:10px 0px ;"
-				= f.password_field :password_confirmation, :placeholder => "Password Confirmation" ,:style=>"width:89%; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#80a52d; margin:10px 0px ;"
-				= f.submit "" , :style=>"position:relative; left:207px; bottom:-7px; background:url(assets/signUp.png); border:none; width:90px; height:36px;"
-				=link_to "<b>Already</b> have an account!".html_safe,new_session_path,:style=>"position:absolute; bottom:60px; left:40px; color:#80a52d;", :remote=>true 
+				= f.text_field :name, :placeholder => "Name" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ;font-family: Helvetica  !important;"
+				= f.text_field :email, :placeholder => "Email" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ;font-family: Helvetica  !important;"
+				= f.password_field :password, :placeholder => "Password" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ;font-family: Helvetica  !important;"
+				= f.password_field :password_confirmation, :placeholder => "Password Confirmation" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ;font-family: Helvetica  !important;"
+				= f.submit "" , :style=>"position:relative; left:195px; bottom:-7px; background:url(assets/signUp.png); border:none; width:90px; height:36px;"
+				=link_to "<b>Already</b> have an account!".html_safe,new_session_path,:style=>"position:absolute; bottom:60px; left:22px; color:#80a52d;", :remote=>true 

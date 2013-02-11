@@ -6,6 +6,8 @@
 <% else -%>
 
 	$.facebox("<%= escape_javascript(render partial: 'form', locals: {user: User.new}) -%>");
-	$('#facebox .popup').css("cssText", "width: 370px !important;");	
-		$('#facebox .content').css("cssText", "width: 370px !important;");	
+	$('#facebox .content').css("cssText", "width: 313px !important;");	
+	$.facebox.settings.closeImage = "/assets/img/icons/close.png";
+	$('#facebox .close').css("cssText", "margin-right: 10px; margin-top: 3px;");
+    
 <% end -%>
