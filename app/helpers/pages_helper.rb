@@ -755,8 +755,8 @@ module PagesHelper
  private
   def links_for_add_item(log, comments)
     share_mine_link = ""
-     share_mine_link = "<td>#{link_to "share mine", "#", :action => share_mine_item_path(log.action_object_id), :remote => 'true',  :id => "share_mine_#{log.action_object_id}"}</td>" unless log.involved_as_requester?current_user.person
-    "<table><tr><td>#{link_to "abc" , item_path(log.action_object_id)}</td>#{share_mine_link}<td><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></td></td></table>"
+     share_mine_link = "<td  style='padding-left:4px;'>#{link_to "share mine", "#", :action => share_mine_item_path(log.action_object_id), :remote => 'true',  :id => "share_mine_#{log.action_object_id}"}</td>" unless log.involved_as_requester?current_user.person
+    "<table><tr><td style='padding-left:0px;'>#{link_to "abc" , item_path(log.action_object_id)}</td>#{share_mine_link}<td style='padding-left:5px;'><a href='#' class=\"comments-show-hide\">comments(#{comments ||= 0})</a></td></tr></table>"
   end
 
 end

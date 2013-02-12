@@ -1,6 +1,6 @@
 %div.block.sidebar-block2
 	%h1.community-header
-		My Community
+		my Community
 	%div.community-info
 		%span.people
 			= network_status_personal_network(nil,nil,{:style=>"color:#fff;text-decoration:none;"})
@@ -11,4 +11,4 @@
 		=render 'shared/news_feed_empty'
 	-else
 		=render "shared/news_feed_person", :locals => { :events => @events, :title => 'Your Network Activity' } 
-	%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+	%a{:href=>"#", :title=>"View more", :class=>"more"} view more
