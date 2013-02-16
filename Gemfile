@@ -10,6 +10,7 @@ gem "aws-ses", "~> 0.4.3", :require => 'aws/ses'
 gem "paperclip"
 gem "jquery-rails"
 gem 'facebox-rails'
+gem 'jquery-raty-rails'
 
 gem 'state_machine'
 gem "omniauth-facebook"
@@ -17,6 +18,9 @@ gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem "possessive"
 gem "fb_graph"
+
+gem 'sqlite3'
+gem 'taps'
 
 gem 'less'
 gem 'less-rails-bootstrap'

@@ -222,6 +222,8 @@ GEM
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-raty-rails (0.0.1)
+      rails (~> 3.2.3)
     json (1.7.5)
     jwt (0.1.5)
       multi_json (>= 1.0)
@@ -375,6 +377,7 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
+    sequel (3.20.0)
     shoulda (2.11.3)
     shoulda-matchers (1.4.2)
       activesupport (>= 3.0.0)
@@ -383,13 +386,21 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
+    sinatra (1.0)
+      rack (>= 1.0)
     slop (3.3.3)
     spork (0.9.2)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sqlite3 (1.3.6)
     state_machine (1.1.2)
+    taps (0.3.24)
+      rack (>= 1.0.1)
+      rest-client (>= 1.4.0, < 1.7.0)
+      sequel (~> 3.20.0)
+      sinatra (~> 1.0.0)
     term-ansicolor (1.0.7)
     therubyracer (0.11.0)
       ref
@@ -458,6 +469,7 @@ DEPENDENCIES
   heroku_san
   iron_worker
   jquery-rails
+  jquery-raty-rails
   kaminari
   less
   less-rails-bootstrap
@@ -482,7 +494,9 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   spork (~> 0.9.0.rc)
+  sqlite3
   state_machine
+  taps
   therubyracer
   thin
   twitter-bootstrap-rails
