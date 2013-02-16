@@ -76,12 +76,30 @@ function check4() {
 		ratyObj = $('.content #star');		
 
 		ratyObj.raty({ 
-		number: 4,
+		number: 5,
 		starOff:'star-off-big.png',
 		starOn   : 'star-on-big.png',
 		scoreName: 'item[rating]'
 
 		});
+
+		$('.content .starRating img').click(function(){
+			//alert($(this).attr('alt'));
+			//alert("abccc");
+			var num = $(this).attr('alt');
+			if (num == 1)
+				$('p#comment').text('1 - Bad');
+			if (num == 2)
+				$('p#comment').text('2 - Good');
+			if (num == 3)
+				$('p#comment').text('3 - Better');
+			if (num == 4)
+				$('p#comment').text('4 - Good condition, performs correctly');
+			if (num == 5)
+				$('p#comment').text('5 - Best');
+
+		});
+
 	}
 
 	function SmallSharing(){
