@@ -2,7 +2,8 @@
 // This file is automatically included by javascript_include_tag :defaults
 //= require jquery.facebox
 //= require lightbox
-
+//= require jquery.raty
+//= require jquery.raty.min
 
 $(document).ready(function() {		
 		$('a[rel*=facebox]').facebox();
@@ -44,7 +45,7 @@ function check4() {
   var detailHTML = "";  
 	
 	function DetailSharing(){
-		
+
 		if (isDetail== false)
 		{
 			
@@ -63,8 +64,26 @@ function check4() {
 			isDetail = false;
 			$(".content #down-arrow").css("background", "url('/assets/img/icons/down_arrow.png') no-repeat 0 5px");
 		}
-		
+		InitiateRaty();
+
+
 	}  
+
+	var ratyObj;
+
+	function InitiateRaty()
+	{
+		ratyObj = $('.content #star');		
+
+		ratyObj.raty({ 
+		number: 4,
+		starOff:'star-off-big.png',
+		starOn   : 'star-on-big.png',
+		scoreName: 'item[rating]'
+
+		});
+	}
+
 	function SmallSharing(){
 		
 		$("#item-type").val("share");

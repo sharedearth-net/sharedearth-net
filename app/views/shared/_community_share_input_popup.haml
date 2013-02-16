@@ -40,6 +40,7 @@
 							
 						- render :partial => "shared/error_messages", :locals => { :model => @item } 
 						%div#content
+
 							%div.lhs
 								%ul.form-holder
 								
@@ -85,6 +86,13 @@
 										=# f.text_field :item_type 
 										%p.description#description  A generic term describing the item, e.g. </br>bike, television, toaster, amplifier, etc
 							
+									%li.clearfix
+										#star.starRating
+
+										%input{:type=>"hidden", :name=>"item[rating]", :id=>"rating-score"} 
+
+											
+
 									%li.clearfix
 																	
 										= f.label :name 
