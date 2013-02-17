@@ -87,6 +87,9 @@ function check4() {
 			//alert($(this).attr('alt'));
 			//alert("abccc");
 			var num = $(this).attr('alt');
+
+			//$(".rating-score-hdn").val(num);
+
 			if (num == 1)
 				$('p#comment').text('1 - Bad');
 			if (num == 2)

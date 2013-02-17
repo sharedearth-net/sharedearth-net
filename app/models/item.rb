@@ -70,6 +70,7 @@ class Item < ActiveRecord::Base
 
 
   before_validation :sanitize_fields
+
   after_create :create_entity_for_item
   after_create :add_to_resource_network
   after_create :item_event_log
@@ -92,6 +93,18 @@ class Item < ActiveRecord::Base
   scope :with_type, lambda { |entity| where("UPPER(item_type) LIKE UPPER(?)", entity) }
 
   attr_accessor :post_it_on_fb
+
+
+  attr_accessor :rating
+  attr_accessible :rating
+  #attr_writer :rating
+
+  def set_rating    
+    self.average_rating = ((self.average_rating.to_i * number_of_times_rated.to_i).to_i +  self.rating.to_i) / (self.number_of_times_rated.to_i + 1)
+    self.number_of_times_rated = self.number_of_times_rated.to_i + 1
+
+  end
+
 
   def is_owner?(entity)
     self.owner == entity

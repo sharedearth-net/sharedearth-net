@@ -11,7 +11,7 @@
 				%input{:type=>"hidden", :name=>"item[purpose]", :id=>"purpose-type"} 
 				%input{:type=>"hidden", :id=>"hid"}
 				
-				=	f.text_field :description, :id=>"share_text", :placeholder=>"e.g.hammer" ,:name=>"item[item_type]"
+				=	f.text_field :item_type, :id=>"share_text", :placeholder=>"e.g.hammer" 
 				
 				
 				%div#detailed-sharing
@@ -47,6 +47,6 @@
 								%br
 
 						%div
-							=	f.text_field :description, :id=>"share_text", :placeholder=>"Descriptive name, e.g. Trek Road Bike 21 " ,:name=>"item[item_type]"
-							=	f.text_area :description, :id=>"share_text_2", :placeholder=>"Further information, e.g. Brakes are little noisy." ,:name=>"item[item_type]"
+							=	f.text_field :name, :id=>"share_text", :placeholder=>"Descriptive name, e.g. Trek Road Bike 21 " 
+							=	f.text_area :description, :id=>"share_text_2", :placeholder=>"Further information, e.g. Brakes are little noisy." 
 

@@ -44,7 +44,12 @@ class ItemsController < ApplicationController
     @item.owner = current_user.person
     @item.status = Item::STATUS_NORMAL
     @item.available = true    
+    @item.set_rating
+
+
      respond_to do |format|
+          debugger
+
        
       if @item.save       
         @item.create_new_item_event_log
@@ -57,7 +62,7 @@ class ItemsController < ApplicationController
         format.html { redirect_to @item }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
-        debugger              
+        
         format.html { redirect_to :controller=>"pages", :action => "community" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end
