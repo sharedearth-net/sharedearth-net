@@ -3,15 +3,16 @@
 		%header.row
 			%h1.village What?
 			 
-		- @item = Item.new if @item.is_a? String or @item.nil? 
+		- @item = Item.new #if @item.is_a? String or @item.nil? 
 	
 		= form_for(@item, :html => { :multipart => true},:id=>"textarea-input",:class=>"row"  ) do |f| 	
 			%div.row#textarea-input
 				
 				%input{:type=>"hidden", :name=>"item[purpose]", :id=>"purpose-type"} 
 				%input{:type=>"hidden", :id=>"hid"}
+				%input{:type=>"hidden", :id=>"small_popup", :value=>"1"}
 				
-				=	f.text_field :item_type, :id=>"share_text", :placeholder=>"e.g.hammer" 
+				=	f.text_field :item_type, :class=>"share_text", :id=>"share_name", :placeholder=>"e.g.hammer"
 				
 				
 				%div#detailed-sharing
@@ -20,7 +21,7 @@
 				
 				
 				
-				= f.submit "share", :id=>"share-facebox1", :class=>"button" , :onClick=>"return validate(this.form.share_text.value);"
+				= f.submit "share", :id=>"share-facebox1", :class=>"button" , :onClick=>"return validate();"
 				%a{:href=>"#",:id=>"change"}><change
 				%p#msj 
 				
@@ -47,6 +48,6 @@
 								%br
 
 						%div
-							=	f.text_field :name, :id=>"share_text", :placeholder=>"Descriptive name, e.g. Trek Road Bike 21 " 
-							=	f.text_area :description, :id=>"share_text_2", :placeholder=>"Further information, e.g. Brakes are little noisy." 
+							=	f.text_field :name, :class=>"share_text", :id=>"share_descritption", :placeholder=>"Descriptive name, e.g. Trek Road Bike 21 " 
+							=	f.text_area :description, :class=>"share_text_2", :id=>"share_info", :placeholder=>"Further information, e.g. Brakes are little noisy." 
 

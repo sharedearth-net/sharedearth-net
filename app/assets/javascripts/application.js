@@ -22,13 +22,13 @@ function check1() {
 }
 
 function check2() {
-	$("#purpose-type").val(20);
+	$("#purpose-type").val(30);
 	document.getElementById("checkbox-no").value = 2;
 	SmallSharing();
 }
 
 function check3() {
-	$("#purpose-type").val(30);
+	$("#purpose-type").val(20);
 	document.getElementById("checkbox-no").value = 3;
 	SmallSharing();
 }
@@ -51,11 +51,12 @@ function check4() {
 			
 			if(detailHTML=="")
 			 detailHTML = $(".content #share-in-details").html();
+			$(".content #small_popup").val(0);
   
   		$(".content #share-in-details").html("");  			
 			$(".content #detailed-sharing").html(detailHTML).show(100);									
 			$(".content #down-arrow").css("background", "url('/assets/img/icons/up_arrow.png') no-repeat 0 5px");
-			//document.forms[5].hid.value = "detail";			
+			//document.forms[5].hid.value = "detail";
 			isDetail = true;
 		}		
 		else
@@ -63,6 +64,7 @@ function check4() {
 			$(".content #detailed-sharing").html("");
 			isDetail = false;
 			$(".content #down-arrow").css("background", "url('/assets/img/icons/down_arrow.png') no-repeat 0 5px");
+			$(".content #small_popup").val(1);
 		}
 		InitiateRaty();
 
@@ -105,6 +107,7 @@ function check4() {
 
 	}
 
+
 	function SmallSharing(){
 		
 		$("#item-type").val("share");
@@ -118,15 +121,27 @@ function check4() {
 	
 	
 	/*    Validation */
-	function validate(text){	
-		if (text==""){				
-				$(".content #msj").html("sss").html("Please fill all fields");				
-				return false;
+	function validate( ){
+		var smallpopup = $(".content #small_popup").val();
+		var shareName = $('.content #share_name').val();
+		var shareDescrition = $('.content #share_descritption').val();
+		var shareInfo = $('.content #share_info').val();
+
+		//alert(smallpopup + "|" + shareName + "|" + shareDescrition + "|" + shareInfo);
+
+		if (smallpopup == 1 && shareName == "")
+		{
+			$(".content #msj").html("sss").html("Please fill all fields");
+			return false;
 		}
-		else 
-		{		
-			return true;
+		if (smallpopup == 0 && (shareName == "" || shareDescrition == "" || shareInfo == ""))
+		{
+			$(".content #msj").html("sss").html("Please fill all fields");
+			return false;
 		}
+
+		$(".content #msj").html("sss").html("");
+		return true;
 	}
 	
 	/*   Upload photos  */
