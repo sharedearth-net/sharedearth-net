@@ -1,0 +1,12 @@
+<div id="sidebar-left">
+  <ul>
+    <li class="people <%= 'selected' unless @searching_people %>">
+      <%= link_to 'Facebook Friends', findtheothers_path %>
+    </li>
+
+    <li class= "people <%= 'selected' if @searching_people %>" > 
+      <%= link_to 'Search', search_people_path %>
+    </li>
+  </ul>
+</div>
+

@@ -1,6 +1,146 @@
 @import "general.less";
 
 
+#search {
+	h1{
+		display: block;
+		font-size: 2em;
+		-webkit-margin-before: 0.67em;
+		-webkit-margin-after: 0.67em;
+		-webkit-margin-start: 0px;
+		-webkit-margin-end: 0px;
+		font-weight: bold;
+	}
+}
+
+#searchwrapper {
+	width:380px; /*follow your image's size*/
+	height:45px;/*follow your image's size*/
+	background-image:url(/assets/connect/search-bar.png);
+	background-repeat:no-repeat; /*important*/
+	padding:0px;
+	margin:0px;
+	position:relative; /*important*/
+	margin-bottom:15px;
+
+	form { 
+		display:inline ; 
+	}
+	.searchbox {
+		border:0px !important;
+		background-color:transparent !important;
+		position:absolute;
+		top:4px;
+		left:9px;
+		width:325px;
+		height:34px !important;
+		color:#999999 !important;
+	}
+}
+
+.searchbox_submit {
+	border:0px; /*important*/
+	background-color:transparent; /*important*/
+	position:absolute; /*important*/
+	top:10px;
+	left:345px;
+	width:34px !important;
+	height:28px;
+}
+
+#community-refresh-btn h2{
+	display:inline; 
+	vertical-align:sub; 
+	color:#666666; 
+	padding-left:5px;
+	font-size: 1.5em;
+	-webkit-margin-before: 0.83em;
+	-webkit-margin-after: 0.83em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	font-weight: bold;
+}
+
+#search h1{ 
+	color:#6a8b1e;
+}
+#community-refresh-btn{
+	display:block; width:670px;
+}
+
+#suggested{
+	display:inline-block; 
+	width:350px; 
+	margin:10px 0;
+	}
+
+#suggested img{
+	vertical-align:middle;
+	}
+#community-reload {
+	display:inline-block; 
+	float:right;
+	}
+/*.block-row{width:500px;}*/
+
+.block-wrapper{
+	width:295px; 
+	padding-left:20px; 
+	padding-top:5px; 
+	padding-bottom:5px;
+	}
+
+#communities{
+	width:670px;
+	}
+.block-info{
+	display:inline-block; 
+	width:170px; 
+	padding-left:15px;
+	}
+
+.block-info h3{
+	color:#666666; 
+	margin-bottom :0px;
+	display: block;
+	font-size: 1.17em;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	font-weight: bold;
+	line-height: 0px;
+}
+
+.block-info p{
+	color:#333333; 
+	margin-top:0;
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	line-height: 0px;
+}
+
+.block-info img{
+	
+}
+
+.block-row{
+	display:inline-block; 
+	border-bottom:1px solid #deecd9; 
+	padding:5px; 
+	width:314px;
+	}
+ 
+
+.block-wrapper:hover {
+	background-image:url(/assets/connect/tab.png);
+	}
+
+
+/*
 .connect-search {
 	h1 {
 		color: #6a8b1e;
@@ -106,3 +246,4 @@
 	line-height: 32px;
 	background: url(/assets/img/icons/people-icon.png) no-repeat 0 0px;
 }
+*/

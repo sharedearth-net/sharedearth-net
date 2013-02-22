@@ -1,0 +1,7 @@
+%li
+	= image_tag person.avatar(:square), :class => "thumb"
+	%div
+		%p
+			= link_to person.name, person_path(person)
+		%p
+			= trust_action_link_for(person)

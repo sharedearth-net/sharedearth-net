@@ -1,0 +1,10 @@
+<% searching_path = @searching_people ? search_people_path : search_fb_friends_path %>
+
+<div class="search-holder clearfix">
+  <%= form_tag searching_path, :method => 'get' do %>
+     <div>
+        <%= text_field_tag :search_terms, params[:search_terms] %>
+        <button id="fb-search" type="submit" title="Search">Search</button>
+      </div>
+  <% end %>
+</div>
