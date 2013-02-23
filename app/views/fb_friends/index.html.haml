@@ -1,91 +1,97 @@
-!!! 5
-%html
-	%head
-		%title= @page_title
-	%body 
+%div.wrapper
+	#cont.container
+		%section#sec.dashboard-feed.page-content
+			
+			#wrapper-connect
+				#search
+					%h1 Connect
+					#searchwrapper
+						%form{:action=>""}
+							%input{:type=>"text", :class=>"searchbox", :name=>"s", :value=>"Search villages, groups or people", :onfocus=>"if(this.value==this.defaultValue)this.value='';", :onblur=>"if(this.value=='')this.value=this.defaultValue;" }
+							%input{:type=>"image", :src=>"/assets/connect/search-btn.png", :class=>"searchbox_submit", :value=>""}
 
-		#wrapper-connect
-			#search
-				%h1 Connect
-				#searchwrapper
-					%form{:action=>""}
-						%input{:type=>"text", :class=>"searchbox", :name=>"s", :value=>"Search villages, groups or people", :onfocus=>"if(this.value==this.defaultValue)this.value='';", :onblur=>"if(this.value=='')this.value=this.defaultValue;" }
-						%input{:type=>"image", :src=>"/assets/connect/search-btn.png", :class=>"searchbox_submit", :value=>""}
-
-			#community-refresh-btn
-				#suggested
-					%img{:src=>"/assets/connect/sug-ct.png", :alt=>"suggest", :title=>"suggest"}
-					%h2 Suggested Communities
-				#community-reload
-					%img{:src=>"/assets/connect/reload.jpg", :alt=>"reload", :title=>"reload"}
+				#community-refresh-btn
+					#suggested
+						%img{:src=>"/assets/connect/sug-ct.png", :alt=>"suggest", :title=>"suggest"}
+						%h2 Suggested Communities
+					#community-reload
+						%img{:src=>"/assets/connect/reload.jpg", :alt=>"reload", :title=>"reload"}
 
 
-			#communities
-				- right = 0
-				-unless @villages.nil?
-					-for village in @villages
-						.block-row
-							.block-wrapper
-								-if (right == 0)
-									%img{:src=>"/assets/connect/image.jpg", :alt=>"image", :title=>"image"}
-									-right = 1
-								-else
-									%img{:src=>"/assets/connect/image.jpg", :alt=>"house", :title=>"house"}
-									-right = 0
-								.block-info
-									%h3
-										=village.name
-									%p
-										="#{village.street} #{village.state} #{village.country}"
-									%img{:src=>"/assets/connect/join.png", :alt=>"join", :title=>"join"}
-
-		%br
-		%br
-		%br
-
-
-		%div.wrapper
-			%div.container
-				%section.page-content.clearfix
-					
-					
-					%div.suggestions
-						%div.row.suggest
-							%h1.people-block People I May Know
-							=link_to "Refresh", "#", :class => "refresh-button" 
-							
-						%div.community-box
-							%div.single-community
-								/ %img{:src=>"/assets/img/picture.png", :alt=>""}
-								%div.content
-									-if @people.empty?
-										= params[:search_terms] ? 'Search term not found' : 'Enter search term'
+				#communities
+					- right = 0
+					-unless @villages.nil?
+						-for village in @villages
+							.block-row
+								.block-wrapper
+									-if (right == 0)
+										%img{:class=>"imagePad",:src=>"/assets/connect/image.jpg", :alt=>"image", :title=>"image"}
+										-right = 1
 									-else
-										%span.meta
-											= render 'people_list', :people => @people
-									
-				%aside.dashboard-sidebar.sidebar
-					%div.block.sidebar-block
-						%hgroup
-							%h1.suggest-side-header musicians in the inner west
-						%div.block-list
-							%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\
-						%ul.block-list
-							%li
-								%div.trusted-block
-									%strong 15 people
-									from your trusted network
-							%li
-								%div.communities-block
-									%strong 15 people
-									from your trusted network
-							%li
-								%div.people-block
-									%strong 350 people
-									in this group
-							%li
-								%div.items-block 
-									%strong 15 people
-									from your trusted network
-						%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+										%img{:src=>"/assets/connect/house.png", :alt=>"house", :title=>"house"}
+										-right = 0
+									.block-info
+										%h3
+											=village.name
+										%p
+											- vloc = "#{village.street}, #{village.state} , #{village.country}"
+											= truncate vloc , :length => 25
+										%img{:src=>"/assets/connect/join.png", :alt=>"join", :title=>"join"}
+
+
+				%br
+
+				#community-refresh-btn
+					#suggested
+						%img{:src=>"/assets/connect/grey_grp.png", :alt=>"suggest", :title=>"suggest"}
+						%h2 People I May Know
+					#community-reload
+						%img{:src=>"/assets/connect/reload.jpg", :alt=>"reload", :title=>"reload"}
+
+
+				#communities
+					-unless @people.nil?
+						-for ppl in @people
+							.block-row
+								.block-wrapper
+									%img{:class=>"imagePad",:src=>"/assets/connect/image.jpg", :alt=>"image", :title=>"image"}
+									.block-info
+										%h3
+											=ppl.name
+										%p
+											- loc = (ppl.location == "") ? "N/A" : ppl.location
+											= truncate loc , :length => 25
+										%img{:src=>"/assets/connect/trust.png", :alt=>"join", :title=>"join"}
+
+
+		%div.buttons-right
+			%button{:class => "button"} Create Village
+
+		%aside.dashboard-sidebar.sidebar
+			%div.block.sidebar-block
+				%hgroup
+					%h1.suggest-side-header musicians in the inner west
+				%div.block-list
+					%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\
+				%ul.block-list
+					%li
+						%div.trusted-block
+							%strong 15 people
+							from your trusted network
+					%li
+						%div.communities-block
+							%strong 15 people
+							from your trusted network
+					%li
+						%div.people-block
+							%strong 350 people
+							in this group
+					%li
+						%div.items-block 
+							%strong 15 people
+							from your trusted network
+				%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+			
+%br
+%br
