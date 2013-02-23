@@ -25,7 +25,7 @@
 							.block-row
 								.block-wrapper
 									-if (right == 0)
-										%img{:class=>"imagePad",:src=>"/assets/connect/image.jpg", :alt=>"image", :title=>"image"}
+										%img{:src=>"/assets/connect/house.png", :alt=>"image", :title=>"image"}
 										-right = 1
 									-else
 										%img{:src=>"/assets/connect/house.png", :alt=>"house", :title=>"house"}
@@ -54,7 +54,7 @@
 						-for ppl in @people
 							.block-row
 								.block-wrapper
-									%img{:class=>"imagePad",:src=>"/assets/connect/image.jpg", :alt=>"image", :title=>"image"}
+									%img{:class=>"imagePad",:src=> ppl.avatar, :alt=>"image", :title=>"image"}
 									.block-info
 										%h3
 											=ppl.name
