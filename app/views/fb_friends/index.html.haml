@@ -25,16 +25,19 @@
 							.block-row
 								.block-wrapper
 									-if (right == 0)
-										%img{:src=>"/assets/connect/house.png", :alt=>"image", :title=>"image"}
+										%img{:class=>"imagePad",:src=>"/assets/connect/house.png", :alt=>"image", :title=>"image"}
 										-right = 1
 									-else
-										%img{:src=>"/assets/connect/house.png", :alt=>"house", :title=>"house"}
+										%img{:class=>"imagePad",:src=>"/assets/connect/house.png", :alt=>"house", :title=>"house"}
 										-right = 0
 									.block-info
 										%h3
 											=village.name
 										%p
-											- vloc = "#{village.street}, #{village.state} , #{village.country}"
+											- str = (village.street == "") ? "" : "#{village.street}, "
+											- st =  (village.state == "") ? "" : "#{village.state}, "
+											- ctry =  (village.country == "") ? "" : "#{village.country}"
+											- vloc = "#{str}#{st}#{ctry}"
 											= truncate vloc , :length => 25
 										%img{:src=>"/assets/connect/join.png", :alt=>"join", :title=>"join"}
 
@@ -68,12 +71,12 @@
 			%button{:class => "button"} Create Village
 
 		%aside.dashboard-sidebar.sidebar
-			%div.block.sidebar-block
+			%div.connect-sidebar-block
 				%hgroup
-					%h1.suggest-side-header musicians in the inner west
+					%h1.suggest-side-header Musicians in the Inner West
 				%div.block-list
-					%p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\
+					%p
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, Ut enim ad minim veniam.
 				%ul.block-list
 					%li
 						%div.trusted-block
@@ -91,7 +94,7 @@
 						%div.items-block 
 							%strong 15 people
 							from your trusted network
-				%a{:href=>"#", :title=>"View more", :class=>"more"} View More
+				%a{:href=>"#", :title=>"View more", :class=>"more"} view more
 			
 %br
 %br
