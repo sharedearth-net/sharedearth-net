@@ -216,6 +216,18 @@ class Person < ActiveRecord::Base
     create_entity
   end
 
+  def suggested_people
+    #self.human_networks.trusted_personal_network.map(&:person_id).collect{|t| Person.find(t)}
+    #self.human_networks.trusted_personal_network.collect{|f| f.person}
+    self.human_networks.trusted_personal_network.collect{|f| f.person}.collect{|ft| ft.human_networks.trusted_personal_network.collect{|fT| fT.person}}.flatten.uniq - self.human_networks.trusted_personal_network
+
+  end
+
+  def person_belongs_to_village
+    ids = (self.human_networks.collect{|p| p.entity_id}.sort.reverse + Village.all.collect{|v| v.id}).uniq
+    ids.collect{|id| Village.find(id)}
+  end
+
   def trusted_network_size
     self.human_networks.trusted_personal_network.count
   end
