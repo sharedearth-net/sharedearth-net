@@ -9,8 +9,9 @@ class FbFriendsController < ApplicationController
       return redirect_to :dashboard, :warning => "Facebook not connected"
     end
 
-    @people  = FbService.get_my_friends(fb_user.token).order(:name)
-    @villages = Village.all
+    @people  = ((FbService.get_my_friends(fb_user.token).order(:name) +  current_person.suggested_people).uniq) - current_person.trusted_friends
+    
+    @villages = current_person.person_belongs_to_village
   end
 
   def search_fb_friends
