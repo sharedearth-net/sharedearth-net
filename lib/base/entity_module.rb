@@ -4,7 +4,7 @@ module EntityModule
 
     # TODO : Add has_many relations for human network and respource network
     def has_human_network(relation_name, options = {})
-      defaults = { :class_name => "HumanNetwork", :as => :entity }
+      defaults = { :class_name => "HumanNetwork", :as => :specific_entity }
       options = defaults.merge( options )
       has_many relation_name, options
     end

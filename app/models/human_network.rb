@@ -2,16 +2,18 @@ class HumanNetwork < ActiveRecord::Base
 
   #before_save :update_entity_ids
 
-  belongs_to :entity, :polymorphic => true
+  belongs_to :entity
+  belongs_to :specific_entity, :polymorphic => true
   belongs_to :person, :class_name => "Person"
+  
 
   self.inheritance_column = "network_type"
 
   belongs_to :trusted_person, :class_name => "Person", :foreign_key => "person_id"
 
   scope :involves_as_trusted_person, lambda { |person| where(:person_id => person) }
-  scope :involves_as_person, lambda { |person| where(:entity_id => person, :entity_type => "Person") }
-  scope :involves, lambda { |person| where("( entity_id = ? AND entity_type = 'Person' ) OR person_id = ?", person.id, person.id) }
+  scope :involves_as_person, lambda { |person| where(:entity_id => person, :specific_entity_type => "Person") }
+  scope :involves, lambda { |person| where("( entity_id = ? AND specific_entity_type = 'Person' ) OR person_id = ?", person.id, person.id) }
 
   scope :facebook_friends, where(:network_type => "FacebookFriend")
   scope :trusted_personal_network, where(:network_type => "TrustedNetwork")
@@ -22,26 +24,31 @@ class HumanNetwork < ActiveRecord::Base
   
   scope :person_items_in_groups,where(:network_type => "Groups")
   
-  scope :village_members, lambda { |village| where("entity_id = ? AND entity_type = ? AND network_type = ?", village.id, "Village", "Member")}
-  scope :village_admins, lambda { |village| where("entity_id = ? AND entity_type = ? AND network_type = ?", village.id, "Village", "GroupAdmin")}
-  scope :part_of_village, lambda { |person| where("person_id = ? AND entity_type =? AND (network_type = ? OR network_type = ?)", person.id, "Village", "GroupAdmin", "Member")}
-  scope :entity_types, lambda { |entity_types| where("entity_type IN (?)", entity_types) }
+  scope :gift_contributors, lambda { |gift| where("entity_id = ? AND specific_entity_type = ? AND network_type = ?", gift.id, "Gift", "Member")}
+  scope :gift_creator, lambda { |gift| where("entity_id = ? AND specific_entity_type = ? AND network_type = ?", gift.id, "Gift", "GroupAdmin")}
+  scope :gift_recipient, lambda { |gift| where("entity_id = ? AND specific_entity_type = ? AND network_type = ?", gift.id, "Gift", "Recipient")}
+  scope :village_members, lambda { |village| where("entity_id = ? AND specific_entity_type = ? AND network_type = ?", village.id, "Village", "Member")}
+  scope :village_admins, lambda { |village| where("entity_id = ? AND specific_entity_type = ? AND network_type = ?", village.id, "Village", "GroupAdmin")}
+  scope :part_of_village, lambda { |person| where("person_id = ? AND specific_entity_type =? AND (network_type = ? OR network_type = ?)", person.id, "Village", "GroupAdmin", "Member")}
+  scope :part_of_gift, lambda { |person| where("person_id = ? AND specific_entity_type =? AND (network_type = ? OR network_type = ?)", person.id, "Gift", "GroupAdmin", "Member")}
+  scope :entity_types, lambda { |entity_types| where("specific_entity_type IN (?)", entity_types) }
+
   scope :member, lambda { |member| where(:person_id => member.id)}
   scope :entity_network, lambda { |entity_type| where(:network_type => entity_type) }
-  scope :specific_entity_network, lambda { |entity| where(:entity_type => entity.class.name, :entity_id => entity.id) }
+  scope :specific_entity_network, lambda { |entity| where(:specific_entity_type => entity.class.name, :entity_id => entity.id) }
 
   #for counts on community
 
 
-  scope :specific_entity_id_trusted_network, lambda { |entity| where(:entity_type => entity.class.name, :specific_entity_id => entity.id, :network_type=>'TrustedNetwork') } 
+  scope :specific_entity_id_trusted_network, lambda { |entity| where(:specific_entity_type => entity.class.name, :specific_entity_id => entity.id, :network_type=>'TrustedNetwork') } 
   
-  scope :specific_entity_id_network, lambda { |entity| where(:entity_type => entity.class.name, :specific_entity_id => entity.id) } 
+  scope :specific_entity_id_network, lambda { |entity| where(:specific_entity_type => entity.class.name, :specific_entity_id => entity.id) } 
   scope :entities_network, lambda { |ids| where("entity_id IN(#{ids})") }  
   scope :person_entities,  lambda { |person| where(:person_id => person.id).uniq }
   
-  scope :member_village, lambda { |member| where(:person_id => member.id, :entity_type => 'Village').uniq}
+  scope :member_village, lambda { |member| where(:person_id => member.id, :specific_entity_type => 'Village').uniq}
  
-  scope :person_trusted_network, lambda { |person| where(:person_id => person.id, :entity_type => 'Person', :network_type=>'TrustedNetwork').uniq}
+  scope :person_trusted_network, lambda { |person| where(:person_id => person.id, :specific_entity_type => 'Person', :network_type=>'TrustedNetwork').uniq}
   
   
   validates_presence_of :entity_id, :entity_type, :person_id

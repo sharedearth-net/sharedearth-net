@@ -2,6 +2,8 @@ class Entity < ActiveRecord::Base
 
   belongs_to :specific_entity, :polymorphic => true
 
+  has_many :human_networks
+
   scope :item, lambda { |entity| where("specific_entity_type =? AND specific_entity_id = ?", "Item", entity.id) }
   scope :villages_with_ids, lambda { |village_ids| where("specific_entity_id IN (?) AND specific_entity_type = ?", village_ids, "Village")}
 
