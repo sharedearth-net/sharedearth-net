@@ -75,8 +75,8 @@ class HumanNetwork < ActiveRecord::Base
     unless first_person.trusted_network.exists?(second_person.id) || second_person.trusted_network.exists?(first_person.id)
       # 2 calls given below should be always happen in conjunction
       # for mutual network updation to be successful
-      TrustedNetwork.create!(:entity => first_person, :person_id => second_person.id)
-      TrustedNetwork.create!(:entity => second_person, :person_id => first_person.id)
+      TrustedNetwork.create!(:specific_entity => first_person, :person_id => second_person.id)
+      TrustedNetwork.create!(:specific_entity => second_person, :person_id => first_person.id)
       first_person.reputation_rating.increase_trusted_network_count
       second_person.reputation_rating.increase_trusted_network_count
       EventLog.create_trust_established_event_log(first_person, second_person)
@@ -86,8 +86,8 @@ class HumanNetwork < ActiveRecord::Base
   
   def self.create_facebook_friends!(first_person, second_person)
     unless first_person.facebook_friend.where(:person_id => second_person.id).exists?
-      FacebookFriend.create!(:entity => first_person, :person_id =>  second_person.id)
-      FacebookFriend.create!(:entity => second_person, :person_id =>  first_person.id)
+      FacebookFriend.create!(:specific_entity => first_person, :entity => first_person.entity, :person_id =>  second_person.id)
+      FacebookFriend.create!(:specific_entity => second_person, :entity => second_person.entity, :person_id =>  first_person.id)
     end
   end
 
