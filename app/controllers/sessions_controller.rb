@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
       user  = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
               User.create_with_omniauth(auth)
                  
+
       user.person = current_person if current_person
       user.token = token
       user.save
@@ -33,6 +34,14 @@ class SessionsController < ApplicationController
 
       session[:fb_token] = auth["credentials"]["token"] if auth['provider'] == 'facebook'
       session[:user_id]  = user.id
+      cookies.permanent.signed[:permanent_user_id] = user.id
+
+      auth = request.env["omniauth.auth"]
+      user  = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
+              User.create_with_omniauth(auth)
+      session[:user_id] = user.id
+      cookies.permanent.signed[:permanent_user_id] = user.id
+
       redirect_to root_path
     end
   end
@@ -46,9 +55,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if session[:user_id].nil? || !current_user
-      redirect_to root_path
-    else
+
+
+      puts "*************************************************#{session[:user_id]}"
+
+      
+    #if session[:user_id].nil? || !current_user
+      
+     # redirect_to root_path
+    #else
       current_user.record_last_activity!
       if session[:fb_token].present? 
         split_token = session[:fb_token].split("|")
@@ -58,8 +73,14 @@ class SessionsController < ApplicationController
       session[:fb_token] = nil
       session[:user_id] = nil
       session[:fb_drop_url] = nil
+
+      cookies.delete(:user_id)
+      cookies.delete(:permanent_user_id)
+
+      sleep 3      
+
       redirect_to root_path
       #redirect_to FbService.fb_logout_url(fb_api_key, fb_session_key, root_url)  #This redirects to facebook
-    end
+#    end
   end
 end

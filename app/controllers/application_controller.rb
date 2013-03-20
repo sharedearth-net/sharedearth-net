@@ -43,8 +43,12 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    user_id = session[:user_id]
-    @current_user ||= User.find(user_id) if user_id
+    return unless cookies.signed[:permanent_user_id] || session[:user_id]
+    begin
+      @current_user ||= User.find(cookies.signed[:permanent_user_id] || session[:user_id])
+    rescue 
+      nil
+    end
   end
 
   def current_person
