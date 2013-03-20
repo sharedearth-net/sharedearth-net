@@ -11,7 +11,11 @@ class FbFriendsController < ApplicationController
 
     @people  = ((FbService.get_my_friends(fb_user.token).order(:name) +  current_person.suggested_people).uniq) - current_person.trusted_friends
     
-    @villages = current_person.person_belongs_to_village
+    @villages = current_person.suggested_villages
+
+    #@trusted_network_count = current_person.trusted_network.count
+    #@people_in_community_count =  current_person.people_in_community_count
+
   end
 
   def search_fb_friends

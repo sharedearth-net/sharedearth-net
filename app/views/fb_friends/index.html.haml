@@ -22,7 +22,7 @@
 					- right = 0
 					-unless @villages.nil?
 						-for village in @villages
-							.block-row
+							.block-row{:id=>village.id}
 								.block-wrapper
 									-if (right == 0)
 										%img{:class=>"imagePad",:src=>"/assets/connect/house.png", :alt=>"image", :title=>"image"}
@@ -98,3 +98,16 @@
 			
 %br
 %br
+.sidebar-data{:style=>"display:none"}
+	-@villages.each do |v|
+		.village-data{:id=>"village-data-#{v.id}"}	
+			.name
+				= v.name
+			.description
+				= v.description			
+			.trusted
+				10
+			.group
+				11
+			.items
+				12

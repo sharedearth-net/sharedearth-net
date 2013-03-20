@@ -43,7 +43,7 @@ class TrustedNetwork < HumanNetwork
 
     #also delete reverse MUTUAL relations
     human_networks_to_delete = HumanNetwork.destroy_all("person_id = #{self.entity_id} and network_type = 'ExtendedNetwork' " +# delete all mutual friends
-      "and entity_type = 'Person' and entity_id not in (" + # except
+      "and specific_entity_type = 'Person' and entity_id not in (" + # except
       "select distinct(person_id) " + #select all mutual_person ids
       "from human_networks where network_type = 'TrustedNetwork' and specific_entity_type = 'Person' and entity_id in " + # person should be friend of
       "(select person_id from human_networks where specific_entity_type = 'Person' and entity_id = #{self.entity_id} and network_type = 'TrustedNetwork') " + # current person's friend

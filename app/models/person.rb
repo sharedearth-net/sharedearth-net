@@ -223,8 +223,10 @@ class Person < ActiveRecord::Base
 
   end
 
-  def person_belongs_to_village
-    ids = (self.human_networks.collect{|p| p.entity_id}.sort.reverse + Village.all.collect{|v| v.id}).uniq
+  def suggested_villages
+    ids = ((self.human_networks.collect{|p| HumanNetwork.part_of_village(p.specific_entity).collect{|se| se.specific_entity_id}} ).flatten - [nil] + Village.all.collect{|v| v.id}).uniq
+
+    #(self.human_networks.collect{|p| p.entity_id}.sort.reverse + Village.all.collect{|v| v.id}).uniq
     ids.collect{|id| Village.find(id)}
   end
 
@@ -455,6 +457,19 @@ class Person < ActiveRecord::Base
     array.uniq.count
   end
   
+
+
+
+
+  ###########
+  #counts for connect page
+  #############
+  
+  def people_in_community_count
+    (HumanNetwork.person_entities(self).collect{|h| h.person_id} + self.human_networks.collect{|h| h.person_id} - [self.id]).uniq.count
+  end
+
+
   # Will remove this once story is approve
   # def news_feed
   #     # Updated SQL to get all events relating to anyone in a user's trusted

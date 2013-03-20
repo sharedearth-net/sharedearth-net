@@ -12,6 +12,35 @@ $(document).ready(function() {
 								
 });
 
+$(document).ready(function() {		
+		$('.block-row').click(function(e){		
+			
+			var village_id = $(this).attr('id');
+
+			show_village_data_side_bar(village_id);
+
+		});
+								
+});
+
+
+function show_village_data_side_bar(village_id)
+{
+
+	//GETTING DATA
+	var name = $("#village-data-"+village_id+" .name").html();
+	var description = $("#village-data-"+village_id+" .description").html();
+	var tusted_count = $("#village-data-"+village_id+" .trusted").html();
+	var group_count =$("#village-data-"+village_id+" .group").html();
+	var items_count =$("#village-data-"+village_id+" .items").html();
+
+	//SETTING DATA
+	$(".suggest-side-header").html(name);
+	$(".connect-sidebar-block .block-list p").html(description);
+	$(".connect-sidebar-block .trusted-block strong").html(tusted_count + " people");
+
+}
+
 
 function check1() {
 

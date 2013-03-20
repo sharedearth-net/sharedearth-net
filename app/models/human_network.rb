@@ -51,7 +51,7 @@ class HumanNetwork < ActiveRecord::Base
   scope :person_trusted_network, lambda { |person| where(:person_id => person.id, :specific_entity_type => 'Person', :network_type=>'TrustedNetwork').uniq}
   
   
-  validates_presence_of :entity_id, :entity_type, :person_id
+  validates_presence_of :specific_entity_type, :specific_entity_id, :person_id
   
   
   NETWORK_WEIGHTAGE = {
@@ -85,6 +85,7 @@ class HumanNetwork < ActiveRecord::Base
   end
   
   def self.create_facebook_friends!(first_person, second_person)
+    debugger
     unless first_person.facebook_friend.where(:person_id => second_person.id).exists?
       FacebookFriend.create!(:specific_entity => first_person, :entity => first_person.entity, :person_id =>  second_person.id)
       FacebookFriend.create!(:specific_entity => second_person, :entity => second_person.entity, :person_id =>  first_person.id)
