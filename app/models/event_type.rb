@@ -384,9 +384,9 @@ class EventType < ActiveRecord::Base
   def self.completed_request_ids
     [10,11,12,13,31,32,33,34]
   end
-
-  def self.events_completed
-    [18,19,21]
+  
+  def self.event_log_sentence_events
+    [18,19,21,22,23,24,25,26,55,56,57,58,59,60,85,98,100,102,104,106,108,110,112,114,116,118,120]
   end
 
   def self.activity_accepted
@@ -547,52 +547,100 @@ class EventType < ActiveRecord::Base
     self.id == EventType.person_join
   end
 
-  def self.positive_feedback_gifter(return_only_id = true)
+  def self.gifter_positive_feedback_gifter(return_only_id = true)
     return_only_id ? 55 : EventType.find(55)
   end
 
-  def positive_feedback_gifter?
-    self.id == EventType.positive_feedback_gifter
+  def gifter_positive_feedback_gifter?
+    self.id == EventType.gifter_positive_feedback_gifter
+  end
+  
+  def self.gifter_positive_feedback_requester(return_only_id = true)
+    return_only_id ? 92 : EventType.find(92)
+  end
+  
+  def gifter_positive_feedback_requester?
+    self.id == EventType.gifter_positive_feedback_requester
   end
 
-  def self.positive_feedback_requester(return_only_id = true)
+  def self.requester_positive_feedback_requester(return_only_id = true)
     return_only_id ? 56 : EventType.find(56)
   end
 
-  def positive_feedback_requester?
-    self.id == EventType.positive_feedback_requester
+  def requester_positive_feedback_requester?
+    self.id == EventType.requester_positive_feedback_requester
+  end
+  
+  def self.requester_positive_feedback_gifter(return_only_id = true)
+    return_only_id ? 93 : EventType.find(93)
+  end
+  
+  def requester_positive_feedback_gifter?
+    self.id == EventType.requester_positive_feedback_gifter
   end
 
-  def self.negative_feedback_gifter(return_only_id = true)
+  def self.gifter_negative_feedback_gifter(return_only_id = true)
     return_only_id ? 57 : EventType.find(57)
   end
 
-  def negative_feedback_gifter?
-    self.id == EventType.negative_feedback_gifter
+  def gifter_negative_feedback_gifter?
+    self.id == EventType.gifter_negative_feedback_gifter
+  end
+  
+  def self.gifter_negative_feedback_requester(return_only_id = true)
+    return_only_id ? 94 : EventType.find(94)
+  end
+  
+  def gifter_negative_feedback_requester?
+    self.id == EventType.gifter_negative_feedback_requester
   end
 
-  def self.negative_feedback_requester(return_only_id = true)
+  def self.requester_negative_feedback_requester(return_only_id = true)
     return_only_id ? 58 : EventType.find(58)
   end
 
-  def negative_feedback_requester?
-    self.id == EventType.negative_feedback_requester
+  def requester_negative_feedback_requester?
+    self.id == EventType.requester_negative_feedback_requester
+  end
+  
+  def self.requester_negative_feedback_gifter(return_only_id = true)
+    return_only_id ? 95 : EventType.find(95)
+  end
+  
+  def requester_negative_feedback_gifter?
+    self.id == EventType.requester_negative_feedback_gifter
   end
 
-  def self.neutral_feedback_gifter(return_only_id = true)
+  def self.gifter_neutral_feedback_gifter(return_only_id = true)
     return_only_id ? 59 : EventType.find(59)
   end
 
-  def neutral_feedback_gifter?
-    self.id == EventType.neutral_feedback_gifter
+  def gifter_neutral_feedback_gifter?
+    self.id == EventType.gifter_neutral_feedback_gifter
+  end
+  
+  def self.gifter_neutral_feedback_requester(return_only_id = true)
+    return_only_id ? 96 : EventType.find(96)
+  end
+  
+  def gifter_neutral_feedback_requester?
+    self.id == EventType.gifter_neutral_feedback_requester 
   end
 
-  def self.neutral_feedback_requester(return_only_id = true)
+  def self.requester_neutral_feedback_requester(return_only_id = true)
     return_only_id ? 60 : EventType.find(60)
   end
 
-  def neutral_feedback_requester?
-    self.id == EventType.neutral_feedback_requester
+  def requester_neutral_feedback_requester?
+    self.id == EventType.requster_neutral_feedback_requester
+  end
+  
+  def self.requester_neutral_feedback_gifter(return_only_id = true)
+    return_only_id ? 97 : EventType.find(97)
+  end
+  
+  def requester_neutral_feedback_gifter?
+    self.id == EventType.requester_neutral_feedback_gifter
   end
 
   def self.trust_request(return_only_id = true)
@@ -854,10 +902,196 @@ class EventType < ActiveRecord::Base
     self.id == EventType.acknowledge_return_shareage_requester
   end
 
+  def self.gift_gifter_positive_feedback_gifter(return_only_id = true)
+    return_only_id ? 98 : EventType.find(98)
+  end
 
+  def gift_gifter_positive_feedback_gifter?
+    self.id == EventType.gift_gifter_positive_feedback_gifter
+  end
+  
+  def self.gift_gifter_positive_feedback_requester(return_only_id = true)
+    return_only_id ? 99 : EventType.find(99)
+  end
+  
+  def gift_gifter_positive_feedback_requester?
+    self.id == EventType.gift_gifter_positive_feedback_requester
+  end
 
+  def self.gift_requester_positive_feedback_requester(return_only_id = true)
+    return_only_id ? 100 : EventType.find(100)
+  end
 
+  def gift_requester_positive_feedback_requester?
+    self.id == EventType.gift_requester_positive_feedback_requester
+  end
+  
+  def self.gift_requester_positive_feedback_gifter(return_only_id = true)
+    return_only_id ? 101 : EventType.find(101)
+  end
+  
+  def gift_requester_positive_feedback_gifter?
+    self.id == EventType.gift_requester_positive_feedback_gifter
+  end
 
+  def self.gift_gifter_negative_feedback_gifter(return_only_id = true)
+    return_only_id ? 102 : EventType.find(102)
+  end
 
+  def gift_gifter_negative_feedback_gifter?
+    self.id == EventType.gift_gifter_negative_feedback_gifter
+  end
+  
+  def self.gift_gifter_negative_feedback_requester(return_only_id = true)
+    return_only_id ? 103 : EventType.find(103)
+  end
+  
+  def gift_gifter_negative_feedback_requester?
+    self.id == EventType.gift_gifter_negative_feedback_requester
+  end
+
+  def self.gift_requester_negative_feedback_requester(return_only_id = true)
+    return_only_id ? 104 : EventType.find(104)
+  end
+
+  def gift_requester_negative_feedback_requester?
+    self.id == EventType.gift_requester_negative_feedback_requester
+  end
+  
+  def self.gift_requester_negative_feedback_gifter(return_only_id = true)
+    return_only_id ? 105 : EventType.find(105)
+  end
+  
+  def gift_requester_negative_feedback_gifter?
+    self.id == EventType.gift_requester_negative_feedback_gifter
+  end
+
+  def self.gift_gifter_neutral_feedback_gifter(return_only_id = true)
+    return_only_id ? 106 : EventType.find(106)
+  end
+
+  def gift_gifter_neutral_feedback_gifter?
+    self.id == EventType.gift_gifter_neutral_feedback_gifter
+  end
+  
+  def self.gift_gifter_neutral_feedback_requester(return_only_id = true)
+    return_only_id ? 107 : EventType.find(107)
+  end
+  
+  def gift_gifter_neutral_feedback_requester?
+    self.id == EventType.gift_gifter_neutral_feedback_requester 
+  end
+
+  def self.gift_requester_neutral_feedback_requester(return_only_id = true)
+    return_only_id ? 108 : EventType.find(108)
+  end
+
+  def gift_requester_neutral_feedback_requester?
+    self.id == EventType.gift_requster_neutral_feedback_requester
+  end
+  
+  def self.gift_requester_neutral_feedback_gifter(return_only_id = true)
+    return_only_id ? 109 : EventType.find(109)
+  end
+  
+  def gift_requester_neutral_feedback_gifter?
+    self.id == EventType.gift_requester_neutral_feedback_gifter
+  end
+
+  def self.shareage_gifter_positive_feedback_gifter(return_only_id = true)
+    return_only_id ? 110 : EventType.find(110)
+  end
+
+  def shareage_gifter_positive_feedback_gifter?
+    self.id == EventType.shareage_gifter_positive_feedback_gifter
+  end
+  
+  def self.shareage_gifter_positive_feedback_requester(return_only_id = true)
+    return_only_id ? 111 : EventType.find(111)
+  end
+  
+  def shareage_gifter_positive_feedback_requester?
+    self.id == EventType.shareage_gifter_positive_feedback_requester
+  end
+
+  def self.shareage_requester_positive_feedback_requester(return_only_id = true)
+    return_only_id ? 112 : EventType.find(112)
+  end
+
+  def shareage_requester_positive_feedback_requester?
+    self.id == EventType.shareage_requester_positive_feedback_requester
+  end
+  
+  def self.shareage_requester_positive_feedback_gifter(return_only_id = true)
+    return_only_id ? 113 : EventType.find(113)
+  end
+  
+  def shareage_requester_positive_feedback_gifter?
+    self.id == EventType.shareage_requester_positive_feedback_gifter
+  end
+
+  def self.shareage_gifter_negative_feedback_gifter(return_only_id = true)
+    return_only_id ? 114 : EventType.find(114)
+  end
+
+  def shareage_gifter_negative_feedback_gifter?
+    self.id == EventType.shareage_gifter_negative_feedback_gifter
+  end
+  
+  def self.shareage_gifter_negative_feedback_requester(return_only_id = true)
+    return_only_id ? 115 : EventType.find(115)
+  end
+  
+  def shareage_gifter_negative_feedback_requester?
+    self.id == EventType.shareage_gifter_negative_feedback_requester
+  end
+
+  def self.shareage_requester_negative_feedback_requester(return_only_id = true)
+    return_only_id ? 116 : EventType.find(116)
+  end
+
+  def shareage_requester_negative_feedback_requester?
+    self.id == EventType.shareage_requester_negative_feedback_requester
+  end
+  
+  def self.shareage_requester_negative_feedback_gifter(return_only_id = true)
+    return_only_id ? 117 : EventType.find(117)
+  end
+  
+  def shareage_requester_negative_feedback_gifter?
+    self.id == EventType.shareage_requester_negative_feedback_gifter
+  end
+
+  def self.shareage_gifter_neutral_feedback_gifter(return_only_id = true)
+    return_only_id ? 118 : EventType.find(118)
+  end
+
+  def shareage_gifter_neutral_feedback_gifter?
+    self.id == EventType.shareage_gifter_neutral_feedback_gifter
+  end
+  
+  def self.shareage_gifter_neutral_feedback_requester(return_only_id = true)
+    return_only_id ? 119 : EventType.find(119)
+  end
+  
+  def shareage_gifter_neutral_feedback_requester?
+    self.id == EventType.shareage_gifter_neutral_feedback_requester 
+  end
+
+  def self.shareage_requester_neutral_feedback_requester(return_only_id = true)
+    return_only_id ? 120 : EventType.find(120)
+  end
+
+  def shareage_requester_neutral_feedback_requester?
+    self.id == EventType.shareage_requster_neutral_feedback_requester
+  end
+  
+  def self.shareage_requester_neutral_feedback_gifter(return_only_id = true)
+    return_only_id ? 121 : EventType.find(121)
+  end
+  
+  def shareage_requester_neutral_feedback_gifter?
+    self.id == EventType.shareage_requester_neutral_feedback_gifter
+  end
 
 end

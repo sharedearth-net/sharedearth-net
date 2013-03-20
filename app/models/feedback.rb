@@ -16,7 +16,7 @@ class Feedback < ActiveRecord::Base
   
   after_create :feedback_reputation_count, :if => :both_parties_left_feedback?
   #TEMPORARY REMOVED, ADD NEW EVENT LOG TYPES FIRST WITH MIGRATION
-  #after_create :post_feedback_event_log, :if => :both_parties_left_feedback?
+  after_create :post_feedback_activity_and_event_logs, :if => :both_parties_left_feedback?
 
   validates_length_of   :feedback_note, :maximum => 400, :if => :neutral_or_negative?
   validates_presence_of :feedback_note, :if => :neutral_or_negative?
@@ -69,29 +69,113 @@ class Feedback < ActiveRecord::Base
     Feedback.find_by_item_request_id_and_person_id(item_request_id, person_id)
   end
   
-  def  post_feedback_event_log
+  def post_feedback_activity_and_event_logs
     self.item_request.feedbacks.each do |feedback|
-      if feedback.requester_feedback?
-        object_person  = self.item_request.gifter
-        subject_person = self.item_request.requester
-      else
-        object_person  = self.item_request.requester
-        subject_person = self.item_request.gifter
-      end
       case feedback.feedback.to_i
-        when FEEDBACK_POSITIVE
-          event_type = feedback.requester_feedback? ? EventType.positive_feedback_gifter : EventType.positive_feedback_requester
-          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type, nil)
+        when FEEDBACK_POSITIVE 
+          if item_request.item.purpose == 10
+            if feedback.person_id == self.item_request.gifter_id
+              ActivityLog.create_item_request_activity_log(self.item_request, EventType.gifter_positive_feedback_gifter, EventType.gifter_positive_feedback_requester)
+              EventLog.create_news_event_log(self.item_request.gifter, self.item_request.requester, self.item_request.item, EventType.gifter_positive_feedback_gifter, nil)
+            elsif feedback.person_id == self.item_request.requester_id
+              ActivityLog.create_item_request_activity_log(self.item_request, EventType.requester_positive_feedback_requester, EventType.requester_positive_feedback_gifter)
+              EventLog.create_news_event_log(self.item_request.requester, self.item_request.gifter, self.item_request.item, EventType.requester_positive_feedback_requester, nil)
+            else
+              #
+            end 
+		  elsif item_request.item.purpose == 20
+			if feedback.person_id == self.item_request.gifter_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.gift_gifter_positive_feedback_gifter, EventType.gift_gifter_positive_feedback_requester)
+			  EventLog.create_news_event_log(self.item_request.gifter, self.item_request.requester, self.item_request.item, EventType.gift_gifter_positive_feedback_gifter, nil)
+			elsif feedback.person_id == self.item_request.requester_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.gift_requester_positive_feedback_requester, EventType.gift_requester_positive_feedback_gifter)
+			  EventLog.create_news_event_log(self.item_request.requester, self.item_request.gifter, self.item_request.item, EventType.gift_requester_positive_feedback_requester, nil)
+			else
+			  #
+			end
+	      elsif item_request.item.purpose == 30
+			if feedback.person_id == self.item_request.gifter_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.shareage_gifter_positive_feedback_gifter, EventType.shareage_gifter_positive_feedback_requester)
+			  EventLog.create_news_event_log(self.item_request.gifter, self.item_request.requester, self.item_request.item, EventType.shareage_gifter_positive_feedback_gifter, nil)
+		    elsif feedback.person_id == self.item_request.requester_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.shareage_requester_positive_feedback_requester, EventType.shareage_requester_positive_feedback_gifter)
+			  EventLog.create_news_event_log(self.item_request.requester, self.item_request.gifter, self.item_request.item, EventType.shareage_requester_positive_feedback_requester, nil)
+		    else
+			  #
+			end 
+		  else
+			#
+		  end
         when FEEDBACK_NEGATIVE
-          event_type = requester_feedback? ? EventType.negative_feedback_gifter : EventType.negative_feedback_requester
-          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type, nil)
+          if item_request.item.purpose == 10 
+            if feedback.person_id == self.item_request.gifter_id 
+              ActivityLog.create_item_request_activity_log(self.item_request, EventType.gifter_negative_feedback_gifter, EventType.gifter_negative_feedback_requester)
+              EventLog.create_news_event_log(self.item_request.gifter, self.item_request.requester, self.item_request.item, EventType.gifter_negative_feedback_gifter, nil)
+            elsif feedback.person_id == self.item_request.requester_id
+              ActivityLog.create_item_request_activity_log(self.item_request, EventType.requester_negative_feedback_requester, EventType.requester_negative_feedback_gifter)
+              EventLog.create_news_event_log(self.item_request.requester, self.item_request.gifter, self.item_request.item, EventType.requester_negative_feedback_requester, nil)
+            else
+              #
+            end
+		  elsif item_request.item.purpose == 20
+			if feedback.person_id == self.item_request.gifter_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.gift_gifter_negative_feedback_gifter, EventType.gift_gifter_negative_feedback_requester)
+			  EventLog.create_news_event_log(self.item_request.gifter, self.item_request.requester, self.item_request.item, EventType.gift_gifter_negative_feedback_gifter, nil)
+			elsif feedback.person_id == self.item_request.requester_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.gift_requester_negative_feedback_requester, EventType.gift_requester_negative_feedback_gifter)
+			  EventLog.create_news_event_log(self.item_request.requester, self.item_request.gifter, self.item_request.item, EventType.gift_requester_negative_feedback_requester, nil)
+			else
+			  #
+			end
+		  elsif item_request.item.purpose == 30
+			if feedback.person_id == self.item_request.gifter_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.shareage_gifter_negative_feedback_gifter, EventType.shareage_gifter_negative_feedback_requester)
+			  EventLog.create_news_event_log(self.item_request.gifter, self.item_request.requester, self.item_request.item, EventType.shareage_gifter_negative_feedback_gifter, nil)
+			elsif feedback.person_id == self.item_request.requester_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.shareage_requester_negative_feedback_requester, EventType.shareage_requester_negative_feedback_gifter)
+			  EventLog.create_news_event_log(self.item_request.requester, self.item_request.gifter, self.item_request.item, EventType.shareage_requester_negative_feedback_requester, nil)
+			else
+			  #
+			end
+          end 
         when FEEDBACK_NEUTRAL
-          event_type = requester_feedback? ? EventType.neutral_feedback_gifter : EventType.neutral_feedback_requester
-          EventLog.create_news_event_log(subject_person, object_person,  self.item_request.item , event_type, nil)
+          if item_request.item.purpose == 10 
+            if feedback.person_id == self.item_request.gifter_id
+              ActivityLog.create_item_request_activity_log(self.item_request, EventType.gifter_neutral_feedback_gifter, EventType.gifter_neutral_feedback_requester)
+              EventLog.create_news_event_log(self.item_request.gifter, self.item_request.requester, self.item_request.item, EventType.gifter_neutral_feedback_gifter, nil)
+            elsif feedback.person_id == self.item_request.requester_id
+              ActivityLog.create_item_request_activity_log(self.item_request, EventType.requester_neutral_feedback_requester, EventType.requester_neutral_feedback_gifter)
+              EventLog.create_news_event_log(self.item_request.requester, self.item_request.gifter, self.item_request.item, EventType.requester_neutral_feedback_requester, nil)
+            else
+              #
+            end
+	      elsif item_request.item.purpose == 20
+		    if feedback.person_id == self.item_request.gifter_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.gift_gifter_neutral_feedback_gifter, EventType.gift_gifter_neutral_feedback_requester)
+			  EventLog.create_news_event_log(self.item_request.gifter, self.item_request.requester, self.item_request.item, EventType.gift_gifter_neutral_feedback_gifter, nil)
+			elsif feedback.person_id == self.item_request.requester_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.gift_requester_neutral_feedback_requester, EventType.gift_requester_neutral_feedback_gifter)
+			  EventLog.create_news_event_log(self.item_request.requester, self.item_request.gifter, self.item_request.item, EventType.gift_requester_neutral_feedback_requester, nil)
+			else
+			  #
+			end
+	      elsif item_request.item.purpose == 30
+		    if feedback.person_id == self.item_request.gifter_id
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.shareage_gifter_neutral_feedback_gifter, EventType.shareage_gifter_neutral_feedback_requester)
+			  EventLog.create_news_event_log(self.item_request.gifter, self.item_request.requester, self.item_request.item, EventType.shareage_gifter_neutral_feedback_gifter, nil)
+			elsif
+			  ActivityLog.create_item_request_activity_log(self.item_request, EventType.shareage_requester_neutral_feedback_requester, EventType.shareage_requester_neutral_feedback_gifter)
+			  EventLog.create_news_event_log(self.item_request.requester, self.item_request.gifter, self.item_request.item, EventType.shareage_requester_neutral_feedback_requester, nil)
+			else
+			  #
+			end
+	      else
+			#
+	      end 
         else
           #
       end
-    end
+    end 
   end
   
   def requester_feedback?
