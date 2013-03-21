@@ -39,6 +39,7 @@
 											- ctry =  (village.country == "") ? "" : "#{village.country}"
 											- vloc = "#{str}#{st}#{ctry}"
 											= truncate vloc , :length => 25
+										-# =link_to "Join", join_village_path(village), :method => :put, :class => "button ui-switch" unless village.is_member_or_admin?(current_person)
 										%img{:src=>"/assets/connect/join.png", :alt=>"join", :title=>"join"}
 
 
@@ -80,20 +81,24 @@
 				%ul.block-list
 					%li
 						%div.trusted-block
-							%strong 15 people
+							%strong
+								= "10 people"
 							from your trusted network
 					%li
 						%div.communities-block
-							%strong 15 people
-							from your trusted network
+							%strong
+								= "20 people"
+							from your community
 					%li
 						%div.people-block
-							%strong 350 people
+							%strong
+								= "30 people"
 							in this group
 					%li
 						%div.items-block 
-							%strong 15 people
-							from your trusted network
+							%strong
+								= "40 items"
+							available
 				%a{:href=>"#", :title=>"View more", :class=>"more"} view more
 			
 %br
@@ -106,8 +111,10 @@
 			.description
 				= v.description			
 			.trusted
-				10
+				= get_count_trusted_network_person_ids(current_person, v).to_s
+			.community
+				= get_count_people_from_community(current_person, v).to_s
 			.group
-				11
+				= get_count_people_live_in(v).to_s
 			.items
-				12
+				= get_count_entity_items(v).to_s

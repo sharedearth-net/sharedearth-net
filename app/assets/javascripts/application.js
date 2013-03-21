@@ -31,6 +31,7 @@ function show_village_data_side_bar(village_id)
 	var name = $("#village-data-"+village_id+" .name").html();
 	var description = $("#village-data-"+village_id+" .description").html();
 	var tusted_count = $("#village-data-"+village_id+" .trusted").html();
+	var community_count = $("#village-data-"+village_id+" .community").html();
 	var group_count =$("#village-data-"+village_id+" .group").html();
 	var items_count =$("#village-data-"+village_id+" .items").html();
 
@@ -38,6 +39,9 @@ function show_village_data_side_bar(village_id)
 	$(".suggest-side-header").html(name);
 	$(".connect-sidebar-block .block-list p").html(description);
 	$(".connect-sidebar-block .trusted-block strong").html(tusted_count + " people");
+	$(".connect-sidebar-block .communities-block strong").html(community_count + " people");
+	$(".connect-sidebar-block .people-block strong").html(group_count + " people");
+	$(".connect-sidebar-block .items-block strong").html(items_count + " items");
 
 }
 
