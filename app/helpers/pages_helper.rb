@@ -1,7 +1,7 @@
 module PagesHelper
   #USE SAME METHOD TO DISPLAY MY EVENTS TO ME, AND MY EVENTS TO OTHER PERSON - SECOND PARAMETER INDICATES IF IT IS SHOWN TO OTHER PERSON IF NOT NIL
   def event_log_sentence(event_log, person, feed)
-     
+
     @same_person = (person.nil? || (current_user.person == person)) ? true : false
     person||= current_user.person
     (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "normal" : text_class = ""
@@ -23,24 +23,58 @@ module PagesHelper
       sentence = sharing_sentence(event_log, person)
     when 19
       sentence = add_item_sentence(event_log, person)
-    when 20
-      sentence = negative_feedback_sentence(event_log, person)
     when 21
       sentence = gifting_sentence(event_log, person)
     when 22
       sentence = trust_established_sentence(event_log, person)
     when 23
       sentence = trust_withdrawn_sentence(event_log, person)
-    when 24, 51
+    when 24
       sentence = item_damaged_sentence(event_log, person)
-    when 25, 52
+    when 25
       sentence = item_repaired_sentence(event_log, person)
     when 26
       sentence = fb_friend_join_sentence(event_log, person)
     when 49
       #
+    when 55
+      sentence = gifter_positive_feedback_sentence(event_log)
+    when 56
+      sentence = requester_positive_feedback_sentence(event_log)
+    when 57
+      sentence = gifter_negative_feedback_sentence(event_log)
+    when 58
+      sentence = requester_negative_feedback_sentence(event_log)
+    when 59
+      sentence = gifter_neutral_feedback_sentence(event_log)
+    when 60
+      sentence = requester_neutral_feedback_sentence(event_log)
     when 85
       sentence = shareage_sentence(event_log, person)
+    when 98
+      sentence = gift_gifter_positive_feedback_sentence(event_log)
+    when 100
+      sentence = gift_requester_positive_feedback_sentence(event_log)
+    when 102
+      sentence = gift_gifter_negative_feedback_sentence(event_log)
+    when 104
+      sentence = gift_requester_negative_feedback_sentence(event_log)
+    when 106
+      sentence = gift_gifter_neutral_feedback_sentence(event_log)
+    when 108
+      sentence = gift_requester_neutral_feedback_sentence(event_log)
+    when 110 
+      sentence = shareage_gifter_positive_feedback_sentence(event_log)
+    when 112
+      sentence = shareage_requester_positive_feedback_sentence(event_log)
+    when 114
+      sentence = shareage_gifter_negative_feedback_sentence(event_log)
+    when 116
+      sentence = shareage_requester_negative_feedback_sentence(event_log)
+    when 118
+      sentence = shareage_gifter_neutral_feedback_sentence(event_log)
+    when 120
+      sentence = shareage_requester_neutral_feedback_sentence(event_log)
     else
       sentence = "dummy sentence"
     end
@@ -55,33 +89,30 @@ module PagesHelper
   end
   
   def add_item_sentence(event_log, person)
-
     verb = verb_from_purpose(event_log.action_object)
-   
     if event_log.involved_as_requester?(person)
        if @same_person
-         sentence = "You are #{ verb } your" + " " + @item
+         sentence = "I am #{ verb } my" + " " + @item
        else
          sentence = @requester + " " + "is #{ verb } their" + " " + @item
        end
-      
     else
       sentence = @requester + " " + "is #{ verb } their" + " " + @item
     end
+    
     sentence.html_safe
   end
   
   def sharing_sentence(event_log, person)
-  
    if event_log.involved_as_requester?(person)
      if @same_person
-       sentence = "You borrowed " + @gifter_possesive + " " + @item
+       sentence = "I borrowed " + @gifter_possesive + " " + @item
      else
        sentence = event_log.primary_full_name + " borrowed " + @gifter_possesive + " " + @item
      end
    elsif event_log.involved_as_gifter?(person)
      if @same_person
-       sentence = @requester + " borrowed your " + @item
+       sentence = @requester + " borrowed my " + @item
      else
        sentence = event_log.secondary_full_name + " shared their " + @item + " with " + @requester
      end
@@ -99,16 +130,15 @@ module PagesHelper
   end
   
   def gifting_sentence(event_log, person)
-  
    if event_log.involved_as_requester?(person)
      if @same_person
-       sentence = "You received " + @gifter_possesive + " " + @item
+       sentence = "I received " + @gifter_possesive + " " + @item
      else
        sentence = @requester + " received " + @gifter_possesive + " " + @item
      end
    elsif event_log.involved_as_gifter?(person)
      if @same_person
-       sentence = "You gifted your " + @item + " to " +  @requester
+       sentence = "I gifted my " + @item + " to " +  @requester
      else
        sentence = @gifter + " gifted their " + @item + " to " +  @requester
      end
@@ -126,7 +156,6 @@ module PagesHelper
   end
 
   def shareage_sentence(event_log, person)
-  
    if event_log.involved_as_requester?(person)
      if @same_person
        sentence = "You borrowed " + @gifter_possesive + " " + @item
@@ -152,19 +181,16 @@ module PagesHelper
    sentence.html_safe
   end
 
-  
-  
   def trust_established_sentence(event_log, person)
-
     if event_log.involved_as_requester?(person)
       if @same_person
-         sentence = "You have established a trusted relationship with " + @second_person_full
+         sentence = "I have established a trusted relationship with " + @second_person_full
        else
          sentence = event_log.primary_full_name + " has established a trusted relationship with " + @second_person_full
       end
     elsif event_log.involved_as_gifter?(person)
       if @same_person
-         sentence = "You have established a trusted relationship with " + @first_person_full
+         sentence = "I have established a trusted relationship with " + @first_person_full
       else
          sentence = event_log.primary_full_name + " has established a trusted relationship with " + @first_person_full
       end
@@ -184,13 +210,13 @@ module PagesHelper
   def trust_withdrawn_sentence(event_log, person)
     if event_log.involved_as_requester?(person)
       if @same_person
-         sentence = "You have withdrawn your trust for " + @second_person_full
+         sentence = "I have withdrawn my trust for " + @second_person_full
        else
          sentence = event_log.primary_full_name +  " has withdrawn their trust for " + @second_person_full
       end
     elsif event_log.involved_as_gifter?(person)
       if @same_person
-         sentence = @first_person_full + " has withdrawn their trust for you"
+         sentence = @first_person_full + " has withdrawn their trust for me"
       else
          sentence = @first_person_full + " has withdrawn their trust for " + event_log.secondary_full_name
       end
@@ -210,26 +236,28 @@ module PagesHelper
   def item_damaged_sentence(event_log, person)
     if event_log.action_object.is_owner?(person)
        if @same_person
-         sentence = "Your " + " " + @item + " " + "is broken"
+         sentence = "My " + " " + @item + " " + "is broken"
        else
          sentence = event_log.primary_full_name.possessive + " " + @item + " " + "is broken"
        end
     else
       sentence = @requester_possesive + " " + @item + " " + "is broken"
     end
+    
     sentence.html_safe
   end
   
   def item_repaired_sentence(event_log, person)
     if event_log.action_object.is_owner?(person)
        if @same_person
-         sentence = "Your " + " " + @item + " " + "has been repaired"
+         sentence = "My " + " " + @item + " " + "has been repaired"
        else
          sentence = event_log.primary_full_name.possessive + " " + @item + " " + "has been repaired"
        end
     else
       sentence = @requester_possesive + " " + @item + " " + "has been repaired"
     end
+    
     sentence.html_safe
   end
   
@@ -242,6 +270,240 @@ module PagesHelper
     end
 
     sentence.html_safe 
+  end
+
+  def gifter_positive_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @requester + " positive feedback after sharing my " + @item + " with them"
+    elsif person.id == event_log.secondary_id
+      sentence = @gifter + " has left me positive feedback after sharing their " + @item + " with me"
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def gift_gifter_positive_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @requester + " positive feedback after gifting my " + @item + " to them"
+    elsif person.id == event_log.secondary_id
+      sentence = @gifter + " has left me positive feedback after gifting their " + @item + " to me"
+    else 
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def shareage_gifter_positive_feedback_sentence(event_log)
+	person = current_user.person
+	if person.id == event_log.primary_id
+	  sentence = "I have left " + @requester + " positive feedback after the shareage of my " + @item + " with them"
+	elsif person.id == event_log.secondary_id 
+	  sentence = @gifter + " has left me positive feedback after the shareage of their " + @item + " with me"
+	else
+	  sentence = sentence
+	end
+	
+	sentence.html_safe
+  end
+ 
+  def requester_positive_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @gifter + " positive feedback after borrowing their " + @item
+    elsif person.id == event_log.secondary_id
+      sentence = @requester + " has left me positive feedback after borrowing my " + @item
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def gift_requester_positive_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @gifter + " positive feedback after receiving their " + @item
+    elsif person.id == event_log.secondary_id
+      sentence = @requester + " has left me positive feedback after receiving my " + @item
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def shareage_requester_positive_feedback_sentence(event_log)
+	person = current_user.person
+	if person.id == event_log.primary_id
+	  sentence = "I have left " + @gifter + " positive feedback after the shareage of their " + @item
+	elsif person.id == event_log.secondary_id
+	  sentence = @requester + " has left me positive feedback after the shareage of my " + @item
+	else
+	  sentence = sentence
+	end
+	
+	sentence.html_safe
+  end
+  
+  def gifter_negative_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id 
+      sentence = "I have left " + @requester + " negative feedback after sharing my " + @item + " with them"
+    elsif person.id == event_log.secondary_id 
+      sentence = @gifter + " has left me negative feedback after sharing their " + @item + " with me"
+    else 
+     sentence = sentence
+    end 
+    
+    sentence.html_safe
+  end
+  
+  def gift_gifter_negative_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @requester + " negative feedback after gifting my " + @item + " to them"
+    elsif person.id == event_log.secondary_id
+      sentence = @gifter + " has left me negative feedback after gifting their " + @item + " to me"
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def shareage_gifter_negative_feedback_sentence(event_log)
+	person = current_user.person
+	if person.id == event_log.primary_id
+	  sentence = "I have left " + @requester + " negative feedback after the shareage of my " + @item + " with them"
+	elsif person.id == event_log.secondary_id
+	  sentence = @gifter + " has left me negative feedback after the shareage of their " + @item + " with me"
+	else
+	  sentence = sentence
+	end
+	
+	sentence.html_safe
+  end
+  
+  def requester_negative_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @gifter + " negative feedback after borrowing their " + @item
+    elsif person.id == event_log.secondary_id
+      sentence = @requester + " has left me negative feedback after borrowing my " + @item
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def gift_requester_negative_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @gifter + " negative feedback after receiving their " + @item
+    elsif person.id == event_log.secondary_id
+      sentence = @requester + " has left me negative feedback after receiving my " + @item
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def shareage_requester_negative_feedback_sentence(event_log)
+	person = current_user.person
+	if person.id == event_log.primary_id
+	  sentence = "I have left " + @gifter + " negative feedback after the shareage of their " + @item
+	elsif person.id == event_log.secondary_id
+	  sentence = @requester + " has left me negative feedback after the shareage of my " + @item
+	else
+	  sentence = sentence
+	end
+	
+	sentence.html_safe
+  end
+
+  def gifter_neutral_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @requester + " neutral feedback after sharing my " + @item + " with them"
+    elsif person.id == event_log.secondary_id
+      sentence = @gifter + " has left me neutral feedback after sharing their " + @item + " with me"
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def gift_gifter_neutral_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @requester + " neutral feedback after gifting my " + @item + " to them"
+    elsif person.id == event_log.secondary_id
+      sentence = @gifter + " has left me neutral feedback after gifting their " + @item + " to me"
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def shareage_gifter_neutral_feedback_sentence(event_log)
+	person = current_user.person
+	if person.id == event_log.primary_id
+	  sentence = "I have left " + @requester + " neutral feedback after the shareage of my " + @item + " with them"
+	elsif person.id == event_log.secondary_id
+	  sentence = @gifter + " has left me neutral feedback after the shareage of their " + @item + " with me"
+	else
+	  sentence = sentence
+	end
+	
+	sentence.html_safe
+  end
+ 
+  def requester_neutral_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @gifter + " neutral feedback after borrowing their " + @item
+    elsif person.id == event_log.secondary_id
+      sentence = @requester + " has left me neutral feedback after borrowing my " + @item
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def gift_requester_neutral_feedback_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have left " + @gifter + " neutral feedback after receiving their " + @item
+    elsif person.id == event_log.secondary_id
+      sentence = @requester + " has left me neutral feedback after receiving my " + @item
+    else
+      sentence = sentence
+    end
+    
+    sentence.html_safe
+  end
+  
+  def shareage_requester_neutral_feedback_sentence(event_log)
+	person = current_user.person
+	if person.id == event_log.primary_id
+	  sentence = "I have left " + @gifter + " neutral feedback after the shareage of their " + @item
+	elsif person.id == event_log.secondary_id
+	  sentence = @requester + " has left me neutral feedback after the shareage of my " + @item
+	else
+	  sentence = sentence
+	end
+	
+	sentence.html_safe
   end
   
   def recent_activity_avatar(activity_log)
@@ -427,84 +689,62 @@ module PagesHelper
 
 	  sentence = ""
     case activity_log.event_type_id
-    when 1
-      sentence = "You are " + verb_from_purpose(activity_log.action_object) + " your " + item
     when 2
-      sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
+      sentence = requester + " would like to borrow " + gifter_possesive + " " + item
     when 3
-      sentence = requester + " made a request to borrow " + gifter_possesive + " " + item
+      sentence = requester + " asked to borrow " + gifter_possesive + " " + item
     when 4
       sentence = gifter + " accepted " + requester_possesive + " request to borrow " + possesive + " " + item  # Check this one
     when 5
-      sentence = gifter + " rejected " + requester_possesive + " request to borrow " + possesive + " " +  item  # Check this one
+      sentence = gifter + " declined " + requester_possesive + " request to borrow " + possesive + " " +  item  # Check this one
     when 6
       sentence = gifter + " accepted " + requester_possesive + " request to borrow " + possesive + " " + item
     when 7
-      sentence = gifter + " rejected " + requester_possesive + " request to borrow " + possesive + " " + item
+      sentence = gifter + " declined " + requester_possesive + " request to borrow " + possesive + " " + item
     when 8
       sentence = requester + " collected " + gifter_possesive + " " + item
     when 9
       sentence = requester + " collected " + gifter_possesive + " " +  item
     when 10
-      sentence = requester + " completed the action of borrowing " + possesive + " " + item
+      sentence = requester + " has finished borrowing " + possesive + " " + item
     when 11
-      sentence = requester + " completed the action of borrowing " + gifter_possesive + " " + item
+      sentence = requester + " finished borrowing " + gifter_possesive + " " + item
     when 12
-      sentence = gifter + " completed the action of sharing " + possesive + " " + item + " with " + requester
+      sentence = gifter + " finished lending " + possesive + " " + item + " to " + requester
     when 13
-      sentence = gifter + " completed the action of sharing their " + item + " with " + requester
+      sentence = gifter + " finished lending their " + item + " to " + "me"
     when 14
       sentence = gifter + " canceled sharing " + possesive + " " + item + " with " + requester
     when 15
-      sentence = gifter + " canceled sharing their " + item + " with " + requester
+      sentence = gifter + " canceled sharing their " + item + " with " + "me"
     when 16
-      sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
+      sentence = requester + " canceled their request to borrow " + gifter_possesive + " " + item
     when 17
-      sentence = requester + " canceled the request to borrow " + gifter_possesive + " " + item
+      sentence = requester + " canceled my request to borrow " + gifter_possesive + " " + item
 
-
-
-    when 18
-      sentence =  ""
     when 19
-      sentence =  "You are " + verb_from_purpose(activity_log.action_object) + " your " + item
-    when 20
-      sentence =  ""
-    when 21
-      sentence =  ""
-    when 22
-      sentence =  ""
-    when 23
-      sentence =  ""
-    when 24
-      sentence =  "Your " + item + " is damaged!" #this is duplicate of - 51
-    when 25
-      sentence =  "Your " + item + " is repaired!" #this is duplicate of - 52
-    when 26
-      sentence =  ""
-
-
+      sentence =  "I added my " + item + " for " + phrase_from_purpose(activity_log.action_object) 
 
     when 27
       sentence =  gifter + " accepted " + requester_possesive + " request for " + possesive + " " + item
     when 28
-      sentence =  gifter + " rejected " + requester_possesive + " request for " + possesive + " " + item
+      sentence =  gifter + " declined " + requester_possesive + " request for " + possesive + " " + item
     when 29
       sentence =  gifter + " accepted " + requester_possesive + " request for " + possesive + " " + item
     when 30
-      sentence =  gifter + " rejected " + requester_possesive + " request for " + possesive + " " + item
+      sentence =  gifter + " declined " + requester_possesive + " request for " + possesive + " " + item
     when 31
-      sentence =  person + " completed the action of receiving your " + item
+      sentence =  person + " received " + gifter_possesive + " " + item
     when 32
-      sentence =  "You received " + gifter_possesive + " " + item
+      sentence =  "I received " + gifter_possesive + " " + item
     when 33
-      sentence =  "You gifted your " + item + " to " + person
+      sentence =  "I gifted my " + item + " to " + person
     when 34
-      sentence =  person + " gifted their " + item + " to you"
+      sentence =  person + " gifted their " + item + " to me"
     when 35
-      sentence =  "You canceled gifting your " + item + " to " + person
+      sentence =  "I canceled gifting my " + item + " to " + person
     when 36
-      sentence = gifter + " canceled gifting their " + item + " to " + requester
+      sentence = gifter + " canceled gifting their " + item + " to " + "me"
     when 37
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 38
@@ -512,113 +752,161 @@ module PagesHelper
 
     #Check if sentence underneath are according to documentation, maybe they have changed
     when 39
-      sentence =  "You connected to sharedearth.net"
-    when 40
-      sentence =  "You made a request to borrow " + person_possesive + " " + item  #this is duplicate of - 3, not used at this moment, left for possible future use
+      sentence =  "I connected to sharedearth.net"
     when 41
-      sentence =  person + " confirmed you have a trusted relationship with them"
+      sentence =  person + " confirmed we have a trusted relationship"
     when 42
-      sentence =  "You confirmed you have a trusted relationship with " + person
-    when 43
-      sentence =  person + " denied you have a trusted relationship with them"
-    when 44
-      sentence =  "You denied you have a trusted relationship with " + person
+      sentence =  "I confirmed I have a trusted relationship with " + person
     when 45
-      sentence =  "You have withdrawn your trust for " + person
+      sentence =  "I have withdrawn my trust for " + person
     when 46
-      sentence =  person + " has withdrawn their trust for you"
-    when 47
-      sentence =  "You cancelled the establishment of a trusted relationship with " + person
-    when 48
-      sentence =  person + " cancelled the establishment of a trusted relationship with you"
+      sentence =  person + " has withdrawn their trust for me"
     when 49
-      sentence =  "You lost your " + item + "!"
+      sentence =  "I lost my " + item + "!"
     when 50
-      sentence =  "You found your " + item + "!"
+      sentence =  "I found my " + item + "!"
     when 51
-      sentence =  "Your " + item + "is damaged!"    #this is duplicate of - when 24
+      sentence =  "My " + item + " is damaged!"    #this is duplicate of - when 24
     when 52
-      sentence =  "Your " + item + " is repaired!"  #this is duplicate of - when 25
+      sentence =  "My " + item + " is repaired!"  #this is duplicate of - when 25
     when 53
-      sentence =  "You removed your " + item + " from sharedearth.net"
-    when 54
-      sentence =  "You connected to sharedearth.net"
+      sentence =  "I removed my " + item + " from sharedearth.net"
     when 55
-      sentence =  person + " has left you positive feedback after borrowing your " + item
+      sentence = "I have left " + requester + " positive feedback after sharing my " + item + " with them"
+    when 92
+      sentence = person + " has left me positive feedback after sharing their " + item + " with me" 
     when 56
-      sentence =  person + " has left you positive feedback after sharing their " + item + " with you"
+      sentence = requester + " has left me positive feedback after borrowing my " + item
+    when 93
+      sentence = "I have left " + person + " positive feedback after borrowing their " + item
     when 57
-      sentence =  person + " has left you negative feedback after borrowing your " + item
+      sentence =  "I have left " + requester + " negative feedback after sharing my " + item + " with them"
+    #94 only works if using person instead of gifter. 
+    when 94
+      sentence = person + " has left me negative feedback after sharing their " + item + " with me"
     when 58
-      sentence =  person + " has left you negative feedback after sharing their " + item + " with you"
+      sentence =  requester + " has left me negative feedback after borrowing my " + item
+    #same issue as 94. 
+    when 95
+      sentence = "I have left " + person + " negative feedback after borrowing their " + item
     when 59
-      sentence =  person + " has left you neutral feedback after borrowing your " + item
+      sentence =  "I have left " + requester + " neutral feedback after sharing my " + item + " with them"
+    when 96
+      sentence = person + " has left me neutral feedback after sharing their " + item + " with me"
     when 60
-      sentence =  person + " has left you neutral feedback after sharing their " + item + " with you"
+      sentence =  requester + " has left me neutral feedback after borrowing my " + item
+    when 97
+      sentence = "I have left " + person + " neutral feedback after borrowing their " + item
     when 61
-      sentence =  "You have indicated you have a trusted relationship with " + person
+      sentence =  "I have indicated I have a trusted relationship with " + person
     when 62
-      sentence =  person + " has indicated they have a trusted relationship with you"
+      sentence =  person + " has indicated they have a trusted relationship with me"
     when 63
       action = activity_log.related.accepted? ? " action " : " request "
-      sentence = person + " commented on the " + action  + " involving your " +  item
+      sentence = person + " commented on the " + action  + " involving my " +  item
     when 64
       action = activity_log.related.accepted? ? " action " : " request "
       sentence = person + " commented on the " + action + " involving their " + item
     when 65 #SHAREAGE REQUEST GIFTER
-      sentence = person + " requested your " + item + " for shareage"
+      sentence = person + " requested my " + item + " for shareage"
     when 66 #SHAREAGE REQUEST REQUESTER
-      sentence = "You requested " + other_person_possesive + " " + item + " for shareage"
+      sentence = "I requested " + other_person_possesive + " " + item + " for shareage"
     when 67 #ACCEPT SHAREAGE GIFTER
-      sentence = "You accepted " + requester_possesive + " request for your " + item
+      sentence = "I accepted " + requester_possesive + " request for my " + item
     when 68 #REJECT SHAREAGE GIFTER
-      sentence = "You rejected " + other_person_possesive + " request for your " + item
+      sentence = "I declined " + other_person_possesive + " request for my " + item
     when 69 #ACCEPT SHAREAGE REQUESTER
-      sentence = other_person + " accepted your request for their " + item
+      sentence = other_person + " accepted my request for their " + item
     when 70 #REJECT SHAREAGE REQUESTER
-      sentence = other_person + " rejected your request for their " + item
+      sentence = other_person + " declined my request for their " + item
     when 71 #COLLECTED SHAREAGE GIFTER
-      sentence = "Your " + item + " is now in shareage with " + requester
+      sentence = "My " + item + " is now in shareage with " + requester
     when 72 #COLLECTED SHAREAGE REQUESTER
-      sentence = "You have collected " + other_person_possesive + " " + item + " for shareage"
+      sentence = "I have collected " + other_person_possesive + " " + item + " for shareage"
     when 73 #RETURN SHAREAGE GIFTER
-      sentence = requester + " would like to return your " + item
+      sentence = requester + " would like to return my " + item
     when 74 #RETURN SHAREAGE REQUESTER
-      sentence = "You have requested the return of " + gifter_possesive + " " + item
+      sentence = "I have requested the return of " + gifter_possesive + " " + item
     when 75 #RECALL SHAREAGE GIFTER
-      sentence = "You have recalled your " + item + " from " + requester
+      sentence = "I have recalled my " + item + " from " + requester
     when 76 #RECALL SHAREAGE REQUESTER
       sentence = person + " requested the return of their " + item
     when 77 #CANCEL RECALL SHAREAGE GIFTER
-      sentence = "You cancelled the recall of your " + item + " from " + requester
+      sentence = "I canceled the recall of my " + item + " from " + requester
     when 78 #CANCEL RECALL SHAREAGE REQUESTER
-      sentence = other_person + " cancelled the recall of their " + item
+      sentence = other_person + " canceled the recall of their " + item
     when 79 #ACKNOWLEDGE SHAREAGE GIFTER
-      sentence = other_person + " acknowledged your request for your " +item
+      sentence = other_person + " acknowledged my request for my " +item
     when 80 #ACKNOWLEDGE SHAREAGE REQUESTER
-      sentence = "You acknowledged " + requester_possesive + " request for their " + item
+      sentence = "I acknowledged " + requester_possesive + " request for their " + item
     when 81 #RETURNED SHAREAGE GIFTER
-      sentence = requester + " returned your  " + item
+      sentence = requester + " returned my " + item
     when 82 #RETURNED SHAREAGE REQUESTER
-      sentence = "You returned " + other_person_possesive + " " +item
+      sentence = "I returned " + other_person_possesive + " " +item
     when 83 #CANCEL RETURN SHAREAGE GIFTER
-      sentence = requester + " cancelled the request to return your " + item
+      sentence = requester + " canceled the request to return my " + item
     when 84 #CANCEL RETURN SHAREAGE REQUESTER
-      sentence = "You cancelled the request to return " + gifter_possesive + " " + item
-    when 85 #SHAREAGE
-      sentence = ""
+      sentence = "I canceled the request to return " + gifter_possesive + " " + item
     when 86 #GIFTER CANCEL SHAREAGE GIFTER
-      sentence =  "You canceled placing your " + item + " into shareage with " + person
+      sentence =  "I canceled placing my " + item + " into shareage with " + person
     when 87 #GIFTER CANCEL SHAREAGE REQUESTER
-      sentence = gifter + " canceled placing their " + item + " into shareage with you"
+      sentence = gifter + " canceled placing their " + item + " into shareage with me"
     when 88 #REQUESTER CANCEL SHAREAGE GIFTER
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 89 #REQUESTER CANCEL SHAREAGE REQUESTER
       sentence =  requester + " canceled the request for " + gifter_possesive + " " + item
     when 90 #ACKNOWLEDGE RETURN SHAREAGE GIFTER
-      sentence = "You acknowledged " + requester_possesive + " request to return your " + item
+      sentence = "I acknowledged " + requester_possesive + " request to return my " + item
     when 91 #ACKNOWLEDGE RETURN SHAREAGE REQUESTER
-      sentence = other_person + " acknowledged your request to return their " +item
+      sentence = other_person + " acknowledged my request to return their " + item
+	when 98 #GIFT GIFTER POSITIVE FEEDBACK GIFTER
+	  sentence = "I have left " + requester + " positive feedback after gifting my " + item + " to them"
+	when 99 #GIFT GIFTER POSITIVE FEEDBACK REQUESTER
+	  sentence = gifter + " has left me positive feedback after gifting their " + item + " to me"
+	when 100 #GIFT REQUESTER POSITIVE FEEDBACK REQUESTER
+	  sentence = "I have left " + gifter + " positive feedback after receiving their " + item
+	when 101 #GIFT REQUESTER POSITIVE FEEDBACK GIFTER 
+	  sentence = requester + " has left me positive feedback after receiving my " + item
+	when 102 #GIFT GIFTER NEGATIVE FEEDBACK GIFTER
+	  sentence = "I have left " + requester + " negative feedback after gifting my " + item + " to them"
+	when 103 #GIFT GIFTER NEGATIVE FEEDBACK REQUESTER
+	  sentence = gifter + " has left me negative feedback after gifting their " + item + " to me"
+	when 104 #GIFT REQUESTER NEGATIVE FEEDBACK REQUESTER 
+	  sentence = "I have left " + gifter + " negative feedback after receiving their " + item
+	when 105 #GIFT REQUESTER NEGATIVE FEEDBACK GIFTER 
+	  sentence = requester + " has left me negative feedback after receiving my " + item
+	when 106 #GIFT GIFTER NEUTRAL FEEDBACK GIFTER 
+	  sentence = "I have left " + requester + " negative feedback after gifting my " + item + " to them"
+	when 107 #GIFT GIFTER NEUTRAL FEEDBACK REQUESTER 
+	  sentence = gifter + " has left me neutral feedback after gifting their " + item + " to me"
+	when 108 #GIFT REQUESTER NEUTRAL FEEDBACK REQUESTER 
+	  sentence = "I have left " + gifter + " neutral feedback after receiving their " + item
+	when 109 #GIFT REQUESTER NEUTRAL FEEDBACK GIFTER 
+	  sentence = requester + " has left me neutral feedback after receiving my " + item
+	when 110 #SHAREAGE GIFTER POSITIVE FEEDBACK GIFTER 
+	  sentence = "I have left " + requester + " positive feedback after the shareage of my " + item + " with them"
+	when 111 #SHAREAGE GIFTER POSITIVE FEEDBACK RQUESTER 
+	  sentence = gifter + " has left me positive feedback after the shareage of their " + item + " with me"
+	when 112 #SHAREAGE REQUESTER POSITIVE FEEDBACK REQUESTER 
+	  sentence = "I have left " + gifter + " positive feedback after the shareage of their " + item
+	when 113 #SHAREAGE REQUESTER POSITIVE FEEDBACK GIFTER 
+	  sentence = requester + " has left me positive feedback after the shareage of my " + item
+	when 114 #SHAREAGE GIFTER NEGATIVE FEEDBACK GIFTER 
+	  sentence = "I have left " + requester + " negative feedback after the shareage of my " + item + " with them"
+	when 115 #SHAREAGE GIFTER NEGATIVE FEEDBACK REQUESTER 
+	  sentence = gifter + " has left me negative feedback after the shareage of their " + item + " with me"
+	when 116 #SHAREAGE REQUESTER NEGATIVE FEEDBACK REQUESTER
+	  sentence = "I have left " + gifter + " negative feedback after the shareage of their " + item
+	when 117 #SHAREAGE REQUESTER NEGATIVE FEEDBACK GIFTER 
+	  sentence = requester + " has left me negative feedback after the shareage of my " + item
+	when 118 #SHAREAGE GIFTER NEUTRAL FEEDBACK GIFTER 
+	  sentence = "I have left " + requester + " neutral feedback after the shareage of my " + item + " with them"
+	when 119 #SHAREAGE GIFTER NEUTRAL FEEDBACK REQUESTER 
+	  sentence = gifter + " has left me neutral feedback after the shareage of their " + item + " with me"
+	when 120 #SHAREAGE REQUESTER NEUTRAL FEEDBACK REQUESTER 
+	  sentence = "I have left " + gifter + " neutral feedback after the shareage of their " + item
+	when 121 #SHAREAGE REQUESTER NEUTRAL FEEDBACK GIFTER 
+	  sentence = requester + " has left me neutral feedback after the shareage of my " + item
     else
       #
     end
@@ -646,7 +934,7 @@ module PagesHelper
         gifter_person = activity_log.secondary
       end
 
-      possesive = ( gifter_person == current_user.person ) ? "your" : "their"
+      possesive = ( gifter_person == current_user.person ) ? "my" : "their"
     end
 
     item = link_to activity_log.action_object_type_readable, item_path(activity_log.action_object), :class => "item-link" unless activity_log.action_object.nil?
@@ -668,14 +956,14 @@ module PagesHelper
 
       unless [3, 6, 7, 9, 11, 13, 15, 17, 29, 30, 32, 34, 36, 38, 74, 84, 87].include?(activity_log.event_type_id.to_i) # event types where roles are reversed
         requester           = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
-        requester_possesive = (activity_log.secondary == current_user.person) ? "your" : activity_log.secondary_full_name.possessive
+        requester_possesive = (activity_log.secondary == current_user.person) ? "my" : activity_log.secondary_full_name.possessive
         gifter              =  (activity_log.primary == current_user.person) ? "You" : activity_log.primary.name
-        gifter_possesive    = (activity_log.primary == current_user.person) ? "your" : activity_log.primary.name.possessive
+        gifter_possesive    = (activity_log.primary == current_user.person) ? "my" : activity_log.primary.name.possessive
       else
         gifter              = (activity_log.secondary == current_user.person) ? "You" : activity_log.secondary_full_name
-        gifter_possesive    = (activity_log.secondary == current_user.person) ? "your" : activity_log.secondary_full_name.possessive
+        gifter_possesive    = (activity_log.secondary == current_user.person) ? "my" : activity_log.secondary_full_name.possessive
         requester           = (activity_log.primary == current_user.person) ? "You" : activity_log.primary.name
-        requester_possesive = (activity_log.primary == current_user.person) ? "your" : activity_log.primary.name.possessive
+        requester_possesive = (activity_log.primary == current_user.person) ? "my" : activity_log.primary.name.possessive
       end
 
       possesive = item.is_owner?(current_user.person) ? "your" : "their"
@@ -743,13 +1031,23 @@ module PagesHelper
   protected
   
   def verb_from_purpose(item)
-		verb = "now sharing"
-		if item.gift?
-			verb = "gifting"
-		elsif item.share?
-			verb = "now sharing"
-		end
-		verb
+    verb = "now sharing"
+    if item.gift?
+      verb = "gifting"
+    elsif item.share?
+      verb = "now sharing"
+    end
+    verb
+  end
+  
+  def phrase_from_purpose(item)
+    phrase = "people to borrow"
+    if item.gift?
+      phrase = "someone to have"
+    elsif item.share?
+      verb = "people to borrow"
+    end
+    phrase
   end
  
  private
