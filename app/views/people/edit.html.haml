@@ -9,49 +9,49 @@
 							-if connections = @person.users.from_networks.presence 
 								="Linked Accounts: #{connections.map(&:network_title).join(", ")}"
 
-                			-if @person.users.where(:provider => "facebook").empty?
+							-if @person.users.where(:provider => "facebook").empty?
 								=link_to "Connect with Facebook", "/auth/facebook"
 
-                			-if @person.users.where(:provider => "google_oauth2").empty?
+							-if @person.users.where(:provider => "google_oauth2").empty?
 								= link_to "Connect with Google", "/auth/google_oauth2"
 
-                		.inner-content.rhs
-                			%h2 Edit Profile
+						.inner-content.rhs
+							%h2 Edit Profile
 
-                			= form_for(@person, :html => { :multipart => true }) do |f|
+							= form_for(@person, :html => { :multipart => true }) do |f|
 								= render :partial => "shared/error_messages", :locals => { :model => @person }
 
-                				%ul
-                					%li
+								%ul
+									%li
 										= f.label "Your Name"
 										= f.text_field :name
 
-                					%li
+									%li
 										= f.label "Email"
 										= f.text_field :new_email, :value => @person.new_email.presence || @person.email
 
 										-if @person.new_email.present?
-                							%small
+											%small
 												="Need confirmation, old email: #{@person.email}"
 
-                					%li
+									%li
 										= f.label "Location"
 										= f.text_field :location, {:class=>"text-input", :maxlength=>"50"}
 
-                					%li
+									%li
 										= f.label "About me" 
 										= f.text_area :description, {:class=>"text-input", :rows=>"5", :maxlength=>"400"}
 
-                					%li.checkbox-holder
+									%li.checkbox-holder
 										= f.label 'Enable smart email notifications'
 										= f.check_box :smart_notifications
 
-                					%li.clearfix
-                						.actions
-                							%ul
-                								%li
+									%li.clearfix
+										.actions
+											%ul
+												%li
 													=f.submit :value => "Save"
-                								%li
+												%li
 													=link_to 'cancel', { :controller => "people", :action => "cancel",:id => @person.id }
 
 		#sidebar
