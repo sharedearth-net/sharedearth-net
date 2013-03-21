@@ -37,6 +37,8 @@ class HumanNetwork < ActiveRecord::Base
   scope :entity_network, lambda { |entity_type| where(:network_type => entity_type) }
   scope :specific_entity_network, lambda { |entity| where(:specific_entity_type => entity.class.name, :entity_id => entity.id) }
 
+  scope :trusted_network_personID_count, lambda { |person| where("entity_id = ? AND person_id = ? ", person.entities_network.uniq)}
+
   #for counts on community
 
 
@@ -69,6 +71,30 @@ class HumanNetwork < ActiveRecord::Base
   # def trusted_person?(person)
   #   self.trusted_person == person
   # end
+
+
+#-------------
+  def self.trusted_network_person_ids_count(person, village)
+    person_ids = specific_entity_id_trusted_network(person).map(&:person_id).join(",")
+    entity_id  = entities_network(village.id).map(&:entity_id).uniq.first
+    where("person_id IN (?) AND entity_id = ?", person_ids, entity_id).map(&:person_id).count
+  end
+
+  def self.people_from_community_count(person, village)
+    entities_list = involves_as_trusted_person(person).map(&:entity_id).uniq.map{|integer| integer.to_s}.join(",")
+
+    person_id_list_1 = entities_network(entities_list).map(&:person_id) - Array(person.id)
+    person_id_list_2 = specific_entity_network(person).map(&:person_id)
+    person_id_list = person_id_list_1 + person_id_list_2
+    person_id_list = person_id_list.uniq.map{|integer| integer.to_s}.join(",")
+    
+    entity_id  = entities_network(village.id).map(&:entity_id).uniq.first
+
+    where("person_id IN (?) AND entity_id = ?", person_id_list, entity_id).count
+
+  end
+
+#---------------  
 
   def self.create_trust!(first_person, second_person)
     # this check is to avoid duplicates
