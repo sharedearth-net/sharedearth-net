@@ -10,16 +10,33 @@ $(document).ready(function() {
 		$('.close_image').attr("src", "/assets/img/icons/close-white.png");
 //		$.facebox.settings.closeImage = "/assets/img/icons/close-white.png";
 								
+
 });
 
+
+
 $(document).ready(function() {		
-		$('.block-row').click(function(e){		
-			
+		$('.block-row').click(function(e){					
 			var village_id = $(this).attr('id');
-
 			show_village_data_side_bar(village_id);
-
 		});
+
+
+		$('.join-village').bind('ajax:success', function(evt, data, status, xhr){
+			var id = $(this).attr('id');
+			$("#" + id).hide();
+
+			var name = id.split("-")[0];
+			if (name == "join")	{
+				id = id.split("-")[1];
+				$("#leave-" + id).show();
+			}
+			if (name == "leave") {
+				id = id.split("-")[1];
+				$("#join-" + id).show();
+			}
+		});
+
 								
 });
 

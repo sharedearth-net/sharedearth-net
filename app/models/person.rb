@@ -217,16 +217,12 @@ class Person < ActiveRecord::Base
   end
 
   def suggested_people
-    #self.human_networks.trusted_personal_network.map(&:person_id).collect{|t| Person.find(t)}
-    #self.human_networks.trusted_personal_network.collect{|f| f.person}
     self.human_networks.trusted_personal_network.collect{|f| f.person}.collect{|ft| ft.human_networks.trusted_personal_network.collect{|fT| fT.person}}.flatten.uniq - self.human_networks.trusted_personal_network
-
   end
 
   def suggested_villages
     ids = ((self.human_networks.collect{|p| HumanNetwork.part_of_village(p.specific_entity).collect{|se| se.specific_entity_id}} ).flatten - [nil] + Village.all.collect{|v| v.id}).uniq
-
-    #(self.human_networks.collect{|p| p.entity_id}.sort.reverse + Village.all.collect{|v| v.id}).uniq
+    #HumanNetwork.part_of_village(self).map(&:specific_entity_id).uniq
     ids.collect{|id| Village.find(id)}
   end
 

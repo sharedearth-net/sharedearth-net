@@ -34,11 +34,11 @@ class Village < ActiveRecord::Base
 
   def join!(entity)
     self.add_items!(entity)
-    Member.create!(:person_id => entity.id, :entity => self)
+    Member.create!(:person_id => entity.id, :specific_entity => self, :entity_id => self.id)
   end
 
   def add_admin!(entity)
-    GroupAdmin.create!(:person_id => entity.id, :entity => self)
+    GroupAdmin.create!(:person_id => entity.id, :specific_entity => self)
   end
 
   def add_items!(entity)

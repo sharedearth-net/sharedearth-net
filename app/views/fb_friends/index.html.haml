@@ -19,17 +19,11 @@
 
 
 				#communities
-					- right = 0
 					-unless @villages.nil?
 						-for village in @villages
 							.block-row{:id=>village.id}
 								.block-wrapper
-									-if (right == 0)
-										%img{:class=>"imagePad",:src=>"/assets/connect/house.png", :alt=>"image", :title=>"image"}
-										-right = 1
-									-else
-										%img{:class=>"imagePad",:src=>"/assets/connect/house.png", :alt=>"house", :title=>"house"}
-										-right = 0
+									%img{:class=>"imagePad",:src=>"/assets/connect/house.png", :alt=>"image", :title=>"image"}
 									.block-info
 										%h3
 											=village.name
@@ -39,8 +33,22 @@
 											- ctry =  (village.country == "") ? "" : "#{village.country}"
 											- vloc = "#{str}#{st}#{ctry}"
 											= truncate vloc , :length => 25
-										-# =link_to "Join", join_village_path(village), :method => :put, :class => "button ui-switch" unless village.is_member_or_admin?(current_person)
-										%img{:src=>"/assets/connect/join.png", :alt=>"join", :title=>"join"}
+										-if (village.is_member_or_admin?(current_person))
+
+											= link_to "Leave", leave_village_path(village.id), :id =>"leave-#{village.id}", :method => :put, :class => "button ui-switch join-village", :remote=>true, :method=>:put
+
+											= link_to "Join", join_village_path(village.id), :id =>"join-#{village.id}", :method => :put, :class => "button ui-switch join-village", :remote=>true, :method=>:put, :style=>"display:none;"
+										
+										-else
+
+											= link_to "Leave", leave_village_path(village.id), :id =>"leave-#{village.id}", :method => :put, :class => "button ui-switch join-village", :remote=>true, :method=>:put, :style=>"display:none;"
+
+											= link_to "Join", join_village_path(village.id), :id =>"join-#{village.id}", :method => :put, :class => "button ui-switch join-village", :remote=>true, :method=>:put
+										
+										-# =link_to(image_tag("/assets/connect/join.png", {:id=>"#{village.id}" , :class=>"join-village", :alt=>"join", :title=>"join"}), join_village_path(village.id), :remote=>true, :method=>:put) 
+
+										-#link_to image_tag("/assets/connect/join.png"), "#"
+
 
 
 				%br

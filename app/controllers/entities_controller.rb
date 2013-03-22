@@ -1,5 +1,6 @@
 class EntitiesController < ApplicationController
-  before_filter :get_instances
+respond_to :html, :json
+before_filter :get_instances
 
 	protected
 
@@ -54,28 +55,20 @@ class EntitiesController < ApplicationController
   def join
     variable = instance_variable_get("@#{controller_name.singularize}")
     variable.join!(current_person)
-    respond_to do |format|
-      format.html { redirect_to_back }
-      format.json do
-        render :json => { :success => true,
-                          :request_html  => "",
-                          :activity_html => "" }
-      end
-    end
 
   end
 
   def leave
     variable = instance_variable_get("@#{controller_name.singularize}")
     variable.leave!(current_person)
-    respond_to do |format|
-      format.html { redirect_to_back }
-      format.json do
-        render :json => { :success => true,
-                          :request_html  => "",
-                          :activity_html => "" }
-      end
-    end
+#    respond_to do |format|
+#      format.html { redirect_to_back }
+#      format.json do
+#        render :json => { :success => true,
+#                          :request_html  => "",
+#                          :activity_html => "" }
+#      end
+#    end
   end
 
   def get_instances

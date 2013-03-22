@@ -81,12 +81,16 @@ class HumanNetwork < ActiveRecord::Base
   end
 
   def self.people_from_community_count(person, village)
-    entities_list = involves_as_trusted_person(person).map(&:entity_id).uniq.map{|integer| integer.to_s}.join(",")
 
-    person_id_list_1 = entities_network(entities_list).map(&:person_id) - Array(person.id)
+    entities_list = involves_as_trusted_person(person).map(&:entity_id)
+    entities_list = entities_list - [nil]
+    entities_list = entities_list.join(",")
+
+    person_id_list_1 = entities_network(entities_list).map(&:person_id) - Array(person.id) 
     person_id_list_2 = specific_entity_network(person).map(&:person_id)
-    person_id_list = person_id_list_1 + person_id_list_2
-    person_id_list = person_id_list.uniq.map{|integer| integer.to_s}.join(",")
+    person_id_list = person_id_list_1 + person_id_list_2 - [nil]
+
+    person_id_list = person_id_list.uniq.join(",").to_s
     
     entity_id  = entities_network(village.id).map(&:entity_id).uniq.first
 
