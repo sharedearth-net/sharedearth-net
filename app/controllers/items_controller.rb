@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
 
 
      respond_to do |format|
-          debugger
+
 
        
       if @item.save       
