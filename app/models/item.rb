@@ -6,8 +6,8 @@ class Item < ActiveRecord::Base
 
   STATUS_NORMAL  = 10.freeze
   STATUS_LOST    = 20.freeze
-  STATUS_DAMAGED = 30.freeze
   STATUS_SHAREAGE = 30.freeze
+  STATUS_DAMAGED = 40.freeze
 
   PURPOSE_SHARE     = 10.freeze
   PURPOSE_GIFT      = 20.freeze
