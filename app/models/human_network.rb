@@ -92,7 +92,7 @@ class HumanNetwork < ActiveRecord::Base
     person_id_list_2 = specific_entity_network(person).map(&:person_id)
     person_id_list = person_id_list_1 + person_id_list_2 - [nil]
 
-    person_id_list = person_id_list.uniq.join(",")        
+    person_id_list = person_id_list.uniq        
     entity_id  = entities_network(village.id).map(&:entity_id).uniq.first
 
     where("person_id IN (?) AND entity_id = ?", person_id_list, entity_id).count
