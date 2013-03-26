@@ -1,0 +1,36 @@
+%section.modal_popup
+	%header.row			
+		.village-header
+			%h1.village-heading Create Village
+
+		 		
+	=form_for Village.new, :id=>"textarea-input",:remote=>true ,:class=>"row" do |f|
+
+		%div.row#textarea-input
+
+			=#render :partial => "shared/error_messages", :locals => {:model => village }
+			-village.errors.full_messages.each do |m|
+				.village_errors
+					=m				
+			
+			
+			=f.text_field :name, :placeholder => "Name", :class=>"village_text"
+			
+			=f.text_area :description, :placeholder => "Description", :class=>"village_text_large"
+			
+			=f.text_field :country, :placeholder => "Countrty", :class=>"village_text"
+			
+			=f.text_field :state, :placeholder => "State", :class=>"village_text"
+
+			=f.text_field :city, :placeholder => "City (optional)", :class=>"village_text"
+			
+			=f.text_field :postcode, :placeholder => "Postcode (optional) ", :class=>"village_text"				
+			=f.text_field :street, :placeholder => "Street (optional)", :class=>"village_text"
+			
+			
+
+			
+
+		
+			=f.submit :value => "Create Village", :class => "button create-village-btn"
+		%div.row#textarea-input
