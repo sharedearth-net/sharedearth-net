@@ -159,7 +159,7 @@
 					
 					-@villages.each do |v|
 
-						-if params[:type] == 'village' and  !params[:id].nil?
+						-if params[:type] == 'village' and  !params[:id].nil? and params[:id].to_i == v.id
 							-classes = ["filter","selected-filter"]
 						-else
 							-classes = ["filter","non-selected-filter"]

@@ -1,6 +1,6 @@
 class Village < ActiveRecord::Base
   acts_as_entity
-  attr_accessible :name, :description, :street, :postcode, :state, :country, :uid
+  attr_accessible :name, :description, :street, :postcode, :state, :country,:city,:uid
   validates_length_of    :name, :maximum => 50
   validates_length_of    :state, :maximum => 30
   validates_length_of    :description, :maximum => 400
@@ -14,7 +14,7 @@ class Village < ActiveRecord::Base
   after_create :create_entity_for_village
 
   def generate_key(length=6)
-    random_number = Random.rand(1..999999)
+    random_number = Random.rand(999999)
     self.uid = random_number
     # Ensure uniqueness of the token..
     generate_key unless Village.find_by_uid(random_number).nil?
@@ -71,7 +71,7 @@ class Village < ActiveRecord::Base
   end
 
   def self.belongs_to_person(person)
-    HumanNetwork.part_of_village(person).map(&:entity_id)
+    HumanNetwork.part_of_village(person).map(&:entity_id) - [nil]
   end
   
   def self.person_villages(person)    

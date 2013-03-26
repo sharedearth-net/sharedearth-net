@@ -16,14 +16,19 @@ before_filter :get_instances
 
   def create
     variable = instance_variable_get("@#{controller_name.singularize}")
+    debugger
     respond_to do |format|
         if variable.save
           variable.add_admin!(current_person)
           variable.add_items!(current_person)
+
+          format.js
           format.html { redirect_to(findtheothers_path) }
           format.xml  { render :xml => variable, :status => :created, :location => variable }
         else
+          format.js {render :action => "new"}
           format.html { render :action => "new" }
+          
           format.xml  { render :xml => variable.errors, :status => :unprocessable_entity }
         end
       end

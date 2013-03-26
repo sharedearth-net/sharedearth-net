@@ -60,4 +60,6 @@
 						%button{:title => "Search", :type => "submit", :class => "search-button"} Search
 					= render :partial => "shared/community_share"
 					%input{:type=>"hidden", :id=>"checkbox-no"}
-					= render :partial => "shared/community_share_input_popup"					
+					= render :partial => "shared/community_share_input_popup"	
+					%div#create-village{:style=>"display:none"}
+						= render :partial => "villages/new_popup", :locals=>{:village=>Village.new}	
