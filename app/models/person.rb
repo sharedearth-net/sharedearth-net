@@ -421,7 +421,7 @@ class Person < ActiveRecord::Base
      array = []
      
      if type.nil?    
-      array = HumanNetwork.entities_network("#{(HumanNetwork.person_entities(self).uniq.map(&:entity_id)-[nil]).join(',')}").map(&:person_id).uniq  + HumanNetwork.specific_entity_id_network(self).map(&:person_id)          
+      array = HumanNetwork.entities_network((HumanNetwork.person_entities(self).uniq.map(&:entity_id)-[nil])).map(&:person_id).uniq  + HumanNetwork.specific_entity_id_network(self).map(&:person_id)          
      
      elsif type == 'trusted' and vid.nil?
      
@@ -429,7 +429,7 @@ class Person < ActiveRecord::Base
      
      elsif type == 'village' and vid.nil?
       #my village     
-      array = HumanNetwork.entities_network("#{(HumanNetwork.member_village(self).uniq.map(&:entity_id)-[nil]).join(',')}").map(&:person_id)      
+      array = HumanNetwork.entities_network((HumanNetwork.member_village(self).uniq.map(&:entity_id)-[nil])).map(&:person_id)      
      elsif type == 'village' and !vid.nil?     
       #specific village
       array = HumanNetwork.village_members(Village.find(vid)).map(&:person_id)
