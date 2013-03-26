@@ -16,7 +16,6 @@ before_filter :get_instances
 
   def create
     variable = instance_variable_get("@#{controller_name.singularize}")
-    debugger
     respond_to do |format|
         if variable.save
           variable.add_admin!(current_person)
