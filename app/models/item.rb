@@ -100,9 +100,8 @@ class Item < ActiveRecord::Base
   #attr_writer :rating
 
   def set_rating    
-    self.average_rating = ((self.average_rating.to_i * number_of_times_rated.to_i).to_i +  self.rating.to_i) / (self.number_of_times_rated.to_i + 1)
-    self.number_of_times_rated = self.number_of_times_rated.to_i + 1
-
+    self.number_of_times_rated = self.number_of_times_rated.to_i + 1    
+    self.average_rating = ((self.average_rating.to_i * number_of_times_rated.to_i).to_i +  self.rating.to_i) / (self.number_of_times_rated.to_i + 1)    
   end
 
 

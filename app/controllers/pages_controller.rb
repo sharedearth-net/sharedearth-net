@@ -89,7 +89,7 @@ class PagesController < ApplicationController
     else
       @items = ResourceNetwork.all_items_from(@entities).sort_by{|i| i.item_type.downcase}
       @items ||= []
-      @items += current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
+      @items = current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
       @events = current_person.network_activity.page(params[:page]).per(25)
     end        
   end

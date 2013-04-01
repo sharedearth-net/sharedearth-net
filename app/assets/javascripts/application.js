@@ -17,6 +17,59 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {		
+
+		$('.close-feedback').click(function(e){
+			$('.modal-feedback').hide();
+			window.location = "/"
+		});
+
+		$("#feedback_feedback_note").keypress(function() {
+			var count = $("#feedback_feedback_note").val().length;
+			var leftChar = 80 - count;
+
+			if (leftChar < 1) {
+				var str = $("#feedback_feedback_note").val();
+				str = str.substr(0, 79);
+				$("#feedback_feedback_note").val(str);
+				$("#char-count").html("0 characters left");
+			}
+			else{
+				$("#char-count").html(leftChar - 1 + " characters left");
+			}
+		});
+
+		$("#feedback_feedback_note").keyup(function() {
+			var count = $("#feedback_feedback_note").val().length;
+			var leftChar = 80 - count;
+
+			$("#char-count").html(leftChar + " characters left");
+		});
+
+		$('.exp-button').click(function(e){
+			// feedback form feedback value
+
+			$("#positiveTag").css("-webkit-box-shadow", "0px 0px 2px #999999");
+			$("#negativeTag").css("-webkit-box-shadow", "0px 0px 2px #999999");
+			$("#neutralTag").css("-webkit-box-shadow", "0px 0px 2px #999999");
+
+			var id = $(this).attr('id');
+			if (id == "positiveTag") {
+				$('#feedback-hdn').val("10");
+				$("#positiveTag").css("-webkit-box-shadow", "0px 0px 6px #4195fc");
+			}
+
+			if (id == "negativeTag") {
+				$('#feedback-hdn').val("20");
+				$("#negativeTag").css("-webkit-box-shadow", "0px 0px 6px #4195fc");
+			}
+			if (id == "neutralTag") {
+				$('#feedback-hdn').val("30");
+				$("#neutralTag").css("-webkit-box-shadow", "0px 0px 6px #4195fc");
+			}
+		});
+
+
+
 		$('.block-row').click(function(e){					
 			var village_id = $(this).attr('id');
 			show_village_data_side_bar(village_id);
@@ -38,7 +91,10 @@ $(document).ready(function() {
 			}
 		});
 
-								
+		var ratyObj;
+		ratyObj = $('.rows #star');
+		InitiateFeedbackRaty(ratyObj);
+
 });
 
 
@@ -117,16 +173,52 @@ function check4() {
 			$(".content #down-arrow").css("background", "url('/assets/img/icons/down_arrow.png') no-repeat 0 5px");
 			$(".content #small_popup").val(1);
 		}
-		InitiateRaty();
 
 
-	}  
+		var ratyObj;
+		ratyObj = $('.content #star');
+		InitiateRaty(ratyObj);
 
-	var ratyObj;
 
-	function InitiateRaty()
+	} 
+
+	function InitiateFeedbackRaty(ratyObj)
 	{
-		ratyObj = $('.content #star');		
+		//ratyObj = $('.content #star');		
+
+		ratyObj.raty({ 
+		number: 5,
+		starOff:'star-off-big.png',
+		starOn   : 'star-on-big.png',
+		scoreName: 'rating'
+
+		});
+
+		$('.content .starRating img').click(function(){
+			//alert($(this).attr('alt'));
+			//alert("abccc");
+			var num = $(this).attr('alt');
+
+			//$(".rating-score-hdn").val(num);
+
+			if (num == 1)
+				$('p#comment').text('1 - Bad');
+			if (num == 2)
+				$('p#comment').text('2 - Good');
+			if (num == 3)
+				$('p#comment').text('3 - Better');
+			if (num == 4)
+				$('p#comment').text('4 - Good condition, performs correctly');
+			if (num == 5)
+				$('p#comment').text('5 - Best');
+
+		});
+
+	}
+
+	function InitiateRaty(ratyObj)
+	{
+		//ratyObj = $('.content #star');		
 
 		ratyObj.raty({ 
 		number: 5,

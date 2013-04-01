@@ -1,0 +1,48 @@
+.feedback-overlay
+.wrapper
+  .container
+    %section.modal-feedback
+      %header.rows
+        %h1 Feedback
+        %a{:class => "close-feedback", :href => "#"}
+          %img{:src => "/assets/img/icons/close-white.png"}
+      .content.rows
+
+        = form_for(@feedback, :url => request_feedbacks_path(@request), :html => { :multipart => true},:id=>"textarea-input"  ) do |f|  
+
+          .rate-item
+            %p
+              Rate
+              %span.imp John's
+              hammer
+
+              #star.starRating
+                %input{:type=>"hidden", :name=>"rating", :class=>"rating-score-hdn"}
+
+              %div.start-comment
+                %p#comment
+
+          %hr.line-border
+
+          %fieldset.rate-experience
+            %p
+              Please rate your experience sharing
+              %span.imp 
+                = @item.owner.name
+              hammer
+
+            = f.hidden_field :feedback, :value => "0", :id => "feedback-hdn"
+
+            .exp-button#positiveTag
+              %label#positiveLabel{:for => "positive"} Positive
+            .exp-button#neutralTag
+              %label#neutralLabel{:for => "neutral"} Neutral
+            .exp-button#negativeTag
+              %label#negativeLabel{:for => "negative"} Negative
+
+          = f.text_area :feedback_note, :class => "textareafield", :placeholder => "Please provide more details"
+
+          #char-count 80 characters left
+          = f.submit :value => "Post", :class => "button"
+
+.feedback-gap
