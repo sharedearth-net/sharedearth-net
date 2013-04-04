@@ -122,11 +122,11 @@ class ItemsController < ApplicationController
     existing_item = Item.find_by_id(params[:id])
     @item = Item.quick_add(existing_item.item_type, current_user.person, Item::PURPOSE_SHARE)
 
-    if existing_item.generic?
-      render :json => {:result => 'success'}  
-    else
-      render :json => {:result => 'success',  :redirect => edit_item_path(@item) } 
-    end
+#    if existing_item.generic?
+#      render :json => {:result => 'success'}  
+#    else
+#      render :json => {:result => 'success',  :redirect => edit_item_path(@item) } 
+#    end
   end
 
   private

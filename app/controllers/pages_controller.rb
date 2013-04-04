@@ -13,6 +13,14 @@ class PagesController < ApplicationController
     end
   end
 
+  def commons
+    @items = Item.item_list_sorted
+
+    @houses = Item.item_list_sorted.paginate(:page => params[:house_item], :per_page => 10)
+    @outdoors = Item.item_list_sorted.paginate(:page => params[:outdoor_item], :per_page => 10)
+    @electronics = Item.item_list_sorted.paginate(:page => params[:electronic_item], :per_page => 10)
+  end
+
   def dashboard
     unless current_user.person.activity_logs.empty?
       @recent_activity_logs = current_user.person.recent_activity_logs
@@ -21,7 +29,7 @@ class PagesController < ApplicationController
     current_user.person.reset_notification_count!
     current_user.record_last_activity!
     current_user.person.news_feed
-    @events = current_user.network_activity.page(params[:page]).per(5)
+    @events = current_user.network_activity.page(params[:page]).per_page(5)
   end
 
   def community
@@ -49,7 +57,7 @@ class PagesController < ApplicationController
     
       
       @items = current_person.trusted_friends_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-      @events = current_person.trusted_network_activity.page(params[:page]).per(25)
+      @events = current_person.trusted_network_activity.page(params[:page]).per_page(25)
      
     elsif params[:type] == 'village'
       @title = "My Villages"    
@@ -66,7 +74,7 @@ class PagesController < ApplicationController
         @trusted_people_count = current_person.trusted_people_count(params[:type])        
                 
         @items = current_person.villages_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-        @events= current_person.villages_activity.page(params[:page]).per(25)        
+        @events= current_person.villages_activity.page(params[:page]).per_page(25)        
       else        
         @people_count = current_person.people_count(params[:type], params[:id] )
         @trusted_people_count = current_person.trusted_people_count(params[:type], params[:id])
@@ -75,22 +83,22 @@ class PagesController < ApplicationController
         @subtitle = v.name + " " + v.postcode + " " + v.state + ", " + v.country if v
                         
         @items = current_person.villages_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-        @events= current_person.villages_activity(params[:id]).page(params[:page]).per(25)        
+        @events= current_person.villages_activity(params[:id]).page(params[:page]).per_page(25)        
       end
       
     
     # elsif params[:type] == 'groups'
       # @items = current_person.groups_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-      # @events= current_person.groups_activity.page(params[:page]).per(25)
+      # @events= current_person.groups_activity.page(params[:page]).per_page(25)
            
     elsif !@entity.nil?
       @items = ResourceNetwork.items_belong_to(@entity.specific_entity)
-      @events = @entity.network_activity.page(params[:page]).per(25)
+      @events = @entity.network_activity.page(params[:page]).per_page(25)
     else
       @items = ResourceNetwork.all_items_from(@entities).sort_by{|i| i.item_type.downcase}
       @items ||= []
       @items = current_person.personal_network_items(params[:filter_type]).sort_by{|i| i.item_type.downcase}
-      @events = current_person.network_activity.page(params[:page]).per(25)
+      @events = current_person.network_activity.page(params[:page]).per_page(25)
     end        
   end
 

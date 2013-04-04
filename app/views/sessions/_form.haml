@@ -10,7 +10,7 @@
             CONNECT WITH
           
         #icons{:style=>"float:right; padding-right: 16px; padding-top: 3px;"}
-          %a{:href=>"/auth/facebook"}
+          %a{:href=>"/auth/facebook", :style=>"text-decoration: none;"}
             %img{:src=>"/assets/facebook_icon_sharedearth.png"}
           %span.line
             |
@@ -19,18 +19,18 @@
 
      
       #pad{:style=>"padding:15px"}
-        %p{:style=>"font-size: 12px; font-weight: bold; color: #B4C295;"} OR LOGIN    
+        %p{:style=>"font-size: 12px; font-weight: bold; color: #B4C295; padding-left: 10px;"} OR LOGIN    
         - if @error
           %p= @error     
         = form_for User.new, :url => sessions_path, :id=>"new_user" do |f|
           = f.text_field :email, :placeholder => "Email" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ; font-family: Helvetica !important;"
           = f.password_field :password, :placeholder => "Password" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ;font-family: Helvetica  !important;"        
           = f.submit "" , :style=>"position:relative; left:200px; bottom:-17px; background:url(assets/login.png); border:none; width:85px; height:33px;"
-          =link_to "Register for an account",new_user_path,:style=>"position:absolute; bottom:40px; left:40px; color:#80a52d;", :remote=>true 
+          =link_to "Register for an account",new_user_path,:style=>"position:absolute; bottom:40px; left:35px; color:#80a52d;", :remote=>true 
         .text-login{:style=>"width:70%; float:left; margin:10px 0px; line-height:32px;"} 
           %a{:href=> "",:style=>"text-decoration:none; color:#80a52d;"}
-          %a{:style=>"position:absolute; bottom:65px; color:#c3c5c0;"} Forgot password?
-          %img{:src=>"/assets/icon_pencil.png", :style=>"position:absolute; left:25px; bottom:45px;"}
+          %a{:style=>"position:absolute; bottom:65px; color:#c3c5c0; padding-left: 10px;"} Forgot password?
+          %img{:src=>"/assets/icon_pencil.png", :style=>"position:absolute; left:20px; bottom:45px;"}
         
       
       %div{:style=>"clear:both;"}                               

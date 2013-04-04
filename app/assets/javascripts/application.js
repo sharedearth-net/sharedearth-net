@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 
 
-$(document).ready(function() {		
+$(document).ready(function() {
 
 		$('.close-feedback').click(function(e){
 			$('.modal-feedback').hide();

@@ -415,4 +415,9 @@ class Item < ActiveRecord::Base
     existing_item_type = ItemType.find_by_item_type(self.item_type)
     existing_item_type.reduce_item_count
   end
+
+  def self.item_list_sorted
+    Item.group('item_type').order('count(*) DESC, item_type ASC')
+  end
+
 end

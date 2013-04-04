@@ -1,0 +1,10 @@
+%h2 House
+%ul.block-list
+	- for house in @houses
+		%li
+			%a.resource{:href=>"#"}
+				= truncate house.item_type , :length => 15
+			= link_to "Share Mine", share_mine_item_path(house.id), :id =>"#{house.item_type}", :class => "button ui-switch share-mine", :remote=>true, :method=>:post
+
+
+= will_paginate @houses, :param_name => 'house_item' , :id => "pagination-houses", :previous_label => "Pre", :next_label => "Next"

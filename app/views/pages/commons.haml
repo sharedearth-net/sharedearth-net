@@ -1,0 +1,28 @@
+%div.wrapper
+	%div.container
+		%section.row
+			%div.commons
+				%header
+					%hgroup
+						%h1.white-heading building the commons
+						%h2 Do you own the following?
+					%div.row
+						%a.refresh-button{:href=>"#"} Refresh
+
+					#community-reload
+						%img{:src=>"/assets/connect/reload.jpg", :alt=>"reload", :title=>"reload"}
+					
+				%article.clearfix
+					%div.third.item-list
+						= render :partial => 'houses'
+
+
+					%div.third.item-list
+						= render :partial => 'outdoors'
+
+					%div.third.item-list
+						= render :partial => 'electronics'
+
+				.earthImg
+				%div.mission
+					%p We, the commoners, are building a better future. Be the change, build the commons. Build the commons, change the world

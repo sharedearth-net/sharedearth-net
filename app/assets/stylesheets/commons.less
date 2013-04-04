@@ -1,0 +1,117 @@
+@import "general.less";
+
+.commons {
+	width: 950px;
+	margin-left: 11%;
+	border: 1px solid #b7cd85;
+	.rounded(10px);
+	padding: 10px 15px;
+	background: #dae8ba;
+	background: -moz-linear-gradient(top, #dae8ba 0%, #ffffff 15%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dae8ba), color-stop(15%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #dae8ba 0%,#ffffff 15%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #dae8ba 0%,#ffffff 15%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #dae8ba 0%,#ffffff 15%); /* IE10+ */
+	background: linear-gradient(to bottom, #dae8ba 0%,#ffffff 15%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dae8ba', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+	
+	.block-list .resource {
+		color: #5F5F5F !important;
+	}
+
+	.block-list .button:hover {
+		text-decoration: none !important;
+	}
+	
+	hgroup {
+		margin-bottom: 20px;
+	}
+	h2 {
+		font-size: 18px;
+		font-weight: normal;
+		line-height: 10px;
+	}
+	.third {
+		float: left;
+		width: 30%;
+		margin-right: 3.3%;
+	}
+
+	.mission {
+		margin: 50px auto 30px;
+		overflow: visible;
+	    padding: 20px 20px 20px 190px;
+	    position: relative;
+	}
+
+	.earthImg {
+			background-image:url(/assets/img/earth.png);
+			background-repeat:no-repeat;
+			overflow: visible;
+		    padding: 20px 20px 20px 135px;
+		    position: relative;
+		    height: 154px;
+		    float: left;
+		    margin-left: 185px;
+			z-index: 1000;
+			margin-top: 20px;
+	}
+
+	.ui-switch{
+		padding: 5px 30px 5px 10px;
+	}
+
+}
+.item-list {
+	h2 {
+		font-size: 16px;
+		line-height: 18px;
+		font-weight: normal;
+		color: #6a8b1e;
+	}
+
+}
+.refresh-button {
+	margin: 0 auto;
+}
+
+.pagination a:hover {
+	color: #6a8b1e !important;
+}
+
+#community-reload{
+	margin-top: -50px;
+	margin-right: 45%;
+	float: right;
+}
+
+.pagination {
+    
+    font-style: normal;
+
+    .current {
+		font-weight: bold;
+		font-style: normal;
+		color: #6a8b1e;
+    }
+
+   a {
+    color: #6a8b1e;
+    text-decoration: none;
+    padding: 3px 2px !important;
+    display: inline-block;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+   .disabled {
+    color: #6a8b1e;
+    text-decoration: none;
+    padding: 3px 2px !important;
+    display: inline-block;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

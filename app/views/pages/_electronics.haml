@@ -1,0 +1,10 @@
+%h2 Electronics
+%ul.block-list
+	- for electronic in @electronics
+		%li
+			%a.resource{:href=>"#"}
+				= truncate electronic.item_type , :length => 15
+			= link_to "Share Mine", share_mine_item_path(electronic.id), :id =>"#{electronic.item_type}", :class => "button ui-switch share-mine", :remote=>true, :method=>:post
+
+
+= will_paginate @houses, :param_name => 'electronic_item' , :id => "pagination-electronics", :previous_label => "Pre", :next_label => "Next"
