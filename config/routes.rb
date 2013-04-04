@@ -139,6 +139,8 @@ Sharedearthapp::Application.routes.draw do
   match '/no_javascript' => 'pages#no_javascript'
   match '/collect_email' => 'pages#collect_email'
 
+  match "/common", :to => "pages#commons"
+
   root :to => "pages#index"
 
   # The priority is based upon order of creation:
