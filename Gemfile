@@ -12,6 +12,8 @@ gem "jquery-rails"
 gem 'facebox-rails'
 gem 'jquery-raty-rails'
 
+gem 'will_paginate', '~> 3.0'
+
 gem 'state_machine'
 gem "omniauth-facebook"
 gem 'omniauth-github'

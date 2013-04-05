@@ -7,4 +7,4 @@
 			= link_to "Share Mine", share_mine_item_path(electronic.id), :id =>"#{electronic.item_type}", :class => "button ui-switch share-mine", :remote=>true, :method=>:post
 
 
-= will_paginate @houses, :param_name => 'electronic_item' , :id => "pagination-electronics", :previous_label => "Pre", :next_label => "Next"
+= will_paginate @electronics, :param_name => 'electronic_item' , :id => "pagination-electronics", :previous_label => "Pre", :next_label => "Next"

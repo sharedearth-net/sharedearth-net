@@ -16,9 +16,9 @@ class PagesController < ApplicationController
   def commons
     @items = Item.item_list_sorted
 
-    @houses = Item.item_list_sorted.paginate(:page => params[:house_item], :per_page => 10)
-    @outdoors = Item.item_list_sorted.paginate(:page => params[:outdoor_item], :per_page => 10)
-    @electronics = Item.item_list_sorted.paginate(:page => params[:electronic_item], :per_page => 10)
+    @houses = Item.item_list_sorted.paginate(:page => params[:house_item], :per_page => 6)
+    @outdoors = Item.item_list_sorted.paginate(:page => params[:outdoor_item], :per_page => 6)
+    @electronics = Item.item_list_sorted.paginate(:page => params[:electronic_item], :per_page => 6)
   end
 
   def dashboard

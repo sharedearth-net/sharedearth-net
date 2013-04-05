@@ -1,3 +1,9 @@
+%div.wrapper.notification{:style => "display:none;"}
+	%div.container 
+		%span#spantextbar
+			= "flash display"
+		%button.close +
+
 %div.wrapper
 	%div.container
 		%section.row
@@ -26,3 +32,39 @@
 				.earthImg
 				%div.mission
 					%p We, the commoners, are building a better future. Be the change, build the commons. Build the commons, change the world
+
+:javascript
+	
+	$(document).ready(function() {
+		alert("aaaaaaaaaaaaaaaa");
+	});
+
+
+	document.observe('click', function(event) {
+		var element = event.element();
+
+		if (element.match('#pagination-houses a')) {
+			alert("HOUSES");
+			new Ajax.Request(element.href, { method: 'get', parameters: { paginate: 'houses' } });
+			event.stop();
+		}
+
+		if (element.match('#outdoors .paginate a')) {
+			alert("OUTDOORS");
+			new Ajax.Request(element.href, { method: 'get', 'parameters: { paginate: 'outdoors' } });
+			event.stop();
+		}
+
+		if (element.match('#electronics .pagination a')) {
+			alert("ELECTRONICS");
+			new Ajax.Request(element.href, { method: 'get', parameters: { paginate: 'electronics' } });
+			event.stop();
+		}
+	});
+
+- if params[:paginate] == 'houses'
+	$('houses').replace("#{escape_javascript(render('houses'))}");
+- if params[:paginate] == 'outdoors'
+	$('outdoors').replace("#{escape_javascript(render('outdoors'))}");
+- if params[:paginate] == 'electronics'
+	$('electronics').replace("#{escape_javascript(render('electronics'))}");
