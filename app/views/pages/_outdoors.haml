@@ -6,4 +6,4 @@
 				= truncate outdoor.item_type , :length => 15
 			= link_to "Share Mine", share_mine_item_path(outdoor.id), :id =>"#{outdoor.item_type}", :class => "button ui-switch share-mine", :remote=>true, :method=>:post
 
-= will_paginate @outdoors, :param_name => 'outdoor_item' , :id => "pagination-outdoors", :previous_label => "Pre", :next_label => "Next"
+= will_paginate @houses, :param_name => 'outdoor_item' , :id => "pagination-outdoors", :previous_label => "Pre", :next_label => "Next"

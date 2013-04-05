@@ -1,4 +1,3 @@
-# encoding: utf-8
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_item, :only => [:show, :edit, :update, :destroy,
@@ -122,8 +121,6 @@ class ItemsController < ApplicationController
   def share_mine
     existing_item = Item.find_by_id(params[:id])
     @item = Item.quick_add(existing_item.item_type, current_user.person, Item::PURPOSE_SHARE)
-
-    flash.now[:notice] = "You had successfully shared #{existing_item.item_type}."
 
 #    if existing_item.generic?
 #      render :json => {:result => 'success'}  
