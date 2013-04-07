@@ -386,7 +386,7 @@ class EventType < ActiveRecord::Base
   end
   
   def self.event_log_sentence_events
-    [18,19,21,22,23,24,25,26,55,56,57,58,59,60,85,98,100,102,104,106,108,110,112,114,116,118,120]
+    [18,19,21,22,23,24,25,26,55,56,57,58,59,60,85,98,100,102,105,106,108,110,112,114,116,118,120]
   end
 
   def self.activity_accepted
@@ -950,7 +950,7 @@ class EventType < ActiveRecord::Base
     self.id == EventType.gift_gifter_negative_feedback_requester
   end
 
-  def self.gift_requester_negative_feedback_requester(return_only_id = true)
+  def self.gift_requester_negative_feedback_gifter(return_only_id = true)
     return_only_id ? 104 : EventType.find(104)
   end
 
@@ -958,7 +958,7 @@ class EventType < ActiveRecord::Base
     self.id == EventType.gift_requester_negative_feedback_requester
   end
   
-  def self.gift_requester_negative_feedback_gifter(return_only_id = true)
+  def self.gift_requester_negative_feedback_requester(return_only_id = true)
     return_only_id ? 105 : EventType.find(105)
   end
   

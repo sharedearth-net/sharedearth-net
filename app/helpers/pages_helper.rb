@@ -1,17 +1,19 @@
 module PagesHelper
   #USE SAME METHOD TO DISPLAY MY EVENTS TO ME, AND MY EVENTS TO OTHER PERSON - SECOND PARAMETER INDICATES IF IT IS SHOWN TO OTHER PERSON IF NOT NIL
   def event_log_sentence(event_log, person, feed)
-
+    
     @same_person = (person.nil? || (current_user.person == person)) ? true : false
     person||= current_user.person
     (feed == EventDisplay::RECENT_ACTIVITY_FEED) ? text_class = "normal" : text_class = ""
 
-    @item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id) unless event_log.action_object_type_readable.nil?
-
-    @requester           = link_to_person event_log.primary, :downcase_you => true  unless event_log.primary.nil?
-  	@requester_possesive = link_to_person event_log.primary, :downcase_you => true, :possessive => true unless event_log.primary.nil?
-    @gifter              = link_to_person event_log.secondary, :downcase_you => true unless event_log.secondary.nil?
-  	@gifter_possesive    = link_to_person event_log.secondary, :downcase_you => true, :possessive => true unless event_log.secondary.nil?
+    @item                = link_to event_log.action_object_type_readable, item_path(event_log.action_object_id), :class => text_class unless event_log.action_object_type_readable.nil?
+    @primary             = link_to_person event_log.primary, :downcase_you => true, :class => text_class unless event_log.primary.nil?
+    @requester           = link_to_person event_log.primary, :downcase_you => true, :class => text_class  unless event_log.primary.nil?
+  	@requester_possesive = link_to_person event_log.primary, :downcase_you => true, :possessive => true, :class => text_class unless event_log.primary.nil?
+	@secondary           = link_to_person event_log.secondary, :downcase_you => true, :class => text_class unless event_log.secondary.nil?
+	@secondary_possessive= link_to_person event_log.secondary, :downcase_you => true, :possessive => true, :class => text_class unless event_log.secondary.nil?
+    @gifter              = link_to_person event_log.secondary, :downcase_you => true, :class => text_class unless event_log.secondary.nil?
+  	@gifter_possesive    = link_to_person event_log.secondary, :downcase_you => true, :possessive => true, :class => text_class unless event_log.secondary.nil?
 
     @first_person_full  = link_to_person event_log.primary, :check_current_user => false, :downcase_you => true unless event_log.primary.nil?
     @second_person_full = link_to_person event_log.secondary, :check_current_user => false, :downcase_you => true unless event_log.secondary.nil?
@@ -20,15 +22,15 @@ module PagesHelper
 
     case event_log.event_type_id
     when 18
-      sentence = sharing_sentence(event_log, person)
+      sentence = sharing_sentence(event_log)
     when 19
       sentence = add_item_sentence(event_log, person)
     when 21
-      sentence = gifting_sentence(event_log, person)
+      sentence = gifting_sentence(event_log)
     when 22
-      sentence = trust_established_sentence(event_log, person)
+      sentence = trust_established_sentence(event_log)
     when 23
-      sentence = trust_withdrawn_sentence(event_log, person)
+      sentence = trust_withdrawn_sentence(event_log)
     when 24
       sentence = item_damaged_sentence(event_log, person)
     when 25
@@ -50,14 +52,14 @@ module PagesHelper
     when 60
       sentence = requester_neutral_feedback_sentence(event_log)
     when 85
-      sentence = shareage_sentence(event_log, person)
+      sentence = shareage_sentence(event_log)
     when 98
       sentence = gift_gifter_positive_feedback_sentence(event_log)
     when 100
       sentence = gift_requester_positive_feedback_sentence(event_log)
     when 102
       sentence = gift_gifter_negative_feedback_sentence(event_log)
-    when 104
+    when 105
       sentence = gift_requester_negative_feedback_sentence(event_log)
     when 106
       sentence = gift_gifter_neutral_feedback_sentence(event_log)
@@ -103,132 +105,67 @@ module PagesHelper
     sentence.html_safe
   end
   
-  def sharing_sentence(event_log, person)
-   if event_log.involved_as_requester?(person)
-     if @same_person
-       sentence = "I borrowed " + @gifter_possesive + " " + @item
-     else
-       sentence = event_log.primary_full_name + " borrowed " + @gifter_possesive + " " + @item
-     end
-   elsif event_log.involved_as_gifter?(person)
-     if @same_person
-       sentence = @requester + " borrowed my " + @item
-     else
-       sentence = event_log.secondary_full_name + " shared their " + @item + " with " + @requester
-     end
-   elsif person.trusts?(event_log.primary) && !person.trusts?(event_log.secondary)
-     sentence = @requester + " borrowed " + @gifter_possesive + " " + @item
-	 elsif !person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-     sentence = @gifter + " shared their " + @item + " with " + @requester
-	 elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-      sentence = @gifter + " " + "shared their" + " " + @item + " with " + @requester 
-   else
-     sentence = ""
-   end
+  def sharing_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I borrowed " + @secondary_possessive + " " + @item 
+    elsif person.id == event_log.secondary_id
+      sentence = @primary + " borrowed my " + @item
+    else
+      sentence = @primary + " borrowed " + @secondary_possessive + " " + @item
+    end
    
-   sentence.html_safe
+    sentence.html_safe
   end
   
-  def gifting_sentence(event_log, person)
-   if event_log.involved_as_requester?(person)
-     if @same_person
-       sentence = "I received " + @gifter_possesive + " " + @item
-     else
-       sentence = @requester + " received " + @gifter_possesive + " " + @item
-     end
-   elsif event_log.involved_as_gifter?(person)
-     if @same_person
-       sentence = "I gifted my " + @item + " to " +  @requester
-     else
-       sentence = @gifter + " gifted their " + @item + " to " +  @requester
-     end
-   elsif person.trusts?(event_log.primary) && !person.trusts?(event_log.secondary)
-     sentence = @requester + " received " + @gifter_possesive + " " + @item
-	 elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-     sentence = @gifter + " gifted their " + @item + " to " + @requester
-	 elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-      sentence = @gifter + " gifted their " + @item + " to " + @requester 
-   else
-     sentence = ""
-   end
+  def gifting_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = @secondary + " gifted their " + @item + " to me" 
+    elsif person.id == event_log.secondary_id
+      sentence = "I gifted my " + @item + " to " + @primary
+    else
+      sentence = @secondary + " gifted their " + @item + " to " + @primary
+    end
    
-   sentence.html_safe
+    sentence.html_safe
   end
 
-  def shareage_sentence(event_log, person)
-   if event_log.involved_as_requester?(person)
-     if @same_person
-       sentence = "You borrowed " + @gifter_possesive + " " + @item
-     else
-       sentence = @requester + " borrowed " + @gifter_possesive + " " + @item
-     end
-   elsif event_log.involved_as_gifter?(person)
-     if @same_person
-       sentence = @requester + ' borrowed your ' + @item
-     else
-       sentence = @gifter + " lent their " + @item + " to " +  @requester
-     end
-   elsif person.trusts?(event_log.primary) && !person.trusts?(event_log.secondary)
-     sentence = @requester + " borrowed " + @gifter_possesive + " " + @item
-	 elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-     sentence = @gifter + " lent their " + @item + " to " + @requester
-	 elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-      sentence = @gifter + " lent their " + @item + " to " + @requester 
-   else
-     sentence = ""
-   end
+  def shareage_sentence(event_log)
+    person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I borrowed " + @secondary_possessive + " " + @item 
+    elsif person.id == event_log.secondary_id
+      sentence = @primary + " borrowed my " + @item
+    else
+      sentence = @secondary + " lent their " + @item + " to " + @primary
+    end
    
-   sentence.html_safe
+    sentence.html_safe
   end
 
-  def trust_established_sentence(event_log, person)
-    if event_log.involved_as_requester?(person)
-      if @same_person
-         sentence = "I have established a trusted relationship with " + @second_person_full
-       else
-         sentence = event_log.primary_full_name + " has established a trusted relationship with " + @second_person_full
-      end
-    elsif event_log.involved_as_gifter?(person)
-      if @same_person
-         sentence = "I have established a trusted relationship with " + @first_person_full
-      else
-         sentence = event_log.primary_full_name + " has established a trusted relationship with " + @first_person_full
-      end
-    elsif person.trusts?(event_log.primary)
-      sentence = @first_person_full + " has established a trusted relationship with " + @second_person_full
-    elsif person.trusts?(event_log.secondary)
-      sentence = @second_person_full + " has established a trusted relationship with " + @first_person_full
-    elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-      sentence = @first_person_full + " and " + @second_person_full + " have established a trusted relationship"
-    else 
-      sentence = ""
+  def trust_established_sentence(event_log)
+	person = current_user.person
+    if person.id == event_log.primary_id
+      sentence = "I have established a trusted relationship with " + @second_person_full
+    elsif person.id == event_log.secondary_id
+      sentence = @primary + " has established a trusted relationship with me"
+    else
+      sentence = @primary + " has established a trusted relationship with " + @secondary 
     end
 
     sentence.html_safe
   end
 
-  def trust_withdrawn_sentence(event_log, person)
-    if event_log.involved_as_requester?(person)
-      if @same_person
-         sentence = "I have withdrawn my trust for " + @second_person_full
-       else
-         sentence = event_log.primary_full_name +  " has withdrawn their trust for " + @second_person_full
-      end
-    elsif event_log.involved_as_gifter?(person)
-      if @same_person
-         sentence = @first_person_full + " has withdrawn their trust for me"
-      else
-         sentence = @first_person_full + " has withdrawn their trust for " + event_log.secondary_full_name
-      end
-    elsif person.trusts?(event_log.primary)
-      sentence = @first_person_full + " has withdrawn their trust for " + @second_person_full
-    elsif person.trusts?(event_log.secondary)
-      sentence = @second_person_full + " has withdrawn their trust for " + @first_person_full
-    elsif person.trusts?(event_log.primary) && person.trusts?(event_log.secondary)
-      sentence = @first_person_full + " has withdrawn their trust for " + @second_person_full
-    else
-      sentence = ""
-    end
+  def trust_withdrawn_sentence(event_log)
+	person = current_user.person
+	if person.id == event_log.primary_id
+	  sentence = "I have withdrawn my trust for " + @second_person_full
+	elsif person.id == event_log.secondary_id
+	  sentence = @primary + " has withdrawn their trust for me"
+	else 
+	  sentence = @primary + " has withdrawn trust for " + @second_person_full
+	end
     
     sentence.html_safe
   end
@@ -263,7 +200,7 @@ module PagesHelper
   
   def fb_friend_join_sentence(event_log, person)
     if person.id == event_log.primary_id
-      sentence = "You have connected to sharedearth.net " 
+      sentence = "I have connected to sharedearth.net " 
 
     else
       sentence = @first_person_full + " has connected to sharedearth.net " 
@@ -275,11 +212,11 @@ module PagesHelper
   def gifter_positive_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @requester + " positive feedback after sharing my " + @item + " with them"
+      sentence = "I have left " + @secondary + " positive feedback after sharing my " + @item + " with them"
     elsif person.id == event_log.secondary_id
-      sentence = @gifter + " has left me positive feedback after sharing their " + @item + " with me"
+      sentence = @primary + " has left me positive feedback after sharing their " + @item + " with me"
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " positive feedback after sharing their " + @item + " with them"
     end
     
     sentence.html_safe
@@ -288,11 +225,11 @@ module PagesHelper
   def gift_gifter_positive_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @requester + " positive feedback after gifting my " + @item + " to them"
+      sentence = "I have left " + @secondary + " positive feedback after gifting my " + @item + " to them"
     elsif person.id == event_log.secondary_id
-      sentence = @gifter + " has left me positive feedback after gifting their " + @item + " to me"
+      sentence = @primary + " has left me positive feedback after gifting their " + @item + " to me"
     else 
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " positive feedback after gifting their " + @item + " to them"
     end
     
     sentence.html_safe
@@ -301,11 +238,11 @@ module PagesHelper
   def shareage_gifter_positive_feedback_sentence(event_log)
 	person = current_user.person
 	if person.id == event_log.primary_id
-	  sentence = "I have left " + @requester + " positive feedback after the shareage of my " + @item + " with them"
+	  sentence = "I have left " + @secondary + " positive feedback after the shareage of my " + @item + " with them"
 	elsif person.id == event_log.secondary_id 
-	  sentence = @gifter + " has left me positive feedback after the shareage of their " + @item + " with me"
+	  sentence = @primary + " has left me positive feedback after the shareage of their " + @item + " with me"
 	else
-	  sentence = sentence
+	  sentence = @primary + " has left " + @secondary + " positive feedback after the shareage of their " + @item + " with them"
 	end
 	
 	sentence.html_safe
@@ -314,11 +251,11 @@ module PagesHelper
   def requester_positive_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @gifter + " positive feedback after borrowing their " + @item
+      sentence = "I have left " + @secondary + " positive feedback after borrowing their " + @item
     elsif person.id == event_log.secondary_id
-      sentence = @requester + " has left me positive feedback after borrowing my " + @item
+      sentence = @primary + " has left me positive feedback after borrowing my " + @item
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " positive feedback after borrowing their " + @item 
     end
     
     sentence.html_safe
@@ -327,11 +264,11 @@ module PagesHelper
   def gift_requester_positive_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @gifter + " positive feedback after receiving their " + @item
+      sentence = "I have left " + @secondary + " positive feedback after receiving their " + @item
     elsif person.id == event_log.secondary_id
-      sentence = @requester + " has left me positive feedback after receiving my " + @item
+      sentence = @primary + " has left me positive feedback after receiving my " + @item
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " positive feedback after receiving their " + @item 
     end
     
     sentence.html_safe
@@ -340,11 +277,11 @@ module PagesHelper
   def shareage_requester_positive_feedback_sentence(event_log)
 	person = current_user.person
 	if person.id == event_log.primary_id
-	  sentence = "I have left " + @gifter + " positive feedback after the shareage of their " + @item
+	  sentence = "I have left " + @secondary + " positive feedback after the shareage of their " + @item
 	elsif person.id == event_log.secondary_id
-	  sentence = @requester + " has left me positive feedback after the shareage of my " + @item
+	  sentence = @primary + " has left me positive feedback after the shareage of my " + @item
 	else
-	  sentence = sentence
+	  sentence = @primary + " has left " + @secondary + " positive feedback after the shareage of their " + @item 
 	end
 	
 	sentence.html_safe
@@ -353,11 +290,11 @@ module PagesHelper
   def gifter_negative_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id 
-      sentence = "I have left " + @requester + " negative feedback after sharing my " + @item + " with them"
+      sentence = "I have left " + @secondary + " negative feedback after sharing my " + @item + " with them"
     elsif person.id == event_log.secondary_id 
-      sentence = @gifter + " has left me negative feedback after sharing their " + @item + " with me"
+      sentence = @primary + " has left me negative feedback after sharing their " + @item + " with me"
     else 
-     sentence = sentence
+     sentence = @primary + " has left " + @secondary + " negative feedback after sharing their " + @item + " with them"
     end 
     
     sentence.html_safe
@@ -366,11 +303,11 @@ module PagesHelper
   def gift_gifter_negative_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @requester + " negative feedback after gifting my " + @item + " to them"
+      sentence = "I have left " + @secondary + " negative feedback after gifting my " + @item + " to them"
     elsif person.id == event_log.secondary_id
-      sentence = @gifter + " has left me negative feedback after gifting their " + @item + " to me"
+      sentence = @primary + " has left me negative feedback after gifting their " + @item + " to me"
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " negative feedback after gifting their " + @item + " to them"
     end
     
     sentence.html_safe
@@ -379,11 +316,11 @@ module PagesHelper
   def shareage_gifter_negative_feedback_sentence(event_log)
 	person = current_user.person
 	if person.id == event_log.primary_id
-	  sentence = "I have left " + @requester + " negative feedback after the shareage of my " + @item + " with them"
+	  sentence = "I have left " + @secondary + " negative feedback after the shareage of my " + @item + " with them"
 	elsif person.id == event_log.secondary_id
-	  sentence = @gifter + " has left me negative feedback after the shareage of their " + @item + " with me"
+	  sentence = @primary + " has left me negative feedback after the shareage of their " + @item + " with me"
 	else
-	  sentence = sentence
+	  sentence = @primary + " has left " + @secondary + " negative feedback after the shareage of their " + @item + " with them"
 	end
 	
 	sentence.html_safe
@@ -392,11 +329,11 @@ module PagesHelper
   def requester_negative_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @gifter + " negative feedback after borrowing their " + @item
+      sentence = "I have left " + @secondary + " negative feedback after borrowing their " + @item
     elsif person.id == event_log.secondary_id
-      sentence = @requester + " has left me negative feedback after borrowing my " + @item
+      sentence = @primary + " has left me negative feedback after borrowing my " + @item
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " negative feedback after borrowing their " + @item 
     end
     
     sentence.html_safe
@@ -405,11 +342,11 @@ module PagesHelper
   def gift_requester_negative_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @gifter + " negative feedback after receiving their " + @item
+      sentence = "I have left " + @secondary + " negative feedback after receiving their " + @item
     elsif person.id == event_log.secondary_id
-      sentence = @requester + " has left me negative feedback after receiving my " + @item
+      sentence = @primary + " has left me negative feedback after receiving my " + @item
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " negative feedback after receiving their " + @item 
     end
     
     sentence.html_safe
@@ -418,11 +355,11 @@ module PagesHelper
   def shareage_requester_negative_feedback_sentence(event_log)
 	person = current_user.person
 	if person.id == event_log.primary_id
-	  sentence = "I have left " + @gifter + " negative feedback after the shareage of their " + @item
+	  sentence = "I have left " + @secondary + " negative feedback after the shareage of their " + @item
 	elsif person.id == event_log.secondary_id
-	  sentence = @requester + " has left me negative feedback after the shareage of my " + @item
+	  sentence = @primary + " has left me negative feedback after the shareage of my " + @item
 	else
-	  sentence = sentence
+	  sentence = @primary + " has left " + @secondary + " negative feedback after the shareage of their " + @item 
 	end
 	
 	sentence.html_safe
@@ -431,11 +368,11 @@ module PagesHelper
   def gifter_neutral_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @requester + " neutral feedback after sharing my " + @item + " with them"
+      sentence = "I have left " + @secondary + " neutral feedback after sharing my " + @item + " with them"
     elsif person.id == event_log.secondary_id
-      sentence = @gifter + " has left me neutral feedback after sharing their " + @item + " with me"
+      sentence = @primary + " has left me neutral feedback after sharing their " + @item + " with me"
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " neutral feedback after sharing their " + @item + " with them"
     end
     
     sentence.html_safe
@@ -444,11 +381,11 @@ module PagesHelper
   def gift_gifter_neutral_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @requester + " neutral feedback after gifting my " + @item + " to them"
+      sentence = "I have left " + @secondary + " neutral feedback after gifting my " + @item + " to them"
     elsif person.id == event_log.secondary_id
-      sentence = @gifter + " has left me neutral feedback after gifting their " + @item + " to me"
+      sentence = @primary + " has left me neutral feedback after gifting their " + @item + " to me"
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " neutral feedback after gifting their " + @item + " to them"
     end
     
     sentence.html_safe
@@ -457,11 +394,11 @@ module PagesHelper
   def shareage_gifter_neutral_feedback_sentence(event_log)
 	person = current_user.person
 	if person.id == event_log.primary_id
-	  sentence = "I have left " + @requester + " neutral feedback after the shareage of my " + @item + " with them"
+	  sentence = "I have left " + @secondary + " neutral feedback after the shareage of my " + @item + " with them"
 	elsif person.id == event_log.secondary_id
-	  sentence = @gifter + " has left me neutral feedback after the shareage of their " + @item + " with me"
+	  sentence = @primary + " has left me neutral feedback after the shareage of their " + @item + " with me"
 	else
-	  sentence = sentence
+	  sentence = @primary + " has left " + @secondary + " neutral feedback after the shareage of their " + @item + " with them"
 	end
 	
 	sentence.html_safe
@@ -470,11 +407,11 @@ module PagesHelper
   def requester_neutral_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @gifter + " neutral feedback after borrowing their " + @item
+      sentence = "I have left " + @secondary + " neutral feedback after borrowing their " + @item
     elsif person.id == event_log.secondary_id
-      sentence = @requester + " has left me neutral feedback after borrowing my " + @item
+      sentence = @primary + " has left me neutral feedback after borrowing my " + @item
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " neutral feedback after borrowing their " + @item
     end
     
     sentence.html_safe
@@ -483,11 +420,11 @@ module PagesHelper
   def gift_requester_neutral_feedback_sentence(event_log)
     person = current_user.person
     if person.id == event_log.primary_id
-      sentence = "I have left " + @gifter + " neutral feedback after receiving their " + @item
+      sentence = "I have left " + @secondary + " neutral feedback after receiving their " + @item
     elsif person.id == event_log.secondary_id
-      sentence = @requester + " has left me neutral feedback after receiving my " + @item
+      sentence = @primary + " has left me neutral feedback after receiving my " + @item
     else
-      sentence = sentence
+      sentence = @primary + " has left " + @secondary + " neutral feedback after receiving their " + @item
     end
     
     sentence.html_safe
@@ -496,11 +433,11 @@ module PagesHelper
   def shareage_requester_neutral_feedback_sentence(event_log)
 	person = current_user.person
 	if person.id == event_log.primary_id
-	  sentence = "I have left " + @gifter + " neutral feedback after the shareage of their " + @item
+	  sentence = "I have left " + @secondary + " neutral feedback after the shareage of their " + @item
 	elsif person.id == event_log.secondary_id
-	  sentence = @requester + " has left me neutral feedback after the shareage of my " + @item
+	  sentence = @primary + " has left me neutral feedback after the shareage of my " + @item
 	else
-	  sentence = sentence
+	  sentence = @primary + " has left " + @secondary + " neutral feedback after the shareage of their " + @item
 	end
 	
 	sentence.html_safe
@@ -781,12 +718,10 @@ module PagesHelper
       sentence = "I have left " + person + " positive feedback after borrowing their " + item
     when 57
       sentence =  "I have left " + requester + " negative feedback after sharing my " + item + " with them"
-    #94 only works if using person instead of gifter. 
     when 94
       sentence = person + " has left me negative feedback after sharing their " + item + " with me"
     when 58
       sentence =  requester + " has left me negative feedback after borrowing my " + item
-    #same issue as 94. 
     when 95
       sentence = "I have left " + person + " negative feedback after borrowing their " + item
     when 59
@@ -862,51 +797,51 @@ module PagesHelper
 	when 98 #GIFT GIFTER POSITIVE FEEDBACK GIFTER
 	  sentence = "I have left " + requester + " positive feedback after gifting my " + item + " to them"
 	when 99 #GIFT GIFTER POSITIVE FEEDBACK REQUESTER
-	  sentence = gifter + " has left me positive feedback after gifting their " + item + " to me"
+	  sentence = person + " has left me positive feedback after gifting their " + item + " to me"
 	when 100 #GIFT REQUESTER POSITIVE FEEDBACK REQUESTER
-	  sentence = "I have left " + gifter + " positive feedback after receiving their " + item
-	when 101 #GIFT REQUESTER POSITIVE FEEDBACK GIFTER 
 	  sentence = requester + " has left me positive feedback after receiving my " + item
+	when 101 #GIFT REQUESTER POSITIVE FEEDBACK GIFTER 
+	  sentence = "I have left " + person + " positive feedback after receiving their " + item
 	when 102 #GIFT GIFTER NEGATIVE FEEDBACK GIFTER
 	  sentence = "I have left " + requester + " negative feedback after gifting my " + item + " to them"
 	when 103 #GIFT GIFTER NEGATIVE FEEDBACK REQUESTER
-	  sentence = gifter + " has left me negative feedback after gifting their " + item + " to me"
+	  sentence = person + " has left me negative feedback after gifting their " + item + " to me"
 	when 104 #GIFT REQUESTER NEGATIVE FEEDBACK REQUESTER 
-	  sentence = "I have left " + gifter + " negative feedback after receiving their " + item
+	  sentence = "I have left " + person + " negative feedback after receiving their " + item
 	when 105 #GIFT REQUESTER NEGATIVE FEEDBACK GIFTER 
 	  sentence = requester + " has left me negative feedback after receiving my " + item
 	when 106 #GIFT GIFTER NEUTRAL FEEDBACK GIFTER 
-	  sentence = "I have left " + requester + " negative feedback after gifting my " + item + " to them"
+	  sentence = "I have left " + requester + " neutral feedback after gifting my " + item + " to them"
 	when 107 #GIFT GIFTER NEUTRAL FEEDBACK REQUESTER 
-	  sentence = gifter + " has left me neutral feedback after gifting their " + item + " to me"
+	  sentence = person + " has left me neutral feedback after gifting their " + item + " to me"
 	when 108 #GIFT REQUESTER NEUTRAL FEEDBACK REQUESTER 
-	  sentence = "I have left " + gifter + " neutral feedback after receiving their " + item
-	when 109 #GIFT REQUESTER NEUTRAL FEEDBACK GIFTER 
 	  sentence = requester + " has left me neutral feedback after receiving my " + item
+	when 109 #GIFT REQUESTER NEUTRAL FEEDBACK GIFTER 
+	  sentence = "I have left " + person + " neutral feedback after receiving their " + item
 	when 110 #SHAREAGE GIFTER POSITIVE FEEDBACK GIFTER 
 	  sentence = "I have left " + requester + " positive feedback after the shareage of my " + item + " with them"
 	when 111 #SHAREAGE GIFTER POSITIVE FEEDBACK RQUESTER 
-	  sentence = gifter + " has left me positive feedback after the shareage of their " + item + " with me"
+	  sentence = person + " has left me positive feedback after the shareage of their " + item + " with me"
 	when 112 #SHAREAGE REQUESTER POSITIVE FEEDBACK REQUESTER 
-	  sentence = "I have left " + gifter + " positive feedback after the shareage of their " + item
-	when 113 #SHAREAGE REQUESTER POSITIVE FEEDBACK GIFTER 
 	  sentence = requester + " has left me positive feedback after the shareage of my " + item
+	when 113 #SHAREAGE REQUESTER POSITIVE FEEDBACK GIFTER 
+	  sentence = "I have left " + person + " positive feedback after the shareage of their " + item
 	when 114 #SHAREAGE GIFTER NEGATIVE FEEDBACK GIFTER 
 	  sentence = "I have left " + requester + " negative feedback after the shareage of my " + item + " with them"
 	when 115 #SHAREAGE GIFTER NEGATIVE FEEDBACK REQUESTER 
-	  sentence = gifter + " has left me negative feedback after the shareage of their " + item + " with me"
+	  sentence = person + " has left me negative feedback after the shareage of their " + item + " with me"
 	when 116 #SHAREAGE REQUESTER NEGATIVE FEEDBACK REQUESTER
-	  sentence = "I have left " + gifter + " negative feedback after the shareage of their " + item
-	when 117 #SHAREAGE REQUESTER NEGATIVE FEEDBACK GIFTER 
 	  sentence = requester + " has left me negative feedback after the shareage of my " + item
+	when 117 #SHAREAGE REQUESTER NEGATIVE FEEDBACK GIFTER 
+	  sentence = "I have left " + person + " negative feedback after the shareage of their " + item
 	when 118 #SHAREAGE GIFTER NEUTRAL FEEDBACK GIFTER 
 	  sentence = "I have left " + requester + " neutral feedback after the shareage of my " + item + " with them"
 	when 119 #SHAREAGE GIFTER NEUTRAL FEEDBACK REQUESTER 
-	  sentence = gifter + " has left me neutral feedback after the shareage of their " + item + " with me"
+	  sentence = person + " has left me neutral feedback after the shareage of their " + item + " with me"
 	when 120 #SHAREAGE REQUESTER NEUTRAL FEEDBACK REQUESTER 
-	  sentence = "I have left " + gifter + " neutral feedback after the shareage of their " + item
-	when 121 #SHAREAGE REQUESTER NEUTRAL FEEDBACK GIFTER 
 	  sentence = requester + " has left me neutral feedback after the shareage of my " + item
+	when 121 #SHAREAGE REQUESTER NEUTRAL FEEDBACK GIFTER 
+	  sentence = "I have left " +person + " neutral feedback after the shareage of their " + item
     else
       #
     end
