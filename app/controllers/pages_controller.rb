@@ -1,3 +1,5 @@
+require 'will_paginate/array' 
+
 class PagesController < ApplicationController
   before_filter :authenticate_user!, :only => [ :dashboard, :network ]
   before_filter :activity, :only => [:community, :dashboard]
