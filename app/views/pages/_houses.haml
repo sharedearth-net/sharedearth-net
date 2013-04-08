@@ -1,10 +1,22 @@
-%h2 House
-%ul.block-list
-	- for house in @houses
-		%li
-			%a.resource{:href=>"#"}
-				= truncate house.item_type , :length => 15
-			= link_to "Share Mine", share_mine_item_path(house.id), :id =>"#{house.item_type}", :class => "button ui-switch share-mine", :remote=>true, :method=>:post
+- size = @houses.length
+- col = 3
+- count = (size / col)
+- if size % col > 0
+	- count = count + 1
 
+-for i in 0..2
+	%div.third.item-list
+		%ul.block-list
+			-for j in 0..count - 1
 
+				-if (i + col * j) >= size
+					- 
+				-else
+					%li
+						%a.resource{:href=>"#"}
+							= truncate @houses[i + col * j].item_type , :length => 15
+						= link_to "Share Mine", share_mine_item_path(@houses[i + col * j].id), :id =>"#{@houses[i + col * j].item_type}", :class => "button ui-switch share-mine", :remote=>true, :method=>:post
+
+%br
+%br
 = will_paginate @houses, :param_name => 'house_item' , :id => "pagination-houses", :previous_label => "Pre", :next_label => "Next"

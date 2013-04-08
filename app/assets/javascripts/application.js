@@ -10,8 +10,10 @@ $(document).ready(function() {
 		
 		$('.close_image').attr("src", "/assets/img/icons/close-white.png");
 //		$.facebox.settings.closeImage = "/assets/img/icons/close-white.png";
-								
+		
 
+		if (window.location.href.split('/')[window.location.href.split('/').length - 1] == "dashboard")
+			$('.notification').show();
 });
 
 

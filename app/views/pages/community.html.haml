@@ -1,8 +1,8 @@
 :javascript
 	$(document).ready(function() {
 		$("#community-tabs").tabs();
-	});
-	
+	});	
+
 %div.wrapper#main-wrapper-container
 	%div.container
 		%section.community-feed.page-content.clearfix
@@ -107,25 +107,13 @@
 					%h2 Do you own the following?
 					%h3 House
 				%ul.block-list
-					%li
-						%span.resource plunger
-						%a{:href=>"#", :title=>"plunger", :class=>"button medium"} Share Mine
-					%li
-						%span.resource hammer
-						%a{:href=>"#", :title=>"hammer", :class=>"button medium"} Share Mine
-					%li
-						%span.resource vacuum cleaner
-						%a{:href=>"#", :title=>"vacuum cleaner", :class=>"button medium"} Share Mine
-					%li
-						%span.resource hot water urn
-						%a{:href=>"#", :title=>"hot water urn", :class=>"button medium"} Share Mine
-					%li
-						%span.resource folding table
-						%a{:href=>"#", :title=>"folding table", :class=>"button medium"} Share Mine
-					%li
-						%span.resource fuse box
-						%a{:href=>"#", :title=>"fuse box", :class=>"button medium"} Share Mine
-				%a{:href=>"#", :title=>"View more", :class=>"more"} view more
+					-for i in 0..7
+						%li
+							%span.resource
+								= truncate @houses[i].item_type , :length => 15
+							= link_to "Share Mine", share_mine_item_path(@houses[i].id), :id =>"#{@houses[i].item_type}", :class => "button", :remote=>true, :method=>:post
+
+				%a{:href=>"common", :title=>"View more", :class=>"more"} view more
 			%div.block.community-sidebar-block2
 				%h1 filter by
 				

@@ -16,12 +16,14 @@ class PagesController < ApplicationController
   def commons
     @items = Item.item_list_sorted
 
-    @houses = Item.item_list_sorted.paginate(:page => params[:house_item], :per_page => 6)
-    @outdoors = Item.item_list_sorted.paginate(:page => params[:outdoor_item], :per_page => 6)
-    @electronics = Item.item_list_sorted.paginate(:page => params[:electronic_item], :per_page => 6)
+    @houses = Item.item_list_sorted.paginate(:page => params[:house_item], :per_page => 18)
+    #@outdoors = Item.item_list_sorted.paginate(:page => params[:outdoor_item], :per_page => 6)
+    #@electronics = Item.item_list_sorted.paginate(:page => params[:electronic_item], :per_page => 6)
   end
 
   def dashboard
+    @houses = Item.item_list_sorted
+
     unless current_user.person.activity_logs.empty?
       @recent_activity_logs = current_user.person.recent_activity_logs
       @recent_activity_dates = @recent_activity_logs.group_by {|r| r.updated_at.strftime("%B %d")}
@@ -33,6 +35,8 @@ class PagesController < ApplicationController
   end
 
   def community
+    @houses = Item.item_list_sorted
+
     @entities = Entity.groups_with_person(current_person)
     @entity = Entity.find_by_id(params[:entity_id]) unless params[:entity_id].nil?
     

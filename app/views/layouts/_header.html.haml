@@ -63,3 +63,8 @@
 					= render :partial => "shared/community_share_input_popup"	
 					%div#create-village{:style=>"display:none"}
 						= render :partial => "villages/new_popup", :locals=>{:village=>Village.new}	
+
+%div.wrapper.notification{:style => "display:none"}
+	%div.container 
+		%span#spantextbar Welcome to sharedearth.net! Get started by adding your items via the share button above.
+		%button.close +

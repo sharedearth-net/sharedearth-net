@@ -3,9 +3,11 @@
 		%h1 building the commons
 		%h2 Do you own the following?
 	%ul.block-list
-		-@item_types.each do |item|
+		-for i in 0..7
 			%li
 				%span.resource
-					=item.item_type
-				=link_to "Share Mine", share_mine_item_path(item), :class => "button medium"
-	%a{:href=>"#", :title=>"View more", :class=>"more"} view more
+					= truncate @houses[i].item_type , :length => 15
+				= link_to "Share Mine", share_mine_item_path(@houses[i].id), :id =>"#{@houses[i].item_type}", :class => "button", :remote=>true, :method=>:post
+
+	%a{:href=>"common", :title=>"View more", :class=>"more"} view more
+
