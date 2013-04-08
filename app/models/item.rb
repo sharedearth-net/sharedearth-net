@@ -417,7 +417,7 @@ class Item < ActiveRecord::Base
   end
 
   def self.item_list_sorted
-    Item.group('item_type').order('count(*) DESC, item_type ASC')
+    Item.group('item_type').order('count(*) DESC').order('item_type ASC')
   end
 
 end
