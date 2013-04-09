@@ -67,6 +67,7 @@ Sharedearthapp::Application.routes.draw do
       put "mark_as_hidden"
       put "mark_as_unhidden"
       post "share_mine"
+      post "share_mine_type"
     end
   end
 

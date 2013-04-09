@@ -132,6 +132,20 @@ class ItemsController < ApplicationController
 #    end
   end
 
+  def share_mine_type
+    type = params[:id]
+
+    @item = Item.quick_add(type , current_user.person, Item::PURPOSE_SHARE)
+
+    flash.now[:notice] = "You have successfully shared #{type}."
+
+#    if existing_item.generic?
+#      render :json => {:result => 'success'}  
+#    else
+#      render :json => {:result => 'success',  :redirect => edit_item_path(@item) } 
+#    end
+  end
+
   private
 
   def actions_completed?

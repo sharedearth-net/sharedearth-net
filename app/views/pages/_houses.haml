@@ -15,7 +15,7 @@
 					%li
 						%a.resource{:href=>"#"}
 							= truncate @houses[i + col * j].item_type , :length => 15
-						= link_to "Share Mine", share_mine_item_path(@houses[i + col * j].id), :id =>"#{@houses[i + col * j].item_type}", :class => "button ui-switch share-mine", :remote=>true, :method=>:post
+						= link_to "Share Mine", share_mine_type_item_path(@houses[i + col * j].item_type), :id =>"#{@houses[i + col * j].item_type}", :class => "button ui-switch share-mine", :remote=>true, :method=>:post
 
 %br
 %br

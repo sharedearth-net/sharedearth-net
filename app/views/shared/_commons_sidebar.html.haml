@@ -7,7 +7,7 @@
 			%li
 				%span.resource
 					= truncate @houses[i].item_type , :length => 15
-				= link_to "Share Mine", share_mine_item_path(@houses[i].id), :id =>"#{@houses[i].item_type}", :class => "button", :remote=>true, :method=>:post
+				= link_to "Share Mine", share_mine_type_item_path(@houses[i].item_type), :id =>"#{@houses[i].item_type}", :class => "button", :remote=>true, :method=>:post
 
 	%a{:href=>"common", :title=>"View more", :class=>"more"} view more
 
