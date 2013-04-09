@@ -11,6 +11,8 @@ gem "paperclip"
 gem "jquery-rails"
 gem 'facebox-rails'
 gem 'jquery-raty-rails'
+gem 'ruby-debug19'
+
 
 gem 'will_paginate', '~> 3.0'
 
