@@ -417,7 +417,7 @@ class Item < ActiveRecord::Base
   end
 
   def self.item_list_sorted
-    Item.all(:group => "item_type", :order => "item_type ASC", :order => "count(*) DESC ")
+    Item.select(:group => "item_type", :order => "item_type ASC", :order => "count(*) DESC ")
     #Item.group('item_type').order('count(*) DESC').order('item_type ASC')
   end
 
