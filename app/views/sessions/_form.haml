@@ -5,7 +5,7 @@
         %img{:src=>"/assets/login_logo.png", :style=>"margin:12px 0px;", :alt=> "Shared Earth"}
     .container-middel-login{:style=>"width:100%;"}  
       #connect_with{:style=>"background:url(assets/background_connect.png) repeat-x; width:100%; height:39px;"}
-        %span{:style=>"float: left;line-height: 39px;padding-left: 17px; color: #B4C295;"}			
+        %span{:style=>"float: left;line-height: 39px;padding-left: 25px; color: #B4C295;"}			
           %b 
             CONNECT WITH
           
@@ -23,8 +23,8 @@
         - if @error
           %p= @error     
         = form_for User.new, :url => sessions_path, :id=>"new_user" do |f|
-          = f.text_field :email, :placeholder => "Email" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ; font-family: Helvetica !important;"
-          = f.password_field :password, :placeholder => "Password" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 10px ; color:#B4C295; margin:10px 0px ;font-family: Helvetica  !important;"        
+          = f.text_field :email, :placeholder => "Email" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 8px ; color:#B4C295; margin:10px 0px ; font-family: Helvetica !important;"
+          = f.password_field :password, :placeholder => "Password" ,:style=>"width:286px; height:40px; border:1px solid #cfcfcf; border-radius:10px; background:#fbfbfa; padding:10px 8px ; color:#B4C295; margin:10px 0px ;font-family: Helvetica  !important;"        
           = f.submit "" , :style=>"position:relative; left:200px; bottom:-17px; background:url(assets/login.png); border:none; width:85px; height:33px;"
           =link_to "Register for an account",new_user_path,:style=>"position:absolute; bottom:40px; left:35px; color:#80a52d;", :remote=>true 
         .text-login{:style=>"width:70%; float:left; margin:10px 0px; line-height:32px;"} 

@@ -8,9 +8,9 @@ class FbFriendsController < ApplicationController
     if !(fb_user = current_person.facebook_user)
       return redirect_to :dashboard, :warning => "Facebook not connected"
     end
-
-    @people  = ((FbService.get_my_friends(fb_user.token).order(:name) +  current_person.suggested_people).uniq) - current_person.trusted_friends
     
+    @people  = ((FbService.get_my_friends(fb_user.token).order(:name) +  current_person.suggested_people).uniq) - current_person.trusted_friends
+    @people = @people - [Person.find(current_user.id)]
     @villages = current_person.suggested_villages
 
     #@trusted_network_count = current_person.trusted_network.count
