@@ -76,7 +76,7 @@ class HumanNetwork < ActiveRecord::Base
 
 #-------------
   def self.trusted_network_person_ids_count(person, village)
-    person_ids = (specific_entity_id_trusted_network(person).map(&:person_id)-[nil]).join(",")
+    person_ids = (specific_entity_id_trusted_network(person).map(&:person_id)-[nil])#.join(",")
     entity_id  = entities_network(village.id).map(&:entity_id).uniq.first
 
     where("person_id IN (?) AND entity_id = ?", person_ids, entity_id).map(&:person_id).count
