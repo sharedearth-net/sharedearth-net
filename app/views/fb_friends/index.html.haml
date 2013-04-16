@@ -59,7 +59,7 @@
 				#communities
 					-unless @people.nil?
 						-for ppl in @people
-							.block-row
+							.block-row-box
 								.block-wrapper
 									%img{:class=>"imagePad",:src=> ppl.avatar, :alt=>"image", :title=>"image"}
 									.block-info
@@ -69,7 +69,7 @@
 											- loc = (ppl.location == "") ? "N/A" : ppl.location
 											= truncate loc , :length => 25
 										
-										= link_to "Trust", create_trusted_network_path(:person1 => current_person, :person2 => ppl ), :id =>"trust-people", :method => :post, :class => "button ui-switch join-village", :remote=>true
+										= link_to "Trust", create_trusted_network_path(:person1 => current_person, :person2 => ppl ), :id =>"trust-people", :method => :post, :class => "button ui-switch", :remote=>true
 
 
 		%div.buttons-right
