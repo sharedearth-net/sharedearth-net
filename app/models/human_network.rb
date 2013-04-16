@@ -103,7 +103,7 @@ class HumanNetwork < ActiveRecord::Base
 
   def self.create_trust!(first_person, second_person)
     # this check is to avoid duplicates
-    unless first_person.trusted_network.exists?(second_person.id) || second_person.trusted_network.exists?(first_person.id)
+    unless first_person.trusted_network.map(&:person_id).include?(second_person.id) || second_person.trusted_network.map(&:person_id).include?(first_person.id)
       # 2 calls given below should be always happen in conjunction
       # for mutual network updation to be successful
       TrustedNetwork.create!(:specific_entity => first_person, :person_id => second_person.id)

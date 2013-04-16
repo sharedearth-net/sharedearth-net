@@ -18,4 +18,14 @@ class HumanNetworkController < ApplicationController
 			format.js
 		end
   end
+
+  def create_trusted_networks
+    first_person = Person.find(params[:person1])
+    second_person = Person.find(params[:person2])
+
+    HumanNetwork.create_trust!(first_person, second_person)
+
+    render :nothing => true
+    
+  end
 end

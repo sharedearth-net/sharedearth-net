@@ -44,11 +44,6 @@
 											= link_to "Leave", leave_village_path(village.id), :id =>"leave-#{village.id}", :method => :put, :class => "button ui-switch join-village", :remote=>true, :method=>:put, :style=>"display:none;"
 
 											= link_to "Join", join_village_path(village.id), :id =>"join-#{village.id}", :method => :put, :class => "button ui-switch join-village", :remote=>true, :method=>:put
-										
-										-# =link_to(image_tag("/assets/connect/join.png", {:id=>"#{village.id}" , :class=>"join-village", :alt=>"join", :title=>"join"}), join_village_path(village.id), :remote=>true, :method=>:put) 
-
-										-#link_to image_tag("/assets/connect/join.png"), "#"
-
 
 
 				%br
@@ -73,7 +68,8 @@
 										%p
 											- loc = (ppl.location == "") ? "N/A" : ppl.location
 											= truncate loc , :length => 25
-										%img{:src=>"/assets/connect/trust.png", :alt=>"join", :title=>"join"}
+										
+										= link_to "Trust", create_trusted_network_path(:person1 => current_person, :person2 => ppl ), :id =>"trust-people", :method => :post, :class => "button ui-switch join-village", :remote=>true
 
 
 		%div.buttons-right
@@ -90,22 +86,22 @@
 					%li
 						%div.trusted-block
 							%strong
-								= "10 people"
+								= "9 people"
 							from your trusted network
 					%li
 						%div.communities-block
 							%strong
-								= "20 people"
+								= "25 people"
 							from community
 					%li
 						%div.people-block
 							%strong
-								= "30 people"
+								= "11 people"
 							in this group
 					%li
 						%div.items-block 
 							%strong
-								= "40 items"
+								= "134 items"
 							available
 				%a{:href=>"#", :title=>"View more", :class=>"more"} view more
 			

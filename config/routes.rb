@@ -142,6 +142,8 @@ Sharedearthapp::Application.routes.draw do
 
   match "/common", :to => "pages#commons"
 
+  post "/create_trusted_network", :to => "human_network#create_trusted_networks"
+
   root :to => "pages#index"
 
   # The priority is based upon order of creation:
